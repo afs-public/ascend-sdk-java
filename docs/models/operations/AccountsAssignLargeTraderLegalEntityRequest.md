@@ -1,0 +1,9 @@
+# AccountsAssignLargeTraderLegalEntityRequest
+
+
+## Fields
+
+| Field                                                                                       | Type                                                                                        | Required                                                                                    | Description                                                                                 | Example                                                                                     |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `legalEntityId`                                                                             | *String*                                                                                    | :heavy_check_mark:                                                                          | The legalEntity id.                                                                         | e6716139-da77-46d1-9f15-13599161db0b                                                        |
+| `assignLargeTraderRequestCreate`                                                            | [AssignLargeTraderRequestCreate](../../models/components/AssignLargeTraderRequestCreate.md) | :heavy_check_mark:                                                                          | N/A                                                                                         |                                                                                             |

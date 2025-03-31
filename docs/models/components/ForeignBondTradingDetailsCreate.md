@@ -1,0 +1,11 @@
+# ForeignBondTradingDetailsCreate
+
+Foreign bond trading detail
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        | Example                                                                                            |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `foreignBondTrading`                                                                               | *boolean*                                                                                          | :heavy_check_mark:                                                                                 | Does the account anticipate trading in foreign bonds                                               | true                                                                                               |
+| `foreignBondTradingDetail`                                                                         | List\<[ForeignBondTradingDetailCreate](../../models/components/ForeignBondTradingDetailCreate.md)> | :heavy_minus_sign:                                                                                 | The foreign bond trading countries details. If yes, than please provide details                    |                                                                                                    |

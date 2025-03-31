@@ -1,0 +1,446 @@
+# BankRelationships
+(*bankRelationships()*)
+
+## Overview
+
+### Available Operations
+
+* [createBankRelationship](#createbankrelationship) - Create Bank Relationship
+* [listBankRelationships](#listbankrelationships) - List Bank Relationships
+* [getBankRelationship](#getbankrelationship) - Get Bank Relationship
+* [updateBankRelationship](#updatebankrelationship) - Update Bank Relationship
+* [cancelBankRelationship](#cancelbankrelationship) - Cancel Bank Relationship
+* [verifyMicroDeposits](#verifymicrodeposits) - Verify Micro Deposits
+* [reissueMicroDeposits](#reissuemicrodeposits) - Reissue Micro Deposits
+
+## createBankRelationship
+
+Creates a bank relationship.
+
+### Example Usage
+
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.BankRelationshipCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.VerificationMethod;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsCreateBankRelationshipResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .build())
+            .build();
+
+        BankRelationshipsCreateBankRelationshipResponse res = sdk.bankRelationships().createBankRelationship()
+                .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
+                .bankRelationshipCreate(BankRelationshipCreate.builder()
+                    .nickname("My Primary Bank")
+                    .verificationMethod(VerificationMethod.MICRO_DEPOSIT)
+                    .build())
+                .call();
+
+        if (res.bankRelationship().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 | Example                                                                     |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `accountId`                                                                 | *String*                                                                    | :heavy_check_mark:                                                          | The account id.                                                             | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                  |
+| `bankRelationshipCreate`                                                    | [BankRelationshipCreate](../../models/components/BankRelationshipCreate.md) | :heavy_check_mark:                                                          | N/A                                                                         |                                                                             |
+
+### Response
+
+**[BankRelationshipsCreateBankRelationshipResponse](../../models/operations/BankRelationshipsCreateBankRelationshipResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403               | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## listBankRelationships
+
+Lists bank relationships for an account.
+
+### Example Usage
+
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsListBankRelationshipsResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.State;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .build())
+            .build();
+
+        BankRelationshipsListBankRelationshipsResponse res = sdk.bankRelationships().listBankRelationships()
+                .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
+                .pageSize(100)
+                .pageToken("CMFRGgYQup3BhQgaCSkAQCKS7AAAAA==")
+                .state(State.APPROVED)
+                .call();
+
+        if (res.listBankRelationshipsResponse().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                                      | Type                                                                                                                                                                                                                                           | Required                                                                                                                                                                                                                                       | Description                                                                                                                                                                                                                                    | Example                                                                                                                                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `accountId`                                                                                                                                                                                                                                    | *String*                                                                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                                                                             | The account id.                                                                                                                                                                                                                                | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                                                                                                                                                                                     |
+| `pageSize`                                                                                                                                                                                                                                     | *Optional\<Integer>*                                                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                                             | The maximum number of bank relationships to return. The service may return fewer than this value. If unspecified, at most 50 bank relationships will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.        | 100                                                                                                                                                                                                                                            |
+| `pageToken`                                                                                                                                                                                                                                    | *Optional\<String>*                                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                                             | A page token, received from a previous `ListBankRelationships` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListBankRelationships` must match the call that provided the page token. | CMFRGgYQup3BhQgaCSkAQCKS7AAAAA==                                                                                                                                                                                                               |
+| `state`                                                                                                                                                                                                                                        | [Optional\<State>](../../models/operations/State.md)                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                                             | The state of bank relationships to filter by. Unspecified returns relationships of all states.                                                                                                                                                 | APPROVED                                                                                                                                                                                                                                       |
+
+### Response
+
+**[BankRelationshipsListBankRelationshipsResponse](../../models/operations/BankRelationshipsListBankRelationshipsResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403               | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## getBankRelationship
+
+Gets an existing bank relationship.
+
+### Example Usage
+
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsGetBankRelationshipResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .build())
+            .build();
+
+        BankRelationshipsGetBankRelationshipResponse res = sdk.bankRelationships().getBankRelationship()
+                .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
+                .bankRelationshipId("651ef9de0dee00240813e60e")
+                .call();
+
+        if (res.bankRelationship().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                  | Type                       | Required                   | Description                | Example                    |
+| -------------------------- | -------------------------- | -------------------------- | -------------------------- | -------------------------- |
+| `accountId`                | *String*                   | :heavy_check_mark:         | The account id.            | 01H8FB90ZRRFWXB4XC2JPJ1D4Y |
+| `bankRelationshipId`       | *String*                   | :heavy_check_mark:         | The bankRelationship id.   | 651ef9de0dee00240813e60e   |
+
+### Response
+
+**[BankRelationshipsGetBankRelationshipResponse](../../models/operations/BankRelationshipsGetBankRelationshipResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403, 404          | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## updateBankRelationship
+
+Updates an existing bank relationship.
+
+### Example Usage
+
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.BankRelationshipUpdate;
+import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsUpdateBankRelationshipResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .build())
+            .build();
+
+        BankRelationshipsUpdateBankRelationshipResponse res = sdk.bankRelationships().updateBankRelationship()
+                .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
+                .bankRelationshipId("651ef9de0dee00240813e60e")
+                .updateMask("{\"update_mask\":{\"paths\":[\"nickname\"]}}")
+                .bankRelationshipUpdate(BankRelationshipUpdate.builder()
+                    .build())
+                .call();
+
+        if (res.bankRelationship().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 | Example                                                                     |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `accountId`                                                                 | *String*                                                                    | :heavy_check_mark:                                                          | The account id.                                                             | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                  |
+| `bankRelationshipId`                                                        | *String*                                                                    | :heavy_check_mark:                                                          | The bankRelationship id.                                                    | 651ef9de0dee00240813e60e                                                    |
+| `updateMask`                                                                | *Optional\<String>*                                                         | :heavy_minus_sign:                                                          | The field of the bank relationship to update. Only `nickname` is supported. | {<br/>"update_mask": {<br/>"paths": [<br/>"nickname"<br/>]<br/>}<br/>}      |
+| `bankRelationshipUpdate`                                                    | [BankRelationshipUpdate](../../models/components/BankRelationshipUpdate.md) | :heavy_check_mark:                                                          | N/A                                                                         |                                                                             |
+
+### Response
+
+**[BankRelationshipsUpdateBankRelationshipResponse](../../models/operations/BankRelationshipsUpdateBankRelationshipResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403, 404          | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## cancelBankRelationship
+
+Cancels an existing bank relationship.
+
+### Example Usage
+
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.CancelBankRelationshipRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsCancelBankRelationshipResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .build())
+            .build();
+
+        BankRelationshipsCancelBankRelationshipResponse res = sdk.bankRelationships().cancelBankRelationship()
+                .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
+                .bankRelationshipId("651ef9de0dee00240813e60e")
+                .cancelBankRelationshipRequestCreate(CancelBankRelationshipRequestCreate.builder()
+                    .comment("User Request")
+                    .name("accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e")
+                    .build())
+                .call();
+
+        if (res.bankRelationship().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           | Example                                                                                               |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `accountId`                                                                                           | *String*                                                                                              | :heavy_check_mark:                                                                                    | The account id.                                                                                       | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                                            |
+| `bankRelationshipId`                                                                                  | *String*                                                                                              | :heavy_check_mark:                                                                                    | The bankRelationship id.                                                                              | 651ef9de0dee00240813e60e                                                                              |
+| `cancelBankRelationshipRequestCreate`                                                                 | [CancelBankRelationshipRequestCreate](../../models/components/CancelBankRelationshipRequestCreate.md) | :heavy_check_mark:                                                                                    | N/A                                                                                                   |                                                                                                       |
+
+### Response
+
+**[BankRelationshipsCancelBankRelationshipResponse](../../models/operations/BankRelationshipsCancelBankRelationshipResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403, 404          | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## verifyMicroDeposits
+
+Verifies a pending bank relationship with the `MICRO_DEPOSIT` verification method. Successful verification of the micro deposit amounts will result in the relationship moving to the `APPROVED` state. The micro deposits will be taken back from the bank account.
+
+### Example Usage
+
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.DecimalCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.MicroDepositAmountsCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.VerifyMicroDepositsRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsVerifyMicroDepositsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .build())
+            .build();
+
+        BankRelationshipsVerifyMicroDepositsResponse res = sdk.bankRelationships().verifyMicroDeposits()
+                .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
+                .bankRelationshipId("651ef9de0dee00240813e60e")
+                .verifyMicroDepositsRequestCreate(VerifyMicroDepositsRequestCreate.builder()
+                    .amounts(MicroDepositAmountsCreate.builder()
+                        .amount1(DecimalCreate.builder()
+                            .build())
+                        .amount2(DecimalCreate.builder()
+                            .build())
+                        .build())
+                    .name("accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e")
+                    .build())
+                .call();
+
+        if (res.bankRelationship().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     | Example                                                                                         |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `accountId`                                                                                     | *String*                                                                                        | :heavy_check_mark:                                                                              | The account id.                                                                                 | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                                      |
+| `bankRelationshipId`                                                                            | *String*                                                                                        | :heavy_check_mark:                                                                              | The bankRelationship id.                                                                        | 651ef9de0dee00240813e60e                                                                        |
+| `verifyMicroDepositsRequestCreate`                                                              | [VerifyMicroDepositsRequestCreate](../../models/components/VerifyMicroDepositsRequestCreate.md) | :heavy_check_mark:                                                                              | N/A                                                                                             |                                                                                                 |
+
+### Response
+
+**[BankRelationshipsVerifyMicroDepositsResponse](../../models/operations/BankRelationshipsVerifyMicroDepositsResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403, 404          | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## reissueMicroDeposits
+
+Reissues micro deposits after micro deposit verification has failed. The user should have received a message that new micro deposits should be reissued.
+
+### Example Usage
+
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.ReissueMicroDepositsRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsReissueMicroDepositsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .build())
+            .build();
+
+        BankRelationshipsReissueMicroDepositsResponse res = sdk.bankRelationships().reissueMicroDeposits()
+                .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
+                .bankRelationshipId("651ef9de0dee00240813e60e")
+                .reissueMicroDepositsRequestCreate(ReissueMicroDepositsRequestCreate.builder()
+                    .name("accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e")
+                    .build())
+                .call();
+
+        if (res.bankRelationship().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       | Example                                                                                           |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `accountId`                                                                                       | *String*                                                                                          | :heavy_check_mark:                                                                                | The account id.                                                                                   | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                                        |
+| `bankRelationshipId`                                                                              | *String*                                                                                          | :heavy_check_mark:                                                                                | The bankRelationship id.                                                                          | 651ef9de0dee00240813e60e                                                                          |
+| `reissueMicroDepositsRequestCreate`                                                               | [ReissueMicroDepositsRequestCreate](../../models/components/ReissueMicroDepositsRequestCreate.md) | :heavy_check_mark:                                                                                | N/A                                                                                               |                                                                                                   |
+
+### Response
+
+**[BankRelationshipsReissueMicroDepositsResponse](../../models/operations/BankRelationshipsReissueMicroDepositsResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403, 404          | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |

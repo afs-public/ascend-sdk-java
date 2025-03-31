@@ -1,0 +1,9 @@
+# OrderPriceServiceRetrieveFixedIncomeMarksRequest
+
+
+## Fields
+
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `correspondentId`                                                                                         | *String*                                                                                                  | :heavy_check_mark:                                                                                        | The correspondent id.                                                                                     |
+| `retrieveFixedIncomeMarksRequestCreate`                                                                   | [RetrieveFixedIncomeMarksRequestCreate](../../models/components/RetrieveFixedIncomeMarksRequestCreate.md) | :heavy_check_mark:                                                                                        | N/A                                                                                                       |

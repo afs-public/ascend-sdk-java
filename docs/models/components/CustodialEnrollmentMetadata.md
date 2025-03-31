@@ -1,0 +1,11 @@
+# CustodialEnrollmentMetadata
+
+Metadata for the REGISTRATION_CUSTODIAL type
+
+
+## Fields
+
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    | Example                                                                                                        |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `dividendReinvestmentPlan`                                                                                     | [Optional\<EnrollmentDividendReinvestmentPlan>](../../models/components/EnrollmentDividendReinvestmentPlan.md) | :heavy_minus_sign:                                                                                             | Option to auto-enroll in Dividend Reinvestment; defaults to true                                               | DIVIDEND_REINVESTMENT_ENROLL                                                                                   |
+| `fdicCashSweep`                                                                                                | [Optional\<EnrollmentFdicCashSweep>](../../models/components/EnrollmentFdicCashSweep.md)                       | :heavy_minus_sign:                                                                                             | Option to auto-enroll in FDIC cash sweep; defaults to true                                                     | FDIC_CASH_SWEEP_ENROLL                                                                                         |

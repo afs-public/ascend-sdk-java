@@ -1,0 +1,13 @@
+# TaxProfileCreate
+
+Tax Profile pertaining to the Legal Entity or Natural Person.
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        | Example                                                                            |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `federalTaxClassification`                                                         | [FederalTaxClassification](../../models/components/FederalTaxClassification.md)    | :heavy_check_mark:                                                                 | Federal tax classification.                                                        | C_CORPORATION                                                                      |
+| `irsFormType`                                                                      | [IrsFormType](../../models/components/IrsFormType.md)                              | :heavy_check_mark:                                                                 | IRS form type.                                                                     | W_8                                                                                |
+| `legalTaxRegionCode`                                                               | *String*                                                                           | :heavy_check_mark:                                                                 | Legal tax region must be "US" if provided W-9, otherwise must be a non-US country. | US                                                                                 |
+| `usTinStatus`                                                                      | [UsTinStatus](../../models/components/UsTinStatus.md)                              | :heavy_check_mark:                                                                 | United States Individual Taxpayer Identification Number (ITIN) status.             | PASSING                                                                            |

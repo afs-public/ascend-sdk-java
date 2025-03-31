@@ -1,0 +1,11 @@
+# WireWithdrawalRecipientBank
+
+The recipient bank / financial institution
+
+
+## Fields
+
+| Field                                                                                                                      | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `bankId`                                                                                                                   | [JsonNullable\<WireWithdrawalBankId>](../../models/components/WireWithdrawalBankId.md)                                     | :heavy_minus_sign:                                                                                                         | An identifier that represents ABA routing number for domestic wire or BIC for foreign wire                                 |
+| `internationalBankDetails`                                                                                                 | [JsonNullable\<WireWithdrawalInternationalBankDetails>](../../models/components/WireWithdrawalInternationalBankDetails.md) | :heavy_minus_sign:                                                                                                         | Bank details required in the case of an international wire transfer                                                        |

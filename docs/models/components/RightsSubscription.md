@@ -1,0 +1,10 @@
+# RightsSubscription
+
+Used to record the purchase of new or additional securities and details related to the subscription. Rights are often tradable in a secondary market
+
+
+## Fields
+
+| Field                                                                                                                                                          | Type                                                                                                                                                           | Required                                                                                                                                                       | Description                                                                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `corporateActionGeneralInformation`                                                                                                                            | [JsonNullable\<EntryRightsSubscriptionCorporateActionGeneralInformation>](../../models/components/EntryRightsSubscriptionCorporateActionGeneralInformation.md) | :heavy_minus_sign:                                                                                                                                             | Common fields for corporate actions                                                                                                                            |

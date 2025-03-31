@@ -1,0 +1,35 @@
+// This file
+// * is referred to in an `apply from` command in `build.gradle`
+// * can be used to customise `build.gradle`
+// * is generated once and not overwritten in SDK generation updates
+
+publishing {
+    repositories {
+        if (project.hasProperty("publish.public") && project.property("publish.public") == "true") {
+            maven {
+                name = "MavenCentral"
+                url = layout.buildDirectory.dir("staging-deploy")
+            }
+        } else {
+            maven {
+                name = "PrivateApexMaven"
+                url "https://nexus.corp.apexclearing.com/repository/maven-snapshots/"
+                credentials {
+                    username = System.getenv("NEXUS_USERNAME")
+                    password = System.getenv("NEXUS_PASSWORD")
+                }
+            }
+        }
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    testImplementation 'org.wiremock:wiremock:3.9.1'
+    testImplementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.18.2'
+    testImplementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+}
