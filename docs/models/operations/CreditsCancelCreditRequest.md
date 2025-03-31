@@ -1,0 +1,10 @@
+# CreditsCancelCreditRequest
+
+
+## Fields
+
+| Field                                                                             | Type                                                                              | Required                                                                          | Description                                                                       | Example                                                                           |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `accountId`                                                                       | *String*                                                                          | :heavy_check_mark:                                                                | The account id.                                                                   | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                        |
+| `creditId`                                                                        | *String*                                                                          | :heavy_check_mark:                                                                | The credit id.                                                                    | 20230823123456                                                                    |
+| `cancelCreditRequestCreate`                                                       | [CancelCreditRequestCreate](../../models/components/CancelCreditRequestCreate.md) | :heavy_check_mark:                                                                | N/A                                                                               |                                                                                   |

@@ -1,0 +1,9 @@
+# AchWithdrawalSchedulesCreateAchWithdrawalScheduleRequest
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           | Example                                                                               |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `accountId`                                                                           | *String*                                                                              | :heavy_check_mark:                                                                    | The account id.                                                                       | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                            |
+| `achWithdrawalScheduleCreate`                                                         | [AchWithdrawalScheduleCreate](../../models/components/AchWithdrawalScheduleCreate.md) | :heavy_check_mark:                                                                    | N/A                                                                                   |                                                                                       |

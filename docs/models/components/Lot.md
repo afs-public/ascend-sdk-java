@@ -1,0 +1,11 @@
+# Lot
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          | Example                                                              |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `id`                                                                 | *Optional\<String>*                                                  | :heavy_minus_sign:                                                   | Client supplied id                                                   | 5821A4ED5ADF4774B151B57E9BBF2FDC                                     |
+| `money`                                                              | [JsonNullable\<Money>](../../models/components/Money.md)             | :heavy_minus_sign:                                                   | Object containing currency/ price information for the trade lot      |                                                                      |
+| `quantity`                                                           | [JsonNullable\<LotQuantity>](../../models/components/LotQuantity.md) | :heavy_minus_sign:                                                   | Quantity of the trade lot                                            | {<br/>"value": "0.25"<br/>}                                          |
+| `tradeDate`                                                          | [JsonNullable\<TradeDate>](../../models/components/TradeDate.md)     | :heavy_minus_sign:                                                   | Trade date of the trade lot                                          | {<br/>"day": 14,<br/>"month": 5,<br/>"year": 2024<br/>}              |

@@ -1,0 +1,10 @@
+# AccountsReplacePartyRequest
+
+
+## Fields
+
+| Field                                                                             | Type                                                                              | Required                                                                          | Description                                                                       | Example                                                                           |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `accountId`                                                                       | *String*                                                                          | :heavy_check_mark:                                                                | The account id.                                                                   | 01HC3MAQ4DR9QN1V8MJ4CN1HMK                                                        |
+| `partyId`                                                                         | *String*                                                                          | :heavy_check_mark:                                                                | The party id.                                                                     | 8096110d-fb55-4f9d-b883-b84f0b70d3ea                                              |
+| `replacePartyRequestCreate`                                                       | [ReplacePartyRequestCreate](../../models/components/ReplacePartyRequestCreate.md) | :heavy_check_mark:                                                                | N/A                                                                               |                                                                                   |

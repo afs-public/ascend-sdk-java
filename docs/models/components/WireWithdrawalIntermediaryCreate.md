@@ -1,0 +1,12 @@
+# WireWithdrawalIntermediaryCreate
+
+An intermediary party
+
+
+## Fields
+
+| Field                                                                                     | Type                                                                                      | Required                                                                                  | Description                                                                               | Example                                                                                   |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `account`                                                                                 | *String*                                                                                  | :heavy_check_mark:                                                                        | The account number of the intermediary party                                              | NL02ABNA0123456789                                                                        |
+| `accountTitle`                                                                            | *String*                                                                                  | :heavy_check_mark:                                                                        | The name of the intermediary party                                                        | Jane Dough                                                                                |
+| `address`                                                                                 | [AddressCreate](../../models/components/AddressCreate.md)                                 | :heavy_check_mark:                                                                        | The data structure containing attributes describing the location of an underlying entity. |                                                                                           |

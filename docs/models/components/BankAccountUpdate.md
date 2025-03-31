@@ -1,0 +1,13 @@
+# BankAccountUpdate
+
+A representation of a bank account.
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          | Example                                                                              |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `accountNumber`                                                                      | *Optional\<String>*                                                                  | :heavy_minus_sign:                                                                   | The bank account number. This value will be masked in responses.                     | 100100123                                                                            |
+| `owner`                                                                              | *Optional\<String>*                                                                  | :heavy_minus_sign:                                                                   | The name of the bank account owner.                                                  | John Doe                                                                             |
+| `routingNumber`                                                                      | *Optional\<String>*                                                                  | :heavy_minus_sign:                                                                   | The bank routing number (either ABA or BIC).                                         | 1.2345678e+07                                                                        |
+| `type`                                                                               | [Optional\<BankAccountUpdateType>](../../models/components/BankAccountUpdateType.md) | :heavy_minus_sign:                                                                   | The bank account type.                                                               | CHECKING                                                                             |

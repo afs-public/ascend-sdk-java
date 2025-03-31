@@ -1,0 +1,11 @@
+# CashJournalConstraints
+
+Retirement constraints for cash journal transfers
+
+
+## Fields
+
+| Field                                                                                                                                    | Type                                                                                                                                     | Required                                                                                                                                 | Description                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `contributionConstraints`                                                                                                                | [JsonNullable\<CashJournalConstraintsContributionConstraints>](../../models/components/CashJournalConstraintsContributionConstraints.md) | :heavy_minus_sign:                                                                                                                       | Contribution constraints for the destination account                                                                                     |
+| `distributionConstraints`                                                                                                                | [JsonNullable\<CashJournalConstraintsDistributionConstraints>](../../models/components/CashJournalConstraintsDistributionConstraints.md) | :heavy_minus_sign:                                                                                                                       | Distribution constraints for the source account                                                                                          |

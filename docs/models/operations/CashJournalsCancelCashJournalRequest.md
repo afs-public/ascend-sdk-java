@@ -1,0 +1,9 @@
+# CashJournalsCancelCashJournalRequest
+
+
+## Fields
+
+| Field                                                                                       | Type                                                                                        | Required                                                                                    | Description                                                                                 | Example                                                                                     |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `cashJournalId`                                                                             | *String*                                                                                    | :heavy_check_mark:                                                                          | The cashJournal id.                                                                         | 20240717000319                                                                              |
+| `cancelCashJournalRequestCreate`                                                            | [CancelCashJournalRequestCreate](../../models/components/CancelCashJournalRequestCreate.md) | :heavy_check_mark:                                                                          | N/A                                                                                         |                                                                                             |

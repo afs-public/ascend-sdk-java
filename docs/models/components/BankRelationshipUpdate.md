@@ -1,0 +1,12 @@
+# BankRelationshipUpdate
+
+A relationship between a bank account and an Apex account.
+
+
+## Fields
+
+| Field                                                                                       | Type                                                                                        | Required                                                                                    | Description                                                                                 | Example                                                                                     |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `bankAccount`                                                                               | [Optional\<BankAccountUpdate>](../../models/components/BankAccountUpdate.md)                | :heavy_minus_sign:                                                                          | A representation of a bank account.                                                         |                                                                                             |
+| `nickname`                                                                                  | *Optional\<String>*                                                                         | :heavy_minus_sign:                                                                          | The nickname of the bank relationship.                                                      | My Primary Bank                                                                             |
+| `plaidProcessorToken`                                                                       | *Optional\<String>*                                                                         | :heavy_minus_sign:                                                                          | A processor token from Plaid (vendor). Required if using `PLAID_TOKEN` verification method. | processor-sandbox-b03434a75-801-4000-990c-eb404cc                                           |

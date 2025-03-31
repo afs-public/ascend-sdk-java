@@ -1,0 +1,12 @@
+# AccountDocumentUploadRequestCreate
+
+Account document to be uploaded;
+
+
+## Fields
+
+| Field                                                                                       | Type                                                                                        | Required                                                                                    | Description                                                                                 | Example                                                                                     |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `accountId`                                                                                 | *String*                                                                                    | :heavy_check_mark:                                                                          | Identifies the account relevant to the document; Required for all account documents         | 01HCZ4ZE2248BR4SC6DE5KFF8S                                                                  |
+| `correspondentId`                                                                           | *String*                                                                                    | :heavy_check_mark:                                                                          | Identifies the correspondent relevant to the document; Required for all account documents   | 01HPMZZM6RKMVZA1JQ63RQKJRP                                                                  |
+| `documentType`                                                                              | [DocumentType](../../models/components/DocumentType.md)                                     | :heavy_check_mark:                                                                          | Describes the contents of a document and how it is used; Required for all account documents | FDIC_SWEEP_PROGRAM_AGREEMENT                                                                |

@@ -1,0 +1,9 @@
+# WireDepositsGetWireDepositRequest
+
+
+## Fields
+
+| Field                      | Type                       | Required                   | Description                | Example                    |
+| -------------------------- | -------------------------- | -------------------------- | -------------------------- | -------------------------- |
+| `accountId`                | *String*                   | :heavy_check_mark:         | The account id.            | 01H8FB90ZRRFWXB4XC2JPJ1D4Y |
+| `wireDepositId`            | *String*                   | :heavy_check_mark:         | The wireDeposit id.        | 20230817000319             |

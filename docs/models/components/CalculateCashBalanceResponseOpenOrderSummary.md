@@ -1,0 +1,11 @@
+# CalculateCashBalanceResponseOpenOrderSummary
+
+A summary of an open order.
+
+
+## Fields
+
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              | Example                                                                                                  |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `asset`                                                                                                  | *Optional\<String>*                                                                                      | :heavy_minus_sign:                                                                                       | The asset for the open order.                                                                            | assets/8395                                                                                              |
+| `expectedNotionalCeilingAmount`                                                                          | [JsonNullable\<ExpectedNotionalCeilingAmount>](../../models/components/ExpectedNotionalCeilingAmount.md) | :heavy_minus_sign:                                                                                       | The notional value the order is not reasonably expected to exceed in USD. This value is always positive. | {<br/>"value": "100.00"<br/>}                                                                            |

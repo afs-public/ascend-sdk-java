@@ -1,0 +1,11 @@
+# CheckPartyTypeResponse
+
+Returns whether a potential cash journal will be considered first party or third party
+
+
+## Fields
+
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              | Example                                                                                                  |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `partyType`                                                                                              | [Optional\<CheckPartyTypeResponsePartyType>](../../models/components/CheckPartyTypeResponsePartyType.md) | :heavy_minus_sign:                                                                                       | Whether the cash journal is considered first party or third party                                        | FIRST_PARTY                                                                                              |
+| `reason`                                                                                                 | *Optional\<String>*                                                                                      | :heavy_minus_sign:                                                                                       | If cash journal is considered third party, reason for why it is considered third party                   | Account owner information does not match                                                                 |

@@ -1,0 +1,14 @@
+# IctDepositTravelRuleCreate
+
+The travel rules associated with an ICT deposit
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `entityOriginatingParty`                                                                         | [Optional\<TravelRuleEntityPartyCreate>](../../models/components/TravelRuleEntityPartyCreate.md) | :heavy_minus_sign:                                                                               | Travel rule entity party                                                                         |
+| `entityRecipientParty`                                                                           | [Optional\<TravelRuleEntityPartyCreate>](../../models/components/TravelRuleEntityPartyCreate.md) | :heavy_minus_sign:                                                                               | Travel rule entity party                                                                         |
+| `individualOriginatingParty`                                                                     | [Optional\<TravelRulePartyCreate>](../../models/components/TravelRulePartyCreate.md)             | :heavy_minus_sign:                                                                               | Travel rule party                                                                                |
+| `individualRecipientParty`                                                                       | [Optional\<TravelRulePartyCreate>](../../models/components/TravelRulePartyCreate.md)             | :heavy_minus_sign:                                                                               | Travel rule party                                                                                |
+| `originatingInstitution`                                                                         | [InstitutionCreate](../../models/components/InstitutionCreate.md)                                | :heavy_check_mark:                                                                               | Institution representing originator or recipient of funds from an Instant Cash Transfer          |

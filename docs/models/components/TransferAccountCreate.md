@@ -1,0 +1,11 @@
+# TransferAccountCreate
+
+The delivering/receiving party information
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          | Example                                                                              |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `apexAccountId`                                                                      | *Optional\<String>*                                                                  | :heavy_minus_sign:                                                                   | The internal apex account id                                                         | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                           |
+| `externalAccount`                                                                    | [Optional\<ExternalAccountCreate>](../../models/components/ExternalAccountCreate.md) | :heavy_minus_sign:                                                                   | The external account information                                                     |                                                                                      |

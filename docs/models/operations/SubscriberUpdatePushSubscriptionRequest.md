@@ -1,0 +1,10 @@
+# SubscriberUpdatePushSubscriptionRequest
+
+
+## Fields
+
+| Field                                                                       | Type                                                                        | Required                                                                    | Description                                                                 | Example                                                                     |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `subscriptionId`                                                            | *String*                                                                    | :heavy_check_mark:                                                          | The subscription id.                                                        | 01H8MCDXH4JVH7KVNB2YY42907                                                  |
+| `updateMask`                                                                | *Optional\<String>*                                                         | :heavy_minus_sign:                                                          | The fields to update in subscription                                        |                                                                             |
+| `pushSubscriptionUpdate`                                                    | [PushSubscriptionUpdate](../../models/components/PushSubscriptionUpdate.md) | :heavy_check_mark:                                                          | N/A                                                                         |                                                                             |
