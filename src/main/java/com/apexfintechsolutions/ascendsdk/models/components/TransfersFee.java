@@ -38,6 +38,16 @@ public class TransfersFee {
   @JsonProperty("description")
   private Optional<String> description;
 
+  /**
+   * Optional account field to denote where the fee amount should be deposited into. If provided,
+   * the account must be a fee operating account. In the case of multiple fee operating accounts
+   * under the same correspondent, this field must be provided. If not provided, this will be looked
+   * up asynchronously (therefore will not be in the initial response)
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("fee_operating_account")
+  private Optional<String> feeOperatingAccount;
+
   /** Full name of the fee resource, which contains account id and fee transaction id */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("name")
@@ -58,18 +68,21 @@ public class TransfersFee {
       @JsonProperty("amount") JsonNullable<? extends TransfersFeeAmount> amount,
       @JsonProperty("client_transfer_id") Optional<String> clientTransferId,
       @JsonProperty("description") Optional<String> description,
+      @JsonProperty("fee_operating_account") Optional<String> feeOperatingAccount,
       @JsonProperty("name") Optional<String> name,
       @JsonProperty("state") JsonNullable<? extends TransfersFeeState> state,
       @JsonProperty("type") Optional<? extends TransfersFeeType> type) {
     Utils.checkNotNull(amount, "amount");
     Utils.checkNotNull(clientTransferId, "clientTransferId");
     Utils.checkNotNull(description, "description");
+    Utils.checkNotNull(feeOperatingAccount, "feeOperatingAccount");
     Utils.checkNotNull(name, "name");
     Utils.checkNotNull(state, "state");
     Utils.checkNotNull(type, "type");
     this.amount = amount;
     this.clientTransferId = clientTransferId;
     this.description = description;
+    this.feeOperatingAccount = feeOperatingAccount;
     this.name = name;
     this.state = state;
     this.type = type;
@@ -78,6 +91,7 @@ public class TransfersFee {
   public TransfersFee() {
     this(
         JsonNullable.undefined(),
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
@@ -105,6 +119,17 @@ public class TransfersFee {
   @JsonIgnore
   public Optional<String> description() {
     return description;
+  }
+
+  /**
+   * Optional account field to denote where the fee amount should be deposited into. If provided,
+   * the account must be a fee operating account. In the case of multiple fee operating accounts
+   * under the same correspondent, this field must be provided. If not provided, this will be looked
+   * up asynchronously (therefore will not be in the initial response)
+   */
+  @JsonIgnore
+  public Optional<String> feeOperatingAccount() {
+    return feeOperatingAccount;
   }
 
   /** Full name of the fee resource, which contains account id and fee transaction id */
@@ -179,6 +204,30 @@ public class TransfersFee {
     return this;
   }
 
+  /**
+   * Optional account field to denote where the fee amount should be deposited into. If provided,
+   * the account must be a fee operating account. In the case of multiple fee operating accounts
+   * under the same correspondent, this field must be provided. If not provided, this will be looked
+   * up asynchronously (therefore will not be in the initial response)
+   */
+  public TransfersFee withFeeOperatingAccount(String feeOperatingAccount) {
+    Utils.checkNotNull(feeOperatingAccount, "feeOperatingAccount");
+    this.feeOperatingAccount = Optional.ofNullable(feeOperatingAccount);
+    return this;
+  }
+
+  /**
+   * Optional account field to denote where the fee amount should be deposited into. If provided,
+   * the account must be a fee operating account. In the case of multiple fee operating accounts
+   * under the same correspondent, this field must be provided. If not provided, this will be looked
+   * up asynchronously (therefore will not be in the initial response)
+   */
+  public TransfersFee withFeeOperatingAccount(Optional<String> feeOperatingAccount) {
+    Utils.checkNotNull(feeOperatingAccount, "feeOperatingAccount");
+    this.feeOperatingAccount = feeOperatingAccount;
+    return this;
+  }
+
   /** Full name of the fee resource, which contains account id and fee transaction id */
   public TransfersFee withName(String name) {
     Utils.checkNotNull(name, "name");
@@ -233,6 +282,7 @@ public class TransfersFee {
     return Objects.deepEquals(this.amount, other.amount)
         && Objects.deepEquals(this.clientTransferId, other.clientTransferId)
         && Objects.deepEquals(this.description, other.description)
+        && Objects.deepEquals(this.feeOperatingAccount, other.feeOperatingAccount)
         && Objects.deepEquals(this.name, other.name)
         && Objects.deepEquals(this.state, other.state)
         && Objects.deepEquals(this.type, other.type);
@@ -240,7 +290,8 @@ public class TransfersFee {
 
   @Override
   public int hashCode() {
-    return Objects.hash(amount, clientTransferId, description, name, state, type);
+    return Objects.hash(
+        amount, clientTransferId, description, feeOperatingAccount, name, state, type);
   }
 
   @Override
@@ -253,6 +304,8 @@ public class TransfersFee {
         clientTransferId,
         "description",
         description,
+        "feeOperatingAccount",
+        feeOperatingAccount,
         "name",
         name,
         "state",
@@ -268,6 +321,8 @@ public class TransfersFee {
     private Optional<String> clientTransferId = Optional.empty();
 
     private Optional<String> description = Optional.empty();
+
+    private Optional<String> feeOperatingAccount = Optional.empty();
 
     private Optional<String> name = Optional.empty();
 
@@ -327,6 +382,30 @@ public class TransfersFee {
       return this;
     }
 
+    /**
+     * Optional account field to denote where the fee amount should be deposited into. If provided,
+     * the account must be a fee operating account. In the case of multiple fee operating accounts
+     * under the same correspondent, this field must be provided. If not provided, this will be
+     * looked up asynchronously (therefore will not be in the initial response)
+     */
+    public Builder feeOperatingAccount(String feeOperatingAccount) {
+      Utils.checkNotNull(feeOperatingAccount, "feeOperatingAccount");
+      this.feeOperatingAccount = Optional.ofNullable(feeOperatingAccount);
+      return this;
+    }
+
+    /**
+     * Optional account field to denote where the fee amount should be deposited into. If provided,
+     * the account must be a fee operating account. In the case of multiple fee operating accounts
+     * under the same correspondent, this field must be provided. If not provided, this will be
+     * looked up asynchronously (therefore will not be in the initial response)
+     */
+    public Builder feeOperatingAccount(Optional<String> feeOperatingAccount) {
+      Utils.checkNotNull(feeOperatingAccount, "feeOperatingAccount");
+      this.feeOperatingAccount = feeOperatingAccount;
+      return this;
+    }
+
     /** Full name of the fee resource, which contains account id and fee transaction id */
     public Builder name(String name) {
       Utils.checkNotNull(name, "name");
@@ -370,7 +449,8 @@ public class TransfersFee {
     }
 
     public TransfersFee build() {
-      return new TransfersFee(amount, clientTransferId, description, name, state, type);
+      return new TransfersFee(
+          amount, clientTransferId, description, feeOperatingAccount, name, state, type);
     }
   }
 }

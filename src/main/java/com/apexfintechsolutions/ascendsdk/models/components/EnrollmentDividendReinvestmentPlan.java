@@ -40,7 +40,7 @@ import java.util.Optional;
  */
 /**
  * EnrollmentDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to
- * true
+ * DIVIDEND_REINVESTMENT_ENROLL
  */
 @JsonDeserialize(using = EnrollmentDividendReinvestmentPlan._Deserializer.class)
 @JsonSerialize(using = EnrollmentDividendReinvestmentPlan._Serializer.class)

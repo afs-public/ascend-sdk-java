@@ -42,6 +42,16 @@ public class TransfersCreditCreate {
   @JsonProperty("description")
   private Optional<String> description;
 
+  /**
+   * Optional account field to denote where the credit amount should be withdrawn from. If provided,
+   * the account must be a fee operating account. In the case of multiple fee operating accounts
+   * under the same correspondent, this field must be provided. If not provided, this will be looked
+   * up asynchronously (therefore will not be in the initial response)
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("fee_operating_account")
+  private Optional<String> feeOperatingAccount;
+
   /** The type of the credit being issued */
   @JsonProperty("type")
   private TransfersCreditCreateType type;
@@ -51,20 +61,23 @@ public class TransfersCreditCreate {
       @JsonProperty("amount") DecimalCreate amount,
       @JsonProperty("client_transfer_id") String clientTransferId,
       @JsonProperty("description") Optional<String> description,
+      @JsonProperty("fee_operating_account") Optional<String> feeOperatingAccount,
       @JsonProperty("type") TransfersCreditCreateType type) {
     Utils.checkNotNull(amount, "amount");
     Utils.checkNotNull(clientTransferId, "clientTransferId");
     Utils.checkNotNull(description, "description");
+    Utils.checkNotNull(feeOperatingAccount, "feeOperatingAccount");
     Utils.checkNotNull(type, "type");
     this.amount = amount;
     this.clientTransferId = clientTransferId;
     this.description = description;
+    this.feeOperatingAccount = feeOperatingAccount;
     this.type = type;
   }
 
   public TransfersCreditCreate(
       DecimalCreate amount, String clientTransferId, TransfersCreditCreateType type) {
-    this(amount, clientTransferId, Optional.empty(), type);
+    this(amount, clientTransferId, Optional.empty(), Optional.empty(), type);
   }
 
   /**
@@ -93,6 +106,17 @@ public class TransfersCreditCreate {
   @JsonIgnore
   public Optional<String> description() {
     return description;
+  }
+
+  /**
+   * Optional account field to denote where the credit amount should be withdrawn from. If provided,
+   * the account must be a fee operating account. In the case of multiple fee operating accounts
+   * under the same correspondent, this field must be provided. If not provided, this will be looked
+   * up asynchronously (therefore will not be in the initial response)
+   */
+  @JsonIgnore
+  public Optional<String> feeOperatingAccount() {
+    return feeOperatingAccount;
   }
 
   /** The type of the credit being issued */
@@ -143,6 +167,30 @@ public class TransfersCreditCreate {
     return this;
   }
 
+  /**
+   * Optional account field to denote where the credit amount should be withdrawn from. If provided,
+   * the account must be a fee operating account. In the case of multiple fee operating accounts
+   * under the same correspondent, this field must be provided. If not provided, this will be looked
+   * up asynchronously (therefore will not be in the initial response)
+   */
+  public TransfersCreditCreate withFeeOperatingAccount(String feeOperatingAccount) {
+    Utils.checkNotNull(feeOperatingAccount, "feeOperatingAccount");
+    this.feeOperatingAccount = Optional.ofNullable(feeOperatingAccount);
+    return this;
+  }
+
+  /**
+   * Optional account field to denote where the credit amount should be withdrawn from. If provided,
+   * the account must be a fee operating account. In the case of multiple fee operating accounts
+   * under the same correspondent, this field must be provided. If not provided, this will be looked
+   * up asynchronously (therefore will not be in the initial response)
+   */
+  public TransfersCreditCreate withFeeOperatingAccount(Optional<String> feeOperatingAccount) {
+    Utils.checkNotNull(feeOperatingAccount, "feeOperatingAccount");
+    this.feeOperatingAccount = feeOperatingAccount;
+    return this;
+  }
+
   /** The type of the credit being issued */
   public TransfersCreditCreate withType(TransfersCreditCreateType type) {
     Utils.checkNotNull(type, "type");
@@ -162,12 +210,13 @@ public class TransfersCreditCreate {
     return Objects.deepEquals(this.amount, other.amount)
         && Objects.deepEquals(this.clientTransferId, other.clientTransferId)
         && Objects.deepEquals(this.description, other.description)
+        && Objects.deepEquals(this.feeOperatingAccount, other.feeOperatingAccount)
         && Objects.deepEquals(this.type, other.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(amount, clientTransferId, description, type);
+    return Objects.hash(amount, clientTransferId, description, feeOperatingAccount, type);
   }
 
   @Override
@@ -180,6 +229,8 @@ public class TransfersCreditCreate {
         clientTransferId,
         "description",
         description,
+        "feeOperatingAccount",
+        feeOperatingAccount,
         "type",
         type);
   }
@@ -191,6 +242,8 @@ public class TransfersCreditCreate {
     private String clientTransferId;
 
     private Optional<String> description = Optional.empty();
+
+    private Optional<String> feeOperatingAccount = Optional.empty();
 
     private TransfersCreditCreateType type;
 
@@ -237,6 +290,30 @@ public class TransfersCreditCreate {
       return this;
     }
 
+    /**
+     * Optional account field to denote where the credit amount should be withdrawn from. If
+     * provided, the account must be a fee operating account. In the case of multiple fee operating
+     * accounts under the same correspondent, this field must be provided. If not provided, this
+     * will be looked up asynchronously (therefore will not be in the initial response)
+     */
+    public Builder feeOperatingAccount(String feeOperatingAccount) {
+      Utils.checkNotNull(feeOperatingAccount, "feeOperatingAccount");
+      this.feeOperatingAccount = Optional.ofNullable(feeOperatingAccount);
+      return this;
+    }
+
+    /**
+     * Optional account field to denote where the credit amount should be withdrawn from. If
+     * provided, the account must be a fee operating account. In the case of multiple fee operating
+     * accounts under the same correspondent, this field must be provided. If not provided, this
+     * will be looked up asynchronously (therefore will not be in the initial response)
+     */
+    public Builder feeOperatingAccount(Optional<String> feeOperatingAccount) {
+      Utils.checkNotNull(feeOperatingAccount, "feeOperatingAccount");
+      this.feeOperatingAccount = feeOperatingAccount;
+      return this;
+    }
+
     /** The type of the credit being issued */
     public Builder type(TransfersCreditCreateType type) {
       Utils.checkNotNull(type, "type");
@@ -245,7 +322,8 @@ public class TransfersCreditCreate {
     }
 
     public TransfersCreditCreate build() {
-      return new TransfersCreditCreate(amount, clientTransferId, description, type);
+      return new TransfersCreditCreate(
+          amount, clientTransferId, description, feeOperatingAccount, type);
     }
   }
 }

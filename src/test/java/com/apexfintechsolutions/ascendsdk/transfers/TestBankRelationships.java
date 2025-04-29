@@ -69,8 +69,7 @@ public class TestBankRelationships {
   public void bank_relationships_transfers_reissue_micro_deposits_reissue_micro_deposits1()
       throws Exception {
     var wrongAmounts =
-        com.apexfintechsolutions.ascendsdk.TransfersUtil.getFailingMicrodepositAmounts(
-            sdk, enrolledAccount, bankRelationship);
+        TransfersUtil.getFailingMicrodepositAmounts(sdk, enrolledAccount, bankRelationship);
     var request =
         VerifyMicroDepositsRequestCreate.builder()
             .name(bankRelationship.name().get())
@@ -111,8 +110,7 @@ public class TestBankRelationships {
   public void bank_relationships_transfers_verify_micro_deposits_verify_micro_deposits1()
       throws Exception {
     var amounts =
-        com.apexfintechsolutions.ascendsdk.TransfersUtil.getCorrectMicrodepositAmounts(
-            sdk, enrolledAccount, bankRelationship);
+        TransfersUtil.getCorrectMicrodepositAmounts(sdk, enrolledAccount, bankRelationship);
 
     var request =
         VerifyMicroDepositsRequestCreate.builder()

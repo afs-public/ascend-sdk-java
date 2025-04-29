@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
 
+/** Ascend OpenAPI: Combined Ascend OpenAPI spec for SDK generation */
 public class SDK {
 
   /** AvailableServers contains identifiers for the servers available to the SDK. */
@@ -62,24 +63,6 @@ public class SDK {
 
   private final Investigations investigations;
 
-  private final AccountTransfers accountTransfers;
-
-  private final CreateOrder createOrder;
-
-  private final FixedIncomePricing fixedIncomePricing;
-
-  private final BasketOrders basketOrders;
-
-  private final Assets assets;
-
-  private final Ledger ledger;
-
-  private final InvestorDocs investorDocs;
-
-  private final DataRetrieval dataRetrieval;
-
-  private final Margins margins;
-
   private final BankRelationships bankRelationships;
 
   private final ACHTransfers achTransfers;
@@ -99,6 +82,28 @@ public class SDK {
   private final FeesAndCredits feesAndCredits;
 
   private final TestSimulation testSimulation;
+
+  private final AccountTransfers accountTransfers;
+
+  private final CreateOrder createOrder;
+
+  private final FixedIncomePricing fixedIncomePricing;
+
+  private final BasketOrders basketOrders;
+
+  private final TradeBooking tradeBooking;
+
+  private final TradeAllocation tradeAllocation;
+
+  private final Assets assets;
+
+  private final Ledger ledger;
+
+  private final Margins margins;
+
+  private final InvestorDocs investorDocs;
+
+  private final DataRetrieval dataRetrieval;
 
   public Authentication authentication() {
     return authentication;
@@ -130,42 +135,6 @@ public class SDK {
 
   public Investigations investigations() {
     return investigations;
-  }
-
-  public AccountTransfers accountTransfers() {
-    return accountTransfers;
-  }
-
-  public CreateOrder createOrder() {
-    return createOrder;
-  }
-
-  public FixedIncomePricing fixedIncomePricing() {
-    return fixedIncomePricing;
-  }
-
-  public BasketOrders basketOrders() {
-    return basketOrders;
-  }
-
-  public Assets assets() {
-    return assets;
-  }
-
-  public Ledger ledger() {
-    return ledger;
-  }
-
-  public InvestorDocs investorDocs() {
-    return investorDocs;
-  }
-
-  public DataRetrieval dataRetrieval() {
-    return dataRetrieval;
-  }
-
-  public Margins margins() {
-    return margins;
   }
 
   public BankRelationships bankRelationships() {
@@ -206,6 +175,50 @@ public class SDK {
 
   public TestSimulation testSimulation() {
     return testSimulation;
+  }
+
+  public AccountTransfers accountTransfers() {
+    return accountTransfers;
+  }
+
+  public CreateOrder createOrder() {
+    return createOrder;
+  }
+
+  public FixedIncomePricing fixedIncomePricing() {
+    return fixedIncomePricing;
+  }
+
+  public BasketOrders basketOrders() {
+    return basketOrders;
+  }
+
+  public TradeBooking tradeBooking() {
+    return tradeBooking;
+  }
+
+  public TradeAllocation tradeAllocation() {
+    return tradeAllocation;
+  }
+
+  public Assets assets() {
+    return assets;
+  }
+
+  public Ledger ledger() {
+    return ledger;
+  }
+
+  public Margins margins() {
+    return margins;
+  }
+
+  public InvestorDocs investorDocs() {
+    return investorDocs;
+  }
+
+  public DataRetrieval dataRetrieval() {
+    return dataRetrieval;
   }
 
   private final SDKConfiguration sdkConfiguration;
@@ -351,15 +364,6 @@ public class SDK {
     this.accountManagement = new AccountManagement(sdkConfiguration);
     this.enrollmentsAndAgreements = new EnrollmentsAndAgreements(sdkConfiguration);
     this.investigations = new Investigations(sdkConfiguration);
-    this.accountTransfers = new AccountTransfers(sdkConfiguration);
-    this.createOrder = new CreateOrder(sdkConfiguration);
-    this.fixedIncomePricing = new FixedIncomePricing(sdkConfiguration);
-    this.basketOrders = new BasketOrders(sdkConfiguration);
-    this.assets = new Assets(sdkConfiguration);
-    this.ledger = new Ledger(sdkConfiguration);
-    this.investorDocs = new InvestorDocs(sdkConfiguration);
-    this.dataRetrieval = new DataRetrieval(sdkConfiguration);
-    this.margins = new Margins(sdkConfiguration);
     this.bankRelationships = new BankRelationships(sdkConfiguration);
     this.achTransfers = new ACHTransfers(sdkConfiguration);
     this.instantCashTransferICT = new InstantCashTransferICT(sdkConfiguration);
@@ -370,6 +374,17 @@ public class SDK {
     this.cashBalances = new CashBalances(sdkConfiguration);
     this.feesAndCredits = new FeesAndCredits(sdkConfiguration);
     this.testSimulation = new TestSimulation(sdkConfiguration);
+    this.accountTransfers = new AccountTransfers(sdkConfiguration);
+    this.createOrder = new CreateOrder(sdkConfiguration);
+    this.fixedIncomePricing = new FixedIncomePricing(sdkConfiguration);
+    this.basketOrders = new BasketOrders(sdkConfiguration);
+    this.tradeBooking = new TradeBooking(sdkConfiguration);
+    this.tradeAllocation = new TradeAllocation(sdkConfiguration);
+    this.assets = new Assets(sdkConfiguration);
+    this.ledger = new Ledger(sdkConfiguration);
+    this.margins = new Margins(sdkConfiguration);
+    this.investorDocs = new InvestorDocs(sdkConfiguration);
+    this.dataRetrieval = new DataRetrieval(sdkConfiguration);
     this.sdkConfiguration.initialize();
   }
 }

@@ -19,7 +19,10 @@ import org.openapitools.jackson.nullable.JsonNullable;
 /** OrderCreate - The message describing an order */
 public class OrderCreate {
 
-  /** The type of the asset in this order */
+  /**
+   * The type of the asset in this order, which must be one of the following: EQUITY, MUTUAL_FUND,
+   * and FIXED_INCOME.
+   */
   @JsonProperty("asset_type")
   private AssetType assetType;
 
@@ -57,7 +60,7 @@ public class OrderCreate {
   @JsonProperty("currency_code")
   private Optional<String> currencyCode;
 
-  /** Fees that will be applied to this order. */
+  /** Fees that will be applied to this order. Only the BROKER_FEE type is supported. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("fees")
   private Optional<? extends List<FeeCreate>> fees;
@@ -293,7 +296,10 @@ public class OrderCreate {
         timeInForce);
   }
 
-  /** The type of the asset in this order */
+  /**
+   * The type of the asset in this order, which must be one of the following: EQUITY, MUTUAL_FUND,
+   * and FIXED_INCOME.
+   */
   @JsonIgnore
   public AssetType assetType() {
     return assetType;
@@ -341,7 +347,7 @@ public class OrderCreate {
     return currencyCode;
   }
 
-  /** Fees that will be applied to this order. */
+  /** Fees that will be applied to this order. Only the BROKER_FEE type is supported. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<List<FeeCreate>> fees() {
@@ -506,7 +512,10 @@ public class OrderCreate {
     return new Builder();
   }
 
-  /** The type of the asset in this order */
+  /**
+   * The type of the asset in this order, which must be one of the following: EQUITY, MUTUAL_FUND,
+   * and FIXED_INCOME.
+   */
   public OrderCreate withAssetType(AssetType assetType) {
     Utils.checkNotNull(assetType, "assetType");
     this.assetType = assetType;
@@ -596,14 +605,14 @@ public class OrderCreate {
     return this;
   }
 
-  /** Fees that will be applied to this order. */
+  /** Fees that will be applied to this order. Only the BROKER_FEE type is supported. */
   public OrderCreate withFees(List<FeeCreate> fees) {
     Utils.checkNotNull(fees, "fees");
     this.fees = Optional.ofNullable(fees);
     return this;
   }
 
-  /** Fees that will be applied to this order. */
+  /** Fees that will be applied to this order. Only the BROKER_FEE type is supported. */
   public OrderCreate withFees(Optional<? extends List<FeeCreate>> fees) {
     Utils.checkNotNull(fees, "fees");
     this.fees = fees;
@@ -1033,7 +1042,10 @@ public class OrderCreate {
       // force use of static builder() method
     }
 
-    /** The type of the asset in this order */
+    /**
+     * The type of the asset in this order, which must be one of the following: EQUITY, MUTUAL_FUND,
+     * and FIXED_INCOME.
+     */
     public Builder assetType(AssetType assetType) {
       Utils.checkNotNull(assetType, "assetType");
       this.assetType = assetType;
@@ -1125,14 +1137,14 @@ public class OrderCreate {
       return this;
     }
 
-    /** Fees that will be applied to this order. */
+    /** Fees that will be applied to this order. Only the BROKER_FEE type is supported. */
     public Builder fees(List<FeeCreate> fees) {
       Utils.checkNotNull(fees, "fees");
       this.fees = Optional.ofNullable(fees);
       return this;
     }
 
-    /** Fees that will be applied to this order. */
+    /** Fees that will be applied to this order. Only the BROKER_FEE type is supported. */
     public Builder fees(Optional<? extends List<FeeCreate>> fees) {
       Utils.checkNotNull(fees, "fees");
       this.fees = fees;

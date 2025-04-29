@@ -24,7 +24,7 @@ public class Lot {
   /** Object containing currency/ price information for the trade lot */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("money")
-  private JsonNullable<? extends Money> money;
+  private JsonNullable<? extends LotMoney> money;
 
   /** Quantity of the trade lot */
   @JsonInclude(Include.NON_ABSENT)
@@ -39,7 +39,7 @@ public class Lot {
   @JsonCreator
   public Lot(
       @JsonProperty("id") Optional<String> id,
-      @JsonProperty("money") JsonNullable<? extends Money> money,
+      @JsonProperty("money") JsonNullable<? extends LotMoney> money,
       @JsonProperty("quantity") JsonNullable<? extends LotQuantity> quantity,
       @JsonProperty("trade_date") JsonNullable<? extends TradeDate> tradeDate) {
     Utils.checkNotNull(id, "id");
@@ -69,8 +69,8 @@ public class Lot {
   /** Object containing currency/ price information for the trade lot */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<Money> money() {
-    return (JsonNullable<Money>) money;
+  public JsonNullable<LotMoney> money() {
+    return (JsonNullable<LotMoney>) money;
   }
 
   /** Quantity of the trade lot */
@@ -106,14 +106,14 @@ public class Lot {
   }
 
   /** Object containing currency/ price information for the trade lot */
-  public Lot withMoney(Money money) {
+  public Lot withMoney(LotMoney money) {
     Utils.checkNotNull(money, "money");
     this.money = JsonNullable.of(money);
     return this;
   }
 
   /** Object containing currency/ price information for the trade lot */
-  public Lot withMoney(JsonNullable<? extends Money> money) {
+  public Lot withMoney(JsonNullable<? extends LotMoney> money) {
     Utils.checkNotNull(money, "money");
     this.money = money;
     return this;
@@ -177,7 +177,7 @@ public class Lot {
 
     private Optional<String> id = Optional.empty();
 
-    private JsonNullable<? extends Money> money = JsonNullable.undefined();
+    private JsonNullable<? extends LotMoney> money = JsonNullable.undefined();
 
     private JsonNullable<? extends LotQuantity> quantity = JsonNullable.undefined();
 
@@ -202,14 +202,14 @@ public class Lot {
     }
 
     /** Object containing currency/ price information for the trade lot */
-    public Builder money(Money money) {
+    public Builder money(LotMoney money) {
       Utils.checkNotNull(money, "money");
       this.money = JsonNullable.of(money);
       return this;
     }
 
     /** Object containing currency/ price information for the trade lot */
-    public Builder money(JsonNullable<? extends Money> money) {
+    public Builder money(JsonNullable<? extends LotMoney> money) {
       Utils.checkNotNull(money, "money");
       this.money = money;
       return this;

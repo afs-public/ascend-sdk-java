@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -47,11 +46,6 @@ public class BasketOrderCreate {
   @JsonProperty("currency_code")
   private Optional<String> currencyCode;
 
-  /** Fees that will be applied to this order. */
-  @JsonInclude(Include.NON_ABSENT)
-  @JsonProperty("fees")
-  private Optional<? extends List<FeeCreate>> fees;
-
   /** Identifier of the asset (of the type specified in `identifier_type`). */
   @JsonProperty("identifier")
   private String identifier;
@@ -62,15 +56,6 @@ public class BasketOrderCreate {
    */
   @JsonProperty("identifier_type")
   private BasketOrderCreateIdentifierType identifierType;
-
-  /**
-   * Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a
-   * commitment to buy a specified monetary amount of shares over a period of time, usually 13
-   * months.
-   */
-  @JsonInclude(Include.NON_ABSENT)
-  @JsonProperty("letter_of_intent")
-  private Optional<? extends LetterOfIntentCreate> letterOfIntent;
 
   /**
    * A representation of a decimal value, such as 2.5. Clients may convert values into
@@ -100,15 +85,6 @@ public class BasketOrderCreate {
   @JsonProperty("quantity")
   private Optional<? extends DecimalCreate> quantity;
 
-  /**
-   * Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares with
-   * the holdings of certain related parties toward achieving the investment thresholds at which
-   * sales charge discounts become available.
-   */
-  @JsonInclude(Include.NON_ABSENT)
-  @JsonProperty("rights_of_accumulation")
-  private Optional<? extends RightsOfAccumulationCreate> rightsOfAccumulation;
-
   /** The side of this order. */
   @JsonProperty("side")
   private BasketOrderCreateSide side;
@@ -128,15 +104,11 @@ public class BasketOrderCreate {
       @JsonProperty("client_order_received_time")
           JsonNullable<OffsetDateTime> clientOrderReceivedTime,
       @JsonProperty("currency_code") Optional<String> currencyCode,
-      @JsonProperty("fees") Optional<? extends List<FeeCreate>> fees,
       @JsonProperty("identifier") String identifier,
       @JsonProperty("identifier_type") BasketOrderCreateIdentifierType identifierType,
-      @JsonProperty("letter_of_intent") Optional<? extends LetterOfIntentCreate> letterOfIntent,
       @JsonProperty("notional_value") Optional<? extends DecimalCreate> notionalValue,
       @JsonProperty("order_type") BasketOrderCreateOrderType orderType,
       @JsonProperty("quantity") Optional<? extends DecimalCreate> quantity,
-      @JsonProperty("rights_of_accumulation")
-          Optional<? extends RightsOfAccumulationCreate> rightsOfAccumulation,
       @JsonProperty("side") BasketOrderCreateSide side,
       @JsonProperty("time_in_force") BasketOrderCreateTimeInForce timeInForce) {
     Utils.checkNotNull(accountId, "accountId");
@@ -144,14 +116,11 @@ public class BasketOrderCreate {
     Utils.checkNotNull(clientOrderId, "clientOrderId");
     Utils.checkNotNull(clientOrderReceivedTime, "clientOrderReceivedTime");
     Utils.checkNotNull(currencyCode, "currencyCode");
-    Utils.checkNotNull(fees, "fees");
     Utils.checkNotNull(identifier, "identifier");
     Utils.checkNotNull(identifierType, "identifierType");
-    Utils.checkNotNull(letterOfIntent, "letterOfIntent");
     Utils.checkNotNull(notionalValue, "notionalValue");
     Utils.checkNotNull(orderType, "orderType");
     Utils.checkNotNull(quantity, "quantity");
-    Utils.checkNotNull(rightsOfAccumulation, "rightsOfAccumulation");
     Utils.checkNotNull(side, "side");
     Utils.checkNotNull(timeInForce, "timeInForce");
     this.accountId = accountId;
@@ -159,14 +128,11 @@ public class BasketOrderCreate {
     this.clientOrderId = clientOrderId;
     this.clientOrderReceivedTime = clientOrderReceivedTime;
     this.currencyCode = currencyCode;
-    this.fees = fees;
     this.identifier = identifier;
     this.identifierType = identifierType;
-    this.letterOfIntent = letterOfIntent;
     this.notionalValue = notionalValue;
     this.orderType = orderType;
     this.quantity = quantity;
-    this.rightsOfAccumulation = rightsOfAccumulation;
     this.side = side;
     this.timeInForce = timeInForce;
   }
@@ -186,13 +152,10 @@ public class BasketOrderCreate {
         clientOrderId,
         JsonNullable.undefined(),
         Optional.empty(),
-        Optional.empty(),
         identifier,
         identifierType,
         Optional.empty(),
-        Optional.empty(),
         orderType,
-        Optional.empty(),
         Optional.empty(),
         side,
         timeInForce);
@@ -234,13 +197,6 @@ public class BasketOrderCreate {
     return currencyCode;
   }
 
-  /** Fees that will be applied to this order. */
-  @SuppressWarnings("unchecked")
-  @JsonIgnore
-  public Optional<List<FeeCreate>> fees() {
-    return (Optional<List<FeeCreate>>) fees;
-  }
-
   /** Identifier of the asset (of the type specified in `identifier_type`). */
   @JsonIgnore
   public String identifier() {
@@ -254,17 +210,6 @@ public class BasketOrderCreate {
   @JsonIgnore
   public BasketOrderCreateIdentifierType identifierType() {
     return identifierType;
-  }
-
-  /**
-   * Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a
-   * commitment to buy a specified monetary amount of shares over a period of time, usually 13
-   * months.
-   */
-  @SuppressWarnings("unchecked")
-  @JsonIgnore
-  public Optional<LetterOfIntentCreate> letterOfIntent() {
-    return (Optional<LetterOfIntentCreate>) letterOfIntent;
   }
 
   /**
@@ -299,17 +244,6 @@ public class BasketOrderCreate {
   @JsonIgnore
   public Optional<DecimalCreate> quantity() {
     return (Optional<DecimalCreate>) quantity;
-  }
-
-  /**
-   * Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares with
-   * the holdings of certain related parties toward achieving the investment thresholds at which
-   * sales charge discounts become available.
-   */
-  @SuppressWarnings("unchecked")
-  @JsonIgnore
-  public Optional<RightsOfAccumulationCreate> rightsOfAccumulation() {
-    return (Optional<RightsOfAccumulationCreate>) rightsOfAccumulation;
   }
 
   /** The side of this order. */
@@ -393,20 +327,6 @@ public class BasketOrderCreate {
     return this;
   }
 
-  /** Fees that will be applied to this order. */
-  public BasketOrderCreate withFees(List<FeeCreate> fees) {
-    Utils.checkNotNull(fees, "fees");
-    this.fees = Optional.ofNullable(fees);
-    return this;
-  }
-
-  /** Fees that will be applied to this order. */
-  public BasketOrderCreate withFees(Optional<? extends List<FeeCreate>> fees) {
-    Utils.checkNotNull(fees, "fees");
-    this.fees = fees;
-    return this;
-  }
-
   /** Identifier of the asset (of the type specified in `identifier_type`). */
   public BasketOrderCreate withIdentifier(String identifier) {
     Utils.checkNotNull(identifier, "identifier");
@@ -421,29 +341,6 @@ public class BasketOrderCreate {
   public BasketOrderCreate withIdentifierType(BasketOrderCreateIdentifierType identifierType) {
     Utils.checkNotNull(identifierType, "identifierType");
     this.identifierType = identifierType;
-    return this;
-  }
-
-  /**
-   * Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a
-   * commitment to buy a specified monetary amount of shares over a period of time, usually 13
-   * months.
-   */
-  public BasketOrderCreate withLetterOfIntent(LetterOfIntentCreate letterOfIntent) {
-    Utils.checkNotNull(letterOfIntent, "letterOfIntent");
-    this.letterOfIntent = Optional.ofNullable(letterOfIntent);
-    return this;
-  }
-
-  /**
-   * Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a
-   * commitment to buy a specified monetary amount of shares over a period of time, usually 13
-   * months.
-   */
-  public BasketOrderCreate withLetterOfIntent(
-      Optional<? extends LetterOfIntentCreate> letterOfIntent) {
-    Utils.checkNotNull(letterOfIntent, "letterOfIntent");
-    this.letterOfIntent = letterOfIntent;
     return this;
   }
 
@@ -510,30 +407,6 @@ public class BasketOrderCreate {
     return this;
   }
 
-  /**
-   * Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares with
-   * the holdings of certain related parties toward achieving the investment thresholds at which
-   * sales charge discounts become available.
-   */
-  public BasketOrderCreate withRightsOfAccumulation(
-      RightsOfAccumulationCreate rightsOfAccumulation) {
-    Utils.checkNotNull(rightsOfAccumulation, "rightsOfAccumulation");
-    this.rightsOfAccumulation = Optional.ofNullable(rightsOfAccumulation);
-    return this;
-  }
-
-  /**
-   * Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares with
-   * the holdings of certain related parties toward achieving the investment thresholds at which
-   * sales charge discounts become available.
-   */
-  public BasketOrderCreate withRightsOfAccumulation(
-      Optional<? extends RightsOfAccumulationCreate> rightsOfAccumulation) {
-    Utils.checkNotNull(rightsOfAccumulation, "rightsOfAccumulation");
-    this.rightsOfAccumulation = rightsOfAccumulation;
-    return this;
-  }
-
   /** The side of this order. */
   public BasketOrderCreate withSide(BasketOrderCreateSide side) {
     Utils.checkNotNull(side, "side");
@@ -565,14 +438,11 @@ public class BasketOrderCreate {
         && Objects.deepEquals(this.clientOrderId, other.clientOrderId)
         && Objects.deepEquals(this.clientOrderReceivedTime, other.clientOrderReceivedTime)
         && Objects.deepEquals(this.currencyCode, other.currencyCode)
-        && Objects.deepEquals(this.fees, other.fees)
         && Objects.deepEquals(this.identifier, other.identifier)
         && Objects.deepEquals(this.identifierType, other.identifierType)
-        && Objects.deepEquals(this.letterOfIntent, other.letterOfIntent)
         && Objects.deepEquals(this.notionalValue, other.notionalValue)
         && Objects.deepEquals(this.orderType, other.orderType)
         && Objects.deepEquals(this.quantity, other.quantity)
-        && Objects.deepEquals(this.rightsOfAccumulation, other.rightsOfAccumulation)
         && Objects.deepEquals(this.side, other.side)
         && Objects.deepEquals(this.timeInForce, other.timeInForce);
   }
@@ -585,14 +455,11 @@ public class BasketOrderCreate {
         clientOrderId,
         clientOrderReceivedTime,
         currencyCode,
-        fees,
         identifier,
         identifierType,
-        letterOfIntent,
         notionalValue,
         orderType,
         quantity,
-        rightsOfAccumulation,
         side,
         timeInForce);
   }
@@ -611,22 +478,16 @@ public class BasketOrderCreate {
         clientOrderReceivedTime,
         "currencyCode",
         currencyCode,
-        "fees",
-        fees,
         "identifier",
         identifier,
         "identifierType",
         identifierType,
-        "letterOfIntent",
-        letterOfIntent,
         "notionalValue",
         notionalValue,
         "orderType",
         orderType,
         "quantity",
         quantity,
-        "rightsOfAccumulation",
-        rightsOfAccumulation,
         "side",
         side,
         "timeInForce",
@@ -645,21 +506,15 @@ public class BasketOrderCreate {
 
     private Optional<String> currencyCode = Optional.empty();
 
-    private Optional<? extends List<FeeCreate>> fees = Optional.empty();
-
     private String identifier;
 
     private BasketOrderCreateIdentifierType identifierType;
-
-    private Optional<? extends LetterOfIntentCreate> letterOfIntent = Optional.empty();
 
     private Optional<? extends DecimalCreate> notionalValue = Optional.empty();
 
     private BasketOrderCreateOrderType orderType;
 
     private Optional<? extends DecimalCreate> quantity = Optional.empty();
-
-    private Optional<? extends RightsOfAccumulationCreate> rightsOfAccumulation = Optional.empty();
 
     private BasketOrderCreateSide side;
 
@@ -730,20 +585,6 @@ public class BasketOrderCreate {
       return this;
     }
 
-    /** Fees that will be applied to this order. */
-    public Builder fees(List<FeeCreate> fees) {
-      Utils.checkNotNull(fees, "fees");
-      this.fees = Optional.ofNullable(fees);
-      return this;
-    }
-
-    /** Fees that will be applied to this order. */
-    public Builder fees(Optional<? extends List<FeeCreate>> fees) {
-      Utils.checkNotNull(fees, "fees");
-      this.fees = fees;
-      return this;
-    }
-
     /** Identifier of the asset (of the type specified in `identifier_type`). */
     public Builder identifier(String identifier) {
       Utils.checkNotNull(identifier, "identifier");
@@ -758,28 +599,6 @@ public class BasketOrderCreate {
     public Builder identifierType(BasketOrderCreateIdentifierType identifierType) {
       Utils.checkNotNull(identifierType, "identifierType");
       this.identifierType = identifierType;
-      return this;
-    }
-
-    /**
-     * Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a
-     * commitment to buy a specified monetary amount of shares over a period of time, usually 13
-     * months.
-     */
-    public Builder letterOfIntent(LetterOfIntentCreate letterOfIntent) {
-      Utils.checkNotNull(letterOfIntent, "letterOfIntent");
-      this.letterOfIntent = Optional.ofNullable(letterOfIntent);
-      return this;
-    }
-
-    /**
-     * Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a
-     * commitment to buy a specified monetary amount of shares over a period of time, usually 13
-     * months.
-     */
-    public Builder letterOfIntent(Optional<? extends LetterOfIntentCreate> letterOfIntent) {
-      Utils.checkNotNull(letterOfIntent, "letterOfIntent");
-      this.letterOfIntent = letterOfIntent;
       return this;
     }
 
@@ -850,29 +669,6 @@ public class BasketOrderCreate {
       return this;
     }
 
-    /**
-     * Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares
-     * with the holdings of certain related parties toward achieving the investment thresholds at
-     * which sales charge discounts become available.
-     */
-    public Builder rightsOfAccumulation(RightsOfAccumulationCreate rightsOfAccumulation) {
-      Utils.checkNotNull(rightsOfAccumulation, "rightsOfAccumulation");
-      this.rightsOfAccumulation = Optional.ofNullable(rightsOfAccumulation);
-      return this;
-    }
-
-    /**
-     * Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares
-     * with the holdings of certain related parties toward achieving the investment thresholds at
-     * which sales charge discounts become available.
-     */
-    public Builder rightsOfAccumulation(
-        Optional<? extends RightsOfAccumulationCreate> rightsOfAccumulation) {
-      Utils.checkNotNull(rightsOfAccumulation, "rightsOfAccumulation");
-      this.rightsOfAccumulation = rightsOfAccumulation;
-      return this;
-    }
-
     /** The side of this order. */
     public Builder side(BasketOrderCreateSide side) {
       Utils.checkNotNull(side, "side");
@@ -897,14 +693,11 @@ public class BasketOrderCreate {
           clientOrderId,
           clientOrderReceivedTime,
           currencyCode,
-          fees,
           identifier,
           identifierType,
-          letterOfIntent,
           notionalValue,
           orderType,
           quantity,
-          rightsOfAccumulation,
           side,
           timeInForce);
     }

@@ -40,7 +40,7 @@ import java.util.Optional;
  */
 /**
  * PriceAdjustmentType - The type of price adjustment being applied by the broker to the net price
- * of the security
+ * of the security.
  */
 @JsonDeserialize(using = PriceAdjustmentType._Deserializer.class)
 @JsonSerialize(using = PriceAdjustmentType._Serializer.class)
@@ -50,7 +50,7 @@ public class PriceAdjustmentType {
       new PriceAdjustmentType("PRICE_ADJUSTMENT_TYPE_UNSPECIFIED");
   public static final PriceAdjustmentType MARKUP = new PriceAdjustmentType("MARKUP");
   public static final PriceAdjustmentType MARKDOWN = new PriceAdjustmentType("MARKDOWN");
-  public static final PriceAdjustmentType SALES_LOAD = new PriceAdjustmentType("SALES_LOAD");
+  public static final PriceAdjustmentType GROSS_CREDIT = new PriceAdjustmentType("GROSS_CREDIT");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -121,7 +121,7 @@ public class PriceAdjustmentType {
     map.put("PRICE_ADJUSTMENT_TYPE_UNSPECIFIED", PRICE_ADJUSTMENT_TYPE_UNSPECIFIED);
     map.put("MARKUP", MARKUP);
     map.put("MARKDOWN", MARKDOWN);
-    map.put("SALES_LOAD", SALES_LOAD);
+    map.put("GROSS_CREDIT", GROSS_CREDIT);
     return map;
   }
 
@@ -132,7 +132,7 @@ public class PriceAdjustmentType {
         PriceAdjustmentTypeEnum.PRICE_ADJUSTMENT_TYPE_UNSPECIFIED);
     map.put("MARKUP", PriceAdjustmentTypeEnum.MARKUP);
     map.put("MARKDOWN", PriceAdjustmentTypeEnum.MARKDOWN);
-    map.put("SALES_LOAD", PriceAdjustmentTypeEnum.SALES_LOAD);
+    map.put("GROSS_CREDIT", PriceAdjustmentTypeEnum.GROSS_CREDIT);
     return map;
   }
 
@@ -170,7 +170,7 @@ public class PriceAdjustmentType {
     PRICE_ADJUSTMENT_TYPE_UNSPECIFIED("PRICE_ADJUSTMENT_TYPE_UNSPECIFIED"),
     MARKUP("MARKUP"),
     MARKDOWN("MARKDOWN"),
-    SALES_LOAD("SALES_LOAD"),
+    GROSS_CREDIT("GROSS_CREDIT"),
     ;
 
     private final String value;

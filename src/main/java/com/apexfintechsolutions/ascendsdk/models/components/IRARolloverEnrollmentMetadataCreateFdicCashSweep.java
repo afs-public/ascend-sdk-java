@@ -40,7 +40,7 @@ import java.util.Optional;
  */
 /**
  * IRARolloverEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep;
- * defaults to true
+ * defaults to FDIC_CASH_SWEEP_ENROLL
  */
 @JsonDeserialize(using = IRARolloverEnrollmentMetadataCreateFdicCashSweep._Deserializer.class)
 @JsonSerialize(using = IRARolloverEnrollmentMetadataCreateFdicCashSweep._Serializer.class)

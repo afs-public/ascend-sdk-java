@@ -28,12 +28,12 @@ public class YieldRecord {
   /** Characterization of a yield percentage */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("yield_type")
-  private Optional<? extends YieldType> yieldType;
+  private Optional<? extends YieldRecordYieldType> yieldType;
 
   @JsonCreator
   public YieldRecord(
       @JsonProperty("yield_percent") JsonNullable<? extends YieldPercent> yieldPercent,
-      @JsonProperty("yield_type") Optional<? extends YieldType> yieldType) {
+      @JsonProperty("yield_type") Optional<? extends YieldRecordYieldType> yieldType) {
     Utils.checkNotNull(yieldPercent, "yieldPercent");
     Utils.checkNotNull(yieldType, "yieldType");
     this.yieldPercent = yieldPercent;
@@ -54,8 +54,8 @@ public class YieldRecord {
   /** Characterization of a yield percentage */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<YieldType> yieldType() {
-    return (Optional<YieldType>) yieldType;
+  public Optional<YieldRecordYieldType> yieldType() {
+    return (Optional<YieldRecordYieldType>) yieldType;
   }
 
   public static final Builder builder() {
@@ -77,14 +77,14 @@ public class YieldRecord {
   }
 
   /** Characterization of a yield percentage */
-  public YieldRecord withYieldType(YieldType yieldType) {
+  public YieldRecord withYieldType(YieldRecordYieldType yieldType) {
     Utils.checkNotNull(yieldType, "yieldType");
     this.yieldType = Optional.ofNullable(yieldType);
     return this;
   }
 
   /** Characterization of a yield percentage */
-  public YieldRecord withYieldType(Optional<? extends YieldType> yieldType) {
+  public YieldRecord withYieldType(Optional<? extends YieldRecordYieldType> yieldType) {
     Utils.checkNotNull(yieldType, "yieldType");
     this.yieldType = yieldType;
     return this;
@@ -117,7 +117,7 @@ public class YieldRecord {
 
     private JsonNullable<? extends YieldPercent> yieldPercent = JsonNullable.undefined();
 
-    private Optional<? extends YieldType> yieldType = Optional.empty();
+    private Optional<? extends YieldRecordYieldType> yieldType = Optional.empty();
 
     private Builder() {
       // force use of static builder() method
@@ -138,14 +138,14 @@ public class YieldRecord {
     }
 
     /** Characterization of a yield percentage */
-    public Builder yieldType(YieldType yieldType) {
+    public Builder yieldType(YieldRecordYieldType yieldType) {
       Utils.checkNotNull(yieldType, "yieldType");
       this.yieldType = Optional.ofNullable(yieldType);
       return this;
     }
 
     /** Characterization of a yield percentage */
-    public Builder yieldType(Optional<? extends YieldType> yieldType) {
+    public Builder yieldType(Optional<? extends YieldRecordYieldType> yieldType) {
       Utils.checkNotNull(yieldType, "yieldType");
       this.yieldType = yieldType;
       return this;

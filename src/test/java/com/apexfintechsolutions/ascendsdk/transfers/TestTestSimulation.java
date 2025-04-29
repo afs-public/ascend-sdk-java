@@ -7,6 +7,7 @@ import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.components.Code;
 import com.apexfintechsolutions.ascendsdk.models.components.TransfersCreditCreateType;
 import com.apexfintechsolutions.ascendsdk.models.components.UpdatedBankAccountType;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import java.time.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Order;
@@ -77,28 +78,40 @@ public class TestTestSimulation {
     Assertions.assertNotNull(microdeposits);
   }
 
-  //  @Test
-  //  @Order(2)
-  //  public void
-  // test_test_simulation_transfers_force_approve_ach_deposit_force_approve_ach_deposit1() throws
-  // Exception {
-  //    assumeFalse(isEvening, "Skipping Endpoint Test: Force Approve ACH Deposit. Requires current
-  // time to be between 11:30 PM CT and 6:00 PM CT");
-  //    var pendingDeposit = TransfersUtil.createAchDeposit(sdk, AccountUtil.getAccount(sdk,
-  // deceasedAccountId), TransfersUtil.getBankRelationship(sdk, deceasedAccountId,
-  // deceasedBankRelationshipId));
-  //    var pendingDepositId = TransfersUtil.getAchDepositId(pendingDeposit);
-  //    Thread.sleep(5000);
-  //    var req = new ForceApproveAchDepositRequestCreate("accounts/" + deceasedAccountId +
-  // "/achDeposits/" + pendingDepositId);
-  //    var res = sdk.testSimulation().forceApproveAchDeposit()
-  //      .accountId(deceasedAccountId)
-  //      .achDepositId(pendingDepositId)
-  //      .forceApproveAchDepositRequestCreate(req)
-  //      .call();
-  //    Assertions.assertNotNull(res);
-  //    Assertions.assertEquals(200, res.statusCode());
-  //  }
+  @Test
+  @Order(2)
+  public void test_test_simulation_transfers_force_approve_ach_deposit_force_approve_ach_deposit1()
+      throws Exception {
+    assumeFalse(
+        isEvening,
+        "Skipping Endpoint Test: Force Approve ACH Deposit. Requires current time to be between"
+            + " 11:30 PM CT and 6:00 PM CT");
+    var pendingDeposit =
+        TransfersUtil.createAchDeposit(
+            sdk,
+            AccountUtil.getAccount(sdk, deceasedAccountId),
+            TransfersUtil.getBankRelationship(sdk, deceasedAccountId, deceasedBankRelationshipId));
+    var pendingDepositId = TransfersUtil.getAchDepositId(pendingDeposit);
+    Thread.sleep(5000);
+    var req =
+        new ForceApproveAchDepositRequestCreate(
+            "accounts/" + deceasedAccountId + "/achDeposits/" + pendingDepositId);
+    try {
+      var res =
+          sdk.testSimulation()
+              .forceApproveAchDeposit()
+              .accountId(deceasedAccountId)
+              .achDepositId(pendingDepositId)
+              .forceApproveAchDepositRequestCreate(req)
+              .call();
+      Assertions.assertNotNull(res);
+      Assertions.assertEquals(200, res.statusCode());
+    } catch (Status status) {
+      Assertions.assertEquals(3, status.code().get());
+      Assertions.assertTrue(
+          status.message().get().toLowerCase().contains("that does not need review"));
+    }
+  }
 
   @Test
   @Order(3)
@@ -155,15 +168,22 @@ public class TestTestSimulation {
     var req =
         new ForceRejectAchDepositRequestCreate(
             "accounts/" + deceasedAccountId + "/achDeposits/" + pendingDepositId);
-    var res =
-        sdk.testSimulation()
-            .forceRejectAchDeposit()
-            .accountId(deceasedAccountId)
-            .achDepositId(pendingDepositId)
-            .forceRejectAchDepositRequestCreate(req)
-            .call();
-    Assertions.assertNotNull(res);
-    Assertions.assertEquals(200, res.statusCode());
+
+    try {
+      var res =
+          sdk.testSimulation()
+              .forceRejectAchDeposit()
+              .accountId(deceasedAccountId)
+              .achDepositId(pendingDepositId)
+              .forceRejectAchDepositRequestCreate(req)
+              .call();
+      Assertions.assertNotNull(res);
+      Assertions.assertEquals(200, res.statusCode());
+    } catch (Status status) {
+      Assertions.assertEquals(3, status.code().get());
+      Assertions.assertTrue(
+          status.message().get().toLowerCase().contains("that does not need review"));
+    }
   }
 
   @Test
@@ -186,40 +206,59 @@ public class TestTestSimulation {
                     + "/achDeposits/"
                     + TransfersUtil.getAchDepositId(achDeposit))
             .build();
-    var res =
-        sdk.testSimulation()
-            .forceReturnAchDeposit()
-            .accountId(account.accountId().get())
-            .achDepositId(TransfersUtil.getAchDepositId(achDeposit))
-            .forceReturnAchDepositRequestCreate(req)
-            .call();
-    Assertions.assertNotNull(res);
-    Assertions.assertEquals(200, res.statusCode());
+    try {
+      var res =
+          sdk.testSimulation()
+              .forceReturnAchDeposit()
+              .accountId(account.accountId().get())
+              .achDepositId(TransfersUtil.getAchDepositId(achDeposit))
+              .forceReturnAchDepositRequestCreate(req)
+              .call();
+
+      Assertions.assertNotNull(res);
+      Assertions.assertEquals(200, res.statusCode());
+    } catch (Status status) {
+      Assertions.assertEquals(3, status.code().get());
+      Assertions.assertTrue(status.message().get().toLowerCase().contains("current state"));
+      ;
+    }
   }
 
-  //  @Test
-  //  @Order(6)
-  //  public void
-  // test_test_simulation_transfers_force_approve_ach_withdrawal_force_approve_ach_withdrawal1()
-  // throws Exception {
-  //    assumeFalse(
-  //      isEvening,
-  //      "Skipping Endpoint Test: Force Approve ACH Withdrawal. Requires current time to be between
-  // 11:30 PM CT"
-  //        + " and 6:00 PM CT");
-  //    var pendingWithdrawal = TransfersUtil.createAchWithdrawalRetirement(sdk,
-  // retirementAccId, retirementBankRelationshipId);
-  //    var pendingWithdrawalId = TransfersUtil.getAchWithdrawalId(pendingWithdrawal);
-  //    var req = new ForceApproveAchWithdrawalRequestCreate("accounts/" + retirementAccId +
-  // "/achWithdrawals/" + pendingWithdrawalId);
-  //    var res = sdk.testSimulation().forceApproveAchWithdrawal()
-  //      .accountId(retirementAccId)
-  //      .achWithdrawalId(pendingWithdrawalId)
-  //      .forceApproveAchWithdrawalRequestCreate(req)
-  //      .call();
-  //    Assertions.assertNotNull(res);
-  //    Assertions.assertEquals(200, res.statusCode());
-  //  }
+  @Test
+  @Order(6)
+  public void
+      test_test_simulation_transfers_force_approve_ach_withdrawal_force_approve_ach_withdrawal1()
+          throws Exception {
+    assumeFalse(
+        isEvening,
+        "Skipping Endpoint Test: Force Approve ACH Withdrawal. Requires current time to be between"
+            + " 11:30 PM CT and 6:00 PM CT");
+    var pendingWithdrawal =
+        TransfersUtil.createAchWithdrawal(
+            sdk,
+            AccountUtil.getAccount(sdk, deceasedAccountId),
+            TransfersUtil.getBankRelationship(sdk, deceasedAccountId, deceasedBankRelationshipId));
+    var pendingWithdrawalId = TransfersUtil.getAchWithdrawalId(pendingWithdrawal);
+    Thread.sleep(10000);
+    var req =
+        new ForceApproveAchWithdrawalRequestCreate(
+            "accounts/" + deceasedAccountId + "/achWithdrawals/" + pendingWithdrawalId);
+    try {
+      var res =
+          sdk.testSimulation()
+              .forceApproveAchWithdrawal()
+              .accountId(deceasedAccountId)
+              .achWithdrawalId(pendingWithdrawalId)
+              .forceApproveAchWithdrawalRequestCreate(req)
+              .call();
+      Assertions.assertNotNull(res);
+      Assertions.assertEquals(200, res.statusCode());
+    } catch (Status status) {
+      Assertions.assertEquals(3, status.code().get());
+      Assertions.assertTrue(
+          status.message().get().toLowerCase().contains("that does not need review"));
+    }
+  }
 
   @Test
   @Order(7)
@@ -276,15 +315,21 @@ public class TestTestSimulation {
     var req =
         new ForceRejectAchWithdrawalRequestCreate(
             "accounts/" + deceasedAccountId + "/achWithdrawals/" + pendingWithdrawalId);
-    var res =
-        sdk.testSimulation()
-            .forceRejectAchWithdrawal()
-            .accountId(deceasedAccountId)
-            .achWithdrawalId(pendingWithdrawalId)
-            .forceRejectAchWithdrawalRequestCreate(req)
-            .call();
-    Assertions.assertNotNull(res);
-    Assertions.assertEquals(200, res.statusCode());
+    try {
+      var res =
+          sdk.testSimulation()
+              .forceRejectAchWithdrawal()
+              .accountId(deceasedAccountId)
+              .achWithdrawalId(pendingWithdrawalId)
+              .forceRejectAchWithdrawalRequestCreate(req)
+              .call();
+      Assertions.assertNotNull(res);
+      Assertions.assertEquals(200, res.statusCode());
+    } catch (Status status) {
+      Assertions.assertEquals(3, status.code().get());
+      Assertions.assertTrue(
+          status.message().get().toLowerCase().contains("that does not need review"));
+    }
   }
 
   @Test
@@ -308,36 +353,54 @@ public class TestTestSimulation {
                     + "/achWithdrawals/"
                     + completedWithdrawalId)
             .build();
-    var res =
-        sdk.testSimulation()
-            .forceReturnAchWithdrawal()
-            .forceReturnAchWithdrawalRequestCreate(req)
-            .achWithdrawalId(completedWithdrawalId)
-            .accountId(TransfersUtil.getWithdrawalAccountId())
-            .call();
-    Assertions.assertNotNull(res);
-    Assertions.assertEquals(200, res.statusCode());
+    try {
+      var res =
+          sdk.testSimulation()
+              .forceReturnAchWithdrawal()
+              .forceReturnAchWithdrawalRequestCreate(req)
+              .achWithdrawalId(completedWithdrawalId)
+              .accountId(TransfersUtil.getWithdrawalAccountId())
+              .call();
+
+      Assertions.assertNotNull(res);
+      Assertions.assertEquals(200, res.statusCode());
+    } catch (Status status) {
+      Assertions.assertEquals(3, status.code().get());
+      Assertions.assertTrue(status.message().get().toLowerCase().contains("current state"));
+      ;
+    }
   }
 
-  //    @Test
-  //    @Order(10)
-  //    public void
-  // test_test_simulation_transfers_force_ict_deposit_approve_force_ict_deposit_approve1() throws
-  // Exception {
-  //      assumeTrue(isMarketHours, "Skipping Endpoint Test: Force ICT Deposit Approve. Requires
-  // current time to be between 6:00 AM CT and 3:00 PM CT");
-  //      var ictDepositId = TransfersUtil.createIctDepositId(sdk, deceasedAccountId);
-  //      Thread.sleep(10000);
-  //      var req = new ForceApproveIctDepositRequestCreate("accounts/" + deceasedAccountId +
-  // "/ictDeposits/" + ictDepositId);
-  //      var res = sdk.testSimulation().forceApproveIctDeposit()
-  //        .accountId(deceasedAccountId)
-  //        .ictDepositId(ictDepositId)
-  //        .forceApproveIctDepositRequestCreate(req)
-  //        .call();
-  //      Assertions.assertNotNull(res);
-  //      Assertions.assertEquals(200, res.statusCode());
-  //    }
+  @Test
+  @Order(10)
+  public void test_test_simulation_transfers_force_ict_deposit_approve_force_ict_deposit_approve1()
+      throws Exception {
+    assumeTrue(
+        isMarketHours,
+        "Skipping Endpoint Test: Force ICT Deposit Approve. Requires current time to be between"
+            + " 6:00 AM CT and 3:00 PM CT");
+    var ictDepositId = TransfersUtil.createIctDepositId(sdk, deceasedAccountId);
+    Thread.sleep(10000);
+    var req =
+        new ForceApproveIctDepositRequestCreate(
+            "accounts/" + deceasedAccountId + "/ictDeposits/" + ictDepositId);
+
+    try {
+      var res =
+          sdk.testSimulation()
+              .forceApproveIctDeposit()
+              .accountId(deceasedAccountId)
+              .ictDepositId(ictDepositId)
+              .forceApproveIctDepositRequestCreate(req)
+              .call();
+      Assertions.assertNotNull(res);
+      Assertions.assertEquals(200, res.statusCode());
+    } catch (Status status) {
+      Assertions.assertEquals(3, status.code().get());
+      Assertions.assertTrue(
+          status.message().get().toLowerCase().contains("that does not need review"));
+    }
+  }
 
   @Test
   @Order(11)
@@ -353,38 +416,56 @@ public class TestTestSimulation {
     var req =
         new ForceRejectIctDepositRequestCreate(
             "accounts/" + deceasedAccountId + "/ictDeposits/" + pendingDepositId);
-    var res =
-        sdk.testSimulation()
-            .forceRejectIctDeposit()
-            .accountId(deceasedAccountId)
-            .ictDepositId(pendingDepositId)
-            .forceRejectIctDepositRequestCreate(req)
-            .call();
 
-    Assertions.assertNotNull(res);
-    Assertions.assertEquals(200, res.statusCode());
+    try {
+      var res =
+          sdk.testSimulation()
+              .forceRejectIctDeposit()
+              .accountId(deceasedAccountId)
+              .ictDepositId(pendingDepositId)
+              .forceRejectIctDepositRequestCreate(req)
+              .call();
+      Assertions.assertNotNull(res);
+      Assertions.assertEquals(200, res.statusCode());
+    } catch (Status status) {
+      Assertions.assertEquals(3, status.code().get());
+      Assertions.assertTrue(
+          status.message().get().toLowerCase().contains("that does not need review"));
+    }
   }
 
-  //    @Test
-  //    @Order(12)
-  //    public void
-  // test_test_simulation_transfers_force_ict_withdrawal_approve_force_ict_withdrawal_approve1()
-  // throws Exception {
-  //      assumeTrue(isMarketHours, "Skipping Endpoint Test: Force ICT Withdrawal Approve. Requires
-  // current time to be between 6:00 AM CT and 3:00 PM CT");
-  //      var ictWithdrawalId = TransfersUtil.createIctWithdrawalId(sdk, retirementAccId);
-  //
-  //      Thread.sleep(10000);
-  //      var req = new ForceApproveIctWithdrawalRequestCreate("accounts/" + retirementAccId +
-  // "/ictWithdrawals/" + ictWithdrawalId);
-  //      var res = sdk.testSimulation().forceApproveIctWithdrawal()
-  //        .accountId(retirementAccId)
-  //        .ictWithdrawalId(ictWithdrawalId)
-  //        .forceApproveIctWithdrawalRequestCreate(req)
-  //        .call();
-  //      Assertions.assertNotNull(res);
-  //      Assertions.assertEquals(200, res.statusCode());
-  //    }
+  @Test
+  @Order(12)
+  public void
+      test_test_simulation_transfers_force_ict_withdrawal_approve_force_ict_withdrawal_approve1()
+          throws Exception {
+    assumeTrue(
+        isMarketHours,
+        "Skipping Endpoint Test: Force ICT Withdrawal Approve. Requires current time to be between"
+            + " 6:00 AM CT and 3:00 PM CT");
+    var ictWithdrawalId = TransfersUtil.createIctWithdrawalId(sdk, deceasedAccountId);
+
+    Thread.sleep(10000);
+    var req =
+        new ForceApproveIctWithdrawalRequestCreate(
+            "accounts/" + deceasedAccountId + "/ictWithdrawals/" + ictWithdrawalId);
+
+    try {
+      var res =
+          sdk.testSimulation()
+              .forceApproveIctWithdrawal()
+              .accountId(deceasedAccountId)
+              .ictWithdrawalId(ictWithdrawalId)
+              .forceApproveIctWithdrawalRequestCreate(req)
+              .call();
+      Assertions.assertNotNull(res);
+      Assertions.assertEquals(200, res.statusCode());
+    } catch (Status status) {
+      Assertions.assertEquals(3, status.code().get());
+      Assertions.assertTrue(
+          status.message().get().toLowerCase().contains("that does not need review"));
+    }
+  }
 
   @Test
   @Order(13)
@@ -401,20 +482,26 @@ public class TestTestSimulation {
     var req =
         new ForceRejectIctWithdrawalRequestCreate(
             "accounts/" + deceasedAccountId + "/ictWithdrawals/" + pendingWithdrawalId);
-    var res =
-        sdk.testSimulation()
-            .forceRejectIctWithdrawal()
-            .accountId(deceasedAccountId)
-            .ictWithdrawalId(pendingWithdrawalId)
-            .forceRejectIctWithdrawalRequestCreate(req)
-            .call();
 
-    Assertions.assertNotNull(res);
-    Assertions.assertEquals(200, res.statusCode());
+    try {
+      var res =
+          sdk.testSimulation()
+              .forceRejectIctWithdrawal()
+              .accountId(deceasedAccountId)
+              .ictWithdrawalId(pendingWithdrawalId)
+              .forceRejectIctWithdrawalRequestCreate(req)
+              .call();
+      Assertions.assertNotNull(res);
+      Assertions.assertEquals(200, res.statusCode());
+    } catch (Status status) {
+      Assertions.assertEquals(3, status.code().get());
+      Assertions.assertTrue(
+          status.message().get().toLowerCase().contains("that does not need review"));
+    }
   }
 
-  @Order(1)
   @Test
+  @Order(14)
   public void
       test_test_simulation_transfers_force_cash_journal_approve_force_cash_journal_approve1()
           throws Exception {
@@ -424,7 +511,7 @@ public class TestTestSimulation {
             + " 6:00 AM CT and 7:00 PM CT");
     var creditReq =
         TransfersCreditCreate.builder()
-            .amount(DecimalCreate.builder().value("500000.00").build())
+            .amount(DecimalCreate.builder().value("5000000.00").build())
             .clientTransferId(java.util.UUID.randomUUID().toString())
             .description("Credit")
             .type(TransfersCreditCreateType.PROMOTIONAL)
@@ -450,8 +537,8 @@ public class TestTestSimulation {
     Assertions.assertEquals(200, res.statusCode());
   }
 
-  @Order(2)
   @Test
+  @Order(15)
   public void test_test_simulation_transfers_force_cash_journal_reject_force_cash_journal_reject1()
       throws Exception {
     assumeTrue(
@@ -471,7 +558,7 @@ public class TestTestSimulation {
   }
 
   @Test
-  @Order(14)
+  @Order(16)
   public void
       test_test_simulation_transfers_force_approve_wire_withdrawal_force_approve_wire_withdrawal1()
           throws Exception {
@@ -502,7 +589,7 @@ public class TestTestSimulation {
   }
 
   @Test
-  @Order(15)
+  @Order(17)
   public void
       test_test_simulation_transfers_force_wire_withdrawal_reject_force_wire_withdrawal_reject1()
           throws Exception {

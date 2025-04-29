@@ -4,206 +4,379 @@
 
 package com.apexfintechsolutions.ascendsdk.models.components;
 
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.OffsetDateTime;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
-/**
- * Wrapper class for an "open" enum. "Open" enums are those that are expected to evolve
- * (particularly with the addition of enum members over time). If an open enum is used then the
- * appearance of unexpected enum values (say in a response from an updated an API) will not bring
- * about a runtime error thus ensuring that non-updated client versions can continue to work without
- * error.
- *
- * <p>Note that instances are immutable and are singletons (an internal thread-safe cache is
- * maintained to ensure that). As a consequence instances created with the same value will satisfy
- * reference equality (via {@code ==}).
- *
- * <p>This class is intended to emulate an enum (in terms of common usage and with reference
- * equality) but with the ability to carry unknown values. Unfortunately Java does not permit the
- * use of an instance in a switch expression but you can use the {@code asEnum()} method (after
- * dealing with the `Optional` appropriately).
- */
-/**
- * IctDepositState - The high level state of a transfer, one of: - `PROCESSING` - The transfer is
- * being processed and will be posted if successful. - `PENDING_REVIEW` - The transfer is pending
- * review and will continue processing if approved. - `POSTED` - The transfer has been posted to the
- * ledger and will be completed at the end of the processing window if not canceled first. -
- * `COMPLETED` - The transfer has been batched and completed. - `REJECTED` - The transfer was
- * rejected. - `CANCELED` - The transfer was canceled. - `RETURNED` - The transfer was returned. -
- * `POSTPONED` - The transfer is postponed and will resume processing during the next processing
- * window.
- */
-@JsonDeserialize(using = IctDepositState._Deserializer.class)
-@JsonSerialize(using = IctDepositState._Serializer.class)
+/** IctDepositState - The state of the ICT deposit */
 public class IctDepositState {
 
-  public static final IctDepositState STATE_UNSPECIFIED = new IctDepositState("STATE_UNSPECIFIED");
-  public static final IctDepositState PROCESSING = new IctDepositState("PROCESSING");
-  public static final IctDepositState PENDING_REVIEW = new IctDepositState("PENDING_REVIEW");
-  public static final IctDepositState POSTED = new IctDepositState("POSTED");
-  public static final IctDepositState COMPLETED = new IctDepositState("COMPLETED");
-  public static final IctDepositState REJECTED = new IctDepositState("REJECTED");
-  public static final IctDepositState CANCELED = new IctDepositState("CANCELED");
-  public static final IctDepositState RETURNED = new IctDepositState("RETURNED");
-  public static final IctDepositState POSTPONED = new IctDepositState("POSTPONED");
+  /** The user or service that triggered the state update. */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("actor")
+  private Optional<String> actor;
 
-  // This map will grow whenever a Color gets created with a new
-  // unrecognized value (a potential memory leak if the user is not
-  // careful). Keep this field lower case to avoid clashing with
-  // generated member names which will always be upper cased (Java
-  // convention)
-  private static final Map<String, IctDepositState> values = createValuesMap();
-  private static final Map<String, IctDepositStateEnum> enums = createEnumsMap();
+  /** Additional description of the transfer state. */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("message")
+  private Optional<String> message;
 
-  private final String value;
+  /**
+   * Additional metadata relating to the transfer state. Included data depends on the state, e.g.: -
+   * Rejection reasons are included when the `state` is `REJECTED` - Reason and comment are included
+   * when `state` is `CANCELED`
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("metadata")
+  private JsonNullable<? extends Map<String, Object>> metadata;
 
-  private IctDepositState(String value) {
-    this.value = value;
+  /**
+   * The high level state of a transfer, one of: - `PROCESSING` - The transfer is being processed
+   * and will be posted if successful. - `PENDING_REVIEW` - The transfer is pending review and will
+   * continue processing if approved. - `POSTED` - The transfer has been posted to the ledger and
+   * will be completed at the end of the processing window if not canceled first. - `COMPLETED` -
+   * The transfer has been batched and completed. - `REJECTED` - The transfer was rejected. -
+   * `CANCELED` - The transfer was canceled. - `RETURNED` - The transfer was returned. - `POSTPONED`
+   * - The transfer is postponed and will resume processing during the next processing window.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("state")
+  private Optional<? extends IctDepositStateState> state;
+
+  /** The time of the state update. */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("update_time")
+  private JsonNullable<OffsetDateTime> updateTime;
+
+  @JsonCreator
+  public IctDepositState(
+      @JsonProperty("actor") Optional<String> actor,
+      @JsonProperty("message") Optional<String> message,
+      @JsonProperty("metadata") JsonNullable<? extends Map<String, Object>> metadata,
+      @JsonProperty("state") Optional<? extends IctDepositStateState> state,
+      @JsonProperty("update_time") JsonNullable<OffsetDateTime> updateTime) {
+    Utils.checkNotNull(actor, "actor");
+    Utils.checkNotNull(message, "message");
+    Utils.checkNotNull(metadata, "metadata");
+    Utils.checkNotNull(state, "state");
+    Utils.checkNotNull(updateTime, "updateTime");
+    this.actor = actor;
+    this.message = message;
+    this.metadata = metadata;
+    this.state = state;
+    this.updateTime = updateTime;
+  }
+
+  public IctDepositState() {
+    this(
+        Optional.empty(),
+        Optional.empty(),
+        JsonNullable.undefined(),
+        Optional.empty(),
+        JsonNullable.undefined());
+  }
+
+  /** The user or service that triggered the state update. */
+  @JsonIgnore
+  public Optional<String> actor() {
+    return actor;
+  }
+
+  /** Additional description of the transfer state. */
+  @JsonIgnore
+  public Optional<String> message() {
+    return message;
   }
 
   /**
-   * Returns a IctDepositState with the given value. For a specific value the returned object will
-   * always be a singleton so reference equality is satisfied when the values are the same.
-   *
-   * @param value value to be wrapped as IctDepositState
+   * Additional metadata relating to the transfer state. Included data depends on the state, e.g.: -
+   * Rejection reasons are included when the `state` is `REJECTED` - Reason and comment are included
+   * when `state` is `CANCELED`
    */
-  public static IctDepositState of(String value) {
-    synchronized (IctDepositState.class) {
-      return values.computeIfAbsent(value, v -> new IctDepositState(v));
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<Map<String, Object>> metadata() {
+    return (JsonNullable<Map<String, Object>>) metadata;
+  }
+
+  /**
+   * The high level state of a transfer, one of: - `PROCESSING` - The transfer is being processed
+   * and will be posted if successful. - `PENDING_REVIEW` - The transfer is pending review and will
+   * continue processing if approved. - `POSTED` - The transfer has been posted to the ledger and
+   * will be completed at the end of the processing window if not canceled first. - `COMPLETED` -
+   * The transfer has been batched and completed. - `REJECTED` - The transfer was rejected. -
+   * `CANCELED` - The transfer was canceled. - `RETURNED` - The transfer was returned. - `POSTPONED`
+   * - The transfer is postponed and will resume processing during the next processing window.
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<IctDepositStateState> state() {
+    return (Optional<IctDepositStateState>) state;
+  }
+
+  /** The time of the state update. */
+  @JsonIgnore
+  public JsonNullable<OffsetDateTime> updateTime() {
+    return updateTime;
+  }
+
+  public static final Builder builder() {
+    return new Builder();
+  }
+
+  /** The user or service that triggered the state update. */
+  public IctDepositState withActor(String actor) {
+    Utils.checkNotNull(actor, "actor");
+    this.actor = Optional.ofNullable(actor);
+    return this;
+  }
+
+  /** The user or service that triggered the state update. */
+  public IctDepositState withActor(Optional<String> actor) {
+    Utils.checkNotNull(actor, "actor");
+    this.actor = actor;
+    return this;
+  }
+
+  /** Additional description of the transfer state. */
+  public IctDepositState withMessage(String message) {
+    Utils.checkNotNull(message, "message");
+    this.message = Optional.ofNullable(message);
+    return this;
+  }
+
+  /** Additional description of the transfer state. */
+  public IctDepositState withMessage(Optional<String> message) {
+    Utils.checkNotNull(message, "message");
+    this.message = message;
+    return this;
+  }
+
+  /**
+   * Additional metadata relating to the transfer state. Included data depends on the state, e.g.: -
+   * Rejection reasons are included when the `state` is `REJECTED` - Reason and comment are included
+   * when `state` is `CANCELED`
+   */
+  public IctDepositState withMetadata(Map<String, Object> metadata) {
+    Utils.checkNotNull(metadata, "metadata");
+    this.metadata = JsonNullable.of(metadata);
+    return this;
+  }
+
+  /**
+   * Additional metadata relating to the transfer state. Included data depends on the state, e.g.: -
+   * Rejection reasons are included when the `state` is `REJECTED` - Reason and comment are included
+   * when `state` is `CANCELED`
+   */
+  public IctDepositState withMetadata(JsonNullable<? extends Map<String, Object>> metadata) {
+    Utils.checkNotNull(metadata, "metadata");
+    this.metadata = metadata;
+    return this;
+  }
+
+  /**
+   * The high level state of a transfer, one of: - `PROCESSING` - The transfer is being processed
+   * and will be posted if successful. - `PENDING_REVIEW` - The transfer is pending review and will
+   * continue processing if approved. - `POSTED` - The transfer has been posted to the ledger and
+   * will be completed at the end of the processing window if not canceled first. - `COMPLETED` -
+   * The transfer has been batched and completed. - `REJECTED` - The transfer was rejected. -
+   * `CANCELED` - The transfer was canceled. - `RETURNED` - The transfer was returned. - `POSTPONED`
+   * - The transfer is postponed and will resume processing during the next processing window.
+   */
+  public IctDepositState withState(IctDepositStateState state) {
+    Utils.checkNotNull(state, "state");
+    this.state = Optional.ofNullable(state);
+    return this;
+  }
+
+  /**
+   * The high level state of a transfer, one of: - `PROCESSING` - The transfer is being processed
+   * and will be posted if successful. - `PENDING_REVIEW` - The transfer is pending review and will
+   * continue processing if approved. - `POSTED` - The transfer has been posted to the ledger and
+   * will be completed at the end of the processing window if not canceled first. - `COMPLETED` -
+   * The transfer has been batched and completed. - `REJECTED` - The transfer was rejected. -
+   * `CANCELED` - The transfer was canceled. - `RETURNED` - The transfer was returned. - `POSTPONED`
+   * - The transfer is postponed and will resume processing during the next processing window.
+   */
+  public IctDepositState withState(Optional<? extends IctDepositStateState> state) {
+    Utils.checkNotNull(state, "state");
+    this.state = state;
+    return this;
+  }
+
+  /** The time of the state update. */
+  public IctDepositState withUpdateTime(OffsetDateTime updateTime) {
+    Utils.checkNotNull(updateTime, "updateTime");
+    this.updateTime = JsonNullable.of(updateTime);
+    return this;
+  }
+
+  /** The time of the state update. */
+  public IctDepositState withUpdateTime(JsonNullable<OffsetDateTime> updateTime) {
+    Utils.checkNotNull(updateTime, "updateTime");
+    this.updateTime = updateTime;
+    return this;
+  }
+
+  @Override
+  public boolean equals(java.lang.Object o) {
+    if (this == o) {
+      return true;
     }
-  }
-
-  public String value() {
-    return value;
-  }
-
-  public Optional<IctDepositStateEnum> asEnum() {
-    return Optional.ofNullable(enums.getOrDefault(value, null));
-  }
-
-  public boolean isKnown() {
-    return asEnum().isPresent();
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    IctDepositState other = (IctDepositState) o;
+    return Objects.deepEquals(this.actor, other.actor)
+        && Objects.deepEquals(this.message, other.message)
+        && Objects.deepEquals(this.metadata, other.metadata)
+        && Objects.deepEquals(this.state, other.state)
+        && Objects.deepEquals(this.updateTime, other.updateTime);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(value);
-  }
-
-  @Override
-  public boolean equals(java.lang.Object obj) {
-    if (this == obj) return true;
-    if (obj == null) return false;
-    if (getClass() != obj.getClass()) return false;
-    IctDepositState other = (IctDepositState) obj;
-    return Objects.equals(value, other.value);
+    return Objects.hash(actor, message, metadata, state, updateTime);
   }
 
   @Override
   public String toString() {
-    return "IctDepositState [value=" + value + "]";
+    return Utils.toString(
+        IctDepositState.class,
+        "actor",
+        actor,
+        "message",
+        message,
+        "metadata",
+        metadata,
+        "state",
+        state,
+        "updateTime",
+        updateTime);
   }
 
-  // return an array just like an enum
-  public static IctDepositState[] values() {
-    synchronized (IctDepositState.class) {
-      return values.values().toArray(new IctDepositState[] {});
-    }
-  }
+  public static final class Builder {
 
-  private static final Map<String, IctDepositState> createValuesMap() {
-    Map<String, IctDepositState> map = new LinkedHashMap<>();
-    map.put("STATE_UNSPECIFIED", STATE_UNSPECIFIED);
-    map.put("PROCESSING", PROCESSING);
-    map.put("PENDING_REVIEW", PENDING_REVIEW);
-    map.put("POSTED", POSTED);
-    map.put("COMPLETED", COMPLETED);
-    map.put("REJECTED", REJECTED);
-    map.put("CANCELED", CANCELED);
-    map.put("RETURNED", RETURNED);
-    map.put("POSTPONED", POSTPONED);
-    return map;
-  }
+    private Optional<String> actor = Optional.empty();
 
-  private static final Map<String, IctDepositStateEnum> createEnumsMap() {
-    Map<String, IctDepositStateEnum> map = new HashMap<>();
-    map.put("STATE_UNSPECIFIED", IctDepositStateEnum.STATE_UNSPECIFIED);
-    map.put("PROCESSING", IctDepositStateEnum.PROCESSING);
-    map.put("PENDING_REVIEW", IctDepositStateEnum.PENDING_REVIEW);
-    map.put("POSTED", IctDepositStateEnum.POSTED);
-    map.put("COMPLETED", IctDepositStateEnum.COMPLETED);
-    map.put("REJECTED", IctDepositStateEnum.REJECTED);
-    map.put("CANCELED", IctDepositStateEnum.CANCELED);
-    map.put("RETURNED", IctDepositStateEnum.RETURNED);
-    map.put("POSTPONED", IctDepositStateEnum.POSTPONED);
-    return map;
-  }
+    private Optional<String> message = Optional.empty();
 
-  @SuppressWarnings("serial")
-  public static final class _Serializer extends StdSerializer<IctDepositState> {
+    private JsonNullable<? extends Map<String, Object>> metadata = JsonNullable.undefined();
 
-    protected _Serializer() {
-      super(IctDepositState.class);
+    private Optional<? extends IctDepositStateState> state = Optional.empty();
+
+    private JsonNullable<OffsetDateTime> updateTime = JsonNullable.undefined();
+
+    private Builder() {
+      // force use of static builder() method
     }
 
-    @Override
-    public void serialize(IctDepositState value, JsonGenerator g, SerializerProvider provider)
-        throws IOException, JsonProcessingException {
-      g.writeObject(value.value);
-    }
-  }
-
-  @SuppressWarnings("serial")
-  public static final class _Deserializer extends StdDeserializer<IctDepositState> {
-
-    protected _Deserializer() {
-      super(IctDepositState.class);
+    /** The user or service that triggered the state update. */
+    public Builder actor(String actor) {
+      Utils.checkNotNull(actor, "actor");
+      this.actor = Optional.ofNullable(actor);
+      return this;
     }
 
-    @Override
-    public IctDepositState deserialize(JsonParser p, DeserializationContext ctxt)
-        throws IOException, JacksonException {
-      String v = p.readValueAs(new TypeReference<String>() {});
-      // use the factory method to ensure we get singletons
-      return IctDepositState.of(v);
-    }
-  }
-
-  public enum IctDepositStateEnum {
-    STATE_UNSPECIFIED("STATE_UNSPECIFIED"),
-    PROCESSING("PROCESSING"),
-    PENDING_REVIEW("PENDING_REVIEW"),
-    POSTED("POSTED"),
-    COMPLETED("COMPLETED"),
-    REJECTED("REJECTED"),
-    CANCELED("CANCELED"),
-    RETURNED("RETURNED"),
-    POSTPONED("POSTPONED"),
-    ;
-
-    private final String value;
-
-    private IctDepositStateEnum(String value) {
-      this.value = value;
+    /** The user or service that triggered the state update. */
+    public Builder actor(Optional<String> actor) {
+      Utils.checkNotNull(actor, "actor");
+      this.actor = actor;
+      return this;
     }
 
-    public String value() {
-      return value;
+    /** Additional description of the transfer state. */
+    public Builder message(String message) {
+      Utils.checkNotNull(message, "message");
+      this.message = Optional.ofNullable(message);
+      return this;
+    }
+
+    /** Additional description of the transfer state. */
+    public Builder message(Optional<String> message) {
+      Utils.checkNotNull(message, "message");
+      this.message = message;
+      return this;
+    }
+
+    /**
+     * Additional metadata relating to the transfer state. Included data depends on the state, e.g.:
+     * - Rejection reasons are included when the `state` is `REJECTED` - Reason and comment are
+     * included when `state` is `CANCELED`
+     */
+    public Builder metadata(Map<String, Object> metadata) {
+      Utils.checkNotNull(metadata, "metadata");
+      this.metadata = JsonNullable.of(metadata);
+      return this;
+    }
+
+    /**
+     * Additional metadata relating to the transfer state. Included data depends on the state, e.g.:
+     * - Rejection reasons are included when the `state` is `REJECTED` - Reason and comment are
+     * included when `state` is `CANCELED`
+     */
+    public Builder metadata(JsonNullable<? extends Map<String, Object>> metadata) {
+      Utils.checkNotNull(metadata, "metadata");
+      this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * The high level state of a transfer, one of: - `PROCESSING` - The transfer is being processed
+     * and will be posted if successful. - `PENDING_REVIEW` - The transfer is pending review and
+     * will continue processing if approved. - `POSTED` - The transfer has been posted to the ledger
+     * and will be completed at the end of the processing window if not canceled first. -
+     * `COMPLETED` - The transfer has been batched and completed. - `REJECTED` - The transfer was
+     * rejected. - `CANCELED` - The transfer was canceled. - `RETURNED` - The transfer was returned.
+     * - `POSTPONED` - The transfer is postponed and will resume processing during the next
+     * processing window.
+     */
+    public Builder state(IctDepositStateState state) {
+      Utils.checkNotNull(state, "state");
+      this.state = Optional.ofNullable(state);
+      return this;
+    }
+
+    /**
+     * The high level state of a transfer, one of: - `PROCESSING` - The transfer is being processed
+     * and will be posted if successful. - `PENDING_REVIEW` - The transfer is pending review and
+     * will continue processing if approved. - `POSTED` - The transfer has been posted to the ledger
+     * and will be completed at the end of the processing window if not canceled first. -
+     * `COMPLETED` - The transfer has been batched and completed. - `REJECTED` - The transfer was
+     * rejected. - `CANCELED` - The transfer was canceled. - `RETURNED` - The transfer was returned.
+     * - `POSTPONED` - The transfer is postponed and will resume processing during the next
+     * processing window.
+     */
+    public Builder state(Optional<? extends IctDepositStateState> state) {
+      Utils.checkNotNull(state, "state");
+      this.state = state;
+      return this;
+    }
+
+    /** The time of the state update. */
+    public Builder updateTime(OffsetDateTime updateTime) {
+      Utils.checkNotNull(updateTime, "updateTime");
+      this.updateTime = JsonNullable.of(updateTime);
+      return this;
+    }
+
+    /** The time of the state update. */
+    public Builder updateTime(JsonNullable<OffsetDateTime> updateTime) {
+      Utils.checkNotNull(updateTime, "updateTime");
+      this.updateTime = updateTime;
+      return this;
+    }
+
+    public IctDepositState build() {
+      return new IctDepositState(actor, message, metadata, state, updateTime);
     }
   }
 }

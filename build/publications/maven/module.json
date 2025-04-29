@@ -1,0 +1,186 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.apexfintechsolutions",
+    "module": "ascendsdk",
+    "version": "1.2.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.5"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "com.fasterxml.jackson.core",
+          "module": "jackson-annotations",
+          "version": {
+            "requires": "2.18.2"
+          }
+        },
+        {
+          "group": "org.openapitools",
+          "module": "jackson-databind-nullable",
+          "version": {
+            "requires": "0.2.6"
+          },
+          "excludes": [
+            {
+              "group": "com.fasterxml.jackson.core",
+              "module": "jackson-databind"
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "name": "ascendsdk-1.2.1.jar",
+          "url": "ascendsdk-1.2.1.jar",
+          "size": 10197541,
+          "sha512": "c5212ea99c334ada23ed5f98b3696d2e69a38b63d45aa53929c5df8297aab9f53a4de2fac3509da0ffd7a8715a97d93a8ab0b4a18be401def1db97e5e020316d",
+          "sha256": "1a5ca7ac9d20ec6ca67ba89b3d2b50e53c0eb3922d24bfbbf86565e2c364a49c",
+          "sha1": "0c36a5b180546d63140c48df524b4498f9f7c8e4",
+          "md5": "bf663d4fac02387677f66e58830f5623"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.nimbusds",
+          "module": "nimbus-jose-jwt",
+          "version": {
+            "requires": "9.9.3"
+          }
+        },
+        {
+          "group": "com.fasterxml.jackson.core",
+          "module": "jackson-databind",
+          "version": {
+            "requires": "2.18.2"
+          }
+        },
+        {
+          "group": "com.fasterxml.jackson.datatype",
+          "module": "jackson-datatype-jsr310",
+          "version": {
+            "requires": "2.18.2"
+          }
+        },
+        {
+          "group": "com.fasterxml.jackson.datatype",
+          "module": "jackson-datatype-jdk8",
+          "version": {
+            "requires": "2.18.2"
+          }
+        },
+        {
+          "group": "org.apache.httpcomponents.client5",
+          "module": "httpclient5",
+          "version": {
+            "requires": "5.4.1"
+          }
+        },
+        {
+          "group": "commons-io",
+          "module": "commons-io",
+          "version": {
+            "requires": "2.18.0"
+          }
+        },
+        {
+          "group": "com.fasterxml.jackson.core",
+          "module": "jackson-annotations",
+          "version": {
+            "requires": "2.18.2"
+          }
+        },
+        {
+          "group": "org.openapitools",
+          "module": "jackson-databind-nullable",
+          "version": {
+            "requires": "0.2.6"
+          },
+          "excludes": [
+            {
+              "group": "com.fasterxml.jackson.core",
+              "module": "jackson-databind"
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "name": "ascendsdk-1.2.1.jar",
+          "url": "ascendsdk-1.2.1.jar",
+          "size": 10197541,
+          "sha512": "c5212ea99c334ada23ed5f98b3696d2e69a38b63d45aa53929c5df8297aab9f53a4de2fac3509da0ffd7a8715a97d93a8ab0b4a18be401def1db97e5e020316d",
+          "sha256": "1a5ca7ac9d20ec6ca67ba89b3d2b50e53c0eb3922d24bfbbf86565e2c364a49c",
+          "sha1": "0c36a5b180546d63140c48df524b4498f9f7c8e4",
+          "md5": "bf663d4fac02387677f66e58830f5623"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "ascendsdk-1.2.1-sources.jar",
+          "url": "ascendsdk-1.2.1-sources.jar",
+          "size": 4424309,
+          "sha512": "3408e37485ba35aa05bc466d1dec7d4c0844a89578fb056421f19cee9aaee2c996a01abdccfc1c9e904c8e726156980fdf04186e776f598f0d3e17f4aa5116cf",
+          "sha256": "6f1b958ca64bcc1e663fe1400f892d31938d3a6eff7fcd8e7179a1f923f1529a",
+          "sha1": "4397625ad200df8041fd5e11afd06f7178791418",
+          "md5": "3d27162498c2c6691a9ed0b0035e2dab"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "ascendsdk-1.2.1-javadoc.jar",
+          "url": "ascendsdk-1.2.1-javadoc.jar",
+          "size": 22970769,
+          "sha512": "1381c1707d99b198fe3bb00377c1b1ea72a3b83f3cbc830df94524a5c2e965dd1d773535240ab8bb0d6076f3d21f237507024b62e8684a5aa91838bbe9127772",
+          "sha256": "7e7ba1cbb980e5ec79de1c1f188fa0e2381a1ffc4cabbfea37b6c8e6167bad21",
+          "sha1": "31c38805f5afee5b3bc1f76502513568cd610bbf",
+          "md5": "db4c5d698756bbcbc2ae895910048798"
+        }
+      ]
+    }
+  ]
+}

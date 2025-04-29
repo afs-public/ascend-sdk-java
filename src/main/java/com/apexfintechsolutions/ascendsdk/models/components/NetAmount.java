@@ -13,10 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 import java.util.Optional;
 
-/**
- * NetAmount - The monetary value of an activity, inclusive of fees, withholding, commisions, etc
- * (Second Money)
- */
+/** NetAmount - The net amount of the trade in USD. This value is always positive. */
 public class NetAmount {
 
   /**

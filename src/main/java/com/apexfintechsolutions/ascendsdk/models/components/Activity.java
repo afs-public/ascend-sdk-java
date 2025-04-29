@@ -307,7 +307,7 @@ public class Activity {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("net_amount")
-  private JsonNullable<? extends NetAmount> netAmount;
+  private JsonNullable<? extends ActivityNetAmount> netAmount;
 
   /**
    * can be an empty string if there is no next activity is populated when there is a modification
@@ -625,7 +625,7 @@ public class Activity {
       @JsonProperty("merger") JsonNullable<? extends ActivityMerger> merger,
       @JsonProperty("name") Optional<String> name,
       @JsonProperty("name_change") JsonNullable<? extends ActivityNameChange> nameChange,
-      @JsonProperty("net_amount") JsonNullable<? extends NetAmount> netAmount,
+      @JsonProperty("net_amount") JsonNullable<? extends ActivityNetAmount> netAmount,
       @JsonProperty("next_activity_id") Optional<String> nextActivityId,
       @JsonProperty("next_activity_process_date")
           JsonNullable<? extends NextActivityProcessDate> nextActivityProcessDate,
@@ -1259,8 +1259,8 @@ public class Activity {
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<NetAmount> netAmount() {
-    return (JsonNullable<NetAmount>) netAmount;
+  public JsonNullable<ActivityNetAmount> netAmount() {
+    return (JsonNullable<ActivityNetAmount>) netAmount;
   }
 
   /**
@@ -2326,7 +2326,7 @@ public class Activity {
    * The monetary value of an activity, inclusive of fees, withholding, commisions, etc (Second
    * Money)
    */
-  public Activity withNetAmount(NetAmount netAmount) {
+  public Activity withNetAmount(ActivityNetAmount netAmount) {
     Utils.checkNotNull(netAmount, "netAmount");
     this.netAmount = JsonNullable.of(netAmount);
     return this;
@@ -2336,7 +2336,7 @@ public class Activity {
    * The monetary value of an activity, inclusive of fees, withholding, commisions, etc (Second
    * Money)
    */
-  public Activity withNetAmount(JsonNullable<? extends NetAmount> netAmount) {
+  public Activity withNetAmount(JsonNullable<? extends ActivityNetAmount> netAmount) {
     Utils.checkNotNull(netAmount, "netAmount");
     this.netAmount = netAmount;
     return this;
@@ -3459,7 +3459,7 @@ public class Activity {
 
     private JsonNullable<? extends ActivityNameChange> nameChange = JsonNullable.undefined();
 
-    private JsonNullable<? extends NetAmount> netAmount = JsonNullable.undefined();
+    private JsonNullable<? extends ActivityNetAmount> netAmount = JsonNullable.undefined();
 
     private Optional<String> nextActivityId = Optional.empty();
 
@@ -4276,7 +4276,7 @@ public class Activity {
      * The monetary value of an activity, inclusive of fees, withholding, commisions, etc (Second
      * Money)
      */
-    public Builder netAmount(NetAmount netAmount) {
+    public Builder netAmount(ActivityNetAmount netAmount) {
       Utils.checkNotNull(netAmount, "netAmount");
       this.netAmount = JsonNullable.of(netAmount);
       return this;
@@ -4286,7 +4286,7 @@ public class Activity {
      * The monetary value of an activity, inclusive of fees, withholding, commisions, etc (Second
      * Money)
      */
-    public Builder netAmount(JsonNullable<? extends NetAmount> netAmount) {
+    public Builder netAmount(JsonNullable<? extends ActivityNetAmount> netAmount) {
       Utils.checkNotNull(netAmount, "netAmount");
       this.netAmount = netAmount;
       return this;

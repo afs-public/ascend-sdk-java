@@ -98,6 +98,10 @@ public class BasketOrderOrderRejectedReason {
       ANOTHER_BASKET_ORDER_FOR_ACCOUNT_HAS_FAILED_RISK_CHECKS =
           new BasketOrderOrderRejectedReason(
               "ANOTHER_BASKET_ORDER_FOR_ACCOUNT_HAS_FAILED_RISK_CHECKS");
+  public static final BasketOrderOrderRejectedReason INSUFFICIENT_POSITION =
+      new BasketOrderOrderRejectedReason("INSUFFICIENT_POSITION");
+  public static final BasketOrderOrderRejectedReason FAILED_BUYING_POWER =
+      new BasketOrderOrderRejectedReason("FAILED_BUYING_POWER");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -196,6 +200,8 @@ public class BasketOrderOrderRejectedReason {
     map.put(
         "ANOTHER_BASKET_ORDER_FOR_ACCOUNT_HAS_FAILED_RISK_CHECKS",
         ANOTHER_BASKET_ORDER_FOR_ACCOUNT_HAS_FAILED_RISK_CHECKS);
+    map.put("INSUFFICIENT_POSITION", INSUFFICIENT_POSITION);
+    map.put("FAILED_BUYING_POWER", FAILED_BUYING_POWER);
     return map;
   }
 
@@ -242,6 +248,8 @@ public class BasketOrderOrderRejectedReason {
     map.put(
         "ANOTHER_BASKET_ORDER_FOR_ACCOUNT_HAS_FAILED_RISK_CHECKS",
         BasketOrderOrderRejectedReasonEnum.ANOTHER_BASKET_ORDER_FOR_ACCOUNT_HAS_FAILED_RISK_CHECKS);
+    map.put("INSUFFICIENT_POSITION", BasketOrderOrderRejectedReasonEnum.INSUFFICIENT_POSITION);
+    map.put("FAILED_BUYING_POWER", BasketOrderOrderRejectedReasonEnum.FAILED_BUYING_POWER);
     return map;
   }
 
@@ -303,6 +311,8 @@ public class BasketOrderOrderRejectedReason {
     ASSET_NOT_SET_UP_TO_TRADE("ASSET_NOT_SET_UP_TO_TRADE"),
     ANOTHER_BASKET_ORDER_FOR_ACCOUNT_HAS_FAILED_RISK_CHECKS(
         "ANOTHER_BASKET_ORDER_FOR_ACCOUNT_HAS_FAILED_RISK_CHECKS"),
+    INSUFFICIENT_POSITION("INSUFFICIENT_POSITION"),
+    FAILED_BUYING_POWER("FAILED_BUYING_POWER"),
     ;
 
     private final String value;

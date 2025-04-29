@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 import java.util.Optional;
 
-/** Amount - Monetary amount associated with the fee */
+/** Amount - The amount to deposit in USD. */
 public class Amount {
 
   /**

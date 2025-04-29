@@ -38,7 +38,10 @@ import java.util.Optional;
  * use of an instance in a switch expression but you can use the {@code asEnum()} method (after
  * dealing with the `Optional` appropriately).
  */
-/** DividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true */
+/**
+ * DividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to
+ * DIVIDEND_REINVESTMENT_ENROLL
+ */
 @JsonDeserialize(using = DividendReinvestmentPlan._Deserializer.class)
 @JsonSerialize(using = DividendReinvestmentPlan._Serializer.class)
 public class DividendReinvestmentPlan {

@@ -132,7 +132,7 @@ public class Detail {
   /** Information about any price adjustments applied to the security */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("price_adjustment_record")
-  private JsonNullable<? extends EntryPriceAdjustmentRecord> priceAdjustmentRecord;
+  private JsonNullable<? extends EntryFlipPriceAdjustmentRecord> priceAdjustmentRecord;
 
   /** The execution route Apex used for this trade */
   @JsonInclude(Include.NON_ABSENT)
@@ -187,7 +187,7 @@ public class Detail {
       @JsonProperty("prevailing_market_price")
           JsonNullable<? extends EntryFlipPrevailingMarketPrice> prevailingMarketPrice,
       @JsonProperty("price_adjustment_record")
-          JsonNullable<? extends EntryPriceAdjustmentRecord> priceAdjustmentRecord,
+          JsonNullable<? extends EntryFlipPriceAdjustmentRecord> priceAdjustmentRecord,
       @JsonProperty("route") Optional<String> route,
       @JsonProperty("special_instructions") Optional<? extends List<String>> specialInstructions,
       @JsonProperty("when_issued") Optional<Boolean> whenIssued,
@@ -415,8 +415,8 @@ public class Detail {
   /** Information about any price adjustments applied to the security */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<EntryPriceAdjustmentRecord> priceAdjustmentRecord() {
-    return (JsonNullable<EntryPriceAdjustmentRecord>) priceAdjustmentRecord;
+  public JsonNullable<EntryFlipPriceAdjustmentRecord> priceAdjustmentRecord() {
+    return (JsonNullable<EntryFlipPriceAdjustmentRecord>) priceAdjustmentRecord;
   }
 
   /** The execution route Apex used for this trade */
@@ -764,7 +764,7 @@ public class Detail {
   }
 
   /** Information about any price adjustments applied to the security */
-  public Detail withPriceAdjustmentRecord(EntryPriceAdjustmentRecord priceAdjustmentRecord) {
+  public Detail withPriceAdjustmentRecord(EntryFlipPriceAdjustmentRecord priceAdjustmentRecord) {
     Utils.checkNotNull(priceAdjustmentRecord, "priceAdjustmentRecord");
     this.priceAdjustmentRecord = JsonNullable.of(priceAdjustmentRecord);
     return this;
@@ -772,7 +772,7 @@ public class Detail {
 
   /** Information about any price adjustments applied to the security */
   public Detail withPriceAdjustmentRecord(
-      JsonNullable<? extends EntryPriceAdjustmentRecord> priceAdjustmentRecord) {
+      JsonNullable<? extends EntryFlipPriceAdjustmentRecord> priceAdjustmentRecord) {
     Utils.checkNotNull(priceAdjustmentRecord, "priceAdjustmentRecord");
     this.priceAdjustmentRecord = priceAdjustmentRecord;
     return this;
@@ -1017,7 +1017,7 @@ public class Detail {
     private JsonNullable<? extends EntryFlipPrevailingMarketPrice> prevailingMarketPrice =
         JsonNullable.undefined();
 
-    private JsonNullable<? extends EntryPriceAdjustmentRecord> priceAdjustmentRecord =
+    private JsonNullable<? extends EntryFlipPriceAdjustmentRecord> priceAdjustmentRecord =
         JsonNullable.undefined();
 
     private Optional<String> route = Optional.empty();
@@ -1342,7 +1342,7 @@ public class Detail {
     }
 
     /** Information about any price adjustments applied to the security */
-    public Builder priceAdjustmentRecord(EntryPriceAdjustmentRecord priceAdjustmentRecord) {
+    public Builder priceAdjustmentRecord(EntryFlipPriceAdjustmentRecord priceAdjustmentRecord) {
       Utils.checkNotNull(priceAdjustmentRecord, "priceAdjustmentRecord");
       this.priceAdjustmentRecord = JsonNullable.of(priceAdjustmentRecord);
       return this;
@@ -1350,7 +1350,7 @@ public class Detail {
 
     /** Information about any price adjustments applied to the security */
     public Builder priceAdjustmentRecord(
-        JsonNullable<? extends EntryPriceAdjustmentRecord> priceAdjustmentRecord) {
+        JsonNullable<? extends EntryFlipPriceAdjustmentRecord> priceAdjustmentRecord) {
       Utils.checkNotNull(priceAdjustmentRecord, "priceAdjustmentRecord");
       this.priceAdjustmentRecord = priceAdjustmentRecord;
       return this;

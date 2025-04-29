@@ -67,6 +67,8 @@ public class CalculateCashBalanceResponseTransferSummaryMechanism {
       new CalculateCashBalanceResponseTransferSummaryMechanism("TPJ");
   public static final CalculateCashBalanceResponseTransferSummaryMechanism WIRE =
       new CalculateCashBalanceResponseTransferSummaryMechanism("WIRE");
+  public static final CalculateCashBalanceResponseTransferSummaryMechanism EXTERNAL_ACH =
+      new CalculateCashBalanceResponseTransferSummaryMechanism("EXTERNAL_ACH");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -152,6 +154,7 @@ public class CalculateCashBalanceResponseTransferSummaryMechanism {
     map.put("RTP", RTP);
     map.put("TPJ", TPJ);
     map.put("WIRE", WIRE);
+    map.put("EXTERNAL_ACH", EXTERNAL_ACH);
     return map;
   }
 
@@ -172,6 +175,7 @@ public class CalculateCashBalanceResponseTransferSummaryMechanism {
     map.put("RTP", CalculateCashBalanceResponseTransferSummaryMechanismEnum.RTP);
     map.put("TPJ", CalculateCashBalanceResponseTransferSummaryMechanismEnum.TPJ);
     map.put("WIRE", CalculateCashBalanceResponseTransferSummaryMechanismEnum.WIRE);
+    map.put("EXTERNAL_ACH", CalculateCashBalanceResponseTransferSummaryMechanismEnum.EXTERNAL_ACH);
     return map;
   }
 
@@ -223,6 +227,7 @@ public class CalculateCashBalanceResponseTransferSummaryMechanism {
     RTP("RTP"),
     TPJ("TPJ"),
     WIRE("WIRE"),
+    EXTERNAL_ACH("EXTERNAL_ACH"),
     ;
 
     private final String value;

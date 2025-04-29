@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 import java.util.Optional;
 
-/** ProcessDate - The date that the entry was booked on */
+/** ProcessDate - The process date of the batch associated with the report. */
 public class ProcessDate {
 
   /**

@@ -39,7 +39,7 @@ public class LocateIctReportResponse {
   /** The process date of the batch associated with the report. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("process_date")
-  private JsonNullable<? extends LocateIctReportResponseProcessDate> processDate;
+  private JsonNullable<? extends ProcessDate> processDate;
 
   /** The ICT program associated with the report. */
   @JsonInclude(Include.NON_ABSENT)
@@ -51,8 +51,7 @@ public class LocateIctReportResponse {
       @JsonProperty("batch_id") Optional<String> batchId,
       @JsonProperty("create_time") JsonNullable<OffsetDateTime> createTime,
       @JsonProperty("download_uri") Optional<String> downloadUri,
-      @JsonProperty("process_date")
-          JsonNullable<? extends LocateIctReportResponseProcessDate> processDate,
+      @JsonProperty("process_date") JsonNullable<? extends ProcessDate> processDate,
       @JsonProperty("program") Optional<? extends LocateIctReportResponseProgram> program) {
     Utils.checkNotNull(batchId, "batchId");
     Utils.checkNotNull(createTime, "createTime");
@@ -96,8 +95,8 @@ public class LocateIctReportResponse {
   /** The process date of the batch associated with the report. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<LocateIctReportResponseProcessDate> processDate() {
-    return (JsonNullable<LocateIctReportResponseProcessDate>) processDate;
+  public JsonNullable<ProcessDate> processDate() {
+    return (JsonNullable<ProcessDate>) processDate;
   }
 
   /** The ICT program associated with the report. */
@@ -154,15 +153,14 @@ public class LocateIctReportResponse {
   }
 
   /** The process date of the batch associated with the report. */
-  public LocateIctReportResponse withProcessDate(LocateIctReportResponseProcessDate processDate) {
+  public LocateIctReportResponse withProcessDate(ProcessDate processDate) {
     Utils.checkNotNull(processDate, "processDate");
     this.processDate = JsonNullable.of(processDate);
     return this;
   }
 
   /** The process date of the batch associated with the report. */
-  public LocateIctReportResponse withProcessDate(
-      JsonNullable<? extends LocateIctReportResponseProcessDate> processDate) {
+  public LocateIctReportResponse withProcessDate(JsonNullable<? extends ProcessDate> processDate) {
     Utils.checkNotNull(processDate, "processDate");
     this.processDate = processDate;
     return this;
@@ -228,8 +226,7 @@ public class LocateIctReportResponse {
 
     private Optional<String> downloadUri = Optional.empty();
 
-    private JsonNullable<? extends LocateIctReportResponseProcessDate> processDate =
-        JsonNullable.undefined();
+    private JsonNullable<? extends ProcessDate> processDate = JsonNullable.undefined();
 
     private Optional<? extends LocateIctReportResponseProgram> program = Optional.empty();
 
@@ -280,15 +277,14 @@ public class LocateIctReportResponse {
     }
 
     /** The process date of the batch associated with the report. */
-    public Builder processDate(LocateIctReportResponseProcessDate processDate) {
+    public Builder processDate(ProcessDate processDate) {
       Utils.checkNotNull(processDate, "processDate");
       this.processDate = JsonNullable.of(processDate);
       return this;
     }
 
     /** The process date of the batch associated with the report. */
-    public Builder processDate(
-        JsonNullable<? extends LocateIctReportResponseProcessDate> processDate) {
+    public Builder processDate(JsonNullable<? extends ProcessDate> processDate) {
       Utils.checkNotNull(processDate, "processDate");
       this.processDate = processDate;
       return this;

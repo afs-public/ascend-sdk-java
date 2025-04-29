@@ -244,7 +244,6 @@ public class TestScheduleTransfers {
     Assertions.assertEquals(200, result.statusCode());
   }
 
-  @Disabled("Disabled until cash team fixes issue")
   @Test
   public void test_schedule_transfers_transfers_list_schedule_summaries_list_schedule_summaries1()
       throws Exception {

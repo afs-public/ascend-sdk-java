@@ -35,6 +35,15 @@ public class ContributionSummary {
   @JsonProperty("regular_amount")
   private JsonNullable<? extends RegularAmount> regularAmount;
 
+  /**
+   * The remaining regular contribution amount allowed for the tax year. Calculated as the
+   * difference between the contribution limit for the account and its regular contribution total to
+   * date. This will return zero if the account has no contribution limit.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("remaining_contribution_allowed")
+  private JsonNullable<? extends RemainingContributionAllowed> remainingContributionAllowed;
+
   /** Rollover contribution amount */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("rollover_amount")
@@ -51,16 +60,20 @@ public class ContributionSummary {
           JsonNullable<? extends ContributionLimit> contributionLimit,
       @JsonProperty("name") Optional<String> name,
       @JsonProperty("regular_amount") JsonNullable<? extends RegularAmount> regularAmount,
+      @JsonProperty("remaining_contribution_allowed")
+          JsonNullable<? extends RemainingContributionAllowed> remainingContributionAllowed,
       @JsonProperty("rollover_amount") JsonNullable<? extends RolloverAmount> rolloverAmount,
       @JsonProperty("tax_year") Optional<Integer> taxYear) {
     Utils.checkNotNull(contributionLimit, "contributionLimit");
     Utils.checkNotNull(name, "name");
     Utils.checkNotNull(regularAmount, "regularAmount");
+    Utils.checkNotNull(remainingContributionAllowed, "remainingContributionAllowed");
     Utils.checkNotNull(rolloverAmount, "rolloverAmount");
     Utils.checkNotNull(taxYear, "taxYear");
     this.contributionLimit = contributionLimit;
     this.name = name;
     this.regularAmount = regularAmount;
+    this.remainingContributionAllowed = remainingContributionAllowed;
     this.rolloverAmount = rolloverAmount;
     this.taxYear = taxYear;
   }
@@ -69,6 +82,7 @@ public class ContributionSummary {
     this(
         JsonNullable.undefined(),
         Optional.empty(),
+        JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty());
@@ -95,6 +109,17 @@ public class ContributionSummary {
   @JsonIgnore
   public JsonNullable<RegularAmount> regularAmount() {
     return (JsonNullable<RegularAmount>) regularAmount;
+  }
+
+  /**
+   * The remaining regular contribution amount allowed for the tax year. Calculated as the
+   * difference between the contribution limit for the account and its regular contribution total to
+   * date. This will return zero if the account has no contribution limit.
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<RemainingContributionAllowed> remainingContributionAllowed() {
+    return (JsonNullable<RemainingContributionAllowed>) remainingContributionAllowed;
   }
 
   /** Rollover contribution amount */
@@ -164,6 +189,30 @@ public class ContributionSummary {
     return this;
   }
 
+  /**
+   * The remaining regular contribution amount allowed for the tax year. Calculated as the
+   * difference between the contribution limit for the account and its regular contribution total to
+   * date. This will return zero if the account has no contribution limit.
+   */
+  public ContributionSummary withRemainingContributionAllowed(
+      RemainingContributionAllowed remainingContributionAllowed) {
+    Utils.checkNotNull(remainingContributionAllowed, "remainingContributionAllowed");
+    this.remainingContributionAllowed = JsonNullable.of(remainingContributionAllowed);
+    return this;
+  }
+
+  /**
+   * The remaining regular contribution amount allowed for the tax year. Calculated as the
+   * difference between the contribution limit for the account and its regular contribution total to
+   * date. This will return zero if the account has no contribution limit.
+   */
+  public ContributionSummary withRemainingContributionAllowed(
+      JsonNullable<? extends RemainingContributionAllowed> remainingContributionAllowed) {
+    Utils.checkNotNull(remainingContributionAllowed, "remainingContributionAllowed");
+    this.remainingContributionAllowed = remainingContributionAllowed;
+    return this;
+  }
+
   /** Rollover contribution amount */
   public ContributionSummary withRolloverAmount(RolloverAmount rolloverAmount) {
     Utils.checkNotNull(rolloverAmount, "rolloverAmount");
@@ -205,13 +254,20 @@ public class ContributionSummary {
     return Objects.deepEquals(this.contributionLimit, other.contributionLimit)
         && Objects.deepEquals(this.name, other.name)
         && Objects.deepEquals(this.regularAmount, other.regularAmount)
+        && Objects.deepEquals(this.remainingContributionAllowed, other.remainingContributionAllowed)
         && Objects.deepEquals(this.rolloverAmount, other.rolloverAmount)
         && Objects.deepEquals(this.taxYear, other.taxYear);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(contributionLimit, name, regularAmount, rolloverAmount, taxYear);
+    return Objects.hash(
+        contributionLimit,
+        name,
+        regularAmount,
+        remainingContributionAllowed,
+        rolloverAmount,
+        taxYear);
   }
 
   @Override
@@ -224,6 +280,8 @@ public class ContributionSummary {
         name,
         "regularAmount",
         regularAmount,
+        "remainingContributionAllowed",
+        remainingContributionAllowed,
         "rolloverAmount",
         rolloverAmount,
         "taxYear",
@@ -237,6 +295,9 @@ public class ContributionSummary {
     private Optional<String> name = Optional.empty();
 
     private JsonNullable<? extends RegularAmount> regularAmount = JsonNullable.undefined();
+
+    private JsonNullable<? extends RemainingContributionAllowed> remainingContributionAllowed =
+        JsonNullable.undefined();
 
     private JsonNullable<? extends RolloverAmount> rolloverAmount = JsonNullable.undefined();
 
@@ -294,6 +355,30 @@ public class ContributionSummary {
       return this;
     }
 
+    /**
+     * The remaining regular contribution amount allowed for the tax year. Calculated as the
+     * difference between the contribution limit for the account and its regular contribution total
+     * to date. This will return zero if the account has no contribution limit.
+     */
+    public Builder remainingContributionAllowed(
+        RemainingContributionAllowed remainingContributionAllowed) {
+      Utils.checkNotNull(remainingContributionAllowed, "remainingContributionAllowed");
+      this.remainingContributionAllowed = JsonNullable.of(remainingContributionAllowed);
+      return this;
+    }
+
+    /**
+     * The remaining regular contribution amount allowed for the tax year. Calculated as the
+     * difference between the contribution limit for the account and its regular contribution total
+     * to date. This will return zero if the account has no contribution limit.
+     */
+    public Builder remainingContributionAllowed(
+        JsonNullable<? extends RemainingContributionAllowed> remainingContributionAllowed) {
+      Utils.checkNotNull(remainingContributionAllowed, "remainingContributionAllowed");
+      this.remainingContributionAllowed = remainingContributionAllowed;
+      return this;
+    }
+
     /** Rollover contribution amount */
     public Builder rolloverAmount(RolloverAmount rolloverAmount) {
       Utils.checkNotNull(rolloverAmount, "rolloverAmount");
@@ -324,7 +409,12 @@ public class ContributionSummary {
 
     public ContributionSummary build() {
       return new ContributionSummary(
-          contributionLimit, name, regularAmount, rolloverAmount, taxYear);
+          contributionLimit,
+          name,
+          regularAmount,
+          remainingContributionAllowed,
+          rolloverAmount,
+          taxYear);
     }
   }
 }

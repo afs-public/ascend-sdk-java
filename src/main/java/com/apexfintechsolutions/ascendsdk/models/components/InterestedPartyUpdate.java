@@ -45,7 +45,7 @@ public class InterestedPartyUpdate {
 
   /**
    * Delivery method instruction for account statements for a given Interested Party; Can be
-   * `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
+   * `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("statement_delivery_preference")
@@ -54,7 +54,7 @@ public class InterestedPartyUpdate {
 
   /**
    * Delivery method instruction for trade confirmations for a given Interested Party record; Can be
-   * `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
+   * `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("trade_confirmation_delivery_preference")
@@ -117,7 +117,7 @@ public class InterestedPartyUpdate {
 
   /**
    * Delivery method instruction for account statements for a given Interested Party; Can be
-   * `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
+   * `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -127,7 +127,7 @@ public class InterestedPartyUpdate {
 
   /**
    * Delivery method instruction for trade confirmations for a given Interested Party record; Can be
-   * `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
+   * `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -206,7 +206,7 @@ public class InterestedPartyUpdate {
 
   /**
    * Delivery method instruction for account statements for a given Interested Party; Can be
-   * `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
+   * `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
    */
   public InterestedPartyUpdate withStatementDeliveryPreference(
       InterestedPartyUpdateStatementDeliveryPreference statementDeliveryPreference) {
@@ -217,7 +217,7 @@ public class InterestedPartyUpdate {
 
   /**
    * Delivery method instruction for account statements for a given Interested Party; Can be
-   * `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
+   * `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
    */
   public InterestedPartyUpdate withStatementDeliveryPreference(
       Optional<? extends InterestedPartyUpdateStatementDeliveryPreference>
@@ -229,7 +229,7 @@ public class InterestedPartyUpdate {
 
   /**
    * Delivery method instruction for trade confirmations for a given Interested Party record; Can be
-   * `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
+   * `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
    */
   public InterestedPartyUpdate withTradeConfirmationDeliveryPreference(
       InterestedPartyUpdateTradeConfirmationDeliveryPreference
@@ -242,7 +242,7 @@ public class InterestedPartyUpdate {
 
   /**
    * Delivery method instruction for trade confirmations for a given Interested Party record; Can be
-   * `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
+   * `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
    */
   public InterestedPartyUpdate withTradeConfirmationDeliveryPreference(
       Optional<? extends InterestedPartyUpdateTradeConfirmationDeliveryPreference>
@@ -371,7 +371,7 @@ public class InterestedPartyUpdate {
 
     /**
      * Delivery method instruction for account statements for a given Interested Party; Can be
-     * `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
+     * `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
      */
     public Builder statementDeliveryPreference(
         InterestedPartyUpdateStatementDeliveryPreference statementDeliveryPreference) {
@@ -382,7 +382,7 @@ public class InterestedPartyUpdate {
 
     /**
      * Delivery method instruction for account statements for a given Interested Party; Can be
-     * `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
+     * `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
      */
     public Builder statementDeliveryPreference(
         Optional<? extends InterestedPartyUpdateStatementDeliveryPreference>
@@ -394,7 +394,7 @@ public class InterestedPartyUpdate {
 
     /**
      * Delivery method instruction for trade confirmations for a given Interested Party record; Can
-     * be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
+     * be `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
      */
     public Builder tradeConfirmationDeliveryPreference(
         InterestedPartyUpdateTradeConfirmationDeliveryPreference
@@ -408,7 +408,7 @@ public class InterestedPartyUpdate {
 
     /**
      * Delivery method instruction for trade confirmations for a given Interested Party record; Can
-     * be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
+     * be `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
      */
     public Builder tradeConfirmationDeliveryPreference(
         Optional<? extends InterestedPartyUpdateTradeConfirmationDeliveryPreference>

@@ -27,20 +27,25 @@ import com.apexfintechsolutions.ascendsdk.models.components.CancelAchWithdrawalS
 import com.apexfintechsolutions.ascendsdk.models.components.CancelBankRelationshipRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelCashJournalRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelCreditRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.CancelExecutionRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelFeeRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelIctDepositRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelIctWithdrawalRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelOrderRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.CancelTradeAllocationRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.CancelTradeRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelWireWithdrawalRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelWireWithdrawalScheduleRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.CashJournalCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.CheckPartyTypeRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.CloseAccountRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.CompleteTradeRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.DateCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.DeactivateEnrollmentRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.EndLargeTraderRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.EndRestrictionRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.EnrollAccountRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.ExecutionCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveAchDepositRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveAchWithdrawalRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveCashJournalRequestCreate;
@@ -73,6 +78,9 @@ import com.apexfintechsolutions.ascendsdk.models.components.OrderCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.PartyRequestUpdate;
 import com.apexfintechsolutions.ascendsdk.models.components.PushSubscriptionCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.PushSubscriptionUpdate;
+import com.apexfintechsolutions.ascendsdk.models.components.RebookExecutionRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.RebookTradeAllocationRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.RebookTradeRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ReissueMicroDepositsRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.RemovePartyRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ReplacePartyRequestCreate;
@@ -83,6 +91,8 @@ import com.apexfintechsolutions.ascendsdk.models.components.RetrieveDistribution
 import com.apexfintechsolutions.ascendsdk.models.components.RetrieveFixedIncomeMarksRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.RetrieveQuoteRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.SubmitBasketRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.TradeAllocationCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.TradeCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.TransferCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.TransfersCreditCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.TransfersFeeCreate;
@@ -430,178 +440,6 @@ public class SDKMethodInterfaces {
                     CustomerIdentificationResultServiceGetCustomerIdentificationQueryParamView>
             view)
         throws Exception;
-  }
-
-  public interface MethodCallAccountTransfersCreateTransfer {
-    AccountTransfersCreateTransferResponse createTransfer(
-        String correspondentId,
-        String accountId,
-        Optional<String> requestId,
-        TransferCreate transferCreate)
-        throws Exception;
-  }
-
-  public interface MethodCallAccountTransfersGetTransfer {
-    AccountTransfersGetTransferResponse getTransfer(
-        String correspondentId, String accountId, String transferId) throws Exception;
-  }
-
-  public interface MethodCallOrderServiceCreateOrder {
-    OrderServiceCreateOrderResponse createOrder(String accountId, OrderCreate orderCreate)
-        throws Exception;
-  }
-
-  public interface MethodCallOrderServiceGetOrder {
-    OrderServiceGetOrderResponse getOrder(String accountId, String orderId) throws Exception;
-  }
-
-  public interface MethodCallOrderServiceCancelOrder {
-    OrderServiceCancelOrderResponse cancelOrder(
-        String accountId, String orderId, CancelOrderRequestCreate cancelOrderRequestCreate)
-        throws Exception;
-  }
-
-  public interface MethodCallOrderPriceServicePreviewOrderCost {
-    OrderPriceServicePreviewOrderCostResponse previewOrderCost(
-        String accountId, OrderCostPreviewRequestCreate orderCostPreviewRequestCreate)
-        throws Exception;
-  }
-
-  public interface MethodCallOrderPriceServiceRetrieveQuote {
-    OrderPriceServiceRetrieveQuoteResponse retrieveQuote(
-        String accountId, RetrieveQuoteRequestCreate retrieveQuoteRequestCreate) throws Exception;
-  }
-
-  public interface MethodCallOrderPriceServiceRetrieveFixedIncomeMarks {
-    OrderPriceServiceRetrieveFixedIncomeMarksResponse retrieveFixedIncomeMarks(
-        String correspondentId,
-        RetrieveFixedIncomeMarksRequestCreate retrieveFixedIncomeMarksRequestCreate)
-        throws Exception;
-  }
-
-  public interface MethodCallBasketOrdersServiceCreateBasket {
-    BasketOrdersServiceCreateBasketResponse createBasket(
-        String correspondentId, BasketCreate basketCreate) throws Exception;
-  }
-
-  public interface MethodCallBasketOrdersServiceAddOrders {
-    BasketOrdersServiceAddOrdersResponse addOrders(
-        String correspondentId, String basketId, AddOrdersRequestCreate addOrdersRequestCreate)
-        throws Exception;
-  }
-
-  public interface MethodCallBasketOrdersServiceGetBasket {
-    BasketOrdersServiceGetBasketResponse getBasket(String correspondentId, String basketId)
-        throws Exception;
-  }
-
-  public interface MethodCallBasketOrdersServiceSubmitBasket {
-    BasketOrdersServiceSubmitBasketResponse submitBasket(
-        String correspondentId,
-        String basketId,
-        SubmitBasketRequestCreate submitBasketRequestCreate)
-        throws Exception;
-  }
-
-  public interface MethodCallBasketOrdersServiceListBasketOrders {
-    BasketOrdersServiceListBasketOrdersResponse listBasketOrders(
-        String correspondentId,
-        String basketId,
-        Optional<Integer> pageSize,
-        Optional<String> pageToken)
-        throws Exception;
-  }
-
-  public interface MethodCallBasketOrdersServiceListCompressedOrders {
-    BasketOrdersServiceListCompressedOrdersResponse listCompressedOrders(
-        String correspondentId,
-        String basketId,
-        Optional<Integer> pageSize,
-        Optional<String> pageToken)
-        throws Exception;
-  }
-
-  public interface MethodCallAssetsListAssets1 {
-    AssetsListAssets1Response listAssets(
-        Optional<String> parent,
-        Optional<Integer> pageSize,
-        Optional<String> pageToken,
-        Optional<String> filter)
-        throws Exception;
-  }
-
-  public interface MethodCallAssetsGetAsset {
-    AssetsGetAssetResponse getAsset(String assetId) throws Exception;
-  }
-
-  public interface MethodCallAssetsListAssetsCorrespondent {
-    AssetsListAssetsCorrespondentResponse listAssetsCorrespondent(
-        String correspondentId,
-        Optional<Integer> pageSize,
-        Optional<String> pageToken,
-        Optional<String> filter)
-        throws Exception;
-  }
-
-  public interface MethodCallAssetsGetAssetCorrespondent {
-    AssetsGetAssetCorrespondentResponse getAssetCorrespondent(
-        String correspondentId, String assetId) throws Exception;
-  }
-
-  public interface MethodCallLedgerListEntries {
-    LedgerListEntriesResponse listEntries(
-        String accountId,
-        Optional<Integer> pageSize,
-        Optional<String> pageToken,
-        Optional<String> filter)
-        throws Exception;
-  }
-
-  public interface MethodCallLedgerListActivities {
-    LedgerListActivitiesResponse listActivities(
-        String accountId,
-        Optional<Integer> pageSize,
-        Optional<String> pageToken,
-        Optional<String> filter)
-        throws Exception;
-  }
-
-  public interface MethodCallLedgerListPositions {
-    LedgerListPositionsResponse listPositions(
-        String accountId,
-        Optional<Integer> pageSize,
-        Optional<String> pageToken,
-        Optional<String> filter)
-        throws Exception;
-  }
-
-  public interface MethodCallLedgerGetActivity {
-    LedgerGetActivityResponse getActivity(String accountId, String activityId) throws Exception;
-  }
-
-  public interface MethodCallLedgerGetEntry {
-    LedgerGetEntryResponse getEntry(String accountId, String entryId) throws Exception;
-  }
-
-  public interface MethodCallInvestorCommunicationServiceBatchCreateUploadLinks {
-    InvestorCommunicationServiceBatchCreateUploadLinksResponse batchCreateUploadLinks(
-        BatchCreateUploadLinksRequestCreate request) throws Exception;
-  }
-
-  public interface MethodCallInvestorCommunicationServiceListDocuments {
-    InvestorCommunicationServiceListDocumentsResponse listDocuments(
-        Optional<Integer> pageSize, Optional<String> pageToken, Optional<String> filter)
-        throws Exception;
-  }
-
-  public interface MethodCallSnapshotsListSnapshots {
-    SnapshotsListSnapshotsResponse listSnapshots(
-        Optional<String> filter, Optional<Integer> pageSize, Optional<String> pageToken)
-        throws Exception;
-  }
-
-  public interface MethodCallMarginsRealTimeGetBuyingPower {
-    MarginsRealTimeGetBuyingPowerResponse getBuyingPower(String accountId) throws Exception;
   }
 
   public interface MethodCallBankRelationshipsCreateBankRelationship {
@@ -1087,6 +925,260 @@ public class SDKMethodInterfaces {
     CashJournalsForceRejectCashJournalResponse forceRejectCashJournal(
         String cashJournalId,
         ForceRejectCashJournalRequestCreate forceRejectCashJournalRequestCreate)
+        throws Exception;
+  }
+
+  public interface MethodCallAccountTransfersCreateTransfer {
+    AccountTransfersCreateTransferResponse createTransfer(
+        String correspondentId,
+        String accountId,
+        Optional<String> requestId,
+        TransferCreate transferCreate)
+        throws Exception;
+  }
+
+  public interface MethodCallAccountTransfersGetTransfer {
+    AccountTransfersGetTransferResponse getTransfer(
+        String correspondentId, String accountId, String transferId) throws Exception;
+  }
+
+  public interface MethodCallOrderServiceCreateOrder {
+    OrderServiceCreateOrderResponse createOrder(String accountId, OrderCreate orderCreate)
+        throws Exception;
+  }
+
+  public interface MethodCallOrderServiceGetOrder {
+    OrderServiceGetOrderResponse getOrder(String accountId, String orderId) throws Exception;
+  }
+
+  public interface MethodCallOrderServiceCancelOrder {
+    OrderServiceCancelOrderResponse cancelOrder(
+        String accountId, String orderId, CancelOrderRequestCreate cancelOrderRequestCreate)
+        throws Exception;
+  }
+
+  public interface MethodCallOrderPriceServicePreviewOrderCost {
+    OrderPriceServicePreviewOrderCostResponse previewOrderCost(
+        String accountId, OrderCostPreviewRequestCreate orderCostPreviewRequestCreate)
+        throws Exception;
+  }
+
+  public interface MethodCallOrderPriceServiceRetrieveQuote {
+    OrderPriceServiceRetrieveQuoteResponse retrieveQuote(
+        String accountId, RetrieveQuoteRequestCreate retrieveQuoteRequestCreate) throws Exception;
+  }
+
+  public interface MethodCallOrderPriceServiceRetrieveFixedIncomeMarks {
+    OrderPriceServiceRetrieveFixedIncomeMarksResponse retrieveFixedIncomeMarks(
+        String correspondentId,
+        RetrieveFixedIncomeMarksRequestCreate retrieveFixedIncomeMarksRequestCreate)
+        throws Exception;
+  }
+
+  public interface MethodCallBasketOrdersServiceCreateBasket {
+    BasketOrdersServiceCreateBasketResponse createBasket(
+        String correspondentId, BasketCreate basketCreate) throws Exception;
+  }
+
+  public interface MethodCallBasketOrdersServiceAddOrders {
+    BasketOrdersServiceAddOrdersResponse addOrders(
+        String correspondentId, String basketId, AddOrdersRequestCreate addOrdersRequestCreate)
+        throws Exception;
+  }
+
+  public interface MethodCallBasketOrdersServiceGetBasket {
+    BasketOrdersServiceGetBasketResponse getBasket(String correspondentId, String basketId)
+        throws Exception;
+  }
+
+  public interface MethodCallBasketOrdersServiceSubmitBasket {
+    BasketOrdersServiceSubmitBasketResponse submitBasket(
+        String correspondentId,
+        String basketId,
+        SubmitBasketRequestCreate submitBasketRequestCreate)
+        throws Exception;
+  }
+
+  public interface MethodCallBasketOrdersServiceListBasketOrders {
+    BasketOrdersServiceListBasketOrdersResponse listBasketOrders(
+        String correspondentId,
+        String basketId,
+        Optional<Integer> pageSize,
+        Optional<String> pageToken)
+        throws Exception;
+  }
+
+  public interface MethodCallBasketOrdersServiceListCompressedOrders {
+    BasketOrdersServiceListCompressedOrdersResponse listCompressedOrders(
+        String correspondentId,
+        String basketId,
+        Optional<Integer> pageSize,
+        Optional<String> pageToken)
+        throws Exception;
+  }
+
+  public interface MethodCallBookingCreateTrade {
+    BookingCreateTradeResponse createTrade(String accountId, TradeCreate tradeCreate)
+        throws Exception;
+  }
+
+  public interface MethodCallBookingGetTrade {
+    BookingGetTradeResponse getTrade(String accountId, String tradeId) throws Exception;
+  }
+
+  public interface MethodCallBookingCompleteTrade {
+    BookingCompleteTradeResponse completeTrade(
+        String accountId, String tradeId, CompleteTradeRequestCreate completeTradeRequestCreate)
+        throws Exception;
+  }
+
+  public interface MethodCallBookingCancelTrade {
+    BookingCancelTradeResponse cancelTrade(
+        String accountId, String tradeId, CancelTradeRequestCreate cancelTradeRequestCreate)
+        throws Exception;
+  }
+
+  public interface MethodCallBookingRebookTrade {
+    BookingRebookTradeResponse rebookTrade(
+        String accountId, String tradeId, RebookTradeRequestCreate rebookTradeRequestCreate)
+        throws Exception;
+  }
+
+  public interface MethodCallBookingCreateExecution {
+    BookingCreateExecutionResponse createExecution(
+        String accountId, String tradeId, ExecutionCreate executionCreate) throws Exception;
+  }
+
+  public interface MethodCallBookingGetExecution {
+    BookingGetExecutionResponse getExecution(String accountId, String tradeId, String executionId)
+        throws Exception;
+  }
+
+  public interface MethodCallBookingCancelExecution {
+    BookingCancelExecutionResponse cancelExecution(
+        String accountId,
+        String tradeId,
+        String executionId,
+        CancelExecutionRequestCreate cancelExecutionRequestCreate)
+        throws Exception;
+  }
+
+  public interface MethodCallBookingRebookExecution {
+    BookingRebookExecutionResponse rebookExecution(
+        String accountId,
+        String tradeId,
+        String executionId,
+        RebookExecutionRequestCreate rebookExecutionRequestCreate)
+        throws Exception;
+  }
+
+  public interface MethodCallBookingCreateTradeAllocation {
+    BookingCreateTradeAllocationResponse createTradeAllocation(
+        String accountId, Optional<String> requestId, TradeAllocationCreate tradeAllocationCreate)
+        throws Exception;
+  }
+
+  public interface MethodCallBookingGetTradeAllocation {
+    BookingGetTradeAllocationResponse getTradeAllocation(String accountId, String tradeAllocationId)
+        throws Exception;
+  }
+
+  public interface MethodCallBookingCancelTradeAllocation {
+    BookingCancelTradeAllocationResponse cancelTradeAllocation(
+        String accountId,
+        String tradeAllocationId,
+        CancelTradeAllocationRequestCreate cancelTradeAllocationRequestCreate)
+        throws Exception;
+  }
+
+  public interface MethodCallBookingRebookTradeAllocation {
+    BookingRebookTradeAllocationResponse rebookTradeAllocation(
+        String accountId,
+        String tradeAllocationId,
+        RebookTradeAllocationRequestCreate rebookTradeAllocationRequestCreate)
+        throws Exception;
+  }
+
+  public interface MethodCallAssetsListAssets1 {
+    AssetsListAssets1Response listAssets(
+        Optional<String> parent,
+        Optional<Integer> pageSize,
+        Optional<String> pageToken,
+        Optional<String> filter)
+        throws Exception;
+  }
+
+  public interface MethodCallAssetsGetAsset {
+    AssetsGetAssetResponse getAsset(String assetId) throws Exception;
+  }
+
+  public interface MethodCallAssetsListAssetsCorrespondent {
+    AssetsListAssetsCorrespondentResponse listAssetsCorrespondent(
+        String correspondentId,
+        Optional<Integer> pageSize,
+        Optional<String> pageToken,
+        Optional<String> filter)
+        throws Exception;
+  }
+
+  public interface MethodCallAssetsGetAssetCorrespondent {
+    AssetsGetAssetCorrespondentResponse getAssetCorrespondent(
+        String correspondentId, String assetId) throws Exception;
+  }
+
+  public interface MethodCallLedgerListEntries {
+    LedgerListEntriesResponse listEntries(
+        String accountId,
+        Optional<Integer> pageSize,
+        Optional<String> pageToken,
+        Optional<String> filter)
+        throws Exception;
+  }
+
+  public interface MethodCallLedgerListActivities {
+    LedgerListActivitiesResponse listActivities(
+        String accountId,
+        Optional<Integer> pageSize,
+        Optional<String> pageToken,
+        Optional<String> filter)
+        throws Exception;
+  }
+
+  public interface MethodCallLedgerListPositions {
+    LedgerListPositionsResponse listPositions(
+        String accountId,
+        Optional<Integer> pageSize,
+        Optional<String> pageToken,
+        Optional<String> filter)
+        throws Exception;
+  }
+
+  public interface MethodCallLedgerGetActivity {
+    LedgerGetActivityResponse getActivity(String accountId, String activityId) throws Exception;
+  }
+
+  public interface MethodCallLedgerGetEntry {
+    LedgerGetEntryResponse getEntry(String accountId, String entryId) throws Exception;
+  }
+
+  public interface MethodCallMarginsRealTimeGetBuyingPower {
+    MarginsRealTimeGetBuyingPowerResponse getBuyingPower(String accountId) throws Exception;
+  }
+
+  public interface MethodCallInvestorCommunicationServiceBatchCreateUploadLinks {
+    InvestorCommunicationServiceBatchCreateUploadLinksResponse batchCreateUploadLinks(
+        BatchCreateUploadLinksRequestCreate request) throws Exception;
+  }
+
+  public interface MethodCallInvestorCommunicationServiceListDocuments {
+    InvestorCommunicationServiceListDocumentsResponse listDocuments(
+        Optional<Integer> pageSize, Optional<String> pageToken, Optional<String> filter)
+        throws Exception;
+  }
+
+  public interface MethodCallSnapshotsListSnapshots {
+    SnapshotsListSnapshotsResponse listSnapshots(
+        Optional<String> filter, Optional<Integer> pageSize, Optional<String> pageToken)
         throws Exception;
   }
 }

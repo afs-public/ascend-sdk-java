@@ -18,10 +18,10 @@ public class Commission {
   /** Monetary amount associated with the commission */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("amount")
-  private JsonNullable<? extends CommissionAmount> amount;
+  private JsonNullable<? extends CommissionAmount1> amount;
 
   @JsonCreator
-  public Commission(@JsonProperty("amount") JsonNullable<? extends CommissionAmount> amount) {
+  public Commission(@JsonProperty("amount") JsonNullable<? extends CommissionAmount1> amount) {
     Utils.checkNotNull(amount, "amount");
     this.amount = amount;
   }
@@ -33,8 +33,8 @@ public class Commission {
   /** Monetary amount associated with the commission */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<CommissionAmount> amount() {
-    return (JsonNullable<CommissionAmount>) amount;
+  public JsonNullable<CommissionAmount1> amount() {
+    return (JsonNullable<CommissionAmount1>) amount;
   }
 
   public static final Builder builder() {
@@ -42,14 +42,14 @@ public class Commission {
   }
 
   /** Monetary amount associated with the commission */
-  public Commission withAmount(CommissionAmount amount) {
+  public Commission withAmount(CommissionAmount1 amount) {
     Utils.checkNotNull(amount, "amount");
     this.amount = JsonNullable.of(amount);
     return this;
   }
 
   /** Monetary amount associated with the commission */
-  public Commission withAmount(JsonNullable<? extends CommissionAmount> amount) {
+  public Commission withAmount(JsonNullable<? extends CommissionAmount1> amount) {
     Utils.checkNotNull(amount, "amount");
     this.amount = amount;
     return this;
@@ -79,21 +79,21 @@ public class Commission {
 
   public static final class Builder {
 
-    private JsonNullable<? extends CommissionAmount> amount = JsonNullable.undefined();
+    private JsonNullable<? extends CommissionAmount1> amount = JsonNullable.undefined();
 
     private Builder() {
       // force use of static builder() method
     }
 
     /** Monetary amount associated with the commission */
-    public Builder amount(CommissionAmount amount) {
+    public Builder amount(CommissionAmount1 amount) {
       Utils.checkNotNull(amount, "amount");
       this.amount = JsonNullable.of(amount);
       return this;
     }
 
     /** Monetary amount associated with the commission */
-    public Builder amount(JsonNullable<? extends CommissionAmount> amount) {
+    public Builder amount(JsonNullable<? extends CommissionAmount1> amount) {
       Utils.checkNotNull(amount, "amount");
       this.amount = amount;
       return this;

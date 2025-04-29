@@ -50,7 +50,7 @@ public class AcatsTransfer {
   /** The direction of the transfer */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("direction")
-  private Optional<? extends Direction> direction;
+  private Optional<? extends AcatsTransferDirection> direction;
 
   /**
    * The service generated name of the transfer. Format:
@@ -97,7 +97,7 @@ public class AcatsTransfer {
       @JsonProperty("comment") Optional<String> comment,
       @JsonProperty("create_time") JsonNullable<OffsetDateTime> createTime,
       @JsonProperty("deliverer") JsonNullable<? extends Deliverer> deliverer,
-      @JsonProperty("direction") Optional<? extends Direction> direction,
+      @JsonProperty("direction") Optional<? extends AcatsTransferDirection> direction,
       @JsonProperty("name") Optional<String> name,
       @JsonProperty("nscc_status") Optional<? extends NsccStatus> nsccStatus,
       @JsonProperty("original_control_number") Optional<String> originalControlNumber,
@@ -185,8 +185,8 @@ public class AcatsTransfer {
   /** The direction of the transfer */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<Direction> direction() {
-    return (Optional<Direction>) direction;
+  public Optional<AcatsTransferDirection> direction() {
+    return (Optional<AcatsTransferDirection>) direction;
   }
 
   /**
@@ -314,14 +314,14 @@ public class AcatsTransfer {
   }
 
   /** The direction of the transfer */
-  public AcatsTransfer withDirection(Direction direction) {
+  public AcatsTransfer withDirection(AcatsTransferDirection direction) {
     Utils.checkNotNull(direction, "direction");
     this.direction = Optional.ofNullable(direction);
     return this;
   }
 
   /** The direction of the transfer */
-  public AcatsTransfer withDirection(Optional<? extends Direction> direction) {
+  public AcatsTransfer withDirection(Optional<? extends AcatsTransferDirection> direction) {
     Utils.checkNotNull(direction, "direction");
     this.direction = direction;
     return this;
@@ -517,7 +517,7 @@ public class AcatsTransfer {
 
     private JsonNullable<? extends Deliverer> deliverer = JsonNullable.undefined();
 
-    private Optional<? extends Direction> direction = Optional.empty();
+    private Optional<? extends AcatsTransferDirection> direction = Optional.empty();
 
     private Optional<String> name = Optional.empty();
 
@@ -608,14 +608,14 @@ public class AcatsTransfer {
     }
 
     /** The direction of the transfer */
-    public Builder direction(Direction direction) {
+    public Builder direction(AcatsTransferDirection direction) {
       Utils.checkNotNull(direction, "direction");
       this.direction = Optional.ofNullable(direction);
       return this;
     }
 
     /** The direction of the transfer */
-    public Builder direction(Optional<? extends Direction> direction) {
+    public Builder direction(Optional<? extends AcatsTransferDirection> direction) {
       Utils.checkNotNull(direction, "direction");
       this.direction = direction;
       return this;

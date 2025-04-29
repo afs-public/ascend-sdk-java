@@ -51,10 +51,6 @@ public class PartyRelationType {
   public static final PartyRelationType PRIMARY_OWNER = new PartyRelationType("PRIMARY_OWNER");
   public static final PartyRelationType JOINT_OWNER = new PartyRelationType("JOINT_OWNER");
   public static final PartyRelationType CUSTODIAN = new PartyRelationType("CUSTODIAN");
-  public static final PartyRelationType GUARDIAN_CONSERVATOR =
-      new PartyRelationType("GUARDIAN_CONSERVATOR");
-  public static final PartyRelationType POWER_OF_ATTORNEY =
-      new PartyRelationType("POWER_OF_ATTORNEY");
   public static final PartyRelationType EXECUTOR = new PartyRelationType("EXECUTOR");
   public static final PartyRelationType AUTHORIZED_SIGNER =
       new PartyRelationType("AUTHORIZED_SIGNER");
@@ -137,8 +133,6 @@ public class PartyRelationType {
     map.put("PRIMARY_OWNER", PRIMARY_OWNER);
     map.put("JOINT_OWNER", JOINT_OWNER);
     map.put("CUSTODIAN", CUSTODIAN);
-    map.put("GUARDIAN_CONSERVATOR", GUARDIAN_CONSERVATOR);
-    map.put("POWER_OF_ATTORNEY", POWER_OF_ATTORNEY);
     map.put("EXECUTOR", EXECUTOR);
     map.put("AUTHORIZED_SIGNER", AUTHORIZED_SIGNER);
     map.put("BENEFICIAL_OWNER", BENEFICIAL_OWNER);
@@ -156,8 +150,6 @@ public class PartyRelationType {
     map.put("PRIMARY_OWNER", PartyRelationTypeEnum.PRIMARY_OWNER);
     map.put("JOINT_OWNER", PartyRelationTypeEnum.JOINT_OWNER);
     map.put("CUSTODIAN", PartyRelationTypeEnum.CUSTODIAN);
-    map.put("GUARDIAN_CONSERVATOR", PartyRelationTypeEnum.GUARDIAN_CONSERVATOR);
-    map.put("POWER_OF_ATTORNEY", PartyRelationTypeEnum.POWER_OF_ATTORNEY);
     map.put("EXECUTOR", PartyRelationTypeEnum.EXECUTOR);
     map.put("AUTHORIZED_SIGNER", PartyRelationTypeEnum.AUTHORIZED_SIGNER);
     map.put("BENEFICIAL_OWNER", PartyRelationTypeEnum.BENEFICIAL_OWNER);
@@ -203,8 +195,6 @@ public class PartyRelationType {
     PRIMARY_OWNER("PRIMARY_OWNER"),
     JOINT_OWNER("JOINT_OWNER"),
     CUSTODIAN("CUSTODIAN"),
-    GUARDIAN_CONSERVATOR("GUARDIAN_CONSERVATOR"),
-    POWER_OF_ATTORNEY("POWER_OF_ATTORNEY"),
     EXECUTOR("EXECUTOR"),
     AUTHORIZED_SIGNER("AUTHORIZED_SIGNER"),
     BENEFICIAL_OWNER("BENEFICIAL_OWNER"),

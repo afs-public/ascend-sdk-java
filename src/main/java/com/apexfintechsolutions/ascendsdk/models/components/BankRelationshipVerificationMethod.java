@@ -57,8 +57,6 @@ public class BankRelationshipVerificationMethod {
       new BankRelationshipVerificationMethod("SYNAPSE");
   public static final BankRelationshipVerificationMethod SOPHTRON =
       new BankRelationshipVerificationMethod("SOPHTRON");
-  public static final BankRelationshipVerificationMethod USE_EXISTING =
-      new BankRelationshipVerificationMethod("USE_EXISTING");
   public static final BankRelationshipVerificationMethod INTERNAL_BANK =
       new BankRelationshipVerificationMethod("INTERNAL_BANK");
   public static final BankRelationshipVerificationMethod MX =
@@ -142,7 +140,6 @@ public class BankRelationshipVerificationMethod {
     map.put("GIACT", GIACT);
     map.put("SYNAPSE", SYNAPSE);
     map.put("SOPHTRON", SOPHTRON);
-    map.put("USE_EXISTING", USE_EXISTING);
     map.put("INTERNAL_BANK", INTERNAL_BANK);
     map.put("MX", MX);
     map.put("FISERV", FISERV);
@@ -161,7 +158,6 @@ public class BankRelationshipVerificationMethod {
     map.put("GIACT", BankRelationshipVerificationMethodEnum.GIACT);
     map.put("SYNAPSE", BankRelationshipVerificationMethodEnum.SYNAPSE);
     map.put("SOPHTRON", BankRelationshipVerificationMethodEnum.SOPHTRON);
-    map.put("USE_EXISTING", BankRelationshipVerificationMethodEnum.USE_EXISTING);
     map.put("INTERNAL_BANK", BankRelationshipVerificationMethodEnum.INTERNAL_BANK);
     map.put("MX", BankRelationshipVerificationMethodEnum.MX);
     map.put("FISERV", BankRelationshipVerificationMethodEnum.FISERV);
@@ -209,7 +205,6 @@ public class BankRelationshipVerificationMethod {
     GIACT("GIACT"),
     SYNAPSE("SYNAPSE"),
     SOPHTRON("SOPHTRON"),
-    USE_EXISTING("USE_EXISTING"),
     INTERNAL_BANK("INTERNAL_BANK"),
     MX("MX"),
     FISERV("FISERV"),

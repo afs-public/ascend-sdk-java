@@ -207,7 +207,7 @@ public class Entry {
   /** The monetary value of an activity, exclusive of any fees (First money) */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("gross_amount")
-  private JsonNullable<? extends GrossAmount> grossAmount;
+  private JsonNullable<? extends EntryGrossAmount> grossAmount;
 
   /**
    * Used to record the payment of interest to accounts that have maintained a cash balance or the
@@ -300,7 +300,7 @@ public class Entry {
   /** The date that the entry was booked on */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("process_date")
-  private JsonNullable<? extends ProcessDate> processDate;
+  private JsonNullable<? extends EntryProcessDate> processDate;
 
   /**
    * The quantity of shares bought, sold, or moved. For entries/ activities involving Fixed Income
@@ -396,7 +396,7 @@ public class Entry {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("side_modifier")
-  private Optional<? extends SideModifier> sideModifier;
+  private Optional<? extends EntrySideModifier> sideModifier;
 
   /**
    * Used to record a distribution of subsidiary securities to the shareholders of the parent
@@ -462,7 +462,7 @@ public class Entry {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("trade")
-  private JsonNullable<? extends Trade> trade;
+  private JsonNullable<? extends EntryTrade> trade;
 
   /**
    * Used to record more generic transfers of funds or securities and details related to the
@@ -554,7 +554,7 @@ public class Entry {
       @JsonProperty("fee") JsonNullable<? extends EntryFee> fee,
       @JsonProperty("flip") JsonNullable<? extends Flip> flip,
       @JsonProperty("fpsl") JsonNullable<? extends Fpsl> fpsl,
-      @JsonProperty("gross_amount") JsonNullable<? extends GrossAmount> grossAmount,
+      @JsonProperty("gross_amount") JsonNullable<? extends EntryGrossAmount> grossAmount,
       @JsonProperty("interest") JsonNullable<? extends Interest> interest,
       @JsonProperty("interest_payment") JsonNullable<? extends InterestPayment> interestPayment,
       @JsonProperty("liquidation") JsonNullable<? extends Liquidation> liquidation,
@@ -567,7 +567,7 @@ public class Entry {
           JsonNullable<? extends OriginalProcessDate> originalProcessDate,
       @JsonProperty("payment_in_kind") JsonNullable<? extends PaymentInKind> paymentInKind,
       @JsonProperty("price") JsonNullable<? extends EntryPrice> price,
-      @JsonProperty("process_date") JsonNullable<? extends ProcessDate> processDate,
+      @JsonProperty("process_date") JsonNullable<? extends EntryProcessDate> processDate,
       @JsonProperty("quantity") JsonNullable<? extends EntryQuantity> quantity,
       @JsonProperty("receive") JsonNullable<? extends Receive> receive,
       @JsonProperty("redemption_full") JsonNullable<? extends RedemptionFull> redemptionFull,
@@ -585,7 +585,7 @@ public class Entry {
       @JsonProperty("sale_of_rights") JsonNullable<? extends SaleOfRights> saleOfRights,
       @JsonProperty("settle_date") JsonNullable<? extends SettleDate> settleDate,
       @JsonProperty("side") Optional<? extends EntrySide> side,
-      @JsonProperty("side_modifier") Optional<? extends SideModifier> sideModifier,
+      @JsonProperty("side_modifier") Optional<? extends EntrySideModifier> sideModifier,
       @JsonProperty("spin_off") JsonNullable<? extends SpinOff> spinOff,
       @JsonProperty("state") Optional<? extends EntryState> state,
       @JsonProperty("stock_dividend") JsonNullable<? extends StockDividend> stockDividend,
@@ -593,7 +593,7 @@ public class Entry {
       @JsonProperty("subtype_category") Optional<String> subtypeCategory,
       @JsonProperty("sweep") JsonNullable<? extends Sweep> sweep,
       @JsonProperty("tender_offer") JsonNullable<? extends TenderOffer> tenderOffer,
-      @JsonProperty("trade") JsonNullable<? extends Trade> trade,
+      @JsonProperty("trade") JsonNullable<? extends EntryTrade> trade,
       @JsonProperty("transfer") JsonNullable<? extends Transfer> transfer,
       @JsonProperty("type") Optional<? extends EntryType> type,
       @JsonProperty("unit_split") JsonNullable<? extends UnitSplit> unitSplit,
@@ -1044,8 +1044,8 @@ public class Entry {
   /** The monetary value of an activity, exclusive of any fees (First money) */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<GrossAmount> grossAmount() {
-    return (JsonNullable<GrossAmount>) grossAmount;
+  public JsonNullable<EntryGrossAmount> grossAmount() {
+    return (JsonNullable<EntryGrossAmount>) grossAmount;
   }
 
   /**
@@ -1159,8 +1159,8 @@ public class Entry {
   /** The date that the entry was booked on */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<ProcessDate> processDate() {
-    return (JsonNullable<ProcessDate>) processDate;
+  public JsonNullable<EntryProcessDate> processDate() {
+    return (JsonNullable<EntryProcessDate>) processDate;
   }
 
   /**
@@ -1280,8 +1280,8 @@ public class Entry {
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<SideModifier> sideModifier() {
-    return (Optional<SideModifier>) sideModifier;
+  public Optional<EntrySideModifier> sideModifier() {
+    return (Optional<EntrySideModifier>) sideModifier;
   }
 
   /**
@@ -1361,8 +1361,8 @@ public class Entry {
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<Trade> trade() {
-    return (JsonNullable<Trade>) trade;
+  public JsonNullable<EntryTrade> trade() {
+    return (JsonNullable<EntryTrade>) trade;
   }
 
   /**
@@ -1918,14 +1918,14 @@ public class Entry {
   }
 
   /** The monetary value of an activity, exclusive of any fees (First money) */
-  public Entry withGrossAmount(GrossAmount grossAmount) {
+  public Entry withGrossAmount(EntryGrossAmount grossAmount) {
     Utils.checkNotNull(grossAmount, "grossAmount");
     this.grossAmount = JsonNullable.of(grossAmount);
     return this;
   }
 
   /** The monetary value of an activity, exclusive of any fees (First money) */
-  public Entry withGrossAmount(JsonNullable<? extends GrossAmount> grossAmount) {
+  public Entry withGrossAmount(JsonNullable<? extends EntryGrossAmount> grossAmount) {
     Utils.checkNotNull(grossAmount, "grossAmount");
     this.grossAmount = grossAmount;
     return this;
@@ -2153,14 +2153,14 @@ public class Entry {
   }
 
   /** The date that the entry was booked on */
-  public Entry withProcessDate(ProcessDate processDate) {
+  public Entry withProcessDate(EntryProcessDate processDate) {
     Utils.checkNotNull(processDate, "processDate");
     this.processDate = JsonNullable.of(processDate);
     return this;
   }
 
   /** The date that the entry was booked on */
-  public Entry withProcessDate(JsonNullable<? extends ProcessDate> processDate) {
+  public Entry withProcessDate(JsonNullable<? extends EntryProcessDate> processDate) {
     Utils.checkNotNull(processDate, "processDate");
     this.processDate = processDate;
     return this;
@@ -2397,7 +2397,7 @@ public class Entry {
    * Additional information about a trade Should be populated if possible for trades; the side
    * modifier for the trade
    */
-  public Entry withSideModifier(SideModifier sideModifier) {
+  public Entry withSideModifier(EntrySideModifier sideModifier) {
     Utils.checkNotNull(sideModifier, "sideModifier");
     this.sideModifier = Optional.ofNullable(sideModifier);
     return this;
@@ -2407,7 +2407,7 @@ public class Entry {
    * Additional information about a trade Should be populated if possible for trades; the side
    * modifier for the trade
    */
-  public Entry withSideModifier(Optional<? extends SideModifier> sideModifier) {
+  public Entry withSideModifier(Optional<? extends EntrySideModifier> sideModifier) {
     Utils.checkNotNull(sideModifier, "sideModifier");
     this.sideModifier = sideModifier;
     return this;
@@ -2561,7 +2561,7 @@ public class Entry {
    * Used to record the the execution of a buy or sell transaction resulting in the transfer of
    * securities and corresponding payment and details related to the trade
    */
-  public Entry withTrade(Trade trade) {
+  public Entry withTrade(EntryTrade trade) {
     Utils.checkNotNull(trade, "trade");
     this.trade = JsonNullable.of(trade);
     return this;
@@ -2571,7 +2571,7 @@ public class Entry {
    * Used to record the the execution of a buy or sell transaction resulting in the transfer of
    * securities and corresponding payment and details related to the trade
    */
-  public Entry withTrade(JsonNullable<? extends Trade> trade) {
+  public Entry withTrade(JsonNullable<? extends EntryTrade> trade) {
     Utils.checkNotNull(trade, "trade");
     this.trade = trade;
     return this;
@@ -3080,7 +3080,7 @@ public class Entry {
 
     private JsonNullable<? extends Fpsl> fpsl = JsonNullable.undefined();
 
-    private JsonNullable<? extends GrossAmount> grossAmount = JsonNullable.undefined();
+    private JsonNullable<? extends EntryGrossAmount> grossAmount = JsonNullable.undefined();
 
     private JsonNullable<? extends Interest> interest = JsonNullable.undefined();
 
@@ -3105,7 +3105,7 @@ public class Entry {
 
     private JsonNullable<? extends EntryPrice> price = JsonNullable.undefined();
 
-    private JsonNullable<? extends ProcessDate> processDate = JsonNullable.undefined();
+    private JsonNullable<? extends EntryProcessDate> processDate = JsonNullable.undefined();
 
     private JsonNullable<? extends EntryQuantity> quantity = JsonNullable.undefined();
 
@@ -3134,7 +3134,7 @@ public class Entry {
 
     private Optional<? extends EntrySide> side = Optional.empty();
 
-    private Optional<? extends SideModifier> sideModifier = Optional.empty();
+    private Optional<? extends EntrySideModifier> sideModifier = Optional.empty();
 
     private JsonNullable<? extends SpinOff> spinOff = JsonNullable.undefined();
 
@@ -3150,7 +3150,7 @@ public class Entry {
 
     private JsonNullable<? extends TenderOffer> tenderOffer = JsonNullable.undefined();
 
-    private JsonNullable<? extends Trade> trade = JsonNullable.undefined();
+    private JsonNullable<? extends EntryTrade> trade = JsonNullable.undefined();
 
     private JsonNullable<? extends Transfer> transfer = JsonNullable.undefined();
 
@@ -3656,14 +3656,14 @@ public class Entry {
     }
 
     /** The monetary value of an activity, exclusive of any fees (First money) */
-    public Builder grossAmount(GrossAmount grossAmount) {
+    public Builder grossAmount(EntryGrossAmount grossAmount) {
       Utils.checkNotNull(grossAmount, "grossAmount");
       this.grossAmount = JsonNullable.of(grossAmount);
       return this;
     }
 
     /** The monetary value of an activity, exclusive of any fees (First money) */
-    public Builder grossAmount(JsonNullable<? extends GrossAmount> grossAmount) {
+    public Builder grossAmount(JsonNullable<? extends EntryGrossAmount> grossAmount) {
       Utils.checkNotNull(grossAmount, "grossAmount");
       this.grossAmount = grossAmount;
       return this;
@@ -3893,14 +3893,14 @@ public class Entry {
     }
 
     /** The date that the entry was booked on */
-    public Builder processDate(ProcessDate processDate) {
+    public Builder processDate(EntryProcessDate processDate) {
       Utils.checkNotNull(processDate, "processDate");
       this.processDate = JsonNullable.of(processDate);
       return this;
     }
 
     /** The date that the entry was booked on */
-    public Builder processDate(JsonNullable<? extends ProcessDate> processDate) {
+    public Builder processDate(JsonNullable<? extends EntryProcessDate> processDate) {
       Utils.checkNotNull(processDate, "processDate");
       this.processDate = processDate;
       return this;
@@ -4137,7 +4137,7 @@ public class Entry {
      * Additional information about a trade Should be populated if possible for trades; the side
      * modifier for the trade
      */
-    public Builder sideModifier(SideModifier sideModifier) {
+    public Builder sideModifier(EntrySideModifier sideModifier) {
       Utils.checkNotNull(sideModifier, "sideModifier");
       this.sideModifier = Optional.ofNullable(sideModifier);
       return this;
@@ -4147,7 +4147,7 @@ public class Entry {
      * Additional information about a trade Should be populated if possible for trades; the side
      * modifier for the trade
      */
-    public Builder sideModifier(Optional<? extends SideModifier> sideModifier) {
+    public Builder sideModifier(Optional<? extends EntrySideModifier> sideModifier) {
       Utils.checkNotNull(sideModifier, "sideModifier");
       this.sideModifier = sideModifier;
       return this;
@@ -4301,7 +4301,7 @@ public class Entry {
      * Used to record the the execution of a buy or sell transaction resulting in the transfer of
      * securities and corresponding payment and details related to the trade
      */
-    public Builder trade(Trade trade) {
+    public Builder trade(EntryTrade trade) {
       Utils.checkNotNull(trade, "trade");
       this.trade = JsonNullable.of(trade);
       return this;
@@ -4311,7 +4311,7 @@ public class Entry {
      * Used to record the the execution of a buy or sell transaction resulting in the transfer of
      * securities and corresponding payment and details related to the trade
      */
-    public Builder trade(JsonNullable<? extends Trade> trade) {
+    public Builder trade(JsonNullable<? extends EntryTrade> trade) {
       Utils.checkNotNull(trade, "trade");
       this.trade = trade;
       return this;

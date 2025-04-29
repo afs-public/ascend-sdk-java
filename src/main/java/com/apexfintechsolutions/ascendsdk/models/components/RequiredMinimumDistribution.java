@@ -44,23 +44,41 @@ public class RequiredMinimumDistribution {
   @JsonProperty("prior_year_end_account_balance")
   private JsonNullable<? extends PriorYearEndAccountBalance> priorYearEndAccountBalance;
 
+  /**
+   * The remaining amount required to be distributed for the tax year. Calculated as the difference
+   * between the RMD for the account and its regular distribution total to date. This will return
+   * zero if the account is not required to make a distribution during the tax year or has already
+   * met its distribution requirement.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("remaining_distribution_required")
+  private JsonNullable<? extends RemainingDistributionRequired> remainingDistributionRequired;
+
   @JsonCreator
   public RequiredMinimumDistribution(
       @JsonProperty("amount") JsonNullable<? extends DistributionSummaryAmount> amount,
       @JsonProperty("life_expectancy_factor")
           JsonNullable<? extends LifeExpectancyFactor> lifeExpectancyFactor,
       @JsonProperty("prior_year_end_account_balance")
-          JsonNullable<? extends PriorYearEndAccountBalance> priorYearEndAccountBalance) {
+          JsonNullable<? extends PriorYearEndAccountBalance> priorYearEndAccountBalance,
+      @JsonProperty("remaining_distribution_required")
+          JsonNullable<? extends RemainingDistributionRequired> remainingDistributionRequired) {
     Utils.checkNotNull(amount, "amount");
     Utils.checkNotNull(lifeExpectancyFactor, "lifeExpectancyFactor");
     Utils.checkNotNull(priorYearEndAccountBalance, "priorYearEndAccountBalance");
+    Utils.checkNotNull(remainingDistributionRequired, "remainingDistributionRequired");
     this.amount = amount;
     this.lifeExpectancyFactor = lifeExpectancyFactor;
     this.priorYearEndAccountBalance = priorYearEndAccountBalance;
+    this.remainingDistributionRequired = remainingDistributionRequired;
   }
 
   public RequiredMinimumDistribution() {
-    this(JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined());
+    this(
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined());
   }
 
   /**
@@ -91,6 +109,18 @@ public class RequiredMinimumDistribution {
   @JsonIgnore
   public JsonNullable<PriorYearEndAccountBalance> priorYearEndAccountBalance() {
     return (JsonNullable<PriorYearEndAccountBalance>) priorYearEndAccountBalance;
+  }
+
+  /**
+   * The remaining amount required to be distributed for the tax year. Calculated as the difference
+   * between the RMD for the account and its regular distribution total to date. This will return
+   * zero if the account is not required to make a distribution during the tax year or has already
+   * met its distribution requirement.
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<RemainingDistributionRequired> remainingDistributionRequired() {
+    return (JsonNullable<RemainingDistributionRequired>) remainingDistributionRequired;
   }
 
   public static final Builder builder() {
@@ -162,6 +192,32 @@ public class RequiredMinimumDistribution {
     return this;
   }
 
+  /**
+   * The remaining amount required to be distributed for the tax year. Calculated as the difference
+   * between the RMD for the account and its regular distribution total to date. This will return
+   * zero if the account is not required to make a distribution during the tax year or has already
+   * met its distribution requirement.
+   */
+  public RequiredMinimumDistribution withRemainingDistributionRequired(
+      RemainingDistributionRequired remainingDistributionRequired) {
+    Utils.checkNotNull(remainingDistributionRequired, "remainingDistributionRequired");
+    this.remainingDistributionRequired = JsonNullable.of(remainingDistributionRequired);
+    return this;
+  }
+
+  /**
+   * The remaining amount required to be distributed for the tax year. Calculated as the difference
+   * between the RMD for the account and its regular distribution total to date. This will return
+   * zero if the account is not required to make a distribution during the tax year or has already
+   * met its distribution requirement.
+   */
+  public RequiredMinimumDistribution withRemainingDistributionRequired(
+      JsonNullable<? extends RemainingDistributionRequired> remainingDistributionRequired) {
+    Utils.checkNotNull(remainingDistributionRequired, "remainingDistributionRequired");
+    this.remainingDistributionRequired = remainingDistributionRequired;
+    return this;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -173,12 +229,15 @@ public class RequiredMinimumDistribution {
     RequiredMinimumDistribution other = (RequiredMinimumDistribution) o;
     return Objects.deepEquals(this.amount, other.amount)
         && Objects.deepEquals(this.lifeExpectancyFactor, other.lifeExpectancyFactor)
-        && Objects.deepEquals(this.priorYearEndAccountBalance, other.priorYearEndAccountBalance);
+        && Objects.deepEquals(this.priorYearEndAccountBalance, other.priorYearEndAccountBalance)
+        && Objects.deepEquals(
+            this.remainingDistributionRequired, other.remainingDistributionRequired);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(amount, lifeExpectancyFactor, priorYearEndAccountBalance);
+    return Objects.hash(
+        amount, lifeExpectancyFactor, priorYearEndAccountBalance, remainingDistributionRequired);
   }
 
   @Override
@@ -190,7 +249,9 @@ public class RequiredMinimumDistribution {
         "lifeExpectancyFactor",
         lifeExpectancyFactor,
         "priorYearEndAccountBalance",
-        priorYearEndAccountBalance);
+        priorYearEndAccountBalance,
+        "remainingDistributionRequired",
+        remainingDistributionRequired);
   }
 
   public static final class Builder {
@@ -201,6 +262,9 @@ public class RequiredMinimumDistribution {
         JsonNullable.undefined();
 
     private JsonNullable<? extends PriorYearEndAccountBalance> priorYearEndAccountBalance =
+        JsonNullable.undefined();
+
+    private JsonNullable<? extends RemainingDistributionRequired> remainingDistributionRequired =
         JsonNullable.undefined();
 
     private Builder() {
@@ -270,9 +334,35 @@ public class RequiredMinimumDistribution {
       return this;
     }
 
+    /**
+     * The remaining amount required to be distributed for the tax year. Calculated as the
+     * difference between the RMD for the account and its regular distribution total to date. This
+     * will return zero if the account is not required to make a distribution during the tax year or
+     * has already met its distribution requirement.
+     */
+    public Builder remainingDistributionRequired(
+        RemainingDistributionRequired remainingDistributionRequired) {
+      Utils.checkNotNull(remainingDistributionRequired, "remainingDistributionRequired");
+      this.remainingDistributionRequired = JsonNullable.of(remainingDistributionRequired);
+      return this;
+    }
+
+    /**
+     * The remaining amount required to be distributed for the tax year. Calculated as the
+     * difference between the RMD for the account and its regular distribution total to date. This
+     * will return zero if the account is not required to make a distribution during the tax year or
+     * has already met its distribution requirement.
+     */
+    public Builder remainingDistributionRequired(
+        JsonNullable<? extends RemainingDistributionRequired> remainingDistributionRequired) {
+      Utils.checkNotNull(remainingDistributionRequired, "remainingDistributionRequired");
+      this.remainingDistributionRequired = remainingDistributionRequired;
+      return this;
+    }
+
     public RequiredMinimumDistribution build() {
       return new RequiredMinimumDistribution(
-          amount, lifeExpectancyFactor, priorYearEndAccountBalance);
+          amount, lifeExpectancyFactor, priorYearEndAccountBalance, remainingDistributionRequired);
     }
   }
 }
