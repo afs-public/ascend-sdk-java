@@ -40,17 +40,13 @@ import java.util.Optional;
  */
 /**
  * InterestedPartyStatementDeliveryPreference - Delivery method instruction for account statements
- * for a given Interested Party; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on
- * party creation
+ * for a given Interested Party; Can be `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party
+ * creation
  */
 @JsonDeserialize(using = InterestedPartyStatementDeliveryPreference._Deserializer.class)
 @JsonSerialize(using = InterestedPartyStatementDeliveryPreference._Serializer.class)
 public class InterestedPartyStatementDeliveryPreference {
 
-  public static final InterestedPartyStatementDeliveryPreference DELIVERY_PREFERENCE_UNSPECIFIED =
-      new InterestedPartyStatementDeliveryPreference("DELIVERY_PREFERENCE_UNSPECIFIED");
-  public static final InterestedPartyStatementDeliveryPreference DIGITAL =
-      new InterestedPartyStatementDeliveryPreference("DIGITAL");
   public static final InterestedPartyStatementDeliveryPreference PHYSICAL =
       new InterestedPartyStatementDeliveryPreference("PHYSICAL");
   public static final InterestedPartyStatementDeliveryPreference SUPPRESS =
@@ -126,8 +122,6 @@ public class InterestedPartyStatementDeliveryPreference {
 
   private static final Map<String, InterestedPartyStatementDeliveryPreference> createValuesMap() {
     Map<String, InterestedPartyStatementDeliveryPreference> map = new LinkedHashMap<>();
-    map.put("DELIVERY_PREFERENCE_UNSPECIFIED", DELIVERY_PREFERENCE_UNSPECIFIED);
-    map.put("DIGITAL", DIGITAL);
     map.put("PHYSICAL", PHYSICAL);
     map.put("SUPPRESS", SUPPRESS);
     return map;
@@ -136,10 +130,6 @@ public class InterestedPartyStatementDeliveryPreference {
   private static final Map<String, InterestedPartyStatementDeliveryPreferenceEnum>
       createEnumsMap() {
     Map<String, InterestedPartyStatementDeliveryPreferenceEnum> map = new HashMap<>();
-    map.put(
-        "DELIVERY_PREFERENCE_UNSPECIFIED",
-        InterestedPartyStatementDeliveryPreferenceEnum.DELIVERY_PREFERENCE_UNSPECIFIED);
-    map.put("DIGITAL", InterestedPartyStatementDeliveryPreferenceEnum.DIGITAL);
     map.put("PHYSICAL", InterestedPartyStatementDeliveryPreferenceEnum.PHYSICAL);
     map.put("SUPPRESS", InterestedPartyStatementDeliveryPreferenceEnum.SUPPRESS);
     return map;
@@ -181,8 +171,6 @@ public class InterestedPartyStatementDeliveryPreference {
   }
 
   public enum InterestedPartyStatementDeliveryPreferenceEnum {
-    DELIVERY_PREFERENCE_UNSPECIFIED("DELIVERY_PREFERENCE_UNSPECIFIED"),
-    DIGITAL("DIGITAL"),
     PHYSICAL("PHYSICAL"),
     SUPPRESS("SUPPRESS"),
     ;

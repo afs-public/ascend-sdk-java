@@ -13,7 +13,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 import java.util.Optional;
 
-/** CommissionAmount - Monetary amount associated with the commission */
+/**
+ * CommissionAmount - Commission amount of the execution. Requirement of 11 or less integral number
+ * and 2 or less fractional precision.
+ */
 public class CommissionAmount {
 
   /**

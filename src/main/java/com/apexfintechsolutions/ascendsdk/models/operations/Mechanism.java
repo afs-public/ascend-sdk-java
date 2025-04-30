@@ -24,7 +24,8 @@ public enum Mechanism {
   PAYPAL("PAYPAL"),
   RTP("RTP"),
   TPJ("TPJ"),
-  WIRE("WIRE");
+  WIRE("WIRE"),
+  EXTERNAL_ACH("EXTERNAL_ACH");
 
   @JsonValue private final String value;
 

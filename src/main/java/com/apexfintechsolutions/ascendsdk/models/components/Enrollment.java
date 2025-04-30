@@ -64,6 +64,12 @@ public class Enrollment {
   private JsonNullable<? extends ForeignIndividualAccountEnrollmentMetadata>
       foreignIndividualAccountEnrollmentMetadata;
 
+  /** Metadata for the REGISTRATION_JOINT_FOREIGN_WROS type */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("foreign_joint_account_enrollment_metadata")
+  private JsonNullable<? extends ForeignJointAccountEnrollmentMetadata>
+      foreignJointAccountEnrollmentMetadata;
+
   /** Metadata for the FULLY_PAID_STOCK_LENDING enrollment type */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("fpsl_enrollment_metadata")
@@ -146,6 +152,12 @@ public class Enrollment {
   @JsonProperty("operating_enrollment_metadata")
   private JsonNullable<? extends OperatingEnrollmentMetadata> operatingEnrollmentMetadata;
 
+  /** Metadata for the ORDERS_OPTIONS_TRADING enrollment type */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("orders_options_trading_enrollment_metadata")
+  private JsonNullable<? extends OrdersOptionsTradingEnrollmentMetadata>
+      ordersOptionsTradingEnrollmentMetadata;
+
   /**
    * The ULID is associated with the approver of a given enrollment. The approver you create will
    * contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID
@@ -180,6 +192,12 @@ public class Enrollment {
   @JsonProperty("unenrollment_time")
   private JsonNullable<OffsetDateTime> unenrollmentTime;
 
+  /** Metadata for the VIRTUAL_ACCOUNT_NUMBER type */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("virtual_account_number_enrollment_metadata")
+  private JsonNullable<? extends VirtualAccountNumberEnrollmentMetadata>
+      virtualAccountNumberEnrollmentMetadata;
+
   @JsonCreator
   public Enrollment(
       @JsonProperty("beneficiary_enrollment_metadata")
@@ -196,6 +214,9 @@ public class Enrollment {
       @JsonProperty("foreign_individual_account_enrollment_metadata")
           JsonNullable<? extends ForeignIndividualAccountEnrollmentMetadata>
               foreignIndividualAccountEnrollmentMetadata,
+      @JsonProperty("foreign_joint_account_enrollment_metadata")
+          JsonNullable<? extends ForeignJointAccountEnrollmentMetadata>
+              foreignJointAccountEnrollmentMetadata,
       @JsonProperty("fpsl_enrollment_metadata")
           JsonNullable<? extends FpslEnrollmentMetadata> fpslEnrollmentMetadata,
       @JsonProperty("individual_enrollment_metadata")
@@ -229,12 +250,18 @@ public class Enrollment {
       @JsonProperty("name") Optional<String> name,
       @JsonProperty("operating_enrollment_metadata")
           JsonNullable<? extends OperatingEnrollmentMetadata> operatingEnrollmentMetadata,
+      @JsonProperty("orders_options_trading_enrollment_metadata")
+          JsonNullable<? extends OrdersOptionsTradingEnrollmentMetadata>
+              ordersOptionsTradingEnrollmentMetadata,
       @JsonProperty("principal_approver_id") Optional<String> principalApproverId,
       @JsonProperty("state") Optional<? extends EnrollmentState> state,
       @JsonProperty("trust_enrollment_metadata")
           JsonNullable<? extends TrustEnrollmentMetadata> trustEnrollmentMetadata,
       @JsonProperty("type") Optional<? extends EnrollmentType1> type,
-      @JsonProperty("unenrollment_time") JsonNullable<OffsetDateTime> unenrollmentTime) {
+      @JsonProperty("unenrollment_time") JsonNullable<OffsetDateTime> unenrollmentTime,
+      @JsonProperty("virtual_account_number_enrollment_metadata")
+          JsonNullable<? extends VirtualAccountNumberEnrollmentMetadata>
+              virtualAccountNumberEnrollmentMetadata) {
     Utils.checkNotNull(beneficiaryEnrollmentMetadata, "beneficiaryEnrollmentMetadata");
     Utils.checkNotNull(consentMethod, "consentMethod");
     Utils.checkNotNull(corporationEnrollmentMetadata, "corporationEnrollmentMetadata");
@@ -244,6 +271,8 @@ public class Enrollment {
     Utils.checkNotNull(estateEnrollmentMetadata, "estateEnrollmentMetadata");
     Utils.checkNotNull(
         foreignIndividualAccountEnrollmentMetadata, "foreignIndividualAccountEnrollmentMetadata");
+    Utils.checkNotNull(
+        foreignJointAccountEnrollmentMetadata, "foreignJointAccountEnrollmentMetadata");
     Utils.checkNotNull(fpslEnrollmentMetadata, "fpslEnrollmentMetadata");
     Utils.checkNotNull(individualEnrollmentMetadata, "individualEnrollmentMetadata");
     Utils.checkNotNull(iraBeneficiaryEnrollmentMetadata, "iraBeneficiaryEnrollmentMetadata");
@@ -264,11 +293,15 @@ public class Enrollment {
     Utils.checkNotNull(llcEnrollmentMetadata, "llcEnrollmentMetadata");
     Utils.checkNotNull(name, "name");
     Utils.checkNotNull(operatingEnrollmentMetadata, "operatingEnrollmentMetadata");
+    Utils.checkNotNull(
+        ordersOptionsTradingEnrollmentMetadata, "ordersOptionsTradingEnrollmentMetadata");
     Utils.checkNotNull(principalApproverId, "principalApproverId");
     Utils.checkNotNull(state, "state");
     Utils.checkNotNull(trustEnrollmentMetadata, "trustEnrollmentMetadata");
     Utils.checkNotNull(type, "type");
     Utils.checkNotNull(unenrollmentTime, "unenrollmentTime");
+    Utils.checkNotNull(
+        virtualAccountNumberEnrollmentMetadata, "virtualAccountNumberEnrollmentMetadata");
     this.beneficiaryEnrollmentMetadata = beneficiaryEnrollmentMetadata;
     this.consentMethod = consentMethod;
     this.corporationEnrollmentMetadata = corporationEnrollmentMetadata;
@@ -277,6 +310,7 @@ public class Enrollment {
     this.enrollmentTime = enrollmentTime;
     this.estateEnrollmentMetadata = estateEnrollmentMetadata;
     this.foreignIndividualAccountEnrollmentMetadata = foreignIndividualAccountEnrollmentMetadata;
+    this.foreignJointAccountEnrollmentMetadata = foreignJointAccountEnrollmentMetadata;
     this.fpslEnrollmentMetadata = fpslEnrollmentMetadata;
     this.individualEnrollmentMetadata = individualEnrollmentMetadata;
     this.iraBeneficiaryEnrollmentMetadata = iraBeneficiaryEnrollmentMetadata;
@@ -293,11 +327,13 @@ public class Enrollment {
     this.llcEnrollmentMetadata = llcEnrollmentMetadata;
     this.name = name;
     this.operatingEnrollmentMetadata = operatingEnrollmentMetadata;
+    this.ordersOptionsTradingEnrollmentMetadata = ordersOptionsTradingEnrollmentMetadata;
     this.principalApproverId = principalApproverId;
     this.state = state;
     this.trustEnrollmentMetadata = trustEnrollmentMetadata;
     this.type = type;
     this.unenrollmentTime = unenrollmentTime;
+    this.virtualAccountNumberEnrollmentMetadata = virtualAccountNumberEnrollmentMetadata;
   }
 
   public Enrollment() {
@@ -323,12 +359,15 @@ public class Enrollment {
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
+        JsonNullable.undefined(),
         Optional.empty(),
+        JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty(),
+        JsonNullable.undefined(),
         JsonNullable.undefined());
   }
 
@@ -391,6 +430,15 @@ public class Enrollment {
       foreignIndividualAccountEnrollmentMetadata() {
     return (JsonNullable<ForeignIndividualAccountEnrollmentMetadata>)
         foreignIndividualAccountEnrollmentMetadata;
+  }
+
+  /** Metadata for the REGISTRATION_JOINT_FOREIGN_WROS type */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<ForeignJointAccountEnrollmentMetadata>
+      foreignJointAccountEnrollmentMetadata() {
+    return (JsonNullable<ForeignJointAccountEnrollmentMetadata>)
+        foreignJointAccountEnrollmentMetadata;
   }
 
   /** Metadata for the FULLY_PAID_STOCK_LENDING enrollment type */
@@ -508,6 +556,15 @@ public class Enrollment {
     return (JsonNullable<OperatingEnrollmentMetadata>) operatingEnrollmentMetadata;
   }
 
+  /** Metadata for the ORDERS_OPTIONS_TRADING enrollment type */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<OrdersOptionsTradingEnrollmentMetadata>
+      ordersOptionsTradingEnrollmentMetadata() {
+    return (JsonNullable<OrdersOptionsTradingEnrollmentMetadata>)
+        ordersOptionsTradingEnrollmentMetadata;
+  }
+
   /**
    * The ULID is associated with the approver of a given enrollment. The approver you create will
    * contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID
@@ -548,6 +605,15 @@ public class Enrollment {
   @JsonIgnore
   public JsonNullable<OffsetDateTime> unenrollmentTime() {
     return unenrollmentTime;
+  }
+
+  /** Metadata for the VIRTUAL_ACCOUNT_NUMBER type */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<VirtualAccountNumberEnrollmentMetadata>
+      virtualAccountNumberEnrollmentMetadata() {
+    return (JsonNullable<VirtualAccountNumberEnrollmentMetadata>)
+        virtualAccountNumberEnrollmentMetadata;
   }
 
   public static final Builder builder() {
@@ -687,6 +753,26 @@ public class Enrollment {
     Utils.checkNotNull(
         foreignIndividualAccountEnrollmentMetadata, "foreignIndividualAccountEnrollmentMetadata");
     this.foreignIndividualAccountEnrollmentMetadata = foreignIndividualAccountEnrollmentMetadata;
+    return this;
+  }
+
+  /** Metadata for the REGISTRATION_JOINT_FOREIGN_WROS type */
+  public Enrollment withForeignJointAccountEnrollmentMetadata(
+      ForeignJointAccountEnrollmentMetadata foreignJointAccountEnrollmentMetadata) {
+    Utils.checkNotNull(
+        foreignJointAccountEnrollmentMetadata, "foreignJointAccountEnrollmentMetadata");
+    this.foreignJointAccountEnrollmentMetadata =
+        JsonNullable.of(foreignJointAccountEnrollmentMetadata);
+    return this;
+  }
+
+  /** Metadata for the REGISTRATION_JOINT_FOREIGN_WROS type */
+  public Enrollment withForeignJointAccountEnrollmentMetadata(
+      JsonNullable<? extends ForeignJointAccountEnrollmentMetadata>
+          foreignJointAccountEnrollmentMetadata) {
+    Utils.checkNotNull(
+        foreignJointAccountEnrollmentMetadata, "foreignJointAccountEnrollmentMetadata");
+    this.foreignJointAccountEnrollmentMetadata = foreignJointAccountEnrollmentMetadata;
     return this;
   }
 
@@ -952,6 +1038,26 @@ public class Enrollment {
     return this;
   }
 
+  /** Metadata for the ORDERS_OPTIONS_TRADING enrollment type */
+  public Enrollment withOrdersOptionsTradingEnrollmentMetadata(
+      OrdersOptionsTradingEnrollmentMetadata ordersOptionsTradingEnrollmentMetadata) {
+    Utils.checkNotNull(
+        ordersOptionsTradingEnrollmentMetadata, "ordersOptionsTradingEnrollmentMetadata");
+    this.ordersOptionsTradingEnrollmentMetadata =
+        JsonNullable.of(ordersOptionsTradingEnrollmentMetadata);
+    return this;
+  }
+
+  /** Metadata for the ORDERS_OPTIONS_TRADING enrollment type */
+  public Enrollment withOrdersOptionsTradingEnrollmentMetadata(
+      JsonNullable<? extends OrdersOptionsTradingEnrollmentMetadata>
+          ordersOptionsTradingEnrollmentMetadata) {
+    Utils.checkNotNull(
+        ordersOptionsTradingEnrollmentMetadata, "ordersOptionsTradingEnrollmentMetadata");
+    this.ordersOptionsTradingEnrollmentMetadata = ordersOptionsTradingEnrollmentMetadata;
+    return this;
+  }
+
   /**
    * The ULID is associated with the approver of a given enrollment. The approver you create will
    * contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID
@@ -1041,6 +1147,26 @@ public class Enrollment {
     return this;
   }
 
+  /** Metadata for the VIRTUAL_ACCOUNT_NUMBER type */
+  public Enrollment withVirtualAccountNumberEnrollmentMetadata(
+      VirtualAccountNumberEnrollmentMetadata virtualAccountNumberEnrollmentMetadata) {
+    Utils.checkNotNull(
+        virtualAccountNumberEnrollmentMetadata, "virtualAccountNumberEnrollmentMetadata");
+    this.virtualAccountNumberEnrollmentMetadata =
+        JsonNullable.of(virtualAccountNumberEnrollmentMetadata);
+    return this;
+  }
+
+  /** Metadata for the VIRTUAL_ACCOUNT_NUMBER type */
+  public Enrollment withVirtualAccountNumberEnrollmentMetadata(
+      JsonNullable<? extends VirtualAccountNumberEnrollmentMetadata>
+          virtualAccountNumberEnrollmentMetadata) {
+    Utils.checkNotNull(
+        virtualAccountNumberEnrollmentMetadata, "virtualAccountNumberEnrollmentMetadata");
+    this.virtualAccountNumberEnrollmentMetadata = virtualAccountNumberEnrollmentMetadata;
+    return this;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -1062,6 +1188,8 @@ public class Enrollment {
         && Objects.deepEquals(
             this.foreignIndividualAccountEnrollmentMetadata,
             other.foreignIndividualAccountEnrollmentMetadata)
+        && Objects.deepEquals(
+            this.foreignJointAccountEnrollmentMetadata, other.foreignJointAccountEnrollmentMetadata)
         && Objects.deepEquals(this.fpslEnrollmentMetadata, other.fpslEnrollmentMetadata)
         && Objects.deepEquals(this.individualEnrollmentMetadata, other.individualEnrollmentMetadata)
         && Objects.deepEquals(
@@ -1088,11 +1216,17 @@ public class Enrollment {
         && Objects.deepEquals(this.llcEnrollmentMetadata, other.llcEnrollmentMetadata)
         && Objects.deepEquals(this.name, other.name)
         && Objects.deepEquals(this.operatingEnrollmentMetadata, other.operatingEnrollmentMetadata)
+        && Objects.deepEquals(
+            this.ordersOptionsTradingEnrollmentMetadata,
+            other.ordersOptionsTradingEnrollmentMetadata)
         && Objects.deepEquals(this.principalApproverId, other.principalApproverId)
         && Objects.deepEquals(this.state, other.state)
         && Objects.deepEquals(this.trustEnrollmentMetadata, other.trustEnrollmentMetadata)
         && Objects.deepEquals(this.type, other.type)
-        && Objects.deepEquals(this.unenrollmentTime, other.unenrollmentTime);
+        && Objects.deepEquals(this.unenrollmentTime, other.unenrollmentTime)
+        && Objects.deepEquals(
+            this.virtualAccountNumberEnrollmentMetadata,
+            other.virtualAccountNumberEnrollmentMetadata);
   }
 
   @Override
@@ -1106,6 +1240,7 @@ public class Enrollment {
         enrollmentTime,
         estateEnrollmentMetadata,
         foreignIndividualAccountEnrollmentMetadata,
+        foreignJointAccountEnrollmentMetadata,
         fpslEnrollmentMetadata,
         individualEnrollmentMetadata,
         iraBeneficiaryEnrollmentMetadata,
@@ -1121,11 +1256,13 @@ public class Enrollment {
         llcEnrollmentMetadata,
         name,
         operatingEnrollmentMetadata,
+        ordersOptionsTradingEnrollmentMetadata,
         principalApproverId,
         state,
         trustEnrollmentMetadata,
         type,
-        unenrollmentTime);
+        unenrollmentTime,
+        virtualAccountNumberEnrollmentMetadata);
   }
 
   @Override
@@ -1148,6 +1285,8 @@ public class Enrollment {
         estateEnrollmentMetadata,
         "foreignIndividualAccountEnrollmentMetadata",
         foreignIndividualAccountEnrollmentMetadata,
+        "foreignJointAccountEnrollmentMetadata",
+        foreignJointAccountEnrollmentMetadata,
         "fpslEnrollmentMetadata",
         fpslEnrollmentMetadata,
         "individualEnrollmentMetadata",
@@ -1178,6 +1317,8 @@ public class Enrollment {
         name,
         "operatingEnrollmentMetadata",
         operatingEnrollmentMetadata,
+        "ordersOptionsTradingEnrollmentMetadata",
+        ordersOptionsTradingEnrollmentMetadata,
         "principalApproverId",
         principalApproverId,
         "state",
@@ -1187,7 +1328,9 @@ public class Enrollment {
         "type",
         type,
         "unenrollmentTime",
-        unenrollmentTime);
+        unenrollmentTime,
+        "virtualAccountNumberEnrollmentMetadata",
+        virtualAccountNumberEnrollmentMetadata);
   }
 
   public static final class Builder {
@@ -1212,6 +1355,9 @@ public class Enrollment {
 
     private JsonNullable<? extends ForeignIndividualAccountEnrollmentMetadata>
         foreignIndividualAccountEnrollmentMetadata = JsonNullable.undefined();
+
+    private JsonNullable<? extends ForeignJointAccountEnrollmentMetadata>
+        foreignJointAccountEnrollmentMetadata = JsonNullable.undefined();
 
     private JsonNullable<? extends FpslEnrollmentMetadata> fpslEnrollmentMetadata =
         JsonNullable.undefined();
@@ -1257,6 +1403,9 @@ public class Enrollment {
     private JsonNullable<? extends OperatingEnrollmentMetadata> operatingEnrollmentMetadata =
         JsonNullable.undefined();
 
+    private JsonNullable<? extends OrdersOptionsTradingEnrollmentMetadata>
+        ordersOptionsTradingEnrollmentMetadata = JsonNullable.undefined();
+
     private Optional<String> principalApproverId = Optional.empty();
 
     private Optional<? extends EnrollmentState> state = Optional.empty();
@@ -1267,6 +1416,9 @@ public class Enrollment {
     private Optional<? extends EnrollmentType1> type = Optional.empty();
 
     private JsonNullable<OffsetDateTime> unenrollmentTime = JsonNullable.undefined();
+
+    private JsonNullable<? extends VirtualAccountNumberEnrollmentMetadata>
+        virtualAccountNumberEnrollmentMetadata = JsonNullable.undefined();
 
     private Builder() {
       // force use of static builder() method
@@ -1406,6 +1558,26 @@ public class Enrollment {
       Utils.checkNotNull(
           foreignIndividualAccountEnrollmentMetadata, "foreignIndividualAccountEnrollmentMetadata");
       this.foreignIndividualAccountEnrollmentMetadata = foreignIndividualAccountEnrollmentMetadata;
+      return this;
+    }
+
+    /** Metadata for the REGISTRATION_JOINT_FOREIGN_WROS type */
+    public Builder foreignJointAccountEnrollmentMetadata(
+        ForeignJointAccountEnrollmentMetadata foreignJointAccountEnrollmentMetadata) {
+      Utils.checkNotNull(
+          foreignJointAccountEnrollmentMetadata, "foreignJointAccountEnrollmentMetadata");
+      this.foreignJointAccountEnrollmentMetadata =
+          JsonNullable.of(foreignJointAccountEnrollmentMetadata);
+      return this;
+    }
+
+    /** Metadata for the REGISTRATION_JOINT_FOREIGN_WROS type */
+    public Builder foreignJointAccountEnrollmentMetadata(
+        JsonNullable<? extends ForeignJointAccountEnrollmentMetadata>
+            foreignJointAccountEnrollmentMetadata) {
+      Utils.checkNotNull(
+          foreignJointAccountEnrollmentMetadata, "foreignJointAccountEnrollmentMetadata");
+      this.foreignJointAccountEnrollmentMetadata = foreignJointAccountEnrollmentMetadata;
       return this;
     }
 
@@ -1669,6 +1841,26 @@ public class Enrollment {
       return this;
     }
 
+    /** Metadata for the ORDERS_OPTIONS_TRADING enrollment type */
+    public Builder ordersOptionsTradingEnrollmentMetadata(
+        OrdersOptionsTradingEnrollmentMetadata ordersOptionsTradingEnrollmentMetadata) {
+      Utils.checkNotNull(
+          ordersOptionsTradingEnrollmentMetadata, "ordersOptionsTradingEnrollmentMetadata");
+      this.ordersOptionsTradingEnrollmentMetadata =
+          JsonNullable.of(ordersOptionsTradingEnrollmentMetadata);
+      return this;
+    }
+
+    /** Metadata for the ORDERS_OPTIONS_TRADING enrollment type */
+    public Builder ordersOptionsTradingEnrollmentMetadata(
+        JsonNullable<? extends OrdersOptionsTradingEnrollmentMetadata>
+            ordersOptionsTradingEnrollmentMetadata) {
+      Utils.checkNotNull(
+          ordersOptionsTradingEnrollmentMetadata, "ordersOptionsTradingEnrollmentMetadata");
+      this.ordersOptionsTradingEnrollmentMetadata = ordersOptionsTradingEnrollmentMetadata;
+      return this;
+    }
+
     /**
      * The ULID is associated with the approver of a given enrollment. The approver you create will
      * contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID
@@ -1758,6 +1950,26 @@ public class Enrollment {
       return this;
     }
 
+    /** Metadata for the VIRTUAL_ACCOUNT_NUMBER type */
+    public Builder virtualAccountNumberEnrollmentMetadata(
+        VirtualAccountNumberEnrollmentMetadata virtualAccountNumberEnrollmentMetadata) {
+      Utils.checkNotNull(
+          virtualAccountNumberEnrollmentMetadata, "virtualAccountNumberEnrollmentMetadata");
+      this.virtualAccountNumberEnrollmentMetadata =
+          JsonNullable.of(virtualAccountNumberEnrollmentMetadata);
+      return this;
+    }
+
+    /** Metadata for the VIRTUAL_ACCOUNT_NUMBER type */
+    public Builder virtualAccountNumberEnrollmentMetadata(
+        JsonNullable<? extends VirtualAccountNumberEnrollmentMetadata>
+            virtualAccountNumberEnrollmentMetadata) {
+      Utils.checkNotNull(
+          virtualAccountNumberEnrollmentMetadata, "virtualAccountNumberEnrollmentMetadata");
+      this.virtualAccountNumberEnrollmentMetadata = virtualAccountNumberEnrollmentMetadata;
+      return this;
+    }
+
     public Enrollment build() {
       return new Enrollment(
           beneficiaryEnrollmentMetadata,
@@ -1768,6 +1980,7 @@ public class Enrollment {
           enrollmentTime,
           estateEnrollmentMetadata,
           foreignIndividualAccountEnrollmentMetadata,
+          foreignJointAccountEnrollmentMetadata,
           fpslEnrollmentMetadata,
           individualEnrollmentMetadata,
           iraBeneficiaryEnrollmentMetadata,
@@ -1783,11 +1996,13 @@ public class Enrollment {
           llcEnrollmentMetadata,
           name,
           operatingEnrollmentMetadata,
+          ordersOptionsTradingEnrollmentMetadata,
           principalApproverId,
           state,
           trustEnrollmentMetadata,
           type,
-          unenrollmentTime);
+          unenrollmentTime,
+          virtualAccountNumberEnrollmentMetadata);
     }
   }
 }

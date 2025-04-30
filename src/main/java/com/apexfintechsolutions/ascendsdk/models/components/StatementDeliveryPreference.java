@@ -40,17 +40,12 @@ import java.util.Optional;
  */
 /**
  * StatementDeliveryPreference - Delivery method instruction for account statements for a given
- * Interested Party; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party
- * creation
+ * Interested Party; Can be `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
  */
 @JsonDeserialize(using = StatementDeliveryPreference._Deserializer.class)
 @JsonSerialize(using = StatementDeliveryPreference._Serializer.class)
 public class StatementDeliveryPreference {
 
-  public static final StatementDeliveryPreference DELIVERY_PREFERENCE_UNSPECIFIED =
-      new StatementDeliveryPreference("DELIVERY_PREFERENCE_UNSPECIFIED");
-  public static final StatementDeliveryPreference DIGITAL =
-      new StatementDeliveryPreference("DIGITAL");
   public static final StatementDeliveryPreference PHYSICAL =
       new StatementDeliveryPreference("PHYSICAL");
   public static final StatementDeliveryPreference SUPPRESS =
@@ -123,8 +118,6 @@ public class StatementDeliveryPreference {
 
   private static final Map<String, StatementDeliveryPreference> createValuesMap() {
     Map<String, StatementDeliveryPreference> map = new LinkedHashMap<>();
-    map.put("DELIVERY_PREFERENCE_UNSPECIFIED", DELIVERY_PREFERENCE_UNSPECIFIED);
-    map.put("DIGITAL", DIGITAL);
     map.put("PHYSICAL", PHYSICAL);
     map.put("SUPPRESS", SUPPRESS);
     return map;
@@ -132,10 +125,6 @@ public class StatementDeliveryPreference {
 
   private static final Map<String, StatementDeliveryPreferenceEnum> createEnumsMap() {
     Map<String, StatementDeliveryPreferenceEnum> map = new HashMap<>();
-    map.put(
-        "DELIVERY_PREFERENCE_UNSPECIFIED",
-        StatementDeliveryPreferenceEnum.DELIVERY_PREFERENCE_UNSPECIFIED);
-    map.put("DIGITAL", StatementDeliveryPreferenceEnum.DIGITAL);
     map.put("PHYSICAL", StatementDeliveryPreferenceEnum.PHYSICAL);
     map.put("SUPPRESS", StatementDeliveryPreferenceEnum.SUPPRESS);
     return map;
@@ -173,8 +162,6 @@ public class StatementDeliveryPreference {
   }
 
   public enum StatementDeliveryPreferenceEnum {
-    DELIVERY_PREFERENCE_UNSPECIFIED("DELIVERY_PREFERENCE_UNSPECIFIED"),
-    DIGITAL("DIGITAL"),
     PHYSICAL("PHYSICAL"),
     SUPPRESS("SUPPRESS"),
     ;

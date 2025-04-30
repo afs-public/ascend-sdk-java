@@ -79,6 +79,8 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
       new DeactivateEnrollmentRequestCreateEnrollmentType("REGISTRATION_TRUST");
   public static final DeactivateEnrollmentRequestCreateEnrollmentType REGISTRATION_CORPORATION =
       new DeactivateEnrollmentRequestCreateEnrollmentType("REGISTRATION_CORPORATION");
+  public static final DeactivateEnrollmentRequestCreateEnrollmentType REGISTRATION_LLC =
+      new DeactivateEnrollmentRequestCreateEnrollmentType("REGISTRATION_LLC");
   public static final DeactivateEnrollmentRequestCreateEnrollmentType CASH_FDIC_CASH_SWEEP =
       new DeactivateEnrollmentRequestCreateEnrollmentType("CASH_FDIC_CASH_SWEEP");
   public static final DeactivateEnrollmentRequestCreateEnrollmentType
@@ -98,6 +100,8 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
           new DeactivateEnrollmentRequestCreateEnrollmentType("REGISTRATION_INDIVIDUAL_FOREIGN");
   public static final DeactivateEnrollmentRequestCreateEnrollmentType REGISTRATION_CUSTODIAL =
       new DeactivateEnrollmentRequestCreateEnrollmentType("REGISTRATION_CUSTODIAL");
+  public static final DeactivateEnrollmentRequestCreateEnrollmentType VIRTUAL_ACCOUNT_NUMBER =
+      new DeactivateEnrollmentRequestCreateEnrollmentType("VIRTUAL_ACCOUNT_NUMBER");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -187,6 +191,7 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
     map.put("REGISTRATION_IRA_ROLLOVER", REGISTRATION_IRA_ROLLOVER);
     map.put("REGISTRATION_TRUST", REGISTRATION_TRUST);
     map.put("REGISTRATION_CORPORATION", REGISTRATION_CORPORATION);
+    map.put("REGISTRATION_LLC", REGISTRATION_LLC);
     map.put("CASH_FDIC_CASH_SWEEP", CASH_FDIC_CASH_SWEEP);
     map.put("RETIREMENT_BENEFICIARY_DESIGNATION", RETIREMENT_BENEFICIARY_DESIGNATION);
     map.put("DIVIDEND_REINVESTMENT_PLAN", DIVIDEND_REINVESTMENT_PLAN);
@@ -194,6 +199,7 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
     map.put("REGISTRATION_IRA_BENEFICIARY_ROTH", REGISTRATION_IRA_BENEFICIARY_ROTH);
     map.put("REGISTRATION_INDIVIDUAL_FOREIGN", REGISTRATION_INDIVIDUAL_FOREIGN);
     map.put("REGISTRATION_CUSTODIAL", REGISTRATION_CUSTODIAL);
+    map.put("VIRTUAL_ACCOUNT_NUMBER", VIRTUAL_ACCOUNT_NUMBER);
     return map;
   }
 
@@ -249,6 +255,8 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
         "REGISTRATION_CORPORATION",
         DeactivateEnrollmentRequestCreateEnrollmentTypeEnum.REGISTRATION_CORPORATION);
     map.put(
+        "REGISTRATION_LLC", DeactivateEnrollmentRequestCreateEnrollmentTypeEnum.REGISTRATION_LLC);
+    map.put(
         "CASH_FDIC_CASH_SWEEP",
         DeactivateEnrollmentRequestCreateEnrollmentTypeEnum.CASH_FDIC_CASH_SWEEP);
     map.put(
@@ -270,6 +278,9 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
     map.put(
         "REGISTRATION_CUSTODIAL",
         DeactivateEnrollmentRequestCreateEnrollmentTypeEnum.REGISTRATION_CUSTODIAL);
+    map.put(
+        "VIRTUAL_ACCOUNT_NUMBER",
+        DeactivateEnrollmentRequestCreateEnrollmentTypeEnum.VIRTUAL_ACCOUNT_NUMBER);
     return map;
   }
 
@@ -325,6 +336,7 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
     REGISTRATION_IRA_ROLLOVER("REGISTRATION_IRA_ROLLOVER"),
     REGISTRATION_TRUST("REGISTRATION_TRUST"),
     REGISTRATION_CORPORATION("REGISTRATION_CORPORATION"),
+    REGISTRATION_LLC("REGISTRATION_LLC"),
     CASH_FDIC_CASH_SWEEP("CASH_FDIC_CASH_SWEEP"),
     RETIREMENT_BENEFICIARY_DESIGNATION("RETIREMENT_BENEFICIARY_DESIGNATION"),
     DIVIDEND_REINVESTMENT_PLAN("DIVIDEND_REINVESTMENT_PLAN"),
@@ -332,6 +344,7 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
     REGISTRATION_IRA_BENEFICIARY_ROTH("REGISTRATION_IRA_BENEFICIARY_ROTH"),
     REGISTRATION_INDIVIDUAL_FOREIGN("REGISTRATION_INDIVIDUAL_FOREIGN"),
     REGISTRATION_CUSTODIAL("REGISTRATION_CUSTODIAL"),
+    VIRTUAL_ACCOUNT_NUMBER("VIRTUAL_ACCOUNT_NUMBER"),
     ;
 
     private final String value;

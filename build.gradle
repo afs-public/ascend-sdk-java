@@ -61,7 +61,7 @@ tasks.withType(Javadoc) {
 }
 
 group = "com.apexfintechsolutions"
-version = "1.2.0"
+version = "1.2.1"
 
 sourcesJar {
     archiveBaseName = "ascendsdk"
@@ -78,7 +78,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'com.apexfintechsolutions'
             artifactId = 'ascendsdk'
-            version = '1.2.0'
+            version = '1.2.1'
 
             from components.java
 

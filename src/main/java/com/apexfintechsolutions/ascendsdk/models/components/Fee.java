@@ -19,7 +19,7 @@ public class Fee {
   /** Monetary amount associated with the fee */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("amount")
-  private JsonNullable<? extends Amount> amount;
+  private JsonNullable<? extends FeeAmount> amount;
 
   /** The type of fee being assessed */
   @JsonInclude(Include.NON_ABSENT)
@@ -28,7 +28,7 @@ public class Fee {
 
   @JsonCreator
   public Fee(
-      @JsonProperty("amount") JsonNullable<? extends Amount> amount,
+      @JsonProperty("amount") JsonNullable<? extends FeeAmount> amount,
       @JsonProperty("type") Optional<? extends FeeType> type) {
     Utils.checkNotNull(amount, "amount");
     Utils.checkNotNull(type, "type");
@@ -43,8 +43,8 @@ public class Fee {
   /** Monetary amount associated with the fee */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<Amount> amount() {
-    return (JsonNullable<Amount>) amount;
+  public JsonNullable<FeeAmount> amount() {
+    return (JsonNullable<FeeAmount>) amount;
   }
 
   /** The type of fee being assessed */
@@ -59,14 +59,14 @@ public class Fee {
   }
 
   /** Monetary amount associated with the fee */
-  public Fee withAmount(Amount amount) {
+  public Fee withAmount(FeeAmount amount) {
     Utils.checkNotNull(amount, "amount");
     this.amount = JsonNullable.of(amount);
     return this;
   }
 
   /** Monetary amount associated with the fee */
-  public Fee withAmount(JsonNullable<? extends Amount> amount) {
+  public Fee withAmount(JsonNullable<? extends FeeAmount> amount) {
     Utils.checkNotNull(amount, "amount");
     this.amount = amount;
     return this;
@@ -111,7 +111,7 @@ public class Fee {
 
   public static final class Builder {
 
-    private JsonNullable<? extends Amount> amount = JsonNullable.undefined();
+    private JsonNullable<? extends FeeAmount> amount = JsonNullable.undefined();
 
     private Optional<? extends FeeType> type = Optional.empty();
 
@@ -120,14 +120,14 @@ public class Fee {
     }
 
     /** Monetary amount associated with the fee */
-    public Builder amount(Amount amount) {
+    public Builder amount(FeeAmount amount) {
       Utils.checkNotNull(amount, "amount");
       this.amount = JsonNullable.of(amount);
       return this;
     }
 
     /** Monetary amount associated with the fee */
-    public Builder amount(JsonNullable<? extends Amount> amount) {
+    public Builder amount(JsonNullable<? extends FeeAmount> amount) {
       Utils.checkNotNull(amount, "amount");
       this.amount = amount;
       return this;

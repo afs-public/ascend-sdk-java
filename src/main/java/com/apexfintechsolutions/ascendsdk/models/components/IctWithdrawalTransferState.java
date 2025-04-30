@@ -16,7 +16,13 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
-/** IctWithdrawalTransferState - The state of the ICT withdrawal */
+/**
+ * IctWithdrawalTransferState - Deprecated, use state instead
+ *
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon
+ *     as possible.
+ */
+@Deprecated
 public class IctWithdrawalTransferState {
 
   /** The user or service that triggered the state update. */
@@ -49,7 +55,7 @@ public class IctWithdrawalTransferState {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("state")
-  private Optional<? extends IctWithdrawalState> state;
+  private Optional<? extends IctWithdrawalTransferStateState> state;
 
   /** The time of the state update. */
   @JsonInclude(Include.NON_ABSENT)
@@ -61,7 +67,7 @@ public class IctWithdrawalTransferState {
       @JsonProperty("actor") Optional<String> actor,
       @JsonProperty("message") Optional<String> message,
       @JsonProperty("metadata") JsonNullable<? extends Map<String, Object>> metadata,
-      @JsonProperty("state") Optional<? extends IctWithdrawalState> state,
+      @JsonProperty("state") Optional<? extends IctWithdrawalTransferStateState> state,
       @JsonProperty("update_time") JsonNullable<OffsetDateTime> updateTime) {
     Utils.checkNotNull(actor, "actor");
     Utils.checkNotNull(message, "message");
@@ -118,8 +124,8 @@ public class IctWithdrawalTransferState {
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<IctWithdrawalState> state() {
-    return (Optional<IctWithdrawalState>) state;
+  public Optional<IctWithdrawalTransferStateState> state() {
+    return (Optional<IctWithdrawalTransferStateState>) state;
   }
 
   /** The time of the state update. */
@@ -192,7 +198,7 @@ public class IctWithdrawalTransferState {
    * `CANCELED` - The transfer was canceled. - `RETURNED` - The transfer was returned. - `POSTPONED`
    * - The transfer is postponed and will resume processing during the next processing window.
    */
-  public IctWithdrawalTransferState withState(IctWithdrawalState state) {
+  public IctWithdrawalTransferState withState(IctWithdrawalTransferStateState state) {
     Utils.checkNotNull(state, "state");
     this.state = Optional.ofNullable(state);
     return this;
@@ -207,7 +213,8 @@ public class IctWithdrawalTransferState {
    * `CANCELED` - The transfer was canceled. - `RETURNED` - The transfer was returned. - `POSTPONED`
    * - The transfer is postponed and will resume processing during the next processing window.
    */
-  public IctWithdrawalTransferState withState(Optional<? extends IctWithdrawalState> state) {
+  public IctWithdrawalTransferState withState(
+      Optional<? extends IctWithdrawalTransferStateState> state) {
     Utils.checkNotNull(state, "state");
     this.state = state;
     return this;
@@ -272,7 +279,7 @@ public class IctWithdrawalTransferState {
 
     private JsonNullable<? extends Map<String, Object>> metadata = JsonNullable.undefined();
 
-    private Optional<? extends IctWithdrawalState> state = Optional.empty();
+    private Optional<? extends IctWithdrawalTransferStateState> state = Optional.empty();
 
     private JsonNullable<OffsetDateTime> updateTime = JsonNullable.undefined();
 
@@ -340,7 +347,7 @@ public class IctWithdrawalTransferState {
      * - `POSTPONED` - The transfer is postponed and will resume processing during the next
      * processing window.
      */
-    public Builder state(IctWithdrawalState state) {
+    public Builder state(IctWithdrawalTransferStateState state) {
       Utils.checkNotNull(state, "state");
       this.state = Optional.ofNullable(state);
       return this;
@@ -356,7 +363,7 @@ public class IctWithdrawalTransferState {
      * - `POSTPONED` - The transfer is postponed and will resume processing during the next
      * processing window.
      */
-    public Builder state(Optional<? extends IctWithdrawalState> state) {
+    public Builder state(Optional<? extends IctWithdrawalTransferStateState> state) {
       Utils.checkNotNull(state, "state");
       this.state = state;
       return this;

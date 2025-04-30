@@ -34,7 +34,10 @@ public class Order {
   @JsonProperty("asset_id")
   private Optional<String> assetId;
 
-  /** The type of the asset in this order */
+  /**
+   * The type of the asset in this order, which must be one of the following: EQUITY, MUTUAL_FUND,
+   * and FIXED_INCOME.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("asset_type")
   private Optional<? extends OrderAssetType> assetType;
@@ -122,7 +125,7 @@ public class Order {
   @JsonProperty("executions")
   private Optional<? extends List<Executions>> executions;
 
-  /** Fees that will be applied to this order. */
+  /** Fees that will be applied to this order. Only the BROKER_FEE type is supported. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("fees")
   private Optional<? extends List<Fee>> fees;
@@ -474,7 +477,10 @@ public class Order {
     return assetId;
   }
 
-  /** The type of the asset in this order */
+  /**
+   * The type of the asset in this order, which must be one of the following: EQUITY, MUTUAL_FUND,
+   * and FIXED_INCOME.
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<OrderAssetType> assetType() {
@@ -581,7 +587,7 @@ public class Order {
     return (Optional<List<Executions>>) executions;
   }
 
-  /** Fees that will be applied to this order. */
+  /** Fees that will be applied to this order. Only the BROKER_FEE type is supported. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<List<Fee>> fees() {
@@ -837,14 +843,20 @@ public class Order {
     return this;
   }
 
-  /** The type of the asset in this order */
+  /**
+   * The type of the asset in this order, which must be one of the following: EQUITY, MUTUAL_FUND,
+   * and FIXED_INCOME.
+   */
   public Order withAssetType(OrderAssetType assetType) {
     Utils.checkNotNull(assetType, "assetType");
     this.assetType = Optional.ofNullable(assetType);
     return this;
   }
 
-  /** The type of the asset in this order */
+  /**
+   * The type of the asset in this order, which must be one of the following: EQUITY, MUTUAL_FUND,
+   * and FIXED_INCOME.
+   */
   public Order withAssetType(Optional<? extends OrderAssetType> assetType) {
     Utils.checkNotNull(assetType, "assetType");
     this.assetType = assetType;
@@ -1063,14 +1075,14 @@ public class Order {
     return this;
   }
 
-  /** Fees that will be applied to this order. */
+  /** Fees that will be applied to this order. Only the BROKER_FEE type is supported. */
   public Order withFees(List<Fee> fees) {
     Utils.checkNotNull(fees, "fees");
     this.fees = Optional.ofNullable(fees);
     return this;
   }
 
-  /** Fees that will be applied to this order. */
+  /** Fees that will be applied to this order. Only the BROKER_FEE type is supported. */
   public Order withFees(Optional<? extends List<Fee>> fees) {
     Utils.checkNotNull(fees, "fees");
     this.fees = fees;
@@ -1798,14 +1810,20 @@ public class Order {
       return this;
     }
 
-    /** The type of the asset in this order */
+    /**
+     * The type of the asset in this order, which must be one of the following: EQUITY, MUTUAL_FUND,
+     * and FIXED_INCOME.
+     */
     public Builder assetType(OrderAssetType assetType) {
       Utils.checkNotNull(assetType, "assetType");
       this.assetType = Optional.ofNullable(assetType);
       return this;
     }
 
-    /** The type of the asset in this order */
+    /**
+     * The type of the asset in this order, which must be one of the following: EQUITY, MUTUAL_FUND,
+     * and FIXED_INCOME.
+     */
     public Builder assetType(Optional<? extends OrderAssetType> assetType) {
       Utils.checkNotNull(assetType, "assetType");
       this.assetType = assetType;
@@ -2026,14 +2044,14 @@ public class Order {
       return this;
     }
 
-    /** Fees that will be applied to this order. */
+    /** Fees that will be applied to this order. Only the BROKER_FEE type is supported. */
     public Builder fees(List<Fee> fees) {
       Utils.checkNotNull(fees, "fees");
       this.fees = Optional.ofNullable(fees);
       return this;
     }
 
-    /** Fees that will be applied to this order. */
+    /** Fees that will be applied to this order. Only the BROKER_FEE type is supported. */
     public Builder fees(Optional<? extends List<Fee>> fees) {
       Utils.checkNotNull(fees, "fees");
       this.fees = fees;

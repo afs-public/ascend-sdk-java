@@ -51,8 +51,6 @@ public class RelationType {
   public static final RelationType PRIMARY_OWNER = new RelationType("PRIMARY_OWNER");
   public static final RelationType JOINT_OWNER = new RelationType("JOINT_OWNER");
   public static final RelationType CUSTODIAN = new RelationType("CUSTODIAN");
-  public static final RelationType GUARDIAN_CONSERVATOR = new RelationType("GUARDIAN_CONSERVATOR");
-  public static final RelationType POWER_OF_ATTORNEY = new RelationType("POWER_OF_ATTORNEY");
   public static final RelationType EXECUTOR = new RelationType("EXECUTOR");
   public static final RelationType AUTHORIZED_SIGNER = new RelationType("AUTHORIZED_SIGNER");
   public static final RelationType BENEFICIAL_OWNER = new RelationType("BENEFICIAL_OWNER");
@@ -132,8 +130,6 @@ public class RelationType {
     map.put("PRIMARY_OWNER", PRIMARY_OWNER);
     map.put("JOINT_OWNER", JOINT_OWNER);
     map.put("CUSTODIAN", CUSTODIAN);
-    map.put("GUARDIAN_CONSERVATOR", GUARDIAN_CONSERVATOR);
-    map.put("POWER_OF_ATTORNEY", POWER_OF_ATTORNEY);
     map.put("EXECUTOR", EXECUTOR);
     map.put("AUTHORIZED_SIGNER", AUTHORIZED_SIGNER);
     map.put("BENEFICIAL_OWNER", BENEFICIAL_OWNER);
@@ -150,8 +146,6 @@ public class RelationType {
     map.put("PRIMARY_OWNER", RelationTypeEnum.PRIMARY_OWNER);
     map.put("JOINT_OWNER", RelationTypeEnum.JOINT_OWNER);
     map.put("CUSTODIAN", RelationTypeEnum.CUSTODIAN);
-    map.put("GUARDIAN_CONSERVATOR", RelationTypeEnum.GUARDIAN_CONSERVATOR);
-    map.put("POWER_OF_ATTORNEY", RelationTypeEnum.POWER_OF_ATTORNEY);
     map.put("EXECUTOR", RelationTypeEnum.EXECUTOR);
     map.put("AUTHORIZED_SIGNER", RelationTypeEnum.AUTHORIZED_SIGNER);
     map.put("BENEFICIAL_OWNER", RelationTypeEnum.BENEFICIAL_OWNER);
@@ -197,8 +191,6 @@ public class RelationType {
     PRIMARY_OWNER("PRIMARY_OWNER"),
     JOINT_OWNER("JOINT_OWNER"),
     CUSTODIAN("CUSTODIAN"),
-    GUARDIAN_CONSERVATOR("GUARDIAN_CONSERVATOR"),
-    POWER_OF_ATTORNEY("POWER_OF_ATTORNEY"),
     EXECUTOR("EXECUTOR"),
     AUTHORIZED_SIGNER("AUTHORIZED_SIGNER"),
     BENEFICIAL_OWNER("BENEFICIAL_OWNER"),

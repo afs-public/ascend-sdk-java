@@ -40,7 +40,7 @@ import java.util.Optional;
  */
 /**
  * EnrollmentJointCommunityPropertyEnrollmentMetadataDividendReinvestmentPlan - Option to
- * auto-enroll in Dividend Reinvestment; defaults to true
+ * auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
  */
 @JsonDeserialize(
     using =

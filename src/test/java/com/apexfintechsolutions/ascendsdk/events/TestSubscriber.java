@@ -14,7 +14,7 @@ public class TestSubscriber {
   @BeforeAll
   public void setup() throws Exception {
     sdk = SdkUtil.getSdk();
-    subscriberId = EventsUtil.getSubscriberId(sdk);
+    subscriberId = EventsUtil.getTestSubscriberId(sdk);
     if (subscriberId == null || subscriberId.isEmpty()) {
       throw new Exception("Subscriber ID not found");
     }
@@ -69,7 +69,7 @@ public class TestSubscriber {
     var res =
         sdk.subscriber()
             .getPushSubscriptionDelivery()
-            .subscriptionId(EventsUtil.getFixedSubscriberId())
+            .subscriptionId(subscriberId)
             .deliveryId(deliveryID)
             .call();
     Assertions.assertNotNull(res);

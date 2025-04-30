@@ -30,14 +30,13 @@ public class CalculateCashBalanceResponseTradeSummary {
   /** The net amount of the trade in USD. This value is always positive. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("net_amount")
-  private JsonNullable<? extends CalculateCashBalanceResponseTradeSummaryNetAmount> netAmount;
+  private JsonNullable<? extends NetAmount> netAmount;
 
   @JsonCreator
   public CalculateCashBalanceResponseTradeSummary(
       @JsonProperty("activity") Optional<String> activity,
       @JsonProperty("asset") Optional<String> asset,
-      @JsonProperty("net_amount")
-          JsonNullable<? extends CalculateCashBalanceResponseTradeSummaryNetAmount> netAmount) {
+      @JsonProperty("net_amount") JsonNullable<? extends NetAmount> netAmount) {
     Utils.checkNotNull(activity, "activity");
     Utils.checkNotNull(asset, "asset");
     Utils.checkNotNull(netAmount, "netAmount");
@@ -65,8 +64,8 @@ public class CalculateCashBalanceResponseTradeSummary {
   /** The net amount of the trade in USD. This value is always positive. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<CalculateCashBalanceResponseTradeSummaryNetAmount> netAmount() {
-    return (JsonNullable<CalculateCashBalanceResponseTradeSummaryNetAmount>) netAmount;
+  public JsonNullable<NetAmount> netAmount() {
+    return (JsonNullable<NetAmount>) netAmount;
   }
 
   public static final Builder builder() {
@@ -102,8 +101,7 @@ public class CalculateCashBalanceResponseTradeSummary {
   }
 
   /** The net amount of the trade in USD. This value is always positive. */
-  public CalculateCashBalanceResponseTradeSummary withNetAmount(
-      CalculateCashBalanceResponseTradeSummaryNetAmount netAmount) {
+  public CalculateCashBalanceResponseTradeSummary withNetAmount(NetAmount netAmount) {
     Utils.checkNotNull(netAmount, "netAmount");
     this.netAmount = JsonNullable.of(netAmount);
     return this;
@@ -111,7 +109,7 @@ public class CalculateCashBalanceResponseTradeSummary {
 
   /** The net amount of the trade in USD. This value is always positive. */
   public CalculateCashBalanceResponseTradeSummary withNetAmount(
-      JsonNullable<? extends CalculateCashBalanceResponseTradeSummaryNetAmount> netAmount) {
+      JsonNullable<? extends NetAmount> netAmount) {
     Utils.checkNotNull(netAmount, "netAmount");
     this.netAmount = netAmount;
     return this;
@@ -154,8 +152,7 @@ public class CalculateCashBalanceResponseTradeSummary {
 
     private Optional<String> asset = Optional.empty();
 
-    private JsonNullable<? extends CalculateCashBalanceResponseTradeSummaryNetAmount> netAmount =
-        JsonNullable.undefined();
+    private JsonNullable<? extends NetAmount> netAmount = JsonNullable.undefined();
 
     private Builder() {
       // force use of static builder() method
@@ -190,15 +187,14 @@ public class CalculateCashBalanceResponseTradeSummary {
     }
 
     /** The net amount of the trade in USD. This value is always positive. */
-    public Builder netAmount(CalculateCashBalanceResponseTradeSummaryNetAmount netAmount) {
+    public Builder netAmount(NetAmount netAmount) {
       Utils.checkNotNull(netAmount, "netAmount");
       this.netAmount = JsonNullable.of(netAmount);
       return this;
     }
 
     /** The net amount of the trade in USD. This value is always positive. */
-    public Builder netAmount(
-        JsonNullable<? extends CalculateCashBalanceResponseTradeSummaryNetAmount> netAmount) {
+    public Builder netAmount(JsonNullable<? extends NetAmount> netAmount) {
       Utils.checkNotNull(netAmount, "netAmount");
       this.netAmount = netAmount;
       return this;

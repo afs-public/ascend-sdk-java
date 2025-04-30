@@ -51,7 +51,6 @@ public class VerificationMethod {
   public static final VerificationMethod GIACT = new VerificationMethod("GIACT");
   public static final VerificationMethod SYNAPSE = new VerificationMethod("SYNAPSE");
   public static final VerificationMethod SOPHTRON = new VerificationMethod("SOPHTRON");
-  public static final VerificationMethod USE_EXISTING = new VerificationMethod("USE_EXISTING");
   public static final VerificationMethod INTERNAL_BANK = new VerificationMethod("INTERNAL_BANK");
   public static final VerificationMethod MX = new VerificationMethod("MX");
   public static final VerificationMethod FISERV = new VerificationMethod("FISERV");
@@ -130,7 +129,6 @@ public class VerificationMethod {
     map.put("GIACT", GIACT);
     map.put("SYNAPSE", SYNAPSE);
     map.put("SOPHTRON", SOPHTRON);
-    map.put("USE_EXISTING", USE_EXISTING);
     map.put("INTERNAL_BANK", INTERNAL_BANK);
     map.put("MX", MX);
     map.put("FISERV", FISERV);
@@ -148,7 +146,6 @@ public class VerificationMethod {
     map.put("GIACT", VerificationMethodEnum.GIACT);
     map.put("SYNAPSE", VerificationMethodEnum.SYNAPSE);
     map.put("SOPHTRON", VerificationMethodEnum.SOPHTRON);
-    map.put("USE_EXISTING", VerificationMethodEnum.USE_EXISTING);
     map.put("INTERNAL_BANK", VerificationMethodEnum.INTERNAL_BANK);
     map.put("MX", VerificationMethodEnum.MX);
     map.put("FISERV", VerificationMethodEnum.FISERV);
@@ -194,7 +191,6 @@ public class VerificationMethod {
     GIACT("GIACT"),
     SYNAPSE("SYNAPSE"),
     SOPHTRON("SOPHTRON"),
-    USE_EXISTING("USE_EXISTING"),
     INTERNAL_BANK("INTERNAL_BANK"),
     MX("MX"),
     FISERV("FISERV"),

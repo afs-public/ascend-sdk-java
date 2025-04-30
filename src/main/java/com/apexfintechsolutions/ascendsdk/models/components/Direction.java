@@ -38,14 +38,14 @@ import java.util.Optional;
  * use of an instance in a switch expression but you can use the {@code asEnum()} method (after
  * dealing with the `Optional` appropriately).
  */
-/** Direction - The direction of the transfer */
+/** Direction - Flag indicating whether this is a deposit or withdrawal transfer */
 @JsonDeserialize(using = Direction._Deserializer.class)
 @JsonSerialize(using = Direction._Serializer.class)
 public class Direction {
 
   public static final Direction DIRECTION_UNSPECIFIED = new Direction("DIRECTION_UNSPECIFIED");
-  public static final Direction OUTGOING = new Direction("OUTGOING");
-  public static final Direction INCOMING = new Direction("INCOMING");
+  public static final Direction DEPOSIT = new Direction("DEPOSIT");
+  public static final Direction WITHDRAWAL = new Direction("WITHDRAWAL");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -114,16 +114,16 @@ public class Direction {
   private static final Map<String, Direction> createValuesMap() {
     Map<String, Direction> map = new LinkedHashMap<>();
     map.put("DIRECTION_UNSPECIFIED", DIRECTION_UNSPECIFIED);
-    map.put("OUTGOING", OUTGOING);
-    map.put("INCOMING", INCOMING);
+    map.put("DEPOSIT", DEPOSIT);
+    map.put("WITHDRAWAL", WITHDRAWAL);
     return map;
   }
 
   private static final Map<String, DirectionEnum> createEnumsMap() {
     Map<String, DirectionEnum> map = new HashMap<>();
     map.put("DIRECTION_UNSPECIFIED", DirectionEnum.DIRECTION_UNSPECIFIED);
-    map.put("OUTGOING", DirectionEnum.OUTGOING);
-    map.put("INCOMING", DirectionEnum.INCOMING);
+    map.put("DEPOSIT", DirectionEnum.DEPOSIT);
+    map.put("WITHDRAWAL", DirectionEnum.WITHDRAWAL);
     return map;
   }
 
@@ -159,8 +159,8 @@ public class Direction {
 
   public enum DirectionEnum {
     DIRECTION_UNSPECIFIED("DIRECTION_UNSPECIFIED"),
-    OUTGOING("OUTGOING"),
-    INCOMING("INCOMING"),
+    DEPOSIT("DEPOSIT"),
+    WITHDRAWAL("WITHDRAWAL"),
     ;
 
     private final String value;

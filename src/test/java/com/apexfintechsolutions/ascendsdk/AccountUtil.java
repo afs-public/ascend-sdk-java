@@ -31,7 +31,7 @@ public class AccountUtil {
                     .employer("Apex Fintech Solutions")
                     .startYear(2019)
                     .build())
-            .correspondentId(com.apexfintechsolutions.ascendsdk.SdkUtil.getCorrespondentId())
+            .correspondentId(SdkUtil.getCorrespondentId())
             .taxIdType(TaxIdType.TAX_ID_TYPE_SSN)
             .taxId("987654321")
             .citizenshipCountries(List.of("US"))
@@ -105,7 +105,7 @@ public class AccountUtil {
     var req =
         AccountRequestCreate.builder()
             .correspondentId(SdkUtil.getCorrespondentId())
-            .accountGroupId(com.apexfintechsolutions.ascendsdk.SdkUtil.getAccountGroupId())
+            .accountGroupId(SdkUtil.getAccountGroupId())
             .parties(List.of(party))
             .investmentProfile(
                 InvestmentProfileCreate.builder()
@@ -208,7 +208,7 @@ public class AccountUtil {
             .accreditedInvestor(false)
             .adviser(false)
             .brokerDealer(false)
-            .correspondentId(com.apexfintechsolutions.ascendsdk.SdkUtil.getCorrespondentId())
+            .correspondentId(SdkUtil.getCorrespondentId())
             .entityName("AcmeInc")
             .entityType(EntityType.ESTATE)
             .exemptVerifyingBeneficialOwners(false)

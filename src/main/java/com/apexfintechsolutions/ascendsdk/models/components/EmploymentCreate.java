@@ -47,9 +47,13 @@ public class EmploymentCreate {
   @JsonProperty("employment_status")
   private EmploymentStatus employmentStatus;
 
-  /** The nature of work performed at an investor's place of employment. */
+  /**
+   * The nature of work performed at an investor's place of employment. Required if the
+   * employment_status is `EMPLOYED` or `SELF_EMPLOYED`.
+   */
+  @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("occupation")
-  private String occupation;
+  private Optional<String> occupation;
 
   /**
    * The start year of employment related to a person's stated employer Must be from birth year to
@@ -64,7 +68,7 @@ public class EmploymentCreate {
       @JsonProperty("employer") Optional<String> employer,
       @JsonProperty("employer_address") Optional<? extends PostalAddressCreate> employerAddress,
       @JsonProperty("employment_status") EmploymentStatus employmentStatus,
-      @JsonProperty("occupation") String occupation,
+      @JsonProperty("occupation") Optional<String> occupation,
       @JsonProperty("start_year") Optional<Integer> startYear) {
     Utils.checkNotNull(employer, "employer");
     Utils.checkNotNull(employerAddress, "employerAddress");
@@ -78,8 +82,8 @@ public class EmploymentCreate {
     this.startYear = startYear;
   }
 
-  public EmploymentCreate(EmploymentStatus employmentStatus, String occupation) {
-    this(Optional.empty(), Optional.empty(), employmentStatus, occupation, Optional.empty());
+  public EmploymentCreate(EmploymentStatus employmentStatus) {
+    this(Optional.empty(), Optional.empty(), employmentStatus, Optional.empty(), Optional.empty());
   }
 
   /** The business name of an investor's employer. */
@@ -115,9 +119,12 @@ public class EmploymentCreate {
     return employmentStatus;
   }
 
-  /** The nature of work performed at an investor's place of employment. */
+  /**
+   * The nature of work performed at an investor's place of employment. Required if the
+   * employment_status is `EMPLOYED` or `SELF_EMPLOYED`.
+   */
   @JsonIgnore
-  public String occupation() {
+  public Optional<String> occupation() {
     return occupation;
   }
 
@@ -198,8 +205,21 @@ public class EmploymentCreate {
     return this;
   }
 
-  /** The nature of work performed at an investor's place of employment. */
+  /**
+   * The nature of work performed at an investor's place of employment. Required if the
+   * employment_status is `EMPLOYED` or `SELF_EMPLOYED`.
+   */
   public EmploymentCreate withOccupation(String occupation) {
+    Utils.checkNotNull(occupation, "occupation");
+    this.occupation = Optional.ofNullable(occupation);
+    return this;
+  }
+
+  /**
+   * The nature of work performed at an investor's place of employment. Required if the
+   * employment_status is `EMPLOYED` or `SELF_EMPLOYED`.
+   */
+  public EmploymentCreate withOccupation(Optional<String> occupation) {
     Utils.checkNotNull(occupation, "occupation");
     this.occupation = occupation;
     return this;
@@ -270,7 +290,7 @@ public class EmploymentCreate {
 
     private EmploymentStatus employmentStatus;
 
-    private String occupation;
+    private Optional<String> occupation = Optional.empty();
 
     private Optional<Integer> startYear = Optional.empty();
 
@@ -341,8 +361,21 @@ public class EmploymentCreate {
       return this;
     }
 
-    /** The nature of work performed at an investor's place of employment. */
+    /**
+     * The nature of work performed at an investor's place of employment. Required if the
+     * employment_status is `EMPLOYED` or `SELF_EMPLOYED`.
+     */
     public Builder occupation(String occupation) {
+      Utils.checkNotNull(occupation, "occupation");
+      this.occupation = Optional.ofNullable(occupation);
+      return this;
+    }
+
+    /**
+     * The nature of work performed at an investor's place of employment. Required if the
+     * employment_status is `EMPLOYED` or `SELF_EMPLOYED`.
+     */
+    public Builder occupation(Optional<String> occupation) {
       Utils.checkNotNull(occupation, "occupation");
       this.occupation = occupation;
       return this;

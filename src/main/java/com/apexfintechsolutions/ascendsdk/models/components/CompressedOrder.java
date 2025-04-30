@@ -85,11 +85,6 @@ public class CompressedOrder {
   @JsonProperty("executions")
   private Optional<? extends List<Executions>> executions;
 
-  /** Fees that will be applied to this order. */
-  @JsonInclude(Include.NON_ABSENT)
-  @JsonProperty("fees")
-  private Optional<? extends List<Fee>> fees;
-
   /**
    * The summed quantity value across all fills in this order, up to a maximum of 5 decimal places.
    * Will be absent if an order has no fill information.
@@ -112,15 +107,6 @@ public class CompressedOrder {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("last_update_time")
   private JsonNullable<OffsetDateTime> lastUpdateTime;
-
-  /**
-   * Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a
-   * commitment to buy a specified monetary amount of shares over a period of time, usually 13
-   * months. Either ROA or LOI may be specified, but not both.
-   */
-  @JsonInclude(Include.NON_ABSENT)
-  @JsonProperty("letter_of_intent")
-  private JsonNullable<? extends CompressedOrderLetterOfIntent> letterOfIntent;
 
   /** System generated name of the order. */
   @JsonInclude(Include.NON_ABSENT)
@@ -165,15 +151,6 @@ public class CompressedOrder {
   @JsonProperty("quantity")
   private JsonNullable<? extends CompressedOrderQuantity> quantity;
 
-  /**
-   * Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares with
-   * the holdings of certain related parties toward achieving the investment thresholds at which
-   * sales charge discounts become available. Either ROA or LOI may be specified, but not both.
-   */
-  @JsonInclude(Include.NON_ABSENT)
-  @JsonProperty("rights_of_accumulation")
-  private JsonNullable<? extends CompressedOrderRightsOfAccumulation> rightsOfAccumulation;
-
   /** The side of this order. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("side")
@@ -199,15 +176,12 @@ public class CompressedOrder {
           JsonNullable<? extends CompressedOrderCumulativeNotionalValue> cumulativeNotionalValue,
       @JsonProperty("currency_code") Optional<String> currencyCode,
       @JsonProperty("executions") Optional<? extends List<Executions>> executions,
-      @JsonProperty("fees") Optional<? extends List<Fee>> fees,
       @JsonProperty("filled_quantity")
           JsonNullable<? extends CompressedOrderFilledQuantity> filledQuantity,
       @JsonProperty("identifier") Optional<String> identifier,
       @JsonProperty("identifier_type")
           Optional<? extends CompressedOrderIdentifierType> identifierType,
       @JsonProperty("last_update_time") JsonNullable<OffsetDateTime> lastUpdateTime,
-      @JsonProperty("letter_of_intent")
-          JsonNullable<? extends CompressedOrderLetterOfIntent> letterOfIntent,
       @JsonProperty("name") Optional<String> name,
       @JsonProperty("notional_value")
           JsonNullable<? extends CompressedOrderNotionalValue> notionalValue,
@@ -216,8 +190,6 @@ public class CompressedOrder {
       @JsonProperty("order_status") Optional<? extends CompressedOrderOrderStatus> orderStatus,
       @JsonProperty("order_type") Optional<? extends CompressedOrderOrderType> orderType,
       @JsonProperty("quantity") JsonNullable<? extends CompressedOrderQuantity> quantity,
-      @JsonProperty("rights_of_accumulation")
-          JsonNullable<? extends CompressedOrderRightsOfAccumulation> rightsOfAccumulation,
       @JsonProperty("side") Optional<? extends CompressedOrderSide> side,
       @JsonProperty("time_in_force") Optional<? extends CompressedOrderTimeInForce> timeInForce) {
     Utils.checkNotNull(assetId, "assetId");
@@ -229,19 +201,16 @@ public class CompressedOrder {
     Utils.checkNotNull(cumulativeNotionalValue, "cumulativeNotionalValue");
     Utils.checkNotNull(currencyCode, "currencyCode");
     Utils.checkNotNull(executions, "executions");
-    Utils.checkNotNull(fees, "fees");
     Utils.checkNotNull(filledQuantity, "filledQuantity");
     Utils.checkNotNull(identifier, "identifier");
     Utils.checkNotNull(identifierType, "identifierType");
     Utils.checkNotNull(lastUpdateTime, "lastUpdateTime");
-    Utils.checkNotNull(letterOfIntent, "letterOfIntent");
     Utils.checkNotNull(name, "name");
     Utils.checkNotNull(notionalValue, "notionalValue");
     Utils.checkNotNull(orderRejectedReason, "orderRejectedReason");
     Utils.checkNotNull(orderStatus, "orderStatus");
     Utils.checkNotNull(orderType, "orderType");
     Utils.checkNotNull(quantity, "quantity");
-    Utils.checkNotNull(rightsOfAccumulation, "rightsOfAccumulation");
     Utils.checkNotNull(side, "side");
     Utils.checkNotNull(timeInForce, "timeInForce");
     this.assetId = assetId;
@@ -253,19 +222,16 @@ public class CompressedOrder {
     this.cumulativeNotionalValue = cumulativeNotionalValue;
     this.currencyCode = currencyCode;
     this.executions = executions;
-    this.fees = fees;
     this.filledQuantity = filledQuantity;
     this.identifier = identifier;
     this.identifierType = identifierType;
     this.lastUpdateTime = lastUpdateTime;
-    this.letterOfIntent = letterOfIntent;
     this.name = name;
     this.notionalValue = notionalValue;
     this.orderRejectedReason = orderRejectedReason;
     this.orderStatus = orderStatus;
     this.orderType = orderType;
     this.quantity = quantity;
-    this.rightsOfAccumulation = rightsOfAccumulation;
     this.side = side;
     this.timeInForce = timeInForce;
   }
@@ -281,18 +247,15 @@ public class CompressedOrder {
         JsonNullable.undefined(),
         Optional.empty(),
         Optional.empty(),
-        Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined(),
-        JsonNullable.undefined(),
         Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
-        JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
         Optional.empty());
@@ -375,13 +338,6 @@ public class CompressedOrder {
     return (Optional<List<Executions>>) executions;
   }
 
-  /** Fees that will be applied to this order. */
-  @SuppressWarnings("unchecked")
-  @JsonIgnore
-  public Optional<List<Fee>> fees() {
-    return (Optional<List<Fee>>) fees;
-  }
-
   /**
    * The summed quantity value across all fills in this order, up to a maximum of 5 decimal places.
    * Will be absent if an order has no fill information.
@@ -409,17 +365,6 @@ public class CompressedOrder {
   @JsonIgnore
   public JsonNullable<OffsetDateTime> lastUpdateTime() {
     return lastUpdateTime;
-  }
-
-  /**
-   * Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a
-   * commitment to buy a specified monetary amount of shares over a period of time, usually 13
-   * months. Either ROA or LOI may be specified, but not both.
-   */
-  @SuppressWarnings("unchecked")
-  @JsonIgnore
-  public JsonNullable<CompressedOrderLetterOfIntent> letterOfIntent() {
-    return (JsonNullable<CompressedOrderLetterOfIntent>) letterOfIntent;
   }
 
   /** System generated name of the order. */
@@ -474,17 +419,6 @@ public class CompressedOrder {
   @JsonIgnore
   public JsonNullable<CompressedOrderQuantity> quantity() {
     return (JsonNullable<CompressedOrderQuantity>) quantity;
-  }
-
-  /**
-   * Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares with
-   * the holdings of certain related parties toward achieving the investment thresholds at which
-   * sales charge discounts become available. Either ROA or LOI may be specified, but not both.
-   */
-  @SuppressWarnings("unchecked")
-  @JsonIgnore
-  public JsonNullable<CompressedOrderRightsOfAccumulation> rightsOfAccumulation() {
-    return (JsonNullable<CompressedOrderRightsOfAccumulation>) rightsOfAccumulation;
   }
 
   /** The side of this order. */
@@ -674,20 +608,6 @@ public class CompressedOrder {
     return this;
   }
 
-  /** Fees that will be applied to this order. */
-  public CompressedOrder withFees(List<Fee> fees) {
-    Utils.checkNotNull(fees, "fees");
-    this.fees = Optional.ofNullable(fees);
-    return this;
-  }
-
-  /** Fees that will be applied to this order. */
-  public CompressedOrder withFees(Optional<? extends List<Fee>> fees) {
-    Utils.checkNotNull(fees, "fees");
-    this.fees = fees;
-    return this;
-  }
-
   /**
    * The summed quantity value across all fills in this order, up to a maximum of 5 decimal places.
    * Will be absent if an order has no fill information.
@@ -749,29 +669,6 @@ public class CompressedOrder {
   public CompressedOrder withLastUpdateTime(JsonNullable<OffsetDateTime> lastUpdateTime) {
     Utils.checkNotNull(lastUpdateTime, "lastUpdateTime");
     this.lastUpdateTime = lastUpdateTime;
-    return this;
-  }
-
-  /**
-   * Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a
-   * commitment to buy a specified monetary amount of shares over a period of time, usually 13
-   * months. Either ROA or LOI may be specified, but not both.
-   */
-  public CompressedOrder withLetterOfIntent(CompressedOrderLetterOfIntent letterOfIntent) {
-    Utils.checkNotNull(letterOfIntent, "letterOfIntent");
-    this.letterOfIntent = JsonNullable.of(letterOfIntent);
-    return this;
-  }
-
-  /**
-   * Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a
-   * commitment to buy a specified monetary amount of shares over a period of time, usually 13
-   * months. Either ROA or LOI may be specified, but not both.
-   */
-  public CompressedOrder withLetterOfIntent(
-      JsonNullable<? extends CompressedOrderLetterOfIntent> letterOfIntent) {
-    Utils.checkNotNull(letterOfIntent, "letterOfIntent");
-    this.letterOfIntent = letterOfIntent;
     return this;
   }
 
@@ -889,30 +786,6 @@ public class CompressedOrder {
     return this;
   }
 
-  /**
-   * Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares with
-   * the holdings of certain related parties toward achieving the investment thresholds at which
-   * sales charge discounts become available. Either ROA or LOI may be specified, but not both.
-   */
-  public CompressedOrder withRightsOfAccumulation(
-      CompressedOrderRightsOfAccumulation rightsOfAccumulation) {
-    Utils.checkNotNull(rightsOfAccumulation, "rightsOfAccumulation");
-    this.rightsOfAccumulation = JsonNullable.of(rightsOfAccumulation);
-    return this;
-  }
-
-  /**
-   * Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares with
-   * the holdings of certain related parties toward achieving the investment thresholds at which
-   * sales charge discounts become available. Either ROA or LOI may be specified, but not both.
-   */
-  public CompressedOrder withRightsOfAccumulation(
-      JsonNullable<? extends CompressedOrderRightsOfAccumulation> rightsOfAccumulation) {
-    Utils.checkNotNull(rightsOfAccumulation, "rightsOfAccumulation");
-    this.rightsOfAccumulation = rightsOfAccumulation;
-    return this;
-  }
-
   /** The side of this order. */
   public CompressedOrder withSide(CompressedOrderSide side) {
     Utils.checkNotNull(side, "side");
@@ -966,19 +839,16 @@ public class CompressedOrder {
         && Objects.deepEquals(this.cumulativeNotionalValue, other.cumulativeNotionalValue)
         && Objects.deepEquals(this.currencyCode, other.currencyCode)
         && Objects.deepEquals(this.executions, other.executions)
-        && Objects.deepEquals(this.fees, other.fees)
         && Objects.deepEquals(this.filledQuantity, other.filledQuantity)
         && Objects.deepEquals(this.identifier, other.identifier)
         && Objects.deepEquals(this.identifierType, other.identifierType)
         && Objects.deepEquals(this.lastUpdateTime, other.lastUpdateTime)
-        && Objects.deepEquals(this.letterOfIntent, other.letterOfIntent)
         && Objects.deepEquals(this.name, other.name)
         && Objects.deepEquals(this.notionalValue, other.notionalValue)
         && Objects.deepEquals(this.orderRejectedReason, other.orderRejectedReason)
         && Objects.deepEquals(this.orderStatus, other.orderStatus)
         && Objects.deepEquals(this.orderType, other.orderType)
         && Objects.deepEquals(this.quantity, other.quantity)
-        && Objects.deepEquals(this.rightsOfAccumulation, other.rightsOfAccumulation)
         && Objects.deepEquals(this.side, other.side)
         && Objects.deepEquals(this.timeInForce, other.timeInForce);
   }
@@ -995,19 +865,16 @@ public class CompressedOrder {
         cumulativeNotionalValue,
         currencyCode,
         executions,
-        fees,
         filledQuantity,
         identifier,
         identifierType,
         lastUpdateTime,
-        letterOfIntent,
         name,
         notionalValue,
         orderRejectedReason,
         orderStatus,
         orderType,
         quantity,
-        rightsOfAccumulation,
         side,
         timeInForce);
   }
@@ -1034,8 +901,6 @@ public class CompressedOrder {
         currencyCode,
         "executions",
         executions,
-        "fees",
-        fees,
         "filledQuantity",
         filledQuantity,
         "identifier",
@@ -1044,8 +909,6 @@ public class CompressedOrder {
         identifierType,
         "lastUpdateTime",
         lastUpdateTime,
-        "letterOfIntent",
-        letterOfIntent,
         "name",
         name,
         "notionalValue",
@@ -1058,8 +921,6 @@ public class CompressedOrder {
         orderType,
         "quantity",
         quantity,
-        "rightsOfAccumulation",
-        rightsOfAccumulation,
         "side",
         side,
         "timeInForce",
@@ -1087,8 +948,6 @@ public class CompressedOrder {
 
     private Optional<? extends List<Executions>> executions = Optional.empty();
 
-    private Optional<? extends List<Fee>> fees = Optional.empty();
-
     private JsonNullable<? extends CompressedOrderFilledQuantity> filledQuantity =
         JsonNullable.undefined();
 
@@ -1097,9 +956,6 @@ public class CompressedOrder {
     private Optional<? extends CompressedOrderIdentifierType> identifierType = Optional.empty();
 
     private JsonNullable<OffsetDateTime> lastUpdateTime = JsonNullable.undefined();
-
-    private JsonNullable<? extends CompressedOrderLetterOfIntent> letterOfIntent =
-        JsonNullable.undefined();
 
     private Optional<String> name = Optional.empty();
 
@@ -1114,9 +970,6 @@ public class CompressedOrder {
     private Optional<? extends CompressedOrderOrderType> orderType = Optional.empty();
 
     private JsonNullable<? extends CompressedOrderQuantity> quantity = JsonNullable.undefined();
-
-    private JsonNullable<? extends CompressedOrderRightsOfAccumulation> rightsOfAccumulation =
-        JsonNullable.undefined();
 
     private Optional<? extends CompressedOrderSide> side = Optional.empty();
 
@@ -1292,20 +1145,6 @@ public class CompressedOrder {
       return this;
     }
 
-    /** Fees that will be applied to this order. */
-    public Builder fees(List<Fee> fees) {
-      Utils.checkNotNull(fees, "fees");
-      this.fees = Optional.ofNullable(fees);
-      return this;
-    }
-
-    /** Fees that will be applied to this order. */
-    public Builder fees(Optional<? extends List<Fee>> fees) {
-      Utils.checkNotNull(fees, "fees");
-      this.fees = fees;
-      return this;
-    }
-
     /**
      * The summed quantity value across all fills in this order, up to a maximum of 5 decimal
      * places. Will be absent if an order has no fill information.
@@ -1367,29 +1206,6 @@ public class CompressedOrder {
     public Builder lastUpdateTime(JsonNullable<OffsetDateTime> lastUpdateTime) {
       Utils.checkNotNull(lastUpdateTime, "lastUpdateTime");
       this.lastUpdateTime = lastUpdateTime;
-      return this;
-    }
-
-    /**
-     * Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a
-     * commitment to buy a specified monetary amount of shares over a period of time, usually 13
-     * months. Either ROA or LOI may be specified, but not both.
-     */
-    public Builder letterOfIntent(CompressedOrderLetterOfIntent letterOfIntent) {
-      Utils.checkNotNull(letterOfIntent, "letterOfIntent");
-      this.letterOfIntent = JsonNullable.of(letterOfIntent);
-      return this;
-    }
-
-    /**
-     * Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a
-     * commitment to buy a specified monetary amount of shares over a period of time, usually 13
-     * months. Either ROA or LOI may be specified, but not both.
-     */
-    public Builder letterOfIntent(
-        JsonNullable<? extends CompressedOrderLetterOfIntent> letterOfIntent) {
-      Utils.checkNotNull(letterOfIntent, "letterOfIntent");
-      this.letterOfIntent = letterOfIntent;
       return this;
     }
 
@@ -1505,31 +1321,6 @@ public class CompressedOrder {
       return this;
     }
 
-    /**
-     * Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares
-     * with the holdings of certain related parties toward achieving the investment thresholds at
-     * which sales charge discounts become available. Either ROA or LOI may be specified, but not
-     * both.
-     */
-    public Builder rightsOfAccumulation(CompressedOrderRightsOfAccumulation rightsOfAccumulation) {
-      Utils.checkNotNull(rightsOfAccumulation, "rightsOfAccumulation");
-      this.rightsOfAccumulation = JsonNullable.of(rightsOfAccumulation);
-      return this;
-    }
-
-    /**
-     * Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares
-     * with the holdings of certain related parties toward achieving the investment thresholds at
-     * which sales charge discounts become available. Either ROA or LOI may be specified, but not
-     * both.
-     */
-    public Builder rightsOfAccumulation(
-        JsonNullable<? extends CompressedOrderRightsOfAccumulation> rightsOfAccumulation) {
-      Utils.checkNotNull(rightsOfAccumulation, "rightsOfAccumulation");
-      this.rightsOfAccumulation = rightsOfAccumulation;
-      return this;
-    }
-
     /** The side of this order. */
     public Builder side(CompressedOrderSide side) {
       Utils.checkNotNull(side, "side");
@@ -1575,19 +1366,16 @@ public class CompressedOrder {
           cumulativeNotionalValue,
           currencyCode,
           executions,
-          fees,
           filledQuantity,
           identifier,
           identifierType,
           lastUpdateTime,
-          letterOfIntent,
           name,
           notionalValue,
           orderRejectedReason,
           orderStatus,
           orderType,
           quantity,
-          rightsOfAccumulation,
           side,
           timeInForce);
     }

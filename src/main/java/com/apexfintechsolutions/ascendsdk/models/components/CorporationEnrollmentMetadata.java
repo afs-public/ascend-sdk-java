@@ -17,7 +17,7 @@ import org.openapitools.jackson.nullable.JsonNullable;
 /** CorporationEnrollmentMetadata - Metadata for the REGISTRATION_CORPORATION type */
 public class CorporationEnrollmentMetadata {
 
-  /** Option to auto-enroll in Dividend Reinvestment; defaults to true */
+  /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("dividend_reinvestment_plan")
   private Optional<? extends EnrollmentCorporationEnrollmentMetadataDividendReinvestmentPlan>
@@ -28,7 +28,7 @@ public class CorporationEnrollmentMetadata {
   @JsonProperty("edd_account_enrollment_metadata")
   private JsonNullable<? extends EddAccountEnrollmentMetadata> eddAccountEnrollmentMetadata;
 
-  /** Option to auto-enroll in FDIC cash sweep; defaults to true */
+  /** Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("fdic_cash_sweep")
   private Optional<? extends EnrollmentCorporationEnrollmentMetadataFdicCashSweep> fdicCashSweep;
@@ -54,7 +54,7 @@ public class CorporationEnrollmentMetadata {
     this(Optional.empty(), JsonNullable.undefined(), Optional.empty());
   }
 
-  /** Option to auto-enroll in Dividend Reinvestment; defaults to true */
+  /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<EnrollmentCorporationEnrollmentMetadataDividendReinvestmentPlan>
@@ -70,7 +70,7 @@ public class CorporationEnrollmentMetadata {
     return (JsonNullable<EddAccountEnrollmentMetadata>) eddAccountEnrollmentMetadata;
   }
 
-  /** Option to auto-enroll in FDIC cash sweep; defaults to true */
+  /** Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<EnrollmentCorporationEnrollmentMetadataFdicCashSweep> fdicCashSweep() {
@@ -81,7 +81,7 @@ public class CorporationEnrollmentMetadata {
     return new Builder();
   }
 
-  /** Option to auto-enroll in Dividend Reinvestment; defaults to true */
+  /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */
   public CorporationEnrollmentMetadata withDividendReinvestmentPlan(
       EnrollmentCorporationEnrollmentMetadataDividendReinvestmentPlan dividendReinvestmentPlan) {
     Utils.checkNotNull(dividendReinvestmentPlan, "dividendReinvestmentPlan");
@@ -89,7 +89,7 @@ public class CorporationEnrollmentMetadata {
     return this;
   }
 
-  /** Option to auto-enroll in Dividend Reinvestment; defaults to true */
+  /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */
   public CorporationEnrollmentMetadata withDividendReinvestmentPlan(
       Optional<? extends EnrollmentCorporationEnrollmentMetadataDividendReinvestmentPlan>
           dividendReinvestmentPlan) {
@@ -114,7 +114,7 @@ public class CorporationEnrollmentMetadata {
     return this;
   }
 
-  /** Option to auto-enroll in FDIC cash sweep; defaults to true */
+  /** Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL */
   public CorporationEnrollmentMetadata withFdicCashSweep(
       EnrollmentCorporationEnrollmentMetadataFdicCashSweep fdicCashSweep) {
     Utils.checkNotNull(fdicCashSweep, "fdicCashSweep");
@@ -122,7 +122,7 @@ public class CorporationEnrollmentMetadata {
     return this;
   }
 
-  /** Option to auto-enroll in FDIC cash sweep; defaults to true */
+  /** Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL */
   public CorporationEnrollmentMetadata withFdicCashSweep(
       Optional<? extends EnrollmentCorporationEnrollmentMetadataFdicCashSweep> fdicCashSweep) {
     Utils.checkNotNull(fdicCashSweep, "fdicCashSweep");
@@ -176,7 +176,7 @@ public class CorporationEnrollmentMetadata {
       // force use of static builder() method
     }
 
-    /** Option to auto-enroll in Dividend Reinvestment; defaults to true */
+    /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */
     public Builder dividendReinvestmentPlan(
         EnrollmentCorporationEnrollmentMetadataDividendReinvestmentPlan dividendReinvestmentPlan) {
       Utils.checkNotNull(dividendReinvestmentPlan, "dividendReinvestmentPlan");
@@ -184,7 +184,7 @@ public class CorporationEnrollmentMetadata {
       return this;
     }
 
-    /** Option to auto-enroll in Dividend Reinvestment; defaults to true */
+    /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */
     public Builder dividendReinvestmentPlan(
         Optional<? extends EnrollmentCorporationEnrollmentMetadataDividendReinvestmentPlan>
             dividendReinvestmentPlan) {
@@ -209,7 +209,7 @@ public class CorporationEnrollmentMetadata {
       return this;
     }
 
-    /** Option to auto-enroll in FDIC cash sweep; defaults to true */
+    /** Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL */
     public Builder fdicCashSweep(
         EnrollmentCorporationEnrollmentMetadataFdicCashSweep fdicCashSweep) {
       Utils.checkNotNull(fdicCashSweep, "fdicCashSweep");
@@ -217,7 +217,7 @@ public class CorporationEnrollmentMetadata {
       return this;
     }
 
-    /** Option to auto-enroll in FDIC cash sweep; defaults to true */
+    /** Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL */
     public Builder fdicCashSweep(
         Optional<? extends EnrollmentCorporationEnrollmentMetadataFdicCashSweep> fdicCashSweep) {
       Utils.checkNotNull(fdicCashSweep, "fdicCashSweep");

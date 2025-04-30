@@ -7,8 +7,11 @@ package com.apexfintechsolutions.ascendsdk.models.components;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * ForceRejectAchWithdrawalRequestCreate - Request to force rejection of an existing ACH withdrawal
@@ -20,16 +23,34 @@ public class ForceRejectAchWithdrawalRequestCreate {
   @JsonProperty("name")
   private String name;
 
+  /** Reason why the ACH withdrawal is being rejected. */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("reason")
+  private Optional<String> reason;
+
   @JsonCreator
-  public ForceRejectAchWithdrawalRequestCreate(@JsonProperty("name") String name) {
+  public ForceRejectAchWithdrawalRequestCreate(
+      @JsonProperty("name") String name, @JsonProperty("reason") Optional<String> reason) {
     Utils.checkNotNull(name, "name");
+    Utils.checkNotNull(reason, "reason");
     this.name = name;
+    this.reason = reason;
+  }
+
+  public ForceRejectAchWithdrawalRequestCreate(String name) {
+    this(name, Optional.empty());
   }
 
   /** The name of the ACH withdrawal to force reject. */
   @JsonIgnore
   public String name() {
     return name;
+  }
+
+  /** Reason why the ACH withdrawal is being rejected. */
+  @JsonIgnore
+  public Optional<String> reason() {
+    return reason;
   }
 
   public static final Builder builder() {
@@ -43,6 +64,20 @@ public class ForceRejectAchWithdrawalRequestCreate {
     return this;
   }
 
+  /** Reason why the ACH withdrawal is being rejected. */
+  public ForceRejectAchWithdrawalRequestCreate withReason(String reason) {
+    Utils.checkNotNull(reason, "reason");
+    this.reason = Optional.ofNullable(reason);
+    return this;
+  }
+
+  /** Reason why the ACH withdrawal is being rejected. */
+  public ForceRejectAchWithdrawalRequestCreate withReason(Optional<String> reason) {
+    Utils.checkNotNull(reason, "reason");
+    this.reason = reason;
+    return this;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -52,22 +87,26 @@ public class ForceRejectAchWithdrawalRequestCreate {
       return false;
     }
     ForceRejectAchWithdrawalRequestCreate other = (ForceRejectAchWithdrawalRequestCreate) o;
-    return Objects.deepEquals(this.name, other.name);
+    return Objects.deepEquals(this.name, other.name)
+        && Objects.deepEquals(this.reason, other.reason);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name);
+    return Objects.hash(name, reason);
   }
 
   @Override
   public String toString() {
-    return Utils.toString(ForceRejectAchWithdrawalRequestCreate.class, "name", name);
+    return Utils.toString(
+        ForceRejectAchWithdrawalRequestCreate.class, "name", name, "reason", reason);
   }
 
   public static final class Builder {
 
     private String name;
+
+    private Optional<String> reason = Optional.empty();
 
     private Builder() {
       // force use of static builder() method
@@ -80,8 +119,22 @@ public class ForceRejectAchWithdrawalRequestCreate {
       return this;
     }
 
+    /** Reason why the ACH withdrawal is being rejected. */
+    public Builder reason(String reason) {
+      Utils.checkNotNull(reason, "reason");
+      this.reason = Optional.ofNullable(reason);
+      return this;
+    }
+
+    /** Reason why the ACH withdrawal is being rejected. */
+    public Builder reason(Optional<String> reason) {
+      Utils.checkNotNull(reason, "reason");
+      this.reason = reason;
+      return this;
+    }
+
     public ForceRejectAchWithdrawalRequestCreate build() {
-      return new ForceRejectAchWithdrawalRequestCreate(name);
+      return new ForceRejectAchWithdrawalRequestCreate(name, reason);
     }
   }
 }

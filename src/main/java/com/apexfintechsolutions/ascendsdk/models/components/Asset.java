@@ -73,6 +73,11 @@ public class Asset {
   @JsonProperty("name")
   private Optional<String> name;
 
+  /** Option specific asset details */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("option")
+  private JsonNullable<? extends Option> option;
+
   /** ISO code identifying the region in which the entity was incorporated */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("originating_region_code")
@@ -108,6 +113,7 @@ public class Asset {
       @JsonProperty("issuing_region_code") Optional<String> issuingRegionCode,
       @JsonProperty("mutual_fund") JsonNullable<? extends MutualFund> mutualFund,
       @JsonProperty("name") Optional<String> name,
+      @JsonProperty("option") JsonNullable<? extends Option> option,
       @JsonProperty("originating_region_code") Optional<String> originatingRegionCode,
       @JsonProperty("symbol") Optional<String> symbol,
       @JsonProperty("type") Optional<? extends AssetType1> type,
@@ -122,6 +128,7 @@ public class Asset {
     Utils.checkNotNull(issuingRegionCode, "issuingRegionCode");
     Utils.checkNotNull(mutualFund, "mutualFund");
     Utils.checkNotNull(name, "name");
+    Utils.checkNotNull(option, "option");
     Utils.checkNotNull(originatingRegionCode, "originatingRegionCode");
     Utils.checkNotNull(symbol, "symbol");
     Utils.checkNotNull(type, "type");
@@ -136,6 +143,7 @@ public class Asset {
     this.issuingRegionCode = issuingRegionCode;
     this.mutualFund = mutualFund;
     this.name = name;
+    this.option = option;
     this.originatingRegionCode = originatingRegionCode;
     this.symbol = symbol;
     this.type = type;
@@ -154,6 +162,7 @@ public class Asset {
         Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty(),
+        JsonNullable.undefined(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
@@ -228,6 +237,13 @@ public class Asset {
   @JsonIgnore
   public Optional<String> name() {
     return name;
+  }
+
+  /** Option specific asset details */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<Option> option() {
+    return (JsonNullable<Option>) option;
   }
 
   /** ISO code identifying the region in which the entity was incorporated */
@@ -414,6 +430,20 @@ public class Asset {
     return this;
   }
 
+  /** Option specific asset details */
+  public Asset withOption(Option option) {
+    Utils.checkNotNull(option, "option");
+    this.option = JsonNullable.of(option);
+    return this;
+  }
+
+  /** Option specific asset details */
+  public Asset withOption(JsonNullable<? extends Option> option) {
+    Utils.checkNotNull(option, "option");
+    this.option = option;
+    return this;
+  }
+
   /** ISO code identifying the region in which the entity was incorporated */
   public Asset withOriginatingRegionCode(String originatingRegionCode) {
     Utils.checkNotNull(originatingRegionCode, "originatingRegionCode");
@@ -495,6 +525,7 @@ public class Asset {
         && Objects.deepEquals(this.issuingRegionCode, other.issuingRegionCode)
         && Objects.deepEquals(this.mutualFund, other.mutualFund)
         && Objects.deepEquals(this.name, other.name)
+        && Objects.deepEquals(this.option, other.option)
         && Objects.deepEquals(this.originatingRegionCode, other.originatingRegionCode)
         && Objects.deepEquals(this.symbol, other.symbol)
         && Objects.deepEquals(this.type, other.type)
@@ -514,6 +545,7 @@ public class Asset {
         issuingRegionCode,
         mutualFund,
         name,
+        option,
         originatingRegionCode,
         symbol,
         type,
@@ -544,6 +576,8 @@ public class Asset {
         mutualFund,
         "name",
         name,
+        "option",
+        option,
         "originatingRegionCode",
         originatingRegionCode,
         "symbol",
@@ -575,6 +609,8 @@ public class Asset {
     private JsonNullable<? extends MutualFund> mutualFund = JsonNullable.undefined();
 
     private Optional<String> name = Optional.empty();
+
+    private JsonNullable<? extends Option> option = JsonNullable.undefined();
 
     private Optional<String> originatingRegionCode = Optional.empty();
 
@@ -740,6 +776,20 @@ public class Asset {
       return this;
     }
 
+    /** Option specific asset details */
+    public Builder option(Option option) {
+      Utils.checkNotNull(option, "option");
+      this.option = JsonNullable.of(option);
+      return this;
+    }
+
+    /** Option specific asset details */
+    public Builder option(JsonNullable<? extends Option> option) {
+      Utils.checkNotNull(option, "option");
+      this.option = option;
+      return this;
+    }
+
     /** ISO code identifying the region in which the entity was incorporated */
     public Builder originatingRegionCode(String originatingRegionCode) {
       Utils.checkNotNull(originatingRegionCode, "originatingRegionCode");
@@ -814,6 +864,7 @@ public class Asset {
           issuingRegionCode,
           mutualFund,
           name,
+          option,
           originatingRegionCode,
           symbol,
           type,

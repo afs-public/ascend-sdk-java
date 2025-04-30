@@ -39,7 +39,7 @@ public class TransferScheduleSummary {
   /** Flag indicating whether this is a deposit or withdrawal transfer */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("direction")
-  private Optional<? extends TransferScheduleSummaryDirection> direction;
+  private Optional<? extends Direction> direction;
 
   /** The mechanism used for this transfer schedule */
   @JsonInclude(Include.NON_ABSENT)
@@ -72,7 +72,7 @@ public class TransferScheduleSummary {
   public TransferScheduleSummary(
       @JsonProperty("amount") JsonNullable<? extends TransferScheduleSummaryAmount> amount,
       @JsonProperty("client_schedule_id") Optional<String> clientScheduleId,
-      @JsonProperty("direction") Optional<? extends TransferScheduleSummaryDirection> direction,
+      @JsonProperty("direction") Optional<? extends Direction> direction,
       @JsonProperty("mechanism") Optional<? extends TransferScheduleSummaryMechanism> mechanism,
       @JsonProperty("retirement_contribution")
           JsonNullable<? extends TransferScheduleSummaryRetirementContribution>
@@ -135,8 +135,8 @@ public class TransferScheduleSummary {
   /** Flag indicating whether this is a deposit or withdrawal transfer */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<TransferScheduleSummaryDirection> direction() {
-    return (Optional<TransferScheduleSummaryDirection>) direction;
+  public Optional<Direction> direction() {
+    return (Optional<Direction>) direction;
   }
 
   /** The mechanism used for this transfer schedule */
@@ -219,15 +219,14 @@ public class TransferScheduleSummary {
   }
 
   /** Flag indicating whether this is a deposit or withdrawal transfer */
-  public TransferScheduleSummary withDirection(TransferScheduleSummaryDirection direction) {
+  public TransferScheduleSummary withDirection(Direction direction) {
     Utils.checkNotNull(direction, "direction");
     this.direction = Optional.ofNullable(direction);
     return this;
   }
 
   /** Flag indicating whether this is a deposit or withdrawal transfer */
-  public TransferScheduleSummary withDirection(
-      Optional<? extends TransferScheduleSummaryDirection> direction) {
+  public TransferScheduleSummary withDirection(Optional<? extends Direction> direction) {
     Utils.checkNotNull(direction, "direction");
     this.direction = direction;
     return this;
@@ -371,7 +370,7 @@ public class TransferScheduleSummary {
 
     private Optional<String> clientScheduleId = Optional.empty();
 
-    private Optional<? extends TransferScheduleSummaryDirection> direction = Optional.empty();
+    private Optional<? extends Direction> direction = Optional.empty();
 
     private Optional<? extends TransferScheduleSummaryMechanism> mechanism = Optional.empty();
 
@@ -431,14 +430,14 @@ public class TransferScheduleSummary {
     }
 
     /** Flag indicating whether this is a deposit or withdrawal transfer */
-    public Builder direction(TransferScheduleSummaryDirection direction) {
+    public Builder direction(Direction direction) {
       Utils.checkNotNull(direction, "direction");
       this.direction = Optional.ofNullable(direction);
       return this;
     }
 
     /** Flag indicating whether this is a deposit or withdrawal transfer */
-    public Builder direction(Optional<? extends TransferScheduleSummaryDirection> direction) {
+    public Builder direction(Optional<? extends Direction> direction) {
       Utils.checkNotNull(direction, "direction");
       this.direction = direction;
       return this;

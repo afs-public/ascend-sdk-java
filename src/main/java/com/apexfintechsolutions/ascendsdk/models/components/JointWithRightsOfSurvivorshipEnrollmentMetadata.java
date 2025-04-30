@@ -19,7 +19,7 @@ import java.util.Optional;
  */
 public class JointWithRightsOfSurvivorshipEnrollmentMetadata {
 
-  /** Option to auto-enroll in Dividend Reinvestment; defaults to true */
+  /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("dividend_reinvestment_plan")
   private Optional<
@@ -27,7 +27,7 @@ public class JointWithRightsOfSurvivorshipEnrollmentMetadata {
               EnrollmentJointWithRightsOfSurvivorshipEnrollmentMetadataDividendReinvestmentPlan>
       dividendReinvestmentPlan;
 
-  /** Option to auto-enroll in FDIC cash sweep; defaults to true */
+  /** Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("fdic_cash_sweep")
   private Optional<? extends EnrollmentJointWithRightsOfSurvivorshipEnrollmentMetadataFdicCashSweep>
@@ -53,7 +53,7 @@ public class JointWithRightsOfSurvivorshipEnrollmentMetadata {
     this(Optional.empty(), Optional.empty());
   }
 
-  /** Option to auto-enroll in Dividend Reinvestment; defaults to true */
+  /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<EnrollmentJointWithRightsOfSurvivorshipEnrollmentMetadataDividendReinvestmentPlan>
@@ -63,7 +63,7 @@ public class JointWithRightsOfSurvivorshipEnrollmentMetadata {
         dividendReinvestmentPlan;
   }
 
-  /** Option to auto-enroll in FDIC cash sweep; defaults to true */
+  /** Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<EnrollmentJointWithRightsOfSurvivorshipEnrollmentMetadataFdicCashSweep>
@@ -76,7 +76,7 @@ public class JointWithRightsOfSurvivorshipEnrollmentMetadata {
     return new Builder();
   }
 
-  /** Option to auto-enroll in Dividend Reinvestment; defaults to true */
+  /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */
   public JointWithRightsOfSurvivorshipEnrollmentMetadata withDividendReinvestmentPlan(
       EnrollmentJointWithRightsOfSurvivorshipEnrollmentMetadataDividendReinvestmentPlan
           dividendReinvestmentPlan) {
@@ -85,7 +85,7 @@ public class JointWithRightsOfSurvivorshipEnrollmentMetadata {
     return this;
   }
 
-  /** Option to auto-enroll in Dividend Reinvestment; defaults to true */
+  /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */
   public JointWithRightsOfSurvivorshipEnrollmentMetadata withDividendReinvestmentPlan(
       Optional<
               ? extends
@@ -96,7 +96,7 @@ public class JointWithRightsOfSurvivorshipEnrollmentMetadata {
     return this;
   }
 
-  /** Option to auto-enroll in FDIC cash sweep; defaults to true */
+  /** Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL */
   public JointWithRightsOfSurvivorshipEnrollmentMetadata withFdicCashSweep(
       EnrollmentJointWithRightsOfSurvivorshipEnrollmentMetadataFdicCashSweep fdicCashSweep) {
     Utils.checkNotNull(fdicCashSweep, "fdicCashSweep");
@@ -104,7 +104,7 @@ public class JointWithRightsOfSurvivorshipEnrollmentMetadata {
     return this;
   }
 
-  /** Option to auto-enroll in FDIC cash sweep; defaults to true */
+  /** Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL */
   public JointWithRightsOfSurvivorshipEnrollmentMetadata withFdicCashSweep(
       Optional<? extends EnrollmentJointWithRightsOfSurvivorshipEnrollmentMetadataFdicCashSweep>
           fdicCashSweep) {
@@ -157,7 +157,7 @@ public class JointWithRightsOfSurvivorshipEnrollmentMetadata {
       // force use of static builder() method
     }
 
-    /** Option to auto-enroll in Dividend Reinvestment; defaults to true */
+    /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */
     public Builder dividendReinvestmentPlan(
         EnrollmentJointWithRightsOfSurvivorshipEnrollmentMetadataDividendReinvestmentPlan
             dividendReinvestmentPlan) {
@@ -166,7 +166,7 @@ public class JointWithRightsOfSurvivorshipEnrollmentMetadata {
       return this;
     }
 
-    /** Option to auto-enroll in Dividend Reinvestment; defaults to true */
+    /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */
     public Builder dividendReinvestmentPlan(
         Optional<
                 ? extends
@@ -177,7 +177,7 @@ public class JointWithRightsOfSurvivorshipEnrollmentMetadata {
       return this;
     }
 
-    /** Option to auto-enroll in FDIC cash sweep; defaults to true */
+    /** Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL */
     public Builder fdicCashSweep(
         EnrollmentJointWithRightsOfSurvivorshipEnrollmentMetadataFdicCashSweep fdicCashSweep) {
       Utils.checkNotNull(fdicCashSweep, "fdicCashSweep");
@@ -185,7 +185,7 @@ public class JointWithRightsOfSurvivorshipEnrollmentMetadata {
       return this;
     }
 
-    /** Option to auto-enroll in FDIC cash sweep; defaults to true */
+    /** Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL */
     public Builder fdicCashSweep(
         Optional<? extends EnrollmentJointWithRightsOfSurvivorshipEnrollmentMetadataFdicCashSweep>
             fdicCashSweep) {

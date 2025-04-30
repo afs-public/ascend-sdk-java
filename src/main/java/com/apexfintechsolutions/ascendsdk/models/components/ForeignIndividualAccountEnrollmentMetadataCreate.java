@@ -15,14 +15,14 @@ import java.util.Optional;
 
 public class ForeignIndividualAccountEnrollmentMetadataCreate {
 
-  /** Option to auto-enroll in Dividend Reinvestment; defaults to true */
+  /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("dividend_reinvestment_plan")
   private Optional<
           ? extends ForeignIndividualAccountEnrollmentMetadataCreateDividendReinvestmentPlan>
       dividendReinvestmentPlan;
 
-  /** Option to auto-enroll in FDIC cash sweep; defaults to true */
+  /** Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("fdic_cash_sweep")
   private Optional<? extends ForeignIndividualAccountEnrollmentMetadataCreateFdicCashSweep>
@@ -63,7 +63,7 @@ public class ForeignIndividualAccountEnrollmentMetadataCreate {
     this(Optional.empty(), Optional.empty(), foreignNaturalPersonAccountEnrollmentMetadata);
   }
 
-  /** Option to auto-enroll in Dividend Reinvestment; defaults to true */
+  /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<ForeignIndividualAccountEnrollmentMetadataCreateDividendReinvestmentPlan>
@@ -72,7 +72,7 @@ public class ForeignIndividualAccountEnrollmentMetadataCreate {
         dividendReinvestmentPlan;
   }
 
-  /** Option to auto-enroll in FDIC cash sweep; defaults to true */
+  /** Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<ForeignIndividualAccountEnrollmentMetadataCreateFdicCashSweep> fdicCashSweep() {
@@ -90,7 +90,7 @@ public class ForeignIndividualAccountEnrollmentMetadataCreate {
     return new Builder();
   }
 
-  /** Option to auto-enroll in Dividend Reinvestment; defaults to true */
+  /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */
   public ForeignIndividualAccountEnrollmentMetadataCreate withDividendReinvestmentPlan(
       ForeignIndividualAccountEnrollmentMetadataCreateDividendReinvestmentPlan
           dividendReinvestmentPlan) {
@@ -99,7 +99,7 @@ public class ForeignIndividualAccountEnrollmentMetadataCreate {
     return this;
   }
 
-  /** Option to auto-enroll in Dividend Reinvestment; defaults to true */
+  /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */
   public ForeignIndividualAccountEnrollmentMetadataCreate withDividendReinvestmentPlan(
       Optional<? extends ForeignIndividualAccountEnrollmentMetadataCreateDividendReinvestmentPlan>
           dividendReinvestmentPlan) {
@@ -108,7 +108,7 @@ public class ForeignIndividualAccountEnrollmentMetadataCreate {
     return this;
   }
 
-  /** Option to auto-enroll in FDIC cash sweep; defaults to true */
+  /** Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL */
   public ForeignIndividualAccountEnrollmentMetadataCreate withFdicCashSweep(
       ForeignIndividualAccountEnrollmentMetadataCreateFdicCashSweep fdicCashSweep) {
     Utils.checkNotNull(fdicCashSweep, "fdicCashSweep");
@@ -116,7 +116,7 @@ public class ForeignIndividualAccountEnrollmentMetadataCreate {
     return this;
   }
 
-  /** Option to auto-enroll in FDIC cash sweep; defaults to true */
+  /** Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL */
   public ForeignIndividualAccountEnrollmentMetadataCreate withFdicCashSweep(
       Optional<? extends ForeignIndividualAccountEnrollmentMetadataCreateFdicCashSweep>
           fdicCashSweep) {
@@ -189,7 +189,7 @@ public class ForeignIndividualAccountEnrollmentMetadataCreate {
       // force use of static builder() method
     }
 
-    /** Option to auto-enroll in Dividend Reinvestment; defaults to true */
+    /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */
     public Builder dividendReinvestmentPlan(
         ForeignIndividualAccountEnrollmentMetadataCreateDividendReinvestmentPlan
             dividendReinvestmentPlan) {
@@ -198,7 +198,7 @@ public class ForeignIndividualAccountEnrollmentMetadataCreate {
       return this;
     }
 
-    /** Option to auto-enroll in Dividend Reinvestment; defaults to true */
+    /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */
     public Builder dividendReinvestmentPlan(
         Optional<? extends ForeignIndividualAccountEnrollmentMetadataCreateDividendReinvestmentPlan>
             dividendReinvestmentPlan) {
@@ -207,7 +207,7 @@ public class ForeignIndividualAccountEnrollmentMetadataCreate {
       return this;
     }
 
-    /** Option to auto-enroll in FDIC cash sweep; defaults to true */
+    /** Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL */
     public Builder fdicCashSweep(
         ForeignIndividualAccountEnrollmentMetadataCreateFdicCashSweep fdicCashSweep) {
       Utils.checkNotNull(fdicCashSweep, "fdicCashSweep");
@@ -215,7 +215,7 @@ public class ForeignIndividualAccountEnrollmentMetadataCreate {
       return this;
     }
 
-    /** Option to auto-enroll in FDIC cash sweep; defaults to true */
+    /** Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL */
     public Builder fdicCashSweep(
         Optional<? extends ForeignIndividualAccountEnrollmentMetadataCreateFdicCashSweep>
             fdicCashSweep) {

@@ -77,8 +77,8 @@ public class LegalEntity {
   private Optional<? extends LegalEntityExemptCustomerReason> exemptCustomerReason;
 
   /**
-   * Indicates whether the entity is exempt from verifying beneficial owners. By default, this is
-   * set to `false`.
+   * Indicates whether the entity is exempt from verifying beneficial owners and Enhanced Due
+   * Diligence. By default, this is set to `false`
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("exempt_verifying_beneficial_owners")
@@ -449,8 +449,8 @@ public class LegalEntity {
   }
 
   /**
-   * Indicates whether the entity is exempt from verifying beneficial owners. By default, this is
-   * set to `false`.
+   * Indicates whether the entity is exempt from verifying beneficial owners and Enhanced Due
+   * Diligence. By default, this is set to `false`
    */
   @JsonIgnore
   public Optional<Boolean> exemptVerifyingBeneficialOwners() {
@@ -796,8 +796,8 @@ public class LegalEntity {
   }
 
   /**
-   * Indicates whether the entity is exempt from verifying beneficial owners. By default, this is
-   * set to `false`.
+   * Indicates whether the entity is exempt from verifying beneficial owners and Enhanced Due
+   * Diligence. By default, this is set to `false`
    */
   public LegalEntity withExemptVerifyingBeneficialOwners(boolean exemptVerifyingBeneficialOwners) {
     Utils.checkNotNull(exemptVerifyingBeneficialOwners, "exemptVerifyingBeneficialOwners");
@@ -806,8 +806,8 @@ public class LegalEntity {
   }
 
   /**
-   * Indicates whether the entity is exempt from verifying beneficial owners. By default, this is
-   * set to `false`.
+   * Indicates whether the entity is exempt from verifying beneficial owners and Enhanced Due
+   * Diligence. By default, this is set to `false`
    */
   public LegalEntity withExemptVerifyingBeneficialOwners(
       Optional<Boolean> exemptVerifyingBeneficialOwners) {
@@ -1589,8 +1589,8 @@ public class LegalEntity {
     }
 
     /**
-     * Indicates whether the entity is exempt from verifying beneficial owners. By default, this is
-     * set to `false`.
+     * Indicates whether the entity is exempt from verifying beneficial owners and Enhanced Due
+     * Diligence. By default, this is set to `false`
      */
     public Builder exemptVerifyingBeneficialOwners(boolean exemptVerifyingBeneficialOwners) {
       Utils.checkNotNull(exemptVerifyingBeneficialOwners, "exemptVerifyingBeneficialOwners");
@@ -1599,8 +1599,8 @@ public class LegalEntity {
     }
 
     /**
-     * Indicates whether the entity is exempt from verifying beneficial owners. By default, this is
-     * set to `false`.
+     * Indicates whether the entity is exempt from verifying beneficial owners and Enhanced Due
+     * Diligence. By default, this is set to `false`
      */
     public Builder exemptVerifyingBeneficialOwners(
         Optional<Boolean> exemptVerifyingBeneficialOwners) {

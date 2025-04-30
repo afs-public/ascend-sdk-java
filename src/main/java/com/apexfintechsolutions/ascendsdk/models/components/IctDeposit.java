@@ -50,7 +50,18 @@ public class IctDeposit {
 
   /** The state of the ICT deposit */
   @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("state")
+  private JsonNullable<? extends IctDepositState> state;
+
+  /**
+   * Deprecated, use state instead
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
+  @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("transfer_state")
+  @Deprecated
   private JsonNullable<? extends TransferState> transferState;
 
   /** The travel rule information for the ICT deposit */
@@ -66,6 +77,7 @@ public class IctDeposit {
       @JsonProperty("program") Optional<? extends IctDepositProgram> program,
       @JsonProperty("retirement_contribution")
           JsonNullable<? extends IctDepositRetirementContribution> retirementContribution,
+      @JsonProperty("state") JsonNullable<? extends IctDepositState> state,
       @JsonProperty("transfer_state") JsonNullable<? extends TransferState> transferState,
       @JsonProperty("travel_rule") JsonNullable<? extends TravelRule> travelRule) {
     Utils.checkNotNull(amount, "amount");
@@ -73,6 +85,7 @@ public class IctDeposit {
     Utils.checkNotNull(name, "name");
     Utils.checkNotNull(program, "program");
     Utils.checkNotNull(retirementContribution, "retirementContribution");
+    Utils.checkNotNull(state, "state");
     Utils.checkNotNull(transferState, "transferState");
     Utils.checkNotNull(travelRule, "travelRule");
     this.amount = amount;
@@ -80,6 +93,7 @@ public class IctDeposit {
     this.name = name;
     this.program = program;
     this.retirementContribution = retirementContribution;
+    this.state = state;
     this.transferState = transferState;
     this.travelRule = travelRule;
   }
@@ -90,6 +104,7 @@ public class IctDeposit {
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
+        JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined());
@@ -132,6 +147,19 @@ public class IctDeposit {
   }
 
   /** The state of the ICT deposit */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<IctDepositState> state() {
+    return (JsonNullable<IctDepositState>) state;
+  }
+
+  /**
+   * Deprecated, use state instead
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
+  @Deprecated
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public JsonNullable<TransferState> transferState() {
@@ -228,13 +256,39 @@ public class IctDeposit {
   }
 
   /** The state of the ICT deposit */
+  public IctDeposit withState(IctDepositState state) {
+    Utils.checkNotNull(state, "state");
+    this.state = JsonNullable.of(state);
+    return this;
+  }
+
+  /** The state of the ICT deposit */
+  public IctDeposit withState(JsonNullable<? extends IctDepositState> state) {
+    Utils.checkNotNull(state, "state");
+    this.state = state;
+    return this;
+  }
+
+  /**
+   * Deprecated, use state instead
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
+  @Deprecated
   public IctDeposit withTransferState(TransferState transferState) {
     Utils.checkNotNull(transferState, "transferState");
     this.transferState = JsonNullable.of(transferState);
     return this;
   }
 
-  /** The state of the ICT deposit */
+  /**
+   * Deprecated, use state instead
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
+  @Deprecated
   public IctDeposit withTransferState(JsonNullable<? extends TransferState> transferState) {
     Utils.checkNotNull(transferState, "transferState");
     this.transferState = transferState;
@@ -269,6 +323,7 @@ public class IctDeposit {
         && Objects.deepEquals(this.name, other.name)
         && Objects.deepEquals(this.program, other.program)
         && Objects.deepEquals(this.retirementContribution, other.retirementContribution)
+        && Objects.deepEquals(this.state, other.state)
         && Objects.deepEquals(this.transferState, other.transferState)
         && Objects.deepEquals(this.travelRule, other.travelRule);
   }
@@ -276,7 +331,14 @@ public class IctDeposit {
   @Override
   public int hashCode() {
     return Objects.hash(
-        amount, clientTransferId, name, program, retirementContribution, transferState, travelRule);
+        amount,
+        clientTransferId,
+        name,
+        program,
+        retirementContribution,
+        state,
+        transferState,
+        travelRule);
   }
 
   @Override
@@ -293,6 +355,8 @@ public class IctDeposit {
         program,
         "retirementContribution",
         retirementContribution,
+        "state",
+        state,
         "transferState",
         transferState,
         "travelRule",
@@ -312,6 +376,9 @@ public class IctDeposit {
     private JsonNullable<? extends IctDepositRetirementContribution> retirementContribution =
         JsonNullable.undefined();
 
+    private JsonNullable<? extends IctDepositState> state = JsonNullable.undefined();
+
+    @Deprecated
     private JsonNullable<? extends TransferState> transferState = JsonNullable.undefined();
 
     private JsonNullable<? extends TravelRule> travelRule = JsonNullable.undefined();
@@ -398,13 +465,39 @@ public class IctDeposit {
     }
 
     /** The state of the ICT deposit */
+    public Builder state(IctDepositState state) {
+      Utils.checkNotNull(state, "state");
+      this.state = JsonNullable.of(state);
+      return this;
+    }
+
+    /** The state of the ICT deposit */
+    public Builder state(JsonNullable<? extends IctDepositState> state) {
+      Utils.checkNotNull(state, "state");
+      this.state = state;
+      return this;
+    }
+
+    /**
+     * Deprecated, use state instead
+     *
+     * @deprecated field: This will be removed in a future release, please migrate away from it as
+     *     soon as possible.
+     */
+    @Deprecated
     public Builder transferState(TransferState transferState) {
       Utils.checkNotNull(transferState, "transferState");
       this.transferState = JsonNullable.of(transferState);
       return this;
     }
 
-    /** The state of the ICT deposit */
+    /**
+     * Deprecated, use state instead
+     *
+     * @deprecated field: This will be removed in a future release, please migrate away from it as
+     *     soon as possible.
+     */
+    @Deprecated
     public Builder transferState(JsonNullable<? extends TransferState> transferState) {
       Utils.checkNotNull(transferState, "transferState");
       this.transferState = transferState;
@@ -432,6 +525,7 @@ public class IctDeposit {
           name,
           program,
           retirementContribution,
+          state,
           transferState,
           travelRule);
     }

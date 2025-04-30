@@ -44,7 +44,7 @@ public class AccountsListAccountsRequest {
    * See the [CEL Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search)
    * page in Guides for more information; Filter options include: `account_id` `account_number`
    * `correspondent_id` `title` `state` `margin_group_id` `account_group_id` `registration_type`
-   * `parties.legal_natural_person.legal_natural_person_id`
+   * `reserve_class` `parties.legal_natural_person.legal_natural_person_id`
    * `parties.legal_natural_person.given_name` `parties.legal_natural_person.family_name`
    * `parties.legal_natural_person.tax_id_type` `parties.legal_natural_person.tax_id`
    * `parties.legal_entity.legal_entity_id` `parties.legal_entity.entity_name`
@@ -120,7 +120,7 @@ public class AccountsListAccountsRequest {
    * See the [CEL Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search)
    * page in Guides for more information; Filter options include: `account_id` `account_number`
    * `correspondent_id` `title` `state` `margin_group_id` `account_group_id` `registration_type`
-   * `parties.legal_natural_person.legal_natural_person_id`
+   * `reserve_class` `parties.legal_natural_person.legal_natural_person_id`
    * `parties.legal_natural_person.given_name` `parties.legal_natural_person.family_name`
    * `parties.legal_natural_person.tax_id_type` `parties.legal_natural_person.tax_id`
    * `parties.legal_entity.legal_entity_id` `parties.legal_entity.entity_name`
@@ -219,7 +219,7 @@ public class AccountsListAccountsRequest {
    * See the [CEL Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search)
    * page in Guides for more information; Filter options include: `account_id` `account_number`
    * `correspondent_id` `title` `state` `margin_group_id` `account_group_id` `registration_type`
-   * `parties.legal_natural_person.legal_natural_person_id`
+   * `reserve_class` `parties.legal_natural_person.legal_natural_person_id`
    * `parties.legal_natural_person.given_name` `parties.legal_natural_person.family_name`
    * `parties.legal_natural_person.tax_id_type` `parties.legal_natural_person.tax_id`
    * `parties.legal_entity.legal_entity_id` `parties.legal_entity.entity_name`
@@ -240,7 +240,7 @@ public class AccountsListAccountsRequest {
    * See the [CEL Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search)
    * page in Guides for more information; Filter options include: `account_id` `account_number`
    * `correspondent_id` `title` `state` `margin_group_id` `account_group_id` `registration_type`
-   * `parties.legal_natural_person.legal_natural_person_id`
+   * `reserve_class` `parties.legal_natural_person.legal_natural_person_id`
    * `parties.legal_natural_person.given_name` `parties.legal_natural_person.family_name`
    * `parties.legal_natural_person.tax_id_type` `parties.legal_natural_person.tax_id`
    * `parties.legal_entity.legal_entity_id` `parties.legal_entity.entity_name`
@@ -397,7 +397,7 @@ public class AccountsListAccountsRequest {
      * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
      * Guides for more information; Filter options include: `account_id` `account_number`
      * `correspondent_id` `title` `state` `margin_group_id` `account_group_id` `registration_type`
-     * `parties.legal_natural_person.legal_natural_person_id`
+     * `reserve_class` `parties.legal_natural_person.legal_natural_person_id`
      * `parties.legal_natural_person.given_name` `parties.legal_natural_person.family_name`
      * `parties.legal_natural_person.tax_id_type` `parties.legal_natural_person.tax_id`
      * `parties.legal_entity.legal_entity_id` `parties.legal_entity.entity_name`
@@ -419,7 +419,7 @@ public class AccountsListAccountsRequest {
      * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
      * Guides for more information; Filter options include: `account_id` `account_number`
      * `correspondent_id` `title` `state` `margin_group_id` `account_group_id` `registration_type`
-     * `parties.legal_natural_person.legal_natural_person_id`
+     * `reserve_class` `parties.legal_natural_person.legal_natural_person_id`
      * `parties.legal_natural_person.given_name` `parties.legal_natural_person.family_name`
      * `parties.legal_natural_person.tax_id_type` `parties.legal_natural_person.tax_id`
      * `parties.legal_entity.legal_entity_id` `parties.legal_entity.entity_name`

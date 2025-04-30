@@ -23,6 +23,18 @@ publishing {
     }
 }
 
+repositories {
+    if (project.hasProperty("testPublishedSDK")) {
+        maven {
+            url = uri("https://nexus.corp.apexclearing.com/repository/maven-group-proxy")
+            credentials {
+                username = System.getenv("NEXUS_USERNAME")
+                password = System.getenv("NEXUS_PASSWORD")
+            }
+        }
+    }
+}
+
 test {
     useJUnitPlatform()
 }
@@ -32,4 +44,8 @@ dependencies {
     testImplementation 'org.wiremock:wiremock:3.9.1'
     testImplementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.18.2'
     testImplementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
+    if (project.hasProperty("testPublishedSDK")) {
+        testImplementation 'com.apexfintechsolutions:ascendsdk:1.2.0'
+    }
 }

@@ -38,12 +38,14 @@ import java.util.Optional;
  * use of an instance in a switch expression but you can use the {@code asEnum()} method (after
  * dealing with the `Optional` appropriately).
  */
-/** AssetType - The type of the asset in this order */
+/**
+ * AssetType - The type of the asset in this order, which must be one of the following: EQUITY,
+ * MUTUAL_FUND, and FIXED_INCOME.
+ */
 @JsonDeserialize(using = AssetType._Deserializer.class)
 @JsonSerialize(using = AssetType._Serializer.class)
 public class AssetType {
 
-  public static final AssetType ASSET_TYPE_UNSPECIFIED = new AssetType("ASSET_TYPE_UNSPECIFIED");
   public static final AssetType EQUITY = new AssetType("EQUITY");
   public static final AssetType FIXED_INCOME = new AssetType("FIXED_INCOME");
   public static final AssetType MUTUAL_FUND = new AssetType("MUTUAL_FUND");
@@ -114,7 +116,6 @@ public class AssetType {
 
   private static final Map<String, AssetType> createValuesMap() {
     Map<String, AssetType> map = new LinkedHashMap<>();
-    map.put("ASSET_TYPE_UNSPECIFIED", ASSET_TYPE_UNSPECIFIED);
     map.put("EQUITY", EQUITY);
     map.put("FIXED_INCOME", FIXED_INCOME);
     map.put("MUTUAL_FUND", MUTUAL_FUND);
@@ -123,7 +124,6 @@ public class AssetType {
 
   private static final Map<String, AssetTypeEnum> createEnumsMap() {
     Map<String, AssetTypeEnum> map = new HashMap<>();
-    map.put("ASSET_TYPE_UNSPECIFIED", AssetTypeEnum.ASSET_TYPE_UNSPECIFIED);
     map.put("EQUITY", AssetTypeEnum.EQUITY);
     map.put("FIXED_INCOME", AssetTypeEnum.FIXED_INCOME);
     map.put("MUTUAL_FUND", AssetTypeEnum.MUTUAL_FUND);
@@ -161,7 +161,6 @@ public class AssetType {
   }
 
   public enum AssetTypeEnum {
-    ASSET_TYPE_UNSPECIFIED("ASSET_TYPE_UNSPECIFIED"),
     EQUITY("EQUITY"),
     FIXED_INCOME("FIXED_INCOME"),
     MUTUAL_FUND("MUTUAL_FUND"),

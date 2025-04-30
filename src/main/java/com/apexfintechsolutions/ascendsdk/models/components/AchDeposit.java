@@ -20,7 +20,7 @@ public class AchDeposit {
   /** The amount to deposit in USD. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("amount")
-  private JsonNullable<? extends AchDepositAmount> amount;
+  private JsonNullable<? extends Amount> amount;
 
   /** The bank relationship to be used for the ACH deposit. */
   @JsonInclude(Include.NON_ABSENT)
@@ -57,7 +57,7 @@ public class AchDeposit {
 
   @JsonCreator
   public AchDeposit(
-      @JsonProperty("amount") JsonNullable<? extends AchDepositAmount> amount,
+      @JsonProperty("amount") JsonNullable<? extends Amount> amount,
       @JsonProperty("bank_relationship") Optional<String> bankRelationship,
       @JsonProperty("client_transfer_id") Optional<String> clientTransferId,
       @JsonProperty("memo") Optional<String> memo,
@@ -95,8 +95,8 @@ public class AchDeposit {
   /** The amount to deposit in USD. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<AchDepositAmount> amount() {
-    return (JsonNullable<AchDepositAmount>) amount;
+  public JsonNullable<Amount> amount() {
+    return (JsonNullable<Amount>) amount;
   }
 
   /** The bank relationship to be used for the ACH deposit. */
@@ -145,14 +145,14 @@ public class AchDeposit {
   }
 
   /** The amount to deposit in USD. */
-  public AchDeposit withAmount(AchDepositAmount amount) {
+  public AchDeposit withAmount(Amount amount) {
     Utils.checkNotNull(amount, "amount");
     this.amount = JsonNullable.of(amount);
     return this;
   }
 
   /** The amount to deposit in USD. */
-  public AchDeposit withAmount(JsonNullable<? extends AchDepositAmount> amount) {
+  public AchDeposit withAmount(JsonNullable<? extends Amount> amount) {
     Utils.checkNotNull(amount, "amount");
     this.amount = amount;
     return this;
@@ -295,7 +295,7 @@ public class AchDeposit {
 
   public static final class Builder {
 
-    private JsonNullable<? extends AchDepositAmount> amount = JsonNullable.undefined();
+    private JsonNullable<? extends Amount> amount = JsonNullable.undefined();
 
     private Optional<String> bankRelationship = Optional.empty();
 
@@ -315,14 +315,14 @@ public class AchDeposit {
     }
 
     /** The amount to deposit in USD. */
-    public Builder amount(AchDepositAmount amount) {
+    public Builder amount(Amount amount) {
       Utils.checkNotNull(amount, "amount");
       this.amount = JsonNullable.of(amount);
       return this;
     }
 
     /** The amount to deposit in USD. */
-    public Builder amount(JsonNullable<? extends AchDepositAmount> amount) {
+    public Builder amount(JsonNullable<? extends Amount> amount) {
       Utils.checkNotNull(amount, "amount");
       this.amount = amount;
       return this;

@@ -42,6 +42,16 @@ public class TransfersFeeCreate {
   @JsonProperty("description")
   private Optional<String> description;
 
+  /**
+   * Optional account field to denote where the fee amount should be deposited into. If provided,
+   * the account must be a fee operating account. In the case of multiple fee operating accounts
+   * under the same correspondent, this field must be provided. If not provided, this will be looked
+   * up asynchronously (therefore will not be in the initial response)
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("fee_operating_account")
+  private Optional<String> feeOperatingAccount;
+
   /** The type of the fee being charged */
   @JsonProperty("type")
   private TransfersFeeCreateType type;
@@ -51,20 +61,23 @@ public class TransfersFeeCreate {
       @JsonProperty("amount") DecimalCreate amount,
       @JsonProperty("client_transfer_id") String clientTransferId,
       @JsonProperty("description") Optional<String> description,
+      @JsonProperty("fee_operating_account") Optional<String> feeOperatingAccount,
       @JsonProperty("type") TransfersFeeCreateType type) {
     Utils.checkNotNull(amount, "amount");
     Utils.checkNotNull(clientTransferId, "clientTransferId");
     Utils.checkNotNull(description, "description");
+    Utils.checkNotNull(feeOperatingAccount, "feeOperatingAccount");
     Utils.checkNotNull(type, "type");
     this.amount = amount;
     this.clientTransferId = clientTransferId;
     this.description = description;
+    this.feeOperatingAccount = feeOperatingAccount;
     this.type = type;
   }
 
   public TransfersFeeCreate(
       DecimalCreate amount, String clientTransferId, TransfersFeeCreateType type) {
-    this(amount, clientTransferId, Optional.empty(), type);
+    this(amount, clientTransferId, Optional.empty(), Optional.empty(), type);
   }
 
   /**
@@ -93,6 +106,17 @@ public class TransfersFeeCreate {
   @JsonIgnore
   public Optional<String> description() {
     return description;
+  }
+
+  /**
+   * Optional account field to denote where the fee amount should be deposited into. If provided,
+   * the account must be a fee operating account. In the case of multiple fee operating accounts
+   * under the same correspondent, this field must be provided. If not provided, this will be looked
+   * up asynchronously (therefore will not be in the initial response)
+   */
+  @JsonIgnore
+  public Optional<String> feeOperatingAccount() {
+    return feeOperatingAccount;
   }
 
   /** The type of the fee being charged */
@@ -143,6 +167,30 @@ public class TransfersFeeCreate {
     return this;
   }
 
+  /**
+   * Optional account field to denote where the fee amount should be deposited into. If provided,
+   * the account must be a fee operating account. In the case of multiple fee operating accounts
+   * under the same correspondent, this field must be provided. If not provided, this will be looked
+   * up asynchronously (therefore will not be in the initial response)
+   */
+  public TransfersFeeCreate withFeeOperatingAccount(String feeOperatingAccount) {
+    Utils.checkNotNull(feeOperatingAccount, "feeOperatingAccount");
+    this.feeOperatingAccount = Optional.ofNullable(feeOperatingAccount);
+    return this;
+  }
+
+  /**
+   * Optional account field to denote where the fee amount should be deposited into. If provided,
+   * the account must be a fee operating account. In the case of multiple fee operating accounts
+   * under the same correspondent, this field must be provided. If not provided, this will be looked
+   * up asynchronously (therefore will not be in the initial response)
+   */
+  public TransfersFeeCreate withFeeOperatingAccount(Optional<String> feeOperatingAccount) {
+    Utils.checkNotNull(feeOperatingAccount, "feeOperatingAccount");
+    this.feeOperatingAccount = feeOperatingAccount;
+    return this;
+  }
+
   /** The type of the fee being charged */
   public TransfersFeeCreate withType(TransfersFeeCreateType type) {
     Utils.checkNotNull(type, "type");
@@ -162,12 +210,13 @@ public class TransfersFeeCreate {
     return Objects.deepEquals(this.amount, other.amount)
         && Objects.deepEquals(this.clientTransferId, other.clientTransferId)
         && Objects.deepEquals(this.description, other.description)
+        && Objects.deepEquals(this.feeOperatingAccount, other.feeOperatingAccount)
         && Objects.deepEquals(this.type, other.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(amount, clientTransferId, description, type);
+    return Objects.hash(amount, clientTransferId, description, feeOperatingAccount, type);
   }
 
   @Override
@@ -180,6 +229,8 @@ public class TransfersFeeCreate {
         clientTransferId,
         "description",
         description,
+        "feeOperatingAccount",
+        feeOperatingAccount,
         "type",
         type);
   }
@@ -191,6 +242,8 @@ public class TransfersFeeCreate {
     private String clientTransferId;
 
     private Optional<String> description = Optional.empty();
+
+    private Optional<String> feeOperatingAccount = Optional.empty();
 
     private TransfersFeeCreateType type;
 
@@ -237,6 +290,30 @@ public class TransfersFeeCreate {
       return this;
     }
 
+    /**
+     * Optional account field to denote where the fee amount should be deposited into. If provided,
+     * the account must be a fee operating account. In the case of multiple fee operating accounts
+     * under the same correspondent, this field must be provided. If not provided, this will be
+     * looked up asynchronously (therefore will not be in the initial response)
+     */
+    public Builder feeOperatingAccount(String feeOperatingAccount) {
+      Utils.checkNotNull(feeOperatingAccount, "feeOperatingAccount");
+      this.feeOperatingAccount = Optional.ofNullable(feeOperatingAccount);
+      return this;
+    }
+
+    /**
+     * Optional account field to denote where the fee amount should be deposited into. If provided,
+     * the account must be a fee operating account. In the case of multiple fee operating accounts
+     * under the same correspondent, this field must be provided. If not provided, this will be
+     * looked up asynchronously (therefore will not be in the initial response)
+     */
+    public Builder feeOperatingAccount(Optional<String> feeOperatingAccount) {
+      Utils.checkNotNull(feeOperatingAccount, "feeOperatingAccount");
+      this.feeOperatingAccount = feeOperatingAccount;
+      return this;
+    }
+
     /** The type of the fee being charged */
     public Builder type(TransfersFeeCreateType type) {
       Utils.checkNotNull(type, "type");
@@ -245,7 +322,8 @@ public class TransfersFeeCreate {
     }
 
     public TransfersFeeCreate build() {
-      return new TransfersFeeCreate(amount, clientTransferId, description, type);
+      return new TransfersFeeCreate(
+          amount, clientTransferId, description, feeOperatingAccount, type);
     }
   }
 }

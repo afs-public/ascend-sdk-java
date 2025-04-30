@@ -16,7 +16,13 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
-/** TransferState - The state of the ICT deposit */
+/**
+ * TransferState - Deprecated, use state instead
+ *
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon
+ *     as possible.
+ */
+@Deprecated
 public class TransferState {
 
   /** The user or service that triggered the state update. */
@@ -49,7 +55,7 @@ public class TransferState {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("state")
-  private Optional<? extends IctDepositState> state;
+  private Optional<? extends IctDepositTransferStateState> state;
 
   /** The time of the state update. */
   @JsonInclude(Include.NON_ABSENT)
@@ -61,7 +67,7 @@ public class TransferState {
       @JsonProperty("actor") Optional<String> actor,
       @JsonProperty("message") Optional<String> message,
       @JsonProperty("metadata") JsonNullable<? extends Map<String, Object>> metadata,
-      @JsonProperty("state") Optional<? extends IctDepositState> state,
+      @JsonProperty("state") Optional<? extends IctDepositTransferStateState> state,
       @JsonProperty("update_time") JsonNullable<OffsetDateTime> updateTime) {
     Utils.checkNotNull(actor, "actor");
     Utils.checkNotNull(message, "message");
@@ -118,8 +124,8 @@ public class TransferState {
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<IctDepositState> state() {
-    return (Optional<IctDepositState>) state;
+  public Optional<IctDepositTransferStateState> state() {
+    return (Optional<IctDepositTransferStateState>) state;
   }
 
   /** The time of the state update. */
@@ -191,7 +197,7 @@ public class TransferState {
    * `CANCELED` - The transfer was canceled. - `RETURNED` - The transfer was returned. - `POSTPONED`
    * - The transfer is postponed and will resume processing during the next processing window.
    */
-  public TransferState withState(IctDepositState state) {
+  public TransferState withState(IctDepositTransferStateState state) {
     Utils.checkNotNull(state, "state");
     this.state = Optional.ofNullable(state);
     return this;
@@ -206,7 +212,7 @@ public class TransferState {
    * `CANCELED` - The transfer was canceled. - `RETURNED` - The transfer was returned. - `POSTPONED`
    * - The transfer is postponed and will resume processing during the next processing window.
    */
-  public TransferState withState(Optional<? extends IctDepositState> state) {
+  public TransferState withState(Optional<? extends IctDepositTransferStateState> state) {
     Utils.checkNotNull(state, "state");
     this.state = state;
     return this;
@@ -271,7 +277,7 @@ public class TransferState {
 
     private JsonNullable<? extends Map<String, Object>> metadata = JsonNullable.undefined();
 
-    private Optional<? extends IctDepositState> state = Optional.empty();
+    private Optional<? extends IctDepositTransferStateState> state = Optional.empty();
 
     private JsonNullable<OffsetDateTime> updateTime = JsonNullable.undefined();
 
@@ -339,7 +345,7 @@ public class TransferState {
      * - `POSTPONED` - The transfer is postponed and will resume processing during the next
      * processing window.
      */
-    public Builder state(IctDepositState state) {
+    public Builder state(IctDepositTransferStateState state) {
       Utils.checkNotNull(state, "state");
       this.state = Optional.ofNullable(state);
       return this;
@@ -355,7 +361,7 @@ public class TransferState {
      * - `POSTPONED` - The transfer is postponed and will resume processing during the next
      * processing window.
      */
-    public Builder state(Optional<? extends IctDepositState> state) {
+    public Builder state(Optional<? extends IctDepositTransferStateState> state) {
       Utils.checkNotNull(state, "state");
       this.state = state;
       return this;

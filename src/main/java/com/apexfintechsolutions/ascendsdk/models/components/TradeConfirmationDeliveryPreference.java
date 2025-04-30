@@ -40,17 +40,13 @@ import java.util.Optional;
  */
 /**
  * TradeConfirmationDeliveryPreference - Delivery method instruction for trade confirmations for a
- * given Interested Party record; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL`
- * on party creation
+ * given Interested Party record; Can be `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party
+ * creation
  */
 @JsonDeserialize(using = TradeConfirmationDeliveryPreference._Deserializer.class)
 @JsonSerialize(using = TradeConfirmationDeliveryPreference._Serializer.class)
 public class TradeConfirmationDeliveryPreference {
 
-  public static final TradeConfirmationDeliveryPreference DELIVERY_PREFERENCE_UNSPECIFIED =
-      new TradeConfirmationDeliveryPreference("DELIVERY_PREFERENCE_UNSPECIFIED");
-  public static final TradeConfirmationDeliveryPreference DIGITAL =
-      new TradeConfirmationDeliveryPreference("DIGITAL");
   public static final TradeConfirmationDeliveryPreference PHYSICAL =
       new TradeConfirmationDeliveryPreference("PHYSICAL");
   public static final TradeConfirmationDeliveryPreference SUPPRESS =
@@ -124,8 +120,6 @@ public class TradeConfirmationDeliveryPreference {
 
   private static final Map<String, TradeConfirmationDeliveryPreference> createValuesMap() {
     Map<String, TradeConfirmationDeliveryPreference> map = new LinkedHashMap<>();
-    map.put("DELIVERY_PREFERENCE_UNSPECIFIED", DELIVERY_PREFERENCE_UNSPECIFIED);
-    map.put("DIGITAL", DIGITAL);
     map.put("PHYSICAL", PHYSICAL);
     map.put("SUPPRESS", SUPPRESS);
     return map;
@@ -133,10 +127,6 @@ public class TradeConfirmationDeliveryPreference {
 
   private static final Map<String, TradeConfirmationDeliveryPreferenceEnum> createEnumsMap() {
     Map<String, TradeConfirmationDeliveryPreferenceEnum> map = new HashMap<>();
-    map.put(
-        "DELIVERY_PREFERENCE_UNSPECIFIED",
-        TradeConfirmationDeliveryPreferenceEnum.DELIVERY_PREFERENCE_UNSPECIFIED);
-    map.put("DIGITAL", TradeConfirmationDeliveryPreferenceEnum.DIGITAL);
     map.put("PHYSICAL", TradeConfirmationDeliveryPreferenceEnum.PHYSICAL);
     map.put("SUPPRESS", TradeConfirmationDeliveryPreferenceEnum.SUPPRESS);
     return map;
@@ -175,8 +165,6 @@ public class TradeConfirmationDeliveryPreference {
   }
 
   public enum TradeConfirmationDeliveryPreferenceEnum {
-    DELIVERY_PREFERENCE_UNSPECIFIED("DELIVERY_PREFERENCE_UNSPECIFIED"),
-    DIGITAL("DIGITAL"),
     PHYSICAL("PHYSICAL"),
     SUPPRESS("SUPPRESS"),
     ;

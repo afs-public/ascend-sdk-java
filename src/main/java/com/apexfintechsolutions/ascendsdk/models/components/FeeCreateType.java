@@ -38,14 +38,25 @@ import java.util.Optional;
  * use of an instance in a switch expression but you can use the {@code asEnum()} method (after
  * dealing with the `Optional` appropriately).
  */
-/** FeeCreateType - The type of fee being specified. Only the type of "BROKER_FEE" is supported. */
+/** FeeCreateType - The type of fee */
 @JsonDeserialize(using = FeeCreateType._Deserializer.class)
 @JsonSerialize(using = FeeCreateType._Serializer.class)
 public class FeeCreateType {
 
   public static final FeeCreateType FEE_TYPE_UNSPECIFIED =
       new FeeCreateType("FEE_TYPE_UNSPECIFIED");
+  public static final FeeCreateType CLIENT_CLEARING = new FeeCreateType("CLIENT_CLEARING");
+  public static final FeeCreateType LIQUIDITY = new FeeCreateType("LIQUIDITY");
+  public static final FeeCreateType TRADE_ACTIVITY = new FeeCreateType("TRADE_ACTIVITY");
+  public static final FeeCreateType FINANCIAL_TRANSACTION_TAX =
+      new FeeCreateType("FINANCIAL_TRANSACTION_TAX");
+  public static final FeeCreateType INDEX_OPTION_FEE = new FeeCreateType("INDEX_OPTION_FEE");
+  public static final FeeCreateType SEC_FEE = new FeeCreateType("SEC_FEE");
+  public static final FeeCreateType OPTIONS_REGULATORY = new FeeCreateType("OPTIONS_REGULATORY");
+  public static final FeeCreateType GENERAL_PURPOSE_FEE = new FeeCreateType("GENERAL_PURPOSE_FEE");
   public static final FeeCreateType BROKER_FEE = new FeeCreateType("BROKER_FEE");
+  public static final FeeCreateType CONTRACT_FEE = new FeeCreateType("CONTRACT_FEE");
+  public static final FeeCreateType OCC_FEE = new FeeCreateType("OCC_FEE");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -114,14 +125,34 @@ public class FeeCreateType {
   private static final Map<String, FeeCreateType> createValuesMap() {
     Map<String, FeeCreateType> map = new LinkedHashMap<>();
     map.put("FEE_TYPE_UNSPECIFIED", FEE_TYPE_UNSPECIFIED);
+    map.put("CLIENT_CLEARING", CLIENT_CLEARING);
+    map.put("LIQUIDITY", LIQUIDITY);
+    map.put("TRADE_ACTIVITY", TRADE_ACTIVITY);
+    map.put("FINANCIAL_TRANSACTION_TAX", FINANCIAL_TRANSACTION_TAX);
+    map.put("INDEX_OPTION_FEE", INDEX_OPTION_FEE);
+    map.put("SEC_FEE", SEC_FEE);
+    map.put("OPTIONS_REGULATORY", OPTIONS_REGULATORY);
+    map.put("GENERAL_PURPOSE_FEE", GENERAL_PURPOSE_FEE);
     map.put("BROKER_FEE", BROKER_FEE);
+    map.put("CONTRACT_FEE", CONTRACT_FEE);
+    map.put("OCC_FEE", OCC_FEE);
     return map;
   }
 
   private static final Map<String, FeeCreateTypeEnum> createEnumsMap() {
     Map<String, FeeCreateTypeEnum> map = new HashMap<>();
     map.put("FEE_TYPE_UNSPECIFIED", FeeCreateTypeEnum.FEE_TYPE_UNSPECIFIED);
+    map.put("CLIENT_CLEARING", FeeCreateTypeEnum.CLIENT_CLEARING);
+    map.put("LIQUIDITY", FeeCreateTypeEnum.LIQUIDITY);
+    map.put("TRADE_ACTIVITY", FeeCreateTypeEnum.TRADE_ACTIVITY);
+    map.put("FINANCIAL_TRANSACTION_TAX", FeeCreateTypeEnum.FINANCIAL_TRANSACTION_TAX);
+    map.put("INDEX_OPTION_FEE", FeeCreateTypeEnum.INDEX_OPTION_FEE);
+    map.put("SEC_FEE", FeeCreateTypeEnum.SEC_FEE);
+    map.put("OPTIONS_REGULATORY", FeeCreateTypeEnum.OPTIONS_REGULATORY);
+    map.put("GENERAL_PURPOSE_FEE", FeeCreateTypeEnum.GENERAL_PURPOSE_FEE);
     map.put("BROKER_FEE", FeeCreateTypeEnum.BROKER_FEE);
+    map.put("CONTRACT_FEE", FeeCreateTypeEnum.CONTRACT_FEE);
+    map.put("OCC_FEE", FeeCreateTypeEnum.OCC_FEE);
     return map;
   }
 
@@ -157,7 +188,17 @@ public class FeeCreateType {
 
   public enum FeeCreateTypeEnum {
     FEE_TYPE_UNSPECIFIED("FEE_TYPE_UNSPECIFIED"),
+    CLIENT_CLEARING("CLIENT_CLEARING"),
+    LIQUIDITY("LIQUIDITY"),
+    TRADE_ACTIVITY("TRADE_ACTIVITY"),
+    FINANCIAL_TRANSACTION_TAX("FINANCIAL_TRANSACTION_TAX"),
+    INDEX_OPTION_FEE("INDEX_OPTION_FEE"),
+    SEC_FEE("SEC_FEE"),
+    OPTIONS_REGULATORY("OPTIONS_REGULATORY"),
+    GENERAL_PURPOSE_FEE("GENERAL_PURPOSE_FEE"),
     BROKER_FEE("BROKER_FEE"),
+    CONTRACT_FEE("CONTRACT_FEE"),
+    OCC_FEE("OCC_FEE"),
     ;
 
     private final String value;

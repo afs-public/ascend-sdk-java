@@ -1,0 +1,10 @@
+# BookingCancelTradeRequest
+
+
+## Fields
+
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     | Example                                                                         |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `accountId`                                                                     | *String*                                                                        | :heavy_check_mark:                                                              | The account id.                                                                 | 01FAKEACCOUNT1TYKWEYRH8S2K                                                      |
+| `tradeId`                                                                       | *String*                                                                        | :heavy_check_mark:                                                              | The trade id.                                                                   | 01FAKETRADEIDPROVIDEDFROMCREATETRADE                                            |
+| `cancelTradeRequestCreate`                                                      | [CancelTradeRequestCreate](../../models/components/CancelTradeRequestCreate.md) | :heavy_check_mark:                                                              | N/A                                                                             |                                                                                 |

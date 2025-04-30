@@ -54,10 +54,6 @@ public class PartyRequestUpdateRelationType {
       new PartyRequestUpdateRelationType("JOINT_OWNER");
   public static final PartyRequestUpdateRelationType CUSTODIAN =
       new PartyRequestUpdateRelationType("CUSTODIAN");
-  public static final PartyRequestUpdateRelationType GUARDIAN_CONSERVATOR =
-      new PartyRequestUpdateRelationType("GUARDIAN_CONSERVATOR");
-  public static final PartyRequestUpdateRelationType POWER_OF_ATTORNEY =
-      new PartyRequestUpdateRelationType("POWER_OF_ATTORNEY");
   public static final PartyRequestUpdateRelationType EXECUTOR =
       new PartyRequestUpdateRelationType("EXECUTOR");
   public static final PartyRequestUpdateRelationType AUTHORIZED_SIGNER =
@@ -144,8 +140,6 @@ public class PartyRequestUpdateRelationType {
     map.put("PRIMARY_OWNER", PRIMARY_OWNER);
     map.put("JOINT_OWNER", JOINT_OWNER);
     map.put("CUSTODIAN", CUSTODIAN);
-    map.put("GUARDIAN_CONSERVATOR", GUARDIAN_CONSERVATOR);
-    map.put("POWER_OF_ATTORNEY", POWER_OF_ATTORNEY);
     map.put("EXECUTOR", EXECUTOR);
     map.put("AUTHORIZED_SIGNER", AUTHORIZED_SIGNER);
     map.put("BENEFICIAL_OWNER", BENEFICIAL_OWNER);
@@ -164,8 +158,6 @@ public class PartyRequestUpdateRelationType {
     map.put("PRIMARY_OWNER", PartyRequestUpdateRelationTypeEnum.PRIMARY_OWNER);
     map.put("JOINT_OWNER", PartyRequestUpdateRelationTypeEnum.JOINT_OWNER);
     map.put("CUSTODIAN", PartyRequestUpdateRelationTypeEnum.CUSTODIAN);
-    map.put("GUARDIAN_CONSERVATOR", PartyRequestUpdateRelationTypeEnum.GUARDIAN_CONSERVATOR);
-    map.put("POWER_OF_ATTORNEY", PartyRequestUpdateRelationTypeEnum.POWER_OF_ATTORNEY);
     map.put("EXECUTOR", PartyRequestUpdateRelationTypeEnum.EXECUTOR);
     map.put("AUTHORIZED_SIGNER", PartyRequestUpdateRelationTypeEnum.AUTHORIZED_SIGNER);
     map.put("BENEFICIAL_OWNER", PartyRequestUpdateRelationTypeEnum.BENEFICIAL_OWNER);
@@ -213,8 +205,6 @@ public class PartyRequestUpdateRelationType {
     PRIMARY_OWNER("PRIMARY_OWNER"),
     JOINT_OWNER("JOINT_OWNER"),
     CUSTODIAN("CUSTODIAN"),
-    GUARDIAN_CONSERVATOR("GUARDIAN_CONSERVATOR"),
-    POWER_OF_ATTORNEY("POWER_OF_ATTORNEY"),
     EXECUTOR("EXECUTOR"),
     AUTHORIZED_SIGNER("AUTHORIZED_SIGNER"),
     BENEFICIAL_OWNER("BENEFICIAL_OWNER"),

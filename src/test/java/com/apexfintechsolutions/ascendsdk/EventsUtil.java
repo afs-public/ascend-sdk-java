@@ -37,15 +37,32 @@ public class EventsUtil {
     }
   }
 
-  public static String getFixedSubscriberId() {
-    return "01JJYZ16TVYZM6A6BDJ8RJRMTQ";
+  public static String getTestSubscriberId(SDK sdk) throws Exception {
+    var res = sdk.subscriber().listPushSubscriptions().call();
+
+    if (res.statusCode() == 200
+        && res.listPushSubscriptionsResponse().isPresent()
+        && res.listPushSubscriptionsResponse().get().pushSubscriptions().isPresent()
+        && !res.listPushSubscriptionsResponse().get().pushSubscriptions().get().isEmpty()) {
+
+      var subscriptions = res.listPushSubscriptionsResponse().get().pushSubscriptions().get();
+      var subscription = subscriptions.get(0);
+
+      // Unwrap the Optional and return the value
+      return subscription
+          .subscriptionId()
+          .orElseThrow(() -> new Exception("Subscription ID not found"));
+
+    } else {
+      throw new Exception("Failed to get subscriber ID.");
+    }
   }
 
   public static String getDeliveryID(SDK sdk) throws Exception {
     var res =
         sdk.subscriber()
             .listPushSubscriptionDeliveries()
-            .subscriptionId(getFixedSubscriberId())
+            .subscriptionId(getTestSubscriberId(sdk))
             .call();
 
     if (res.statusCode() == 200

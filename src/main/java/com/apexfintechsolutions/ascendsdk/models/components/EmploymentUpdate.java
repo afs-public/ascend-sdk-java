@@ -48,7 +48,10 @@ public class EmploymentUpdate {
   @JsonProperty("employment_status")
   private Optional<? extends EmploymentUpdateEmploymentStatus> employmentStatus;
 
-  /** The nature of work performed at an investor's place of employment. */
+  /**
+   * The nature of work performed at an investor's place of employment. Required if the
+   * employment_status is `EMPLOYED` or `SELF_EMPLOYED`.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("occupation")
   private Optional<String> occupation;
@@ -119,7 +122,10 @@ public class EmploymentUpdate {
     return (Optional<EmploymentUpdateEmploymentStatus>) employmentStatus;
   }
 
-  /** The nature of work performed at an investor's place of employment. */
+  /**
+   * The nature of work performed at an investor's place of employment. Required if the
+   * employment_status is `EMPLOYED` or `SELF_EMPLOYED`.
+   */
   @JsonIgnore
   public Optional<String> occupation() {
     return occupation;
@@ -210,14 +216,20 @@ public class EmploymentUpdate {
     return this;
   }
 
-  /** The nature of work performed at an investor's place of employment. */
+  /**
+   * The nature of work performed at an investor's place of employment. Required if the
+   * employment_status is `EMPLOYED` or `SELF_EMPLOYED`.
+   */
   public EmploymentUpdate withOccupation(String occupation) {
     Utils.checkNotNull(occupation, "occupation");
     this.occupation = Optional.ofNullable(occupation);
     return this;
   }
 
-  /** The nature of work performed at an investor's place of employment. */
+  /**
+   * The nature of work performed at an investor's place of employment. Required if the
+   * employment_status is `EMPLOYED` or `SELF_EMPLOYED`.
+   */
   public EmploymentUpdate withOccupation(Optional<String> occupation) {
     Utils.checkNotNull(occupation, "occupation");
     this.occupation = occupation;
@@ -369,14 +381,20 @@ public class EmploymentUpdate {
       return this;
     }
 
-    /** The nature of work performed at an investor's place of employment. */
+    /**
+     * The nature of work performed at an investor's place of employment. Required if the
+     * employment_status is `EMPLOYED` or `SELF_EMPLOYED`.
+     */
     public Builder occupation(String occupation) {
       Utils.checkNotNull(occupation, "occupation");
       this.occupation = Optional.ofNullable(occupation);
       return this;
     }
 
-    /** The nature of work performed at an investor's place of employment. */
+    /**
+     * The nature of work performed at an investor's place of employment. Required if the
+     * employment_status is `EMPLOYED` or `SELF_EMPLOYED`.
+     */
     public Builder occupation(Optional<String> occupation) {
       Utils.checkNotNull(occupation, "occupation");
       this.occupation = occupation;

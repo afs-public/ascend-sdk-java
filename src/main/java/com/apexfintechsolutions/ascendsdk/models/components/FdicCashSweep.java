@@ -38,7 +38,7 @@ import java.util.Optional;
  * use of an instance in a switch expression but you can use the {@code asEnum()} method (after
  * dealing with the `Optional` appropriately).
  */
-/** FdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true */
+/** FdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL */
 @JsonDeserialize(using = FdicCashSweep._Deserializer.class)
 @JsonSerialize(using = FdicCashSweep._Serializer.class)
 public class FdicCashSweep {

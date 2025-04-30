@@ -32,12 +32,4 @@ public class AccountTransfersUtil {
     }
     throw new Exception("Failed to create account transfer");
   }
-
-  public static String getFixedSubscriberId() {
-    return "01JJYZ16TVYZM6A6BDJ8RJRMTQ";
-  }
-
-  public static String getFixedDeliveryId() {
-    return "01JJYZ7DBHP60A9QJ584MNS2ZC";
-  }
 }

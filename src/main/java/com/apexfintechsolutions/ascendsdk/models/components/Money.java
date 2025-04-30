@@ -12,25 +12,36 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 import java.util.Optional;
-import org.openapitools.jackson.nullable.JsonNullable;
 
-/** Money - Object containing currency/ price information for the trade lot */
+/**
+ * Money - Deprecated; use the price field instead
+ *
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon
+ *     as possible.
+ */
+@Deprecated
 public class Money {
 
-  /** Currency code of the price */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("currency_code")
   private Optional<String> currencyCode;
 
-  /** Price of the trade lot */
+  /**
+   * A representation of a decimal value, such as 2.5. Clients may convert values into
+   * language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
+   *
+   * <p>[BigDecimal]:
+   * https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html
+   * [decimal.Decimal]: https://docs.python.org/3/library/decimal.html
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("price")
-  private JsonNullable<? extends LotPrice> price;
+  private Optional<? extends DecimalCreate> price;
 
   @JsonCreator
   public Money(
       @JsonProperty("currency_code") Optional<String> currencyCode,
-      @JsonProperty("price") JsonNullable<? extends LotPrice> price) {
+      @JsonProperty("price") Optional<? extends DecimalCreate> price) {
     Utils.checkNotNull(currencyCode, "currencyCode");
     Utils.checkNotNull(price, "price");
     this.currencyCode = currencyCode;
@@ -38,49 +49,67 @@ public class Money {
   }
 
   public Money() {
-    this(Optional.empty(), JsonNullable.undefined());
+    this(Optional.empty(), Optional.empty());
   }
 
-  /** Currency code of the price */
   @JsonIgnore
   public Optional<String> currencyCode() {
     return currencyCode;
   }
 
-  /** Price of the trade lot */
+  /**
+   * A representation of a decimal value, such as 2.5. Clients may convert values into
+   * language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
+   *
+   * <p>[BigDecimal]:
+   * https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html
+   * [decimal.Decimal]: https://docs.python.org/3/library/decimal.html
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<LotPrice> price() {
-    return (JsonNullable<LotPrice>) price;
+  public Optional<DecimalCreate> price() {
+    return (Optional<DecimalCreate>) price;
   }
 
   public static final Builder builder() {
     return new Builder();
   }
 
-  /** Currency code of the price */
   public Money withCurrencyCode(String currencyCode) {
     Utils.checkNotNull(currencyCode, "currencyCode");
     this.currencyCode = Optional.ofNullable(currencyCode);
     return this;
   }
 
-  /** Currency code of the price */
   public Money withCurrencyCode(Optional<String> currencyCode) {
     Utils.checkNotNull(currencyCode, "currencyCode");
     this.currencyCode = currencyCode;
     return this;
   }
 
-  /** Price of the trade lot */
-  public Money withPrice(LotPrice price) {
+  /**
+   * A representation of a decimal value, such as 2.5. Clients may convert values into
+   * language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
+   *
+   * <p>[BigDecimal]:
+   * https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html
+   * [decimal.Decimal]: https://docs.python.org/3/library/decimal.html
+   */
+  public Money withPrice(DecimalCreate price) {
     Utils.checkNotNull(price, "price");
-    this.price = JsonNullable.of(price);
+    this.price = Optional.ofNullable(price);
     return this;
   }
 
-  /** Price of the trade lot */
-  public Money withPrice(JsonNullable<? extends LotPrice> price) {
+  /**
+   * A representation of a decimal value, such as 2.5. Clients may convert values into
+   * language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
+   *
+   * <p>[BigDecimal]:
+   * https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html
+   * [decimal.Decimal]: https://docs.python.org/3/library/decimal.html
+   */
+  public Money withPrice(Optional<? extends DecimalCreate> price) {
     Utils.checkNotNull(price, "price");
     this.price = price;
     return this;
@@ -113,35 +142,49 @@ public class Money {
 
     private Optional<String> currencyCode = Optional.empty();
 
-    private JsonNullable<? extends LotPrice> price = JsonNullable.undefined();
+    private Optional<? extends DecimalCreate> price = Optional.empty();
 
     private Builder() {
       // force use of static builder() method
     }
 
-    /** Currency code of the price */
     public Builder currencyCode(String currencyCode) {
       Utils.checkNotNull(currencyCode, "currencyCode");
       this.currencyCode = Optional.ofNullable(currencyCode);
       return this;
     }
 
-    /** Currency code of the price */
     public Builder currencyCode(Optional<String> currencyCode) {
       Utils.checkNotNull(currencyCode, "currencyCode");
       this.currencyCode = currencyCode;
       return this;
     }
 
-    /** Price of the trade lot */
-    public Builder price(LotPrice price) {
+    /**
+     * A representation of a decimal value, such as 2.5. Clients may convert values into
+     * language-native decimal formats, such as Java's [BigDecimal][] or Python's
+     * [decimal.Decimal][].
+     *
+     * <p>[BigDecimal]:
+     * https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html
+     * [decimal.Decimal]: https://docs.python.org/3/library/decimal.html
+     */
+    public Builder price(DecimalCreate price) {
       Utils.checkNotNull(price, "price");
-      this.price = JsonNullable.of(price);
+      this.price = Optional.ofNullable(price);
       return this;
     }
 
-    /** Price of the trade lot */
-    public Builder price(JsonNullable<? extends LotPrice> price) {
+    /**
+     * A representation of a decimal value, such as 2.5. Clients may convert values into
+     * language-native decimal formats, such as Java's [BigDecimal][] or Python's
+     * [decimal.Decimal][].
+     *
+     * <p>[BigDecimal]:
+     * https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html
+     * [decimal.Decimal]: https://docs.python.org/3/library/decimal.html
+     */
+    public Builder price(Optional<? extends DecimalCreate> price) {
       Utils.checkNotNull(price, "price");
       this.price = price;
       return this;

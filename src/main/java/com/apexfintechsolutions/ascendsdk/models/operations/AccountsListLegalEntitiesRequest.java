@@ -39,7 +39,8 @@ public class AccountsListLegalEntitiesRequest {
    * A CEL string to filter results; Use `upperAscii()` for case-insensitive searches; E.g.
    * `entity_name.upperAscii()=="AcMe,InC".upperAscii()`; See the [CEL
    * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
-   * Guides for more information;
+   * Guides for more information; Filter options include: `legal_entity_id` `investigation_id`
+   * `exempt_customer_reason` `exempt_verifying_beneficial_owners`
    */
   @SpeakeasyMetadata("queryParam:style=form,explode=true,name=filter")
   private Optional<String> filter;
@@ -96,7 +97,8 @@ public class AccountsListLegalEntitiesRequest {
    * A CEL string to filter results; Use `upperAscii()` for case-insensitive searches; E.g.
    * `entity_name.upperAscii()=="AcMe,InC".upperAscii()`; See the [CEL
    * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
-   * Guides for more information;
+   * Guides for more information; Filter options include: `legal_entity_id` `investigation_id`
+   * `exempt_customer_reason` `exempt_verifying_beneficial_owners`
    */
   @JsonIgnore
   public Optional<String> filter() {
@@ -173,7 +175,8 @@ public class AccountsListLegalEntitiesRequest {
    * A CEL string to filter results; Use `upperAscii()` for case-insensitive searches; E.g.
    * `entity_name.upperAscii()=="AcMe,InC".upperAscii()`; See the [CEL
    * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
-   * Guides for more information;
+   * Guides for more information; Filter options include: `legal_entity_id` `investigation_id`
+   * `exempt_customer_reason` `exempt_verifying_beneficial_owners`
    */
   public AccountsListLegalEntitiesRequest withFilter(String filter) {
     Utils.checkNotNull(filter, "filter");
@@ -185,7 +188,8 @@ public class AccountsListLegalEntitiesRequest {
    * A CEL string to filter results; Use `upperAscii()` for case-insensitive searches; E.g.
    * `entity_name.upperAscii()=="AcMe,InC".upperAscii()`; See the [CEL
    * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
-   * Guides for more information;
+   * Guides for more information; Filter options include: `legal_entity_id` `investigation_id`
+   * `exempt_customer_reason` `exempt_verifying_beneficial_owners`
    */
   public AccountsListLegalEntitiesRequest withFilter(Optional<String> filter) {
     Utils.checkNotNull(filter, "filter");
@@ -307,7 +311,8 @@ public class AccountsListLegalEntitiesRequest {
      * A CEL string to filter results; Use `upperAscii()` for case-insensitive searches; E.g.
      * `entity_name.upperAscii()=="AcMe,InC".upperAscii()`; See the [CEL
      * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
-     * Guides for more information;
+     * Guides for more information; Filter options include: `legal_entity_id` `investigation_id`
+     * `exempt_customer_reason` `exempt_verifying_beneficial_owners`
      */
     public Builder filter(String filter) {
       Utils.checkNotNull(filter, "filter");
@@ -319,7 +324,8 @@ public class AccountsListLegalEntitiesRequest {
      * A CEL string to filter results; Use `upperAscii()` for case-insensitive searches; E.g.
      * `entity_name.upperAscii()=="AcMe,InC".upperAscii()`; See the [CEL
      * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
-     * Guides for more information;
+     * Guides for more information; Filter options include: `legal_entity_id` `investigation_id`
+     * `exempt_customer_reason` `exempt_verifying_beneficial_owners`
      */
     public Builder filter(Optional<String> filter) {
       Utils.checkNotNull(filter, "filter");
