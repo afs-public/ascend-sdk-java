@@ -17,9 +17,8 @@ public final class SDKHooks {
   }
 
   public static final void initialize(com.apexfintechsolutions.ascendsdk.utils.Hooks hooks) {
-    // register hooks here
-
-    // for more information see
-    // https://www.speakeasy.com/docs/additional-features/sdk-hooks
+    ApexAccessTokenHook accessTokenHook =
+        new com.apexfintechsolutions.ascendsdk.hooks.ApexAccessTokenHook();
+    hooks.registerBeforeRequest(accessTokenHook);
   }
 }

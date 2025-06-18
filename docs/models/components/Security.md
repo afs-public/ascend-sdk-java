@@ -3,7 +3,7 @@
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `bearerAuth`       | *String*           | :heavy_check_mark: | N/A                |
-| `apiKeyAuth`       | *String*           | :heavy_check_mark: | N/A                |
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `apiKey`                                                                         | *Optional\<String>*                                                              | :heavy_minus_sign:                                                               | N/A                                                                              | ABCDEFGHIJ0123456789abcdefghij0123456789                                         |
+| `serviceAccountCreds`                                                            | [Optional\<ServiceAccountCreds>](../../models/components/ServiceAccountCreds.md) | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |

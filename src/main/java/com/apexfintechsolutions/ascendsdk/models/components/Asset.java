@@ -53,6 +53,11 @@ public class Asset {
   @JsonProperty("fixed_income")
   private JsonNullable<? extends FixedIncome> fixedIncome;
 
+  /** Index specific asset details */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("index")
+  private JsonNullable<? extends Index> index;
+
   /** isin is the International Securities Identification Number */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("isin")
@@ -109,6 +114,7 @@ public class Asset {
       @JsonProperty("description") Optional<String> description,
       @JsonProperty("equity") JsonNullable<? extends Equity> equity,
       @JsonProperty("fixed_income") JsonNullable<? extends FixedIncome> fixedIncome,
+      @JsonProperty("index") JsonNullable<? extends Index> index,
       @JsonProperty("isin") Optional<String> isin,
       @JsonProperty("issuing_region_code") Optional<String> issuingRegionCode,
       @JsonProperty("mutual_fund") JsonNullable<? extends MutualFund> mutualFund,
@@ -124,6 +130,7 @@ public class Asset {
     Utils.checkNotNull(description, "description");
     Utils.checkNotNull(equity, "equity");
     Utils.checkNotNull(fixedIncome, "fixedIncome");
+    Utils.checkNotNull(index, "index");
     Utils.checkNotNull(isin, "isin");
     Utils.checkNotNull(issuingRegionCode, "issuingRegionCode");
     Utils.checkNotNull(mutualFund, "mutualFund");
@@ -139,6 +146,7 @@ public class Asset {
     this.description = description;
     this.equity = equity;
     this.fixedIncome = fixedIncome;
+    this.index = index;
     this.isin = isin;
     this.issuingRegionCode = issuingRegionCode;
     this.mutualFund = mutualFund;
@@ -156,6 +164,7 @@ public class Asset {
         JsonNullable.undefined(),
         Optional.empty(),
         Optional.empty(),
+        JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
@@ -212,6 +221,13 @@ public class Asset {
   @JsonIgnore
   public JsonNullable<FixedIncome> fixedIncome() {
     return (JsonNullable<FixedIncome>) fixedIncome;
+  }
+
+  /** Index specific asset details */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<Index> index() {
+    return (JsonNullable<Index>) index;
   }
 
   /** isin is the International Securities Identification Number */
@@ -374,6 +390,20 @@ public class Asset {
     return this;
   }
 
+  /** Index specific asset details */
+  public Asset withIndex(Index index) {
+    Utils.checkNotNull(index, "index");
+    this.index = JsonNullable.of(index);
+    return this;
+  }
+
+  /** Index specific asset details */
+  public Asset withIndex(JsonNullable<? extends Index> index) {
+    Utils.checkNotNull(index, "index");
+    this.index = index;
+    return this;
+  }
+
   /** isin is the International Securities Identification Number */
   public Asset withIsin(String isin) {
     Utils.checkNotNull(isin, "isin");
@@ -521,6 +551,7 @@ public class Asset {
         && Objects.deepEquals(this.description, other.description)
         && Objects.deepEquals(this.equity, other.equity)
         && Objects.deepEquals(this.fixedIncome, other.fixedIncome)
+        && Objects.deepEquals(this.index, other.index)
         && Objects.deepEquals(this.isin, other.isin)
         && Objects.deepEquals(this.issuingRegionCode, other.issuingRegionCode)
         && Objects.deepEquals(this.mutualFund, other.mutualFund)
@@ -541,6 +572,7 @@ public class Asset {
         description,
         equity,
         fixedIncome,
+        index,
         isin,
         issuingRegionCode,
         mutualFund,
@@ -568,6 +600,8 @@ public class Asset {
         equity,
         "fixedIncome",
         fixedIncome,
+        "index",
+        index,
         "isin",
         isin,
         "issuingRegionCode",
@@ -601,6 +635,8 @@ public class Asset {
     private JsonNullable<? extends Equity> equity = JsonNullable.undefined();
 
     private JsonNullable<? extends FixedIncome> fixedIncome = JsonNullable.undefined();
+
+    private JsonNullable<? extends Index> index = JsonNullable.undefined();
 
     private Optional<String> isin = Optional.empty();
 
@@ -717,6 +753,20 @@ public class Asset {
     public Builder fixedIncome(JsonNullable<? extends FixedIncome> fixedIncome) {
       Utils.checkNotNull(fixedIncome, "fixedIncome");
       this.fixedIncome = fixedIncome;
+      return this;
+    }
+
+    /** Index specific asset details */
+    public Builder index(Index index) {
+      Utils.checkNotNull(index, "index");
+      this.index = JsonNullable.of(index);
+      return this;
+    }
+
+    /** Index specific asset details */
+    public Builder index(JsonNullable<? extends Index> index) {
+      Utils.checkNotNull(index, "index");
+      this.index = index;
       return this;
     }
 
@@ -860,6 +910,7 @@ public class Asset {
           description,
           equity,
           fixedIncome,
+          index,
           isin,
           issuingRegionCode,
           mutualFund,

@@ -28,9 +28,9 @@ class SDKConfiguration {
 
   public String server;
   private static final String LANGUAGE = "java";
-  public static final String OPENAPI_DOC_VERSION = "v1:20250425:uat:4e9cbfb617ca";
-  public static final String SDK_VERSION = "1.2.1";
-  public static final String GEN_VERSION = "2.506.0";
+  public static final String OPENAPI_DOC_VERSION = "v1:20250617:uat:6f66f0a5cade";
+  public static final String SDK_VERSION = "1.3.0";
+  public static final String GEN_VERSION = "2.558.2";
   private static final String BASE_PACKAGE = "com.apexfintechsolutions.ascendsdk";
   public static final String USER_AGENT =
       String.format(

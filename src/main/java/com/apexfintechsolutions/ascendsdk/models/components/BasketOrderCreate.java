@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -90,6 +91,14 @@ public class BasketOrderCreate {
   private BasketOrderCreateSide side;
 
   /**
+   * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("special_reporting_instructions")
+  private Optional<? extends List<BasketOrderCreateSpecialReportingInstructions>>
+      specialReportingInstructions;
+
+  /**
    * Must be the value "DAY". Regulatory requirements dictate that the system capture the intended
    * time_in_force, which is why this a mandatory field.
    */
@@ -110,6 +119,9 @@ public class BasketOrderCreate {
       @JsonProperty("order_type") BasketOrderCreateOrderType orderType,
       @JsonProperty("quantity") Optional<? extends DecimalCreate> quantity,
       @JsonProperty("side") BasketOrderCreateSide side,
+      @JsonProperty("special_reporting_instructions")
+          Optional<? extends List<BasketOrderCreateSpecialReportingInstructions>>
+              specialReportingInstructions,
       @JsonProperty("time_in_force") BasketOrderCreateTimeInForce timeInForce) {
     Utils.checkNotNull(accountId, "accountId");
     Utils.checkNotNull(assetType, "assetType");
@@ -122,6 +134,7 @@ public class BasketOrderCreate {
     Utils.checkNotNull(orderType, "orderType");
     Utils.checkNotNull(quantity, "quantity");
     Utils.checkNotNull(side, "side");
+    Utils.checkNotNull(specialReportingInstructions, "specialReportingInstructions");
     Utils.checkNotNull(timeInForce, "timeInForce");
     this.accountId = accountId;
     this.assetType = assetType;
@@ -134,6 +147,7 @@ public class BasketOrderCreate {
     this.orderType = orderType;
     this.quantity = quantity;
     this.side = side;
+    this.specialReportingInstructions = specialReportingInstructions;
     this.timeInForce = timeInForce;
   }
 
@@ -158,6 +172,7 @@ public class BasketOrderCreate {
         orderType,
         Optional.empty(),
         side,
+        Optional.empty(),
         timeInForce);
   }
 
@@ -250,6 +265,17 @@ public class BasketOrderCreate {
   @JsonIgnore
   public BasketOrderCreateSide side() {
     return side;
+  }
+
+  /**
+   * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<List<BasketOrderCreateSpecialReportingInstructions>>
+      specialReportingInstructions() {
+    return (Optional<List<BasketOrderCreateSpecialReportingInstructions>>)
+        specialReportingInstructions;
   }
 
   /**
@@ -415,6 +441,27 @@ public class BasketOrderCreate {
   }
 
   /**
+   * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+   */
+  public BasketOrderCreate withSpecialReportingInstructions(
+      List<BasketOrderCreateSpecialReportingInstructions> specialReportingInstructions) {
+    Utils.checkNotNull(specialReportingInstructions, "specialReportingInstructions");
+    this.specialReportingInstructions = Optional.ofNullable(specialReportingInstructions);
+    return this;
+  }
+
+  /**
+   * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+   */
+  public BasketOrderCreate withSpecialReportingInstructions(
+      Optional<? extends List<BasketOrderCreateSpecialReportingInstructions>>
+          specialReportingInstructions) {
+    Utils.checkNotNull(specialReportingInstructions, "specialReportingInstructions");
+    this.specialReportingInstructions = specialReportingInstructions;
+    return this;
+  }
+
+  /**
    * Must be the value "DAY". Regulatory requirements dictate that the system capture the intended
    * time_in_force, which is why this a mandatory field.
    */
@@ -444,6 +491,7 @@ public class BasketOrderCreate {
         && Objects.deepEquals(this.orderType, other.orderType)
         && Objects.deepEquals(this.quantity, other.quantity)
         && Objects.deepEquals(this.side, other.side)
+        && Objects.deepEquals(this.specialReportingInstructions, other.specialReportingInstructions)
         && Objects.deepEquals(this.timeInForce, other.timeInForce);
   }
 
@@ -461,6 +509,7 @@ public class BasketOrderCreate {
         orderType,
         quantity,
         side,
+        specialReportingInstructions,
         timeInForce);
   }
 
@@ -490,6 +539,8 @@ public class BasketOrderCreate {
         quantity,
         "side",
         side,
+        "specialReportingInstructions",
+        specialReportingInstructions,
         "timeInForce",
         timeInForce);
   }
@@ -517,6 +568,9 @@ public class BasketOrderCreate {
     private Optional<? extends DecimalCreate> quantity = Optional.empty();
 
     private BasketOrderCreateSide side;
+
+    private Optional<? extends List<BasketOrderCreateSpecialReportingInstructions>>
+        specialReportingInstructions = Optional.empty();
 
     private BasketOrderCreateTimeInForce timeInForce;
 
@@ -677,6 +731,29 @@ public class BasketOrderCreate {
     }
 
     /**
+     * Special Reporting Instructions to be applied to this order. Can include multiple
+     * Instructions.
+     */
+    public Builder specialReportingInstructions(
+        List<BasketOrderCreateSpecialReportingInstructions> specialReportingInstructions) {
+      Utils.checkNotNull(specialReportingInstructions, "specialReportingInstructions");
+      this.specialReportingInstructions = Optional.ofNullable(specialReportingInstructions);
+      return this;
+    }
+
+    /**
+     * Special Reporting Instructions to be applied to this order. Can include multiple
+     * Instructions.
+     */
+    public Builder specialReportingInstructions(
+        Optional<? extends List<BasketOrderCreateSpecialReportingInstructions>>
+            specialReportingInstructions) {
+      Utils.checkNotNull(specialReportingInstructions, "specialReportingInstructions");
+      this.specialReportingInstructions = specialReportingInstructions;
+      return this;
+    }
+
+    /**
      * Must be the value "DAY". Regulatory requirements dictate that the system capture the intended
      * time_in_force, which is why this a mandatory field.
      */
@@ -699,6 +776,7 @@ public class BasketOrderCreate {
           orderType,
           quantity,
           side,
+          specialReportingInstructions,
           timeInForce);
     }
   }

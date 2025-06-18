@@ -38,7 +38,7 @@ import java.util.Optional;
  * use of an instance in a switch expression but you can use the {@code asEnum()} method (after
  * dealing with the `Optional` appropriately).
  */
-/** RebookTradeResponseBrokerCapacity - Used to calculate broadridge blotter code */
+/** RebookTradeResponseBrokerCapacity - Broker capacity for the trade. */
 @JsonDeserialize(using = RebookTradeResponseBrokerCapacity._Deserializer.class)
 @JsonSerialize(using = RebookTradeResponseBrokerCapacity._Serializer.class)
 public class RebookTradeResponseBrokerCapacity {

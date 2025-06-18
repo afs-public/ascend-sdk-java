@@ -90,8 +90,6 @@ public class IDDocumentUploadRequestCreateDocumentType {
       new IDDocumentUploadRequestCreateDocumentType("TRUSTEE_CERTIFICATION");
   public static final IDDocumentUploadRequestCreateDocumentType SELFIE =
       new IDDocumentUploadRequestCreateDocumentType("SELFIE");
-  public static final IDDocumentUploadRequestCreateDocumentType ARTICLES_OF_ORGANISATION =
-      new IDDocumentUploadRequestCreateDocumentType("ARTICLES_OF_ORGANISATION");
   public static final IDDocumentUploadRequestCreateDocumentType CERT_OF_SOLE_OFFICER =
       new IDDocumentUploadRequestCreateDocumentType("CERT_OF_SOLE_OFFICER");
   public static final IDDocumentUploadRequestCreateDocumentType
@@ -121,6 +119,8 @@ public class IDDocumentUploadRequestCreateDocumentType {
       new IDDocumentUploadRequestCreateDocumentType("SHAREHOLDER_AGREEMENT");
   public static final IDDocumentUploadRequestCreateDocumentType CORPORATE_RECORDS =
       new IDDocumentUploadRequestCreateDocumentType("CORPORATE_RECORDS");
+  public static final IDDocumentUploadRequestCreateDocumentType ARTICLES_OF_ORGANIZATION =
+      new IDDocumentUploadRequestCreateDocumentType("ARTICLES_OF_ORGANIZATION");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -214,7 +214,6 @@ public class IDDocumentUploadRequestCreateDocumentType {
     map.put("EXECUTOR_CERTIFICATION", EXECUTOR_CERTIFICATION);
     map.put("TRUSTEE_CERTIFICATION", TRUSTEE_CERTIFICATION);
     map.put("SELFIE", SELFIE);
-    map.put("ARTICLES_OF_ORGANISATION", ARTICLES_OF_ORGANISATION);
     map.put("CERT_OF_SOLE_OFFICER", CERT_OF_SOLE_OFFICER);
     map.put("CERTIFICATION_CORRESPONDENT_ACCOUNTS", CERTIFICATION_CORRESPONDENT_ACCOUNTS);
     map.put("CERTIFICATION_FOREIGN_BANKS", CERTIFICATION_FOREIGN_BANKS);
@@ -229,6 +228,7 @@ public class IDDocumentUploadRequestCreateDocumentType {
     map.put("CORPORATE_BYLAWS", CORPORATE_BYLAWS);
     map.put("SHAREHOLDER_AGREEMENT", SHAREHOLDER_AGREEMENT);
     map.put("CORPORATE_RECORDS", CORPORATE_RECORDS);
+    map.put("ARTICLES_OF_ORGANIZATION", ARTICLES_OF_ORGANIZATION);
     return map;
   }
 
@@ -274,9 +274,6 @@ public class IDDocumentUploadRequestCreateDocumentType {
         IDDocumentUploadRequestCreateDocumentTypeEnum.TRUSTEE_CERTIFICATION);
     map.put("SELFIE", IDDocumentUploadRequestCreateDocumentTypeEnum.SELFIE);
     map.put(
-        "ARTICLES_OF_ORGANISATION",
-        IDDocumentUploadRequestCreateDocumentTypeEnum.ARTICLES_OF_ORGANISATION);
-    map.put(
         "CERT_OF_SOLE_OFFICER", IDDocumentUploadRequestCreateDocumentTypeEnum.CERT_OF_SOLE_OFFICER);
     map.put(
         "CERTIFICATION_CORRESPONDENT_ACCOUNTS",
@@ -305,6 +302,9 @@ public class IDDocumentUploadRequestCreateDocumentType {
         "SHAREHOLDER_AGREEMENT",
         IDDocumentUploadRequestCreateDocumentTypeEnum.SHAREHOLDER_AGREEMENT);
     map.put("CORPORATE_RECORDS", IDDocumentUploadRequestCreateDocumentTypeEnum.CORPORATE_RECORDS);
+    map.put(
+        "ARTICLES_OF_ORGANIZATION",
+        IDDocumentUploadRequestCreateDocumentTypeEnum.ARTICLES_OF_ORGANIZATION);
     return map;
   }
 
@@ -366,7 +366,6 @@ public class IDDocumentUploadRequestCreateDocumentType {
     EXECUTOR_CERTIFICATION("EXECUTOR_CERTIFICATION"),
     TRUSTEE_CERTIFICATION("TRUSTEE_CERTIFICATION"),
     SELFIE("SELFIE"),
-    ARTICLES_OF_ORGANISATION("ARTICLES_OF_ORGANISATION"),
     CERT_OF_SOLE_OFFICER("CERT_OF_SOLE_OFFICER"),
     CERTIFICATION_CORRESPONDENT_ACCOUNTS("CERTIFICATION_CORRESPONDENT_ACCOUNTS"),
     CERTIFICATION_FOREIGN_BANKS("CERTIFICATION_FOREIGN_BANKS"),
@@ -381,6 +380,7 @@ public class IDDocumentUploadRequestCreateDocumentType {
     CORPORATE_BYLAWS("CORPORATE_BYLAWS"),
     SHAREHOLDER_AGREEMENT("SHAREHOLDER_AGREEMENT"),
     CORPORATE_RECORDS("CORPORATE_RECORDS"),
+    ARTICLES_OF_ORGANIZATION("ARTICLES_OF_ORGANIZATION"),
     ;
 
     private final String value;

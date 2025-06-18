@@ -16,7 +16,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'com.apexfintechsolutions:ascendsdk:1.2.1'
+implementation 'com.apexfintechsolutions:ascendsdk:1.3.0'
 ```
 
 Maven:
@@ -24,7 +24,7 @@ Maven:
 <dependency>
     <groupId>com.apexfintechsolutions</groupId>
     <artifactId>ascendsdk</artifactId>
-    <version>1.2.1</version>
+    <version>1.3.0</version>
 </dependency>
 ```
 
@@ -45,19 +45,23 @@ package hello.world;
 import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsGetAccountResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.QueryParamView;
-import com.apexfintechsolutions.ascendsdk.utils.ApexSecuritySource;
+import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 
 public class Application {
 
     public static void main(String[] args) throws Exception {
         SDK sdk = SDK.builder()
             .serverURL(System.getenv("APEX_APIS_URL"))
-            .securitySource(
-                ApexSecuritySource.builder()
-                    .serverUrl(System.getenv("APEX_APIS_URL"))
-                    .apiKey(System.getenv("X_API_KEY"))
-                    .ascendCredsJson(System.getenv("APEX_CREDS_APX1"))
+            .security(Security.builder()
+                .apiKey("X_API_KEY")
+                .serviceAccountCreds(ServiceAccountCreds.builder()
+                    .privateKey("SERVICE_ACCOUNT_CREDS_PRIVATE_KEY")
+                    .name("SERVICE_ACCOUNT_CREDS_NAME")
+                    .organization("SERVICE_ACCOUNT_CREDS_ORGANIZATION")
+                    .type("serviceAccount")
                     .build())
+                .build())
             .build();
 
         AccountsGetAccountResponse res = sdk.accountCreation().getAccount()
@@ -94,6 +98,7 @@ package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsGetAccountResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.QueryParamView;
@@ -105,8 +110,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -130,11 +140,11 @@ public class Application {
 
 You can override the default server globally using the `.server(AvailableServers server)` builder method when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
 
-| Name   | Server                     |
-| ------ | -------------------------- |
-| `uat`  | `https://uat.apexapis.com` |
-| `prod` | `https://api.apexapis.com` |
-| `sbx`  | `https://sbx.apexapis.com` |
+| Name   | Server                     | Description                |
+| ------ | -------------------------- | -------------------------- |
+| `uat`  | `https://uat.apexapis.com` | our uat environment        |
+| `prod` | `https://api.apexapis.com` | our production environment |
+| `sbx`  | `https://sbx.apexapis.com` | our sandbox environment    |
 
 #### Example
 
@@ -143,6 +153,7 @@ package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsGetAccountResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.QueryParamView;
@@ -153,10 +164,15 @@ public class Application {
     public static void main(String[] args) throws Status, Status, Exception {
 
         SDK sdk = SDK.builder()
-                .serverIndex(2)
+                .server(SDK.AvailableServers.SBX)
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -180,6 +196,7 @@ package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsGetAccountResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.QueryParamView;
@@ -192,8 +209,13 @@ public class Application {
         SDK sdk = SDK.builder()
                 .serverURL("https://uat.apexapis.com")
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -249,6 +271,9 @@ public class Application {
 ### [accountTransfers()](docs/sdks/accounttransfers/README.md)
 
 * [createTransfer](docs/sdks/accounttransfers/README.md#createtransfer) - Create Transfer
+* [listTransfers](docs/sdks/accounttransfers/README.md#listtransfers) - List Transfers
+* [acceptTransfer](docs/sdks/accounttransfers/README.md#accepttransfer) - Accept Transfer
+* [rejectTransfer](docs/sdks/accounttransfers/README.md#rejecttransfer) - Reject Transfer
 * [getTransfer](docs/sdks/accounttransfers/README.md#gettransfer) - Get Transfer
 
 ### [achTransfers()](docs/sdks/achtransfers/README.md)

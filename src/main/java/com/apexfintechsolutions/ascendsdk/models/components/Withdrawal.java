@@ -74,6 +74,11 @@ public class Withdrawal {
   @JsonProperty("retirement_type")
   private Optional<? extends RetirementType> retirementType;
 
+  /** Indicates whether or a not a distribution is a full liquidation of a tax-advantaged account */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("total_distribution")
+  private Optional<Boolean> totalDistribution;
+
   /** Provides information on the method through which a deposit/ withdrawal was initiated */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("type")
@@ -91,6 +96,7 @@ public class Withdrawal {
       @JsonProperty("originating_institution") Optional<String> originatingInstitution,
       @JsonProperty("periodic") Optional<Boolean> periodic,
       @JsonProperty("retirement_type") Optional<? extends RetirementType> retirementType,
+      @JsonProperty("total_distribution") Optional<Boolean> totalDistribution,
       @JsonProperty("type") Optional<? extends EntryWithdrawalType> type) {
     Utils.checkNotNull(additionalInstructions, "additionalInstructions");
     Utils.checkNotNull(closingAccount, "closingAccount");
@@ -102,6 +108,7 @@ public class Withdrawal {
     Utils.checkNotNull(originatingInstitution, "originatingInstitution");
     Utils.checkNotNull(periodic, "periodic");
     Utils.checkNotNull(retirementType, "retirementType");
+    Utils.checkNotNull(totalDistribution, "totalDistribution");
     Utils.checkNotNull(type, "type");
     this.additionalInstructions = additionalInstructions;
     this.closingAccount = closingAccount;
@@ -113,11 +120,13 @@ public class Withdrawal {
     this.originatingInstitution = originatingInstitution;
     this.periodic = periodic;
     this.retirementType = retirementType;
+    this.totalDistribution = totalDistribution;
     this.type = type;
   }
 
   public Withdrawal() {
     this(
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
@@ -196,6 +205,12 @@ public class Withdrawal {
   @JsonIgnore
   public Optional<RetirementType> retirementType() {
     return (Optional<RetirementType>) retirementType;
+  }
+
+  /** Indicates whether or a not a distribution is a full liquidation of a tax-advantaged account */
+  @JsonIgnore
+  public Optional<Boolean> totalDistribution() {
+    return totalDistribution;
   }
 
   /** Provides information on the method through which a deposit/ withdrawal was initiated */
@@ -359,6 +374,20 @@ public class Withdrawal {
     return this;
   }
 
+  /** Indicates whether or a not a distribution is a full liquidation of a tax-advantaged account */
+  public Withdrawal withTotalDistribution(boolean totalDistribution) {
+    Utils.checkNotNull(totalDistribution, "totalDistribution");
+    this.totalDistribution = Optional.ofNullable(totalDistribution);
+    return this;
+  }
+
+  /** Indicates whether or a not a distribution is a full liquidation of a tax-advantaged account */
+  public Withdrawal withTotalDistribution(Optional<Boolean> totalDistribution) {
+    Utils.checkNotNull(totalDistribution, "totalDistribution");
+    this.totalDistribution = totalDistribution;
+    return this;
+  }
+
   /** Provides information on the method through which a deposit/ withdrawal was initiated */
   public Withdrawal withType(EntryWithdrawalType type) {
     Utils.checkNotNull(type, "type");
@@ -392,6 +421,7 @@ public class Withdrawal {
         && Objects.deepEquals(this.originatingInstitution, other.originatingInstitution)
         && Objects.deepEquals(this.periodic, other.periodic)
         && Objects.deepEquals(this.retirementType, other.retirementType)
+        && Objects.deepEquals(this.totalDistribution, other.totalDistribution)
         && Objects.deepEquals(this.type, other.type);
   }
 
@@ -408,6 +438,7 @@ public class Withdrawal {
         originatingInstitution,
         periodic,
         retirementType,
+        totalDistribution,
         type);
   }
 
@@ -435,6 +466,8 @@ public class Withdrawal {
         periodic,
         "retirementType",
         retirementType,
+        "totalDistribution",
+        totalDistribution,
         "type",
         type);
   }
@@ -460,6 +493,8 @@ public class Withdrawal {
     private Optional<Boolean> periodic = Optional.empty();
 
     private Optional<? extends RetirementType> retirementType = Optional.empty();
+
+    private Optional<Boolean> totalDistribution = Optional.empty();
 
     private Optional<? extends EntryWithdrawalType> type = Optional.empty();
 
@@ -617,6 +652,24 @@ public class Withdrawal {
       return this;
     }
 
+    /**
+     * Indicates whether or a not a distribution is a full liquidation of a tax-advantaged account
+     */
+    public Builder totalDistribution(boolean totalDistribution) {
+      Utils.checkNotNull(totalDistribution, "totalDistribution");
+      this.totalDistribution = Optional.ofNullable(totalDistribution);
+      return this;
+    }
+
+    /**
+     * Indicates whether or a not a distribution is a full liquidation of a tax-advantaged account
+     */
+    public Builder totalDistribution(Optional<Boolean> totalDistribution) {
+      Utils.checkNotNull(totalDistribution, "totalDistribution");
+      this.totalDistribution = totalDistribution;
+      return this;
+    }
+
     /** Provides information on the method through which a deposit/ withdrawal was initiated */
     public Builder type(EntryWithdrawalType type) {
       Utils.checkNotNull(type, "type");
@@ -643,6 +696,7 @@ public class Withdrawal {
           originatingInstitution,
           periodic,
           retirementType,
+          totalDistribution,
           type);
     }
   }

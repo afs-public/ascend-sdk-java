@@ -24,6 +24,7 @@ package hello.world;
 import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.DecimalCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.components.TransfersFeeCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.TransfersFeeCreateType;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
@@ -36,8 +37,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -87,6 +93,7 @@ package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.FeesGetFeeResponse;
 import java.lang.Exception;
@@ -97,8 +104,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -144,6 +156,7 @@ package hello.world;
 import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelFeeRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.FeesCancelFeeResponse;
 import java.lang.Exception;
@@ -154,8 +167,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -205,6 +223,7 @@ package hello.world;
 import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.DecimalCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.components.TransfersCreditCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.TransfersCreditCreateType;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
@@ -217,8 +236,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -268,6 +292,7 @@ package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.CreditsGetCreditResponse;
 import java.lang.Exception;
@@ -278,8 +303,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -325,6 +355,7 @@ package hello.world;
 import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelCreditRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.CreditsCancelCreditResponse;
 import java.lang.Exception;
@@ -335,8 +366,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 

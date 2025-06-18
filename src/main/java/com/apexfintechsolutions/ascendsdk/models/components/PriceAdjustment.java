@@ -20,7 +20,7 @@ public class PriceAdjustment {
   /** Total monetary value of the price_adjustment */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("price_adjustment_amount")
-  private JsonNullable<? extends ExecutionPriceAdjustmentAmount> priceAdjustmentAmount;
+  private JsonNullable<? extends PriceAdjustmentAmount> priceAdjustmentAmount;
 
   /** The type of price adjustment being applied by the broker to the net price of the security. */
   @JsonInclude(Include.NON_ABSENT)
@@ -30,7 +30,7 @@ public class PriceAdjustment {
   @JsonCreator
   public PriceAdjustment(
       @JsonProperty("price_adjustment_amount")
-          JsonNullable<? extends ExecutionPriceAdjustmentAmount> priceAdjustmentAmount,
+          JsonNullable<? extends PriceAdjustmentAmount> priceAdjustmentAmount,
       @JsonProperty("price_adjustment_type")
           Optional<? extends ExecutionPriceAdjustmentType> priceAdjustmentType) {
     Utils.checkNotNull(priceAdjustmentAmount, "priceAdjustmentAmount");
@@ -46,8 +46,8 @@ public class PriceAdjustment {
   /** Total monetary value of the price_adjustment */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<ExecutionPriceAdjustmentAmount> priceAdjustmentAmount() {
-    return (JsonNullable<ExecutionPriceAdjustmentAmount>) priceAdjustmentAmount;
+  public JsonNullable<PriceAdjustmentAmount> priceAdjustmentAmount() {
+    return (JsonNullable<PriceAdjustmentAmount>) priceAdjustmentAmount;
   }
 
   /** The type of price adjustment being applied by the broker to the net price of the security. */
@@ -62,8 +62,7 @@ public class PriceAdjustment {
   }
 
   /** Total monetary value of the price_adjustment */
-  public PriceAdjustment withPriceAdjustmentAmount(
-      ExecutionPriceAdjustmentAmount priceAdjustmentAmount) {
+  public PriceAdjustment withPriceAdjustmentAmount(PriceAdjustmentAmount priceAdjustmentAmount) {
     Utils.checkNotNull(priceAdjustmentAmount, "priceAdjustmentAmount");
     this.priceAdjustmentAmount = JsonNullable.of(priceAdjustmentAmount);
     return this;
@@ -71,7 +70,7 @@ public class PriceAdjustment {
 
   /** Total monetary value of the price_adjustment */
   public PriceAdjustment withPriceAdjustmentAmount(
-      JsonNullable<? extends ExecutionPriceAdjustmentAmount> priceAdjustmentAmount) {
+      JsonNullable<? extends PriceAdjustmentAmount> priceAdjustmentAmount) {
     Utils.checkNotNull(priceAdjustmentAmount, "priceAdjustmentAmount");
     this.priceAdjustmentAmount = priceAdjustmentAmount;
     return this;
@@ -122,7 +121,7 @@ public class PriceAdjustment {
 
   public static final class Builder {
 
-    private JsonNullable<? extends ExecutionPriceAdjustmentAmount> priceAdjustmentAmount =
+    private JsonNullable<? extends PriceAdjustmentAmount> priceAdjustmentAmount =
         JsonNullable.undefined();
 
     private Optional<? extends ExecutionPriceAdjustmentType> priceAdjustmentType = Optional.empty();
@@ -132,7 +131,7 @@ public class PriceAdjustment {
     }
 
     /** Total monetary value of the price_adjustment */
-    public Builder priceAdjustmentAmount(ExecutionPriceAdjustmentAmount priceAdjustmentAmount) {
+    public Builder priceAdjustmentAmount(PriceAdjustmentAmount priceAdjustmentAmount) {
       Utils.checkNotNull(priceAdjustmentAmount, "priceAdjustmentAmount");
       this.priceAdjustmentAmount = JsonNullable.of(priceAdjustmentAmount);
       return this;
@@ -140,7 +139,7 @@ public class PriceAdjustment {
 
     /** Total monetary value of the price_adjustment */
     public Builder priceAdjustmentAmount(
-        JsonNullable<? extends ExecutionPriceAdjustmentAmount> priceAdjustmentAmount) {
+        JsonNullable<? extends PriceAdjustmentAmount> priceAdjustmentAmount) {
       Utils.checkNotNull(priceAdjustmentAmount, "priceAdjustmentAmount");
       this.priceAdjustmentAmount = priceAdjustmentAmount;
       return this;

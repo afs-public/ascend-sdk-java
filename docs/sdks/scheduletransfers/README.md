@@ -33,6 +33,7 @@ package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.TransferScheduleSummariesListScheduleSummariesResponse;
 import java.lang.Exception;
@@ -43,8 +44,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -96,6 +102,7 @@ import com.apexfintechsolutions.ascendsdk.models.components.DecimalCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.DepositScheduleDetailsCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.SchedulePropertiesCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.components.TimeUnit;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchDepositSchedulesCreateAchDepositScheduleResponse;
@@ -107,8 +114,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -166,6 +178,7 @@ package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchDepositSchedulesListAchDepositSchedulesResponse;
 import java.lang.Exception;
@@ -176,8 +189,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -226,6 +244,7 @@ package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchDepositSchedulesGetAchDepositScheduleResponse;
 import java.lang.Exception;
@@ -236,8 +255,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -283,6 +307,7 @@ package hello.world;
 import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.AchDepositScheduleUpdate;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchDepositSchedulesUpdateAchDepositScheduleResponse;
 import java.lang.Exception;
@@ -293,8 +318,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -345,6 +375,7 @@ package hello.world;
 import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelAchDepositScheduleRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchDepositSchedulesCancelAchDepositScheduleResponse;
 import java.lang.Exception;
@@ -355,8 +386,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -408,6 +444,7 @@ import com.apexfintechsolutions.ascendsdk.models.components.AchWithdrawalSchedul
 import com.apexfintechsolutions.ascendsdk.models.components.DateCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.SchedulePropertiesCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.components.TimeUnit;
 import com.apexfintechsolutions.ascendsdk.models.components.WithdrawalScheduleDetailsCreate;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
@@ -420,8 +457,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -477,6 +519,7 @@ package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchWithdrawalSchedulesListAchWithdrawalSchedulesResponse;
 import java.lang.Exception;
@@ -487,8 +530,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -537,6 +585,7 @@ package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchWithdrawalSchedulesGetAchWithdrawalScheduleResponse;
 import java.lang.Exception;
@@ -547,8 +596,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -594,6 +648,7 @@ package hello.world;
 import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.AchWithdrawalScheduleUpdate;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchWithdrawalSchedulesUpdateAchWithdrawalScheduleResponse;
 import java.lang.Exception;
@@ -604,8 +659,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -656,6 +716,7 @@ package hello.world;
 import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelAchWithdrawalScheduleRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchWithdrawalSchedulesCancelAchWithdrawalScheduleResponse;
 import java.lang.Exception;
@@ -666,8 +727,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -720,6 +786,7 @@ import com.apexfintechsolutions.ascendsdk.models.components.RecipientBankBankIdC
 import com.apexfintechsolutions.ascendsdk.models.components.RecipientBankBankIdCreateType;
 import com.apexfintechsolutions.ascendsdk.models.components.SchedulePropertiesCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.components.TimeUnit;
 import com.apexfintechsolutions.ascendsdk.models.components.WireWithdrawalBeneficiaryCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.WireWithdrawalRecipientBankCreate;
@@ -735,8 +802,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -800,6 +872,7 @@ package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.WireWithdrawalSchedulesListWireWithdrawalSchedulesResponse;
 import java.lang.Exception;
@@ -810,8 +883,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -860,6 +938,7 @@ package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.WireWithdrawalSchedulesGetWireWithdrawalScheduleResponse;
 import java.lang.Exception;
@@ -870,8 +949,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -916,6 +1000,7 @@ package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.components.WireWithdrawalScheduleUpdate;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.WireWithdrawalSchedulesUpdateWireWithdrawalScheduleResponse;
@@ -927,8 +1012,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -979,6 +1069,7 @@ package hello.world;
 import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelWireWithdrawalScheduleRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.WireWithdrawalSchedulesCancelWireWithdrawalScheduleResponse;
 import java.lang.Exception;
@@ -989,8 +1080,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 

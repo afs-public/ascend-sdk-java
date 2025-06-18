@@ -27,12 +27,12 @@ public class CapitalGains {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("cash_rate")
-  private JsonNullable<? extends CashRate> cashRate;
+  private JsonNullable<? extends EntryCashRate> cashRate;
 
   /** Common fields for corporate actions */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("corporate_action_general_information")
-  private JsonNullable<? extends EntryCorporateActionGeneralInformation>
+  private JsonNullable<? extends EntryCapitalGainsCorporateActionGeneralInformation>
       corporateActionGeneralInformation;
 
   /** Corresponds to corporateactions.announcement.capital_gains */
@@ -43,7 +43,7 @@ public class CapitalGains {
   /** The anticipated payment date at the depository */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("payment_date")
-  private JsonNullable<? extends PaymentDate> paymentDate;
+  private JsonNullable<? extends EntryPaymentDate> paymentDate;
 
   /**
    * Identifies whether dividend income is potentially qualified for the lower maximum individual
@@ -70,12 +70,12 @@ public class CapitalGains {
 
   @JsonCreator
   public CapitalGains(
-      @JsonProperty("cash_rate") JsonNullable<? extends CashRate> cashRate,
+      @JsonProperty("cash_rate") JsonNullable<? extends EntryCashRate> cashRate,
       @JsonProperty("corporate_action_general_information")
-          JsonNullable<? extends EntryCorporateActionGeneralInformation>
+          JsonNullable<? extends EntryCapitalGainsCorporateActionGeneralInformation>
               corporateActionGeneralInformation,
       @JsonProperty("long_term_gain") Optional<Boolean> longTermGain,
-      @JsonProperty("payment_date") JsonNullable<? extends PaymentDate> paymentDate,
+      @JsonProperty("payment_date") JsonNullable<? extends EntryPaymentDate> paymentDate,
       @JsonProperty("qualified") Optional<Boolean> qualified,
       @JsonProperty("quantity") JsonNullable<? extends EntryCapitalGainsQuantity> quantity,
       @JsonProperty("record_date") JsonNullable<? extends RecordDate> recordDate,
@@ -116,15 +116,17 @@ public class CapitalGains {
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<CashRate> cashRate() {
-    return (JsonNullable<CashRate>) cashRate;
+  public JsonNullable<EntryCashRate> cashRate() {
+    return (JsonNullable<EntryCashRate>) cashRate;
   }
 
   /** Common fields for corporate actions */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<EntryCorporateActionGeneralInformation> corporateActionGeneralInformation() {
-    return (JsonNullable<EntryCorporateActionGeneralInformation>) corporateActionGeneralInformation;
+  public JsonNullable<EntryCapitalGainsCorporateActionGeneralInformation>
+      corporateActionGeneralInformation() {
+    return (JsonNullable<EntryCapitalGainsCorporateActionGeneralInformation>)
+        corporateActionGeneralInformation;
   }
 
   /** Corresponds to corporateactions.announcement.capital_gains */
@@ -136,8 +138,8 @@ public class CapitalGains {
   /** The anticipated payment date at the depository */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<PaymentDate> paymentDate() {
-    return (JsonNullable<PaymentDate>) paymentDate;
+  public JsonNullable<EntryPaymentDate> paymentDate() {
+    return (JsonNullable<EntryPaymentDate>) paymentDate;
   }
 
   /**
@@ -177,7 +179,7 @@ public class CapitalGains {
    * The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash
    * will be disbursed to the shareholder
    */
-  public CapitalGains withCashRate(CashRate cashRate) {
+  public CapitalGains withCashRate(EntryCashRate cashRate) {
     Utils.checkNotNull(cashRate, "cashRate");
     this.cashRate = JsonNullable.of(cashRate);
     return this;
@@ -187,7 +189,7 @@ public class CapitalGains {
    * The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash
    * will be disbursed to the shareholder
    */
-  public CapitalGains withCashRate(JsonNullable<? extends CashRate> cashRate) {
+  public CapitalGains withCashRate(JsonNullable<? extends EntryCashRate> cashRate) {
     Utils.checkNotNull(cashRate, "cashRate");
     this.cashRate = cashRate;
     return this;
@@ -195,7 +197,7 @@ public class CapitalGains {
 
   /** Common fields for corporate actions */
   public CapitalGains withCorporateActionGeneralInformation(
-      EntryCorporateActionGeneralInformation corporateActionGeneralInformation) {
+      EntryCapitalGainsCorporateActionGeneralInformation corporateActionGeneralInformation) {
     Utils.checkNotNull(corporateActionGeneralInformation, "corporateActionGeneralInformation");
     this.corporateActionGeneralInformation = JsonNullable.of(corporateActionGeneralInformation);
     return this;
@@ -203,7 +205,7 @@ public class CapitalGains {
 
   /** Common fields for corporate actions */
   public CapitalGains withCorporateActionGeneralInformation(
-      JsonNullable<? extends EntryCorporateActionGeneralInformation>
+      JsonNullable<? extends EntryCapitalGainsCorporateActionGeneralInformation>
           corporateActionGeneralInformation) {
     Utils.checkNotNull(corporateActionGeneralInformation, "corporateActionGeneralInformation");
     this.corporateActionGeneralInformation = corporateActionGeneralInformation;
@@ -225,14 +227,14 @@ public class CapitalGains {
   }
 
   /** The anticipated payment date at the depository */
-  public CapitalGains withPaymentDate(PaymentDate paymentDate) {
+  public CapitalGains withPaymentDate(EntryPaymentDate paymentDate) {
     Utils.checkNotNull(paymentDate, "paymentDate");
     this.paymentDate = JsonNullable.of(paymentDate);
     return this;
   }
 
   /** The anticipated payment date at the depository */
-  public CapitalGains withPaymentDate(JsonNullable<? extends PaymentDate> paymentDate) {
+  public CapitalGains withPaymentDate(JsonNullable<? extends EntryPaymentDate> paymentDate) {
     Utils.checkNotNull(paymentDate, "paymentDate");
     this.paymentDate = paymentDate;
     return this;
@@ -357,14 +359,14 @@ public class CapitalGains {
 
   public static final class Builder {
 
-    private JsonNullable<? extends CashRate> cashRate = JsonNullable.undefined();
+    private JsonNullable<? extends EntryCashRate> cashRate = JsonNullable.undefined();
 
-    private JsonNullable<? extends EntryCorporateActionGeneralInformation>
+    private JsonNullable<? extends EntryCapitalGainsCorporateActionGeneralInformation>
         corporateActionGeneralInformation = JsonNullable.undefined();
 
     private Optional<Boolean> longTermGain = Optional.empty();
 
-    private JsonNullable<? extends PaymentDate> paymentDate = JsonNullable.undefined();
+    private JsonNullable<? extends EntryPaymentDate> paymentDate = JsonNullable.undefined();
 
     private Optional<Boolean> qualified = Optional.empty();
 
@@ -382,7 +384,7 @@ public class CapitalGains {
      * The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash
      * will be disbursed to the shareholder
      */
-    public Builder cashRate(CashRate cashRate) {
+    public Builder cashRate(EntryCashRate cashRate) {
       Utils.checkNotNull(cashRate, "cashRate");
       this.cashRate = JsonNullable.of(cashRate);
       return this;
@@ -392,7 +394,7 @@ public class CapitalGains {
      * The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash
      * will be disbursed to the shareholder
      */
-    public Builder cashRate(JsonNullable<? extends CashRate> cashRate) {
+    public Builder cashRate(JsonNullable<? extends EntryCashRate> cashRate) {
       Utils.checkNotNull(cashRate, "cashRate");
       this.cashRate = cashRate;
       return this;
@@ -400,7 +402,7 @@ public class CapitalGains {
 
     /** Common fields for corporate actions */
     public Builder corporateActionGeneralInformation(
-        EntryCorporateActionGeneralInformation corporateActionGeneralInformation) {
+        EntryCapitalGainsCorporateActionGeneralInformation corporateActionGeneralInformation) {
       Utils.checkNotNull(corporateActionGeneralInformation, "corporateActionGeneralInformation");
       this.corporateActionGeneralInformation = JsonNullable.of(corporateActionGeneralInformation);
       return this;
@@ -408,7 +410,7 @@ public class CapitalGains {
 
     /** Common fields for corporate actions */
     public Builder corporateActionGeneralInformation(
-        JsonNullable<? extends EntryCorporateActionGeneralInformation>
+        JsonNullable<? extends EntryCapitalGainsCorporateActionGeneralInformation>
             corporateActionGeneralInformation) {
       Utils.checkNotNull(corporateActionGeneralInformation, "corporateActionGeneralInformation");
       this.corporateActionGeneralInformation = corporateActionGeneralInformation;
@@ -430,14 +432,14 @@ public class CapitalGains {
     }
 
     /** The anticipated payment date at the depository */
-    public Builder paymentDate(PaymentDate paymentDate) {
+    public Builder paymentDate(EntryPaymentDate paymentDate) {
       Utils.checkNotNull(paymentDate, "paymentDate");
       this.paymentDate = JsonNullable.of(paymentDate);
       return this;
     }
 
     /** The anticipated payment date at the depository */
-    public Builder paymentDate(JsonNullable<? extends PaymentDate> paymentDate) {
+    public Builder paymentDate(JsonNullable<? extends EntryPaymentDate> paymentDate) {
       Utils.checkNotNull(paymentDate, "paymentDate");
       this.paymentDate = paymentDate;
       return this;

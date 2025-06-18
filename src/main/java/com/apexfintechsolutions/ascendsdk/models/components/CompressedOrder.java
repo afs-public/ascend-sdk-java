@@ -51,7 +51,7 @@ public class CompressedOrder {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("average_prices")
-  private Optional<? extends List<ExecutedPrice>> averagePrices;
+  private Optional<? extends List<BasketTradingExecutedPrice>> averagePrices;
 
   /** System generated unique id for the compressed order. */
   @JsonInclude(Include.NON_ABSENT)
@@ -83,7 +83,7 @@ public class CompressedOrder {
   /** The execution-level details that compose this order */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("executions")
-  private Optional<? extends List<Executions>> executions;
+  private Optional<? extends List<BasketTradingExecutions>> executions;
 
   /**
    * The summed quantity value across all fills in this order, up to a maximum of 5 decimal places.
@@ -157,6 +157,14 @@ public class CompressedOrder {
   private Optional<? extends CompressedOrderSide> side;
 
   /**
+   * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("special_reporting_instructions")
+  private Optional<? extends List<CompressedOrderSpecialReportingInstructions>>
+      specialReportingInstructions;
+
+  /**
    * Must be the value "DAY". Regulatory requirements dictate that the system capture the intended
    * time_in_force, which is why this a mandatory field.
    */
@@ -169,13 +177,14 @@ public class CompressedOrder {
       @JsonProperty("asset_id") Optional<String> assetId,
       @JsonProperty("asset_type") Optional<? extends CompressedOrderAssetType> assetType,
       @JsonProperty("average_price_account_id") Optional<String> averagePriceAccountId,
-      @JsonProperty("average_prices") Optional<? extends List<ExecutedPrice>> averagePrices,
+      @JsonProperty("average_prices")
+          Optional<? extends List<BasketTradingExecutedPrice>> averagePrices,
       @JsonProperty("compressed_order_id") Optional<String> compressedOrderId,
       @JsonProperty("create_time") JsonNullable<OffsetDateTime> createTime,
       @JsonProperty("cumulative_notional_value")
           JsonNullable<? extends CompressedOrderCumulativeNotionalValue> cumulativeNotionalValue,
       @JsonProperty("currency_code") Optional<String> currencyCode,
-      @JsonProperty("executions") Optional<? extends List<Executions>> executions,
+      @JsonProperty("executions") Optional<? extends List<BasketTradingExecutions>> executions,
       @JsonProperty("filled_quantity")
           JsonNullable<? extends CompressedOrderFilledQuantity> filledQuantity,
       @JsonProperty("identifier") Optional<String> identifier,
@@ -191,6 +200,9 @@ public class CompressedOrder {
       @JsonProperty("order_type") Optional<? extends CompressedOrderOrderType> orderType,
       @JsonProperty("quantity") JsonNullable<? extends CompressedOrderQuantity> quantity,
       @JsonProperty("side") Optional<? extends CompressedOrderSide> side,
+      @JsonProperty("special_reporting_instructions")
+          Optional<? extends List<CompressedOrderSpecialReportingInstructions>>
+              specialReportingInstructions,
       @JsonProperty("time_in_force") Optional<? extends CompressedOrderTimeInForce> timeInForce) {
     Utils.checkNotNull(assetId, "assetId");
     Utils.checkNotNull(assetType, "assetType");
@@ -212,6 +224,7 @@ public class CompressedOrder {
     Utils.checkNotNull(orderType, "orderType");
     Utils.checkNotNull(quantity, "quantity");
     Utils.checkNotNull(side, "side");
+    Utils.checkNotNull(specialReportingInstructions, "specialReportingInstructions");
     Utils.checkNotNull(timeInForce, "timeInForce");
     this.assetId = assetId;
     this.assetType = assetType;
@@ -233,6 +246,7 @@ public class CompressedOrder {
     this.orderType = orderType;
     this.quantity = quantity;
     this.side = side;
+    this.specialReportingInstructions = specialReportingInstructions;
     this.timeInForce = timeInForce;
   }
 
@@ -257,6 +271,7 @@ public class CompressedOrder {
         Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined(),
+        Optional.empty(),
         Optional.empty(),
         Optional.empty());
   }
@@ -295,8 +310,8 @@ public class CompressedOrder {
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<List<ExecutedPrice>> averagePrices() {
-    return (Optional<List<ExecutedPrice>>) averagePrices;
+  public Optional<List<BasketTradingExecutedPrice>> averagePrices() {
+    return (Optional<List<BasketTradingExecutedPrice>>) averagePrices;
   }
 
   /** System generated unique id for the compressed order. */
@@ -334,8 +349,8 @@ public class CompressedOrder {
   /** The execution-level details that compose this order */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<List<Executions>> executions() {
-    return (Optional<List<Executions>>) executions;
+  public Optional<List<BasketTradingExecutions>> executions() {
+    return (Optional<List<BasketTradingExecutions>>) executions;
   }
 
   /**
@@ -429,6 +444,17 @@ public class CompressedOrder {
   }
 
   /**
+   * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<List<CompressedOrderSpecialReportingInstructions>>
+      specialReportingInstructions() {
+    return (Optional<List<CompressedOrderSpecialReportingInstructions>>)
+        specialReportingInstructions;
+  }
+
+  /**
    * Must be the value "DAY". Regulatory requirements dictate that the system capture the intended
    * time_in_force, which is why this a mandatory field.
    */
@@ -502,7 +528,7 @@ public class CompressedOrder {
    * PRICE_PER_UNIT. This will have up to 4 decimal places for USD amounts less than $1, and a
    * maximum of two for larger USD amounts.
    */
-  public CompressedOrder withAveragePrices(List<ExecutedPrice> averagePrices) {
+  public CompressedOrder withAveragePrices(List<BasketTradingExecutedPrice> averagePrices) {
     Utils.checkNotNull(averagePrices, "averagePrices");
     this.averagePrices = Optional.ofNullable(averagePrices);
     return this;
@@ -516,7 +542,8 @@ public class CompressedOrder {
    * PRICE_PER_UNIT. This will have up to 4 decimal places for USD amounts less than $1, and a
    * maximum of two for larger USD amounts.
    */
-  public CompressedOrder withAveragePrices(Optional<? extends List<ExecutedPrice>> averagePrices) {
+  public CompressedOrder withAveragePrices(
+      Optional<? extends List<BasketTradingExecutedPrice>> averagePrices) {
     Utils.checkNotNull(averagePrices, "averagePrices");
     this.averagePrices = averagePrices;
     return this;
@@ -595,14 +622,15 @@ public class CompressedOrder {
   }
 
   /** The execution-level details that compose this order */
-  public CompressedOrder withExecutions(List<Executions> executions) {
+  public CompressedOrder withExecutions(List<BasketTradingExecutions> executions) {
     Utils.checkNotNull(executions, "executions");
     this.executions = Optional.ofNullable(executions);
     return this;
   }
 
   /** The execution-level details that compose this order */
-  public CompressedOrder withExecutions(Optional<? extends List<Executions>> executions) {
+  public CompressedOrder withExecutions(
+      Optional<? extends List<BasketTradingExecutions>> executions) {
     Utils.checkNotNull(executions, "executions");
     this.executions = executions;
     return this;
@@ -801,6 +829,27 @@ public class CompressedOrder {
   }
 
   /**
+   * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+   */
+  public CompressedOrder withSpecialReportingInstructions(
+      List<CompressedOrderSpecialReportingInstructions> specialReportingInstructions) {
+    Utils.checkNotNull(specialReportingInstructions, "specialReportingInstructions");
+    this.specialReportingInstructions = Optional.ofNullable(specialReportingInstructions);
+    return this;
+  }
+
+  /**
+   * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+   */
+  public CompressedOrder withSpecialReportingInstructions(
+      Optional<? extends List<CompressedOrderSpecialReportingInstructions>>
+          specialReportingInstructions) {
+    Utils.checkNotNull(specialReportingInstructions, "specialReportingInstructions");
+    this.specialReportingInstructions = specialReportingInstructions;
+    return this;
+  }
+
+  /**
    * Must be the value "DAY". Regulatory requirements dictate that the system capture the intended
    * time_in_force, which is why this a mandatory field.
    */
@@ -850,6 +899,7 @@ public class CompressedOrder {
         && Objects.deepEquals(this.orderType, other.orderType)
         && Objects.deepEquals(this.quantity, other.quantity)
         && Objects.deepEquals(this.side, other.side)
+        && Objects.deepEquals(this.specialReportingInstructions, other.specialReportingInstructions)
         && Objects.deepEquals(this.timeInForce, other.timeInForce);
   }
 
@@ -876,6 +926,7 @@ public class CompressedOrder {
         orderType,
         quantity,
         side,
+        specialReportingInstructions,
         timeInForce);
   }
 
@@ -923,6 +974,8 @@ public class CompressedOrder {
         quantity,
         "side",
         side,
+        "specialReportingInstructions",
+        specialReportingInstructions,
         "timeInForce",
         timeInForce);
   }
@@ -935,7 +988,7 @@ public class CompressedOrder {
 
     private Optional<String> averagePriceAccountId = Optional.empty();
 
-    private Optional<? extends List<ExecutedPrice>> averagePrices = Optional.empty();
+    private Optional<? extends List<BasketTradingExecutedPrice>> averagePrices = Optional.empty();
 
     private Optional<String> compressedOrderId = Optional.empty();
 
@@ -946,7 +999,7 @@ public class CompressedOrder {
 
     private Optional<String> currencyCode = Optional.empty();
 
-    private Optional<? extends List<Executions>> executions = Optional.empty();
+    private Optional<? extends List<BasketTradingExecutions>> executions = Optional.empty();
 
     private JsonNullable<? extends CompressedOrderFilledQuantity> filledQuantity =
         JsonNullable.undefined();
@@ -972,6 +1025,9 @@ public class CompressedOrder {
     private JsonNullable<? extends CompressedOrderQuantity> quantity = JsonNullable.undefined();
 
     private Optional<? extends CompressedOrderSide> side = Optional.empty();
+
+    private Optional<? extends List<CompressedOrderSpecialReportingInstructions>>
+        specialReportingInstructions = Optional.empty();
 
     private Optional<? extends CompressedOrderTimeInForce> timeInForce = Optional.empty();
 
@@ -1039,7 +1095,7 @@ public class CompressedOrder {
      * PRICE_PER_UNIT. This will have up to 4 decimal places for USD amounts less than $1, and a
      * maximum of two for larger USD amounts.
      */
-    public Builder averagePrices(List<ExecutedPrice> averagePrices) {
+    public Builder averagePrices(List<BasketTradingExecutedPrice> averagePrices) {
       Utils.checkNotNull(averagePrices, "averagePrices");
       this.averagePrices = Optional.ofNullable(averagePrices);
       return this;
@@ -1053,7 +1109,8 @@ public class CompressedOrder {
      * PRICE_PER_UNIT. This will have up to 4 decimal places for USD amounts less than $1, and a
      * maximum of two for larger USD amounts.
      */
-    public Builder averagePrices(Optional<? extends List<ExecutedPrice>> averagePrices) {
+    public Builder averagePrices(
+        Optional<? extends List<BasketTradingExecutedPrice>> averagePrices) {
       Utils.checkNotNull(averagePrices, "averagePrices");
       this.averagePrices = averagePrices;
       return this;
@@ -1132,14 +1189,14 @@ public class CompressedOrder {
     }
 
     /** The execution-level details that compose this order */
-    public Builder executions(List<Executions> executions) {
+    public Builder executions(List<BasketTradingExecutions> executions) {
       Utils.checkNotNull(executions, "executions");
       this.executions = Optional.ofNullable(executions);
       return this;
     }
 
     /** The execution-level details that compose this order */
-    public Builder executions(Optional<? extends List<Executions>> executions) {
+    public Builder executions(Optional<? extends List<BasketTradingExecutions>> executions) {
       Utils.checkNotNull(executions, "executions");
       this.executions = executions;
       return this;
@@ -1336,6 +1393,29 @@ public class CompressedOrder {
     }
 
     /**
+     * Special Reporting Instructions to be applied to this order. Can include multiple
+     * Instructions.
+     */
+    public Builder specialReportingInstructions(
+        List<CompressedOrderSpecialReportingInstructions> specialReportingInstructions) {
+      Utils.checkNotNull(specialReportingInstructions, "specialReportingInstructions");
+      this.specialReportingInstructions = Optional.ofNullable(specialReportingInstructions);
+      return this;
+    }
+
+    /**
+     * Special Reporting Instructions to be applied to this order. Can include multiple
+     * Instructions.
+     */
+    public Builder specialReportingInstructions(
+        Optional<? extends List<CompressedOrderSpecialReportingInstructions>>
+            specialReportingInstructions) {
+      Utils.checkNotNull(specialReportingInstructions, "specialReportingInstructions");
+      this.specialReportingInstructions = specialReportingInstructions;
+      return this;
+    }
+
+    /**
      * Must be the value "DAY". Regulatory requirements dictate that the system capture the intended
      * time_in_force, which is why this a mandatory field.
      */
@@ -1377,6 +1457,7 @@ public class CompressedOrder {
           orderType,
           quantity,
           side,
+          specialReportingInstructions,
           timeInForce);
     }
   }

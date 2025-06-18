@@ -1,6 +1,7 @@
 package com.apexfintechsolutions.ascendsdk;
 
 import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.operations.IctReconReportsLocateIctReportRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.ProgramDateFilterProgram;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Order;
@@ -107,12 +108,16 @@ public class TestInstantCashTransfers {
   @Test
   public void test_instant_cash_transfer_transfers_locate_ict_report_locate_ict_report1()
       throws Exception {
-    var res =
-        sdk.instantCashTransferICT()
-            .locateIctReport()
+
+    var req =
+        IctReconReportsLocateIctReportRequest.builder()
             .correspondentId(SdkUtil.getCorrespondentId())
             .programDateFilterProgram(ProgramDateFilterProgram.BROKER_PARTNER)
-            .call();
+            .programDateFilterProcessDateYear(2025)
+            .programDateFilterProcessDateMonth(5)
+            .programDateFilterProcessDateDay(28)
+            .build();
+    var res = sdk.instantCashTransferICT().locateIctReport().request(req).call();
     Assertions.assertNotNull(res);
     Assertions.assertEquals(200, res.statusCode());
   }

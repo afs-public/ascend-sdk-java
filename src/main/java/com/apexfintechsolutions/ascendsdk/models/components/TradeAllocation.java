@@ -82,7 +82,7 @@ public class TradeAllocation {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("fees")
-  private Optional<? extends List<Fee>> fees;
+  private Optional<? extends List<BookingFee>> fees;
 
   /** The ULID formatted account_id that the positions will be moved from. */
   @JsonInclude(Include.NON_ABSENT)
@@ -130,7 +130,7 @@ public class TradeAllocation {
   /** One or many lot matching instructions for the trade allocation. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("lot_matching_instructions")
-  private Optional<? extends List<Lot>> lotMatchingInstructions;
+  private Optional<? extends List<BookingLot>> lotMatchingInstructions;
 
   /**
    * Caller provided but can be used for booking-service to note original trade details when booking
@@ -174,7 +174,7 @@ public class TradeAllocation {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("settlement_date")
-  private JsonNullable<? extends SettlementDate> settlementDate;
+  private JsonNullable<? extends TradeAllocationSettlementDate> settlementDate;
 
   /** Side modifier for the trade allocation. */
   @JsonInclude(Include.NON_ABSENT)
@@ -242,7 +242,7 @@ public class TradeAllocation {
       @JsonProperty("commission_amount")
           JsonNullable<? extends TradeAllocationCommissionAmount> commissionAmount,
       @JsonProperty("execution_time") JsonNullable<OffsetDateTime> executionTime,
-      @JsonProperty("fees") Optional<? extends List<Fee>> fees,
+      @JsonProperty("fees") Optional<? extends List<BookingFee>> fees,
       @JsonProperty("from_account_id") Optional<String> fromAccountId,
       @JsonProperty("from_activity_id") Optional<String> fromActivityId,
       @JsonProperty("gross_amount") JsonNullable<? extends TradeAllocationGrossAmount> grossAmount,
@@ -251,7 +251,7 @@ public class TradeAllocation {
           Optional<? extends TradeAllocationIdentifierType> identifierType,
       @JsonProperty("issuing_region_code") Optional<String> issuingRegionCode,
       @JsonProperty("lot_matching_instructions")
-          Optional<? extends List<Lot>> lotMatchingInstructions,
+          Optional<? extends List<BookingLot>> lotMatchingInstructions,
       @JsonProperty("memo") Optional<String> memo,
       @JsonProperty("name") Optional<String> name,
       @JsonProperty("prevailing_market_price")
@@ -260,7 +260,8 @@ public class TradeAllocation {
       @JsonProperty("price_adjustment")
           JsonNullable<? extends TradeAllocationPriceAdjustment> priceAdjustment,
       @JsonProperty("quantity") JsonNullable<? extends TradeAllocationQuantity> quantity,
-      @JsonProperty("settlement_date") JsonNullable<? extends SettlementDate> settlementDate,
+      @JsonProperty("settlement_date")
+          JsonNullable<? extends TradeAllocationSettlementDate> settlementDate,
       @JsonProperty("side_modifier") Optional<? extends TradeAllocationSideModifier> sideModifier,
       @JsonProperty("source_application") Optional<String> sourceApplication,
       @JsonProperty("special_instructions")
@@ -446,8 +447,8 @@ public class TradeAllocation {
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<List<Fee>> fees() {
-    return (Optional<List<Fee>>) fees;
+  public Optional<List<BookingFee>> fees() {
+    return (Optional<List<BookingFee>>) fees;
   }
 
   /** The ULID formatted account_id that the positions will be moved from. */
@@ -504,8 +505,8 @@ public class TradeAllocation {
   /** One or many lot matching instructions for the trade allocation. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<List<Lot>> lotMatchingInstructions() {
-    return (Optional<List<Lot>>) lotMatchingInstructions;
+  public Optional<List<BookingLot>> lotMatchingInstructions() {
+    return (Optional<List<BookingLot>>) lotMatchingInstructions;
   }
 
   /**
@@ -560,8 +561,8 @@ public class TradeAllocation {
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<SettlementDate> settlementDate() {
-    return (JsonNullable<SettlementDate>) settlementDate;
+  public JsonNullable<TradeAllocationSettlementDate> settlementDate() {
+    return (JsonNullable<TradeAllocationSettlementDate>) settlementDate;
   }
 
   /** Side modifier for the trade allocation. */
@@ -783,7 +784,7 @@ public class TradeAllocation {
    * Client calculated fees that will only be applied to the to_account_id. Regulatory fees will be
    * calculated automatically if they are not explicitly overwritten or suppressed.
    */
-  public TradeAllocation withFees(List<Fee> fees) {
+  public TradeAllocation withFees(List<BookingFee> fees) {
     Utils.checkNotNull(fees, "fees");
     this.fees = Optional.ofNullable(fees);
     return this;
@@ -793,7 +794,7 @@ public class TradeAllocation {
    * Client calculated fees that will only be applied to the to_account_id. Regulatory fees will be
    * calculated automatically if they are not explicitly overwritten or suppressed.
    */
-  public TradeAllocation withFees(Optional<? extends List<Fee>> fees) {
+  public TradeAllocation withFees(Optional<? extends List<BookingFee>> fees) {
     Utils.checkNotNull(fees, "fees");
     this.fees = fees;
     return this;
@@ -912,7 +913,7 @@ public class TradeAllocation {
   }
 
   /** One or many lot matching instructions for the trade allocation. */
-  public TradeAllocation withLotMatchingInstructions(List<Lot> lotMatchingInstructions) {
+  public TradeAllocation withLotMatchingInstructions(List<BookingLot> lotMatchingInstructions) {
     Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
     this.lotMatchingInstructions = Optional.ofNullable(lotMatchingInstructions);
     return this;
@@ -920,7 +921,7 @@ public class TradeAllocation {
 
   /** One or many lot matching instructions for the trade allocation. */
   public TradeAllocation withLotMatchingInstructions(
-      Optional<? extends List<Lot>> lotMatchingInstructions) {
+      Optional<? extends List<BookingLot>> lotMatchingInstructions) {
     Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
     this.lotMatchingInstructions = lotMatchingInstructions;
     return this;
@@ -1029,7 +1030,7 @@ public class TradeAllocation {
    * Defaults to T+1 for equities if this is not provided. Calculated using the execution_time field
    * in Eastern Time.
    */
-  public TradeAllocation withSettlementDate(SettlementDate settlementDate) {
+  public TradeAllocation withSettlementDate(TradeAllocationSettlementDate settlementDate) {
     Utils.checkNotNull(settlementDate, "settlementDate");
     this.settlementDate = JsonNullable.of(settlementDate);
     return this;
@@ -1039,7 +1040,8 @@ public class TradeAllocation {
    * Defaults to T+1 for equities if this is not provided. Calculated using the execution_time field
    * in Eastern Time.
    */
-  public TradeAllocation withSettlementDate(JsonNullable<? extends SettlementDate> settlementDate) {
+  public TradeAllocation withSettlementDate(
+      JsonNullable<? extends TradeAllocationSettlementDate> settlementDate) {
     Utils.checkNotNull(settlementDate, "settlementDate");
     this.settlementDate = settlementDate;
     return this;
@@ -1360,7 +1362,7 @@ public class TradeAllocation {
 
     private JsonNullable<OffsetDateTime> executionTime = JsonNullable.undefined();
 
-    private Optional<? extends List<Fee>> fees = Optional.empty();
+    private Optional<? extends List<BookingFee>> fees = Optional.empty();
 
     private Optional<String> fromAccountId = Optional.empty();
 
@@ -1375,7 +1377,7 @@ public class TradeAllocation {
 
     private Optional<String> issuingRegionCode = Optional.empty();
 
-    private Optional<? extends List<Lot>> lotMatchingInstructions = Optional.empty();
+    private Optional<? extends List<BookingLot>> lotMatchingInstructions = Optional.empty();
 
     private Optional<String> memo = Optional.empty();
 
@@ -1391,7 +1393,8 @@ public class TradeAllocation {
 
     private JsonNullable<? extends TradeAllocationQuantity> quantity = JsonNullable.undefined();
 
-    private JsonNullable<? extends SettlementDate> settlementDate = JsonNullable.undefined();
+    private JsonNullable<? extends TradeAllocationSettlementDate> settlementDate =
+        JsonNullable.undefined();
 
     private Optional<? extends TradeAllocationSideModifier> sideModifier = Optional.empty();
 
@@ -1566,7 +1569,7 @@ public class TradeAllocation {
      * Client calculated fees that will only be applied to the to_account_id. Regulatory fees will
      * be calculated automatically if they are not explicitly overwritten or suppressed.
      */
-    public Builder fees(List<Fee> fees) {
+    public Builder fees(List<BookingFee> fees) {
       Utils.checkNotNull(fees, "fees");
       this.fees = Optional.ofNullable(fees);
       return this;
@@ -1576,7 +1579,7 @@ public class TradeAllocation {
      * Client calculated fees that will only be applied to the to_account_id. Regulatory fees will
      * be calculated automatically if they are not explicitly overwritten or suppressed.
      */
-    public Builder fees(Optional<? extends List<Fee>> fees) {
+    public Builder fees(Optional<? extends List<BookingFee>> fees) {
       Utils.checkNotNull(fees, "fees");
       this.fees = fees;
       return this;
@@ -1694,14 +1697,15 @@ public class TradeAllocation {
     }
 
     /** One or many lot matching instructions for the trade allocation. */
-    public Builder lotMatchingInstructions(List<Lot> lotMatchingInstructions) {
+    public Builder lotMatchingInstructions(List<BookingLot> lotMatchingInstructions) {
       Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
       this.lotMatchingInstructions = Optional.ofNullable(lotMatchingInstructions);
       return this;
     }
 
     /** One or many lot matching instructions for the trade allocation. */
-    public Builder lotMatchingInstructions(Optional<? extends List<Lot>> lotMatchingInstructions) {
+    public Builder lotMatchingInstructions(
+        Optional<? extends List<BookingLot>> lotMatchingInstructions) {
       Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
       this.lotMatchingInstructions = lotMatchingInstructions;
       return this;
@@ -1814,7 +1818,7 @@ public class TradeAllocation {
      * Defaults to T+1 for equities if this is not provided. Calculated using the execution_time
      * field in Eastern Time.
      */
-    public Builder settlementDate(SettlementDate settlementDate) {
+    public Builder settlementDate(TradeAllocationSettlementDate settlementDate) {
       Utils.checkNotNull(settlementDate, "settlementDate");
       this.settlementDate = JsonNullable.of(settlementDate);
       return this;
@@ -1824,7 +1828,8 @@ public class TradeAllocation {
      * Defaults to T+1 for equities if this is not provided. Calculated using the execution_time
      * field in Eastern Time.
      */
-    public Builder settlementDate(JsonNullable<? extends SettlementDate> settlementDate) {
+    public Builder settlementDate(
+        JsonNullable<? extends TradeAllocationSettlementDate> settlementDate) {
       Utils.checkNotNull(settlementDate, "settlementDate");
       this.settlementDate = settlementDate;
       return this;

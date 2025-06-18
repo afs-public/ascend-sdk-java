@@ -45,8 +45,8 @@ public class EnrollmentOptionsLevel {
 
   public static final EnrollmentOptionsLevel OPTIONS_LEVEL_UNSPECIFIED =
       new EnrollmentOptionsLevel("OPTIONS_LEVEL_UNSPECIFIED");
-  public static final EnrollmentOptionsLevel LEVEL1_BASIC_DIRECTIONAL_TRADES =
-      new EnrollmentOptionsLevel("LEVEL_1_BASIC_DIRECTIONAL_TRADES");
+  public static final EnrollmentOptionsLevel OPTIONS_LEVEL2_LONG_OPTIONS =
+      new EnrollmentOptionsLevel("OPTIONS_LEVEL_2_LONG_OPTIONS");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -115,16 +115,14 @@ public class EnrollmentOptionsLevel {
   private static final Map<String, EnrollmentOptionsLevel> createValuesMap() {
     Map<String, EnrollmentOptionsLevel> map = new LinkedHashMap<>();
     map.put("OPTIONS_LEVEL_UNSPECIFIED", OPTIONS_LEVEL_UNSPECIFIED);
-    map.put("LEVEL_1_BASIC_DIRECTIONAL_TRADES", LEVEL1_BASIC_DIRECTIONAL_TRADES);
+    map.put("OPTIONS_LEVEL_2_LONG_OPTIONS", OPTIONS_LEVEL2_LONG_OPTIONS);
     return map;
   }
 
   private static final Map<String, EnrollmentOptionsLevelEnum> createEnumsMap() {
     Map<String, EnrollmentOptionsLevelEnum> map = new HashMap<>();
     map.put("OPTIONS_LEVEL_UNSPECIFIED", EnrollmentOptionsLevelEnum.OPTIONS_LEVEL_UNSPECIFIED);
-    map.put(
-        "LEVEL_1_BASIC_DIRECTIONAL_TRADES",
-        EnrollmentOptionsLevelEnum.LEVEL1_BASIC_DIRECTIONAL_TRADES);
+    map.put("OPTIONS_LEVEL_2_LONG_OPTIONS", EnrollmentOptionsLevelEnum.OPTIONS_LEVEL2_LONG_OPTIONS);
     return map;
   }
 
@@ -161,7 +159,7 @@ public class EnrollmentOptionsLevel {
 
   public enum EnrollmentOptionsLevelEnum {
     OPTIONS_LEVEL_UNSPECIFIED("OPTIONS_LEVEL_UNSPECIFIED"),
-    LEVEL1_BASIC_DIRECTIONAL_TRADES("LEVEL_1_BASIC_DIRECTIONAL_TRADES"),
+    OPTIONS_LEVEL2_LONG_OPTIONS("OPTIONS_LEVEL_2_LONG_OPTIONS"),
     ;
 
     private final String value;

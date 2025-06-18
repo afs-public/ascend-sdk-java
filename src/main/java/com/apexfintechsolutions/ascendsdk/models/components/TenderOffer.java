@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
+import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
@@ -33,20 +34,28 @@ public class TenderOffer {
   private JsonNullable<? extends EntryTenderOfferCorporateActionGeneralInformation>
       corporateActionGeneralInformation;
 
+  /** the type of tender offer */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("tender_offer_type")
+  private Optional<? extends TenderOfferType> tenderOfferType;
+
   @JsonCreator
   public TenderOffer(
       @JsonProperty("cash_rate") JsonNullable<? extends EntryTenderOfferCashRate> cashRate,
       @JsonProperty("corporate_action_general_information")
           JsonNullable<? extends EntryTenderOfferCorporateActionGeneralInformation>
-              corporateActionGeneralInformation) {
+              corporateActionGeneralInformation,
+      @JsonProperty("tender_offer_type") Optional<? extends TenderOfferType> tenderOfferType) {
     Utils.checkNotNull(cashRate, "cashRate");
     Utils.checkNotNull(corporateActionGeneralInformation, "corporateActionGeneralInformation");
+    Utils.checkNotNull(tenderOfferType, "tenderOfferType");
     this.cashRate = cashRate;
     this.corporateActionGeneralInformation = corporateActionGeneralInformation;
+    this.tenderOfferType = tenderOfferType;
   }
 
   public TenderOffer() {
-    this(JsonNullable.undefined(), JsonNullable.undefined());
+    this(JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty());
   }
 
   /**
@@ -66,6 +75,13 @@ public class TenderOffer {
       corporateActionGeneralInformation() {
     return (JsonNullable<EntryTenderOfferCorporateActionGeneralInformation>)
         corporateActionGeneralInformation;
+  }
+
+  /** the type of tender offer */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<TenderOfferType> tenderOfferType() {
+    return (Optional<TenderOfferType>) tenderOfferType;
   }
 
   public static final Builder builder() {
@@ -109,6 +125,20 @@ public class TenderOffer {
     return this;
   }
 
+  /** the type of tender offer */
+  public TenderOffer withTenderOfferType(TenderOfferType tenderOfferType) {
+    Utils.checkNotNull(tenderOfferType, "tenderOfferType");
+    this.tenderOfferType = Optional.ofNullable(tenderOfferType);
+    return this;
+  }
+
+  /** the type of tender offer */
+  public TenderOffer withTenderOfferType(Optional<? extends TenderOfferType> tenderOfferType) {
+    Utils.checkNotNull(tenderOfferType, "tenderOfferType");
+    this.tenderOfferType = tenderOfferType;
+    return this;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -120,12 +150,13 @@ public class TenderOffer {
     TenderOffer other = (TenderOffer) o;
     return Objects.deepEquals(this.cashRate, other.cashRate)
         && Objects.deepEquals(
-            this.corporateActionGeneralInformation, other.corporateActionGeneralInformation);
+            this.corporateActionGeneralInformation, other.corporateActionGeneralInformation)
+        && Objects.deepEquals(this.tenderOfferType, other.tenderOfferType);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(cashRate, corporateActionGeneralInformation);
+    return Objects.hash(cashRate, corporateActionGeneralInformation, tenderOfferType);
   }
 
   @Override
@@ -135,7 +166,9 @@ public class TenderOffer {
         "cashRate",
         cashRate,
         "corporateActionGeneralInformation",
-        corporateActionGeneralInformation);
+        corporateActionGeneralInformation,
+        "tenderOfferType",
+        tenderOfferType);
   }
 
   public static final class Builder {
@@ -144,6 +177,8 @@ public class TenderOffer {
 
     private JsonNullable<? extends EntryTenderOfferCorporateActionGeneralInformation>
         corporateActionGeneralInformation = JsonNullable.undefined();
+
+    private Optional<? extends TenderOfferType> tenderOfferType = Optional.empty();
 
     private Builder() {
       // force use of static builder() method
@@ -186,8 +221,22 @@ public class TenderOffer {
       return this;
     }
 
+    /** the type of tender offer */
+    public Builder tenderOfferType(TenderOfferType tenderOfferType) {
+      Utils.checkNotNull(tenderOfferType, "tenderOfferType");
+      this.tenderOfferType = Optional.ofNullable(tenderOfferType);
+      return this;
+    }
+
+    /** the type of tender offer */
+    public Builder tenderOfferType(Optional<? extends TenderOfferType> tenderOfferType) {
+      Utils.checkNotNull(tenderOfferType, "tenderOfferType");
+      this.tenderOfferType = tenderOfferType;
+      return this;
+    }
+
     public TenderOffer build() {
-      return new TenderOffer(cashRate, corporateActionGeneralInformation);
+      return new TenderOffer(cashRate, corporateActionGeneralInformation, tenderOfferType);
     }
   }
 }

@@ -5,15 +5,29 @@
 package com.apexfintechsolutions.ascendsdk;
 
 import com.apexfintechsolutions.ascendsdk.models.components.AcatsTransfer;
+import com.apexfintechsolutions.ascendsdk.models.components.AcceptTransferRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.AcceptTransferResponse;
+import com.apexfintechsolutions.ascendsdk.models.components.ListTransfersResponse;
+import com.apexfintechsolutions.ascendsdk.models.components.RejectTransferRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.RejectTransferResponse;
 import com.apexfintechsolutions.ascendsdk.models.components.TransferCreate;
 import com.apexfintechsolutions.ascendsdk.models.errors.SDKError;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersAcceptTransferRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersAcceptTransferRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersAcceptTransferResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersCreateTransferRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersCreateTransferRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersCreateTransferResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersGetTransferRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersGetTransferRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersGetTransferResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersListTransfersRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersListTransfersRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersListTransfersResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersRejectTransferRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersRejectTransferRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersRejectTransferResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.SDKMethodInterfaces.*;
 import com.apexfintechsolutions.ascendsdk.utils.HTTPClient;
 import com.apexfintechsolutions.ascendsdk.utils.HTTPRequest;
@@ -31,7 +45,11 @@ import java.util.List;
 import java.util.Optional;
 
 public class AccountTransfers
-    implements MethodCallAccountTransfersCreateTransfer, MethodCallAccountTransfersGetTransfer {
+    implements MethodCallAccountTransfersCreateTransfer,
+        MethodCallAccountTransfersListTransfers,
+        MethodCallAccountTransfersAcceptTransfer,
+        MethodCallAccountTransfersRejectTransfer,
+        MethodCallAccountTransfersGetTransfer {
 
   private final SDKConfiguration sdkConfiguration;
 
@@ -188,6 +206,590 @@ public class AccountTransfers
       }
     }
     if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "403", "409")) {
+      if (Utils.contentTypeMatches(_contentType, "application/json")) {
+        Status _out =
+            Utils.mapper()
+                .readValue(Utils.toUtf8AndClose(_httpRes.body()), new TypeReference<Status>() {});
+        throw _out;
+      } else {
+        throw new SDKError(
+            _httpRes,
+            _httpRes.statusCode(),
+            "Unexpected content-type received: " + _contentType,
+            Utils.extractByteArrayFromBody(_httpRes));
+      }
+    }
+    if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
+      // no content
+      throw new SDKError(
+          _httpRes,
+          _httpRes.statusCode(),
+          "API error occurred",
+          Utils.extractByteArrayFromBody(_httpRes));
+    }
+    if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
+      // no content
+      throw new SDKError(
+          _httpRes,
+          _httpRes.statusCode(),
+          "API error occurred",
+          Utils.extractByteArrayFromBody(_httpRes));
+    }
+    if (Utils.statusCodeMatches(_httpRes.statusCode(), "default")) {
+      if (Utils.contentTypeMatches(_contentType, "application/json")) {
+        com.apexfintechsolutions.ascendsdk.models.components.Status _out =
+            Utils.mapper()
+                .readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<
+                        com.apexfintechsolutions.ascendsdk.models.components.Status>() {});
+        _res.withStatus(Optional.ofNullable(_out));
+        return _res;
+      } else {
+        throw new SDKError(
+            _httpRes,
+            _httpRes.statusCode(),
+            "Unexpected content-type received: " + _contentType,
+            Utils.extractByteArrayFromBody(_httpRes));
+      }
+    }
+    throw new SDKError(
+        _httpRes,
+        _httpRes.statusCode(),
+        "Unexpected status code received: " + _httpRes.statusCode(),
+        Utils.extractByteArrayFromBody(_httpRes));
+  }
+
+  /**
+   * List Transfers Lists existing transfers using a CEL filter.
+   *
+   * @return The call builder
+   */
+  public AccountTransfersListTransfersRequestBuilder listTransfers() {
+    return new AccountTransfersListTransfersRequestBuilder(this);
+  }
+
+  /**
+   * List Transfers Lists existing transfers using a CEL filter.
+   *
+   * @param request The request object containing all of the parameters for the API call.
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountTransfersListTransfersResponse listTransfers(
+      AccountTransfersListTransfersRequest request) throws Exception {
+    String _baseUrl = this.sdkConfiguration.serverUrl;
+    String _url =
+        Utils.generateURL(
+            AccountTransfersListTransfersRequest.class,
+            _baseUrl,
+            "/acats/v1/correspondents/{correspondent_id}/accounts/{account_id}/transfers",
+            request,
+            null);
+
+    HTTPRequest _req = new HTTPRequest(_url, "GET");
+    _req.addHeader("Accept", "application/json")
+        .addHeader("user-agent", SDKConfiguration.USER_AGENT);
+
+    _req.addQueryParams(
+        Utils.getQueryParams(AccountTransfersListTransfersRequest.class, request, null));
+
+    Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+    Utils.configureSecurity(_req, this.sdkConfiguration.securitySource.getSecurity());
+    HTTPClient _client = this.sdkConfiguration.defaultClient;
+    HttpRequest _r =
+        sdkConfiguration
+            .hooks()
+            .beforeRequest(
+                new BeforeRequestContextImpl(
+                    "AccountTransfers_ListTransfers", Optional.of(List.of()), _hookSecuritySource),
+                _req.build());
+    HttpResponse<InputStream> _httpRes;
+    try {
+      _httpRes = _client.send(_r);
+      if (Utils.statusCodeMatches(
+          _httpRes.statusCode(), "400", "403", "4XX", "500", "503", "5XX")) {
+        _httpRes =
+            sdkConfiguration
+                .hooks()
+                .afterError(
+                    new AfterErrorContextImpl(
+                        "AccountTransfers_ListTransfers",
+                        Optional.of(List.of()),
+                        _hookSecuritySource),
+                    Optional.of(_httpRes),
+                    Optional.empty());
+      } else {
+        _httpRes =
+            sdkConfiguration
+                .hooks()
+                .afterSuccess(
+                    new AfterSuccessContextImpl(
+                        "AccountTransfers_ListTransfers",
+                        Optional.of(List.of()),
+                        _hookSecuritySource),
+                    _httpRes);
+      }
+    } catch (Exception _e) {
+      _httpRes =
+          sdkConfiguration
+              .hooks()
+              .afterError(
+                  new AfterErrorContextImpl(
+                      "AccountTransfers_ListTransfers",
+                      Optional.of(List.of()),
+                      _hookSecuritySource),
+                  Optional.empty(),
+                  Optional.of(_e));
+    }
+    String _contentType =
+        _httpRes.headers().firstValue("Content-Type").orElse("application/octet-stream");
+    AccountTransfersListTransfersResponse.Builder _resBuilder =
+        AccountTransfersListTransfersResponse.builder()
+            .contentType(_contentType)
+            .statusCode(_httpRes.statusCode())
+            .rawResponse(_httpRes);
+
+    AccountTransfersListTransfersResponse _res = _resBuilder.build();
+
+    if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+      if (Utils.contentTypeMatches(_contentType, "application/json")) {
+        ListTransfersResponse _out =
+            Utils.mapper()
+                .readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<ListTransfersResponse>() {});
+        _res.withListTransfersResponse(Optional.ofNullable(_out));
+        return _res;
+      } else {
+        throw new SDKError(
+            _httpRes,
+            _httpRes.statusCode(),
+            "Unexpected content-type received: " + _contentType,
+            Utils.extractByteArrayFromBody(_httpRes));
+      }
+    }
+    if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "403")) {
+      if (Utils.contentTypeMatches(_contentType, "application/json")) {
+        Status _out =
+            Utils.mapper()
+                .readValue(Utils.toUtf8AndClose(_httpRes.body()), new TypeReference<Status>() {});
+        throw _out;
+      } else {
+        throw new SDKError(
+            _httpRes,
+            _httpRes.statusCode(),
+            "Unexpected content-type received: " + _contentType,
+            Utils.extractByteArrayFromBody(_httpRes));
+      }
+    }
+    if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "503")) {
+      if (Utils.contentTypeMatches(_contentType, "application/json")) {
+        Status _out =
+            Utils.mapper()
+                .readValue(Utils.toUtf8AndClose(_httpRes.body()), new TypeReference<Status>() {});
+        throw _out;
+      } else {
+        throw new SDKError(
+            _httpRes,
+            _httpRes.statusCode(),
+            "Unexpected content-type received: " + _contentType,
+            Utils.extractByteArrayFromBody(_httpRes));
+      }
+    }
+    if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
+      // no content
+      throw new SDKError(
+          _httpRes,
+          _httpRes.statusCode(),
+          "API error occurred",
+          Utils.extractByteArrayFromBody(_httpRes));
+    }
+    if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
+      // no content
+      throw new SDKError(
+          _httpRes,
+          _httpRes.statusCode(),
+          "API error occurred",
+          Utils.extractByteArrayFromBody(_httpRes));
+    }
+    if (Utils.statusCodeMatches(_httpRes.statusCode(), "default")) {
+      if (Utils.contentTypeMatches(_contentType, "application/json")) {
+        com.apexfintechsolutions.ascendsdk.models.components.Status _out =
+            Utils.mapper()
+                .readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<
+                        com.apexfintechsolutions.ascendsdk.models.components.Status>() {});
+        _res.withStatus(Optional.ofNullable(_out));
+        return _res;
+      } else {
+        throw new SDKError(
+            _httpRes,
+            _httpRes.statusCode(),
+            "Unexpected content-type received: " + _contentType,
+            Utils.extractByteArrayFromBody(_httpRes));
+      }
+    }
+    throw new SDKError(
+        _httpRes,
+        _httpRes.statusCode(),
+        "Unexpected status code received: " + _httpRes.statusCode(),
+        Utils.extractByteArrayFromBody(_httpRes));
+  }
+
+  /**
+   * Accept Transfer Accept one side (incoming/outgoing) of an internal Ascend transfer. When both
+   * the incoming side and outgoing side of the transfer have been accepted then bookkeeping is done
+   * immediately. If neither, or only one side of a transfer is accepted, then both sides of the
+   * internal perform bookkeeping one full settlement day after they went into the bookkeeping
+   * queue.
+   *
+   * @return The call builder
+   */
+  public AccountTransfersAcceptTransferRequestBuilder acceptTransfer() {
+    return new AccountTransfersAcceptTransferRequestBuilder(this);
+  }
+
+  /**
+   * Accept Transfer Accept one side (incoming/outgoing) of an internal Ascend transfer. When both
+   * the incoming side and outgoing side of the transfer have been accepted then bookkeeping is done
+   * immediately. If neither, or only one side of a transfer is accepted, then both sides of the
+   * internal perform bookkeeping one full settlement day after they went into the bookkeeping
+   * queue.
+   *
+   * @param correspondentId The correspondent id.
+   * @param accountId The account id.
+   * @param transferId The transfer id.
+   * @param acceptTransferRequestCreate Request to accept internal Ascend transfers.
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountTransfersAcceptTransferResponse acceptTransfer(
+      String correspondentId,
+      String accountId,
+      String transferId,
+      AcceptTransferRequestCreate acceptTransferRequestCreate)
+      throws Exception {
+    AccountTransfersAcceptTransferRequest request =
+        AccountTransfersAcceptTransferRequest.builder()
+            .correspondentId(correspondentId)
+            .accountId(accountId)
+            .transferId(transferId)
+            .acceptTransferRequestCreate(acceptTransferRequestCreate)
+            .build();
+
+    String _baseUrl = this.sdkConfiguration.serverUrl;
+    String _url =
+        Utils.generateURL(
+            AccountTransfersAcceptTransferRequest.class,
+            _baseUrl,
+            "/acats/v1/correspondents/{correspondent_id}/accounts/{account_id}/transfers/{transfer_id}:accept",
+            request,
+            null);
+
+    HTTPRequest _req = new HTTPRequest(_url, "POST");
+    Object _convertedRequest =
+        Utils.convertToShape(request, JsonShape.DEFAULT, new TypeReference<Object>() {});
+    SerializedBody _serializedRequestBody =
+        Utils.serializeRequestBody(_convertedRequest, "acceptTransferRequestCreate", "json", false);
+    if (_serializedRequestBody == null) {
+      throw new Exception("Request body is required");
+    }
+    _req.setBody(Optional.ofNullable(_serializedRequestBody));
+    _req.addHeader("Accept", "application/json")
+        .addHeader("user-agent", SDKConfiguration.USER_AGENT);
+
+    Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+    Utils.configureSecurity(_req, this.sdkConfiguration.securitySource.getSecurity());
+    HTTPClient _client = this.sdkConfiguration.defaultClient;
+    HttpRequest _r =
+        sdkConfiguration
+            .hooks()
+            .beforeRequest(
+                new BeforeRequestContextImpl(
+                    "AccountTransfers_AcceptTransfer", Optional.of(List.of()), _hookSecuritySource),
+                _req.build());
+    HttpResponse<InputStream> _httpRes;
+    try {
+      _httpRes = _client.send(_r);
+      if (Utils.statusCodeMatches(
+          _httpRes.statusCode(), "400", "403", "4XX", "500", "503", "5XX")) {
+        _httpRes =
+            sdkConfiguration
+                .hooks()
+                .afterError(
+                    new AfterErrorContextImpl(
+                        "AccountTransfers_AcceptTransfer",
+                        Optional.of(List.of()),
+                        _hookSecuritySource),
+                    Optional.of(_httpRes),
+                    Optional.empty());
+      } else {
+        _httpRes =
+            sdkConfiguration
+                .hooks()
+                .afterSuccess(
+                    new AfterSuccessContextImpl(
+                        "AccountTransfers_AcceptTransfer",
+                        Optional.of(List.of()),
+                        _hookSecuritySource),
+                    _httpRes);
+      }
+    } catch (Exception _e) {
+      _httpRes =
+          sdkConfiguration
+              .hooks()
+              .afterError(
+                  new AfterErrorContextImpl(
+                      "AccountTransfers_AcceptTransfer",
+                      Optional.of(List.of()),
+                      _hookSecuritySource),
+                  Optional.empty(),
+                  Optional.of(_e));
+    }
+    String _contentType =
+        _httpRes.headers().firstValue("Content-Type").orElse("application/octet-stream");
+    AccountTransfersAcceptTransferResponse.Builder _resBuilder =
+        AccountTransfersAcceptTransferResponse.builder()
+            .contentType(_contentType)
+            .statusCode(_httpRes.statusCode())
+            .rawResponse(_httpRes);
+
+    AccountTransfersAcceptTransferResponse _res = _resBuilder.build();
+
+    if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+      if (Utils.contentTypeMatches(_contentType, "application/json")) {
+        AcceptTransferResponse _out =
+            Utils.mapper()
+                .readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<AcceptTransferResponse>() {});
+        _res.withAcceptTransferResponse(Optional.ofNullable(_out));
+        return _res;
+      } else {
+        throw new SDKError(
+            _httpRes,
+            _httpRes.statusCode(),
+            "Unexpected content-type received: " + _contentType,
+            Utils.extractByteArrayFromBody(_httpRes));
+      }
+    }
+    if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "403")) {
+      if (Utils.contentTypeMatches(_contentType, "application/json")) {
+        Status _out =
+            Utils.mapper()
+                .readValue(Utils.toUtf8AndClose(_httpRes.body()), new TypeReference<Status>() {});
+        throw _out;
+      } else {
+        throw new SDKError(
+            _httpRes,
+            _httpRes.statusCode(),
+            "Unexpected content-type received: " + _contentType,
+            Utils.extractByteArrayFromBody(_httpRes));
+      }
+    }
+    if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "503")) {
+      if (Utils.contentTypeMatches(_contentType, "application/json")) {
+        Status _out =
+            Utils.mapper()
+                .readValue(Utils.toUtf8AndClose(_httpRes.body()), new TypeReference<Status>() {});
+        throw _out;
+      } else {
+        throw new SDKError(
+            _httpRes,
+            _httpRes.statusCode(),
+            "Unexpected content-type received: " + _contentType,
+            Utils.extractByteArrayFromBody(_httpRes));
+      }
+    }
+    if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
+      // no content
+      throw new SDKError(
+          _httpRes,
+          _httpRes.statusCode(),
+          "API error occurred",
+          Utils.extractByteArrayFromBody(_httpRes));
+    }
+    if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
+      // no content
+      throw new SDKError(
+          _httpRes,
+          _httpRes.statusCode(),
+          "API error occurred",
+          Utils.extractByteArrayFromBody(_httpRes));
+    }
+    if (Utils.statusCodeMatches(_httpRes.statusCode(), "default")) {
+      if (Utils.contentTypeMatches(_contentType, "application/json")) {
+        com.apexfintechsolutions.ascendsdk.models.components.Status _out =
+            Utils.mapper()
+                .readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<
+                        com.apexfintechsolutions.ascendsdk.models.components.Status>() {});
+        _res.withStatus(Optional.ofNullable(_out));
+        return _res;
+      } else {
+        throw new SDKError(
+            _httpRes,
+            _httpRes.statusCode(),
+            "Unexpected content-type received: " + _contentType,
+            Utils.extractByteArrayFromBody(_httpRes));
+      }
+    }
+    throw new SDKError(
+        _httpRes,
+        _httpRes.statusCode(),
+        "Unexpected status code received: " + _httpRes.statusCode(),
+        Utils.extractByteArrayFromBody(_httpRes));
+  }
+
+  /**
+   * Reject Transfer Reject one side (incoming/outgoing) of an internal Ascend transfer. Rejecting
+   * one side automatically moves the contra side of the transfer to be rejected as well.
+   *
+   * @return The call builder
+   */
+  public AccountTransfersRejectTransferRequestBuilder rejectTransfer() {
+    return new AccountTransfersRejectTransferRequestBuilder(this);
+  }
+
+  /**
+   * Reject Transfer Reject one side (incoming/outgoing) of an internal Ascend transfer. Rejecting
+   * one side automatically moves the contra side of the transfer to be rejected as well.
+   *
+   * @param correspondentId The correspondent id.
+   * @param accountId The account id.
+   * @param transferId The transfer id.
+   * @param rejectTransferRequestCreate Request to reject internal Ascend transfers.
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountTransfersRejectTransferResponse rejectTransfer(
+      String correspondentId,
+      String accountId,
+      String transferId,
+      RejectTransferRequestCreate rejectTransferRequestCreate)
+      throws Exception {
+    AccountTransfersRejectTransferRequest request =
+        AccountTransfersRejectTransferRequest.builder()
+            .correspondentId(correspondentId)
+            .accountId(accountId)
+            .transferId(transferId)
+            .rejectTransferRequestCreate(rejectTransferRequestCreate)
+            .build();
+
+    String _baseUrl = this.sdkConfiguration.serverUrl;
+    String _url =
+        Utils.generateURL(
+            AccountTransfersRejectTransferRequest.class,
+            _baseUrl,
+            "/acats/v1/correspondents/{correspondent_id}/accounts/{account_id}/transfers/{transfer_id}:reject",
+            request,
+            null);
+
+    HTTPRequest _req = new HTTPRequest(_url, "POST");
+    Object _convertedRequest =
+        Utils.convertToShape(request, JsonShape.DEFAULT, new TypeReference<Object>() {});
+    SerializedBody _serializedRequestBody =
+        Utils.serializeRequestBody(_convertedRequest, "rejectTransferRequestCreate", "json", false);
+    if (_serializedRequestBody == null) {
+      throw new Exception("Request body is required");
+    }
+    _req.setBody(Optional.ofNullable(_serializedRequestBody));
+    _req.addHeader("Accept", "application/json")
+        .addHeader("user-agent", SDKConfiguration.USER_AGENT);
+
+    Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+    Utils.configureSecurity(_req, this.sdkConfiguration.securitySource.getSecurity());
+    HTTPClient _client = this.sdkConfiguration.defaultClient;
+    HttpRequest _r =
+        sdkConfiguration
+            .hooks()
+            .beforeRequest(
+                new BeforeRequestContextImpl(
+                    "AccountTransfers_RejectTransfer", Optional.of(List.of()), _hookSecuritySource),
+                _req.build());
+    HttpResponse<InputStream> _httpRes;
+    try {
+      _httpRes = _client.send(_r);
+      if (Utils.statusCodeMatches(
+          _httpRes.statusCode(), "400", "403", "4XX", "500", "503", "5XX")) {
+        _httpRes =
+            sdkConfiguration
+                .hooks()
+                .afterError(
+                    new AfterErrorContextImpl(
+                        "AccountTransfers_RejectTransfer",
+                        Optional.of(List.of()),
+                        _hookSecuritySource),
+                    Optional.of(_httpRes),
+                    Optional.empty());
+      } else {
+        _httpRes =
+            sdkConfiguration
+                .hooks()
+                .afterSuccess(
+                    new AfterSuccessContextImpl(
+                        "AccountTransfers_RejectTransfer",
+                        Optional.of(List.of()),
+                        _hookSecuritySource),
+                    _httpRes);
+      }
+    } catch (Exception _e) {
+      _httpRes =
+          sdkConfiguration
+              .hooks()
+              .afterError(
+                  new AfterErrorContextImpl(
+                      "AccountTransfers_RejectTransfer",
+                      Optional.of(List.of()),
+                      _hookSecuritySource),
+                  Optional.empty(),
+                  Optional.of(_e));
+    }
+    String _contentType =
+        _httpRes.headers().firstValue("Content-Type").orElse("application/octet-stream");
+    AccountTransfersRejectTransferResponse.Builder _resBuilder =
+        AccountTransfersRejectTransferResponse.builder()
+            .contentType(_contentType)
+            .statusCode(_httpRes.statusCode())
+            .rawResponse(_httpRes);
+
+    AccountTransfersRejectTransferResponse _res = _resBuilder.build();
+
+    if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+      if (Utils.contentTypeMatches(_contentType, "application/json")) {
+        RejectTransferResponse _out =
+            Utils.mapper()
+                .readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<RejectTransferResponse>() {});
+        _res.withRejectTransferResponse(Optional.ofNullable(_out));
+        return _res;
+      } else {
+        throw new SDKError(
+            _httpRes,
+            _httpRes.statusCode(),
+            "Unexpected content-type received: " + _contentType,
+            Utils.extractByteArrayFromBody(_httpRes));
+      }
+    }
+    if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "403")) {
+      if (Utils.contentTypeMatches(_contentType, "application/json")) {
+        Status _out =
+            Utils.mapper()
+                .readValue(Utils.toUtf8AndClose(_httpRes.body()), new TypeReference<Status>() {});
+        throw _out;
+      } else {
+        throw new SDKError(
+            _httpRes,
+            _httpRes.statusCode(),
+            "Unexpected content-type received: " + _contentType,
+            Utils.extractByteArrayFromBody(_httpRes));
+      }
+    }
+    if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "503")) {
       if (Utils.contentTypeMatches(_contentType, "application/json")) {
         Status _out =
             Utils.mapper()

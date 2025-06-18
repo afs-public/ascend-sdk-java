@@ -23,7 +23,7 @@ public class IDDocumentUploadRequestCreate {
   @JsonProperty("document_type")
   private IDDocumentUploadRequestCreateDocumentType documentType;
 
-  /** Identifies the legal natural person relevant to the document */
+  /** Identifies the legal natural person or legal entity relevant to the document */
   @JsonProperty("legal_natural_person_id")
   private String legalNaturalPersonId;
 
@@ -54,7 +54,7 @@ public class IDDocumentUploadRequestCreate {
     return documentType;
   }
 
-  /** Identifies the legal natural person relevant to the document */
+  /** Identifies the legal natural person or legal entity relevant to the document */
   @JsonIgnore
   public String legalNaturalPersonId() {
     return legalNaturalPersonId;
@@ -81,7 +81,7 @@ public class IDDocumentUploadRequestCreate {
     return this;
   }
 
-  /** Identifies the legal natural person relevant to the document */
+  /** Identifies the legal natural person or legal entity relevant to the document */
   public IDDocumentUploadRequestCreate withLegalNaturalPersonId(String legalNaturalPersonId) {
     Utils.checkNotNull(legalNaturalPersonId, "legalNaturalPersonId");
     this.legalNaturalPersonId = legalNaturalPersonId;
@@ -149,7 +149,7 @@ public class IDDocumentUploadRequestCreate {
       return this;
     }
 
-    /** Identifies the legal natural person relevant to the document */
+    /** Identifies the legal natural person or legal entity relevant to the document */
     public Builder legalNaturalPersonId(String legalNaturalPersonId) {
       Utils.checkNotNull(legalNaturalPersonId, "legalNaturalPersonId");
       this.legalNaturalPersonId = legalNaturalPersonId;

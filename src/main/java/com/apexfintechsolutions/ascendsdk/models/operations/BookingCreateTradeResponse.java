@@ -4,8 +4,8 @@
 
 package com.apexfintechsolutions.ascendsdk.models.operations;
 
+import com.apexfintechsolutions.ascendsdk.models.components.BookingTrade;
 import com.apexfintechsolutions.ascendsdk.models.components.Status;
-import com.apexfintechsolutions.ascendsdk.models.components.Trade;
 import com.apexfintechsolutions.ascendsdk.utils.Response;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -27,7 +27,7 @@ public class BookingCreateTradeResponse implements Response {
   private HttpResponse<InputStream> rawResponse;
 
   /** OK */
-  private Optional<? extends Trade> trade;
+  private Optional<? extends BookingTrade> bookingTrade;
 
   /**
    * FAILED_PRECONDITION: The operation was rejected because the system is not in a state required
@@ -40,17 +40,17 @@ public class BookingCreateTradeResponse implements Response {
       String contentType,
       int statusCode,
       HttpResponse<InputStream> rawResponse,
-      Optional<? extends Trade> trade,
+      Optional<? extends BookingTrade> bookingTrade,
       Optional<? extends Status> status) {
     Utils.checkNotNull(contentType, "contentType");
     Utils.checkNotNull(statusCode, "statusCode");
     Utils.checkNotNull(rawResponse, "rawResponse");
-    Utils.checkNotNull(trade, "trade");
+    Utils.checkNotNull(bookingTrade, "bookingTrade");
     Utils.checkNotNull(status, "status");
     this.contentType = contentType;
     this.statusCode = statusCode;
     this.rawResponse = rawResponse;
-    this.trade = trade;
+    this.bookingTrade = bookingTrade;
     this.status = status;
   }
 
@@ -80,8 +80,8 @@ public class BookingCreateTradeResponse implements Response {
   /** OK */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<Trade> trade() {
-    return (Optional<Trade>) trade;
+  public Optional<BookingTrade> bookingTrade() {
+    return (Optional<BookingTrade>) bookingTrade;
   }
 
   /**
@@ -120,16 +120,17 @@ public class BookingCreateTradeResponse implements Response {
   }
 
   /** OK */
-  public BookingCreateTradeResponse withTrade(Trade trade) {
-    Utils.checkNotNull(trade, "trade");
-    this.trade = Optional.ofNullable(trade);
+  public BookingCreateTradeResponse withBookingTrade(BookingTrade bookingTrade) {
+    Utils.checkNotNull(bookingTrade, "bookingTrade");
+    this.bookingTrade = Optional.ofNullable(bookingTrade);
     return this;
   }
 
   /** OK */
-  public BookingCreateTradeResponse withTrade(Optional<? extends Trade> trade) {
-    Utils.checkNotNull(trade, "trade");
-    this.trade = trade;
+  public BookingCreateTradeResponse withBookingTrade(
+      Optional<? extends BookingTrade> bookingTrade) {
+    Utils.checkNotNull(bookingTrade, "bookingTrade");
+    this.bookingTrade = bookingTrade;
     return this;
   }
 
@@ -165,13 +166,13 @@ public class BookingCreateTradeResponse implements Response {
     return Objects.deepEquals(this.contentType, other.contentType)
         && Objects.deepEquals(this.statusCode, other.statusCode)
         && Objects.deepEquals(this.rawResponse, other.rawResponse)
-        && Objects.deepEquals(this.trade, other.trade)
+        && Objects.deepEquals(this.bookingTrade, other.bookingTrade)
         && Objects.deepEquals(this.status, other.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(contentType, statusCode, rawResponse, trade, status);
+    return Objects.hash(contentType, statusCode, rawResponse, bookingTrade, status);
   }
 
   @Override
@@ -184,8 +185,8 @@ public class BookingCreateTradeResponse implements Response {
         statusCode,
         "rawResponse",
         rawResponse,
-        "trade",
-        trade,
+        "bookingTrade",
+        bookingTrade,
         "status",
         status);
   }
@@ -198,7 +199,7 @@ public class BookingCreateTradeResponse implements Response {
 
     private HttpResponse<InputStream> rawResponse;
 
-    private Optional<? extends Trade> trade = Optional.empty();
+    private Optional<? extends BookingTrade> bookingTrade = Optional.empty();
 
     private Optional<? extends Status> status = Optional.empty();
 
@@ -228,16 +229,16 @@ public class BookingCreateTradeResponse implements Response {
     }
 
     /** OK */
-    public Builder trade(Trade trade) {
-      Utils.checkNotNull(trade, "trade");
-      this.trade = Optional.ofNullable(trade);
+    public Builder bookingTrade(BookingTrade bookingTrade) {
+      Utils.checkNotNull(bookingTrade, "bookingTrade");
+      this.bookingTrade = Optional.ofNullable(bookingTrade);
       return this;
     }
 
     /** OK */
-    public Builder trade(Optional<? extends Trade> trade) {
-      Utils.checkNotNull(trade, "trade");
-      this.trade = trade;
+    public Builder bookingTrade(Optional<? extends BookingTrade> bookingTrade) {
+      Utils.checkNotNull(bookingTrade, "bookingTrade");
+      this.bookingTrade = bookingTrade;
       return this;
     }
 
@@ -262,7 +263,8 @@ public class BookingCreateTradeResponse implements Response {
     }
 
     public BookingCreateTradeResponse build() {
-      return new BookingCreateTradeResponse(contentType, statusCode, rawResponse, trade, status);
+      return new BookingCreateTradeResponse(
+          contentType, statusCode, rawResponse, bookingTrade, status);
     }
   }
 }

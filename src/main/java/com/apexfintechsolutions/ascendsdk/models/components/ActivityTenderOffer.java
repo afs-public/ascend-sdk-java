@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
+import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
@@ -33,20 +34,29 @@ public class ActivityTenderOffer {
   private JsonNullable<? extends ActivityTenderOfferCorporateActionGeneralInformation>
       corporateActionGeneralInformation;
 
+  /** the type of tender offer */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("tender_offer_type")
+  private Optional<? extends ActivityTenderOfferType> tenderOfferType;
+
   @JsonCreator
   public ActivityTenderOffer(
       @JsonProperty("cash_rate") JsonNullable<? extends ActivityTenderOfferCashRate> cashRate,
       @JsonProperty("corporate_action_general_information")
           JsonNullable<? extends ActivityTenderOfferCorporateActionGeneralInformation>
-              corporateActionGeneralInformation) {
+              corporateActionGeneralInformation,
+      @JsonProperty("tender_offer_type")
+          Optional<? extends ActivityTenderOfferType> tenderOfferType) {
     Utils.checkNotNull(cashRate, "cashRate");
     Utils.checkNotNull(corporateActionGeneralInformation, "corporateActionGeneralInformation");
+    Utils.checkNotNull(tenderOfferType, "tenderOfferType");
     this.cashRate = cashRate;
     this.corporateActionGeneralInformation = corporateActionGeneralInformation;
+    this.tenderOfferType = tenderOfferType;
   }
 
   public ActivityTenderOffer() {
-    this(JsonNullable.undefined(), JsonNullable.undefined());
+    this(JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty());
   }
 
   /**
@@ -66,6 +76,13 @@ public class ActivityTenderOffer {
       corporateActionGeneralInformation() {
     return (JsonNullable<ActivityTenderOfferCorporateActionGeneralInformation>)
         corporateActionGeneralInformation;
+  }
+
+  /** the type of tender offer */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<ActivityTenderOfferType> tenderOfferType() {
+    return (Optional<ActivityTenderOfferType>) tenderOfferType;
   }
 
   public static final Builder builder() {
@@ -110,6 +127,21 @@ public class ActivityTenderOffer {
     return this;
   }
 
+  /** the type of tender offer */
+  public ActivityTenderOffer withTenderOfferType(ActivityTenderOfferType tenderOfferType) {
+    Utils.checkNotNull(tenderOfferType, "tenderOfferType");
+    this.tenderOfferType = Optional.ofNullable(tenderOfferType);
+    return this;
+  }
+
+  /** the type of tender offer */
+  public ActivityTenderOffer withTenderOfferType(
+      Optional<? extends ActivityTenderOfferType> tenderOfferType) {
+    Utils.checkNotNull(tenderOfferType, "tenderOfferType");
+    this.tenderOfferType = tenderOfferType;
+    return this;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -121,12 +153,13 @@ public class ActivityTenderOffer {
     ActivityTenderOffer other = (ActivityTenderOffer) o;
     return Objects.deepEquals(this.cashRate, other.cashRate)
         && Objects.deepEquals(
-            this.corporateActionGeneralInformation, other.corporateActionGeneralInformation);
+            this.corporateActionGeneralInformation, other.corporateActionGeneralInformation)
+        && Objects.deepEquals(this.tenderOfferType, other.tenderOfferType);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(cashRate, corporateActionGeneralInformation);
+    return Objects.hash(cashRate, corporateActionGeneralInformation, tenderOfferType);
   }
 
   @Override
@@ -136,7 +169,9 @@ public class ActivityTenderOffer {
         "cashRate",
         cashRate,
         "corporateActionGeneralInformation",
-        corporateActionGeneralInformation);
+        corporateActionGeneralInformation,
+        "tenderOfferType",
+        tenderOfferType);
   }
 
   public static final class Builder {
@@ -145,6 +180,8 @@ public class ActivityTenderOffer {
 
     private JsonNullable<? extends ActivityTenderOfferCorporateActionGeneralInformation>
         corporateActionGeneralInformation = JsonNullable.undefined();
+
+    private Optional<? extends ActivityTenderOfferType> tenderOfferType = Optional.empty();
 
     private Builder() {
       // force use of static builder() method
@@ -187,8 +224,22 @@ public class ActivityTenderOffer {
       return this;
     }
 
+    /** the type of tender offer */
+    public Builder tenderOfferType(ActivityTenderOfferType tenderOfferType) {
+      Utils.checkNotNull(tenderOfferType, "tenderOfferType");
+      this.tenderOfferType = Optional.ofNullable(tenderOfferType);
+      return this;
+    }
+
+    /** the type of tender offer */
+    public Builder tenderOfferType(Optional<? extends ActivityTenderOfferType> tenderOfferType) {
+      Utils.checkNotNull(tenderOfferType, "tenderOfferType");
+      this.tenderOfferType = tenderOfferType;
+      return this;
+    }
+
     public ActivityTenderOffer build() {
-      return new ActivityTenderOffer(cashRate, corporateActionGeneralInformation);
+      return new ActivityTenderOffer(cashRate, corporateActionGeneralInformation, tenderOfferType);
     }
   }
 }

@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 import java.util.Optional;
 
-/** TradeDate - Trade date of the trade lot */
+/** TradeDate - Trade date for this lot specifically */
 public class TradeDate {
 
   /**

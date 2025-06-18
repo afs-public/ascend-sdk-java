@@ -68,7 +68,16 @@ public class PartyLegalEntity {
   @JsonProperty("entity_type")
   private Optional<? extends PartyEntityType> entityType;
 
-  /** The reason the customer is exempt from verifying beneficial owners, if applicable. */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Exempt entities must set `exempt_verifying_beneficial_owners` to `true` and provide an
+   * `exempt_customer_reason` on the owner record.
+   *
+   * <p>Required if `exempt_verifying_beneficial_owners` is `true`.
+   *
+   * <p>Otherwise, must be empty.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("exempt_customer_reason")
   private Optional<? extends PartyExemptCustomerReason> exemptCustomerReason;
@@ -438,7 +447,16 @@ public class PartyLegalEntity {
     return (Optional<PartyEntityType>) entityType;
   }
 
-  /** The reason the customer is exempt from verifying beneficial owners, if applicable. */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Exempt entities must set `exempt_verifying_beneficial_owners` to `true` and provide an
+   * `exempt_customer_reason` on the owner record.
+   *
+   * <p>Required if `exempt_verifying_beneficial_owners` is `true`.
+   *
+   * <p>Otherwise, must be empty.
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<PartyExemptCustomerReason> exemptCustomerReason() {
@@ -775,14 +793,32 @@ public class PartyLegalEntity {
     return this;
   }
 
-  /** The reason the customer is exempt from verifying beneficial owners, if applicable. */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Exempt entities must set `exempt_verifying_beneficial_owners` to `true` and provide an
+   * `exempt_customer_reason` on the owner record.
+   *
+   * <p>Required if `exempt_verifying_beneficial_owners` is `true`.
+   *
+   * <p>Otherwise, must be empty.
+   */
   public PartyLegalEntity withExemptCustomerReason(PartyExemptCustomerReason exemptCustomerReason) {
     Utils.checkNotNull(exemptCustomerReason, "exemptCustomerReason");
     this.exemptCustomerReason = Optional.ofNullable(exemptCustomerReason);
     return this;
   }
 
-  /** The reason the customer is exempt from verifying beneficial owners, if applicable. */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Exempt entities must set `exempt_verifying_beneficial_owners` to `true` and provide an
+   * `exempt_customer_reason` on the owner record.
+   *
+   * <p>Required if `exempt_verifying_beneficial_owners` is `true`.
+   *
+   * <p>Otherwise, must be empty.
+   */
   public PartyLegalEntity withExemptCustomerReason(
       Optional<? extends PartyExemptCustomerReason> exemptCustomerReason) {
     Utils.checkNotNull(exemptCustomerReason, "exemptCustomerReason");
@@ -1571,14 +1607,32 @@ public class PartyLegalEntity {
       return this;
     }
 
-    /** The reason the customer is exempt from verifying beneficial owners, if applicable. */
+    /**
+     * **Field Dependencies:**
+     *
+     * <p>Exempt entities must set `exempt_verifying_beneficial_owners` to `true` and provide an
+     * `exempt_customer_reason` on the owner record.
+     *
+     * <p>Required if `exempt_verifying_beneficial_owners` is `true`.
+     *
+     * <p>Otherwise, must be empty.
+     */
     public Builder exemptCustomerReason(PartyExemptCustomerReason exemptCustomerReason) {
       Utils.checkNotNull(exemptCustomerReason, "exemptCustomerReason");
       this.exemptCustomerReason = Optional.ofNullable(exemptCustomerReason);
       return this;
     }
 
-    /** The reason the customer is exempt from verifying beneficial owners, if applicable. */
+    /**
+     * **Field Dependencies:**
+     *
+     * <p>Exempt entities must set `exempt_verifying_beneficial_owners` to `true` and provide an
+     * `exempt_customer_reason` on the owner record.
+     *
+     * <p>Required if `exempt_verifying_beneficial_owners` is `true`.
+     *
+     * <p>Otherwise, must be empty.
+     */
     public Builder exemptCustomerReason(
         Optional<? extends PartyExemptCustomerReason> exemptCustomerReason) {
       Utils.checkNotNull(exemptCustomerReason, "exemptCustomerReason");

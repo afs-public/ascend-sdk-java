@@ -34,14 +34,14 @@ public class Lot {
   /** Trade date of the trade lot */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("trade_date")
-  private JsonNullable<? extends TradeDate> tradeDate;
+  private JsonNullable<? extends LotTradeDate> tradeDate;
 
   @JsonCreator
   public Lot(
       @JsonProperty("id") Optional<String> id,
       @JsonProperty("money") JsonNullable<? extends LotMoney> money,
       @JsonProperty("quantity") JsonNullable<? extends LotQuantity> quantity,
-      @JsonProperty("trade_date") JsonNullable<? extends TradeDate> tradeDate) {
+      @JsonProperty("trade_date") JsonNullable<? extends LotTradeDate> tradeDate) {
     Utils.checkNotNull(id, "id");
     Utils.checkNotNull(money, "money");
     Utils.checkNotNull(quantity, "quantity");
@@ -83,8 +83,8 @@ public class Lot {
   /** Trade date of the trade lot */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<TradeDate> tradeDate() {
-    return (JsonNullable<TradeDate>) tradeDate;
+  public JsonNullable<LotTradeDate> tradeDate() {
+    return (JsonNullable<LotTradeDate>) tradeDate;
   }
 
   public static final Builder builder() {
@@ -134,14 +134,14 @@ public class Lot {
   }
 
   /** Trade date of the trade lot */
-  public Lot withTradeDate(TradeDate tradeDate) {
+  public Lot withTradeDate(LotTradeDate tradeDate) {
     Utils.checkNotNull(tradeDate, "tradeDate");
     this.tradeDate = JsonNullable.of(tradeDate);
     return this;
   }
 
   /** Trade date of the trade lot */
-  public Lot withTradeDate(JsonNullable<? extends TradeDate> tradeDate) {
+  public Lot withTradeDate(JsonNullable<? extends LotTradeDate> tradeDate) {
     Utils.checkNotNull(tradeDate, "tradeDate");
     this.tradeDate = tradeDate;
     return this;
@@ -181,7 +181,7 @@ public class Lot {
 
     private JsonNullable<? extends LotQuantity> quantity = JsonNullable.undefined();
 
-    private JsonNullable<? extends TradeDate> tradeDate = JsonNullable.undefined();
+    private JsonNullable<? extends LotTradeDate> tradeDate = JsonNullable.undefined();
 
     private Builder() {
       // force use of static builder() method
@@ -230,14 +230,14 @@ public class Lot {
     }
 
     /** Trade date of the trade lot */
-    public Builder tradeDate(TradeDate tradeDate) {
+    public Builder tradeDate(LotTradeDate tradeDate) {
       Utils.checkNotNull(tradeDate, "tradeDate");
       this.tradeDate = JsonNullable.of(tradeDate);
       return this;
     }
 
     /** Trade date of the trade lot */
-    public Builder tradeDate(JsonNullable<? extends TradeDate> tradeDate) {
+    public Builder tradeDate(JsonNullable<? extends LotTradeDate> tradeDate) {
       Utils.checkNotNull(tradeDate, "tradeDate");
       this.tradeDate = tradeDate;
       return this;

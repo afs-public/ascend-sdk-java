@@ -49,7 +49,7 @@ public class BasketOrder {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("average_prices")
-  private Optional<? extends List<ExecutedPrice>> averagePrices;
+  private Optional<? extends List<BasketTradingExecutedPrice>> averagePrices;
 
   /** System generated unique id for the basket order. */
   @JsonInclude(Include.NON_ABSENT)
@@ -166,6 +166,14 @@ public class BasketOrder {
   private Optional<? extends BasketOrderSide> side;
 
   /**
+   * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("special_reporting_instructions")
+  private Optional<? extends List<BasketOrderSpecialReportingInstructions>>
+      specialReportingInstructions;
+
+  /**
    * Must be the value "DAY". Regulatory requirements dictate that the system capture the intended
    * time_in_force, which is why this a mandatory field.
    */
@@ -178,7 +186,8 @@ public class BasketOrder {
       @JsonProperty("account_id") Optional<String> accountId,
       @JsonProperty("asset_id") Optional<String> assetId,
       @JsonProperty("asset_type") Optional<? extends BasketOrderAssetType> assetType,
-      @JsonProperty("average_prices") Optional<? extends List<ExecutedPrice>> averagePrices,
+      @JsonProperty("average_prices")
+          Optional<? extends List<BasketTradingExecutedPrice>> averagePrices,
       @JsonProperty("basket_order_id") Optional<String> basketOrderId,
       @JsonProperty("client_order_id") Optional<String> clientOrderId,
       @JsonProperty("client_order_received_time")
@@ -201,6 +210,9 @@ public class BasketOrder {
       @JsonProperty("order_type") Optional<? extends BasketOrderOrderType> orderType,
       @JsonProperty("quantity") JsonNullable<? extends BasketOrderQuantity> quantity,
       @JsonProperty("side") Optional<? extends BasketOrderSide> side,
+      @JsonProperty("special_reporting_instructions")
+          Optional<? extends List<BasketOrderSpecialReportingInstructions>>
+              specialReportingInstructions,
       @JsonProperty("time_in_force") Optional<? extends BasketOrderTimeInForce> timeInForce) {
     Utils.checkNotNull(accountId, "accountId");
     Utils.checkNotNull(assetId, "assetId");
@@ -223,6 +235,7 @@ public class BasketOrder {
     Utils.checkNotNull(orderType, "orderType");
     Utils.checkNotNull(quantity, "quantity");
     Utils.checkNotNull(side, "side");
+    Utils.checkNotNull(specialReportingInstructions, "specialReportingInstructions");
     Utils.checkNotNull(timeInForce, "timeInForce");
     this.accountId = accountId;
     this.assetId = assetId;
@@ -245,6 +258,7 @@ public class BasketOrder {
     this.orderType = orderType;
     this.quantity = quantity;
     this.side = side;
+    this.specialReportingInstructions = specialReportingInstructions;
     this.timeInForce = timeInForce;
   }
 
@@ -270,6 +284,7 @@ public class BasketOrder {
         Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined(),
+        Optional.empty(),
         Optional.empty(),
         Optional.empty());
   }
@@ -308,8 +323,8 @@ public class BasketOrder {
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<List<ExecutedPrice>> averagePrices() {
-    return (Optional<List<ExecutedPrice>>) averagePrices;
+  public Optional<List<BasketTradingExecutedPrice>> averagePrices() {
+    return (Optional<List<BasketTradingExecutedPrice>>) averagePrices;
   }
 
   /** System generated unique id for the basket order. */
@@ -453,6 +468,15 @@ public class BasketOrder {
   }
 
   /**
+   * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<List<BasketOrderSpecialReportingInstructions>> specialReportingInstructions() {
+    return (Optional<List<BasketOrderSpecialReportingInstructions>>) specialReportingInstructions;
+  }
+
+  /**
    * Must be the value "DAY". Regulatory requirements dictate that the system capture the intended
    * time_in_force, which is why this a mandatory field.
    */
@@ -526,7 +550,7 @@ public class BasketOrder {
    * PRICE_PER_UNIT. This will have up to 4 decimal places for USD amounts less than $1, and a
    * maximum of two for larger USD amounts.
    */
-  public BasketOrder withAveragePrices(List<ExecutedPrice> averagePrices) {
+  public BasketOrder withAveragePrices(List<BasketTradingExecutedPrice> averagePrices) {
     Utils.checkNotNull(averagePrices, "averagePrices");
     this.averagePrices = Optional.ofNullable(averagePrices);
     return this;
@@ -540,7 +564,8 @@ public class BasketOrder {
    * PRICE_PER_UNIT. This will have up to 4 decimal places for USD amounts less than $1, and a
    * maximum of two for larger USD amounts.
    */
-  public BasketOrder withAveragePrices(Optional<? extends List<ExecutedPrice>> averagePrices) {
+  public BasketOrder withAveragePrices(
+      Optional<? extends List<BasketTradingExecutedPrice>> averagePrices) {
     Utils.checkNotNull(averagePrices, "averagePrices");
     this.averagePrices = averagePrices;
     return this;
@@ -850,6 +875,27 @@ public class BasketOrder {
   }
 
   /**
+   * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+   */
+  public BasketOrder withSpecialReportingInstructions(
+      List<BasketOrderSpecialReportingInstructions> specialReportingInstructions) {
+    Utils.checkNotNull(specialReportingInstructions, "specialReportingInstructions");
+    this.specialReportingInstructions = Optional.ofNullable(specialReportingInstructions);
+    return this;
+  }
+
+  /**
+   * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+   */
+  public BasketOrder withSpecialReportingInstructions(
+      Optional<? extends List<BasketOrderSpecialReportingInstructions>>
+          specialReportingInstructions) {
+    Utils.checkNotNull(specialReportingInstructions, "specialReportingInstructions");
+    this.specialReportingInstructions = specialReportingInstructions;
+    return this;
+  }
+
+  /**
    * Must be the value "DAY". Regulatory requirements dictate that the system capture the intended
    * time_in_force, which is why this a mandatory field.
    */
@@ -899,6 +945,7 @@ public class BasketOrder {
         && Objects.deepEquals(this.orderType, other.orderType)
         && Objects.deepEquals(this.quantity, other.quantity)
         && Objects.deepEquals(this.side, other.side)
+        && Objects.deepEquals(this.specialReportingInstructions, other.specialReportingInstructions)
         && Objects.deepEquals(this.timeInForce, other.timeInForce);
   }
 
@@ -926,6 +973,7 @@ public class BasketOrder {
         orderType,
         quantity,
         side,
+        specialReportingInstructions,
         timeInForce);
   }
 
@@ -975,6 +1023,8 @@ public class BasketOrder {
         quantity,
         "side",
         side,
+        "specialReportingInstructions",
+        specialReportingInstructions,
         "timeInForce",
         timeInForce);
   }
@@ -987,7 +1037,7 @@ public class BasketOrder {
 
     private Optional<? extends BasketOrderAssetType> assetType = Optional.empty();
 
-    private Optional<? extends List<ExecutedPrice>> averagePrices = Optional.empty();
+    private Optional<? extends List<BasketTradingExecutedPrice>> averagePrices = Optional.empty();
 
     private Optional<String> basketOrderId = Optional.empty();
 
@@ -1026,6 +1076,9 @@ public class BasketOrder {
     private JsonNullable<? extends BasketOrderQuantity> quantity = JsonNullable.undefined();
 
     private Optional<? extends BasketOrderSide> side = Optional.empty();
+
+    private Optional<? extends List<BasketOrderSpecialReportingInstructions>>
+        specialReportingInstructions = Optional.empty();
 
     private Optional<? extends BasketOrderTimeInForce> timeInForce = Optional.empty();
 
@@ -1093,7 +1146,7 @@ public class BasketOrder {
      * PRICE_PER_UNIT. This will have up to 4 decimal places for USD amounts less than $1, and a
      * maximum of two for larger USD amounts.
      */
-    public Builder averagePrices(List<ExecutedPrice> averagePrices) {
+    public Builder averagePrices(List<BasketTradingExecutedPrice> averagePrices) {
       Utils.checkNotNull(averagePrices, "averagePrices");
       this.averagePrices = Optional.ofNullable(averagePrices);
       return this;
@@ -1107,7 +1160,8 @@ public class BasketOrder {
      * PRICE_PER_UNIT. This will have up to 4 decimal places for USD amounts less than $1, and a
      * maximum of two for larger USD amounts.
      */
-    public Builder averagePrices(Optional<? extends List<ExecutedPrice>> averagePrices) {
+    public Builder averagePrices(
+        Optional<? extends List<BasketTradingExecutedPrice>> averagePrices) {
       Utils.checkNotNull(averagePrices, "averagePrices");
       this.averagePrices = averagePrices;
       return this;
@@ -1414,6 +1468,29 @@ public class BasketOrder {
     }
 
     /**
+     * Special Reporting Instructions to be applied to this order. Can include multiple
+     * Instructions.
+     */
+    public Builder specialReportingInstructions(
+        List<BasketOrderSpecialReportingInstructions> specialReportingInstructions) {
+      Utils.checkNotNull(specialReportingInstructions, "specialReportingInstructions");
+      this.specialReportingInstructions = Optional.ofNullable(specialReportingInstructions);
+      return this;
+    }
+
+    /**
+     * Special Reporting Instructions to be applied to this order. Can include multiple
+     * Instructions.
+     */
+    public Builder specialReportingInstructions(
+        Optional<? extends List<BasketOrderSpecialReportingInstructions>>
+            specialReportingInstructions) {
+      Utils.checkNotNull(specialReportingInstructions, "specialReportingInstructions");
+      this.specialReportingInstructions = specialReportingInstructions;
+      return this;
+    }
+
+    /**
      * Must be the value "DAY". Regulatory requirements dictate that the system capture the intended
      * time_in_force, which is why this a mandatory field.
      */
@@ -1456,6 +1533,7 @@ public class BasketOrder {
           orderType,
           quantity,
           side,
+          specialReportingInstructions,
           timeInForce);
     }
   }

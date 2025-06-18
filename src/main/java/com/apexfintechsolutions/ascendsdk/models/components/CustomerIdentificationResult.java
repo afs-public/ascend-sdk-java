@@ -23,6 +23,14 @@ public class CustomerIdentificationResult {
   private Optional<? extends BirthDateVerified> birthDateVerified;
 
   /**
+   * Whether or not the result is completed Must be true to be linked to an Investigation or used to
+   * Create/Update an LegalNaturalPerson
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("completed")
+  private Optional<Boolean> completed;
+
+  /**
    * Whether or not the document authenticity is verified or not Will be NOT_IN_SCOPE if the check
    * being done is not documentary
    */
@@ -40,11 +48,16 @@ public class CustomerIdentificationResult {
 
   /**
    * One or more ULIDs from the documents api of the image(s) of the document that relates to the
-   * identification check
+   * identification check for a DOCUMENTARY check, these will be the images provided in the session
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("document_verification_ids")
   private Optional<? extends List<String>> documentVerificationIds;
+
+  /** The URI to complete documentary session Will be populated if the CheckType is DOCUMENTARY */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("documentary_session_uri")
+  private Optional<String> documentarySessionUri;
 
   /** Whether or not the customer email was verified */
   @JsonInclude(Include.NON_ABSENT)
@@ -102,12 +115,14 @@ public class CustomerIdentificationResult {
   @JsonCreator
   public CustomerIdentificationResult(
       @JsonProperty("birth_date_verified") Optional<? extends BirthDateVerified> birthDateVerified,
+      @JsonProperty("completed") Optional<Boolean> completed,
       @JsonProperty("document_authenticity_verified")
           Optional<? extends DocumentAuthenticityVerified> documentAuthenticityVerified,
       @JsonProperty("document_expiry_status")
           Optional<? extends DocumentExpiryStatus> documentExpiryStatus,
       @JsonProperty("document_verification_ids")
           Optional<? extends List<String>> documentVerificationIds,
+      @JsonProperty("documentary_session_uri") Optional<String> documentarySessionUri,
       @JsonProperty("email_verified") Optional<? extends EmailVerified> emailVerified,
       @JsonProperty("external_vendor") Optional<String> externalVendor,
       @JsonProperty("external_vendor_id") Optional<String> externalVendorId,
@@ -123,9 +138,11 @@ public class CustomerIdentificationResult {
       @JsonProperty("raw_vendor_result") Optional<String> rawVendorResult,
       @JsonProperty("selfie_verified") Optional<? extends SelfieVerified> selfieVerified) {
     Utils.checkNotNull(birthDateVerified, "birthDateVerified");
+    Utils.checkNotNull(completed, "completed");
     Utils.checkNotNull(documentAuthenticityVerified, "documentAuthenticityVerified");
     Utils.checkNotNull(documentExpiryStatus, "documentExpiryStatus");
     Utils.checkNotNull(documentVerificationIds, "documentVerificationIds");
+    Utils.checkNotNull(documentarySessionUri, "documentarySessionUri");
     Utils.checkNotNull(emailVerified, "emailVerified");
     Utils.checkNotNull(externalVendor, "externalVendor");
     Utils.checkNotNull(externalVendorId, "externalVendorId");
@@ -137,9 +154,11 @@ public class CustomerIdentificationResult {
     Utils.checkNotNull(rawVendorResult, "rawVendorResult");
     Utils.checkNotNull(selfieVerified, "selfieVerified");
     this.birthDateVerified = birthDateVerified;
+    this.completed = completed;
     this.documentAuthenticityVerified = documentAuthenticityVerified;
     this.documentExpiryStatus = documentExpiryStatus;
     this.documentVerificationIds = documentVerificationIds;
+    this.documentarySessionUri = documentarySessionUri;
     this.emailVerified = emailVerified;
     this.externalVendor = externalVendor;
     this.externalVendorId = externalVendorId;
@@ -167,6 +186,8 @@ public class CustomerIdentificationResult {
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
+        Optional.empty(),
+        Optional.empty(),
         Optional.empty());
   }
 
@@ -175,6 +196,15 @@ public class CustomerIdentificationResult {
   @JsonIgnore
   public Optional<BirthDateVerified> birthDateVerified() {
     return (Optional<BirthDateVerified>) birthDateVerified;
+  }
+
+  /**
+   * Whether or not the result is completed Must be true to be linked to an Investigation or used to
+   * Create/Update an LegalNaturalPerson
+   */
+  @JsonIgnore
+  public Optional<Boolean> completed() {
+    return completed;
   }
 
   /**
@@ -199,12 +229,18 @@ public class CustomerIdentificationResult {
 
   /**
    * One or more ULIDs from the documents api of the image(s) of the document that relates to the
-   * identification check
+   * identification check for a DOCUMENTARY check, these will be the images provided in the session
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<List<String>> documentVerificationIds() {
     return (Optional<List<String>>) documentVerificationIds;
+  }
+
+  /** The URI to complete documentary session Will be populated if the CheckType is DOCUMENTARY */
+  @JsonIgnore
+  public Optional<String> documentarySessionUri() {
+    return documentarySessionUri;
   }
 
   /** Whether or not the customer email was verified */
@@ -297,6 +333,26 @@ public class CustomerIdentificationResult {
   }
 
   /**
+   * Whether or not the result is completed Must be true to be linked to an Investigation or used to
+   * Create/Update an LegalNaturalPerson
+   */
+  public CustomerIdentificationResult withCompleted(boolean completed) {
+    Utils.checkNotNull(completed, "completed");
+    this.completed = Optional.ofNullable(completed);
+    return this;
+  }
+
+  /**
+   * Whether or not the result is completed Must be true to be linked to an Investigation or used to
+   * Create/Update an LegalNaturalPerson
+   */
+  public CustomerIdentificationResult withCompleted(Optional<Boolean> completed) {
+    Utils.checkNotNull(completed, "completed");
+    this.completed = completed;
+    return this;
+  }
+
+  /**
    * Whether or not the document authenticity is verified or not Will be NOT_IN_SCOPE if the check
    * being done is not documentary
    */
@@ -342,7 +398,7 @@ public class CustomerIdentificationResult {
 
   /**
    * One or more ULIDs from the documents api of the image(s) of the document that relates to the
-   * identification check
+   * identification check for a DOCUMENTARY check, these will be the images provided in the session
    */
   public CustomerIdentificationResult withDocumentVerificationIds(
       List<String> documentVerificationIds) {
@@ -353,12 +409,27 @@ public class CustomerIdentificationResult {
 
   /**
    * One or more ULIDs from the documents api of the image(s) of the document that relates to the
-   * identification check
+   * identification check for a DOCUMENTARY check, these will be the images provided in the session
    */
   public CustomerIdentificationResult withDocumentVerificationIds(
       Optional<? extends List<String>> documentVerificationIds) {
     Utils.checkNotNull(documentVerificationIds, "documentVerificationIds");
     this.documentVerificationIds = documentVerificationIds;
+    return this;
+  }
+
+  /** The URI to complete documentary session Will be populated if the CheckType is DOCUMENTARY */
+  public CustomerIdentificationResult withDocumentarySessionUri(String documentarySessionUri) {
+    Utils.checkNotNull(documentarySessionUri, "documentarySessionUri");
+    this.documentarySessionUri = Optional.ofNullable(documentarySessionUri);
+    return this;
+  }
+
+  /** The URI to complete documentary session Will be populated if the CheckType is DOCUMENTARY */
+  public CustomerIdentificationResult withDocumentarySessionUri(
+      Optional<String> documentarySessionUri) {
+    Utils.checkNotNull(documentarySessionUri, "documentarySessionUri");
+    this.documentarySessionUri = documentarySessionUri;
     return this;
   }
 
@@ -529,9 +600,11 @@ public class CustomerIdentificationResult {
     }
     CustomerIdentificationResult other = (CustomerIdentificationResult) o;
     return Objects.deepEquals(this.birthDateVerified, other.birthDateVerified)
+        && Objects.deepEquals(this.completed, other.completed)
         && Objects.deepEquals(this.documentAuthenticityVerified, other.documentAuthenticityVerified)
         && Objects.deepEquals(this.documentExpiryStatus, other.documentExpiryStatus)
         && Objects.deepEquals(this.documentVerificationIds, other.documentVerificationIds)
+        && Objects.deepEquals(this.documentarySessionUri, other.documentarySessionUri)
         && Objects.deepEquals(this.emailVerified, other.emailVerified)
         && Objects.deepEquals(this.externalVendor, other.externalVendor)
         && Objects.deepEquals(this.externalVendorId, other.externalVendorId)
@@ -548,9 +621,11 @@ public class CustomerIdentificationResult {
   public int hashCode() {
     return Objects.hash(
         birthDateVerified,
+        completed,
         documentAuthenticityVerified,
         documentExpiryStatus,
         documentVerificationIds,
+        documentarySessionUri,
         emailVerified,
         externalVendor,
         externalVendorId,
@@ -569,12 +644,16 @@ public class CustomerIdentificationResult {
         CustomerIdentificationResult.class,
         "birthDateVerified",
         birthDateVerified,
+        "completed",
+        completed,
         "documentAuthenticityVerified",
         documentAuthenticityVerified,
         "documentExpiryStatus",
         documentExpiryStatus,
         "documentVerificationIds",
         documentVerificationIds,
+        "documentarySessionUri",
+        documentarySessionUri,
         "emailVerified",
         emailVerified,
         "externalVendor",
@@ -601,12 +680,16 @@ public class CustomerIdentificationResult {
 
     private Optional<? extends BirthDateVerified> birthDateVerified = Optional.empty();
 
+    private Optional<Boolean> completed = Optional.empty();
+
     private Optional<? extends DocumentAuthenticityVerified> documentAuthenticityVerified =
         Optional.empty();
 
     private Optional<? extends DocumentExpiryStatus> documentExpiryStatus = Optional.empty();
 
     private Optional<? extends List<String>> documentVerificationIds = Optional.empty();
+
+    private Optional<String> documentarySessionUri = Optional.empty();
 
     private Optional<? extends EmailVerified> emailVerified = Optional.empty();
 
@@ -645,6 +728,26 @@ public class CustomerIdentificationResult {
     public Builder birthDateVerified(Optional<? extends BirthDateVerified> birthDateVerified) {
       Utils.checkNotNull(birthDateVerified, "birthDateVerified");
       this.birthDateVerified = birthDateVerified;
+      return this;
+    }
+
+    /**
+     * Whether or not the result is completed Must be true to be linked to an Investigation or used
+     * to Create/Update an LegalNaturalPerson
+     */
+    public Builder completed(boolean completed) {
+      Utils.checkNotNull(completed, "completed");
+      this.completed = Optional.ofNullable(completed);
+      return this;
+    }
+
+    /**
+     * Whether or not the result is completed Must be true to be linked to an Investigation or used
+     * to Create/Update an LegalNaturalPerson
+     */
+    public Builder completed(Optional<Boolean> completed) {
+      Utils.checkNotNull(completed, "completed");
+      this.completed = completed;
       return this;
     }
 
@@ -693,7 +796,8 @@ public class CustomerIdentificationResult {
 
     /**
      * One or more ULIDs from the documents api of the image(s) of the document that relates to the
-     * identification check
+     * identification check for a DOCUMENTARY check, these will be the images provided in the
+     * session
      */
     public Builder documentVerificationIds(List<String> documentVerificationIds) {
       Utils.checkNotNull(documentVerificationIds, "documentVerificationIds");
@@ -703,12 +807,27 @@ public class CustomerIdentificationResult {
 
     /**
      * One or more ULIDs from the documents api of the image(s) of the document that relates to the
-     * identification check
+     * identification check for a DOCUMENTARY check, these will be the images provided in the
+     * session
      */
     public Builder documentVerificationIds(
         Optional<? extends List<String>> documentVerificationIds) {
       Utils.checkNotNull(documentVerificationIds, "documentVerificationIds");
       this.documentVerificationIds = documentVerificationIds;
+      return this;
+    }
+
+    /** The URI to complete documentary session Will be populated if the CheckType is DOCUMENTARY */
+    public Builder documentarySessionUri(String documentarySessionUri) {
+      Utils.checkNotNull(documentarySessionUri, "documentarySessionUri");
+      this.documentarySessionUri = Optional.ofNullable(documentarySessionUri);
+      return this;
+    }
+
+    /** The URI to complete documentary session Will be populated if the CheckType is DOCUMENTARY */
+    public Builder documentarySessionUri(Optional<String> documentarySessionUri) {
+      Utils.checkNotNull(documentarySessionUri, "documentarySessionUri");
+      this.documentarySessionUri = documentarySessionUri;
       return this;
     }
 
@@ -867,9 +986,11 @@ public class CustomerIdentificationResult {
     public CustomerIdentificationResult build() {
       return new CustomerIdentificationResult(
           birthDateVerified,
+          completed,
           documentAuthenticityVerified,
           documentExpiryStatus,
           documentVerificationIds,
+          documentarySessionUri,
           emailVerified,
           externalVendor,
           externalVendorId,

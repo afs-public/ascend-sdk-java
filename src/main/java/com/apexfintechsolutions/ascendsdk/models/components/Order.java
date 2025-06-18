@@ -56,7 +56,7 @@ public class Order {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("average_prices")
-  private Optional<? extends List<ExecutedPrice>> averagePrices;
+  private Optional<? extends List<TradingExecutedPrice>> averagePrices;
 
   /**
    * Defaults to "AGENCY" if not specified. For Equities: Only "AGENCY" is allowed. For Mutual
@@ -123,12 +123,12 @@ public class Order {
   /** The execution-level details that compose this order */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("executions")
-  private Optional<? extends List<Executions>> executions;
+  private Optional<? extends List<TradingExecutions>> executions;
 
   /** Fees that will be applied to this order. Only the BROKER_FEE type is supported. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("fees")
-  private Optional<? extends List<Fee>> fees;
+  private Optional<? extends List<TradingFee>> fees;
 
   /**
    * The summed quantity value across all fills in this order, up to a maximum of 5 decimal places.
@@ -298,12 +298,20 @@ public class Order {
   @JsonProperty("time_in_force")
   private Optional<? extends OrderTimeInForce> timeInForce;
 
+  /**
+   * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
+   * orders.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("trading_strategy")
+  private Optional<? extends OrderTradingStrategy> tradingStrategy;
+
   @JsonCreator
   public Order(
       @JsonProperty("account_id") Optional<String> accountId,
       @JsonProperty("asset_id") Optional<String> assetId,
       @JsonProperty("asset_type") Optional<? extends OrderAssetType> assetType,
-      @JsonProperty("average_prices") Optional<? extends List<ExecutedPrice>> averagePrices,
+      @JsonProperty("average_prices") Optional<? extends List<TradingExecutedPrice>> averagePrices,
       @JsonProperty("broker_capacity") Optional<? extends OrderBrokerCapacity> brokerCapacity,
       @JsonProperty("cancel_reason") Optional<String> cancelReason,
       @JsonProperty("cancel_rejected_reason")
@@ -315,8 +323,8 @@ public class Order {
       @JsonProperty("cumulative_notional_value")
           JsonNullable<? extends CumulativeNotionalValue> cumulativeNotionalValue,
       @JsonProperty("currency_code") Optional<String> currencyCode,
-      @JsonProperty("executions") Optional<? extends List<Executions>> executions,
-      @JsonProperty("fees") Optional<? extends List<Fee>> fees,
+      @JsonProperty("executions") Optional<? extends List<TradingExecutions>> executions,
+      @JsonProperty("fees") Optional<? extends List<TradingFee>> fees,
       @JsonProperty("filled_quantity") JsonNullable<? extends FilledQuantity> filledQuantity,
       @JsonProperty("identifier") Optional<String> identifier,
       @JsonProperty("identifier_issuing_region_code") Optional<String> identifierIssuingRegionCode,
@@ -342,7 +350,8 @@ public class Order {
       @JsonProperty("special_reporting_instructions")
           Optional<? extends List<OrderSpecialReportingInstructions>> specialReportingInstructions,
       @JsonProperty("stop_price") JsonNullable<? extends StopPrice> stopPrice,
-      @JsonProperty("time_in_force") Optional<? extends OrderTimeInForce> timeInForce) {
+      @JsonProperty("time_in_force") Optional<? extends OrderTimeInForce> timeInForce,
+      @JsonProperty("trading_strategy") Optional<? extends OrderTradingStrategy> tradingStrategy) {
     Utils.checkNotNull(accountId, "accountId");
     Utils.checkNotNull(assetId, "assetId");
     Utils.checkNotNull(assetType, "assetType");
@@ -380,6 +389,7 @@ public class Order {
     Utils.checkNotNull(specialReportingInstructions, "specialReportingInstructions");
     Utils.checkNotNull(stopPrice, "stopPrice");
     Utils.checkNotNull(timeInForce, "timeInForce");
+    Utils.checkNotNull(tradingStrategy, "tradingStrategy");
     this.accountId = accountId;
     this.assetId = assetId;
     this.assetType = assetType;
@@ -417,6 +427,7 @@ public class Order {
     this.specialReportingInstructions = specialReportingInstructions;
     this.stopPrice = stopPrice;
     this.timeInForce = timeInForce;
+    this.tradingStrategy = tradingStrategy;
   }
 
   public Order() {
@@ -457,6 +468,7 @@ public class Order {
         Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined(),
+        Optional.empty(),
         Optional.empty());
   }
 
@@ -501,8 +513,8 @@ public class Order {
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<List<ExecutedPrice>> averagePrices() {
-    return (Optional<List<ExecutedPrice>>) averagePrices;
+  public Optional<List<TradingExecutedPrice>> averagePrices() {
+    return (Optional<List<TradingExecutedPrice>>) averagePrices;
   }
 
   /**
@@ -583,15 +595,15 @@ public class Order {
   /** The execution-level details that compose this order */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<List<Executions>> executions() {
-    return (Optional<List<Executions>>) executions;
+  public Optional<List<TradingExecutions>> executions() {
+    return (Optional<List<TradingExecutions>>) executions;
   }
 
   /** Fees that will be applied to this order. Only the BROKER_FEE type is supported. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<List<Fee>> fees() {
-    return (Optional<List<Fee>>) fees;
+  public Optional<List<TradingFee>> fees() {
+    return (Optional<List<TradingFee>>) fees;
   }
 
   /**
@@ -801,6 +813,16 @@ public class Order {
     return (Optional<OrderTimeInForce>) timeInForce;
   }
 
+  /**
+   * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
+   * orders.
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<OrderTradingStrategy> tradingStrategy() {
+    return (Optional<OrderTradingStrategy>) tradingStrategy;
+  }
+
   public static final Builder builder() {
     return new Builder();
   }
@@ -875,7 +897,7 @@ public class Order {
    * type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 4 decimal
    * places of precision, and price values measured in yields will support up to 5 decimal places.
    */
-  public Order withAveragePrices(List<ExecutedPrice> averagePrices) {
+  public Order withAveragePrices(List<TradingExecutedPrice> averagePrices) {
     Utils.checkNotNull(averagePrices, "averagePrices");
     this.averagePrices = Optional.ofNullable(averagePrices);
     return this;
@@ -893,7 +915,7 @@ public class Order {
    * type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 4 decimal
    * places of precision, and price values measured in yields will support up to 5 decimal places.
    */
-  public Order withAveragePrices(Optional<? extends List<ExecutedPrice>> averagePrices) {
+  public Order withAveragePrices(Optional<? extends List<TradingExecutedPrice>> averagePrices) {
     Utils.checkNotNull(averagePrices, "averagePrices");
     this.averagePrices = averagePrices;
     return this;
@@ -1062,28 +1084,28 @@ public class Order {
   }
 
   /** The execution-level details that compose this order */
-  public Order withExecutions(List<Executions> executions) {
+  public Order withExecutions(List<TradingExecutions> executions) {
     Utils.checkNotNull(executions, "executions");
     this.executions = Optional.ofNullable(executions);
     return this;
   }
 
   /** The execution-level details that compose this order */
-  public Order withExecutions(Optional<? extends List<Executions>> executions) {
+  public Order withExecutions(Optional<? extends List<TradingExecutions>> executions) {
     Utils.checkNotNull(executions, "executions");
     this.executions = executions;
     return this;
   }
 
   /** Fees that will be applied to this order. Only the BROKER_FEE type is supported. */
-  public Order withFees(List<Fee> fees) {
+  public Order withFees(List<TradingFee> fees) {
     Utils.checkNotNull(fees, "fees");
     this.fees = Optional.ofNullable(fees);
     return this;
   }
 
   /** Fees that will be applied to this order. Only the BROKER_FEE type is supported. */
-  public Order withFees(Optional<? extends List<Fee>> fees) {
+  public Order withFees(Optional<? extends List<TradingFee>> fees) {
     Utils.checkNotNull(fees, "fees");
     this.fees = fees;
     return this;
@@ -1518,6 +1540,26 @@ public class Order {
     return this;
   }
 
+  /**
+   * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
+   * orders.
+   */
+  public Order withTradingStrategy(OrderTradingStrategy tradingStrategy) {
+    Utils.checkNotNull(tradingStrategy, "tradingStrategy");
+    this.tradingStrategy = Optional.ofNullable(tradingStrategy);
+    return this;
+  }
+
+  /**
+   * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
+   * orders.
+   */
+  public Order withTradingStrategy(Optional<? extends OrderTradingStrategy> tradingStrategy) {
+    Utils.checkNotNull(tradingStrategy, "tradingStrategy");
+    this.tradingStrategy = tradingStrategy;
+    return this;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -1563,7 +1605,8 @@ public class Order {
         && Objects.deepEquals(this.side, other.side)
         && Objects.deepEquals(this.specialReportingInstructions, other.specialReportingInstructions)
         && Objects.deepEquals(this.stopPrice, other.stopPrice)
-        && Objects.deepEquals(this.timeInForce, other.timeInForce);
+        && Objects.deepEquals(this.timeInForce, other.timeInForce)
+        && Objects.deepEquals(this.tradingStrategy, other.tradingStrategy);
   }
 
   @Override
@@ -1605,7 +1648,8 @@ public class Order {
         side,
         specialReportingInstructions,
         stopPrice,
-        timeInForce);
+        timeInForce,
+        tradingStrategy);
   }
 
   @Override
@@ -1685,7 +1729,9 @@ public class Order {
         "stopPrice",
         stopPrice,
         "timeInForce",
-        timeInForce);
+        timeInForce,
+        "tradingStrategy",
+        tradingStrategy);
   }
 
   public static final class Builder {
@@ -1696,7 +1742,7 @@ public class Order {
 
     private Optional<? extends OrderAssetType> assetType = Optional.empty();
 
-    private Optional<? extends List<ExecutedPrice>> averagePrices = Optional.empty();
+    private Optional<? extends List<TradingExecutedPrice>> averagePrices = Optional.empty();
 
     private Optional<? extends OrderBrokerCapacity> brokerCapacity = Optional.empty();
 
@@ -1717,9 +1763,9 @@ public class Order {
 
     private Optional<String> currencyCode = Optional.empty();
 
-    private Optional<? extends List<Executions>> executions = Optional.empty();
+    private Optional<? extends List<TradingExecutions>> executions = Optional.empty();
 
-    private Optional<? extends List<Fee>> fees = Optional.empty();
+    private Optional<? extends List<TradingFee>> fees = Optional.empty();
 
     private JsonNullable<? extends FilledQuantity> filledQuantity = JsonNullable.undefined();
 
@@ -1767,6 +1813,8 @@ public class Order {
     private JsonNullable<? extends StopPrice> stopPrice = JsonNullable.undefined();
 
     private Optional<? extends OrderTimeInForce> timeInForce = Optional.empty();
+
+    private Optional<? extends OrderTradingStrategy> tradingStrategy = Optional.empty();
 
     private Builder() {
       // force use of static builder() method
@@ -1842,7 +1890,7 @@ public class Order {
      * a type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 4 decimal
      * places of precision, and price values measured in yields will support up to 5 decimal places.
      */
-    public Builder averagePrices(List<ExecutedPrice> averagePrices) {
+    public Builder averagePrices(List<TradingExecutedPrice> averagePrices) {
       Utils.checkNotNull(averagePrices, "averagePrices");
       this.averagePrices = Optional.ofNullable(averagePrices);
       return this;
@@ -1860,7 +1908,7 @@ public class Order {
      * a type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 4 decimal
      * places of precision, and price values measured in yields will support up to 5 decimal places.
      */
-    public Builder averagePrices(Optional<? extends List<ExecutedPrice>> averagePrices) {
+    public Builder averagePrices(Optional<? extends List<TradingExecutedPrice>> averagePrices) {
       Utils.checkNotNull(averagePrices, "averagePrices");
       this.averagePrices = averagePrices;
       return this;
@@ -2031,28 +2079,28 @@ public class Order {
     }
 
     /** The execution-level details that compose this order */
-    public Builder executions(List<Executions> executions) {
+    public Builder executions(List<TradingExecutions> executions) {
       Utils.checkNotNull(executions, "executions");
       this.executions = Optional.ofNullable(executions);
       return this;
     }
 
     /** The execution-level details that compose this order */
-    public Builder executions(Optional<? extends List<Executions>> executions) {
+    public Builder executions(Optional<? extends List<TradingExecutions>> executions) {
       Utils.checkNotNull(executions, "executions");
       this.executions = executions;
       return this;
     }
 
     /** Fees that will be applied to this order. Only the BROKER_FEE type is supported. */
-    public Builder fees(List<Fee> fees) {
+    public Builder fees(List<TradingFee> fees) {
       Utils.checkNotNull(fees, "fees");
       this.fees = Optional.ofNullable(fees);
       return this;
     }
 
     /** Fees that will be applied to this order. Only the BROKER_FEE type is supported. */
-    public Builder fees(Optional<? extends List<Fee>> fees) {
+    public Builder fees(Optional<? extends List<TradingFee>> fees) {
       Utils.checkNotNull(fees, "fees");
       this.fees = fees;
       return this;
@@ -2491,6 +2539,26 @@ public class Order {
       return this;
     }
 
+    /**
+     * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
+     * orders.
+     */
+    public Builder tradingStrategy(OrderTradingStrategy tradingStrategy) {
+      Utils.checkNotNull(tradingStrategy, "tradingStrategy");
+      this.tradingStrategy = Optional.ofNullable(tradingStrategy);
+      return this;
+    }
+
+    /**
+     * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
+     * orders.
+     */
+    public Builder tradingStrategy(Optional<? extends OrderTradingStrategy> tradingStrategy) {
+      Utils.checkNotNull(tradingStrategy, "tradingStrategy");
+      this.tradingStrategy = tradingStrategy;
+      return this;
+    }
+
     public Order build() {
       return new Order(
           accountId,
@@ -2529,7 +2597,8 @@ public class Order {
           side,
           specialReportingInstructions,
           stopPrice,
-          timeInForce);
+          timeInForce,
+          tradingStrategy);
     }
   }
 }

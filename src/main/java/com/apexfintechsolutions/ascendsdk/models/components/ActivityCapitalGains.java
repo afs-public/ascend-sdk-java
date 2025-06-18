@@ -24,7 +24,7 @@ public class ActivityCapitalGains {
   /** Common fields for corporate actions */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("corporate_action_general_information")
-  private JsonNullable<? extends ActivityCorporateActionGeneralInformation>
+  private JsonNullable<? extends ActivityCapitalGainsCorporateActionGeneralInformation>
       corporateActionGeneralInformation;
 
   /** Can indicate the capital gain is eligible for preferential tax treatment */
@@ -35,7 +35,7 @@ public class ActivityCapitalGains {
   /** The anticipated payment date at the depository */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("payment_date")
-  private JsonNullable<? extends ActivityPaymentDate> paymentDate;
+  private JsonNullable<? extends ActivityCapitalGainsPaymentDate> paymentDate;
 
   /** The position on which the corporate action was paid */
   @JsonInclude(Include.NON_ABSENT)
@@ -55,10 +55,11 @@ public class ActivityCapitalGains {
   @JsonCreator
   public ActivityCapitalGains(
       @JsonProperty("corporate_action_general_information")
-          JsonNullable<? extends ActivityCorporateActionGeneralInformation>
+          JsonNullable<? extends ActivityCapitalGainsCorporateActionGeneralInformation>
               corporateActionGeneralInformation,
       @JsonProperty("long_term_gain") Optional<Boolean> longTermGain,
-      @JsonProperty("payment_date") JsonNullable<? extends ActivityPaymentDate> paymentDate,
+      @JsonProperty("payment_date")
+          JsonNullable<? extends ActivityCapitalGainsPaymentDate> paymentDate,
       @JsonProperty("quantity") JsonNullable<? extends ActivityCapitalGainsQuantity> quantity,
       @JsonProperty("record_date") JsonNullable<? extends ActivityRecordDate> recordDate,
       @JsonProperty("reinvested") Optional<Boolean> reinvested) {
@@ -89,9 +90,9 @@ public class ActivityCapitalGains {
   /** Common fields for corporate actions */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<ActivityCorporateActionGeneralInformation>
+  public JsonNullable<ActivityCapitalGainsCorporateActionGeneralInformation>
       corporateActionGeneralInformation() {
-    return (JsonNullable<ActivityCorporateActionGeneralInformation>)
+    return (JsonNullable<ActivityCapitalGainsCorporateActionGeneralInformation>)
         corporateActionGeneralInformation;
   }
 
@@ -104,8 +105,8 @@ public class ActivityCapitalGains {
   /** The anticipated payment date at the depository */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<ActivityPaymentDate> paymentDate() {
-    return (JsonNullable<ActivityPaymentDate>) paymentDate;
+  public JsonNullable<ActivityCapitalGainsPaymentDate> paymentDate() {
+    return (JsonNullable<ActivityCapitalGainsPaymentDate>) paymentDate;
   }
 
   /** The position on which the corporate action was paid */
@@ -134,7 +135,7 @@ public class ActivityCapitalGains {
 
   /** Common fields for corporate actions */
   public ActivityCapitalGains withCorporateActionGeneralInformation(
-      ActivityCorporateActionGeneralInformation corporateActionGeneralInformation) {
+      ActivityCapitalGainsCorporateActionGeneralInformation corporateActionGeneralInformation) {
     Utils.checkNotNull(corporateActionGeneralInformation, "corporateActionGeneralInformation");
     this.corporateActionGeneralInformation = JsonNullable.of(corporateActionGeneralInformation);
     return this;
@@ -142,7 +143,7 @@ public class ActivityCapitalGains {
 
   /** Common fields for corporate actions */
   public ActivityCapitalGains withCorporateActionGeneralInformation(
-      JsonNullable<? extends ActivityCorporateActionGeneralInformation>
+      JsonNullable<? extends ActivityCapitalGainsCorporateActionGeneralInformation>
           corporateActionGeneralInformation) {
     Utils.checkNotNull(corporateActionGeneralInformation, "corporateActionGeneralInformation");
     this.corporateActionGeneralInformation = corporateActionGeneralInformation;
@@ -164,7 +165,7 @@ public class ActivityCapitalGains {
   }
 
   /** The anticipated payment date at the depository */
-  public ActivityCapitalGains withPaymentDate(ActivityPaymentDate paymentDate) {
+  public ActivityCapitalGains withPaymentDate(ActivityCapitalGainsPaymentDate paymentDate) {
     Utils.checkNotNull(paymentDate, "paymentDate");
     this.paymentDate = JsonNullable.of(paymentDate);
     return this;
@@ -172,7 +173,7 @@ public class ActivityCapitalGains {
 
   /** The anticipated payment date at the depository */
   public ActivityCapitalGains withPaymentDate(
-      JsonNullable<? extends ActivityPaymentDate> paymentDate) {
+      JsonNullable<? extends ActivityCapitalGainsPaymentDate> paymentDate) {
     Utils.checkNotNull(paymentDate, "paymentDate");
     this.paymentDate = paymentDate;
     return this;
@@ -271,12 +272,13 @@ public class ActivityCapitalGains {
 
   public static final class Builder {
 
-    private JsonNullable<? extends ActivityCorporateActionGeneralInformation>
+    private JsonNullable<? extends ActivityCapitalGainsCorporateActionGeneralInformation>
         corporateActionGeneralInformation = JsonNullable.undefined();
 
     private Optional<Boolean> longTermGain = Optional.empty();
 
-    private JsonNullable<? extends ActivityPaymentDate> paymentDate = JsonNullable.undefined();
+    private JsonNullable<? extends ActivityCapitalGainsPaymentDate> paymentDate =
+        JsonNullable.undefined();
 
     private JsonNullable<? extends ActivityCapitalGainsQuantity> quantity =
         JsonNullable.undefined();
@@ -291,7 +293,7 @@ public class ActivityCapitalGains {
 
     /** Common fields for corporate actions */
     public Builder corporateActionGeneralInformation(
-        ActivityCorporateActionGeneralInformation corporateActionGeneralInformation) {
+        ActivityCapitalGainsCorporateActionGeneralInformation corporateActionGeneralInformation) {
       Utils.checkNotNull(corporateActionGeneralInformation, "corporateActionGeneralInformation");
       this.corporateActionGeneralInformation = JsonNullable.of(corporateActionGeneralInformation);
       return this;
@@ -299,7 +301,7 @@ public class ActivityCapitalGains {
 
     /** Common fields for corporate actions */
     public Builder corporateActionGeneralInformation(
-        JsonNullable<? extends ActivityCorporateActionGeneralInformation>
+        JsonNullable<? extends ActivityCapitalGainsCorporateActionGeneralInformation>
             corporateActionGeneralInformation) {
       Utils.checkNotNull(corporateActionGeneralInformation, "corporateActionGeneralInformation");
       this.corporateActionGeneralInformation = corporateActionGeneralInformation;
@@ -321,14 +323,15 @@ public class ActivityCapitalGains {
     }
 
     /** The anticipated payment date at the depository */
-    public Builder paymentDate(ActivityPaymentDate paymentDate) {
+    public Builder paymentDate(ActivityCapitalGainsPaymentDate paymentDate) {
       Utils.checkNotNull(paymentDate, "paymentDate");
       this.paymentDate = JsonNullable.of(paymentDate);
       return this;
     }
 
     /** The anticipated payment date at the depository */
-    public Builder paymentDate(JsonNullable<? extends ActivityPaymentDate> paymentDate) {
+    public Builder paymentDate(
+        JsonNullable<? extends ActivityCapitalGainsPaymentDate> paymentDate) {
       Utils.checkNotNull(paymentDate, "paymentDate");
       this.paymentDate = paymentDate;
       return this;

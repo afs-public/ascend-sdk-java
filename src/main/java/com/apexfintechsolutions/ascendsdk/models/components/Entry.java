@@ -83,6 +83,11 @@ public class Entry {
   @JsonProperty("activity_time")
   private JsonNullable<OffsetDateTime> activityTime;
 
+  /** Object containing metadata for trade allocation */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("allocation")
+  private JsonNullable<? extends Allocation> allocation;
+
   /**
    * An Apex-provided, global identifier created on a per asset bases which provides connectivity
    * across all areas Required, except for currency movements which should instead have a
@@ -91,6 +96,11 @@ public class Entry {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("asset_id")
   private Optional<String> assetId;
+
+  /** Object containing metadata for bond defaults */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("bond_default")
+  private JsonNullable<? extends BondDefault> bondDefault;
 
   /**
    * Used to record a distribution of cash that an issuer has determined will be declared as income
@@ -108,6 +118,11 @@ public class Entry {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("cash_dividend")
   private JsonNullable<? extends CashDividend> cashDividend;
+
+  /** Object containing metadata for cash in lieu */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("cash_in_lieu")
+  private JsonNullable<? extends CashInLieu> cashInLieu;
 
   /**
    * Indicates that the entry references commission charged by brokers or financial intermediaries
@@ -391,8 +406,8 @@ public class Entry {
   private Optional<? extends EntrySide> side;
 
   /**
-   * Additional information about a trade Should be populated if possible for trades; the side
-   * modifier for the trade
+   * Indicates whether the trade is opening a new position or closing an existing position Should be
+   * populated if possible for trades; the side modifier for the trade
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("side_modifier")
@@ -471,7 +486,7 @@ public class Entry {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("transfer")
-  private JsonNullable<? extends Transfer> transfer;
+  private JsonNullable<? extends EntryTransfer> transfer;
 
   /**
    * The Type of the entry; determines the set of mandatory fields as well as informing downstream
@@ -536,9 +551,12 @@ public class Entry {
       @JsonProperty("activity_date") JsonNullable<? extends ActivityDate> activityDate,
       @JsonProperty("activity_id") Optional<String> activityId,
       @JsonProperty("activity_time") JsonNullable<OffsetDateTime> activityTime,
+      @JsonProperty("allocation") JsonNullable<? extends Allocation> allocation,
       @JsonProperty("asset_id") Optional<String> assetId,
+      @JsonProperty("bond_default") JsonNullable<? extends BondDefault> bondDefault,
       @JsonProperty("capital_gains") JsonNullable<? extends CapitalGains> capitalGains,
       @JsonProperty("cash_dividend") JsonNullable<? extends CashDividend> cashDividend,
+      @JsonProperty("cash_in_lieu") JsonNullable<? extends CashInLieu> cashInLieu,
       @JsonProperty("commission") JsonNullable<? extends EntryCommission> commission,
       @JsonProperty("conversion") JsonNullable<? extends Conversion> conversion,
       @JsonProperty("corporate_action_memo_adjustment")
@@ -594,7 +612,7 @@ public class Entry {
       @JsonProperty("sweep") JsonNullable<? extends Sweep> sweep,
       @JsonProperty("tender_offer") JsonNullable<? extends TenderOffer> tenderOffer,
       @JsonProperty("trade") JsonNullable<? extends EntryTrade> trade,
-      @JsonProperty("transfer") JsonNullable<? extends Transfer> transfer,
+      @JsonProperty("transfer") JsonNullable<? extends EntryTransfer> transfer,
       @JsonProperty("type") Optional<? extends EntryType> type,
       @JsonProperty("unit_split") JsonNullable<? extends UnitSplit> unitSplit,
       @JsonProperty("warrant_exercise") JsonNullable<? extends WarrantExercise> warrantExercise,
@@ -612,9 +630,12 @@ public class Entry {
     Utils.checkNotNull(activityDate, "activityDate");
     Utils.checkNotNull(activityId, "activityId");
     Utils.checkNotNull(activityTime, "activityTime");
+    Utils.checkNotNull(allocation, "allocation");
     Utils.checkNotNull(assetId, "assetId");
+    Utils.checkNotNull(bondDefault, "bondDefault");
     Utils.checkNotNull(capitalGains, "capitalGains");
     Utils.checkNotNull(cashDividend, "cashDividend");
+    Utils.checkNotNull(cashInLieu, "cashInLieu");
     Utils.checkNotNull(commission, "commission");
     Utils.checkNotNull(conversion, "conversion");
     Utils.checkNotNull(corporateActionMemoAdjustment, "corporateActionMemoAdjustment");
@@ -680,9 +701,12 @@ public class Entry {
     this.activityDate = activityDate;
     this.activityId = activityId;
     this.activityTime = activityTime;
+    this.allocation = allocation;
     this.assetId = assetId;
+    this.bondDefault = bondDefault;
     this.capitalGains = capitalGains;
     this.cashDividend = cashDividend;
+    this.cashInLieu = cashInLieu;
     this.commission = commission;
     this.conversion = conversion;
     this.corporateActionMemoAdjustment = corporateActionMemoAdjustment;
@@ -752,7 +776,10 @@ public class Entry {
         JsonNullable.undefined(),
         Optional.empty(),
         JsonNullable.undefined(),
+        JsonNullable.undefined(),
         Optional.empty(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
@@ -890,6 +917,13 @@ public class Entry {
     return activityTime;
   }
 
+  /** Object containing metadata for trade allocation */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<Allocation> allocation() {
+    return (JsonNullable<Allocation>) allocation;
+  }
+
   /**
    * An Apex-provided, global identifier created on a per asset bases which provides connectivity
    * across all areas Required, except for currency movements which should instead have a
@@ -898,6 +932,13 @@ public class Entry {
   @JsonIgnore
   public Optional<String> assetId() {
     return assetId;
+  }
+
+  /** Object containing metadata for bond defaults */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<BondDefault> bondDefault() {
+    return (JsonNullable<BondDefault>) bondDefault;
   }
 
   /**
@@ -919,6 +960,13 @@ public class Entry {
   @JsonIgnore
   public JsonNullable<CashDividend> cashDividend() {
     return (JsonNullable<CashDividend>) cashDividend;
+  }
+
+  /** Object containing metadata for cash in lieu */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<CashInLieu> cashInLieu() {
+    return (JsonNullable<CashInLieu>) cashInLieu;
   }
 
   /**
@@ -1275,8 +1323,8 @@ public class Entry {
   }
 
   /**
-   * Additional information about a trade Should be populated if possible for trades; the side
-   * modifier for the trade
+   * Indicates whether the trade is opening a new position or closing an existing position Should be
+   * populated if possible for trades; the side modifier for the trade
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -1372,8 +1420,8 @@ public class Entry {
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<Transfer> transfer() {
-    return (JsonNullable<Transfer>) transfer;
+  public JsonNullable<EntryTransfer> transfer() {
+    return (JsonNullable<EntryTransfer>) transfer;
   }
 
   /**
@@ -1605,6 +1653,20 @@ public class Entry {
     return this;
   }
 
+  /** Object containing metadata for trade allocation */
+  public Entry withAllocation(Allocation allocation) {
+    Utils.checkNotNull(allocation, "allocation");
+    this.allocation = JsonNullable.of(allocation);
+    return this;
+  }
+
+  /** Object containing metadata for trade allocation */
+  public Entry withAllocation(JsonNullable<? extends Allocation> allocation) {
+    Utils.checkNotNull(allocation, "allocation");
+    this.allocation = allocation;
+    return this;
+  }
+
   /**
    * An Apex-provided, global identifier created on a per asset bases which provides connectivity
    * across all areas Required, except for currency movements which should instead have a
@@ -1624,6 +1686,20 @@ public class Entry {
   public Entry withAssetId(Optional<String> assetId) {
     Utils.checkNotNull(assetId, "assetId");
     this.assetId = assetId;
+    return this;
+  }
+
+  /** Object containing metadata for bond defaults */
+  public Entry withBondDefault(BondDefault bondDefault) {
+    Utils.checkNotNull(bondDefault, "bondDefault");
+    this.bondDefault = JsonNullable.of(bondDefault);
+    return this;
+  }
+
+  /** Object containing metadata for bond defaults */
+  public Entry withBondDefault(JsonNullable<? extends BondDefault> bondDefault) {
+    Utils.checkNotNull(bondDefault, "bondDefault");
+    this.bondDefault = bondDefault;
     return this;
   }
 
@@ -1666,6 +1742,20 @@ public class Entry {
   public Entry withCashDividend(JsonNullable<? extends CashDividend> cashDividend) {
     Utils.checkNotNull(cashDividend, "cashDividend");
     this.cashDividend = cashDividend;
+    return this;
+  }
+
+  /** Object containing metadata for cash in lieu */
+  public Entry withCashInLieu(CashInLieu cashInLieu) {
+    Utils.checkNotNull(cashInLieu, "cashInLieu");
+    this.cashInLieu = JsonNullable.of(cashInLieu);
+    return this;
+  }
+
+  /** Object containing metadata for cash in lieu */
+  public Entry withCashInLieu(JsonNullable<? extends CashInLieu> cashInLieu) {
+    Utils.checkNotNull(cashInLieu, "cashInLieu");
+    this.cashInLieu = cashInLieu;
     return this;
   }
 
@@ -2394,8 +2484,8 @@ public class Entry {
   }
 
   /**
-   * Additional information about a trade Should be populated if possible for trades; the side
-   * modifier for the trade
+   * Indicates whether the trade is opening a new position or closing an existing position Should be
+   * populated if possible for trades; the side modifier for the trade
    */
   public Entry withSideModifier(EntrySideModifier sideModifier) {
     Utils.checkNotNull(sideModifier, "sideModifier");
@@ -2404,8 +2494,8 @@ public class Entry {
   }
 
   /**
-   * Additional information about a trade Should be populated if possible for trades; the side
-   * modifier for the trade
+   * Indicates whether the trade is opening a new position or closing an existing position Should be
+   * populated if possible for trades; the side modifier for the trade
    */
   public Entry withSideModifier(Optional<? extends EntrySideModifier> sideModifier) {
     Utils.checkNotNull(sideModifier, "sideModifier");
@@ -2582,7 +2672,7 @@ public class Entry {
    * transfer. The transfer type and activity_description can be used to provide more specific
    * context
    */
-  public Entry withTransfer(Transfer transfer) {
+  public Entry withTransfer(EntryTransfer transfer) {
     Utils.checkNotNull(transfer, "transfer");
     this.transfer = JsonNullable.of(transfer);
     return this;
@@ -2593,7 +2683,7 @@ public class Entry {
    * transfer. The transfer type and activity_description can be used to provide more specific
    * context
    */
-  public Entry withTransfer(JsonNullable<? extends Transfer> transfer) {
+  public Entry withTransfer(JsonNullable<? extends EntryTransfer> transfer) {
     Utils.checkNotNull(transfer, "transfer");
     this.transfer = transfer;
     return this;
@@ -2748,9 +2838,12 @@ public class Entry {
         && Objects.deepEquals(this.activityDate, other.activityDate)
         && Objects.deepEquals(this.activityId, other.activityId)
         && Objects.deepEquals(this.activityTime, other.activityTime)
+        && Objects.deepEquals(this.allocation, other.allocation)
         && Objects.deepEquals(this.assetId, other.assetId)
+        && Objects.deepEquals(this.bondDefault, other.bondDefault)
         && Objects.deepEquals(this.capitalGains, other.capitalGains)
         && Objects.deepEquals(this.cashDividend, other.cashDividend)
+        && Objects.deepEquals(this.cashInLieu, other.cashInLieu)
         && Objects.deepEquals(this.commission, other.commission)
         && Objects.deepEquals(this.conversion, other.conversion)
         && Objects.deepEquals(
@@ -2822,9 +2915,12 @@ public class Entry {
         activityDate,
         activityId,
         activityTime,
+        allocation,
         assetId,
+        bondDefault,
         capitalGains,
         cashDividend,
+        cashInLieu,
         commission,
         conversion,
         corporateActionMemoAdjustment,
@@ -2905,12 +3001,18 @@ public class Entry {
         activityId,
         "activityTime",
         activityTime,
+        "allocation",
+        allocation,
         "assetId",
         assetId,
+        "bondDefault",
+        bondDefault,
         "capitalGains",
         capitalGains,
         "cashDividend",
         cashDividend,
+        "cashInLieu",
+        cashInLieu,
         "commission",
         commission,
         "conversion",
@@ -3045,11 +3147,17 @@ public class Entry {
 
     private JsonNullable<OffsetDateTime> activityTime = JsonNullable.undefined();
 
+    private JsonNullable<? extends Allocation> allocation = JsonNullable.undefined();
+
     private Optional<String> assetId = Optional.empty();
+
+    private JsonNullable<? extends BondDefault> bondDefault = JsonNullable.undefined();
 
     private JsonNullable<? extends CapitalGains> capitalGains = JsonNullable.undefined();
 
     private JsonNullable<? extends CashDividend> cashDividend = JsonNullable.undefined();
+
+    private JsonNullable<? extends CashInLieu> cashInLieu = JsonNullable.undefined();
 
     private JsonNullable<? extends EntryCommission> commission = JsonNullable.undefined();
 
@@ -3152,7 +3260,7 @@ public class Entry {
 
     private JsonNullable<? extends EntryTrade> trade = JsonNullable.undefined();
 
-    private JsonNullable<? extends Transfer> transfer = JsonNullable.undefined();
+    private JsonNullable<? extends EntryTransfer> transfer = JsonNullable.undefined();
 
     private Optional<? extends EntryType> type = Optional.empty();
 
@@ -3333,6 +3441,20 @@ public class Entry {
       return this;
     }
 
+    /** Object containing metadata for trade allocation */
+    public Builder allocation(Allocation allocation) {
+      Utils.checkNotNull(allocation, "allocation");
+      this.allocation = JsonNullable.of(allocation);
+      return this;
+    }
+
+    /** Object containing metadata for trade allocation */
+    public Builder allocation(JsonNullable<? extends Allocation> allocation) {
+      Utils.checkNotNull(allocation, "allocation");
+      this.allocation = allocation;
+      return this;
+    }
+
     /**
      * An Apex-provided, global identifier created on a per asset bases which provides connectivity
      * across all areas Required, except for currency movements which should instead have a
@@ -3352,6 +3474,20 @@ public class Entry {
     public Builder assetId(Optional<String> assetId) {
       Utils.checkNotNull(assetId, "assetId");
       this.assetId = assetId;
+      return this;
+    }
+
+    /** Object containing metadata for bond defaults */
+    public Builder bondDefault(BondDefault bondDefault) {
+      Utils.checkNotNull(bondDefault, "bondDefault");
+      this.bondDefault = JsonNullable.of(bondDefault);
+      return this;
+    }
+
+    /** Object containing metadata for bond defaults */
+    public Builder bondDefault(JsonNullable<? extends BondDefault> bondDefault) {
+      Utils.checkNotNull(bondDefault, "bondDefault");
+      this.bondDefault = bondDefault;
       return this;
     }
 
@@ -3396,6 +3532,20 @@ public class Entry {
     public Builder cashDividend(JsonNullable<? extends CashDividend> cashDividend) {
       Utils.checkNotNull(cashDividend, "cashDividend");
       this.cashDividend = cashDividend;
+      return this;
+    }
+
+    /** Object containing metadata for cash in lieu */
+    public Builder cashInLieu(CashInLieu cashInLieu) {
+      Utils.checkNotNull(cashInLieu, "cashInLieu");
+      this.cashInLieu = JsonNullable.of(cashInLieu);
+      return this;
+    }
+
+    /** Object containing metadata for cash in lieu */
+    public Builder cashInLieu(JsonNullable<? extends CashInLieu> cashInLieu) {
+      Utils.checkNotNull(cashInLieu, "cashInLieu");
+      this.cashInLieu = cashInLieu;
       return this;
     }
 
@@ -4134,8 +4284,8 @@ public class Entry {
     }
 
     /**
-     * Additional information about a trade Should be populated if possible for trades; the side
-     * modifier for the trade
+     * Indicates whether the trade is opening a new position or closing an existing position Should
+     * be populated if possible for trades; the side modifier for the trade
      */
     public Builder sideModifier(EntrySideModifier sideModifier) {
       Utils.checkNotNull(sideModifier, "sideModifier");
@@ -4144,8 +4294,8 @@ public class Entry {
     }
 
     /**
-     * Additional information about a trade Should be populated if possible for trades; the side
-     * modifier for the trade
+     * Indicates whether the trade is opening a new position or closing an existing position Should
+     * be populated if possible for trades; the side modifier for the trade
      */
     public Builder sideModifier(Optional<? extends EntrySideModifier> sideModifier) {
       Utils.checkNotNull(sideModifier, "sideModifier");
@@ -4322,7 +4472,7 @@ public class Entry {
      * transfer. The transfer type and activity_description can be used to provide more specific
      * context
      */
-    public Builder transfer(Transfer transfer) {
+    public Builder transfer(EntryTransfer transfer) {
       Utils.checkNotNull(transfer, "transfer");
       this.transfer = JsonNullable.of(transfer);
       return this;
@@ -4333,7 +4483,7 @@ public class Entry {
      * transfer. The transfer type and activity_description can be used to provide more specific
      * context
      */
-    public Builder transfer(JsonNullable<? extends Transfer> transfer) {
+    public Builder transfer(JsonNullable<? extends EntryTransfer> transfer) {
       Utils.checkNotNull(transfer, "transfer");
       this.transfer = transfer;
       return this;
@@ -4481,9 +4631,12 @@ public class Entry {
           activityDate,
           activityId,
           activityTime,
+          allocation,
           assetId,
+          bondDefault,
           capitalGains,
           cashDividend,
+          cashInLieu,
           commission,
           conversion,
           corporateActionMemoAdjustment,

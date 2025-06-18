@@ -27,7 +27,7 @@ public class CashDividend {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("cash_rate")
-  private JsonNullable<? extends EntryCashRate> cashRate;
+  private JsonNullable<? extends EntryCashDividendCashRate> cashRate;
 
   /** Common fields for corporate actions */
   @JsonInclude(Include.NON_ABSENT)
@@ -59,7 +59,7 @@ public class CashDividend {
   /** The anticipated payment date at the depository */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("payment_date")
-  private JsonNullable<? extends EntryPaymentDate> paymentDate;
+  private JsonNullable<? extends EntryCashDividendPaymentDate> paymentDate;
 
   /**
    * Identifies whether dividend income is potentially qualified for the lower maximum individual
@@ -105,14 +105,15 @@ public class CashDividend {
 
   @JsonCreator
   public CashDividend(
-      @JsonProperty("cash_rate") JsonNullable<? extends EntryCashRate> cashRate,
+      @JsonProperty("cash_rate") JsonNullable<? extends EntryCashDividendCashRate> cashRate,
       @JsonProperty("corporate_action_general_information")
           JsonNullable<? extends EntryCashDividendCorporateActionGeneralInformation>
               corporateActionGeneralInformation,
       @JsonProperty("fpsl") JsonNullable<? extends EntryFpsl> fpsl,
       @JsonProperty("free") JsonNullable<? extends EntryFree> free,
       @JsonProperty("long_term_gain") Optional<Boolean> longTermGain,
-      @JsonProperty("payment_date") JsonNullable<? extends EntryPaymentDate> paymentDate,
+      @JsonProperty("payment_date")
+          JsonNullable<? extends EntryCashDividendPaymentDate> paymentDate,
       @JsonProperty("qualified") Optional<Boolean> qualified,
       @JsonProperty("quantity") JsonNullable<? extends EntryCashDividendQuantity> quantity,
       @JsonProperty("record_date") JsonNullable<? extends EntryRecordDate> recordDate,
@@ -171,8 +172,8 @@ public class CashDividend {
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<EntryCashRate> cashRate() {
-    return (JsonNullable<EntryCashRate>) cashRate;
+  public JsonNullable<EntryCashDividendCashRate> cashRate() {
+    return (JsonNullable<EntryCashDividendCashRate>) cashRate;
   }
 
   /** Common fields for corporate actions */
@@ -213,8 +214,8 @@ public class CashDividend {
   /** The anticipated payment date at the depository */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<EntryPaymentDate> paymentDate() {
-    return (JsonNullable<EntryPaymentDate>) paymentDate;
+  public JsonNullable<EntryCashDividendPaymentDate> paymentDate() {
+    return (JsonNullable<EntryCashDividendPaymentDate>) paymentDate;
   }
 
   /**
@@ -278,7 +279,7 @@ public class CashDividend {
    * The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash
    * will be disbursed to the shareholder
    */
-  public CashDividend withCashRate(EntryCashRate cashRate) {
+  public CashDividend withCashRate(EntryCashDividendCashRate cashRate) {
     Utils.checkNotNull(cashRate, "cashRate");
     this.cashRate = JsonNullable.of(cashRate);
     return this;
@@ -288,7 +289,7 @@ public class CashDividend {
    * The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash
    * will be disbursed to the shareholder
    */
-  public CashDividend withCashRate(JsonNullable<? extends EntryCashRate> cashRate) {
+  public CashDividend withCashRate(JsonNullable<? extends EntryCashDividendCashRate> cashRate) {
     Utils.checkNotNull(cashRate, "cashRate");
     this.cashRate = cashRate;
     return this;
@@ -366,14 +367,15 @@ public class CashDividend {
   }
 
   /** The anticipated payment date at the depository */
-  public CashDividend withPaymentDate(EntryPaymentDate paymentDate) {
+  public CashDividend withPaymentDate(EntryCashDividendPaymentDate paymentDate) {
     Utils.checkNotNull(paymentDate, "paymentDate");
     this.paymentDate = JsonNullable.of(paymentDate);
     return this;
   }
 
   /** The anticipated payment date at the depository */
-  public CashDividend withPaymentDate(JsonNullable<? extends EntryPaymentDate> paymentDate) {
+  public CashDividend withPaymentDate(
+      JsonNullable<? extends EntryCashDividendPaymentDate> paymentDate) {
     Utils.checkNotNull(paymentDate, "paymentDate");
     this.paymentDate = paymentDate;
     return this;
@@ -568,7 +570,7 @@ public class CashDividend {
 
   public static final class Builder {
 
-    private JsonNullable<? extends EntryCashRate> cashRate = JsonNullable.undefined();
+    private JsonNullable<? extends EntryCashDividendCashRate> cashRate = JsonNullable.undefined();
 
     private JsonNullable<? extends EntryCashDividendCorporateActionGeneralInformation>
         corporateActionGeneralInformation = JsonNullable.undefined();
@@ -579,7 +581,8 @@ public class CashDividend {
 
     private Optional<Boolean> longTermGain = Optional.empty();
 
-    private JsonNullable<? extends EntryPaymentDate> paymentDate = JsonNullable.undefined();
+    private JsonNullable<? extends EntryCashDividendPaymentDate> paymentDate =
+        JsonNullable.undefined();
 
     private Optional<Boolean> qualified = Optional.empty();
 
@@ -603,7 +606,7 @@ public class CashDividend {
      * The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash
      * will be disbursed to the shareholder
      */
-    public Builder cashRate(EntryCashRate cashRate) {
+    public Builder cashRate(EntryCashDividendCashRate cashRate) {
       Utils.checkNotNull(cashRate, "cashRate");
       this.cashRate = JsonNullable.of(cashRate);
       return this;
@@ -613,7 +616,7 @@ public class CashDividend {
      * The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash
      * will be disbursed to the shareholder
      */
-    public Builder cashRate(JsonNullable<? extends EntryCashRate> cashRate) {
+    public Builder cashRate(JsonNullable<? extends EntryCashDividendCashRate> cashRate) {
       Utils.checkNotNull(cashRate, "cashRate");
       this.cashRate = cashRate;
       return this;
@@ -691,14 +694,14 @@ public class CashDividend {
     }
 
     /** The anticipated payment date at the depository */
-    public Builder paymentDate(EntryPaymentDate paymentDate) {
+    public Builder paymentDate(EntryCashDividendPaymentDate paymentDate) {
       Utils.checkNotNull(paymentDate, "paymentDate");
       this.paymentDate = JsonNullable.of(paymentDate);
       return this;
     }
 
     /** The anticipated payment date at the depository */
-    public Builder paymentDate(JsonNullable<? extends EntryPaymentDate> paymentDate) {
+    public Builder paymentDate(JsonNullable<? extends EntryCashDividendPaymentDate> paymentDate) {
       Utils.checkNotNull(paymentDate, "paymentDate");
       this.paymentDate = paymentDate;
       return this;

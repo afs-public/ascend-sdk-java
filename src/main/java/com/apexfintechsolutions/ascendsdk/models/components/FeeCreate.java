@@ -7,13 +7,10 @@ package com.apexfintechsolutions.ascendsdk.models.components;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
-import java.util.Optional;
 
-/** FeeCreate - Fee message includes both fee type as well as the fee amount */
+/** FeeCreate - A fee that applies to an order */
 public class FeeCreate {
 
   /**
@@ -24,39 +21,20 @@ public class FeeCreate {
    * https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html
    * [decimal.Decimal]: https://docs.python.org/3/library/decimal.html
    */
-  @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("amount")
-  private Optional<? extends DecimalCreate> amount;
+  private DecimalCreate amount;
 
-  /**
-   * Indicates whether to explicitly suppress this fee type. If the trade would normally calculate
-   * fees (e.g., for TRADE_ACTIVITY), the client can add a fee with this boolean value set to true,
-   * and the Booking Service will not calculate or assess that fee on the trade.
-   */
-  @JsonInclude(Include.NON_ABSENT)
-  @JsonProperty("suppress_fee")
-  private Optional<Boolean> suppressFee;
-
-  /** The type of fee */
-  @JsonInclude(Include.NON_ABSENT)
+  /** The type of fee being specified. Only the type of "BROKER_FEE" is supported. */
   @JsonProperty("type")
-  private Optional<? extends FeeCreateType> type;
+  private FeeCreateType type;
 
   @JsonCreator
   public FeeCreate(
-      @JsonProperty("amount") Optional<? extends DecimalCreate> amount,
-      @JsonProperty("suppress_fee") Optional<Boolean> suppressFee,
-      @JsonProperty("type") Optional<? extends FeeCreateType> type) {
+      @JsonProperty("amount") DecimalCreate amount, @JsonProperty("type") FeeCreateType type) {
     Utils.checkNotNull(amount, "amount");
-    Utils.checkNotNull(suppressFee, "suppressFee");
     Utils.checkNotNull(type, "type");
     this.amount = amount;
-    this.suppressFee = suppressFee;
     this.type = type;
-  }
-
-  public FeeCreate() {
-    this(Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -67,27 +45,15 @@ public class FeeCreate {
    * https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html
    * [decimal.Decimal]: https://docs.python.org/3/library/decimal.html
    */
-  @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<DecimalCreate> amount() {
-    return (Optional<DecimalCreate>) amount;
+  public DecimalCreate amount() {
+    return amount;
   }
 
-  /**
-   * Indicates whether to explicitly suppress this fee type. If the trade would normally calculate
-   * fees (e.g., for TRADE_ACTIVITY), the client can add a fee with this boolean value set to true,
-   * and the Booking Service will not calculate or assess that fee on the trade.
-   */
+  /** The type of fee being specified. Only the type of "BROKER_FEE" is supported. */
   @JsonIgnore
-  public Optional<Boolean> suppressFee() {
-    return suppressFee;
-  }
-
-  /** The type of fee */
-  @SuppressWarnings("unchecked")
-  @JsonIgnore
-  public Optional<FeeCreateType> type() {
-    return (Optional<FeeCreateType>) type;
+  public FeeCreateType type() {
+    return type;
   }
 
   public static final Builder builder() {
@@ -104,55 +70,12 @@ public class FeeCreate {
    */
   public FeeCreate withAmount(DecimalCreate amount) {
     Utils.checkNotNull(amount, "amount");
-    this.amount = Optional.ofNullable(amount);
-    return this;
-  }
-
-  /**
-   * A representation of a decimal value, such as 2.5. Clients may convert values into
-   * language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
-   *
-   * <p>[BigDecimal]:
-   * https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html
-   * [decimal.Decimal]: https://docs.python.org/3/library/decimal.html
-   */
-  public FeeCreate withAmount(Optional<? extends DecimalCreate> amount) {
-    Utils.checkNotNull(amount, "amount");
     this.amount = amount;
     return this;
   }
 
-  /**
-   * Indicates whether to explicitly suppress this fee type. If the trade would normally calculate
-   * fees (e.g., for TRADE_ACTIVITY), the client can add a fee with this boolean value set to true,
-   * and the Booking Service will not calculate or assess that fee on the trade.
-   */
-  public FeeCreate withSuppressFee(boolean suppressFee) {
-    Utils.checkNotNull(suppressFee, "suppressFee");
-    this.suppressFee = Optional.ofNullable(suppressFee);
-    return this;
-  }
-
-  /**
-   * Indicates whether to explicitly suppress this fee type. If the trade would normally calculate
-   * fees (e.g., for TRADE_ACTIVITY), the client can add a fee with this boolean value set to true,
-   * and the Booking Service will not calculate or assess that fee on the trade.
-   */
-  public FeeCreate withSuppressFee(Optional<Boolean> suppressFee) {
-    Utils.checkNotNull(suppressFee, "suppressFee");
-    this.suppressFee = suppressFee;
-    return this;
-  }
-
-  /** The type of fee */
+  /** The type of fee being specified. Only the type of "BROKER_FEE" is supported. */
   public FeeCreate withType(FeeCreateType type) {
-    Utils.checkNotNull(type, "type");
-    this.type = Optional.ofNullable(type);
-    return this;
-  }
-
-  /** The type of fee */
-  public FeeCreate withType(Optional<? extends FeeCreateType> type) {
     Utils.checkNotNull(type, "type");
     this.type = type;
     return this;
@@ -168,28 +91,24 @@ public class FeeCreate {
     }
     FeeCreate other = (FeeCreate) o;
     return Objects.deepEquals(this.amount, other.amount)
-        && Objects.deepEquals(this.suppressFee, other.suppressFee)
         && Objects.deepEquals(this.type, other.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(amount, suppressFee, type);
+    return Objects.hash(amount, type);
   }
 
   @Override
   public String toString() {
-    return Utils.toString(
-        FeeCreate.class, "amount", amount, "suppressFee", suppressFee, "type", type);
+    return Utils.toString(FeeCreate.class, "amount", amount, "type", type);
   }
 
   public static final class Builder {
 
-    private Optional<? extends DecimalCreate> amount = Optional.empty();
+    private DecimalCreate amount;
 
-    private Optional<Boolean> suppressFee = Optional.empty();
-
-    private Optional<? extends FeeCreateType> type = Optional.empty();
+    private FeeCreateType type;
 
     private Builder() {
       // force use of static builder() method
@@ -206,63 +125,19 @@ public class FeeCreate {
      */
     public Builder amount(DecimalCreate amount) {
       Utils.checkNotNull(amount, "amount");
-      this.amount = Optional.ofNullable(amount);
-      return this;
-    }
-
-    /**
-     * A representation of a decimal value, such as 2.5. Clients may convert values into
-     * language-native decimal formats, such as Java's [BigDecimal][] or Python's
-     * [decimal.Decimal][].
-     *
-     * <p>[BigDecimal]:
-     * https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html
-     * [decimal.Decimal]: https://docs.python.org/3/library/decimal.html
-     */
-    public Builder amount(Optional<? extends DecimalCreate> amount) {
-      Utils.checkNotNull(amount, "amount");
       this.amount = amount;
       return this;
     }
 
-    /**
-     * Indicates whether to explicitly suppress this fee type. If the trade would normally calculate
-     * fees (e.g., for TRADE_ACTIVITY), the client can add a fee with this boolean value set to
-     * true, and the Booking Service will not calculate or assess that fee on the trade.
-     */
-    public Builder suppressFee(boolean suppressFee) {
-      Utils.checkNotNull(suppressFee, "suppressFee");
-      this.suppressFee = Optional.ofNullable(suppressFee);
-      return this;
-    }
-
-    /**
-     * Indicates whether to explicitly suppress this fee type. If the trade would normally calculate
-     * fees (e.g., for TRADE_ACTIVITY), the client can add a fee with this boolean value set to
-     * true, and the Booking Service will not calculate or assess that fee on the trade.
-     */
-    public Builder suppressFee(Optional<Boolean> suppressFee) {
-      Utils.checkNotNull(suppressFee, "suppressFee");
-      this.suppressFee = suppressFee;
-      return this;
-    }
-
-    /** The type of fee */
+    /** The type of fee being specified. Only the type of "BROKER_FEE" is supported. */
     public Builder type(FeeCreateType type) {
-      Utils.checkNotNull(type, "type");
-      this.type = Optional.ofNullable(type);
-      return this;
-    }
-
-    /** The type of fee */
-    public Builder type(Optional<? extends FeeCreateType> type) {
       Utils.checkNotNull(type, "type");
       this.type = type;
       return this;
     }
 
     public FeeCreate build() {
-      return new FeeCreate(amount, suppressFee, type);
+      return new FeeCreate(amount, type);
     }
   }
 }

@@ -4,39 +4,209 @@
 
 package com.apexfintechsolutions.ascendsdk.models.components;
 
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.core.JacksonException;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper class for an "open" enum. "Open" enums are those that are expected to evolve
+ * (particularly with the addition of enum members over time). If an open enum is used then the
+ * appearance of unexpected enum values (say in a response from an updated an API) will not bring
+ * about a runtime error thus ensuring that non-updated client versions can continue to work without
+ * error.
+ *
+ * <p>Note that instances are immutable and are singletons (an internal thread-safe cache is
+ * maintained to ensure that). As a consequence instances created with the same value will satisfy
+ * reference equality (via {@code ==}).
+ *
+ * <p>This class is intended to emulate an enum (in terms of common usage and with reference
+ * equality) but with the ability to carry unknown values. Unfortunately Java does not permit the
+ * use of an instance in a switch expression but you can use the {@code asEnum()} method (after
+ * dealing with the `Optional` appropriately).
+ */
 /** TransferType - The type of transfer */
-public enum TransferType {
-  TRANSFER_TYPE_UNSPECIFIED("TRANSFER_TYPE_UNSPECIFIED"),
-  FAIL_REVERSAL_BROKER_TO_BROKER_ONLY("FAIL_REVERSAL_BROKER_TO_BROKER_ONLY"),
-  FULL_TRANSFER("FULL_TRANSFER"),
-  MUTUAL_FUND_CLEANUP("MUTUAL_FUND_CLEANUP"),
-  PARTIAL_TRANSFER_DELIVERER("PARTIAL_TRANSFER_DELIVERER"),
-  PARTIAL_TRANSFER_RECEIVER("PARTIAL_TRANSFER_RECEIVER"),
-  POSITION_TRANSFER_FUND_FIRM_TO_MUTUAL_FUND_COMPANY_ONLY(
-      "POSITION_TRANSFER_FUND_FIRM_TO_MUTUAL_FUND_COMPANY_ONLY"),
-  RECLAIM("RECLAIM"),
-  RESIDUAL_CREDIT("RESIDUAL_CREDIT");
+@JsonDeserialize(using = TransferType._Deserializer.class)
+@JsonSerialize(using = TransferType._Serializer.class)
+public class TransferType {
 
-  @JsonValue private final String value;
+  public static final TransferType TRANSFER_TYPE_UNSPECIFIED =
+      new TransferType("TRANSFER_TYPE_UNSPECIFIED");
+  public static final TransferType FAIL_REVERSAL_BROKER_TO_BROKER_ONLY =
+      new TransferType("FAIL_REVERSAL_BROKER_TO_BROKER_ONLY");
+  public static final TransferType FULL_TRANSFER = new TransferType("FULL_TRANSFER");
+  public static final TransferType MUTUAL_FUND_CLEANUP = new TransferType("MUTUAL_FUND_CLEANUP");
+  public static final TransferType PARTIAL_TRANSFER_DELIVERER =
+      new TransferType("PARTIAL_TRANSFER_DELIVERER");
+  public static final TransferType PARTIAL_TRANSFER_RECEIVER =
+      new TransferType("PARTIAL_TRANSFER_RECEIVER");
+  public static final TransferType POSITION_TRANSFER_FUND_FIRM_TO_MUTUAL_FUND_COMPANY_ONLY =
+      new TransferType("POSITION_TRANSFER_FUND_FIRM_TO_MUTUAL_FUND_COMPANY_ONLY");
+  public static final TransferType RECLAIM = new TransferType("RECLAIM");
+  public static final TransferType RESIDUAL_CREDIT = new TransferType("RESIDUAL_CREDIT");
+
+  // This map will grow whenever a Color gets created with a new
+  // unrecognized value (a potential memory leak if the user is not
+  // careful). Keep this field lower case to avoid clashing with
+  // generated member names which will always be upper cased (Java
+  // convention)
+  private static final Map<String, TransferType> values = createValuesMap();
+  private static final Map<String, TransferTypeEnum> enums = createEnumsMap();
+
+  private final String value;
 
   private TransferType(String value) {
     this.value = value;
+  }
+
+  /**
+   * Returns a TransferType with the given value. For a specific value the returned object will
+   * always be a singleton so reference equality is satisfied when the values are the same.
+   *
+   * @param value value to be wrapped as TransferType
+   */
+  public static TransferType of(String value) {
+    synchronized (TransferType.class) {
+      return values.computeIfAbsent(value, v -> new TransferType(v));
+    }
   }
 
   public String value() {
     return value;
   }
 
-  public static Optional<TransferType> fromValue(String value) {
-    for (TransferType o : TransferType.values()) {
-      if (Objects.deepEquals(o.value, value)) {
-        return Optional.of(o);
-      }
+  public Optional<TransferTypeEnum> asEnum() {
+    return Optional.ofNullable(enums.getOrDefault(value, null));
+  }
+
+  public boolean isKnown() {
+    return asEnum().isPresent();
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(value);
+  }
+
+  @Override
+  public boolean equals(java.lang.Object obj) {
+    if (this == obj) return true;
+    if (obj == null) return false;
+    if (getClass() != obj.getClass()) return false;
+    TransferType other = (TransferType) obj;
+    return Objects.equals(value, other.value);
+  }
+
+  @Override
+  public String toString() {
+    return "TransferType [value=" + value + "]";
+  }
+
+  // return an array just like an enum
+  public static TransferType[] values() {
+    synchronized (TransferType.class) {
+      return values.values().toArray(new TransferType[] {});
     }
-    return Optional.empty();
+  }
+
+  private static final Map<String, TransferType> createValuesMap() {
+    Map<String, TransferType> map = new LinkedHashMap<>();
+    map.put("TRANSFER_TYPE_UNSPECIFIED", TRANSFER_TYPE_UNSPECIFIED);
+    map.put("FAIL_REVERSAL_BROKER_TO_BROKER_ONLY", FAIL_REVERSAL_BROKER_TO_BROKER_ONLY);
+    map.put("FULL_TRANSFER", FULL_TRANSFER);
+    map.put("MUTUAL_FUND_CLEANUP", MUTUAL_FUND_CLEANUP);
+    map.put("PARTIAL_TRANSFER_DELIVERER", PARTIAL_TRANSFER_DELIVERER);
+    map.put("PARTIAL_TRANSFER_RECEIVER", PARTIAL_TRANSFER_RECEIVER);
+    map.put(
+        "POSITION_TRANSFER_FUND_FIRM_TO_MUTUAL_FUND_COMPANY_ONLY",
+        POSITION_TRANSFER_FUND_FIRM_TO_MUTUAL_FUND_COMPANY_ONLY);
+    map.put("RECLAIM", RECLAIM);
+    map.put("RESIDUAL_CREDIT", RESIDUAL_CREDIT);
+    return map;
+  }
+
+  private static final Map<String, TransferTypeEnum> createEnumsMap() {
+    Map<String, TransferTypeEnum> map = new HashMap<>();
+    map.put("TRANSFER_TYPE_UNSPECIFIED", TransferTypeEnum.TRANSFER_TYPE_UNSPECIFIED);
+    map.put(
+        "FAIL_REVERSAL_BROKER_TO_BROKER_ONLY",
+        TransferTypeEnum.FAIL_REVERSAL_BROKER_TO_BROKER_ONLY);
+    map.put("FULL_TRANSFER", TransferTypeEnum.FULL_TRANSFER);
+    map.put("MUTUAL_FUND_CLEANUP", TransferTypeEnum.MUTUAL_FUND_CLEANUP);
+    map.put("PARTIAL_TRANSFER_DELIVERER", TransferTypeEnum.PARTIAL_TRANSFER_DELIVERER);
+    map.put("PARTIAL_TRANSFER_RECEIVER", TransferTypeEnum.PARTIAL_TRANSFER_RECEIVER);
+    map.put(
+        "POSITION_TRANSFER_FUND_FIRM_TO_MUTUAL_FUND_COMPANY_ONLY",
+        TransferTypeEnum.POSITION_TRANSFER_FUND_FIRM_TO_MUTUAL_FUND_COMPANY_ONLY);
+    map.put("RECLAIM", TransferTypeEnum.RECLAIM);
+    map.put("RESIDUAL_CREDIT", TransferTypeEnum.RESIDUAL_CREDIT);
+    return map;
+  }
+
+  @SuppressWarnings("serial")
+  public static final class _Serializer extends StdSerializer<TransferType> {
+
+    protected _Serializer() {
+      super(TransferType.class);
+    }
+
+    @Override
+    public void serialize(TransferType value, JsonGenerator g, SerializerProvider provider)
+        throws IOException, JsonProcessingException {
+      g.writeObject(value.value);
+    }
+  }
+
+  @SuppressWarnings("serial")
+  public static final class _Deserializer extends StdDeserializer<TransferType> {
+
+    protected _Deserializer() {
+      super(TransferType.class);
+    }
+
+    @Override
+    public TransferType deserialize(JsonParser p, DeserializationContext ctxt)
+        throws IOException, JacksonException {
+      String v = p.readValueAs(new TypeReference<String>() {});
+      // use the factory method to ensure we get singletons
+      return TransferType.of(v);
+    }
+  }
+
+  public enum TransferTypeEnum {
+    TRANSFER_TYPE_UNSPECIFIED("TRANSFER_TYPE_UNSPECIFIED"),
+    FAIL_REVERSAL_BROKER_TO_BROKER_ONLY("FAIL_REVERSAL_BROKER_TO_BROKER_ONLY"),
+    FULL_TRANSFER("FULL_TRANSFER"),
+    MUTUAL_FUND_CLEANUP("MUTUAL_FUND_CLEANUP"),
+    PARTIAL_TRANSFER_DELIVERER("PARTIAL_TRANSFER_DELIVERER"),
+    PARTIAL_TRANSFER_RECEIVER("PARTIAL_TRANSFER_RECEIVER"),
+    POSITION_TRANSFER_FUND_FIRM_TO_MUTUAL_FUND_COMPANY_ONLY(
+        "POSITION_TRANSFER_FUND_FIRM_TO_MUTUAL_FUND_COMPANY_ONLY"),
+    RECLAIM("RECLAIM"),
+    RESIDUAL_CREDIT("RESIDUAL_CREDIT"),
+    ;
+
+    private final String value;
+
+    private TransferTypeEnum(String value) {
+      this.value = value;
+    }
+
+    public String value() {
+      return value;
+    }
   }
 }

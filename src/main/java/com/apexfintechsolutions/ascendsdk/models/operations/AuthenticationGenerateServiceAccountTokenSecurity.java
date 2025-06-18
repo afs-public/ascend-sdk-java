@@ -4,13 +4,14 @@
 
 package com.apexfintechsolutions.ascendsdk.models.operations;
 
+import com.apexfintechsolutions.ascendsdk.utils.HasSecurity;
 import com.apexfintechsolutions.ascendsdk.utils.SpeakeasyMetadata;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Objects;
 
-public class AuthenticationGenerateServiceAccountTokenSecurity {
+public class AuthenticationGenerateServiceAccountTokenSecurity implements HasSecurity {
 
   @SpeakeasyMetadata("security:scheme=true,type=apiKey,subtype=header,name=x-api-key")
   private String apiKeyAuth;

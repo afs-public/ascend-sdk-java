@@ -20,7 +20,7 @@ public class EntryPriceAdjustmentRecord {
   /** Total monetary value of the price_adjustment */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("price_adjustment_amount")
-  private JsonNullable<? extends EntryPriceAdjustmentAmount> priceAdjustmentAmount;
+  private JsonNullable<? extends EntryTradePriceAdjustmentAmount> priceAdjustmentAmount;
 
   /**
    * The percent at which the price was adjusted. Expressed as a number from 0.00-100 (rounded to 2
@@ -33,16 +33,16 @@ public class EntryPriceAdjustmentRecord {
   /** The type of price adjustment being applied by the broker to the net price of the security */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("price_adjustment_type")
-  private Optional<? extends EntryPriceAdjustmentType> priceAdjustmentType;
+  private Optional<? extends EntryTradePriceAdjustmentType> priceAdjustmentType;
 
   @JsonCreator
   public EntryPriceAdjustmentRecord(
       @JsonProperty("price_adjustment_amount")
-          JsonNullable<? extends EntryPriceAdjustmentAmount> priceAdjustmentAmount,
+          JsonNullable<? extends EntryTradePriceAdjustmentAmount> priceAdjustmentAmount,
       @JsonProperty("price_adjustment_percent")
           JsonNullable<? extends EntryPriceAdjustmentPercent> priceAdjustmentPercent,
       @JsonProperty("price_adjustment_type")
-          Optional<? extends EntryPriceAdjustmentType> priceAdjustmentType) {
+          Optional<? extends EntryTradePriceAdjustmentType> priceAdjustmentType) {
     Utils.checkNotNull(priceAdjustmentAmount, "priceAdjustmentAmount");
     Utils.checkNotNull(priceAdjustmentPercent, "priceAdjustmentPercent");
     Utils.checkNotNull(priceAdjustmentType, "priceAdjustmentType");
@@ -58,8 +58,8 @@ public class EntryPriceAdjustmentRecord {
   /** Total monetary value of the price_adjustment */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<EntryPriceAdjustmentAmount> priceAdjustmentAmount() {
-    return (JsonNullable<EntryPriceAdjustmentAmount>) priceAdjustmentAmount;
+  public JsonNullable<EntryTradePriceAdjustmentAmount> priceAdjustmentAmount() {
+    return (JsonNullable<EntryTradePriceAdjustmentAmount>) priceAdjustmentAmount;
   }
 
   /**
@@ -75,8 +75,8 @@ public class EntryPriceAdjustmentRecord {
   /** The type of price adjustment being applied by the broker to the net price of the security */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<EntryPriceAdjustmentType> priceAdjustmentType() {
-    return (Optional<EntryPriceAdjustmentType>) priceAdjustmentType;
+  public Optional<EntryTradePriceAdjustmentType> priceAdjustmentType() {
+    return (Optional<EntryTradePriceAdjustmentType>) priceAdjustmentType;
   }
 
   public static final Builder builder() {
@@ -85,7 +85,7 @@ public class EntryPriceAdjustmentRecord {
 
   /** Total monetary value of the price_adjustment */
   public EntryPriceAdjustmentRecord withPriceAdjustmentAmount(
-      EntryPriceAdjustmentAmount priceAdjustmentAmount) {
+      EntryTradePriceAdjustmentAmount priceAdjustmentAmount) {
     Utils.checkNotNull(priceAdjustmentAmount, "priceAdjustmentAmount");
     this.priceAdjustmentAmount = JsonNullable.of(priceAdjustmentAmount);
     return this;
@@ -93,7 +93,7 @@ public class EntryPriceAdjustmentRecord {
 
   /** Total monetary value of the price_adjustment */
   public EntryPriceAdjustmentRecord withPriceAdjustmentAmount(
-      JsonNullable<? extends EntryPriceAdjustmentAmount> priceAdjustmentAmount) {
+      JsonNullable<? extends EntryTradePriceAdjustmentAmount> priceAdjustmentAmount) {
     Utils.checkNotNull(priceAdjustmentAmount, "priceAdjustmentAmount");
     this.priceAdjustmentAmount = priceAdjustmentAmount;
     return this;
@@ -123,7 +123,7 @@ public class EntryPriceAdjustmentRecord {
 
   /** The type of price adjustment being applied by the broker to the net price of the security */
   public EntryPriceAdjustmentRecord withPriceAdjustmentType(
-      EntryPriceAdjustmentType priceAdjustmentType) {
+      EntryTradePriceAdjustmentType priceAdjustmentType) {
     Utils.checkNotNull(priceAdjustmentType, "priceAdjustmentType");
     this.priceAdjustmentType = Optional.ofNullable(priceAdjustmentType);
     return this;
@@ -131,7 +131,7 @@ public class EntryPriceAdjustmentRecord {
 
   /** The type of price adjustment being applied by the broker to the net price of the security */
   public EntryPriceAdjustmentRecord withPriceAdjustmentType(
-      Optional<? extends EntryPriceAdjustmentType> priceAdjustmentType) {
+      Optional<? extends EntryTradePriceAdjustmentType> priceAdjustmentType) {
     Utils.checkNotNull(priceAdjustmentType, "priceAdjustmentType");
     this.priceAdjustmentType = priceAdjustmentType;
     return this;
@@ -170,20 +170,21 @@ public class EntryPriceAdjustmentRecord {
 
   public static final class Builder {
 
-    private JsonNullable<? extends EntryPriceAdjustmentAmount> priceAdjustmentAmount =
+    private JsonNullable<? extends EntryTradePriceAdjustmentAmount> priceAdjustmentAmount =
         JsonNullable.undefined();
 
     private JsonNullable<? extends EntryPriceAdjustmentPercent> priceAdjustmentPercent =
         JsonNullable.undefined();
 
-    private Optional<? extends EntryPriceAdjustmentType> priceAdjustmentType = Optional.empty();
+    private Optional<? extends EntryTradePriceAdjustmentType> priceAdjustmentType =
+        Optional.empty();
 
     private Builder() {
       // force use of static builder() method
     }
 
     /** Total monetary value of the price_adjustment */
-    public Builder priceAdjustmentAmount(EntryPriceAdjustmentAmount priceAdjustmentAmount) {
+    public Builder priceAdjustmentAmount(EntryTradePriceAdjustmentAmount priceAdjustmentAmount) {
       Utils.checkNotNull(priceAdjustmentAmount, "priceAdjustmentAmount");
       this.priceAdjustmentAmount = JsonNullable.of(priceAdjustmentAmount);
       return this;
@@ -191,7 +192,7 @@ public class EntryPriceAdjustmentRecord {
 
     /** Total monetary value of the price_adjustment */
     public Builder priceAdjustmentAmount(
-        JsonNullable<? extends EntryPriceAdjustmentAmount> priceAdjustmentAmount) {
+        JsonNullable<? extends EntryTradePriceAdjustmentAmount> priceAdjustmentAmount) {
       Utils.checkNotNull(priceAdjustmentAmount, "priceAdjustmentAmount");
       this.priceAdjustmentAmount = priceAdjustmentAmount;
       return this;
@@ -219,7 +220,7 @@ public class EntryPriceAdjustmentRecord {
     }
 
     /** The type of price adjustment being applied by the broker to the net price of the security */
-    public Builder priceAdjustmentType(EntryPriceAdjustmentType priceAdjustmentType) {
+    public Builder priceAdjustmentType(EntryTradePriceAdjustmentType priceAdjustmentType) {
       Utils.checkNotNull(priceAdjustmentType, "priceAdjustmentType");
       this.priceAdjustmentType = Optional.ofNullable(priceAdjustmentType);
       return this;
@@ -227,7 +228,7 @@ public class EntryPriceAdjustmentRecord {
 
     /** The type of price adjustment being applied by the broker to the net price of the security */
     public Builder priceAdjustmentType(
-        Optional<? extends EntryPriceAdjustmentType> priceAdjustmentType) {
+        Optional<? extends EntryTradePriceAdjustmentType> priceAdjustmentType) {
       Utils.checkNotNull(priceAdjustmentType, "priceAdjustmentType");
       this.priceAdjustmentType = priceAdjustmentType;
       return this;
