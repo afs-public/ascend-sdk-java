@@ -103,6 +103,11 @@ public class ActivityWithdrawal {
   @JsonProperty("taxable")
   private Optional<Boolean> taxable;
 
+  /** Indicates whether or a not a distribution is a full liquidation of a tax-advantaged account */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("total_distribution")
+  private Optional<Boolean> totalDistribution;
+
   /** The mechanism by which the funds will be withdrawn */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("type")
@@ -126,6 +131,7 @@ public class ActivityWithdrawal {
       @JsonProperty("periodic") Optional<Boolean> periodic,
       @JsonProperty("retirement_type") Optional<? extends ActivityRetirementType> retirementType,
       @JsonProperty("taxable") Optional<Boolean> taxable,
+      @JsonProperty("total_distribution") Optional<Boolean> totalDistribution,
       @JsonProperty("type") Optional<? extends ActivityWithdrawalType> type) {
     Utils.checkNotNull(additionalInstructions, "additionalInstructions");
     Utils.checkNotNull(advance, "advance");
@@ -142,6 +148,7 @@ public class ActivityWithdrawal {
     Utils.checkNotNull(periodic, "periodic");
     Utils.checkNotNull(retirementType, "retirementType");
     Utils.checkNotNull(taxable, "taxable");
+    Utils.checkNotNull(totalDistribution, "totalDistribution");
     Utils.checkNotNull(type, "type");
     this.additionalInstructions = additionalInstructions;
     this.advance = advance;
@@ -158,11 +165,13 @@ public class ActivityWithdrawal {
     this.periodic = periodic;
     this.retirementType = retirementType;
     this.taxable = taxable;
+    this.totalDistribution = totalDistribution;
     this.type = type;
   }
 
   public ActivityWithdrawal() {
     this(
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
@@ -280,6 +289,12 @@ public class ActivityWithdrawal {
   @JsonIgnore
   public Optional<Boolean> taxable() {
     return taxable;
+  }
+
+  /** Indicates whether or a not a distribution is a full liquidation of a tax-advantaged account */
+  @JsonIgnore
+  public Optional<Boolean> totalDistribution() {
+    return totalDistribution;
   }
 
   /** The mechanism by which the funds will be withdrawn */
@@ -524,6 +539,20 @@ public class ActivityWithdrawal {
     return this;
   }
 
+  /** Indicates whether or a not a distribution is a full liquidation of a tax-advantaged account */
+  public ActivityWithdrawal withTotalDistribution(boolean totalDistribution) {
+    Utils.checkNotNull(totalDistribution, "totalDistribution");
+    this.totalDistribution = Optional.ofNullable(totalDistribution);
+    return this;
+  }
+
+  /** Indicates whether or a not a distribution is a full liquidation of a tax-advantaged account */
+  public ActivityWithdrawal withTotalDistribution(Optional<Boolean> totalDistribution) {
+    Utils.checkNotNull(totalDistribution, "totalDistribution");
+    this.totalDistribution = totalDistribution;
+    return this;
+  }
+
   /** The mechanism by which the funds will be withdrawn */
   public ActivityWithdrawal withType(ActivityWithdrawalType type) {
     Utils.checkNotNull(type, "type");
@@ -562,6 +591,7 @@ public class ActivityWithdrawal {
         && Objects.deepEquals(this.periodic, other.periodic)
         && Objects.deepEquals(this.retirementType, other.retirementType)
         && Objects.deepEquals(this.taxable, other.taxable)
+        && Objects.deepEquals(this.totalDistribution, other.totalDistribution)
         && Objects.deepEquals(this.type, other.type);
   }
 
@@ -583,6 +613,7 @@ public class ActivityWithdrawal {
         periodic,
         retirementType,
         taxable,
+        totalDistribution,
         type);
   }
 
@@ -620,6 +651,8 @@ public class ActivityWithdrawal {
         retirementType,
         "taxable",
         taxable,
+        "totalDistribution",
+        totalDistribution,
         "type",
         type);
   }
@@ -655,6 +688,8 @@ public class ActivityWithdrawal {
     private Optional<? extends ActivityRetirementType> retirementType = Optional.empty();
 
     private Optional<Boolean> taxable = Optional.empty();
+
+    private Optional<Boolean> totalDistribution = Optional.empty();
 
     private Optional<? extends ActivityWithdrawalType> type = Optional.empty();
 
@@ -890,6 +925,24 @@ public class ActivityWithdrawal {
       return this;
     }
 
+    /**
+     * Indicates whether or a not a distribution is a full liquidation of a tax-advantaged account
+     */
+    public Builder totalDistribution(boolean totalDistribution) {
+      Utils.checkNotNull(totalDistribution, "totalDistribution");
+      this.totalDistribution = Optional.ofNullable(totalDistribution);
+      return this;
+    }
+
+    /**
+     * Indicates whether or a not a distribution is a full liquidation of a tax-advantaged account
+     */
+    public Builder totalDistribution(Optional<Boolean> totalDistribution) {
+      Utils.checkNotNull(totalDistribution, "totalDistribution");
+      this.totalDistribution = totalDistribution;
+      return this;
+    }
+
     /** The mechanism by which the funds will be withdrawn */
     public Builder type(ActivityWithdrawalType type) {
       Utils.checkNotNull(type, "type");
@@ -921,6 +974,7 @@ public class ActivityWithdrawal {
           periodic,
           retirementType,
           taxable,
+          totalDistribution,
           type);
     }
   }

@@ -92,7 +92,7 @@ public class TradeAllocationCreate {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("fees")
-  private Optional<? extends List<FeeCreate>> fees;
+  private Optional<? extends List<BookingFeeCreate>> fees;
 
   /** The ULID formatted account_id that the positions will be moved from. */
   @JsonProperty("from_account_id")
@@ -241,7 +241,7 @@ public class TradeAllocationCreate {
       @JsonProperty("client_order_id") Optional<String> clientOrderId,
       @JsonProperty("commission_amount") Optional<? extends DecimalCreate> commissionAmount,
       @JsonProperty("execution_time") Optional<OffsetDateTime> executionTime,
-      @JsonProperty("fees") Optional<? extends List<FeeCreate>> fees,
+      @JsonProperty("fees") Optional<? extends List<BookingFeeCreate>> fees,
       @JsonProperty("from_account_id") String fromAccountId,
       @JsonProperty("gross_amount") Optional<? extends DecimalCreate> grossAmount,
       @JsonProperty("identifier") String identifier,
@@ -444,8 +444,8 @@ public class TradeAllocationCreate {
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<List<FeeCreate>> fees() {
-    return (Optional<List<FeeCreate>>) fees;
+  public Optional<List<BookingFeeCreate>> fees() {
+    return (Optional<List<BookingFeeCreate>>) fees;
   }
 
   /** The ULID formatted account_id that the positions will be moved from. */
@@ -787,7 +787,7 @@ public class TradeAllocationCreate {
    * Client calculated fees that will only be applied to the to_account_id. Regulatory fees will be
    * calculated automatically if they are not explicitly overwritten or suppressed.
    */
-  public TradeAllocationCreate withFees(List<FeeCreate> fees) {
+  public TradeAllocationCreate withFees(List<BookingFeeCreate> fees) {
     Utils.checkNotNull(fees, "fees");
     this.fees = Optional.ofNullable(fees);
     return this;
@@ -797,7 +797,7 @@ public class TradeAllocationCreate {
    * Client calculated fees that will only be applied to the to_account_id. Regulatory fees will be
    * calculated automatically if they are not explicitly overwritten or suppressed.
    */
-  public TradeAllocationCreate withFees(Optional<? extends List<FeeCreate>> fees) {
+  public TradeAllocationCreate withFees(Optional<? extends List<BookingFeeCreate>> fees) {
     Utils.checkNotNull(fees, "fees");
     this.fees = fees;
     return this;
@@ -1244,7 +1244,7 @@ public class TradeAllocationCreate {
 
     private Optional<OffsetDateTime> executionTime = Optional.empty();
 
-    private Optional<? extends List<FeeCreate>> fees = Optional.empty();
+    private Optional<? extends List<BookingFeeCreate>> fees = Optional.empty();
 
     private String fromAccountId;
 
@@ -1454,7 +1454,7 @@ public class TradeAllocationCreate {
      * Client calculated fees that will only be applied to the to_account_id. Regulatory fees will
      * be calculated automatically if they are not explicitly overwritten or suppressed.
      */
-    public Builder fees(List<FeeCreate> fees) {
+    public Builder fees(List<BookingFeeCreate> fees) {
       Utils.checkNotNull(fees, "fees");
       this.fees = Optional.ofNullable(fees);
       return this;
@@ -1464,7 +1464,7 @@ public class TradeAllocationCreate {
      * Client calculated fees that will only be applied to the to_account_id. Regulatory fees will
      * be calculated automatically if they are not explicitly overwritten or suppressed.
      */
-    public Builder fees(Optional<? extends List<FeeCreate>> fees) {
+    public Builder fees(Optional<? extends List<BookingFeeCreate>> fees) {
       Utils.checkNotNull(fees, "fees");
       this.fees = fees;
       return this;

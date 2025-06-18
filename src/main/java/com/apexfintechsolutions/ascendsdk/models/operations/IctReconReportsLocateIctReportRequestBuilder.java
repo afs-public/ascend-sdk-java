@@ -4,16 +4,11 @@
 
 package com.apexfintechsolutions.ascendsdk.models.operations;
 
-import com.apexfintechsolutions.ascendsdk.models.components.DateCreate;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
-import java.util.Optional;
 
 public class IctReconReportsLocateIctReportRequestBuilder {
 
-  private String correspondentId;
-  private Optional<String> batchId = Optional.empty();
-  private Optional<? extends ProgramDateFilterProgram> programDateFilterProgram = Optional.empty();
-  private Optional<? extends DateCreate> programDateFilterProcessDate = Optional.empty();
+  private IctReconReportsLocateIctReportRequest request;
   private final SDKMethodInterfaces.MethodCallIctReconReportsLocateIctReport sdk;
 
   public IctReconReportsLocateIctReportRequestBuilder(
@@ -21,55 +16,15 @@ public class IctReconReportsLocateIctReportRequestBuilder {
     this.sdk = sdk;
   }
 
-  public IctReconReportsLocateIctReportRequestBuilder correspondentId(String correspondentId) {
-    Utils.checkNotNull(correspondentId, "correspondentId");
-    this.correspondentId = correspondentId;
-    return this;
-  }
-
-  public IctReconReportsLocateIctReportRequestBuilder batchId(String batchId) {
-    Utils.checkNotNull(batchId, "batchId");
-    this.batchId = Optional.of(batchId);
-    return this;
-  }
-
-  public IctReconReportsLocateIctReportRequestBuilder batchId(Optional<String> batchId) {
-    Utils.checkNotNull(batchId, "batchId");
-    this.batchId = batchId;
-    return this;
-  }
-
-  public IctReconReportsLocateIctReportRequestBuilder programDateFilterProgram(
-      ProgramDateFilterProgram programDateFilterProgram) {
-    Utils.checkNotNull(programDateFilterProgram, "programDateFilterProgram");
-    this.programDateFilterProgram = Optional.of(programDateFilterProgram);
-    return this;
-  }
-
-  public IctReconReportsLocateIctReportRequestBuilder programDateFilterProgram(
-      Optional<? extends ProgramDateFilterProgram> programDateFilterProgram) {
-    Utils.checkNotNull(programDateFilterProgram, "programDateFilterProgram");
-    this.programDateFilterProgram = programDateFilterProgram;
-    return this;
-  }
-
-  public IctReconReportsLocateIctReportRequestBuilder programDateFilterProcessDate(
-      DateCreate programDateFilterProcessDate) {
-    Utils.checkNotNull(programDateFilterProcessDate, "programDateFilterProcessDate");
-    this.programDateFilterProcessDate = Optional.of(programDateFilterProcessDate);
-    return this;
-  }
-
-  public IctReconReportsLocateIctReportRequestBuilder programDateFilterProcessDate(
-      Optional<? extends DateCreate> programDateFilterProcessDate) {
-    Utils.checkNotNull(programDateFilterProcessDate, "programDateFilterProcessDate");
-    this.programDateFilterProcessDate = programDateFilterProcessDate;
+  public IctReconReportsLocateIctReportRequestBuilder request(
+      IctReconReportsLocateIctReportRequest request) {
+    Utils.checkNotNull(request, "request");
+    this.request = request;
     return this;
   }
 
   public IctReconReportsLocateIctReportResponse call() throws Exception {
 
-    return sdk.locateIctReport(
-        correspondentId, batchId, programDateFilterProgram, programDateFilterProcessDate);
+    return sdk.locateIctReport(request);
   }
 }

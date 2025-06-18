@@ -19,11 +19,10 @@ public class CompleteTradeResponse {
   /** The completed trade. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("trade")
-  private JsonNullable<? extends CompleteTradeResponseTrade> trade;
+  private JsonNullable<? extends Trade> trade;
 
   @JsonCreator
-  public CompleteTradeResponse(
-      @JsonProperty("trade") JsonNullable<? extends CompleteTradeResponseTrade> trade) {
+  public CompleteTradeResponse(@JsonProperty("trade") JsonNullable<? extends Trade> trade) {
     Utils.checkNotNull(trade, "trade");
     this.trade = trade;
   }
@@ -35,8 +34,8 @@ public class CompleteTradeResponse {
   /** The completed trade. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<CompleteTradeResponseTrade> trade() {
-    return (JsonNullable<CompleteTradeResponseTrade>) trade;
+  public JsonNullable<Trade> trade() {
+    return (JsonNullable<Trade>) trade;
   }
 
   public static final Builder builder() {
@@ -44,14 +43,14 @@ public class CompleteTradeResponse {
   }
 
   /** The completed trade. */
-  public CompleteTradeResponse withTrade(CompleteTradeResponseTrade trade) {
+  public CompleteTradeResponse withTrade(Trade trade) {
     Utils.checkNotNull(trade, "trade");
     this.trade = JsonNullable.of(trade);
     return this;
   }
 
   /** The completed trade. */
-  public CompleteTradeResponse withTrade(JsonNullable<? extends CompleteTradeResponseTrade> trade) {
+  public CompleteTradeResponse withTrade(JsonNullable<? extends Trade> trade) {
     Utils.checkNotNull(trade, "trade");
     this.trade = trade;
     return this;
@@ -81,21 +80,21 @@ public class CompleteTradeResponse {
 
   public static final class Builder {
 
-    private JsonNullable<? extends CompleteTradeResponseTrade> trade = JsonNullable.undefined();
+    private JsonNullable<? extends Trade> trade = JsonNullable.undefined();
 
     private Builder() {
       // force use of static builder() method
     }
 
     /** The completed trade. */
-    public Builder trade(CompleteTradeResponseTrade trade) {
+    public Builder trade(Trade trade) {
       Utils.checkNotNull(trade, "trade");
       this.trade = JsonNullable.of(trade);
       return this;
     }
 
     /** The completed trade. */
-    public Builder trade(JsonNullable<? extends CompleteTradeResponseTrade> trade) {
+    public Builder trade(JsonNullable<? extends Trade> trade) {
       Utils.checkNotNull(trade, "trade");
       this.trade = trade;
       return this;

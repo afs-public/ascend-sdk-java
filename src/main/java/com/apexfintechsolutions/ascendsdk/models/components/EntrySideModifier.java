@@ -39,8 +39,8 @@ import java.util.Optional;
  * dealing with the `Optional` appropriately).
  */
 /**
- * EntrySideModifier - Additional information about a trade Should be populated if possible for
- * trades; the side modifier for the trade
+ * EntrySideModifier - Indicates whether the trade is opening a new position or closing an existing
+ * position Should be populated if possible for trades; the side modifier for the trade
  */
 @JsonDeserialize(using = EntrySideModifier._Deserializer.class)
 @JsonSerialize(using = EntrySideModifier._Serializer.class)

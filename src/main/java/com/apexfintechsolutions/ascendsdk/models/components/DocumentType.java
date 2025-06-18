@@ -199,6 +199,8 @@ public class DocumentType {
   public static final DocumentType WORTHLESS_SECURITIES = new DocumentType("WORTHLESS_SECURITIES");
   public static final DocumentType CHANGE_OF_ADDRESS_REQUEST =
       new DocumentType("CHANGE_OF_ADDRESS_REQUEST");
+  public static final DocumentType OPTIONS_AGREEMENT = new DocumentType("OPTIONS_AGREEMENT");
+  public static final DocumentType STATE_WAIVER_FORM = new DocumentType("STATE_WAIVER_FORM");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -380,6 +382,8 @@ public class DocumentType {
     map.put("WIRE_REQUEST_FORM", WIRE_REQUEST_FORM);
     map.put("WORTHLESS_SECURITIES", WORTHLESS_SECURITIES);
     map.put("CHANGE_OF_ADDRESS_REQUEST", CHANGE_OF_ADDRESS_REQUEST);
+    map.put("OPTIONS_AGREEMENT", OPTIONS_AGREEMENT);
+    map.put("STATE_WAIVER_FORM", STATE_WAIVER_FORM);
     return map;
   }
 
@@ -519,6 +523,8 @@ public class DocumentType {
     map.put("WIRE_REQUEST_FORM", DocumentTypeEnum.WIRE_REQUEST_FORM);
     map.put("WORTHLESS_SECURITIES", DocumentTypeEnum.WORTHLESS_SECURITIES);
     map.put("CHANGE_OF_ADDRESS_REQUEST", DocumentTypeEnum.CHANGE_OF_ADDRESS_REQUEST);
+    map.put("OPTIONS_AGREEMENT", DocumentTypeEnum.OPTIONS_AGREEMENT);
+    map.put("STATE_WAIVER_FORM", DocumentTypeEnum.STATE_WAIVER_FORM);
     return map;
   }
 
@@ -663,6 +669,8 @@ public class DocumentType {
     WIRE_REQUEST_FORM("WIRE_REQUEST_FORM"),
     WORTHLESS_SECURITIES("WORTHLESS_SECURITIES"),
     CHANGE_OF_ADDRESS_REQUEST("CHANGE_OF_ADDRESS_REQUEST"),
+    OPTIONS_AGREEMENT("OPTIONS_AGREEMENT"),
+    STATE_WAIVER_FORM("STATE_WAIVER_FORM"),
     ;
 
     private final String value;

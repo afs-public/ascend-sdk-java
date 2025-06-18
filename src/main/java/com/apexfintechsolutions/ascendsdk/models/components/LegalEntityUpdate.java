@@ -73,7 +73,16 @@ public class LegalEntityUpdate {
   @JsonProperty("entity_type")
   private Optional<? extends LegalEntityUpdateEntityType> entityType;
 
-  /** The reason the customer is exempt from verifying beneficial owners, if applicable. */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Exempt entities must set `exempt_verifying_beneficial_owners` to `true` and provide an
+   * `exempt_customer_reason` on the owner record.
+   *
+   * <p>Required if `exempt_verifying_beneficial_owners` is `true`.
+   *
+   * <p>Otherwise, must be empty.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("exempt_customer_reason")
   private Optional<? extends LegalEntityUpdateExemptCustomerReason> exemptCustomerReason;
@@ -415,7 +424,16 @@ public class LegalEntityUpdate {
     return (Optional<LegalEntityUpdateEntityType>) entityType;
   }
 
-  /** The reason the customer is exempt from verifying beneficial owners, if applicable. */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Exempt entities must set `exempt_verifying_beneficial_owners` to `true` and provide an
+   * `exempt_customer_reason` on the owner record.
+   *
+   * <p>Required if `exempt_verifying_beneficial_owners` is `true`.
+   *
+   * <p>Otherwise, must be empty.
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<LegalEntityUpdateExemptCustomerReason> exemptCustomerReason() {
@@ -743,7 +761,16 @@ public class LegalEntityUpdate {
     return this;
   }
 
-  /** The reason the customer is exempt from verifying beneficial owners, if applicable. */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Exempt entities must set `exempt_verifying_beneficial_owners` to `true` and provide an
+   * `exempt_customer_reason` on the owner record.
+   *
+   * <p>Required if `exempt_verifying_beneficial_owners` is `true`.
+   *
+   * <p>Otherwise, must be empty.
+   */
   public LegalEntityUpdate withExemptCustomerReason(
       LegalEntityUpdateExemptCustomerReason exemptCustomerReason) {
     Utils.checkNotNull(exemptCustomerReason, "exemptCustomerReason");
@@ -751,7 +778,16 @@ public class LegalEntityUpdate {
     return this;
   }
 
-  /** The reason the customer is exempt from verifying beneficial owners, if applicable. */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Exempt entities must set `exempt_verifying_beneficial_owners` to `true` and provide an
+   * `exempt_customer_reason` on the owner record.
+   *
+   * <p>Required if `exempt_verifying_beneficial_owners` is `true`.
+   *
+   * <p>Otherwise, must be empty.
+   */
   public LegalEntityUpdate withExemptCustomerReason(
       Optional<? extends LegalEntityUpdateExemptCustomerReason> exemptCustomerReason) {
     Utils.checkNotNull(exemptCustomerReason, "exemptCustomerReason");
@@ -1471,7 +1507,16 @@ public class LegalEntityUpdate {
       return this;
     }
 
-    /** The reason the customer is exempt from verifying beneficial owners, if applicable. */
+    /**
+     * **Field Dependencies:**
+     *
+     * <p>Exempt entities must set `exempt_verifying_beneficial_owners` to `true` and provide an
+     * `exempt_customer_reason` on the owner record.
+     *
+     * <p>Required if `exempt_verifying_beneficial_owners` is `true`.
+     *
+     * <p>Otherwise, must be empty.
+     */
     public Builder exemptCustomerReason(
         LegalEntityUpdateExemptCustomerReason exemptCustomerReason) {
       Utils.checkNotNull(exemptCustomerReason, "exemptCustomerReason");
@@ -1479,7 +1524,16 @@ public class LegalEntityUpdate {
       return this;
     }
 
-    /** The reason the customer is exempt from verifying beneficial owners, if applicable. */
+    /**
+     * **Field Dependencies:**
+     *
+     * <p>Exempt entities must set `exempt_verifying_beneficial_owners` to `true` and provide an
+     * `exempt_customer_reason` on the owner record.
+     *
+     * <p>Required if `exempt_verifying_beneficial_owners` is `true`.
+     *
+     * <p>Otherwise, must be empty.
+     */
     public Builder exemptCustomerReason(
         Optional<? extends LegalEntityUpdateExemptCustomerReason> exemptCustomerReason) {
       Utils.checkNotNull(exemptCustomerReason, "exemptCustomerReason");

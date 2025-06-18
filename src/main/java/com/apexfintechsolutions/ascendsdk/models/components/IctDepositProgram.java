@@ -48,8 +48,6 @@ public class IctDepositProgram {
   public static final IctDepositProgram BROKER_PARTNER = new IctDepositProgram("BROKER_PARTNER");
   public static final IctDepositProgram DEPOSIT_ONLY = new IctDepositProgram("DEPOSIT_ONLY");
   public static final IctDepositProgram BANKING_PARTNER = new IctDepositProgram("BANKING_PARTNER");
-  public static final IctDepositProgram MONEY_TRANSMITTER =
-      new IctDepositProgram("MONEY_TRANSMITTER");
   public static final IctDepositProgram WITHDRAWAL_ONLY = new IctDepositProgram("WITHDRAWAL_ONLY");
   public static final IctDepositProgram DIGITAL_PARTNER = new IctDepositProgram("DIGITAL_PARTNER");
 
@@ -123,7 +121,6 @@ public class IctDepositProgram {
     map.put("BROKER_PARTNER", BROKER_PARTNER);
     map.put("DEPOSIT_ONLY", DEPOSIT_ONLY);
     map.put("BANKING_PARTNER", BANKING_PARTNER);
-    map.put("MONEY_TRANSMITTER", MONEY_TRANSMITTER);
     map.put("WITHDRAWAL_ONLY", WITHDRAWAL_ONLY);
     map.put("DIGITAL_PARTNER", DIGITAL_PARTNER);
     return map;
@@ -135,7 +132,6 @@ public class IctDepositProgram {
     map.put("BROKER_PARTNER", IctDepositProgramEnum.BROKER_PARTNER);
     map.put("DEPOSIT_ONLY", IctDepositProgramEnum.DEPOSIT_ONLY);
     map.put("BANKING_PARTNER", IctDepositProgramEnum.BANKING_PARTNER);
-    map.put("MONEY_TRANSMITTER", IctDepositProgramEnum.MONEY_TRANSMITTER);
     map.put("WITHDRAWAL_ONLY", IctDepositProgramEnum.WITHDRAWAL_ONLY);
     map.put("DIGITAL_PARTNER", IctDepositProgramEnum.DIGITAL_PARTNER);
     return map;
@@ -176,7 +172,6 @@ public class IctDepositProgram {
     BROKER_PARTNER("BROKER_PARTNER"),
     DEPOSIT_ONLY("DEPOSIT_ONLY"),
     BANKING_PARTNER("BANKING_PARTNER"),
-    MONEY_TRANSMITTER("MONEY_TRANSMITTER"),
     WITHDRAWAL_ONLY("WITHDRAWAL_ONLY"),
     DIGITAL_PARTNER("DIGITAL_PARTNER"),
     ;

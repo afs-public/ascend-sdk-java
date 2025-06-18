@@ -95,6 +95,11 @@ public class Activity {
   @JsonProperty("activity_time")
   private JsonNullable<OffsetDateTime> activityTime;
 
+  /** Object containing metadata for trade allocation */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("allocation")
+  private JsonNullable<? extends ActivityAllocation> allocation;
+
   /**
    * Name of the issuer of a security and additional descriptive information about the particular
    * issue
@@ -110,6 +115,11 @@ public class Activity {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("asset_id")
   private Optional<String> assetId;
+
+  /** Object containing metadata for bond defaults */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("bond_default")
+  private JsonNullable<? extends ActivityBondDefault> bondDefault;
 
   /**
    * Used to record a distribution of cash that an issuer has determined will be declared as income
@@ -127,6 +137,11 @@ public class Activity {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("cash_dividend")
   private JsonNullable<? extends ActivityCashDividend> cashDividend;
+
+  /** Object containing metadata for cash in lieu */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("cash_in_lieu")
+  private JsonNullable<? extends ActivityCashInLieu> cashInLieu;
 
   /**
    * Used to record commission charged by brokers or financial intermediaries for executing
@@ -454,6 +469,11 @@ public class Activity {
   @JsonProperty("side")
   private Optional<? extends ActivitySide> side;
 
+  /** Indicates whether the trade is opening a new position or closing an existing position */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("side_modifier")
+  private Optional<? extends ActivitySideModifier> sideModifier;
+
   /**
    * Used to record a distribution of subsidiary securities to the shareholders of the parent
    * company without a surrender of securities or payment and details related to the spinoff. A
@@ -594,10 +614,13 @@ public class Activity {
       @JsonProperty("activity_description") Optional<String> activityDescription,
       @JsonProperty("activity_id") Optional<String> activityId,
       @JsonProperty("activity_time") JsonNullable<OffsetDateTime> activityTime,
+      @JsonProperty("allocation") JsonNullable<? extends ActivityAllocation> allocation,
       @JsonProperty("asset_description") Optional<String> assetDescription,
       @JsonProperty("asset_id") Optional<String> assetId,
+      @JsonProperty("bond_default") JsonNullable<? extends ActivityBondDefault> bondDefault,
       @JsonProperty("capital_gains") JsonNullable<? extends ActivityCapitalGains> capitalGains,
       @JsonProperty("cash_dividend") JsonNullable<? extends ActivityCashDividend> cashDividend,
+      @JsonProperty("cash_in_lieu") JsonNullable<? extends ActivityCashInLieu> cashInLieu,
       @JsonProperty("commission") JsonNullable<? extends ActivityCommission> commission,
       @JsonProperty("commissions") Optional<? extends List<Commission>> commissions,
       @JsonProperty("conversion") JsonNullable<? extends ActivityConversion> conversion,
@@ -655,6 +678,7 @@ public class Activity {
       @JsonProperty("sale_of_rights") JsonNullable<? extends ActivitySaleOfRights> saleOfRights,
       @JsonProperty("settle_date") JsonNullable<? extends ActivitySettleDate> settleDate,
       @JsonProperty("side") Optional<? extends ActivitySide> side,
+      @JsonProperty("side_modifier") Optional<? extends ActivitySideModifier> sideModifier,
       @JsonProperty("spinoff") JsonNullable<? extends ActivitySpinoff> spinoff,
       @JsonProperty("state") Optional<? extends ActivityState> state,
       @JsonProperty("stock_dividend") JsonNullable<? extends ActivityStockDividend> stockDividend,
@@ -684,10 +708,13 @@ public class Activity {
     Utils.checkNotNull(activityDescription, "activityDescription");
     Utils.checkNotNull(activityId, "activityId");
     Utils.checkNotNull(activityTime, "activityTime");
+    Utils.checkNotNull(allocation, "allocation");
     Utils.checkNotNull(assetDescription, "assetDescription");
     Utils.checkNotNull(assetId, "assetId");
+    Utils.checkNotNull(bondDefault, "bondDefault");
     Utils.checkNotNull(capitalGains, "capitalGains");
     Utils.checkNotNull(cashDividend, "cashDividend");
+    Utils.checkNotNull(cashInLieu, "cashInLieu");
     Utils.checkNotNull(commission, "commission");
     Utils.checkNotNull(commissions, "commissions");
     Utils.checkNotNull(conversion, "conversion");
@@ -734,6 +761,7 @@ public class Activity {
     Utils.checkNotNull(saleOfRights, "saleOfRights");
     Utils.checkNotNull(settleDate, "settleDate");
     Utils.checkNotNull(side, "side");
+    Utils.checkNotNull(sideModifier, "sideModifier");
     Utils.checkNotNull(spinoff, "spinoff");
     Utils.checkNotNull(state, "state");
     Utils.checkNotNull(stockDividend, "stockDividend");
@@ -761,10 +789,13 @@ public class Activity {
     this.activityDescription = activityDescription;
     this.activityId = activityId;
     this.activityTime = activityTime;
+    this.allocation = allocation;
     this.assetDescription = assetDescription;
     this.assetId = assetId;
+    this.bondDefault = bondDefault;
     this.capitalGains = capitalGains;
     this.cashDividend = cashDividend;
+    this.cashInLieu = cashInLieu;
     this.commission = commission;
     this.commissions = commissions;
     this.conversion = conversion;
@@ -811,6 +842,7 @@ public class Activity {
     this.saleOfRights = saleOfRights;
     this.settleDate = settleDate;
     this.side = side;
+    this.sideModifier = sideModifier;
     this.spinoff = spinoff;
     this.state = state;
     this.stockDividend = stockDividend;
@@ -842,27 +874,9 @@ public class Activity {
         Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined(),
-        Optional.empty(),
-        Optional.empty(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        Optional.empty(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        Optional.empty(),
-        JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
         Optional.empty(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        Optional.empty(),
-        JsonNullable.undefined(),
-        Optional.empty(),
-        JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
@@ -874,6 +888,27 @@ public class Activity {
         Optional.empty(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
+        Optional.empty(),
+        Optional.empty(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        Optional.empty(),
+        JsonNullable.undefined(),
+        Optional.empty(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        Optional.empty(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        Optional.empty(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
         JsonNullable.undefined(),
@@ -891,6 +926,7 @@ public class Activity {
         Optional.empty(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
+        Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty(),
@@ -1000,6 +1036,13 @@ public class Activity {
     return activityTime;
   }
 
+  /** Object containing metadata for trade allocation */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<ActivityAllocation> allocation() {
+    return (JsonNullable<ActivityAllocation>) allocation;
+  }
+
   /**
    * Name of the issuer of a security and additional descriptive information about the particular
    * issue
@@ -1016,6 +1059,13 @@ public class Activity {
   @JsonIgnore
   public Optional<String> assetId() {
     return assetId;
+  }
+
+  /** Object containing metadata for bond defaults */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<ActivityBondDefault> bondDefault() {
+    return (JsonNullable<ActivityBondDefault>) bondDefault;
   }
 
   /**
@@ -1037,6 +1087,13 @@ public class Activity {
   @JsonIgnore
   public JsonNullable<ActivityCashDividend> cashDividend() {
     return (JsonNullable<ActivityCashDividend>) cashDividend;
+  }
+
+  /** Object containing metadata for cash in lieu */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<ActivityCashInLieu> cashInLieu() {
+    return (JsonNullable<ActivityCashInLieu>) cashInLieu;
   }
 
   /**
@@ -1446,6 +1503,13 @@ public class Activity {
     return (Optional<ActivitySide>) side;
   }
 
+  /** Indicates whether the trade is opening a new position or closing an existing position */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<ActivitySideModifier> sideModifier() {
+    return (Optional<ActivitySideModifier>) sideModifier;
+  }
+
   /**
    * Used to record a distribution of subsidiary securities to the shareholders of the parent
    * company without a surrender of securities or payment and details related to the spinoff. A
@@ -1797,6 +1861,20 @@ public class Activity {
     return this;
   }
 
+  /** Object containing metadata for trade allocation */
+  public Activity withAllocation(ActivityAllocation allocation) {
+    Utils.checkNotNull(allocation, "allocation");
+    this.allocation = JsonNullable.of(allocation);
+    return this;
+  }
+
+  /** Object containing metadata for trade allocation */
+  public Activity withAllocation(JsonNullable<? extends ActivityAllocation> allocation) {
+    Utils.checkNotNull(allocation, "allocation");
+    this.allocation = allocation;
+    return this;
+  }
+
   /**
    * Name of the issuer of a security and additional descriptive information about the particular
    * issue
@@ -1834,6 +1912,20 @@ public class Activity {
   public Activity withAssetId(Optional<String> assetId) {
     Utils.checkNotNull(assetId, "assetId");
     this.assetId = assetId;
+    return this;
+  }
+
+  /** Object containing metadata for bond defaults */
+  public Activity withBondDefault(ActivityBondDefault bondDefault) {
+    Utils.checkNotNull(bondDefault, "bondDefault");
+    this.bondDefault = JsonNullable.of(bondDefault);
+    return this;
+  }
+
+  /** Object containing metadata for bond defaults */
+  public Activity withBondDefault(JsonNullable<? extends ActivityBondDefault> bondDefault) {
+    Utils.checkNotNull(bondDefault, "bondDefault");
+    this.bondDefault = bondDefault;
     return this;
   }
 
@@ -1876,6 +1968,20 @@ public class Activity {
   public Activity withCashDividend(JsonNullable<? extends ActivityCashDividend> cashDividend) {
     Utils.checkNotNull(cashDividend, "cashDividend");
     this.cashDividend = cashDividend;
+    return this;
+  }
+
+  /** Object containing metadata for cash in lieu */
+  public Activity withCashInLieu(ActivityCashInLieu cashInLieu) {
+    Utils.checkNotNull(cashInLieu, "cashInLieu");
+    this.cashInLieu = JsonNullable.of(cashInLieu);
+    return this;
+  }
+
+  /** Object containing metadata for cash in lieu */
+  public Activity withCashInLieu(JsonNullable<? extends ActivityCashInLieu> cashInLieu) {
+    Utils.checkNotNull(cashInLieu, "cashInLieu");
+    this.cashInLieu = cashInLieu;
     return this;
   }
 
@@ -2724,6 +2830,20 @@ public class Activity {
     return this;
   }
 
+  /** Indicates whether the trade is opening a new position or closing an existing position */
+  public Activity withSideModifier(ActivitySideModifier sideModifier) {
+    Utils.checkNotNull(sideModifier, "sideModifier");
+    this.sideModifier = Optional.ofNullable(sideModifier);
+    return this;
+  }
+
+  /** Indicates whether the trade is opening a new position or closing an existing position */
+  public Activity withSideModifier(Optional<? extends ActivitySideModifier> sideModifier) {
+    Utils.checkNotNull(sideModifier, "sideModifier");
+    this.sideModifier = sideModifier;
+    return this;
+  }
+
   /**
    * Used to record a distribution of subsidiary securities to the shareholders of the parent
    * company without a surrender of securities or payment and details related to the spinoff. A
@@ -3064,10 +3184,13 @@ public class Activity {
         && Objects.deepEquals(this.activityDescription, other.activityDescription)
         && Objects.deepEquals(this.activityId, other.activityId)
         && Objects.deepEquals(this.activityTime, other.activityTime)
+        && Objects.deepEquals(this.allocation, other.allocation)
         && Objects.deepEquals(this.assetDescription, other.assetDescription)
         && Objects.deepEquals(this.assetId, other.assetId)
+        && Objects.deepEquals(this.bondDefault, other.bondDefault)
         && Objects.deepEquals(this.capitalGains, other.capitalGains)
         && Objects.deepEquals(this.cashDividend, other.cashDividend)
+        && Objects.deepEquals(this.cashInLieu, other.cashInLieu)
         && Objects.deepEquals(this.commission, other.commission)
         && Objects.deepEquals(this.commissions, other.commissions)
         && Objects.deepEquals(this.conversion, other.conversion)
@@ -3115,6 +3238,7 @@ public class Activity {
         && Objects.deepEquals(this.saleOfRights, other.saleOfRights)
         && Objects.deepEquals(this.settleDate, other.settleDate)
         && Objects.deepEquals(this.side, other.side)
+        && Objects.deepEquals(this.sideModifier, other.sideModifier)
         && Objects.deepEquals(this.spinoff, other.spinoff)
         && Objects.deepEquals(this.state, other.state)
         && Objects.deepEquals(this.stockDividend, other.stockDividend)
@@ -3147,10 +3271,13 @@ public class Activity {
         activityDescription,
         activityId,
         activityTime,
+        allocation,
         assetDescription,
         assetId,
+        bondDefault,
         capitalGains,
         cashDividend,
+        cashInLieu,
         commission,
         commissions,
         conversion,
@@ -3197,6 +3324,7 @@ public class Activity {
         saleOfRights,
         settleDate,
         side,
+        sideModifier,
         spinoff,
         state,
         stockDividend,
@@ -3240,14 +3368,20 @@ public class Activity {
         activityId,
         "activityTime",
         activityTime,
+        "allocation",
+        allocation,
         "assetDescription",
         assetDescription,
         "assetId",
         assetId,
+        "bondDefault",
+        bondDefault,
         "capitalGains",
         capitalGains,
         "cashDividend",
         cashDividend,
+        "cashInLieu",
+        cashInLieu,
         "commission",
         commission,
         "commissions",
@@ -3340,6 +3474,8 @@ public class Activity {
         settleDate,
         "side",
         side,
+        "sideModifier",
+        sideModifier,
         "spinoff",
         spinoff,
         "state",
@@ -3401,13 +3537,19 @@ public class Activity {
 
     private JsonNullable<OffsetDateTime> activityTime = JsonNullable.undefined();
 
+    private JsonNullable<? extends ActivityAllocation> allocation = JsonNullable.undefined();
+
     private Optional<String> assetDescription = Optional.empty();
 
     private Optional<String> assetId = Optional.empty();
 
+    private JsonNullable<? extends ActivityBondDefault> bondDefault = JsonNullable.undefined();
+
     private JsonNullable<? extends ActivityCapitalGains> capitalGains = JsonNullable.undefined();
 
     private JsonNullable<? extends ActivityCashDividend> cashDividend = JsonNullable.undefined();
+
+    private JsonNullable<? extends ActivityCashInLieu> cashInLieu = JsonNullable.undefined();
 
     private JsonNullable<? extends ActivityCommission> commission = JsonNullable.undefined();
 
@@ -3510,6 +3652,8 @@ public class Activity {
     private JsonNullable<? extends ActivitySettleDate> settleDate = JsonNullable.undefined();
 
     private Optional<? extends ActivitySide> side = Optional.empty();
+
+    private Optional<? extends ActivitySideModifier> sideModifier = Optional.empty();
 
     private JsonNullable<? extends ActivitySpinoff> spinoff = JsonNullable.undefined();
 
@@ -3740,6 +3884,20 @@ public class Activity {
       return this;
     }
 
+    /** Object containing metadata for trade allocation */
+    public Builder allocation(ActivityAllocation allocation) {
+      Utils.checkNotNull(allocation, "allocation");
+      this.allocation = JsonNullable.of(allocation);
+      return this;
+    }
+
+    /** Object containing metadata for trade allocation */
+    public Builder allocation(JsonNullable<? extends ActivityAllocation> allocation) {
+      Utils.checkNotNull(allocation, "allocation");
+      this.allocation = allocation;
+      return this;
+    }
+
     /**
      * Name of the issuer of a security and additional descriptive information about the particular
      * issue
@@ -3777,6 +3935,20 @@ public class Activity {
     public Builder assetId(Optional<String> assetId) {
       Utils.checkNotNull(assetId, "assetId");
       this.assetId = assetId;
+      return this;
+    }
+
+    /** Object containing metadata for bond defaults */
+    public Builder bondDefault(ActivityBondDefault bondDefault) {
+      Utils.checkNotNull(bondDefault, "bondDefault");
+      this.bondDefault = JsonNullable.of(bondDefault);
+      return this;
+    }
+
+    /** Object containing metadata for bond defaults */
+    public Builder bondDefault(JsonNullable<? extends ActivityBondDefault> bondDefault) {
+      Utils.checkNotNull(bondDefault, "bondDefault");
+      this.bondDefault = bondDefault;
       return this;
     }
 
@@ -3821,6 +3993,20 @@ public class Activity {
     public Builder cashDividend(JsonNullable<? extends ActivityCashDividend> cashDividend) {
       Utils.checkNotNull(cashDividend, "cashDividend");
       this.cashDividend = cashDividend;
+      return this;
+    }
+
+    /** Object containing metadata for cash in lieu */
+    public Builder cashInLieu(ActivityCashInLieu cashInLieu) {
+      Utils.checkNotNull(cashInLieu, "cashInLieu");
+      this.cashInLieu = JsonNullable.of(cashInLieu);
+      return this;
+    }
+
+    /** Object containing metadata for cash in lieu */
+    public Builder cashInLieu(JsonNullable<? extends ActivityCashInLieu> cashInLieu) {
+      Utils.checkNotNull(cashInLieu, "cashInLieu");
+      this.cashInLieu = cashInLieu;
       return this;
     }
 
@@ -4673,6 +4859,20 @@ public class Activity {
       return this;
     }
 
+    /** Indicates whether the trade is opening a new position or closing an existing position */
+    public Builder sideModifier(ActivitySideModifier sideModifier) {
+      Utils.checkNotNull(sideModifier, "sideModifier");
+      this.sideModifier = Optional.ofNullable(sideModifier);
+      return this;
+    }
+
+    /** Indicates whether the trade is opening a new position or closing an existing position */
+    public Builder sideModifier(Optional<? extends ActivitySideModifier> sideModifier) {
+      Utils.checkNotNull(sideModifier, "sideModifier");
+      this.sideModifier = sideModifier;
+      return this;
+    }
+
     /**
      * Used to record a distribution of subsidiary securities to the shareholders of the parent
      * company without a surrender of securities or payment and details related to the spinoff. A
@@ -5006,10 +5206,13 @@ public class Activity {
           activityDescription,
           activityId,
           activityTime,
+          allocation,
           assetDescription,
           assetId,
+          bondDefault,
           capitalGains,
           cashDividend,
+          cashInLieu,
           commission,
           commissions,
           conversion,
@@ -5056,6 +5259,7 @@ public class Activity {
           saleOfRights,
           settleDate,
           side,
+          sideModifier,
           spinoff,
           state,
           stockDividend,

@@ -49,7 +49,7 @@ public class ActivityTrade {
   /** Used to calculate broadridge blotter code */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("broker_capacity")
-  private Optional<? extends ActivityBrokerCapacity> brokerCapacity;
+  private Optional<? extends ActivityTradeBrokerCapacity> brokerCapacity;
 
   /** Free form text submitted by the client for internal purposes */
   @JsonInclude(Include.NON_ABSENT)
@@ -124,12 +124,12 @@ public class ActivityTrade {
   /** The price for the instrument that is prevailing in the market. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("prevailing_market_price")
-  private JsonNullable<? extends ActivityPrevailingMarketPrice> prevailingMarketPrice;
+  private JsonNullable<? extends ActivityTradePrevailingMarketPrice> prevailingMarketPrice;
 
   /** Information about any price adjustments applied to the security */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("price_adjustment_record")
-  private JsonNullable<? extends ActivityPriceAdjustmentRecord> priceAdjustmentRecord;
+  private JsonNullable<? extends ActivityTradePriceAdjustmentRecord> priceAdjustmentRecord;
 
   /** Used to calculate broadridge blotter code */
   @JsonInclude(Include.NON_ABSENT)
@@ -174,7 +174,8 @@ public class ActivityTrade {
       @JsonProperty("booking_api_trade_allocation_id") Optional<String> bookingApiTradeAllocationId,
       @JsonProperty("booking_api_trade_id") Optional<String> bookingApiTradeId,
       @JsonProperty("broker") Optional<String> broker,
-      @JsonProperty("broker_capacity") Optional<? extends ActivityBrokerCapacity> brokerCapacity,
+      @JsonProperty("broker_capacity")
+          Optional<? extends ActivityTradeBrokerCapacity> brokerCapacity,
       @JsonProperty("client_memos") Optional<? extends List<String>> clientMemos,
       @JsonProperty("client_order_id") Optional<String> clientOrderId,
       @JsonProperty("exchange") Optional<String> exchange,
@@ -188,9 +189,9 @@ public class ActivityTrade {
       @JsonProperty("lots") Optional<? extends List<Lot>> lots,
       @JsonProperty("order_id") Optional<String> orderId,
       @JsonProperty("prevailing_market_price")
-          JsonNullable<? extends ActivityPrevailingMarketPrice> prevailingMarketPrice,
+          JsonNullable<? extends ActivityTradePrevailingMarketPrice> prevailingMarketPrice,
       @JsonProperty("price_adjustment_record")
-          JsonNullable<? extends ActivityPriceAdjustmentRecord> priceAdjustmentRecord,
+          JsonNullable<? extends ActivityTradePriceAdjustmentRecord> priceAdjustmentRecord,
       @JsonProperty("route") Optional<String> route,
       @JsonProperty("special_instructions") Optional<? extends List<String>> specialInstructions,
       @JsonProperty("symbol_description") Optional<String> symbolDescription,
@@ -311,8 +312,8 @@ public class ActivityTrade {
   /** Used to calculate broadridge blotter code */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<ActivityBrokerCapacity> brokerCapacity() {
-    return (Optional<ActivityBrokerCapacity>) brokerCapacity;
+  public Optional<ActivityTradeBrokerCapacity> brokerCapacity() {
+    return (Optional<ActivityTradeBrokerCapacity>) brokerCapacity;
   }
 
   /** Free form text submitted by the client for internal purposes */
@@ -402,15 +403,15 @@ public class ActivityTrade {
   /** The price for the instrument that is prevailing in the market. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<ActivityPrevailingMarketPrice> prevailingMarketPrice() {
-    return (JsonNullable<ActivityPrevailingMarketPrice>) prevailingMarketPrice;
+  public JsonNullable<ActivityTradePrevailingMarketPrice> prevailingMarketPrice() {
+    return (JsonNullable<ActivityTradePrevailingMarketPrice>) prevailingMarketPrice;
   }
 
   /** Information about any price adjustments applied to the security */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<ActivityPriceAdjustmentRecord> priceAdjustmentRecord() {
-    return (JsonNullable<ActivityPriceAdjustmentRecord>) priceAdjustmentRecord;
+  public JsonNullable<ActivityTradePriceAdjustmentRecord> priceAdjustmentRecord() {
+    return (JsonNullable<ActivityTradePriceAdjustmentRecord>) priceAdjustmentRecord;
   }
 
   /** Used to calculate broadridge blotter code */
@@ -532,7 +533,7 @@ public class ActivityTrade {
   }
 
   /** Used to calculate broadridge blotter code */
-  public ActivityTrade withBrokerCapacity(ActivityBrokerCapacity brokerCapacity) {
+  public ActivityTrade withBrokerCapacity(ActivityTradeBrokerCapacity brokerCapacity) {
     Utils.checkNotNull(brokerCapacity, "brokerCapacity");
     this.brokerCapacity = Optional.ofNullable(brokerCapacity);
     return this;
@@ -540,7 +541,7 @@ public class ActivityTrade {
 
   /** Used to calculate broadridge blotter code */
   public ActivityTrade withBrokerCapacity(
-      Optional<? extends ActivityBrokerCapacity> brokerCapacity) {
+      Optional<? extends ActivityTradeBrokerCapacity> brokerCapacity) {
     Utils.checkNotNull(brokerCapacity, "brokerCapacity");
     this.brokerCapacity = brokerCapacity;
     return this;
@@ -736,7 +737,7 @@ public class ActivityTrade {
 
   /** The price for the instrument that is prevailing in the market. */
   public ActivityTrade withPrevailingMarketPrice(
-      ActivityPrevailingMarketPrice prevailingMarketPrice) {
+      ActivityTradePrevailingMarketPrice prevailingMarketPrice) {
     Utils.checkNotNull(prevailingMarketPrice, "prevailingMarketPrice");
     this.prevailingMarketPrice = JsonNullable.of(prevailingMarketPrice);
     return this;
@@ -744,7 +745,7 @@ public class ActivityTrade {
 
   /** The price for the instrument that is prevailing in the market. */
   public ActivityTrade withPrevailingMarketPrice(
-      JsonNullable<? extends ActivityPrevailingMarketPrice> prevailingMarketPrice) {
+      JsonNullable<? extends ActivityTradePrevailingMarketPrice> prevailingMarketPrice) {
     Utils.checkNotNull(prevailingMarketPrice, "prevailingMarketPrice");
     this.prevailingMarketPrice = prevailingMarketPrice;
     return this;
@@ -752,7 +753,7 @@ public class ActivityTrade {
 
   /** Information about any price adjustments applied to the security */
   public ActivityTrade withPriceAdjustmentRecord(
-      ActivityPriceAdjustmentRecord priceAdjustmentRecord) {
+      ActivityTradePriceAdjustmentRecord priceAdjustmentRecord) {
     Utils.checkNotNull(priceAdjustmentRecord, "priceAdjustmentRecord");
     this.priceAdjustmentRecord = JsonNullable.of(priceAdjustmentRecord);
     return this;
@@ -760,7 +761,7 @@ public class ActivityTrade {
 
   /** Information about any price adjustments applied to the security */
   public ActivityTrade withPriceAdjustmentRecord(
-      JsonNullable<? extends ActivityPriceAdjustmentRecord> priceAdjustmentRecord) {
+      JsonNullable<? extends ActivityTradePriceAdjustmentRecord> priceAdjustmentRecord) {
     Utils.checkNotNull(priceAdjustmentRecord, "priceAdjustmentRecord");
     this.priceAdjustmentRecord = priceAdjustmentRecord;
     return this;
@@ -991,7 +992,7 @@ public class ActivityTrade {
 
     private Optional<String> broker = Optional.empty();
 
-    private Optional<? extends ActivityBrokerCapacity> brokerCapacity = Optional.empty();
+    private Optional<? extends ActivityTradeBrokerCapacity> brokerCapacity = Optional.empty();
 
     private Optional<? extends List<String>> clientMemos = Optional.empty();
 
@@ -1017,10 +1018,10 @@ public class ActivityTrade {
 
     private Optional<String> orderId = Optional.empty();
 
-    private JsonNullable<? extends ActivityPrevailingMarketPrice> prevailingMarketPrice =
+    private JsonNullable<? extends ActivityTradePrevailingMarketPrice> prevailingMarketPrice =
         JsonNullable.undefined();
 
-    private JsonNullable<? extends ActivityPriceAdjustmentRecord> priceAdjustmentRecord =
+    private JsonNullable<? extends ActivityTradePriceAdjustmentRecord> priceAdjustmentRecord =
         JsonNullable.undefined();
 
     private Optional<String> route = Optional.empty();
@@ -1108,14 +1109,14 @@ public class ActivityTrade {
     }
 
     /** Used to calculate broadridge blotter code */
-    public Builder brokerCapacity(ActivityBrokerCapacity brokerCapacity) {
+    public Builder brokerCapacity(ActivityTradeBrokerCapacity brokerCapacity) {
       Utils.checkNotNull(brokerCapacity, "brokerCapacity");
       this.brokerCapacity = Optional.ofNullable(brokerCapacity);
       return this;
     }
 
     /** Used to calculate broadridge blotter code */
-    public Builder brokerCapacity(Optional<? extends ActivityBrokerCapacity> brokerCapacity) {
+    public Builder brokerCapacity(Optional<? extends ActivityTradeBrokerCapacity> brokerCapacity) {
       Utils.checkNotNull(brokerCapacity, "brokerCapacity");
       this.brokerCapacity = brokerCapacity;
       return this;
@@ -1310,7 +1311,7 @@ public class ActivityTrade {
     }
 
     /** The price for the instrument that is prevailing in the market. */
-    public Builder prevailingMarketPrice(ActivityPrevailingMarketPrice prevailingMarketPrice) {
+    public Builder prevailingMarketPrice(ActivityTradePrevailingMarketPrice prevailingMarketPrice) {
       Utils.checkNotNull(prevailingMarketPrice, "prevailingMarketPrice");
       this.prevailingMarketPrice = JsonNullable.of(prevailingMarketPrice);
       return this;
@@ -1318,14 +1319,14 @@ public class ActivityTrade {
 
     /** The price for the instrument that is prevailing in the market. */
     public Builder prevailingMarketPrice(
-        JsonNullable<? extends ActivityPrevailingMarketPrice> prevailingMarketPrice) {
+        JsonNullable<? extends ActivityTradePrevailingMarketPrice> prevailingMarketPrice) {
       Utils.checkNotNull(prevailingMarketPrice, "prevailingMarketPrice");
       this.prevailingMarketPrice = prevailingMarketPrice;
       return this;
     }
 
     /** Information about any price adjustments applied to the security */
-    public Builder priceAdjustmentRecord(ActivityPriceAdjustmentRecord priceAdjustmentRecord) {
+    public Builder priceAdjustmentRecord(ActivityTradePriceAdjustmentRecord priceAdjustmentRecord) {
       Utils.checkNotNull(priceAdjustmentRecord, "priceAdjustmentRecord");
       this.priceAdjustmentRecord = JsonNullable.of(priceAdjustmentRecord);
       return this;
@@ -1333,7 +1334,7 @@ public class ActivityTrade {
 
     /** Information about any price adjustments applied to the security */
     public Builder priceAdjustmentRecord(
-        JsonNullable<? extends ActivityPriceAdjustmentRecord> priceAdjustmentRecord) {
+        JsonNullable<? extends ActivityTradePriceAdjustmentRecord> priceAdjustmentRecord) {
       Utils.checkNotNull(priceAdjustmentRecord, "priceAdjustmentRecord");
       this.priceAdjustmentRecord = priceAdjustmentRecord;
       return this;

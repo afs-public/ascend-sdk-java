@@ -51,6 +51,7 @@ public class AssetType1 {
   public static final AssetType1 FDIC_SYNTHETIC = new AssetType1("FDIC_SYNTHETIC");
   public static final AssetType1 FIXED_INCOME = new AssetType1("FIXED_INCOME");
   public static final AssetType1 MUTUAL_FUND = new AssetType1("MUTUAL_FUND");
+  public static final AssetType1 INDEX = new AssetType1("INDEX");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -126,6 +127,7 @@ public class AssetType1 {
     map.put("FDIC_SYNTHETIC", FDIC_SYNTHETIC);
     map.put("FIXED_INCOME", FIXED_INCOME);
     map.put("MUTUAL_FUND", MUTUAL_FUND);
+    map.put("INDEX", INDEX);
     return map;
   }
 
@@ -139,6 +141,7 @@ public class AssetType1 {
     map.put("FDIC_SYNTHETIC", AssetType1Enum.FDIC_SYNTHETIC);
     map.put("FIXED_INCOME", AssetType1Enum.FIXED_INCOME);
     map.put("MUTUAL_FUND", AssetType1Enum.MUTUAL_FUND);
+    map.put("INDEX", AssetType1Enum.INDEX);
     return map;
   }
 
@@ -181,6 +184,7 @@ public class AssetType1 {
     FDIC_SYNTHETIC("FDIC_SYNTHETIC"),
     FIXED_INCOME("FIXED_INCOME"),
     MUTUAL_FUND("MUTUAL_FUND"),
+    INDEX("INDEX"),
     ;
 
     private final String value;

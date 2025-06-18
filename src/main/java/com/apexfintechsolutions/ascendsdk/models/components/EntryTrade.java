@@ -54,7 +54,7 @@ public class EntryTrade {
   /** Used to calculate broadridge blotter code */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("broker_capacity")
-  private Optional<? extends EntryBrokerCapacity> brokerCapacity;
+  private Optional<? extends EntryTradeBrokerCapacity> brokerCapacity;
 
   /** client usage area (intact). len 20 */
   @JsonInclude(Include.NON_ABSENT)
@@ -130,7 +130,7 @@ public class EntryTrade {
   /** The price for the instrument that is prevailing in the market */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("prevailing_market_price")
-  private JsonNullable<? extends EntryPrevailingMarketPrice> prevailingMarketPrice;
+  private JsonNullable<? extends EntryTradePrevailingMarketPrice> prevailingMarketPrice;
 
   /** Information about any price adjustments applied to the security */
   @JsonInclude(Include.NON_ABSENT)
@@ -173,7 +173,7 @@ public class EntryTrade {
       @JsonProperty("booking_api_trade_allocation_id") Optional<String> bookingApiTradeAllocationId,
       @JsonProperty("booking_api_trade_id") Optional<String> bookingApiTradeId,
       @JsonProperty("broker") Optional<String> broker,
-      @JsonProperty("broker_capacity") Optional<? extends EntryBrokerCapacity> brokerCapacity,
+      @JsonProperty("broker_capacity") Optional<? extends EntryTradeBrokerCapacity> brokerCapacity,
       @JsonProperty("client_memo") Optional<String> clientMemo,
       @JsonProperty("client_order_id") Optional<String> clientOrderId,
       @JsonProperty("exchange") Optional<String> exchange,
@@ -188,7 +188,7 @@ public class EntryTrade {
       @JsonProperty("market") Optional<String> market,
       @JsonProperty("order_id") Optional<String> orderId,
       @JsonProperty("prevailing_market_price")
-          JsonNullable<? extends EntryPrevailingMarketPrice> prevailingMarketPrice,
+          JsonNullable<? extends EntryTradePrevailingMarketPrice> prevailingMarketPrice,
       @JsonProperty("price_adjustment_record")
           JsonNullable<? extends EntryPriceAdjustmentRecord> priceAdjustmentRecord,
       @JsonProperty("route") Optional<String> route,
@@ -319,8 +319,8 @@ public class EntryTrade {
   /** Used to calculate broadridge blotter code */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<EntryBrokerCapacity> brokerCapacity() {
-    return (Optional<EntryBrokerCapacity>) brokerCapacity;
+  public Optional<EntryTradeBrokerCapacity> brokerCapacity() {
+    return (Optional<EntryTradeBrokerCapacity>) brokerCapacity;
   }
 
   /** client usage area (intact). len 20 */
@@ -411,8 +411,8 @@ public class EntryTrade {
   /** The price for the instrument that is prevailing in the market */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<EntryPrevailingMarketPrice> prevailingMarketPrice() {
-    return (JsonNullable<EntryPrevailingMarketPrice>) prevailingMarketPrice;
+  public JsonNullable<EntryTradePrevailingMarketPrice> prevailingMarketPrice() {
+    return (JsonNullable<EntryTradePrevailingMarketPrice>) prevailingMarketPrice;
   }
 
   /** Information about any price adjustments applied to the security */
@@ -545,14 +545,15 @@ public class EntryTrade {
   }
 
   /** Used to calculate broadridge blotter code */
-  public EntryTrade withBrokerCapacity(EntryBrokerCapacity brokerCapacity) {
+  public EntryTrade withBrokerCapacity(EntryTradeBrokerCapacity brokerCapacity) {
     Utils.checkNotNull(brokerCapacity, "brokerCapacity");
     this.brokerCapacity = Optional.ofNullable(brokerCapacity);
     return this;
   }
 
   /** Used to calculate broadridge blotter code */
-  public EntryTrade withBrokerCapacity(Optional<? extends EntryBrokerCapacity> brokerCapacity) {
+  public EntryTrade withBrokerCapacity(
+      Optional<? extends EntryTradeBrokerCapacity> brokerCapacity) {
     Utils.checkNotNull(brokerCapacity, "brokerCapacity");
     this.brokerCapacity = brokerCapacity;
     return this;
@@ -753,7 +754,8 @@ public class EntryTrade {
   }
 
   /** The price for the instrument that is prevailing in the market */
-  public EntryTrade withPrevailingMarketPrice(EntryPrevailingMarketPrice prevailingMarketPrice) {
+  public EntryTrade withPrevailingMarketPrice(
+      EntryTradePrevailingMarketPrice prevailingMarketPrice) {
     Utils.checkNotNull(prevailingMarketPrice, "prevailingMarketPrice");
     this.prevailingMarketPrice = JsonNullable.of(prevailingMarketPrice);
     return this;
@@ -761,7 +763,7 @@ public class EntryTrade {
 
   /** The price for the instrument that is prevailing in the market */
   public EntryTrade withPrevailingMarketPrice(
-      JsonNullable<? extends EntryPrevailingMarketPrice> prevailingMarketPrice) {
+      JsonNullable<? extends EntryTradePrevailingMarketPrice> prevailingMarketPrice) {
     Utils.checkNotNull(prevailingMarketPrice, "prevailingMarketPrice");
     this.prevailingMarketPrice = prevailingMarketPrice;
     return this;
@@ -990,7 +992,7 @@ public class EntryTrade {
 
     private Optional<String> broker = Optional.empty();
 
-    private Optional<? extends EntryBrokerCapacity> brokerCapacity = Optional.empty();
+    private Optional<? extends EntryTradeBrokerCapacity> brokerCapacity = Optional.empty();
 
     private Optional<String> clientMemo = Optional.empty();
 
@@ -1018,7 +1020,7 @@ public class EntryTrade {
 
     private Optional<String> orderId = Optional.empty();
 
-    private JsonNullable<? extends EntryPrevailingMarketPrice> prevailingMarketPrice =
+    private JsonNullable<? extends EntryTradePrevailingMarketPrice> prevailingMarketPrice =
         JsonNullable.undefined();
 
     private JsonNullable<? extends EntryPriceAdjustmentRecord> priceAdjustmentRecord =
@@ -1121,14 +1123,14 @@ public class EntryTrade {
     }
 
     /** Used to calculate broadridge blotter code */
-    public Builder brokerCapacity(EntryBrokerCapacity brokerCapacity) {
+    public Builder brokerCapacity(EntryTradeBrokerCapacity brokerCapacity) {
       Utils.checkNotNull(brokerCapacity, "brokerCapacity");
       this.brokerCapacity = Optional.ofNullable(brokerCapacity);
       return this;
     }
 
     /** Used to calculate broadridge blotter code */
-    public Builder brokerCapacity(Optional<? extends EntryBrokerCapacity> brokerCapacity) {
+    public Builder brokerCapacity(Optional<? extends EntryTradeBrokerCapacity> brokerCapacity) {
       Utils.checkNotNull(brokerCapacity, "brokerCapacity");
       this.brokerCapacity = brokerCapacity;
       return this;
@@ -1331,7 +1333,7 @@ public class EntryTrade {
     }
 
     /** The price for the instrument that is prevailing in the market */
-    public Builder prevailingMarketPrice(EntryPrevailingMarketPrice prevailingMarketPrice) {
+    public Builder prevailingMarketPrice(EntryTradePrevailingMarketPrice prevailingMarketPrice) {
       Utils.checkNotNull(prevailingMarketPrice, "prevailingMarketPrice");
       this.prevailingMarketPrice = JsonNullable.of(prevailingMarketPrice);
       return this;
@@ -1339,7 +1341,7 @@ public class EntryTrade {
 
     /** The price for the instrument that is prevailing in the market */
     public Builder prevailingMarketPrice(
-        JsonNullable<? extends EntryPrevailingMarketPrice> prevailingMarketPrice) {
+        JsonNullable<? extends EntryTradePrevailingMarketPrice> prevailingMarketPrice) {
       Utils.checkNotNull(prevailingMarketPrice, "prevailingMarketPrice");
       this.prevailingMarketPrice = prevailingMarketPrice;
       return this;

@@ -52,6 +52,7 @@ public class ActivityDepositType {
   public static final ActivityDepositType RTP = new ActivityDepositType("RTP");
   public static final ActivityDepositType ICT = new ActivityDepositType("ICT");
   public static final ActivityDepositType JOURNAL = new ActivityDepositType("JOURNAL");
+  public static final ActivityDepositType EXTERNAL_ACH = new ActivityDepositType("EXTERNAL_ACH");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -127,6 +128,7 @@ public class ActivityDepositType {
     map.put("RTP", RTP);
     map.put("ICT", ICT);
     map.put("JOURNAL", JOURNAL);
+    map.put("EXTERNAL_ACH", EXTERNAL_ACH);
     return map;
   }
 
@@ -142,6 +144,7 @@ public class ActivityDepositType {
     map.put("RTP", ActivityDepositTypeEnum.RTP);
     map.put("ICT", ActivityDepositTypeEnum.ICT);
     map.put("JOURNAL", ActivityDepositTypeEnum.JOURNAL);
+    map.put("EXTERNAL_ACH", ActivityDepositTypeEnum.EXTERNAL_ACH);
     return map;
   }
 
@@ -184,6 +187,7 @@ public class ActivityDepositType {
     RTP("RTP"),
     ICT("ICT"),
     JOURNAL("JOURNAL"),
+    EXTERNAL_ACH("EXTERNAL_ACH"),
     ;
 
     private final String value;

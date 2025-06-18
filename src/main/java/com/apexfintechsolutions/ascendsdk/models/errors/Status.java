@@ -4,7 +4,7 @@
 
 package com.apexfintechsolutions.ascendsdk.models.errors;
 
-import com.apexfintechsolutions.ascendsdk.models.components.GoogleProtobufAny;
+import com.apexfintechsolutions.ascendsdk.models.components.Any;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -29,7 +29,7 @@ public class Status extends RuntimeException {
   /** The details field contains one or more technical error details. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("details")
-  private Optional<? extends List<GoogleProtobufAny>> details;
+  private Optional<? extends List<Any>> details;
 
   /** The message field contains human-friendly messages about the error. */
   @JsonInclude(Include.NON_ABSENT)
@@ -39,7 +39,7 @@ public class Status extends RuntimeException {
   @JsonCreator
   public Status(
       @JsonProperty("code") Optional<Integer> code,
-      @JsonProperty("details") Optional<? extends List<GoogleProtobufAny>> details,
+      @JsonProperty("details") Optional<? extends List<Any>> details,
       @JsonProperty("message") Optional<String> message) {
     super(message.orElse(null));
     Utils.checkNotNull(code, "code");
@@ -61,8 +61,8 @@ public class Status extends RuntimeException {
 
   /** The details field contains one or more technical error details. */
   @SuppressWarnings("unchecked")
-  public Optional<List<GoogleProtobufAny>> details() {
-    return (Optional<List<GoogleProtobufAny>>) details;
+  public Optional<List<Any>> details() {
+    return (Optional<List<Any>>) details;
   }
 
   /** The message field contains human-friendly messages about the error. */
@@ -89,14 +89,14 @@ public class Status extends RuntimeException {
   }
 
   /** The details field contains one or more technical error details. */
-  public Status withDetails(List<GoogleProtobufAny> details) {
+  public Status withDetails(List<Any> details) {
     Utils.checkNotNull(details, "details");
     this.details = Optional.ofNullable(details);
     return this;
   }
 
   /** The details field contains one or more technical error details. */
-  public Status withDetails(Optional<? extends List<GoogleProtobufAny>> details) {
+  public Status withDetails(Optional<? extends List<Any>> details) {
     Utils.checkNotNull(details, "details");
     this.details = details;
     return this;
@@ -144,7 +144,7 @@ public class Status extends RuntimeException {
 
     private Optional<Integer> code = Optional.empty();
 
-    private Optional<? extends List<GoogleProtobufAny>> details = Optional.empty();
+    private Optional<? extends List<Any>> details = Optional.empty();
 
     private Optional<String> message = Optional.empty();
 
@@ -167,14 +167,14 @@ public class Status extends RuntimeException {
     }
 
     /** The details field contains one or more technical error details. */
-    public Builder details(List<GoogleProtobufAny> details) {
+    public Builder details(List<Any> details) {
       Utils.checkNotNull(details, "details");
       this.details = Optional.ofNullable(details);
       return this;
     }
 
     /** The details field contains one or more technical error details. */
-    public Builder details(Optional<? extends List<GoogleProtobufAny>> details) {
+    public Builder details(Optional<? extends List<Any>> details) {
       Utils.checkNotNull(details, "details");
       this.details = details;
       return this;

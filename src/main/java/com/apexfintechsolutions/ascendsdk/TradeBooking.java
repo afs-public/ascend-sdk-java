@@ -4,6 +4,7 @@
 
 package com.apexfintechsolutions.ascendsdk;
 
+import com.apexfintechsolutions.ascendsdk.models.components.BookingTrade;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelExecutionRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelExecutionResponse;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelTradeRequestCreate;
@@ -16,7 +17,6 @@ import com.apexfintechsolutions.ascendsdk.models.components.RebookExecutionReque
 import com.apexfintechsolutions.ascendsdk.models.components.RebookExecutionResponse;
 import com.apexfintechsolutions.ascendsdk.models.components.RebookTradeRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.RebookTradeResponse;
-import com.apexfintechsolutions.ascendsdk.models.components.Trade;
 import com.apexfintechsolutions.ascendsdk.models.components.TradeCreate;
 import com.apexfintechsolutions.ascendsdk.models.errors.SDKError;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
@@ -188,10 +188,11 @@ public class TradeBooking
 
     if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
       if (Utils.contentTypeMatches(_contentType, "application/json")) {
-        Trade _out =
+        BookingTrade _out =
             Utils.mapper()
-                .readValue(Utils.toUtf8AndClose(_httpRes.body()), new TypeReference<Trade>() {});
-        _res.withTrade(Optional.ofNullable(_out));
+                .readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()), new TypeReference<BookingTrade>() {});
+        _res.withBookingTrade(Optional.ofNullable(_out));
         return _res;
       } else {
         throw new SDKError(
@@ -362,10 +363,11 @@ public class TradeBooking
 
     if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
       if (Utils.contentTypeMatches(_contentType, "application/json")) {
-        Trade _out =
+        BookingTrade _out =
             Utils.mapper()
-                .readValue(Utils.toUtf8AndClose(_httpRes.body()), new TypeReference<Trade>() {});
-        _res.withTrade(Optional.ofNullable(_out));
+                .readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()), new TypeReference<BookingTrade>() {});
+        _res.withBookingTrade(Optional.ofNullable(_out));
         return _res;
       } else {
         throw new SDKError(

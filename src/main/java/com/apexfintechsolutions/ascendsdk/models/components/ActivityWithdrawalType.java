@@ -52,6 +52,8 @@ public class ActivityWithdrawalType {
   public static final ActivityWithdrawalType RTP = new ActivityWithdrawalType("RTP");
   public static final ActivityWithdrawalType ICT = new ActivityWithdrawalType("ICT");
   public static final ActivityWithdrawalType JOURNAL = new ActivityWithdrawalType("JOURNAL");
+  public static final ActivityWithdrawalType EXTERNAL_ACH =
+      new ActivityWithdrawalType("EXTERNAL_ACH");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -127,6 +129,7 @@ public class ActivityWithdrawalType {
     map.put("RTP", RTP);
     map.put("ICT", ICT);
     map.put("JOURNAL", JOURNAL);
+    map.put("EXTERNAL_ACH", EXTERNAL_ACH);
     return map;
   }
 
@@ -142,6 +145,7 @@ public class ActivityWithdrawalType {
     map.put("RTP", ActivityWithdrawalTypeEnum.RTP);
     map.put("ICT", ActivityWithdrawalTypeEnum.ICT);
     map.put("JOURNAL", ActivityWithdrawalTypeEnum.JOURNAL);
+    map.put("EXTERNAL_ACH", ActivityWithdrawalTypeEnum.EXTERNAL_ACH);
     return map;
   }
 
@@ -185,6 +189,7 @@ public class ActivityWithdrawalType {
     RTP("RTP"),
     ICT("ICT"),
     JOURNAL("JOURNAL"),
+    EXTERNAL_ACH("EXTERNAL_ACH"),
     ;
 
     private final String value;

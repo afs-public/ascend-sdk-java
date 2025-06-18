@@ -48,7 +48,6 @@ public class FeeType {
   public static final FeeType LIQUIDITY = new FeeType("LIQUIDITY");
   public static final FeeType GENERAL_PURPOSE = new FeeType("GENERAL_PURPOSE");
   public static final FeeType COMMISSION = new FeeType("COMMISSION");
-  public static final FeeType ORF = new FeeType("ORF");
   public static final FeeType TAF = new FeeType("TAF");
   public static final FeeType SEC = new FeeType("SEC");
   public static final FeeType ACCOUNT_CLOSING = new FeeType("ACCOUNT_CLOSING");
@@ -77,6 +76,10 @@ public class FeeType {
   public static final FeeType INTERNATIONAL_WIRE_WITHDRAWAL_FEE =
       new FeeType("INTERNATIONAL_WIRE_WITHDRAWAL_FEE");
   public static final FeeType BROKER_FEE = new FeeType("BROKER_FEE");
+  public static final FeeType OCC_FEE = new FeeType("OCC_FEE");
+  public static final FeeType CONTRACT_FEE = new FeeType("CONTRACT_FEE");
+  public static final FeeType OPTIONS_REGULATORY = new FeeType("OPTIONS_REGULATORY");
+  public static final FeeType FINANCIAL_TRANSACTION_TAX = new FeeType("FINANCIAL_TRANSACTION_TAX");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -149,7 +152,6 @@ public class FeeType {
     map.put("LIQUIDITY", LIQUIDITY);
     map.put("GENERAL_PURPOSE", GENERAL_PURPOSE);
     map.put("COMMISSION", COMMISSION);
-    map.put("ORF", ORF);
     map.put("TAF", TAF);
     map.put("SEC", SEC);
     map.put("ACCOUNT_CLOSING", ACCOUNT_CLOSING);
@@ -175,6 +177,10 @@ public class FeeType {
     map.put("INTERNATIONAL_WIRE_DEPOSIT_FEE", INTERNATIONAL_WIRE_DEPOSIT_FEE);
     map.put("INTERNATIONAL_WIRE_WITHDRAWAL_FEE", INTERNATIONAL_WIRE_WITHDRAWAL_FEE);
     map.put("BROKER_FEE", BROKER_FEE);
+    map.put("OCC_FEE", OCC_FEE);
+    map.put("CONTRACT_FEE", CONTRACT_FEE);
+    map.put("OPTIONS_REGULATORY", OPTIONS_REGULATORY);
+    map.put("FINANCIAL_TRANSACTION_TAX", FINANCIAL_TRANSACTION_TAX);
     return map;
   }
 
@@ -185,7 +191,6 @@ public class FeeType {
     map.put("LIQUIDITY", FeeTypeEnum.LIQUIDITY);
     map.put("GENERAL_PURPOSE", FeeTypeEnum.GENERAL_PURPOSE);
     map.put("COMMISSION", FeeTypeEnum.COMMISSION);
-    map.put("ORF", FeeTypeEnum.ORF);
     map.put("TAF", FeeTypeEnum.TAF);
     map.put("SEC", FeeTypeEnum.SEC);
     map.put("ACCOUNT_CLOSING", FeeTypeEnum.ACCOUNT_CLOSING);
@@ -211,6 +216,10 @@ public class FeeType {
     map.put("INTERNATIONAL_WIRE_DEPOSIT_FEE", FeeTypeEnum.INTERNATIONAL_WIRE_DEPOSIT_FEE);
     map.put("INTERNATIONAL_WIRE_WITHDRAWAL_FEE", FeeTypeEnum.INTERNATIONAL_WIRE_WITHDRAWAL_FEE);
     map.put("BROKER_FEE", FeeTypeEnum.BROKER_FEE);
+    map.put("OCC_FEE", FeeTypeEnum.OCC_FEE);
+    map.put("CONTRACT_FEE", FeeTypeEnum.CONTRACT_FEE);
+    map.put("OPTIONS_REGULATORY", FeeTypeEnum.OPTIONS_REGULATORY);
+    map.put("FINANCIAL_TRANSACTION_TAX", FeeTypeEnum.FINANCIAL_TRANSACTION_TAX);
     return map;
   }
 
@@ -250,7 +259,6 @@ public class FeeType {
     LIQUIDITY("LIQUIDITY"),
     GENERAL_PURPOSE("GENERAL_PURPOSE"),
     COMMISSION("COMMISSION"),
-    ORF("ORF"),
     TAF("TAF"),
     SEC("SEC"),
     ACCOUNT_CLOSING("ACCOUNT_CLOSING"),
@@ -276,6 +284,10 @@ public class FeeType {
     INTERNATIONAL_WIRE_DEPOSIT_FEE("INTERNATIONAL_WIRE_DEPOSIT_FEE"),
     INTERNATIONAL_WIRE_WITHDRAWAL_FEE("INTERNATIONAL_WIRE_WITHDRAWAL_FEE"),
     BROKER_FEE("BROKER_FEE"),
+    OCC_FEE("OCC_FEE"),
+    CONTRACT_FEE("CONTRACT_FEE"),
+    OPTIONS_REGULATORY("OPTIONS_REGULATORY"),
+    FINANCIAL_TRANSACTION_TAX("FINANCIAL_TRANSACTION_TAX"),
     ;
 
     private final String value;

@@ -16,12 +16,24 @@ import java.util.Optional;
 /** DeactivateEnrollmentRequestCreate - The request for deactivating an Enrollment on an account. */
 public class DeactivateEnrollmentRequestCreate {
 
-  /** A system-generated unique identifier referencing a single instance of an enrollment; */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Required if `enrollment_type` is not present.
+   *
+   * <p>Otherwise, must be empty.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("enrollment_id")
   private Optional<String> enrollmentId;
 
-  /** Describes the name of the enrollment; Expressed as an enum */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Required if `enrollment_id` is not present.
+   *
+   * <p>Otherwise, must be empty.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("enrollment_type")
   private Optional<? extends DeactivateEnrollmentRequestCreateEnrollmentType> enrollmentType;
@@ -41,13 +53,25 @@ public class DeactivateEnrollmentRequestCreate {
     this(Optional.empty(), Optional.empty());
   }
 
-  /** A system-generated unique identifier referencing a single instance of an enrollment; */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Required if `enrollment_type` is not present.
+   *
+   * <p>Otherwise, must be empty.
+   */
   @JsonIgnore
   public Optional<String> enrollmentId() {
     return enrollmentId;
   }
 
-  /** Describes the name of the enrollment; Expressed as an enum */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Required if `enrollment_id` is not present.
+   *
+   * <p>Otherwise, must be empty.
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<DeactivateEnrollmentRequestCreateEnrollmentType> enrollmentType() {
@@ -58,21 +82,39 @@ public class DeactivateEnrollmentRequestCreate {
     return new Builder();
   }
 
-  /** A system-generated unique identifier referencing a single instance of an enrollment; */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Required if `enrollment_type` is not present.
+   *
+   * <p>Otherwise, must be empty.
+   */
   public DeactivateEnrollmentRequestCreate withEnrollmentId(String enrollmentId) {
     Utils.checkNotNull(enrollmentId, "enrollmentId");
     this.enrollmentId = Optional.ofNullable(enrollmentId);
     return this;
   }
 
-  /** A system-generated unique identifier referencing a single instance of an enrollment; */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Required if `enrollment_type` is not present.
+   *
+   * <p>Otherwise, must be empty.
+   */
   public DeactivateEnrollmentRequestCreate withEnrollmentId(Optional<String> enrollmentId) {
     Utils.checkNotNull(enrollmentId, "enrollmentId");
     this.enrollmentId = enrollmentId;
     return this;
   }
 
-  /** Describes the name of the enrollment; Expressed as an enum */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Required if `enrollment_id` is not present.
+   *
+   * <p>Otherwise, must be empty.
+   */
   public DeactivateEnrollmentRequestCreate withEnrollmentType(
       DeactivateEnrollmentRequestCreateEnrollmentType enrollmentType) {
     Utils.checkNotNull(enrollmentType, "enrollmentType");
@@ -80,7 +122,13 @@ public class DeactivateEnrollmentRequestCreate {
     return this;
   }
 
-  /** Describes the name of the enrollment; Expressed as an enum */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Required if `enrollment_id` is not present.
+   *
+   * <p>Otherwise, must be empty.
+   */
   public DeactivateEnrollmentRequestCreate withEnrollmentType(
       Optional<? extends DeactivateEnrollmentRequestCreateEnrollmentType> enrollmentType) {
     Utils.checkNotNull(enrollmentType, "enrollmentType");
@@ -127,28 +175,52 @@ public class DeactivateEnrollmentRequestCreate {
       // force use of static builder() method
     }
 
-    /** A system-generated unique identifier referencing a single instance of an enrollment; */
+    /**
+     * **Field Dependencies:**
+     *
+     * <p>Required if `enrollment_type` is not present.
+     *
+     * <p>Otherwise, must be empty.
+     */
     public Builder enrollmentId(String enrollmentId) {
       Utils.checkNotNull(enrollmentId, "enrollmentId");
       this.enrollmentId = Optional.ofNullable(enrollmentId);
       return this;
     }
 
-    /** A system-generated unique identifier referencing a single instance of an enrollment; */
+    /**
+     * **Field Dependencies:**
+     *
+     * <p>Required if `enrollment_type` is not present.
+     *
+     * <p>Otherwise, must be empty.
+     */
     public Builder enrollmentId(Optional<String> enrollmentId) {
       Utils.checkNotNull(enrollmentId, "enrollmentId");
       this.enrollmentId = enrollmentId;
       return this;
     }
 
-    /** Describes the name of the enrollment; Expressed as an enum */
+    /**
+     * **Field Dependencies:**
+     *
+     * <p>Required if `enrollment_id` is not present.
+     *
+     * <p>Otherwise, must be empty.
+     */
     public Builder enrollmentType(DeactivateEnrollmentRequestCreateEnrollmentType enrollmentType) {
       Utils.checkNotNull(enrollmentType, "enrollmentType");
       this.enrollmentType = Optional.ofNullable(enrollmentType);
       return this;
     }
 
-    /** Describes the name of the enrollment; Expressed as an enum */
+    /**
+     * **Field Dependencies:**
+     *
+     * <p>Required if `enrollment_id` is not present.
+     *
+     * <p>Otherwise, must be empty.
+     */
     public Builder enrollmentType(
         Optional<? extends DeactivateEnrollmentRequestCreateEnrollmentType> enrollmentType) {
       Utils.checkNotNull(enrollmentType, "enrollmentType");

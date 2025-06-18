@@ -1,7 +1,6 @@
 package com.apexfintechsolutions.ascendsdk;
 
 import com.apexfintechsolutions.ascendsdk.models.components.*;
-import com.apexfintechsolutions.ascendsdk.utils.ApexSecuritySource;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -16,7 +15,9 @@ public class EventTests {
   public void test_Can_Deserialize_Event_Data() throws Exception {
     String baseURL = System.getenv("BASE_URL");
     String apiKey = System.getenv("API_KEY");
-    String ascendJson = System.getenv("ASCEND_CREDS_JSON");
+    String privateKey = System.getenv("SERVICE_ACCOUNT_CREDS_PRIVATE_KEY");
+    String name = System.getenv("SERVICE_ACCOUNT_CREDS_NAME");
+    String organization = System.getenv("SERVICE_ACCOUNT_CREDS_ORGANIZATION");
 
     ObjectMapper mapper = new ObjectMapper();
     mapper.registerModule(new Jdk8Module());
@@ -26,11 +27,16 @@ public class EventTests {
     SDK sdk =
         SDK.builder()
             .serverURL(baseURL)
-            .securitySource(
-                ApexSecuritySource.builder()
-                    .ascendCredsJson(ascendJson)
+            .security(
+                Security.builder()
                     .apiKey(apiKey)
-                    .serverUrl(baseURL)
+                    .serviceAccountCreds(
+                        ServiceAccountCreds.builder()
+                            .privateKey(privateKey)
+                            .name(name)
+                            .organization(organization)
+                            .type("serviceAccount")
+                            .build())
                     .build())
             .build();
 

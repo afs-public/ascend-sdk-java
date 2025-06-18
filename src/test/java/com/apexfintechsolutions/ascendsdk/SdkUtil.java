@@ -1,6 +1,7 @@
 package com.apexfintechsolutions.ascendsdk;
 
-import com.apexfintechsolutions.ascendsdk.utils.ApexSecuritySource;
+import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 
 public class SdkUtil {
   private static SDK sdkInstance = null;
@@ -12,16 +13,23 @@ public class SdkUtil {
 
     String baseURL = System.getenv("BASE_URL");
     String apiKey = System.getenv("API_KEY");
-    String ascendJson = System.getenv("ASCEND_CREDS_JSON");
+    String privateKey = System.getenv("SERVICE_ACCOUNT_CREDS_PRIVATE_KEY");
+    String name = System.getenv("SERVICE_ACCOUNT_CREDS_NAME");
+    String organization = System.getenv("SERVICE_ACCOUNT_CREDS_ORGANIZATION");
 
     SDK sdk =
         SDK.builder()
             .serverURL(baseURL)
-            .securitySource(
-                ApexSecuritySource.builder()
-                    .ascendCredsJson(ascendJson)
+            .security(
+                Security.builder()
                     .apiKey(apiKey)
-                    .serverUrl(baseURL)
+                    .serviceAccountCreds(
+                        ServiceAccountCreds.builder()
+                            .privateKey(privateKey)
+                            .name(name)
+                            .organization(organization)
+                            .type("serviceAccount")
+                            .build())
                     .build())
             .build();
 

@@ -190,6 +190,14 @@ public class OrderCreate {
   @JsonProperty("time_in_force")
   private TimeInForce timeInForce;
 
+  /**
+   * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
+   * orders.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("trading_strategy")
+  private Optional<? extends TradingStrategy> tradingStrategy;
+
   @JsonCreator
   public OrderCreate(
       @JsonProperty("asset_type") AssetType assetType,
@@ -215,7 +223,8 @@ public class OrderCreate {
       @JsonProperty("special_reporting_instructions")
           Optional<? extends List<SpecialReportingInstructions>> specialReportingInstructions,
       @JsonProperty("stop_price") Optional<? extends StopPriceCreate> stopPrice,
-      @JsonProperty("time_in_force") TimeInForce timeInForce) {
+      @JsonProperty("time_in_force") TimeInForce timeInForce,
+      @JsonProperty("trading_strategy") Optional<? extends TradingStrategy> tradingStrategy) {
     Utils.checkNotNull(assetType, "assetType");
     Utils.checkNotNull(brokerCapacity, "brokerCapacity");
     Utils.checkNotNull(clientOrderId, "clientOrderId");
@@ -238,6 +247,7 @@ public class OrderCreate {
     Utils.checkNotNull(specialReportingInstructions, "specialReportingInstructions");
     Utils.checkNotNull(stopPrice, "stopPrice");
     Utils.checkNotNull(timeInForce, "timeInForce");
+    Utils.checkNotNull(tradingStrategy, "tradingStrategy");
     this.assetType = assetType;
     this.brokerCapacity = brokerCapacity;
     this.clientOrderId = clientOrderId;
@@ -260,6 +270,7 @@ public class OrderCreate {
     this.specialReportingInstructions = specialReportingInstructions;
     this.stopPrice = stopPrice;
     this.timeInForce = timeInForce;
+    this.tradingStrategy = tradingStrategy;
   }
 
   public OrderCreate(
@@ -293,7 +304,8 @@ public class OrderCreate {
         side,
         Optional.empty(),
         Optional.empty(),
-        timeInForce);
+        timeInForce,
+        Optional.empty());
   }
 
   /**
@@ -506,6 +518,16 @@ public class OrderCreate {
   @JsonIgnore
   public TimeInForce timeInForce() {
     return timeInForce;
+  }
+
+  /**
+   * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
+   * orders.
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<TradingStrategy> tradingStrategy() {
+    return (Optional<TradingStrategy>) tradingStrategy;
   }
 
   public static final Builder builder() {
@@ -881,6 +903,26 @@ public class OrderCreate {
     return this;
   }
 
+  /**
+   * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
+   * orders.
+   */
+  public OrderCreate withTradingStrategy(TradingStrategy tradingStrategy) {
+    Utils.checkNotNull(tradingStrategy, "tradingStrategy");
+    this.tradingStrategy = Optional.ofNullable(tradingStrategy);
+    return this;
+  }
+
+  /**
+   * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
+   * orders.
+   */
+  public OrderCreate withTradingStrategy(Optional<? extends TradingStrategy> tradingStrategy) {
+    Utils.checkNotNull(tradingStrategy, "tradingStrategy");
+    this.tradingStrategy = tradingStrategy;
+    return this;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -911,7 +953,8 @@ public class OrderCreate {
         && Objects.deepEquals(this.side, other.side)
         && Objects.deepEquals(this.specialReportingInstructions, other.specialReportingInstructions)
         && Objects.deepEquals(this.stopPrice, other.stopPrice)
-        && Objects.deepEquals(this.timeInForce, other.timeInForce);
+        && Objects.deepEquals(this.timeInForce, other.timeInForce)
+        && Objects.deepEquals(this.tradingStrategy, other.tradingStrategy);
   }
 
   @Override
@@ -938,7 +981,8 @@ public class OrderCreate {
         side,
         specialReportingInstructions,
         stopPrice,
-        timeInForce);
+        timeInForce,
+        tradingStrategy);
   }
 
   @Override
@@ -988,7 +1032,9 @@ public class OrderCreate {
         "stopPrice",
         stopPrice,
         "timeInForce",
-        timeInForce);
+        timeInForce,
+        "tradingStrategy",
+        tradingStrategy);
   }
 
   public static final class Builder {
@@ -1037,6 +1083,8 @@ public class OrderCreate {
     private Optional<? extends StopPriceCreate> stopPrice = Optional.empty();
 
     private TimeInForce timeInForce;
+
+    private Optional<? extends TradingStrategy> tradingStrategy = Optional.empty();
 
     private Builder() {
       // force use of static builder() method
@@ -1421,6 +1469,26 @@ public class OrderCreate {
       return this;
     }
 
+    /**
+     * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
+     * orders.
+     */
+    public Builder tradingStrategy(TradingStrategy tradingStrategy) {
+      Utils.checkNotNull(tradingStrategy, "tradingStrategy");
+      this.tradingStrategy = Optional.ofNullable(tradingStrategy);
+      return this;
+    }
+
+    /**
+     * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
+     * orders.
+     */
+    public Builder tradingStrategy(Optional<? extends TradingStrategy> tradingStrategy) {
+      Utils.checkNotNull(tradingStrategy, "tradingStrategy");
+      this.tradingStrategy = tradingStrategy;
+      return this;
+    }
+
     public OrderCreate build() {
       return new OrderCreate(
           assetType,
@@ -1444,7 +1512,8 @@ public class OrderCreate {
           side,
           specialReportingInstructions,
           stopPrice,
-          timeInForce);
+          timeInForce,
+          tradingStrategy);
     }
   }
 }

@@ -109,6 +109,8 @@ public class OrderRejectedReason {
       new OrderRejectedReason("INVALID_ORDER_QUANTITY");
   public static final OrderRejectedReason CLIENT_RECEIVED_TIME_REQUIRED =
       new OrderRejectedReason("CLIENT_RECEIVED_TIME_REQUIRED");
+  public static final OrderRejectedReason CLIENT_NOT_PERMITTED_TO_USE_TRADING_STRATEGY =
+      new OrderRejectedReason("CLIENT_NOT_PERMITTED_TO_USE_TRADING_STRATEGY");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -216,6 +218,9 @@ public class OrderRejectedReason {
     map.put("ASSET_NOT_SET_UP_TO_TRADE", ASSET_NOT_SET_UP_TO_TRADE);
     map.put("INVALID_ORDER_QUANTITY", INVALID_ORDER_QUANTITY);
     map.put("CLIENT_RECEIVED_TIME_REQUIRED", CLIENT_RECEIVED_TIME_REQUIRED);
+    map.put(
+        "CLIENT_NOT_PERMITTED_TO_USE_TRADING_STRATEGY",
+        CLIENT_NOT_PERMITTED_TO_USE_TRADING_STRATEGY);
     return map;
   }
 
@@ -266,6 +271,9 @@ public class OrderRejectedReason {
     map.put("ASSET_NOT_SET_UP_TO_TRADE", OrderRejectedReasonEnum.ASSET_NOT_SET_UP_TO_TRADE);
     map.put("INVALID_ORDER_QUANTITY", OrderRejectedReasonEnum.INVALID_ORDER_QUANTITY);
     map.put("CLIENT_RECEIVED_TIME_REQUIRED", OrderRejectedReasonEnum.CLIENT_RECEIVED_TIME_REQUIRED);
+    map.put(
+        "CLIENT_NOT_PERMITTED_TO_USE_TRADING_STRATEGY",
+        OrderRejectedReasonEnum.CLIENT_NOT_PERMITTED_TO_USE_TRADING_STRATEGY);
     return map;
   }
 
@@ -334,6 +342,7 @@ public class OrderRejectedReason {
     ASSET_NOT_SET_UP_TO_TRADE("ASSET_NOT_SET_UP_TO_TRADE"),
     INVALID_ORDER_QUANTITY("INVALID_ORDER_QUANTITY"),
     CLIENT_RECEIVED_TIME_REQUIRED("CLIENT_RECEIVED_TIME_REQUIRED"),
+    CLIENT_NOT_PERMITTED_TO_USE_TRADING_STRATEGY("CLIENT_NOT_PERMITTED_TO_USE_TRADING_STRATEGY"),
     ;
 
     private final String value;

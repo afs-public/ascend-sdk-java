@@ -1,0 +1,10 @@
+# CashInLieu
+
+Object containing metadata for cash in lieu
+
+
+## Fields
+
+| Field                                                                                                                                          | Type                                                                                                                                           | Required                                                                                                                                       | Description                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `corporateActionGeneralInformation`                                                                                                            | [JsonNullable\<EntryCashInLieuCorporateActionGeneralInformation>](../../models/components/EntryCashInLieuCorporateActionGeneralInformation.md) | :heavy_minus_sign:                                                                                                                             | Common fields for corporate actions                                                                                                            |

@@ -68,6 +68,9 @@ public class OperatingPurpose {
   public static final OperatingPurpose FEE = new OperatingPurpose("FEE");
   public static final OperatingPurpose PRINCIPAL_TRADING =
       new OperatingPurpose("PRINCIPAL_TRADING");
+  public static final OperatingPurpose SAFEKEEPING_BOOK_ENTITY_DOMESTIC =
+      new OperatingPurpose("SAFEKEEPING_BOOK_ENTITY_DOMESTIC");
+  public static final OperatingPurpose FAIL = new OperatingPurpose("FAIL");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -155,6 +158,8 @@ public class OperatingPurpose {
     map.put("TAX_WITHHOLDING", TAX_WITHHOLDING);
     map.put("FEE", FEE);
     map.put("PRINCIPAL_TRADING", PRINCIPAL_TRADING);
+    map.put("SAFEKEEPING_BOOK_ENTITY_DOMESTIC", SAFEKEEPING_BOOK_ENTITY_DOMESTIC);
+    map.put("FAIL", FAIL);
     return map;
   }
 
@@ -180,6 +185,9 @@ public class OperatingPurpose {
     map.put("TAX_WITHHOLDING", OperatingPurposeEnum.TAX_WITHHOLDING);
     map.put("FEE", OperatingPurposeEnum.FEE);
     map.put("PRINCIPAL_TRADING", OperatingPurposeEnum.PRINCIPAL_TRADING);
+    map.put(
+        "SAFEKEEPING_BOOK_ENTITY_DOMESTIC", OperatingPurposeEnum.SAFEKEEPING_BOOK_ENTITY_DOMESTIC);
+    map.put("FAIL", OperatingPurposeEnum.FAIL);
     return map;
   }
 
@@ -234,6 +242,8 @@ public class OperatingPurpose {
     TAX_WITHHOLDING("TAX_WITHHOLDING"),
     FEE("FEE"),
     PRINCIPAL_TRADING("PRINCIPAL_TRADING"),
+    SAFEKEEPING_BOOK_ENTITY_DOMESTIC("SAFEKEEPING_BOOK_ENTITY_DOMESTIC"),
+    FAIL("FAIL"),
     ;
 
     private final String value;

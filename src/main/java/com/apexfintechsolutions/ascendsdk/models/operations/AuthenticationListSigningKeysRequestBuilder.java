@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public class AuthenticationListSigningKeysRequestBuilder {
 
+  private AuthenticationListSigningKeysSecurity security;
   private Optional<Integer> pageSize = Optional.empty();
   private Optional<String> pageToken = Optional.empty();
   private final SDKMethodInterfaces.MethodCallAuthenticationListSigningKeys sdk;
@@ -16,6 +17,13 @@ public class AuthenticationListSigningKeysRequestBuilder {
   public AuthenticationListSigningKeysRequestBuilder(
       SDKMethodInterfaces.MethodCallAuthenticationListSigningKeys sdk) {
     this.sdk = sdk;
+  }
+
+  public AuthenticationListSigningKeysRequestBuilder security(
+      AuthenticationListSigningKeysSecurity security) {
+    Utils.checkNotNull(security, "security");
+    this.security = security;
+    return this;
   }
 
   public AuthenticationListSigningKeysRequestBuilder pageSize(int pageSize) {
@@ -44,6 +52,6 @@ public class AuthenticationListSigningKeysRequestBuilder {
 
   public AuthenticationListSigningKeysResponse call() throws Exception {
 
-    return sdk.listSigningKeys(pageSize, pageToken);
+    return sdk.listSigningKeys(security, pageSize, pageToken);
   }
 }

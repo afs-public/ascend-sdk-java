@@ -85,6 +85,11 @@ public class AcatsTransfer {
   @JsonProperty("state")
   private Optional<? extends AcatsTransferState> state;
 
+  /** A reason for the state if applicable */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("state_reason")
+  private Optional<String> stateReason;
+
   /** The type of transfer */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("transfer_type")
@@ -104,6 +109,7 @@ public class AcatsTransfer {
       @JsonProperty("receiver") JsonNullable<? extends Receiver> receiver,
       @JsonProperty("reject_code") Optional<? extends RejectCode> rejectCode,
       @JsonProperty("state") Optional<? extends AcatsTransferState> state,
+      @JsonProperty("state_reason") Optional<String> stateReason,
       @JsonProperty("transfer_type") Optional<? extends TransferType> transferType) {
     Utils.checkNotNull(acatControlNumber, "acatControlNumber");
     Utils.checkNotNull(assets, "assets");
@@ -117,6 +123,7 @@ public class AcatsTransfer {
     Utils.checkNotNull(receiver, "receiver");
     Utils.checkNotNull(rejectCode, "rejectCode");
     Utils.checkNotNull(state, "state");
+    Utils.checkNotNull(stateReason, "stateReason");
     Utils.checkNotNull(transferType, "transferType");
     this.acatControlNumber = acatControlNumber;
     this.assets = assets;
@@ -130,6 +137,7 @@ public class AcatsTransfer {
     this.receiver = receiver;
     this.rejectCode = rejectCode;
     this.state = state;
+    this.stateReason = stateReason;
     this.transferType = transferType;
   }
 
@@ -145,6 +153,7 @@ public class AcatsTransfer {
         Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined(),
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty());
@@ -230,6 +239,12 @@ public class AcatsTransfer {
   @JsonIgnore
   public Optional<AcatsTransferState> state() {
     return (Optional<AcatsTransferState>) state;
+  }
+
+  /** A reason for the state if applicable */
+  @JsonIgnore
+  public Optional<String> stateReason() {
+    return stateReason;
   }
 
   /** The type of transfer */
@@ -417,6 +432,20 @@ public class AcatsTransfer {
     return this;
   }
 
+  /** A reason for the state if applicable */
+  public AcatsTransfer withStateReason(String stateReason) {
+    Utils.checkNotNull(stateReason, "stateReason");
+    this.stateReason = Optional.ofNullable(stateReason);
+    return this;
+  }
+
+  /** A reason for the state if applicable */
+  public AcatsTransfer withStateReason(Optional<String> stateReason) {
+    Utils.checkNotNull(stateReason, "stateReason");
+    this.stateReason = stateReason;
+    return this;
+  }
+
   /** The type of transfer */
   public AcatsTransfer withTransferType(TransferType transferType) {
     Utils.checkNotNull(transferType, "transferType");
@@ -452,6 +481,7 @@ public class AcatsTransfer {
         && Objects.deepEquals(this.receiver, other.receiver)
         && Objects.deepEquals(this.rejectCode, other.rejectCode)
         && Objects.deepEquals(this.state, other.state)
+        && Objects.deepEquals(this.stateReason, other.stateReason)
         && Objects.deepEquals(this.transferType, other.transferType);
   }
 
@@ -470,6 +500,7 @@ public class AcatsTransfer {
         receiver,
         rejectCode,
         state,
+        stateReason,
         transferType);
   }
 
@@ -501,6 +532,8 @@ public class AcatsTransfer {
         rejectCode,
         "state",
         state,
+        "stateReason",
+        stateReason,
         "transferType",
         transferType);
   }
@@ -530,6 +563,8 @@ public class AcatsTransfer {
     private Optional<? extends RejectCode> rejectCode = Optional.empty();
 
     private Optional<? extends AcatsTransferState> state = Optional.empty();
+
+    private Optional<String> stateReason = Optional.empty();
 
     private Optional<? extends TransferType> transferType = Optional.empty();
 
@@ -711,6 +746,20 @@ public class AcatsTransfer {
       return this;
     }
 
+    /** A reason for the state if applicable */
+    public Builder stateReason(String stateReason) {
+      Utils.checkNotNull(stateReason, "stateReason");
+      this.stateReason = Optional.ofNullable(stateReason);
+      return this;
+    }
+
+    /** A reason for the state if applicable */
+    public Builder stateReason(Optional<String> stateReason) {
+      Utils.checkNotNull(stateReason, "stateReason");
+      this.stateReason = stateReason;
+      return this;
+    }
+
     /** The type of transfer */
     public Builder transferType(TransferType transferType) {
       Utils.checkNotNull(transferType, "transferType");
@@ -739,6 +788,7 @@ public class AcatsTransfer {
           receiver,
           rejectCode,
           state,
+          stateReason,
           transferType);
     }
   }

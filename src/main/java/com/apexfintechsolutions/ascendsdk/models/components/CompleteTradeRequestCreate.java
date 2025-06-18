@@ -20,7 +20,7 @@ public class CompleteTradeRequestCreate {
   /** Client calculated fees to use while completing an existing trade. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("fees")
-  private Optional<? extends List<FeeCreate>> fees;
+  private Optional<? extends List<BookingFeeCreate>> fees;
 
   /** The name of the trade to complete. */
   @JsonProperty("name")
@@ -28,7 +28,7 @@ public class CompleteTradeRequestCreate {
 
   @JsonCreator
   public CompleteTradeRequestCreate(
-      @JsonProperty("fees") Optional<? extends List<FeeCreate>> fees,
+      @JsonProperty("fees") Optional<? extends List<BookingFeeCreate>> fees,
       @JsonProperty("name") String name) {
     Utils.checkNotNull(fees, "fees");
     Utils.checkNotNull(name, "name");
@@ -43,8 +43,8 @@ public class CompleteTradeRequestCreate {
   /** Client calculated fees to use while completing an existing trade. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<List<FeeCreate>> fees() {
-    return (Optional<List<FeeCreate>>) fees;
+  public Optional<List<BookingFeeCreate>> fees() {
+    return (Optional<List<BookingFeeCreate>>) fees;
   }
 
   /** The name of the trade to complete. */
@@ -58,14 +58,14 @@ public class CompleteTradeRequestCreate {
   }
 
   /** Client calculated fees to use while completing an existing trade. */
-  public CompleteTradeRequestCreate withFees(List<FeeCreate> fees) {
+  public CompleteTradeRequestCreate withFees(List<BookingFeeCreate> fees) {
     Utils.checkNotNull(fees, "fees");
     this.fees = Optional.ofNullable(fees);
     return this;
   }
 
   /** Client calculated fees to use while completing an existing trade. */
-  public CompleteTradeRequestCreate withFees(Optional<? extends List<FeeCreate>> fees) {
+  public CompleteTradeRequestCreate withFees(Optional<? extends List<BookingFeeCreate>> fees) {
     Utils.checkNotNull(fees, "fees");
     this.fees = fees;
     return this;
@@ -102,7 +102,7 @@ public class CompleteTradeRequestCreate {
 
   public static final class Builder {
 
-    private Optional<? extends List<FeeCreate>> fees = Optional.empty();
+    private Optional<? extends List<BookingFeeCreate>> fees = Optional.empty();
 
     private String name;
 
@@ -111,14 +111,14 @@ public class CompleteTradeRequestCreate {
     }
 
     /** Client calculated fees to use while completing an existing trade. */
-    public Builder fees(List<FeeCreate> fees) {
+    public Builder fees(List<BookingFeeCreate> fees) {
       Utils.checkNotNull(fees, "fees");
       this.fees = Optional.ofNullable(fees);
       return this;
     }
 
     /** Client calculated fees to use while completing an existing trade. */
-    public Builder fees(Optional<? extends List<FeeCreate>> fees) {
+    public Builder fees(Optional<? extends List<BookingFeeCreate>> fees) {
       Utils.checkNotNull(fees, "fees");
       this.fees = fees;
       return this;

@@ -47,7 +47,6 @@ public class Program {
   public static final Program BROKER_PARTNER = new Program("BROKER_PARTNER");
   public static final Program DEPOSIT_ONLY = new Program("DEPOSIT_ONLY");
   public static final Program BANKING_PARTNER = new Program("BANKING_PARTNER");
-  public static final Program MONEY_TRANSMITTER = new Program("MONEY_TRANSMITTER");
   public static final Program WITHDRAWAL_ONLY = new Program("WITHDRAWAL_ONLY");
   public static final Program DIGITAL_PARTNER = new Program("DIGITAL_PARTNER");
 
@@ -121,7 +120,6 @@ public class Program {
     map.put("BROKER_PARTNER", BROKER_PARTNER);
     map.put("DEPOSIT_ONLY", DEPOSIT_ONLY);
     map.put("BANKING_PARTNER", BANKING_PARTNER);
-    map.put("MONEY_TRANSMITTER", MONEY_TRANSMITTER);
     map.put("WITHDRAWAL_ONLY", WITHDRAWAL_ONLY);
     map.put("DIGITAL_PARTNER", DIGITAL_PARTNER);
     return map;
@@ -133,7 +131,6 @@ public class Program {
     map.put("BROKER_PARTNER", ProgramEnum.BROKER_PARTNER);
     map.put("DEPOSIT_ONLY", ProgramEnum.DEPOSIT_ONLY);
     map.put("BANKING_PARTNER", ProgramEnum.BANKING_PARTNER);
-    map.put("MONEY_TRANSMITTER", ProgramEnum.MONEY_TRANSMITTER);
     map.put("WITHDRAWAL_ONLY", ProgramEnum.WITHDRAWAL_ONLY);
     map.put("DIGITAL_PARTNER", ProgramEnum.DIGITAL_PARTNER);
     return map;
@@ -174,7 +171,6 @@ public class Program {
     BROKER_PARTNER("BROKER_PARTNER"),
     DEPOSIT_ONLY("DEPOSIT_ONLY"),
     BANKING_PARTNER("BANKING_PARTNER"),
-    MONEY_TRANSMITTER("MONEY_TRANSMITTER"),
     WITHDRAWAL_ONLY("WITHDRAWAL_ONLY"),
     DIGITAL_PARTNER("DIGITAL_PARTNER"),
     ;

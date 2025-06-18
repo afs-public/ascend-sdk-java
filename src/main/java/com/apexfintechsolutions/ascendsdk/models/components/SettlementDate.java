@@ -14,8 +14,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * SettlementDate - Defaults to T+1 for equities if this is not provided. Calculated using the
- * execution_time field in Eastern Time.
+ * SettlementDate - Defaults to T+1 for equities if this is not provided. Calculated by the
+ * execution's execution_time field in Eastern Time.
  */
 public class SettlementDate {
 

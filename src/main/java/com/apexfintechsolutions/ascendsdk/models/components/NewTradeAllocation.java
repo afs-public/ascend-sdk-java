@@ -80,7 +80,7 @@ public class NewTradeAllocation {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("fees")
-  private Optional<? extends List<Fee>> fees;
+  private Optional<? extends List<BookingFee>> fees;
 
   /** The ULID formatted account_id that the positions will be moved from. */
   @JsonInclude(Include.NON_ABSENT)
@@ -128,7 +128,7 @@ public class NewTradeAllocation {
   /** One or many lot matching instructions for the trade allocation. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("lot_matching_instructions")
-  private Optional<? extends List<Lot>> lotMatchingInstructions;
+  private Optional<? extends List<BookingLot>> lotMatchingInstructions;
 
   /**
    * Caller provided but can be used for booking-service to note original trade details when booking
@@ -244,7 +244,7 @@ public class NewTradeAllocation {
       @JsonProperty("commission_amount")
           JsonNullable<? extends RebookTradeAllocationResponseCommissionAmount> commissionAmount,
       @JsonProperty("execution_time") JsonNullable<OffsetDateTime> executionTime,
-      @JsonProperty("fees") Optional<? extends List<Fee>> fees,
+      @JsonProperty("fees") Optional<? extends List<BookingFee>> fees,
       @JsonProperty("from_account_id") Optional<String> fromAccountId,
       @JsonProperty("from_activity_id") Optional<String> fromActivityId,
       @JsonProperty("gross_amount")
@@ -254,7 +254,7 @@ public class NewTradeAllocation {
           Optional<? extends RebookTradeAllocationResponseIdentifierType> identifierType,
       @JsonProperty("issuing_region_code") Optional<String> issuingRegionCode,
       @JsonProperty("lot_matching_instructions")
-          Optional<? extends List<Lot>> lotMatchingInstructions,
+          Optional<? extends List<BookingLot>> lotMatchingInstructions,
       @JsonProperty("memo") Optional<String> memo,
       @JsonProperty("name") Optional<String> name,
       @JsonProperty("prevailing_market_price")
@@ -455,8 +455,8 @@ public class NewTradeAllocation {
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<List<Fee>> fees() {
-    return (Optional<List<Fee>>) fees;
+  public Optional<List<BookingFee>> fees() {
+    return (Optional<List<BookingFee>>) fees;
   }
 
   /** The ULID formatted account_id that the positions will be moved from. */
@@ -513,8 +513,8 @@ public class NewTradeAllocation {
   /** One or many lot matching instructions for the trade allocation. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<List<Lot>> lotMatchingInstructions() {
-    return (Optional<List<Lot>>) lotMatchingInstructions;
+  public Optional<List<BookingLot>> lotMatchingInstructions() {
+    return (Optional<List<BookingLot>>) lotMatchingInstructions;
   }
 
   /**
@@ -796,7 +796,7 @@ public class NewTradeAllocation {
    * Client calculated fees that will only be applied to the to_account_id. Regulatory fees will be
    * calculated automatically if they are not explicitly overwritten or suppressed.
    */
-  public NewTradeAllocation withFees(List<Fee> fees) {
+  public NewTradeAllocation withFees(List<BookingFee> fees) {
     Utils.checkNotNull(fees, "fees");
     this.fees = Optional.ofNullable(fees);
     return this;
@@ -806,7 +806,7 @@ public class NewTradeAllocation {
    * Client calculated fees that will only be applied to the to_account_id. Regulatory fees will be
    * calculated automatically if they are not explicitly overwritten or suppressed.
    */
-  public NewTradeAllocation withFees(Optional<? extends List<Fee>> fees) {
+  public NewTradeAllocation withFees(Optional<? extends List<BookingFee>> fees) {
     Utils.checkNotNull(fees, "fees");
     this.fees = fees;
     return this;
@@ -926,7 +926,7 @@ public class NewTradeAllocation {
   }
 
   /** One or many lot matching instructions for the trade allocation. */
-  public NewTradeAllocation withLotMatchingInstructions(List<Lot> lotMatchingInstructions) {
+  public NewTradeAllocation withLotMatchingInstructions(List<BookingLot> lotMatchingInstructions) {
     Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
     this.lotMatchingInstructions = Optional.ofNullable(lotMatchingInstructions);
     return this;
@@ -934,7 +934,7 @@ public class NewTradeAllocation {
 
   /** One or many lot matching instructions for the trade allocation. */
   public NewTradeAllocation withLotMatchingInstructions(
-      Optional<? extends List<Lot>> lotMatchingInstructions) {
+      Optional<? extends List<BookingLot>> lotMatchingInstructions) {
     Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
     this.lotMatchingInstructions = lotMatchingInstructions;
     return this;
@@ -1386,7 +1386,7 @@ public class NewTradeAllocation {
 
     private JsonNullable<OffsetDateTime> executionTime = JsonNullable.undefined();
 
-    private Optional<? extends List<Fee>> fees = Optional.empty();
+    private Optional<? extends List<BookingFee>> fees = Optional.empty();
 
     private Optional<String> fromAccountId = Optional.empty();
 
@@ -1402,7 +1402,7 @@ public class NewTradeAllocation {
 
     private Optional<String> issuingRegionCode = Optional.empty();
 
-    private Optional<? extends List<Lot>> lotMatchingInstructions = Optional.empty();
+    private Optional<? extends List<BookingLot>> lotMatchingInstructions = Optional.empty();
 
     private Optional<String> memo = Optional.empty();
 
@@ -1600,7 +1600,7 @@ public class NewTradeAllocation {
      * Client calculated fees that will only be applied to the to_account_id. Regulatory fees will
      * be calculated automatically if they are not explicitly overwritten or suppressed.
      */
-    public Builder fees(List<Fee> fees) {
+    public Builder fees(List<BookingFee> fees) {
       Utils.checkNotNull(fees, "fees");
       this.fees = Optional.ofNullable(fees);
       return this;
@@ -1610,7 +1610,7 @@ public class NewTradeAllocation {
      * Client calculated fees that will only be applied to the to_account_id. Regulatory fees will
      * be calculated automatically if they are not explicitly overwritten or suppressed.
      */
-    public Builder fees(Optional<? extends List<Fee>> fees) {
+    public Builder fees(Optional<? extends List<BookingFee>> fees) {
       Utils.checkNotNull(fees, "fees");
       this.fees = fees;
       return this;
@@ -1729,14 +1729,15 @@ public class NewTradeAllocation {
     }
 
     /** One or many lot matching instructions for the trade allocation. */
-    public Builder lotMatchingInstructions(List<Lot> lotMatchingInstructions) {
+    public Builder lotMatchingInstructions(List<BookingLot> lotMatchingInstructions) {
       Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
       this.lotMatchingInstructions = Optional.ofNullable(lotMatchingInstructions);
       return this;
     }
 
     /** One or many lot matching instructions for the trade allocation. */
-    public Builder lotMatchingInstructions(Optional<? extends List<Lot>> lotMatchingInstructions) {
+    public Builder lotMatchingInstructions(
+        Optional<? extends List<BookingLot>> lotMatchingInstructions) {
       Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
       this.lotMatchingInstructions = lotMatchingInstructions;
       return this;

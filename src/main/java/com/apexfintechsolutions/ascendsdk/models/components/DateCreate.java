@@ -4,7 +4,6 @@
 
 package com.apexfintechsolutions.ascendsdk.models.components;
 
-import com.apexfintechsolutions.ascendsdk.utils.SpeakeasyMetadata;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -34,19 +33,16 @@ public class DateCreate {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("day")
-  @SpeakeasyMetadata("queryParam:name=day")
   private Optional<Integer> day;
 
   /** Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("month")
-  @SpeakeasyMetadata("queryParam:name=month")
   private Optional<Integer> month;
 
   /** Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("year")
-  @SpeakeasyMetadata("queryParam:name=year")
   private Optional<Integer> year;
 
   @JsonCreator

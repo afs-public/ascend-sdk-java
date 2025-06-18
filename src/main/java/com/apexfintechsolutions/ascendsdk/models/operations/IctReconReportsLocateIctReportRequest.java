@@ -4,7 +4,6 @@
 
 package com.apexfintechsolutions.ascendsdk.models.operations;
 
-import com.apexfintechsolutions.ascendsdk.models.components.DateCreate;
 import com.apexfintechsolutions.ascendsdk.utils.SpeakeasyMetadata;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -26,28 +25,53 @@ public class IctReconReportsLocateIctReportRequest {
   @SpeakeasyMetadata("queryParam:style=form,explode=true,name=program_date_filter.program")
   private Optional<? extends ProgramDateFilterProgram> programDateFilterProgram;
 
-  /** The process date for which to locate the report. */
-  @SpeakeasyMetadata("queryParam:style=form,explode=true,name=program_date_filter.process_date")
-  private Optional<? extends DateCreate> programDateFilterProcessDate;
+  /** Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year. */
+  @SpeakeasyMetadata(
+      "queryParam:style=form,explode=true,name=program_date_filter.process_date.year")
+  private Optional<Integer> programDateFilterProcessDateYear;
+
+  /** Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day. */
+  @SpeakeasyMetadata(
+      "queryParam:style=form,explode=true,name=program_date_filter.process_date.month")
+  private Optional<Integer> programDateFilterProcessDateMonth;
+
+  /**
+   * Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year
+   * by itself or a year and month where the day isn't significant.
+   */
+  @SpeakeasyMetadata("queryParam:style=form,explode=true,name=program_date_filter.process_date.day")
+  private Optional<Integer> programDateFilterProcessDateDay;
 
   @JsonCreator
   public IctReconReportsLocateIctReportRequest(
       String correspondentId,
       Optional<String> batchId,
       Optional<? extends ProgramDateFilterProgram> programDateFilterProgram,
-      Optional<? extends DateCreate> programDateFilterProcessDate) {
+      Optional<Integer> programDateFilterProcessDateYear,
+      Optional<Integer> programDateFilterProcessDateMonth,
+      Optional<Integer> programDateFilterProcessDateDay) {
     Utils.checkNotNull(correspondentId, "correspondentId");
     Utils.checkNotNull(batchId, "batchId");
     Utils.checkNotNull(programDateFilterProgram, "programDateFilterProgram");
-    Utils.checkNotNull(programDateFilterProcessDate, "programDateFilterProcessDate");
+    Utils.checkNotNull(programDateFilterProcessDateYear, "programDateFilterProcessDateYear");
+    Utils.checkNotNull(programDateFilterProcessDateMonth, "programDateFilterProcessDateMonth");
+    Utils.checkNotNull(programDateFilterProcessDateDay, "programDateFilterProcessDateDay");
     this.correspondentId = correspondentId;
     this.batchId = batchId;
     this.programDateFilterProgram = programDateFilterProgram;
-    this.programDateFilterProcessDate = programDateFilterProcessDate;
+    this.programDateFilterProcessDateYear = programDateFilterProcessDateYear;
+    this.programDateFilterProcessDateMonth = programDateFilterProcessDateMonth;
+    this.programDateFilterProcessDateDay = programDateFilterProcessDateDay;
   }
 
   public IctReconReportsLocateIctReportRequest(String correspondentId) {
-    this(correspondentId, Optional.empty(), Optional.empty(), Optional.empty());
+    this(
+        correspondentId,
+        Optional.empty(),
+        Optional.empty(),
+        Optional.empty(),
+        Optional.empty(),
+        Optional.empty());
   }
 
   /** The correspondent id. */
@@ -69,11 +93,25 @@ public class IctReconReportsLocateIctReportRequest {
     return (Optional<ProgramDateFilterProgram>) programDateFilterProgram;
   }
 
-  /** The process date for which to locate the report. */
-  @SuppressWarnings("unchecked")
+  /** Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year. */
   @JsonIgnore
-  public Optional<DateCreate> programDateFilterProcessDate() {
-    return (Optional<DateCreate>) programDateFilterProcessDate;
+  public Optional<Integer> programDateFilterProcessDateYear() {
+    return programDateFilterProcessDateYear;
+  }
+
+  /** Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day. */
+  @JsonIgnore
+  public Optional<Integer> programDateFilterProcessDateMonth() {
+    return programDateFilterProcessDateMonth;
+  }
+
+  /**
+   * Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year
+   * by itself or a year and month where the day isn't significant.
+   */
+  @JsonIgnore
+  public Optional<Integer> programDateFilterProcessDateDay() {
+    return programDateFilterProcessDateDay;
   }
 
   public static final Builder builder() {
@@ -117,19 +155,57 @@ public class IctReconReportsLocateIctReportRequest {
     return this;
   }
 
-  /** The process date for which to locate the report. */
-  public IctReconReportsLocateIctReportRequest withProgramDateFilterProcessDate(
-      DateCreate programDateFilterProcessDate) {
-    Utils.checkNotNull(programDateFilterProcessDate, "programDateFilterProcessDate");
-    this.programDateFilterProcessDate = Optional.ofNullable(programDateFilterProcessDate);
+  /** Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year. */
+  public IctReconReportsLocateIctReportRequest withProgramDateFilterProcessDateYear(
+      int programDateFilterProcessDateYear) {
+    Utils.checkNotNull(programDateFilterProcessDateYear, "programDateFilterProcessDateYear");
+    this.programDateFilterProcessDateYear = Optional.ofNullable(programDateFilterProcessDateYear);
     return this;
   }
 
-  /** The process date for which to locate the report. */
-  public IctReconReportsLocateIctReportRequest withProgramDateFilterProcessDate(
-      Optional<? extends DateCreate> programDateFilterProcessDate) {
-    Utils.checkNotNull(programDateFilterProcessDate, "programDateFilterProcessDate");
-    this.programDateFilterProcessDate = programDateFilterProcessDate;
+  /** Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year. */
+  public IctReconReportsLocateIctReportRequest withProgramDateFilterProcessDateYear(
+      Optional<Integer> programDateFilterProcessDateYear) {
+    Utils.checkNotNull(programDateFilterProcessDateYear, "programDateFilterProcessDateYear");
+    this.programDateFilterProcessDateYear = programDateFilterProcessDateYear;
+    return this;
+  }
+
+  /** Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day. */
+  public IctReconReportsLocateIctReportRequest withProgramDateFilterProcessDateMonth(
+      int programDateFilterProcessDateMonth) {
+    Utils.checkNotNull(programDateFilterProcessDateMonth, "programDateFilterProcessDateMonth");
+    this.programDateFilterProcessDateMonth = Optional.ofNullable(programDateFilterProcessDateMonth);
+    return this;
+  }
+
+  /** Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day. */
+  public IctReconReportsLocateIctReportRequest withProgramDateFilterProcessDateMonth(
+      Optional<Integer> programDateFilterProcessDateMonth) {
+    Utils.checkNotNull(programDateFilterProcessDateMonth, "programDateFilterProcessDateMonth");
+    this.programDateFilterProcessDateMonth = programDateFilterProcessDateMonth;
+    return this;
+  }
+
+  /**
+   * Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year
+   * by itself or a year and month where the day isn't significant.
+   */
+  public IctReconReportsLocateIctReportRequest withProgramDateFilterProcessDateDay(
+      int programDateFilterProcessDateDay) {
+    Utils.checkNotNull(programDateFilterProcessDateDay, "programDateFilterProcessDateDay");
+    this.programDateFilterProcessDateDay = Optional.ofNullable(programDateFilterProcessDateDay);
+    return this;
+  }
+
+  /**
+   * Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year
+   * by itself or a year and month where the day isn't significant.
+   */
+  public IctReconReportsLocateIctReportRequest withProgramDateFilterProcessDateDay(
+      Optional<Integer> programDateFilterProcessDateDay) {
+    Utils.checkNotNull(programDateFilterProcessDateDay, "programDateFilterProcessDateDay");
+    this.programDateFilterProcessDateDay = programDateFilterProcessDateDay;
     return this;
   }
 
@@ -146,13 +222,22 @@ public class IctReconReportsLocateIctReportRequest {
         && Objects.deepEquals(this.batchId, other.batchId)
         && Objects.deepEquals(this.programDateFilterProgram, other.programDateFilterProgram)
         && Objects.deepEquals(
-            this.programDateFilterProcessDate, other.programDateFilterProcessDate);
+            this.programDateFilterProcessDateYear, other.programDateFilterProcessDateYear)
+        && Objects.deepEquals(
+            this.programDateFilterProcessDateMonth, other.programDateFilterProcessDateMonth)
+        && Objects.deepEquals(
+            this.programDateFilterProcessDateDay, other.programDateFilterProcessDateDay);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(
-        correspondentId, batchId, programDateFilterProgram, programDateFilterProcessDate);
+        correspondentId,
+        batchId,
+        programDateFilterProgram,
+        programDateFilterProcessDateYear,
+        programDateFilterProcessDateMonth,
+        programDateFilterProcessDateDay);
   }
 
   @Override
@@ -165,8 +250,12 @@ public class IctReconReportsLocateIctReportRequest {
         batchId,
         "programDateFilterProgram",
         programDateFilterProgram,
-        "programDateFilterProcessDate",
-        programDateFilterProcessDate);
+        "programDateFilterProcessDateYear",
+        programDateFilterProcessDateYear,
+        "programDateFilterProcessDateMonth",
+        programDateFilterProcessDateMonth,
+        "programDateFilterProcessDateDay",
+        programDateFilterProcessDateDay);
   }
 
   public static final class Builder {
@@ -178,7 +267,11 @@ public class IctReconReportsLocateIctReportRequest {
     private Optional<? extends ProgramDateFilterProgram> programDateFilterProgram =
         Optional.empty();
 
-    private Optional<? extends DateCreate> programDateFilterProcessDate = Optional.empty();
+    private Optional<Integer> programDateFilterProcessDateYear = Optional.empty();
+
+    private Optional<Integer> programDateFilterProcessDateMonth = Optional.empty();
+
+    private Optional<Integer> programDateFilterProcessDateDay = Optional.empty();
 
     private Builder() {
       // force use of static builder() method
@@ -220,24 +313,66 @@ public class IctReconReportsLocateIctReportRequest {
       return this;
     }
 
-    /** The process date for which to locate the report. */
-    public Builder programDateFilterProcessDate(DateCreate programDateFilterProcessDate) {
-      Utils.checkNotNull(programDateFilterProcessDate, "programDateFilterProcessDate");
-      this.programDateFilterProcessDate = Optional.ofNullable(programDateFilterProcessDate);
+    /** Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year. */
+    public Builder programDateFilterProcessDateYear(int programDateFilterProcessDateYear) {
+      Utils.checkNotNull(programDateFilterProcessDateYear, "programDateFilterProcessDateYear");
+      this.programDateFilterProcessDateYear = Optional.ofNullable(programDateFilterProcessDateYear);
       return this;
     }
 
-    /** The process date for which to locate the report. */
-    public Builder programDateFilterProcessDate(
-        Optional<? extends DateCreate> programDateFilterProcessDate) {
-      Utils.checkNotNull(programDateFilterProcessDate, "programDateFilterProcessDate");
-      this.programDateFilterProcessDate = programDateFilterProcessDate;
+    /** Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year. */
+    public Builder programDateFilterProcessDateYear(
+        Optional<Integer> programDateFilterProcessDateYear) {
+      Utils.checkNotNull(programDateFilterProcessDateYear, "programDateFilterProcessDateYear");
+      this.programDateFilterProcessDateYear = programDateFilterProcessDateYear;
+      return this;
+    }
+
+    /** Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day. */
+    public Builder programDateFilterProcessDateMonth(int programDateFilterProcessDateMonth) {
+      Utils.checkNotNull(programDateFilterProcessDateMonth, "programDateFilterProcessDateMonth");
+      this.programDateFilterProcessDateMonth =
+          Optional.ofNullable(programDateFilterProcessDateMonth);
+      return this;
+    }
+
+    /** Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day. */
+    public Builder programDateFilterProcessDateMonth(
+        Optional<Integer> programDateFilterProcessDateMonth) {
+      Utils.checkNotNull(programDateFilterProcessDateMonth, "programDateFilterProcessDateMonth");
+      this.programDateFilterProcessDateMonth = programDateFilterProcessDateMonth;
+      return this;
+    }
+
+    /**
+     * Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year
+     * by itself or a year and month where the day isn't significant.
+     */
+    public Builder programDateFilterProcessDateDay(int programDateFilterProcessDateDay) {
+      Utils.checkNotNull(programDateFilterProcessDateDay, "programDateFilterProcessDateDay");
+      this.programDateFilterProcessDateDay = Optional.ofNullable(programDateFilterProcessDateDay);
+      return this;
+    }
+
+    /**
+     * Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year
+     * by itself or a year and month where the day isn't significant.
+     */
+    public Builder programDateFilterProcessDateDay(
+        Optional<Integer> programDateFilterProcessDateDay) {
+      Utils.checkNotNull(programDateFilterProcessDateDay, "programDateFilterProcessDateDay");
+      this.programDateFilterProcessDateDay = programDateFilterProcessDateDay;
       return this;
     }
 
     public IctReconReportsLocateIctReportRequest build() {
       return new IctReconReportsLocateIctReportRequest(
-          correspondentId, batchId, programDateFilterProgram, programDateFilterProcessDate);
+          correspondentId,
+          batchId,
+          programDateFilterProgram,
+          programDateFilterProcessDateYear,
+          programDateFilterProcessDateMonth,
+          programDateFilterProcessDateDay);
     }
   }
 }

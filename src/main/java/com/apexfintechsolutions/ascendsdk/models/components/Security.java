@@ -4,51 +4,81 @@
 
 package com.apexfintechsolutions.ascendsdk.models.components;
 
+import com.apexfintechsolutions.ascendsdk.utils.HasSecurity;
 import com.apexfintechsolutions.ascendsdk.utils.SpeakeasyMetadata;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
+import java.util.Optional;
 
-public class Security {
+public class Security implements HasSecurity {
 
-  @SpeakeasyMetadata("security:scheme=true,type=http,subtype=bearer,name=Authorization")
-  private String bearerAuth;
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("apiKey")
+  @SpeakeasyMetadata("security:scheme=true,type=http,subtype=custom,name=apiKey")
+  private Optional<String> apiKey;
 
-  @SpeakeasyMetadata("security:scheme=true,type=apiKey,subtype=header,name=x-api-key")
-  private String apiKeyAuth;
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("serviceAccountCreds")
+  @SpeakeasyMetadata("security:scheme=true,type=http,subtype=custom,name=serviceAccountCreds")
+  private Optional<? extends ServiceAccountCreds> serviceAccountCreds;
 
   @JsonCreator
-  public Security(String bearerAuth, String apiKeyAuth) {
-    Utils.checkNotNull(bearerAuth, "bearerAuth");
-    Utils.checkNotNull(apiKeyAuth, "apiKeyAuth");
-    this.bearerAuth = bearerAuth;
-    this.apiKeyAuth = apiKeyAuth;
+  public Security(
+      @JsonProperty("apiKey") Optional<String> apiKey,
+      @JsonProperty("serviceAccountCreds")
+          Optional<? extends ServiceAccountCreds> serviceAccountCreds) {
+    Utils.checkNotNull(apiKey, "apiKey");
+    Utils.checkNotNull(serviceAccountCreds, "serviceAccountCreds");
+    this.apiKey = apiKey;
+    this.serviceAccountCreds = serviceAccountCreds;
+  }
+
+  public Security() {
+    this(Optional.empty(), Optional.empty());
   }
 
   @JsonIgnore
-  public String bearerAuth() {
-    return bearerAuth;
+  public Optional<String> apiKey() {
+    return apiKey;
   }
 
+  @SuppressWarnings("unchecked")
   @JsonIgnore
-  public String apiKeyAuth() {
-    return apiKeyAuth;
+  public Optional<ServiceAccountCreds> serviceAccountCreds() {
+    return (Optional<ServiceAccountCreds>) serviceAccountCreds;
   }
 
   public static final Builder builder() {
     return new Builder();
   }
 
-  public Security withBearerAuth(String bearerAuth) {
-    Utils.checkNotNull(bearerAuth, "bearerAuth");
-    this.bearerAuth = bearerAuth;
+  public Security withApiKey(String apiKey) {
+    Utils.checkNotNull(apiKey, "apiKey");
+    this.apiKey = Optional.ofNullable(apiKey);
     return this;
   }
 
-  public Security withApiKeyAuth(String apiKeyAuth) {
-    Utils.checkNotNull(apiKeyAuth, "apiKeyAuth");
-    this.apiKeyAuth = apiKeyAuth;
+  public Security withApiKey(Optional<String> apiKey) {
+    Utils.checkNotNull(apiKey, "apiKey");
+    this.apiKey = apiKey;
+    return this;
+  }
+
+  public Security withServiceAccountCreds(ServiceAccountCreds serviceAccountCreds) {
+    Utils.checkNotNull(serviceAccountCreds, "serviceAccountCreds");
+    this.serviceAccountCreds = Optional.ofNullable(serviceAccountCreds);
+    return this;
+  }
+
+  public Security withServiceAccountCreds(
+      Optional<? extends ServiceAccountCreds> serviceAccountCreds) {
+    Utils.checkNotNull(serviceAccountCreds, "serviceAccountCreds");
+    this.serviceAccountCreds = serviceAccountCreds;
     return this;
   }
 
@@ -61,44 +91,58 @@ public class Security {
       return false;
     }
     Security other = (Security) o;
-    return Objects.deepEquals(this.bearerAuth, other.bearerAuth)
-        && Objects.deepEquals(this.apiKeyAuth, other.apiKeyAuth);
+    return Objects.deepEquals(this.apiKey, other.apiKey)
+        && Objects.deepEquals(this.serviceAccountCreds, other.serviceAccountCreds);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bearerAuth, apiKeyAuth);
+    return Objects.hash(apiKey, serviceAccountCreds);
   }
 
   @Override
   public String toString() {
-    return Utils.toString(Security.class, "bearerAuth", bearerAuth, "apiKeyAuth", apiKeyAuth);
+    return Utils.toString(
+        Security.class, "apiKey", apiKey, "serviceAccountCreds", serviceAccountCreds);
   }
 
   public static final class Builder {
 
-    private String bearerAuth;
+    private Optional<String> apiKey = Optional.empty();
 
-    private String apiKeyAuth;
+    private Optional<? extends ServiceAccountCreds> serviceAccountCreds = Optional.empty();
 
     private Builder() {
       // force use of static builder() method
     }
 
-    public Builder bearerAuth(String bearerAuth) {
-      Utils.checkNotNull(bearerAuth, "bearerAuth");
-      this.bearerAuth = bearerAuth;
+    public Builder apiKey(String apiKey) {
+      Utils.checkNotNull(apiKey, "apiKey");
+      this.apiKey = Optional.ofNullable(apiKey);
       return this;
     }
 
-    public Builder apiKeyAuth(String apiKeyAuth) {
-      Utils.checkNotNull(apiKeyAuth, "apiKeyAuth");
-      this.apiKeyAuth = apiKeyAuth;
+    public Builder apiKey(Optional<String> apiKey) {
+      Utils.checkNotNull(apiKey, "apiKey");
+      this.apiKey = apiKey;
+      return this;
+    }
+
+    public Builder serviceAccountCreds(ServiceAccountCreds serviceAccountCreds) {
+      Utils.checkNotNull(serviceAccountCreds, "serviceAccountCreds");
+      this.serviceAccountCreds = Optional.ofNullable(serviceAccountCreds);
+      return this;
+    }
+
+    public Builder serviceAccountCreds(
+        Optional<? extends ServiceAccountCreds> serviceAccountCreds) {
+      Utils.checkNotNull(serviceAccountCreds, "serviceAccountCreds");
+      this.serviceAccountCreds = serviceAccountCreds;
       return this;
     }
 
     public Security build() {
-      return new Security(bearerAuth, apiKeyAuth);
+      return new Security(apiKey, serviceAccountCreds);
     }
   }
 }

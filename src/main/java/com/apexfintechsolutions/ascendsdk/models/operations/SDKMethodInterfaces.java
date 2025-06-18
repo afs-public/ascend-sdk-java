@@ -4,6 +4,7 @@
 
 package com.apexfintechsolutions.ascendsdk.models.operations;
 
+import com.apexfintechsolutions.ascendsdk.models.components.AcceptTransferRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.AccountRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.AccountRequestUpdate;
 import com.apexfintechsolutions.ascendsdk.models.components.AchDepositCreate;
@@ -40,7 +41,6 @@ import com.apexfintechsolutions.ascendsdk.models.components.CashJournalCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.CheckPartyTypeRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.CloseAccountRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.CompleteTradeRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.DateCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.DeactivateEnrollmentRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.EndLargeTraderRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.EndRestrictionRequestCreate;
@@ -82,6 +82,7 @@ import com.apexfintechsolutions.ascendsdk.models.components.RebookExecutionReque
 import com.apexfintechsolutions.ascendsdk.models.components.RebookTradeAllocationRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.RebookTradeRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ReissueMicroDepositsRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.RejectTransferRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.RemovePartyRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ReplacePartyRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.RestrictionCreate;
@@ -115,7 +116,10 @@ public class SDKMethodInterfaces {
 
   public interface MethodCallAuthenticationListSigningKeys {
     AuthenticationListSigningKeysResponse listSigningKeys(
-        Optional<Integer> pageSize, Optional<String> pageToken) throws Exception;
+        AuthenticationListSigningKeysSecurity security,
+        Optional<Integer> pageSize,
+        Optional<String> pageToken)
+        throws Exception;
   }
 
   public interface MethodCallReaderListEventMessages {
@@ -568,11 +572,7 @@ public class SDKMethodInterfaces {
 
   public interface MethodCallIctReconReportsLocateIctReport {
     IctReconReportsLocateIctReportResponse locateIctReport(
-        String correspondentId,
-        Optional<String> batchId,
-        Optional<? extends ProgramDateFilterProgram> programDateFilterProgram,
-        Optional<? extends DateCreate> programDateFilterProcessDate)
-        throws Exception;
+        IctReconReportsLocateIctReportRequest request) throws Exception;
   }
 
   public interface MethodCallRetirementConstraintsListContributionSummaries {
@@ -934,6 +934,29 @@ public class SDKMethodInterfaces {
         String accountId,
         Optional<String> requestId,
         TransferCreate transferCreate)
+        throws Exception;
+  }
+
+  public interface MethodCallAccountTransfersListTransfers {
+    AccountTransfersListTransfersResponse listTransfers(
+        AccountTransfersListTransfersRequest request) throws Exception;
+  }
+
+  public interface MethodCallAccountTransfersAcceptTransfer {
+    AccountTransfersAcceptTransferResponse acceptTransfer(
+        String correspondentId,
+        String accountId,
+        String transferId,
+        AcceptTransferRequestCreate acceptTransferRequestCreate)
+        throws Exception;
+  }
+
+  public interface MethodCallAccountTransfersRejectTransfer {
+    AccountTransfersRejectTransferResponse rejectTransfer(
+        String correspondentId,
+        String accountId,
+        String transferId,
+        RejectTransferRequestCreate rejectTransferRequestCreate)
         throws Exception;
   }
 

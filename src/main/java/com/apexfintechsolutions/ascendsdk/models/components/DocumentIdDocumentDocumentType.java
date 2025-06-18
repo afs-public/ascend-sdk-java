@@ -87,8 +87,6 @@ public class DocumentIdDocumentDocumentType {
       new DocumentIdDocumentDocumentType("TRUSTEE_CERTIFICATION");
   public static final DocumentIdDocumentDocumentType SELFIE =
       new DocumentIdDocumentDocumentType("SELFIE");
-  public static final DocumentIdDocumentDocumentType ARTICLES_OF_ORGANISATION =
-      new DocumentIdDocumentDocumentType("ARTICLES_OF_ORGANISATION");
   public static final DocumentIdDocumentDocumentType CERT_OF_SOLE_OFFICER =
       new DocumentIdDocumentDocumentType("CERT_OF_SOLE_OFFICER");
   public static final DocumentIdDocumentDocumentType CERTIFICATION_CORRESPONDENT_ACCOUNTS =
@@ -117,6 +115,8 @@ public class DocumentIdDocumentDocumentType {
       new DocumentIdDocumentDocumentType("SHAREHOLDER_AGREEMENT");
   public static final DocumentIdDocumentDocumentType CORPORATE_RECORDS =
       new DocumentIdDocumentDocumentType("CORPORATE_RECORDS");
+  public static final DocumentIdDocumentDocumentType ARTICLES_OF_ORGANIZATION =
+      new DocumentIdDocumentDocumentType("ARTICLES_OF_ORGANIZATION");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -207,7 +207,6 @@ public class DocumentIdDocumentDocumentType {
     map.put("EXECUTOR_CERTIFICATION", EXECUTOR_CERTIFICATION);
     map.put("TRUSTEE_CERTIFICATION", TRUSTEE_CERTIFICATION);
     map.put("SELFIE", SELFIE);
-    map.put("ARTICLES_OF_ORGANISATION", ARTICLES_OF_ORGANISATION);
     map.put("CERT_OF_SOLE_OFFICER", CERT_OF_SOLE_OFFICER);
     map.put("CERTIFICATION_CORRESPONDENT_ACCOUNTS", CERTIFICATION_CORRESPONDENT_ACCOUNTS);
     map.put("CERTIFICATION_FOREIGN_BANKS", CERTIFICATION_FOREIGN_BANKS);
@@ -222,6 +221,7 @@ public class DocumentIdDocumentDocumentType {
     map.put("CORPORATE_BYLAWS", CORPORATE_BYLAWS);
     map.put("SHAREHOLDER_AGREEMENT", SHAREHOLDER_AGREEMENT);
     map.put("CORPORATE_RECORDS", CORPORATE_RECORDS);
+    map.put("ARTICLES_OF_ORGANIZATION", ARTICLES_OF_ORGANIZATION);
     return map;
   }
 
@@ -256,8 +256,6 @@ public class DocumentIdDocumentDocumentType {
     map.put("EXECUTOR_CERTIFICATION", DocumentIdDocumentDocumentTypeEnum.EXECUTOR_CERTIFICATION);
     map.put("TRUSTEE_CERTIFICATION", DocumentIdDocumentDocumentTypeEnum.TRUSTEE_CERTIFICATION);
     map.put("SELFIE", DocumentIdDocumentDocumentTypeEnum.SELFIE);
-    map.put(
-        "ARTICLES_OF_ORGANISATION", DocumentIdDocumentDocumentTypeEnum.ARTICLES_OF_ORGANISATION);
     map.put("CERT_OF_SOLE_OFFICER", DocumentIdDocumentDocumentTypeEnum.CERT_OF_SOLE_OFFICER);
     map.put(
         "CERTIFICATION_CORRESPONDENT_ACCOUNTS",
@@ -280,6 +278,8 @@ public class DocumentIdDocumentDocumentType {
     map.put("CORPORATE_BYLAWS", DocumentIdDocumentDocumentTypeEnum.CORPORATE_BYLAWS);
     map.put("SHAREHOLDER_AGREEMENT", DocumentIdDocumentDocumentTypeEnum.SHAREHOLDER_AGREEMENT);
     map.put("CORPORATE_RECORDS", DocumentIdDocumentDocumentTypeEnum.CORPORATE_RECORDS);
+    map.put(
+        "ARTICLES_OF_ORGANIZATION", DocumentIdDocumentDocumentTypeEnum.ARTICLES_OF_ORGANIZATION);
     return map;
   }
 
@@ -337,7 +337,6 @@ public class DocumentIdDocumentDocumentType {
     EXECUTOR_CERTIFICATION("EXECUTOR_CERTIFICATION"),
     TRUSTEE_CERTIFICATION("TRUSTEE_CERTIFICATION"),
     SELFIE("SELFIE"),
-    ARTICLES_OF_ORGANISATION("ARTICLES_OF_ORGANISATION"),
     CERT_OF_SOLE_OFFICER("CERT_OF_SOLE_OFFICER"),
     CERTIFICATION_CORRESPONDENT_ACCOUNTS("CERTIFICATION_CORRESPONDENT_ACCOUNTS"),
     CERTIFICATION_FOREIGN_BANKS("CERTIFICATION_FOREIGN_BANKS"),
@@ -352,6 +351,7 @@ public class DocumentIdDocumentDocumentType {
     CORPORATE_BYLAWS("CORPORATE_BYLAWS"),
     SHAREHOLDER_AGREEMENT("SHAREHOLDER_AGREEMENT"),
     CORPORATE_RECORDS("CORPORATE_RECORDS"),
+    ARTICLES_OF_ORGANIZATION("ARTICLES_OF_ORGANIZATION"),
     ;
 
     private final String value;

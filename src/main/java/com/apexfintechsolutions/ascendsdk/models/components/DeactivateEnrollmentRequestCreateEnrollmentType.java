@@ -39,8 +39,11 @@ import java.util.Optional;
  * dealing with the `Optional` appropriately).
  */
 /**
- * DeactivateEnrollmentRequestCreateEnrollmentType - Describes the name of the enrollment; Expressed
- * as an enum
+ * DeactivateEnrollmentRequestCreateEnrollmentType - **Field Dependencies:**
+ *
+ * <p>Required if `enrollment_id` is not present.
+ *
+ * <p>Otherwise, must be empty.
  */
 @JsonDeserialize(using = DeactivateEnrollmentRequestCreateEnrollmentType._Deserializer.class)
 @JsonSerialize(using = DeactivateEnrollmentRequestCreateEnrollmentType._Serializer.class)

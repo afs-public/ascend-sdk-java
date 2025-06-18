@@ -31,7 +31,8 @@ public class InvestigationServiceUpdateInvestigationResponse implements Response
 
   /**
    * INVALID_ARGUMENT: The request is not valid, additional information may be present in the
-   * BadRequest details.
+   * BadRequest details. FAILED_PRECONDITION: The request is not valid, additional information may
+   * be present in the BadRequest details.
    */
   private Optional<? extends Status> status;
 
@@ -86,7 +87,8 @@ public class InvestigationServiceUpdateInvestigationResponse implements Response
 
   /**
    * INVALID_ARGUMENT: The request is not valid, additional information may be present in the
-   * BadRequest details.
+   * BadRequest details. FAILED_PRECONDITION: The request is not valid, additional information may
+   * be present in the BadRequest details.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -138,7 +140,8 @@ public class InvestigationServiceUpdateInvestigationResponse implements Response
 
   /**
    * INVALID_ARGUMENT: The request is not valid, additional information may be present in the
-   * BadRequest details.
+   * BadRequest details. FAILED_PRECONDITION: The request is not valid, additional information may
+   * be present in the BadRequest details.
    */
   public InvestigationServiceUpdateInvestigationResponse withStatus(Status status) {
     Utils.checkNotNull(status, "status");
@@ -148,7 +151,8 @@ public class InvestigationServiceUpdateInvestigationResponse implements Response
 
   /**
    * INVALID_ARGUMENT: The request is not valid, additional information may be present in the
-   * BadRequest details.
+   * BadRequest details. FAILED_PRECONDITION: The request is not valid, additional information may
+   * be present in the BadRequest details.
    */
   public InvestigationServiceUpdateInvestigationResponse withStatus(
       Optional<? extends Status> status) {
@@ -248,7 +252,8 @@ public class InvestigationServiceUpdateInvestigationResponse implements Response
 
     /**
      * INVALID_ARGUMENT: The request is not valid, additional information may be present in the
-     * BadRequest details.
+     * BadRequest details. FAILED_PRECONDITION: The request is not valid, additional information may
+     * be present in the BadRequest details.
      */
     public Builder status(Status status) {
       Utils.checkNotNull(status, "status");
@@ -258,7 +263,8 @@ public class InvestigationServiceUpdateInvestigationResponse implements Response
 
     /**
      * INVALID_ARGUMENT: The request is not valid, additional information may be present in the
-     * BadRequest details.
+     * BadRequest details. FAILED_PRECONDITION: The request is not valid, additional information may
+     * be present in the BadRequest details.
      */
     public Builder status(Optional<? extends Status> status) {
       Utils.checkNotNull(status, "status");

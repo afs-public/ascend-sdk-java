@@ -47,6 +47,11 @@ public class WatchlistMatch {
   @JsonProperty("match_state")
   private Optional<? extends MatchState> matchState;
 
+  /** The types of watchlist matches */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("match_types")
+  private Optional<? extends List<MatchTypes>> matchTypes;
+
   /** The time the watchlist match was last updated */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("updated_at")
@@ -69,6 +74,7 @@ public class WatchlistMatch {
       @JsonProperty("exclude_from_screening") Optional<Boolean> excludeFromScreening,
       @JsonProperty("match_attributes") Optional<? extends List<MatchAttributes>> matchAttributes,
       @JsonProperty("match_state") Optional<? extends MatchState> matchState,
+      @JsonProperty("match_types") Optional<? extends List<MatchTypes>> matchTypes,
       @JsonProperty("updated_at") JsonNullable<OffsetDateTime> updatedAt,
       @JsonProperty("watchlist_id") Optional<String> watchlistId,
       @JsonProperty("watchlist_item_id") Optional<Integer> watchlistItemId) {
@@ -77,6 +83,7 @@ public class WatchlistMatch {
     Utils.checkNotNull(excludeFromScreening, "excludeFromScreening");
     Utils.checkNotNull(matchAttributes, "matchAttributes");
     Utils.checkNotNull(matchState, "matchState");
+    Utils.checkNotNull(matchTypes, "matchTypes");
     Utils.checkNotNull(updatedAt, "updatedAt");
     Utils.checkNotNull(watchlistId, "watchlistId");
     Utils.checkNotNull(watchlistItemId, "watchlistItemId");
@@ -85,6 +92,7 @@ public class WatchlistMatch {
     this.excludeFromScreening = excludeFromScreening;
     this.matchAttributes = matchAttributes;
     this.matchState = matchState;
+    this.matchTypes = matchTypes;
     this.updatedAt = updatedAt;
     this.watchlistId = watchlistId;
     this.watchlistItemId = watchlistItemId;
@@ -94,6 +102,7 @@ public class WatchlistMatch {
     this(
         Optional.empty(),
         JsonNullable.undefined(),
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
@@ -135,6 +144,13 @@ public class WatchlistMatch {
   @JsonIgnore
   public Optional<MatchState> matchState() {
     return (Optional<MatchState>) matchState;
+  }
+
+  /** The types of watchlist matches */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<List<MatchTypes>> matchTypes() {
+    return (Optional<List<MatchTypes>>) matchTypes;
   }
 
   /** The time the watchlist match was last updated */
@@ -236,6 +252,20 @@ public class WatchlistMatch {
     return this;
   }
 
+  /** The types of watchlist matches */
+  public WatchlistMatch withMatchTypes(List<MatchTypes> matchTypes) {
+    Utils.checkNotNull(matchTypes, "matchTypes");
+    this.matchTypes = Optional.ofNullable(matchTypes);
+    return this;
+  }
+
+  /** The types of watchlist matches */
+  public WatchlistMatch withMatchTypes(Optional<? extends List<MatchTypes>> matchTypes) {
+    Utils.checkNotNull(matchTypes, "matchTypes");
+    this.matchTypes = matchTypes;
+    return this;
+  }
+
   /** The time the watchlist match was last updated */
   public WatchlistMatch withUpdatedAt(OffsetDateTime updatedAt) {
     Utils.checkNotNull(updatedAt, "updatedAt");
@@ -292,6 +322,7 @@ public class WatchlistMatch {
         && Objects.deepEquals(this.excludeFromScreening, other.excludeFromScreening)
         && Objects.deepEquals(this.matchAttributes, other.matchAttributes)
         && Objects.deepEquals(this.matchState, other.matchState)
+        && Objects.deepEquals(this.matchTypes, other.matchTypes)
         && Objects.deepEquals(this.updatedAt, other.updatedAt)
         && Objects.deepEquals(this.watchlistId, other.watchlistId)
         && Objects.deepEquals(this.watchlistItemId, other.watchlistItemId);
@@ -305,6 +336,7 @@ public class WatchlistMatch {
         excludeFromScreening,
         matchAttributes,
         matchState,
+        matchTypes,
         updatedAt,
         watchlistId,
         watchlistItemId);
@@ -324,6 +356,8 @@ public class WatchlistMatch {
         matchAttributes,
         "matchState",
         matchState,
+        "matchTypes",
+        matchTypes,
         "updatedAt",
         updatedAt,
         "watchlistId",
@@ -343,6 +377,8 @@ public class WatchlistMatch {
     private Optional<? extends List<MatchAttributes>> matchAttributes = Optional.empty();
 
     private Optional<? extends MatchState> matchState = Optional.empty();
+
+    private Optional<? extends List<MatchTypes>> matchTypes = Optional.empty();
 
     private JsonNullable<OffsetDateTime> updatedAt = JsonNullable.undefined();
 
@@ -430,6 +466,20 @@ public class WatchlistMatch {
       return this;
     }
 
+    /** The types of watchlist matches */
+    public Builder matchTypes(List<MatchTypes> matchTypes) {
+      Utils.checkNotNull(matchTypes, "matchTypes");
+      this.matchTypes = Optional.ofNullable(matchTypes);
+      return this;
+    }
+
+    /** The types of watchlist matches */
+    public Builder matchTypes(Optional<? extends List<MatchTypes>> matchTypes) {
+      Utils.checkNotNull(matchTypes, "matchTypes");
+      this.matchTypes = matchTypes;
+      return this;
+    }
+
     /** The time the watchlist match was last updated */
     public Builder updatedAt(OffsetDateTime updatedAt) {
       Utils.checkNotNull(updatedAt, "updatedAt");
@@ -479,6 +529,7 @@ public class WatchlistMatch {
           excludeFromScreening,
           matchAttributes,
           matchState,
+          matchTypes,
           updatedAt,
           watchlistId,
           watchlistItemId);

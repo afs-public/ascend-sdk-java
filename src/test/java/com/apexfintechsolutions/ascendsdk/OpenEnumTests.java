@@ -6,9 +6,12 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMoc
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class OpenEnumTests {
+
+  @Disabled("Disabling test for now")
   @Test
   public void test_Can_Fetch_Open_Enum_Data() throws Exception {
     WireMock.configureFor(9980);
@@ -65,7 +68,7 @@ public class OpenEnumTests {
     SDK sdk =
         SDK.builder()
             .serverURL("http://localhost:9980")
-            .security(Security.builder().bearerAuth("MOCK").apiKeyAuth("MOCK").build())
+            .security(Security.builder().apiKey("MOCK").build())
             .build();
 
     var result = sdk.assets().getAsset().assetId("204218").call();

@@ -69,7 +69,7 @@ public class TradeCreate {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("fees")
-  private Optional<? extends List<FeeCreate>> fees;
+  private Optional<? extends List<BookingFeeCreate>> fees;
 
   /**
    * Identifier (of the type specified in `identifier_type`). Responses will supply the originally
@@ -195,7 +195,7 @@ public class TradeCreate {
       @JsonProperty("client_order_id") String clientOrderId,
       @JsonProperty("executing_broker") Optional<String> executingBroker,
       @JsonProperty("executions") List<ExecutionCreate> executions,
-      @JsonProperty("fees") Optional<? extends List<FeeCreate>> fees,
+      @JsonProperty("fees") Optional<? extends List<BookingFeeCreate>> fees,
       @JsonProperty("identifier") String identifier,
       @JsonProperty("identifier_type") TradeCreateIdentifierType identifierType,
       @JsonProperty("issuing_region_code") Optional<String> issuingRegionCode,
@@ -366,8 +366,8 @@ public class TradeCreate {
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<List<FeeCreate>> fees() {
-    return (Optional<List<FeeCreate>>) fees;
+  public Optional<List<BookingFeeCreate>> fees() {
+    return (Optional<List<BookingFeeCreate>>) fees;
   }
 
   /**
@@ -614,7 +614,7 @@ public class TradeCreate {
    * Regulatory fees will be calculated automatically if they are not explicitly overwritten or
    * suppressed.
    */
-  public TradeCreate withFees(List<FeeCreate> fees) {
+  public TradeCreate withFees(List<BookingFeeCreate> fees) {
     Utils.checkNotNull(fees, "fees");
     this.fees = Optional.ofNullable(fees);
     return this;
@@ -625,7 +625,7 @@ public class TradeCreate {
    * Regulatory fees will be calculated automatically if they are not explicitly overwritten or
    * suppressed.
    */
-  public TradeCreate withFees(Optional<? extends List<FeeCreate>> fees) {
+  public TradeCreate withFees(Optional<? extends List<BookingFeeCreate>> fees) {
     Utils.checkNotNull(fees, "fees");
     this.fees = fees;
     return this;
@@ -1037,7 +1037,7 @@ public class TradeCreate {
 
     private List<ExecutionCreate> executions;
 
-    private Optional<? extends List<FeeCreate>> fees = Optional.empty();
+    private Optional<? extends List<BookingFeeCreate>> fees = Optional.empty();
 
     private String identifier;
 
@@ -1173,7 +1173,7 @@ public class TradeCreate {
      * Regulatory fees will be calculated automatically if they are not explicitly overwritten or
      * suppressed.
      */
-    public Builder fees(List<FeeCreate> fees) {
+    public Builder fees(List<BookingFeeCreate> fees) {
       Utils.checkNotNull(fees, "fees");
       this.fees = Optional.ofNullable(fees);
       return this;
@@ -1184,7 +1184,7 @@ public class TradeCreate {
      * Regulatory fees will be calculated automatically if they are not explicitly overwritten or
      * suppressed.
      */
-    public Builder fees(Optional<? extends List<FeeCreate>> fees) {
+    public Builder fees(Optional<? extends List<BookingFeeCreate>> fees) {
       Utils.checkNotNull(fees, "fees");
       this.fees = fees;
       return this;

@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * CustomerIdentification - CustomerIdentification includes the details of a customer identification
@@ -20,10 +21,26 @@ import java.util.Optional;
  */
 public class CustomerIdentification {
 
-  /** The types of checks being requested */
+  /**
+   * The types of checks being requested Must either be DATABASE or DOCUMENTARY else will return
+   * INVALID_ARGUMENT
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("check_types")
   private Optional<? extends List<CheckTypes>> checkTypes;
+
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>An identity is required when the `check_types` is DATABASE
+   *
+   * <p>Required if `check_types` is `DATABASE`.
+   *
+   * <p>Otherwise, must be empty.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("identity")
+  private JsonNullable<? extends Identity> identity;
 
   /**
    * required format:
@@ -41,25 +58,46 @@ public class CustomerIdentification {
   @JsonCreator
   public CustomerIdentification(
       @JsonProperty("check_types") Optional<? extends List<CheckTypes>> checkTypes,
+      @JsonProperty("identity") JsonNullable<? extends Identity> identity,
       @JsonProperty("name") Optional<String> name,
       @JsonProperty("results") Optional<? extends List<CustomerIdentificationResult>> results) {
     Utils.checkNotNull(checkTypes, "checkTypes");
+    Utils.checkNotNull(identity, "identity");
     Utils.checkNotNull(name, "name");
     Utils.checkNotNull(results, "results");
     this.checkTypes = checkTypes;
+    this.identity = identity;
     this.name = name;
     this.results = results;
   }
 
   public CustomerIdentification() {
-    this(Optional.empty(), Optional.empty(), Optional.empty());
+    this(Optional.empty(), JsonNullable.undefined(), Optional.empty(), Optional.empty());
   }
 
-  /** The types of checks being requested */
+  /**
+   * The types of checks being requested Must either be DATABASE or DOCUMENTARY else will return
+   * INVALID_ARGUMENT
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<List<CheckTypes>> checkTypes() {
     return (Optional<List<CheckTypes>>) checkTypes;
+  }
+
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>An identity is required when the `check_types` is DATABASE
+   *
+   * <p>Required if `check_types` is `DATABASE`.
+   *
+   * <p>Otherwise, must be empty.
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<Identity> identity() {
+    return (JsonNullable<Identity>) identity;
   }
 
   /**
@@ -82,17 +120,53 @@ public class CustomerIdentification {
     return new Builder();
   }
 
-  /** The types of checks being requested */
+  /**
+   * The types of checks being requested Must either be DATABASE or DOCUMENTARY else will return
+   * INVALID_ARGUMENT
+   */
   public CustomerIdentification withCheckTypes(List<CheckTypes> checkTypes) {
     Utils.checkNotNull(checkTypes, "checkTypes");
     this.checkTypes = Optional.ofNullable(checkTypes);
     return this;
   }
 
-  /** The types of checks being requested */
+  /**
+   * The types of checks being requested Must either be DATABASE or DOCUMENTARY else will return
+   * INVALID_ARGUMENT
+   */
   public CustomerIdentification withCheckTypes(Optional<? extends List<CheckTypes>> checkTypes) {
     Utils.checkNotNull(checkTypes, "checkTypes");
     this.checkTypes = checkTypes;
+    return this;
+  }
+
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>An identity is required when the `check_types` is DATABASE
+   *
+   * <p>Required if `check_types` is `DATABASE`.
+   *
+   * <p>Otherwise, must be empty.
+   */
+  public CustomerIdentification withIdentity(Identity identity) {
+    Utils.checkNotNull(identity, "identity");
+    this.identity = JsonNullable.of(identity);
+    return this;
+  }
+
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>An identity is required when the `check_types` is DATABASE
+   *
+   * <p>Required if `check_types` is `DATABASE`.
+   *
+   * <p>Otherwise, must be empty.
+   */
+  public CustomerIdentification withIdentity(JsonNullable<? extends Identity> identity) {
+    Utils.checkNotNull(identity, "identity");
+    this.identity = identity;
     return this;
   }
 
@@ -141,24 +215,35 @@ public class CustomerIdentification {
     }
     CustomerIdentification other = (CustomerIdentification) o;
     return Objects.deepEquals(this.checkTypes, other.checkTypes)
+        && Objects.deepEquals(this.identity, other.identity)
         && Objects.deepEquals(this.name, other.name)
         && Objects.deepEquals(this.results, other.results);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(checkTypes, name, results);
+    return Objects.hash(checkTypes, identity, name, results);
   }
 
   @Override
   public String toString() {
     return Utils.toString(
-        CustomerIdentification.class, "checkTypes", checkTypes, "name", name, "results", results);
+        CustomerIdentification.class,
+        "checkTypes",
+        checkTypes,
+        "identity",
+        identity,
+        "name",
+        name,
+        "results",
+        results);
   }
 
   public static final class Builder {
 
     private Optional<? extends List<CheckTypes>> checkTypes = Optional.empty();
+
+    private JsonNullable<? extends Identity> identity = JsonNullable.undefined();
 
     private Optional<String> name = Optional.empty();
 
@@ -168,17 +253,53 @@ public class CustomerIdentification {
       // force use of static builder() method
     }
 
-    /** The types of checks being requested */
+    /**
+     * The types of checks being requested Must either be DATABASE or DOCUMENTARY else will return
+     * INVALID_ARGUMENT
+     */
     public Builder checkTypes(List<CheckTypes> checkTypes) {
       Utils.checkNotNull(checkTypes, "checkTypes");
       this.checkTypes = Optional.ofNullable(checkTypes);
       return this;
     }
 
-    /** The types of checks being requested */
+    /**
+     * The types of checks being requested Must either be DATABASE or DOCUMENTARY else will return
+     * INVALID_ARGUMENT
+     */
     public Builder checkTypes(Optional<? extends List<CheckTypes>> checkTypes) {
       Utils.checkNotNull(checkTypes, "checkTypes");
       this.checkTypes = checkTypes;
+      return this;
+    }
+
+    /**
+     * **Field Dependencies:**
+     *
+     * <p>An identity is required when the `check_types` is DATABASE
+     *
+     * <p>Required if `check_types` is `DATABASE`.
+     *
+     * <p>Otherwise, must be empty.
+     */
+    public Builder identity(Identity identity) {
+      Utils.checkNotNull(identity, "identity");
+      this.identity = JsonNullable.of(identity);
+      return this;
+    }
+
+    /**
+     * **Field Dependencies:**
+     *
+     * <p>An identity is required when the `check_types` is DATABASE
+     *
+     * <p>Required if `check_types` is `DATABASE`.
+     *
+     * <p>Otherwise, must be empty.
+     */
+    public Builder identity(JsonNullable<? extends Identity> identity) {
+      Utils.checkNotNull(identity, "identity");
+      this.identity = identity;
       return this;
     }
 
@@ -217,7 +338,7 @@ public class CustomerIdentification {
     }
 
     public CustomerIdentification build() {
-      return new CustomerIdentification(checkTypes, name, results);
+      return new CustomerIdentification(checkTypes, identity, name, results);
     }
   }
 }

@@ -69,7 +69,16 @@ public class LegalEntityCreate {
   @JsonProperty("entity_type")
   private EntityType entityType;
 
-  /** The reason the customer is exempt from verifying beneficial owners, if applicable. */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Exempt entities must set `exempt_verifying_beneficial_owners` to `true` and provide an
+   * `exempt_customer_reason` on the owner record.
+   *
+   * <p>Required if `exempt_verifying_beneficial_owners` is `true`.
+   *
+   * <p>Otherwise, must be empty.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("exempt_customer_reason")
   private Optional<? extends ExemptCustomerReason> exemptCustomerReason;
@@ -410,7 +419,16 @@ public class LegalEntityCreate {
     return entityType;
   }
 
-  /** The reason the customer is exempt from verifying beneficial owners, if applicable. */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Exempt entities must set `exempt_verifying_beneficial_owners` to `true` and provide an
+   * `exempt_customer_reason` on the owner record.
+   *
+   * <p>Required if `exempt_verifying_beneficial_owners` is `true`.
+   *
+   * <p>Otherwise, must be empty.
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<ExemptCustomerReason> exemptCustomerReason() {
@@ -710,14 +728,32 @@ public class LegalEntityCreate {
     return this;
   }
 
-  /** The reason the customer is exempt from verifying beneficial owners, if applicable. */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Exempt entities must set `exempt_verifying_beneficial_owners` to `true` and provide an
+   * `exempt_customer_reason` on the owner record.
+   *
+   * <p>Required if `exempt_verifying_beneficial_owners` is `true`.
+   *
+   * <p>Otherwise, must be empty.
+   */
   public LegalEntityCreate withExemptCustomerReason(ExemptCustomerReason exemptCustomerReason) {
     Utils.checkNotNull(exemptCustomerReason, "exemptCustomerReason");
     this.exemptCustomerReason = Optional.ofNullable(exemptCustomerReason);
     return this;
   }
 
-  /** The reason the customer is exempt from verifying beneficial owners, if applicable. */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Exempt entities must set `exempt_verifying_beneficial_owners` to `true` and provide an
+   * `exempt_customer_reason` on the owner record.
+   *
+   * <p>Required if `exempt_verifying_beneficial_owners` is `true`.
+   *
+   * <p>Otherwise, must be empty.
+   */
   public LegalEntityCreate withExemptCustomerReason(
       Optional<? extends ExemptCustomerReason> exemptCustomerReason) {
     Utils.checkNotNull(exemptCustomerReason, "exemptCustomerReason");
@@ -1342,14 +1378,32 @@ public class LegalEntityCreate {
       return this;
     }
 
-    /** The reason the customer is exempt from verifying beneficial owners, if applicable. */
+    /**
+     * **Field Dependencies:**
+     *
+     * <p>Exempt entities must set `exempt_verifying_beneficial_owners` to `true` and provide an
+     * `exempt_customer_reason` on the owner record.
+     *
+     * <p>Required if `exempt_verifying_beneficial_owners` is `true`.
+     *
+     * <p>Otherwise, must be empty.
+     */
     public Builder exemptCustomerReason(ExemptCustomerReason exemptCustomerReason) {
       Utils.checkNotNull(exemptCustomerReason, "exemptCustomerReason");
       this.exemptCustomerReason = Optional.ofNullable(exemptCustomerReason);
       return this;
     }
 
-    /** The reason the customer is exempt from verifying beneficial owners, if applicable. */
+    /**
+     * **Field Dependencies:**
+     *
+     * <p>Exempt entities must set `exempt_verifying_beneficial_owners` to `true` and provide an
+     * `exempt_customer_reason` on the owner record.
+     *
+     * <p>Required if `exempt_verifying_beneficial_owners` is `true`.
+     *
+     * <p>Otherwise, must be empty.
+     */
     public Builder exemptCustomerReason(
         Optional<? extends ExemptCustomerReason> exemptCustomerReason) {
       Utils.checkNotNull(exemptCustomerReason, "exemptCustomerReason");

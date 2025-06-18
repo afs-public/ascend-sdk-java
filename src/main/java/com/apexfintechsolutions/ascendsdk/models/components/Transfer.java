@@ -10,120 +10,450 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
-/**
- * Transfer - Used to record more generic transfers of funds or securities and details related to
- * the transfer. The transfer type and activity_description can be used to provide more specific
- * context
- */
+/** Transfer - The accepted transfer's resource */
 public class Transfer {
 
-  /** Free form text field */
+  /** The NSCC transfer identifier */
   @JsonInclude(Include.NON_ABSENT)
-  @JsonProperty("additional_instructions")
-  private Optional<String> additionalInstructions;
+  @JsonProperty("acat_control_number")
+  private Optional<String> acatControlNumber;
+
+  /** The assets being transferred (Cash, Equities, etc.) */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("assets")
+  private Optional<? extends List<AcatsAsset>> assets;
+
+  /** User supplied comment */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("comment")
+  private Optional<String> comment;
+
+  /** The transfer creation timestamp */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("create_time")
+  private JsonNullable<OffsetDateTime> createTime;
+
+  /** The delivering party information */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("deliverer")
+  private JsonNullable<? extends AcceptTransferResponseDeliverer> deliverer;
+
+  /** The direction of the transfer */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("direction")
+  private Optional<? extends AcceptTransferResponseDirection> direction;
 
   /**
-   * String field that can be populated with the broker dealer undergoing a clearing platform
-   * conversion. Used for activity description purposes
+   * The service generated name of the transfer. Format:
+   * correspondents/{correspondent_id}/accounts/{account_id}/transfers/{transfer_id}
    */
   @JsonInclude(Include.NON_ABSENT)
-  @JsonProperty("client_brokerage")
-  private Optional<String> clientBrokerage;
+  @JsonProperty("name")
+  private Optional<String> name;
 
-  /** Provides more detail on the type of transfer */
+  /** The NSCC transfer status */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("nscc_status")
+  private Optional<? extends AcceptTransferResponseNsccStatus> nsccStatus;
+
+  /** An associated NSCC transfer identifier, if applicable */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("original_control_number")
+  private Optional<String> originalControlNumber;
+
+  /** The receiving party information */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("receiver")
+  private JsonNullable<? extends AcceptTransferResponseReceiver> receiver;
+
+  /** The reject code */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("reject_code")
+  private Optional<? extends AcceptTransferResponseRejectCode> rejectCode;
+
+  /** The transfer state */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("state")
+  private Optional<? extends AcceptTransferResponseState> state;
+
+  /** A reason for the state if applicable */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("state_reason")
+  private Optional<String> stateReason;
+
+  /** The type of transfer */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("transfer_type")
-  private Optional<? extends EntryTransferType> transferType;
+  private Optional<? extends AcceptTransferResponseTransferType> transferType;
 
   @JsonCreator
   public Transfer(
-      @JsonProperty("additional_instructions") Optional<String> additionalInstructions,
-      @JsonProperty("client_brokerage") Optional<String> clientBrokerage,
-      @JsonProperty("transfer_type") Optional<? extends EntryTransferType> transferType) {
-    Utils.checkNotNull(additionalInstructions, "additionalInstructions");
-    Utils.checkNotNull(clientBrokerage, "clientBrokerage");
+      @JsonProperty("acat_control_number") Optional<String> acatControlNumber,
+      @JsonProperty("assets") Optional<? extends List<AcatsAsset>> assets,
+      @JsonProperty("comment") Optional<String> comment,
+      @JsonProperty("create_time") JsonNullable<OffsetDateTime> createTime,
+      @JsonProperty("deliverer") JsonNullable<? extends AcceptTransferResponseDeliverer> deliverer,
+      @JsonProperty("direction") Optional<? extends AcceptTransferResponseDirection> direction,
+      @JsonProperty("name") Optional<String> name,
+      @JsonProperty("nscc_status") Optional<? extends AcceptTransferResponseNsccStatus> nsccStatus,
+      @JsonProperty("original_control_number") Optional<String> originalControlNumber,
+      @JsonProperty("receiver") JsonNullable<? extends AcceptTransferResponseReceiver> receiver,
+      @JsonProperty("reject_code") Optional<? extends AcceptTransferResponseRejectCode> rejectCode,
+      @JsonProperty("state") Optional<? extends AcceptTransferResponseState> state,
+      @JsonProperty("state_reason") Optional<String> stateReason,
+      @JsonProperty("transfer_type")
+          Optional<? extends AcceptTransferResponseTransferType> transferType) {
+    Utils.checkNotNull(acatControlNumber, "acatControlNumber");
+    Utils.checkNotNull(assets, "assets");
+    Utils.checkNotNull(comment, "comment");
+    Utils.checkNotNull(createTime, "createTime");
+    Utils.checkNotNull(deliverer, "deliverer");
+    Utils.checkNotNull(direction, "direction");
+    Utils.checkNotNull(name, "name");
+    Utils.checkNotNull(nsccStatus, "nsccStatus");
+    Utils.checkNotNull(originalControlNumber, "originalControlNumber");
+    Utils.checkNotNull(receiver, "receiver");
+    Utils.checkNotNull(rejectCode, "rejectCode");
+    Utils.checkNotNull(state, "state");
+    Utils.checkNotNull(stateReason, "stateReason");
     Utils.checkNotNull(transferType, "transferType");
-    this.additionalInstructions = additionalInstructions;
-    this.clientBrokerage = clientBrokerage;
+    this.acatControlNumber = acatControlNumber;
+    this.assets = assets;
+    this.comment = comment;
+    this.createTime = createTime;
+    this.deliverer = deliverer;
+    this.direction = direction;
+    this.name = name;
+    this.nsccStatus = nsccStatus;
+    this.originalControlNumber = originalControlNumber;
+    this.receiver = receiver;
+    this.rejectCode = rejectCode;
+    this.state = state;
+    this.stateReason = stateReason;
     this.transferType = transferType;
   }
 
   public Transfer() {
-    this(Optional.empty(), Optional.empty(), Optional.empty());
+    this(
+        Optional.empty(),
+        Optional.empty(),
+        Optional.empty(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        Optional.empty(),
+        Optional.empty(),
+        Optional.empty(),
+        Optional.empty(),
+        JsonNullable.undefined(),
+        Optional.empty(),
+        Optional.empty(),
+        Optional.empty(),
+        Optional.empty());
   }
 
-  /** Free form text field */
+  /** The NSCC transfer identifier */
   @JsonIgnore
-  public Optional<String> additionalInstructions() {
-    return additionalInstructions;
+  public Optional<String> acatControlNumber() {
+    return acatControlNumber;
+  }
+
+  /** The assets being transferred (Cash, Equities, etc.) */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<List<AcatsAsset>> assets() {
+    return (Optional<List<AcatsAsset>>) assets;
+  }
+
+  /** User supplied comment */
+  @JsonIgnore
+  public Optional<String> comment() {
+    return comment;
+  }
+
+  /** The transfer creation timestamp */
+  @JsonIgnore
+  public JsonNullable<OffsetDateTime> createTime() {
+    return createTime;
+  }
+
+  /** The delivering party information */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<AcceptTransferResponseDeliverer> deliverer() {
+    return (JsonNullable<AcceptTransferResponseDeliverer>) deliverer;
+  }
+
+  /** The direction of the transfer */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<AcceptTransferResponseDirection> direction() {
+    return (Optional<AcceptTransferResponseDirection>) direction;
   }
 
   /**
-   * String field that can be populated with the broker dealer undergoing a clearing platform
-   * conversion. Used for activity description purposes
+   * The service generated name of the transfer. Format:
+   * correspondents/{correspondent_id}/accounts/{account_id}/transfers/{transfer_id}
    */
   @JsonIgnore
-  public Optional<String> clientBrokerage() {
-    return clientBrokerage;
+  public Optional<String> name() {
+    return name;
   }
 
-  /** Provides more detail on the type of transfer */
+  /** The NSCC transfer status */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<EntryTransferType> transferType() {
-    return (Optional<EntryTransferType>) transferType;
+  public Optional<AcceptTransferResponseNsccStatus> nsccStatus() {
+    return (Optional<AcceptTransferResponseNsccStatus>) nsccStatus;
+  }
+
+  /** An associated NSCC transfer identifier, if applicable */
+  @JsonIgnore
+  public Optional<String> originalControlNumber() {
+    return originalControlNumber;
+  }
+
+  /** The receiving party information */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<AcceptTransferResponseReceiver> receiver() {
+    return (JsonNullable<AcceptTransferResponseReceiver>) receiver;
+  }
+
+  /** The reject code */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<AcceptTransferResponseRejectCode> rejectCode() {
+    return (Optional<AcceptTransferResponseRejectCode>) rejectCode;
+  }
+
+  /** The transfer state */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<AcceptTransferResponseState> state() {
+    return (Optional<AcceptTransferResponseState>) state;
+  }
+
+  /** A reason for the state if applicable */
+  @JsonIgnore
+  public Optional<String> stateReason() {
+    return stateReason;
+  }
+
+  /** The type of transfer */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<AcceptTransferResponseTransferType> transferType() {
+    return (Optional<AcceptTransferResponseTransferType>) transferType;
   }
 
   public static final Builder builder() {
     return new Builder();
   }
 
-  /** Free form text field */
-  public Transfer withAdditionalInstructions(String additionalInstructions) {
-    Utils.checkNotNull(additionalInstructions, "additionalInstructions");
-    this.additionalInstructions = Optional.ofNullable(additionalInstructions);
+  /** The NSCC transfer identifier */
+  public Transfer withAcatControlNumber(String acatControlNumber) {
+    Utils.checkNotNull(acatControlNumber, "acatControlNumber");
+    this.acatControlNumber = Optional.ofNullable(acatControlNumber);
     return this;
   }
 
-  /** Free form text field */
-  public Transfer withAdditionalInstructions(Optional<String> additionalInstructions) {
-    Utils.checkNotNull(additionalInstructions, "additionalInstructions");
-    this.additionalInstructions = additionalInstructions;
+  /** The NSCC transfer identifier */
+  public Transfer withAcatControlNumber(Optional<String> acatControlNumber) {
+    Utils.checkNotNull(acatControlNumber, "acatControlNumber");
+    this.acatControlNumber = acatControlNumber;
+    return this;
+  }
+
+  /** The assets being transferred (Cash, Equities, etc.) */
+  public Transfer withAssets(List<AcatsAsset> assets) {
+    Utils.checkNotNull(assets, "assets");
+    this.assets = Optional.ofNullable(assets);
+    return this;
+  }
+
+  /** The assets being transferred (Cash, Equities, etc.) */
+  public Transfer withAssets(Optional<? extends List<AcatsAsset>> assets) {
+    Utils.checkNotNull(assets, "assets");
+    this.assets = assets;
+    return this;
+  }
+
+  /** User supplied comment */
+  public Transfer withComment(String comment) {
+    Utils.checkNotNull(comment, "comment");
+    this.comment = Optional.ofNullable(comment);
+    return this;
+  }
+
+  /** User supplied comment */
+  public Transfer withComment(Optional<String> comment) {
+    Utils.checkNotNull(comment, "comment");
+    this.comment = comment;
+    return this;
+  }
+
+  /** The transfer creation timestamp */
+  public Transfer withCreateTime(OffsetDateTime createTime) {
+    Utils.checkNotNull(createTime, "createTime");
+    this.createTime = JsonNullable.of(createTime);
+    return this;
+  }
+
+  /** The transfer creation timestamp */
+  public Transfer withCreateTime(JsonNullable<OffsetDateTime> createTime) {
+    Utils.checkNotNull(createTime, "createTime");
+    this.createTime = createTime;
+    return this;
+  }
+
+  /** The delivering party information */
+  public Transfer withDeliverer(AcceptTransferResponseDeliverer deliverer) {
+    Utils.checkNotNull(deliverer, "deliverer");
+    this.deliverer = JsonNullable.of(deliverer);
+    return this;
+  }
+
+  /** The delivering party information */
+  public Transfer withDeliverer(JsonNullable<? extends AcceptTransferResponseDeliverer> deliverer) {
+    Utils.checkNotNull(deliverer, "deliverer");
+    this.deliverer = deliverer;
+    return this;
+  }
+
+  /** The direction of the transfer */
+  public Transfer withDirection(AcceptTransferResponseDirection direction) {
+    Utils.checkNotNull(direction, "direction");
+    this.direction = Optional.ofNullable(direction);
+    return this;
+  }
+
+  /** The direction of the transfer */
+  public Transfer withDirection(Optional<? extends AcceptTransferResponseDirection> direction) {
+    Utils.checkNotNull(direction, "direction");
+    this.direction = direction;
     return this;
   }
 
   /**
-   * String field that can be populated with the broker dealer undergoing a clearing platform
-   * conversion. Used for activity description purposes
+   * The service generated name of the transfer. Format:
+   * correspondents/{correspondent_id}/accounts/{account_id}/transfers/{transfer_id}
    */
-  public Transfer withClientBrokerage(String clientBrokerage) {
-    Utils.checkNotNull(clientBrokerage, "clientBrokerage");
-    this.clientBrokerage = Optional.ofNullable(clientBrokerage);
+  public Transfer withName(String name) {
+    Utils.checkNotNull(name, "name");
+    this.name = Optional.ofNullable(name);
     return this;
   }
 
   /**
-   * String field that can be populated with the broker dealer undergoing a clearing platform
-   * conversion. Used for activity description purposes
+   * The service generated name of the transfer. Format:
+   * correspondents/{correspondent_id}/accounts/{account_id}/transfers/{transfer_id}
    */
-  public Transfer withClientBrokerage(Optional<String> clientBrokerage) {
-    Utils.checkNotNull(clientBrokerage, "clientBrokerage");
-    this.clientBrokerage = clientBrokerage;
+  public Transfer withName(Optional<String> name) {
+    Utils.checkNotNull(name, "name");
+    this.name = name;
     return this;
   }
 
-  /** Provides more detail on the type of transfer */
-  public Transfer withTransferType(EntryTransferType transferType) {
+  /** The NSCC transfer status */
+  public Transfer withNsccStatus(AcceptTransferResponseNsccStatus nsccStatus) {
+    Utils.checkNotNull(nsccStatus, "nsccStatus");
+    this.nsccStatus = Optional.ofNullable(nsccStatus);
+    return this;
+  }
+
+  /** The NSCC transfer status */
+  public Transfer withNsccStatus(Optional<? extends AcceptTransferResponseNsccStatus> nsccStatus) {
+    Utils.checkNotNull(nsccStatus, "nsccStatus");
+    this.nsccStatus = nsccStatus;
+    return this;
+  }
+
+  /** An associated NSCC transfer identifier, if applicable */
+  public Transfer withOriginalControlNumber(String originalControlNumber) {
+    Utils.checkNotNull(originalControlNumber, "originalControlNumber");
+    this.originalControlNumber = Optional.ofNullable(originalControlNumber);
+    return this;
+  }
+
+  /** An associated NSCC transfer identifier, if applicable */
+  public Transfer withOriginalControlNumber(Optional<String> originalControlNumber) {
+    Utils.checkNotNull(originalControlNumber, "originalControlNumber");
+    this.originalControlNumber = originalControlNumber;
+    return this;
+  }
+
+  /** The receiving party information */
+  public Transfer withReceiver(AcceptTransferResponseReceiver receiver) {
+    Utils.checkNotNull(receiver, "receiver");
+    this.receiver = JsonNullable.of(receiver);
+    return this;
+  }
+
+  /** The receiving party information */
+  public Transfer withReceiver(JsonNullable<? extends AcceptTransferResponseReceiver> receiver) {
+    Utils.checkNotNull(receiver, "receiver");
+    this.receiver = receiver;
+    return this;
+  }
+
+  /** The reject code */
+  public Transfer withRejectCode(AcceptTransferResponseRejectCode rejectCode) {
+    Utils.checkNotNull(rejectCode, "rejectCode");
+    this.rejectCode = Optional.ofNullable(rejectCode);
+    return this;
+  }
+
+  /** The reject code */
+  public Transfer withRejectCode(Optional<? extends AcceptTransferResponseRejectCode> rejectCode) {
+    Utils.checkNotNull(rejectCode, "rejectCode");
+    this.rejectCode = rejectCode;
+    return this;
+  }
+
+  /** The transfer state */
+  public Transfer withState(AcceptTransferResponseState state) {
+    Utils.checkNotNull(state, "state");
+    this.state = Optional.ofNullable(state);
+    return this;
+  }
+
+  /** The transfer state */
+  public Transfer withState(Optional<? extends AcceptTransferResponseState> state) {
+    Utils.checkNotNull(state, "state");
+    this.state = state;
+    return this;
+  }
+
+  /** A reason for the state if applicable */
+  public Transfer withStateReason(String stateReason) {
+    Utils.checkNotNull(stateReason, "stateReason");
+    this.stateReason = Optional.ofNullable(stateReason);
+    return this;
+  }
+
+  /** A reason for the state if applicable */
+  public Transfer withStateReason(Optional<String> stateReason) {
+    Utils.checkNotNull(stateReason, "stateReason");
+    this.stateReason = stateReason;
+    return this;
+  }
+
+  /** The type of transfer */
+  public Transfer withTransferType(AcceptTransferResponseTransferType transferType) {
     Utils.checkNotNull(transferType, "transferType");
     this.transferType = Optional.ofNullable(transferType);
     return this;
   }
 
-  /** Provides more detail on the type of transfer */
-  public Transfer withTransferType(Optional<? extends EntryTransferType> transferType) {
+  /** The type of transfer */
+  public Transfer withTransferType(
+      Optional<? extends AcceptTransferResponseTransferType> transferType) {
     Utils.checkNotNull(transferType, "transferType");
     this.transferType = transferType;
     return this;
@@ -138,90 +468,330 @@ public class Transfer {
       return false;
     }
     Transfer other = (Transfer) o;
-    return Objects.deepEquals(this.additionalInstructions, other.additionalInstructions)
-        && Objects.deepEquals(this.clientBrokerage, other.clientBrokerage)
+    return Objects.deepEquals(this.acatControlNumber, other.acatControlNumber)
+        && Objects.deepEquals(this.assets, other.assets)
+        && Objects.deepEquals(this.comment, other.comment)
+        && Objects.deepEquals(this.createTime, other.createTime)
+        && Objects.deepEquals(this.deliverer, other.deliverer)
+        && Objects.deepEquals(this.direction, other.direction)
+        && Objects.deepEquals(this.name, other.name)
+        && Objects.deepEquals(this.nsccStatus, other.nsccStatus)
+        && Objects.deepEquals(this.originalControlNumber, other.originalControlNumber)
+        && Objects.deepEquals(this.receiver, other.receiver)
+        && Objects.deepEquals(this.rejectCode, other.rejectCode)
+        && Objects.deepEquals(this.state, other.state)
+        && Objects.deepEquals(this.stateReason, other.stateReason)
         && Objects.deepEquals(this.transferType, other.transferType);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(additionalInstructions, clientBrokerage, transferType);
+    return Objects.hash(
+        acatControlNumber,
+        assets,
+        comment,
+        createTime,
+        deliverer,
+        direction,
+        name,
+        nsccStatus,
+        originalControlNumber,
+        receiver,
+        rejectCode,
+        state,
+        stateReason,
+        transferType);
   }
 
   @Override
   public String toString() {
     return Utils.toString(
         Transfer.class,
-        "additionalInstructions",
-        additionalInstructions,
-        "clientBrokerage",
-        clientBrokerage,
+        "acatControlNumber",
+        acatControlNumber,
+        "assets",
+        assets,
+        "comment",
+        comment,
+        "createTime",
+        createTime,
+        "deliverer",
+        deliverer,
+        "direction",
+        direction,
+        "name",
+        name,
+        "nsccStatus",
+        nsccStatus,
+        "originalControlNumber",
+        originalControlNumber,
+        "receiver",
+        receiver,
+        "rejectCode",
+        rejectCode,
+        "state",
+        state,
+        "stateReason",
+        stateReason,
         "transferType",
         transferType);
   }
 
   public static final class Builder {
 
-    private Optional<String> additionalInstructions = Optional.empty();
+    private Optional<String> acatControlNumber = Optional.empty();
 
-    private Optional<String> clientBrokerage = Optional.empty();
+    private Optional<? extends List<AcatsAsset>> assets = Optional.empty();
 
-    private Optional<? extends EntryTransferType> transferType = Optional.empty();
+    private Optional<String> comment = Optional.empty();
+
+    private JsonNullable<OffsetDateTime> createTime = JsonNullable.undefined();
+
+    private JsonNullable<? extends AcceptTransferResponseDeliverer> deliverer =
+        JsonNullable.undefined();
+
+    private Optional<? extends AcceptTransferResponseDirection> direction = Optional.empty();
+
+    private Optional<String> name = Optional.empty();
+
+    private Optional<? extends AcceptTransferResponseNsccStatus> nsccStatus = Optional.empty();
+
+    private Optional<String> originalControlNumber = Optional.empty();
+
+    private JsonNullable<? extends AcceptTransferResponseReceiver> receiver =
+        JsonNullable.undefined();
+
+    private Optional<? extends AcceptTransferResponseRejectCode> rejectCode = Optional.empty();
+
+    private Optional<? extends AcceptTransferResponseState> state = Optional.empty();
+
+    private Optional<String> stateReason = Optional.empty();
+
+    private Optional<? extends AcceptTransferResponseTransferType> transferType = Optional.empty();
 
     private Builder() {
       // force use of static builder() method
     }
 
-    /** Free form text field */
-    public Builder additionalInstructions(String additionalInstructions) {
-      Utils.checkNotNull(additionalInstructions, "additionalInstructions");
-      this.additionalInstructions = Optional.ofNullable(additionalInstructions);
+    /** The NSCC transfer identifier */
+    public Builder acatControlNumber(String acatControlNumber) {
+      Utils.checkNotNull(acatControlNumber, "acatControlNumber");
+      this.acatControlNumber = Optional.ofNullable(acatControlNumber);
       return this;
     }
 
-    /** Free form text field */
-    public Builder additionalInstructions(Optional<String> additionalInstructions) {
-      Utils.checkNotNull(additionalInstructions, "additionalInstructions");
-      this.additionalInstructions = additionalInstructions;
+    /** The NSCC transfer identifier */
+    public Builder acatControlNumber(Optional<String> acatControlNumber) {
+      Utils.checkNotNull(acatControlNumber, "acatControlNumber");
+      this.acatControlNumber = acatControlNumber;
+      return this;
+    }
+
+    /** The assets being transferred (Cash, Equities, etc.) */
+    public Builder assets(List<AcatsAsset> assets) {
+      Utils.checkNotNull(assets, "assets");
+      this.assets = Optional.ofNullable(assets);
+      return this;
+    }
+
+    /** The assets being transferred (Cash, Equities, etc.) */
+    public Builder assets(Optional<? extends List<AcatsAsset>> assets) {
+      Utils.checkNotNull(assets, "assets");
+      this.assets = assets;
+      return this;
+    }
+
+    /** User supplied comment */
+    public Builder comment(String comment) {
+      Utils.checkNotNull(comment, "comment");
+      this.comment = Optional.ofNullable(comment);
+      return this;
+    }
+
+    /** User supplied comment */
+    public Builder comment(Optional<String> comment) {
+      Utils.checkNotNull(comment, "comment");
+      this.comment = comment;
+      return this;
+    }
+
+    /** The transfer creation timestamp */
+    public Builder createTime(OffsetDateTime createTime) {
+      Utils.checkNotNull(createTime, "createTime");
+      this.createTime = JsonNullable.of(createTime);
+      return this;
+    }
+
+    /** The transfer creation timestamp */
+    public Builder createTime(JsonNullable<OffsetDateTime> createTime) {
+      Utils.checkNotNull(createTime, "createTime");
+      this.createTime = createTime;
+      return this;
+    }
+
+    /** The delivering party information */
+    public Builder deliverer(AcceptTransferResponseDeliverer deliverer) {
+      Utils.checkNotNull(deliverer, "deliverer");
+      this.deliverer = JsonNullable.of(deliverer);
+      return this;
+    }
+
+    /** The delivering party information */
+    public Builder deliverer(JsonNullable<? extends AcceptTransferResponseDeliverer> deliverer) {
+      Utils.checkNotNull(deliverer, "deliverer");
+      this.deliverer = deliverer;
+      return this;
+    }
+
+    /** The direction of the transfer */
+    public Builder direction(AcceptTransferResponseDirection direction) {
+      Utils.checkNotNull(direction, "direction");
+      this.direction = Optional.ofNullable(direction);
+      return this;
+    }
+
+    /** The direction of the transfer */
+    public Builder direction(Optional<? extends AcceptTransferResponseDirection> direction) {
+      Utils.checkNotNull(direction, "direction");
+      this.direction = direction;
       return this;
     }
 
     /**
-     * String field that can be populated with the broker dealer undergoing a clearing platform
-     * conversion. Used for activity description purposes
+     * The service generated name of the transfer. Format:
+     * correspondents/{correspondent_id}/accounts/{account_id}/transfers/{transfer_id}
      */
-    public Builder clientBrokerage(String clientBrokerage) {
-      Utils.checkNotNull(clientBrokerage, "clientBrokerage");
-      this.clientBrokerage = Optional.ofNullable(clientBrokerage);
+    public Builder name(String name) {
+      Utils.checkNotNull(name, "name");
+      this.name = Optional.ofNullable(name);
       return this;
     }
 
     /**
-     * String field that can be populated with the broker dealer undergoing a clearing platform
-     * conversion. Used for activity description purposes
+     * The service generated name of the transfer. Format:
+     * correspondents/{correspondent_id}/accounts/{account_id}/transfers/{transfer_id}
      */
-    public Builder clientBrokerage(Optional<String> clientBrokerage) {
-      Utils.checkNotNull(clientBrokerage, "clientBrokerage");
-      this.clientBrokerage = clientBrokerage;
+    public Builder name(Optional<String> name) {
+      Utils.checkNotNull(name, "name");
+      this.name = name;
       return this;
     }
 
-    /** Provides more detail on the type of transfer */
-    public Builder transferType(EntryTransferType transferType) {
+    /** The NSCC transfer status */
+    public Builder nsccStatus(AcceptTransferResponseNsccStatus nsccStatus) {
+      Utils.checkNotNull(nsccStatus, "nsccStatus");
+      this.nsccStatus = Optional.ofNullable(nsccStatus);
+      return this;
+    }
+
+    /** The NSCC transfer status */
+    public Builder nsccStatus(Optional<? extends AcceptTransferResponseNsccStatus> nsccStatus) {
+      Utils.checkNotNull(nsccStatus, "nsccStatus");
+      this.nsccStatus = nsccStatus;
+      return this;
+    }
+
+    /** An associated NSCC transfer identifier, if applicable */
+    public Builder originalControlNumber(String originalControlNumber) {
+      Utils.checkNotNull(originalControlNumber, "originalControlNumber");
+      this.originalControlNumber = Optional.ofNullable(originalControlNumber);
+      return this;
+    }
+
+    /** An associated NSCC transfer identifier, if applicable */
+    public Builder originalControlNumber(Optional<String> originalControlNumber) {
+      Utils.checkNotNull(originalControlNumber, "originalControlNumber");
+      this.originalControlNumber = originalControlNumber;
+      return this;
+    }
+
+    /** The receiving party information */
+    public Builder receiver(AcceptTransferResponseReceiver receiver) {
+      Utils.checkNotNull(receiver, "receiver");
+      this.receiver = JsonNullable.of(receiver);
+      return this;
+    }
+
+    /** The receiving party information */
+    public Builder receiver(JsonNullable<? extends AcceptTransferResponseReceiver> receiver) {
+      Utils.checkNotNull(receiver, "receiver");
+      this.receiver = receiver;
+      return this;
+    }
+
+    /** The reject code */
+    public Builder rejectCode(AcceptTransferResponseRejectCode rejectCode) {
+      Utils.checkNotNull(rejectCode, "rejectCode");
+      this.rejectCode = Optional.ofNullable(rejectCode);
+      return this;
+    }
+
+    /** The reject code */
+    public Builder rejectCode(Optional<? extends AcceptTransferResponseRejectCode> rejectCode) {
+      Utils.checkNotNull(rejectCode, "rejectCode");
+      this.rejectCode = rejectCode;
+      return this;
+    }
+
+    /** The transfer state */
+    public Builder state(AcceptTransferResponseState state) {
+      Utils.checkNotNull(state, "state");
+      this.state = Optional.ofNullable(state);
+      return this;
+    }
+
+    /** The transfer state */
+    public Builder state(Optional<? extends AcceptTransferResponseState> state) {
+      Utils.checkNotNull(state, "state");
+      this.state = state;
+      return this;
+    }
+
+    /** A reason for the state if applicable */
+    public Builder stateReason(String stateReason) {
+      Utils.checkNotNull(stateReason, "stateReason");
+      this.stateReason = Optional.ofNullable(stateReason);
+      return this;
+    }
+
+    /** A reason for the state if applicable */
+    public Builder stateReason(Optional<String> stateReason) {
+      Utils.checkNotNull(stateReason, "stateReason");
+      this.stateReason = stateReason;
+      return this;
+    }
+
+    /** The type of transfer */
+    public Builder transferType(AcceptTransferResponseTransferType transferType) {
       Utils.checkNotNull(transferType, "transferType");
       this.transferType = Optional.ofNullable(transferType);
       return this;
     }
 
-    /** Provides more detail on the type of transfer */
-    public Builder transferType(Optional<? extends EntryTransferType> transferType) {
+    /** The type of transfer */
+    public Builder transferType(
+        Optional<? extends AcceptTransferResponseTransferType> transferType) {
       Utils.checkNotNull(transferType, "transferType");
       this.transferType = transferType;
       return this;
     }
 
     public Transfer build() {
-      return new Transfer(additionalInstructions, clientBrokerage, transferType);
+      return new Transfer(
+          acatControlNumber,
+          assets,
+          comment,
+          createTime,
+          deliverer,
+          direction,
+          name,
+          nsccStatus,
+          originalControlNumber,
+          receiver,
+          rejectCode,
+          state,
+          stateReason,
+          transferType);
     }
   }
 }

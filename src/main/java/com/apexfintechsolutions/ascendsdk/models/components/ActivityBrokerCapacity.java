@@ -38,7 +38,7 @@ import java.util.Optional;
  * use of an instance in a switch expression but you can use the {@code asEnum()} method (after
  * dealing with the `Optional` appropriately).
  */
-/** ActivityBrokerCapacity - Used to calculate broadridge blotter code */
+/** ActivityBrokerCapacity - The execution route Apex used for this trade */
 @JsonDeserialize(using = ActivityBrokerCapacity._Deserializer.class)
 @JsonSerialize(using = ActivityBrokerCapacity._Serializer.class)
 public class ActivityBrokerCapacity {

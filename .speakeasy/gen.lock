@@ -1,28 +1,29 @@
 lockVersion: 2.0.0
 id: 04604b59-b953-4711-ac65-9ad5897162b4
 management:
-  docChecksum: aff4652104bbdcbbb88b056c48c96243
-  docVersion: v1:20250425:uat:4e9cbfb617ca
-  speakeasyVersion: 1.487.1
-  generationVersion: 2.506.0
-  releaseVersion: 1.2.1
-  configChecksum: 2d07c35d0bfec9bda3e244f8973e530e
+  docChecksum: 5ce91c7251a156c72b6a6bfd31bbe361
+  docVersion: v1:20250617:uat:6f66f0a5cade
+  speakeasyVersion: 1.521.0
+  generationVersion: 2.558.2
+  releaseVersion: 1.3.0
+  configChecksum: 84ef6f9135640da4507b750720216d0b
 features:
   java:
     additionalDependencies: 0.1.0
     additionalProperties: 0.0.1
-    core: 3.33.8
+    core: 3.35.1
+    customSecuritySchemes: 0.2.0
     deprecations: 2.81.1
     examples: 2.81.5
     flattening: 2.81.1
-    globalSecurity: 2.82.7
+    globalSecurity: 2.82.8
     globalSecurityCallbacks: 0.1.0
     globalServerURLs: 2.82.1
-    methodSecurity: 2.82.1
+    methodSecurity: 2.82.2
     nameOverrides: 2.81.3
     nullables: 0.1.0
     openEnums: 0.2.0
-    sdkHooks: 0.1.0
+    sdkHooks: 1.0.0
     serverIDs: 2.81.1
 generatedFiles:
   - .gitattributes
@@ -37,6 +38,17 @@ generatedFiles:
   - docs/models/components/AcatsTransferDirection.md
   - docs/models/components/AcatsTransferExternalAccount.md
   - docs/models/components/AcatsTransferState.md
+  - docs/models/components/AcceptTransferRequestCreate.md
+  - docs/models/components/AcceptTransferResponse.md
+  - docs/models/components/AcceptTransferResponseDeliverer.md
+  - docs/models/components/AcceptTransferResponseDirection.md
+  - docs/models/components/AcceptTransferResponseExternalAccount.md
+  - docs/models/components/AcceptTransferResponseNsccStatus.md
+  - docs/models/components/AcceptTransferResponseReceiver.md
+  - docs/models/components/AcceptTransferResponseRejectCode.md
+  - docs/models/components/AcceptTransferResponseState.md
+  - docs/models/components/AcceptTransferResponseTransferExternalAccount.md
+  - docs/models/components/AcceptTransferResponseTransferType.md
   - docs/models/components/Account.md
   - docs/models/components/AccountAnnualIncomeRangeUsd.md
   - docs/models/components/AccountCatAccountHolderType.md
@@ -125,15 +137,23 @@ generatedFiles:
   - docs/models/components/ActivityAccountTransfer.md
   - docs/models/components/ActivityAction.md
   - docs/models/components/ActivityActivityDate.md
+  - docs/models/components/ActivityAllocation.md
+  - docs/models/components/ActivityBondDefault.md
+  - docs/models/components/ActivityBondDefaultQuantity.md
   - docs/models/components/ActivityBrokerCapacity.md
   - docs/models/components/ActivityCapitalGains.md
+  - docs/models/components/ActivityCapitalGainsCorporateActionGeneralInformation.md
+  - docs/models/components/ActivityCapitalGainsPaymentDate.md
   - docs/models/components/ActivityCapitalGainsQuantity.md
   - docs/models/components/ActivityCashDividend.md
+  - docs/models/components/ActivityCashDividendCashRate.md
   - docs/models/components/ActivityCashDividendCorporateActionGeneralInformation.md
   - docs/models/components/ActivityCashDividendFpsl.md
   - docs/models/components/ActivityCashDividendPaymentDate.md
   - docs/models/components/ActivityCashDividendQuantity.md
   - docs/models/components/ActivityCashDividendRecordDate.md
+  - docs/models/components/ActivityCashInLieu.md
+  - docs/models/components/ActivityCashInLieuCorporateActionGeneralInformation.md
   - docs/models/components/ActivityCashRate.md
   - docs/models/components/ActivityCommission.md
   - docs/models/components/ActivityContributionType.md
@@ -259,6 +279,7 @@ generatedFiles:
   - docs/models/components/ActivitySettleDate.md
   - docs/models/components/ActivitySettled.md
   - docs/models/components/ActivitySide.md
+  - docs/models/components/ActivitySideModifier.md
   - docs/models/components/ActivitySpinoff.md
   - docs/models/components/ActivitySpinoffCorporateActionGeneralInformation.md
   - docs/models/components/ActivitySpinoffQuantity.md
@@ -284,7 +305,14 @@ generatedFiles:
   - docs/models/components/ActivityTenderOffer.md
   - docs/models/components/ActivityTenderOfferCashRate.md
   - docs/models/components/ActivityTenderOfferCorporateActionGeneralInformation.md
+  - docs/models/components/ActivityTenderOfferType.md
   - docs/models/components/ActivityTrade.md
+  - docs/models/components/ActivityTradeBrokerCapacity.md
+  - docs/models/components/ActivityTradePrevailingMarketPrice.md
+  - docs/models/components/ActivityTradePriceAdjustmentAmount.md
+  - docs/models/components/ActivityTradePriceAdjustmentPercent.md
+  - docs/models/components/ActivityTradePriceAdjustmentRecord.md
+  - docs/models/components/ActivityTradePriceAdjustmentType.md
   - docs/models/components/ActivityTransfer.md
   - docs/models/components/ActivityTransferType.md
   - docs/models/components/ActivityType.md
@@ -313,11 +341,13 @@ generatedFiles:
   - docs/models/components/Agreement.md
   - docs/models/components/AgreementSource.md
   - docs/models/components/AgreementState.md
+  - docs/models/components/Allocation.md
   - docs/models/components/AllocationPercentage.md
   - docs/models/components/Amount.md
   - docs/models/components/Amount1.md
   - docs/models/components/Amount2.md
   - docs/models/components/AnnualIncomeRangeUsd.md
+  - docs/models/components/Any.md
   - docs/models/components/AskMinimumQuantity.md
   - docs/models/components/AskQuantity.md
   - docs/models/components/Asset.md
@@ -358,6 +388,7 @@ generatedFiles:
   - docs/models/components/BasketOrderCreateIdentifierType.md
   - docs/models/components/BasketOrderCreateOrderType.md
   - docs/models/components/BasketOrderCreateSide.md
+  - docs/models/components/BasketOrderCreateSpecialReportingInstructions.md
   - docs/models/components/BasketOrderCreateTimeInForce.md
   - docs/models/components/BasketOrderCumulativeNotionalValue.md
   - docs/models/components/BasketOrderFilledQuantity.md
@@ -368,8 +399,14 @@ generatedFiles:
   - docs/models/components/BasketOrderOrderType.md
   - docs/models/components/BasketOrderQuantity.md
   - docs/models/components/BasketOrderSide.md
+  - docs/models/components/BasketOrderSpecialReportingInstructions.md
   - docs/models/components/BasketOrderTimeInForce.md
   - docs/models/components/BasketState.md
+  - docs/models/components/BasketTradingExecutedPrice.md
+  - docs/models/components/BasketTradingExecutedPricePrice.md
+  - docs/models/components/BasketTradingExecutedPriceType.md
+  - docs/models/components/BasketTradingExecutions.md
+  - docs/models/components/BasketTradingExecutionsQuantity.md
   - docs/models/components/BatchCreateUploadLinksRequestCreate.md
   - docs/models/components/BatchCreateUploadLinksResponse.md
   - docs/models/components/Beneficiary.md
@@ -390,9 +427,30 @@ generatedFiles:
   - docs/models/components/BidQuantity.md
   - docs/models/components/BirthDate.md
   - docs/models/components/BirthDateVerified.md
+  - docs/models/components/BondDefault.md
   - docs/models/components/BondYield.md
   - docs/models/components/BondYieldCreate.md
   - docs/models/components/BondYieldYieldType.md
+  - docs/models/components/BookingFee.md
+  - docs/models/components/BookingFeeAmount.md
+  - docs/models/components/BookingFeeCreate.md
+  - docs/models/components/BookingFeeCreateType.md
+  - docs/models/components/BookingFeeType.md
+  - docs/models/components/BookingLot.md
+  - docs/models/components/BookingLotMoney.md
+  - docs/models/components/BookingLotMoneyPrice.md
+  - docs/models/components/BookingLotPrice.md
+  - docs/models/components/BookingLotQuantity.md
+  - docs/models/components/BookingTrade.md
+  - docs/models/components/BookingTradeAssetType.md
+  - docs/models/components/BookingTradeBrokerCapacity.md
+  - docs/models/components/BookingTradeIdentifierType.md
+  - docs/models/components/BookingTradeRouteType.md
+  - docs/models/components/BookingTradeSide.md
+  - docs/models/components/BookingTradeSideModifier.md
+  - docs/models/components/BookingTradeSpecialInstructions.md
+  - docs/models/components/BookingTradeVenue.md
+  - docs/models/components/BookingTradeWhenIssued.md
   - docs/models/components/BrokerCapacity.md
   - docs/models/components/BusinessIndustrialClassification.md
   - docs/models/components/BuyingPower.md
@@ -454,18 +512,24 @@ generatedFiles:
   - docs/models/components/CancelTradeAllocationResponseWhenIssued.md
   - docs/models/components/CancelTradeRequestCreate.md
   - docs/models/components/CancelTradeResponse.md
+  - docs/models/components/CancelTradeResponseAssetType.md
   - docs/models/components/CancelTradeResponseBrokerCapacity.md
-  - docs/models/components/CancelTradeResponsePrevailingMarketPrice.md
-  - docs/models/components/CancelTradeResponsePriceAdjustmentAmount.md
-  - docs/models/components/CancelTradeResponsePriceAdjustmentPercent.md
-  - docs/models/components/CancelTradeResponsePriceAdjustmentRecord.md
-  - docs/models/components/CancelTradeResponsePriceAdjustmentType.md
+  - docs/models/components/CancelTradeResponseIdentifierType.md
+  - docs/models/components/CancelTradeResponseLocalMarketTradeDate.md
+  - docs/models/components/CancelTradeResponseRouteType.md
+  - docs/models/components/CancelTradeResponseSettlementDate.md
+  - docs/models/components/CancelTradeResponseSide.md
+  - docs/models/components/CancelTradeResponseSideModifier.md
+  - docs/models/components/CancelTradeResponseSpecialInstructions.md
   - docs/models/components/CancelTradeResponseTrade.md
+  - docs/models/components/CancelTradeResponseVenue.md
+  - docs/models/components/CancelTradeResponseWhenIssued.md
   - docs/models/components/CancelWireWithdrawalRequestCreate.md
   - docs/models/components/CancelWireWithdrawalScheduleRequestCreate.md
   - docs/models/components/CapitalGains.md
   - docs/models/components/CashAmount.md
   - docs/models/components/CashDividend.md
+  - docs/models/components/CashInLieu.md
   - docs/models/components/CashJournal.md
   - docs/models/components/CashJournalAmount.md
   - docs/models/components/CashJournalConstraints.md
@@ -501,13 +565,17 @@ generatedFiles:
   - docs/models/components/CommissionCreateType.md
   - docs/models/components/CompleteTradeRequestCreate.md
   - docs/models/components/CompleteTradeResponse.md
+  - docs/models/components/CompleteTradeResponseAssetType.md
   - docs/models/components/CompleteTradeResponseBrokerCapacity.md
-  - docs/models/components/CompleteTradeResponsePrevailingMarketPrice.md
-  - docs/models/components/CompleteTradeResponsePriceAdjustmentAmount.md
-  - docs/models/components/CompleteTradeResponsePriceAdjustmentPercent.md
-  - docs/models/components/CompleteTradeResponsePriceAdjustmentRecord.md
-  - docs/models/components/CompleteTradeResponsePriceAdjustmentType.md
-  - docs/models/components/CompleteTradeResponseTrade.md
+  - docs/models/components/CompleteTradeResponseIdentifierType.md
+  - docs/models/components/CompleteTradeResponseLocalMarketTradeDate.md
+  - docs/models/components/CompleteTradeResponseRouteType.md
+  - docs/models/components/CompleteTradeResponseSettlementDate.md
+  - docs/models/components/CompleteTradeResponseSide.md
+  - docs/models/components/CompleteTradeResponseSideModifier.md
+  - docs/models/components/CompleteTradeResponseSpecialInstructions.md
+  - docs/models/components/CompleteTradeResponseVenue.md
+  - docs/models/components/CompleteTradeResponseWhenIssued.md
   - docs/models/components/CompressedOrder.md
   - docs/models/components/CompressedOrderAssetType.md
   - docs/models/components/CompressedOrderCumulativeNotionalValue.md
@@ -519,6 +587,7 @@ generatedFiles:
   - docs/models/components/CompressedOrderOrderType.md
   - docs/models/components/CompressedOrderQuantity.md
   - docs/models/components/CompressedOrderSide.md
+  - docs/models/components/CompressedOrderSpecialReportingInstructions.md
   - docs/models/components/CompressedOrderTimeInForce.md
   - docs/models/components/ConsentMethod.md
   - docs/models/components/ContributionConstraints.md
@@ -550,6 +619,8 @@ generatedFiles:
   - docs/models/components/CustodialEnrollmentMetadataCreateDividendReinvestmentPlan.md
   - docs/models/components/CustodialEnrollmentMetadataCreateFdicCashSweep.md
   - docs/models/components/CustomerIdentification.md
+  - docs/models/components/CustomerIdentificationBirthDate.md
+  - docs/models/components/CustomerIdentificationLegalAddress.md
   - docs/models/components/CustomerIdentificationResult.md
   - docs/models/components/CustomerProfile.md
   - docs/models/components/CustomerProfileCreate.md
@@ -724,11 +795,16 @@ generatedFiles:
   - docs/models/components/Entry.md
   - docs/models/components/EntryAccruedInterest.md
   - docs/models/components/EntryAction.md
+  - docs/models/components/EntryBondDefaultQuantity.md
   - docs/models/components/EntryBrokerCapacity.md
+  - docs/models/components/EntryCapitalGainsCorporateActionGeneralInformation.md
   - docs/models/components/EntryCapitalGainsQuantity.md
+  - docs/models/components/EntryCashDividendCashRate.md
   - docs/models/components/EntryCashDividendCorporateActionGeneralInformation.md
+  - docs/models/components/EntryCashDividendPaymentDate.md
   - docs/models/components/EntryCashDividendQuantity.md
   - docs/models/components/EntryCashDividendSettled.md
+  - docs/models/components/EntryCashInLieuCorporateActionGeneralInformation.md
   - docs/models/components/EntryCashRate.md
   - docs/models/components/EntryCommission.md
   - docs/models/components/EntryConversionCashRate.md
@@ -846,6 +922,11 @@ generatedFiles:
   - docs/models/components/EntryTenderOfferCashRate.md
   - docs/models/components/EntryTenderOfferCorporateActionGeneralInformation.md
   - docs/models/components/EntryTrade.md
+  - docs/models/components/EntryTradeBrokerCapacity.md
+  - docs/models/components/EntryTradePrevailingMarketPrice.md
+  - docs/models/components/EntryTradePriceAdjustmentAmount.md
+  - docs/models/components/EntryTradePriceAdjustmentType.md
+  - docs/models/components/EntryTransfer.md
   - docs/models/components/EntryTransferType.md
   - docs/models/components/EntryType.md
   - docs/models/components/EntryUnitSplitCorporateActionGeneralInformation.md
@@ -869,19 +950,15 @@ generatedFiles:
   - docs/models/components/EstimatedNetAmount.md
   - docs/models/components/EventMessage.md
   - docs/models/components/Exchange.md
-  - docs/models/components/ExecutedPrice.md
-  - docs/models/components/ExecutedPriceType.md
   - docs/models/components/Execution.md
   - docs/models/components/ExecutionAccruedInterestAmount.md
   - docs/models/components/ExecutionCreate.md
   - docs/models/components/ExecutionDate.md
   - docs/models/components/ExecutionPrevailingMarketPrice.md
   - docs/models/components/ExecutionPrice.md
-  - docs/models/components/ExecutionPriceAdjustmentAmount.md
   - docs/models/components/ExecutionPriceAdjustmentType.md
   - docs/models/components/ExecutionQuantity.md
   - docs/models/components/ExecutionState.md
-  - docs/models/components/Executions.md
   - docs/models/components/ExemptCustomerReason.md
   - docs/models/components/ExerciseStyle.md
   - docs/models/components/ExpectedNotionalCeilingAmount.md
@@ -952,7 +1029,6 @@ generatedFiles:
   - docs/models/components/FullyPaidUnsettledFundsAmount.md
   - docs/models/components/FundingType.md
   - docs/models/components/GenerateServiceAccountTokenRequestCreate.md
-  - docs/models/components/GoogleProtobufAny.md
   - docs/models/components/GrossAmount.md
   - docs/models/components/GrossCreditAmount.md
   - docs/models/components/HttpCallback.md
@@ -1031,6 +1107,9 @@ generatedFiles:
   - docs/models/components/IdentifierType1.md
   - docs/models/components/IdentifierUpdate.md
   - docs/models/components/IdentifierUpdateType.md
+  - docs/models/components/Identity.md
+  - docs/models/components/IdentityIdentification.md
+  - docs/models/components/IdentityIdentificationType.md
   - docs/models/components/IdentityVerification.md
   - docs/models/components/IdentityVerificationResult.md
   - docs/models/components/IdentityVerificationResultCreate.md
@@ -1039,6 +1118,7 @@ generatedFiles:
   - docs/models/components/IdentityVerificationTypes.md
   - docs/models/components/ImmediateFamilyMember.md
   - docs/models/components/ImmediateFamilyMemberCreate.md
+  - docs/models/components/Index.md
   - docs/models/components/IndividualEnrollmentMetadata.md
   - docs/models/components/IndividualEnrollmentMetadataCreate.md
   - docs/models/components/IndividualEnrollmentMetadataCreateDividendReinvestmentPlan.md
@@ -1208,8 +1288,10 @@ generatedFiles:
   - docs/models/components/ListScheduleSummariesResponse.md
   - docs/models/components/ListSigningKeysResponse.md
   - docs/models/components/ListSnapshotsResponse.md
+  - docs/models/components/ListTransfersResponse.md
   - docs/models/components/ListWireWithdrawalSchedulesResponse.md
   - docs/models/components/LlcEnrollmentMetadata.md
+  - docs/models/components/LocalMarketTradeDate.md
   - docs/models/components/LocateIctReportResponse.md
   - docs/models/components/LocateIctReportResponseProgram.md
   - docs/models/components/Lot.md
@@ -1217,6 +1299,7 @@ generatedFiles:
   - docs/models/components/LotMoney.md
   - docs/models/components/LotPrice.md
   - docs/models/components/LotQuantity.md
+  - docs/models/components/LotTradeDate.md
   - docs/models/components/LowPricedSecurities.md
   - docs/models/components/LowPricedSecuritiesCreate.md
   - docs/models/components/LowPricedSecuritiesPercentage.md
@@ -1228,6 +1311,7 @@ generatedFiles:
   - docs/models/components/MarkPriceType.md
   - docs/models/components/MatchAttributes.md
   - docs/models/components/MatchState.md
+  - docs/models/components/MatchTypes.md
   - docs/models/components/Maturity.md
   - docs/models/components/MaturityDate.md
   - docs/models/components/MaxSellQuantity.md
@@ -1312,6 +1396,7 @@ generatedFiles:
   - docs/models/components/OrderStopPricePrice.md
   - docs/models/components/OrderStopPriceType.md
   - docs/models/components/OrderTimeInForce.md
+  - docs/models/components/OrderTradingStrategy.md
   - docs/models/components/OrderType.md
   - docs/models/components/OrdersOptionsTradingEnrollmentMetadata.md
   - docs/models/components/OrdersOptionsTradingEnrollmentMetadataCreate.md
@@ -1513,18 +1598,28 @@ generatedFiles:
   - docs/models/components/RebookTradeAllocationResponseWhenIssued.md
   - docs/models/components/RebookTradeRequestCreate.md
   - docs/models/components/RebookTradeResponse.md
+  - docs/models/components/RebookTradeResponseAssetType.md
   - docs/models/components/RebookTradeResponseBrokerCapacity.md
+  - docs/models/components/RebookTradeResponseIdentifierType.md
+  - docs/models/components/RebookTradeResponseLocalMarketTradeDate.md
+  - docs/models/components/RebookTradeResponseOriginalTradeAssetType.md
   - docs/models/components/RebookTradeResponseOriginalTradeBrokerCapacity.md
-  - docs/models/components/RebookTradeResponseOriginalTradePrevailingMarketPrice.md
-  - docs/models/components/RebookTradeResponseOriginalTradePriceAdjustmentAmount.md
-  - docs/models/components/RebookTradeResponseOriginalTradePriceAdjustmentPercent.md
-  - docs/models/components/RebookTradeResponseOriginalTradePriceAdjustmentRecord.md
-  - docs/models/components/RebookTradeResponseOriginalTradePriceAdjustmentType.md
-  - docs/models/components/RebookTradeResponsePrevailingMarketPrice.md
-  - docs/models/components/RebookTradeResponsePriceAdjustmentAmount.md
-  - docs/models/components/RebookTradeResponsePriceAdjustmentPercent.md
-  - docs/models/components/RebookTradeResponsePriceAdjustmentRecord.md
-  - docs/models/components/RebookTradeResponsePriceAdjustmentType.md
+  - docs/models/components/RebookTradeResponseOriginalTradeIdentifierType.md
+  - docs/models/components/RebookTradeResponseOriginalTradeLocalMarketTradeDate.md
+  - docs/models/components/RebookTradeResponseOriginalTradeRouteType.md
+  - docs/models/components/RebookTradeResponseOriginalTradeSettlementDate.md
+  - docs/models/components/RebookTradeResponseOriginalTradeSide.md
+  - docs/models/components/RebookTradeResponseOriginalTradeSideModifier.md
+  - docs/models/components/RebookTradeResponseOriginalTradeSpecialInstructions.md
+  - docs/models/components/RebookTradeResponseOriginalTradeVenue.md
+  - docs/models/components/RebookTradeResponseOriginalTradeWhenIssued.md
+  - docs/models/components/RebookTradeResponseRouteType.md
+  - docs/models/components/RebookTradeResponseSettlementDate.md
+  - docs/models/components/RebookTradeResponseSide.md
+  - docs/models/components/RebookTradeResponseSideModifier.md
+  - docs/models/components/RebookTradeResponseSpecialInstructions.md
+  - docs/models/components/RebookTradeResponseVenue.md
+  - docs/models/components/RebookTradeResponseWhenIssued.md
   - docs/models/components/Receive.md
   - docs/models/components/Receiver.md
   - docs/models/components/RecipientBank.md
@@ -1539,6 +1634,18 @@ generatedFiles:
   - docs/models/components/RegularAmount.md
   - docs/models/components/ReissueMicroDepositsRequestCreate.md
   - docs/models/components/RejectCode.md
+  - docs/models/components/RejectTransferRequestCreate.md
+  - docs/models/components/RejectTransferResponse.md
+  - docs/models/components/RejectTransferResponseDeliverer.md
+  - docs/models/components/RejectTransferResponseDirection.md
+  - docs/models/components/RejectTransferResponseExternalAccount.md
+  - docs/models/components/RejectTransferResponseNsccStatus.md
+  - docs/models/components/RejectTransferResponseReceiver.md
+  - docs/models/components/RejectTransferResponseRejectCode.md
+  - docs/models/components/RejectTransferResponseState.md
+  - docs/models/components/RejectTransferResponseTransfer.md
+  - docs/models/components/RejectTransferResponseTransferExternalAccount.md
+  - docs/models/components/RejectTransferResponseTransferType.md
   - docs/models/components/RelatedPep.md
   - docs/models/components/RelatedPepCreate.md
   - docs/models/components/RelatedPepDetails.md
@@ -1606,6 +1713,7 @@ generatedFiles:
   - docs/models/components/Security.md
   - docs/models/components/SelfieVerified.md
   - docs/models/components/SeriesDate.md
+  - docs/models/components/ServiceAccountCreds.md
   - docs/models/components/SettleDate.md
   - docs/models/components/Settled.md
   - docs/models/components/SettlementConvention.md
@@ -1657,6 +1765,7 @@ generatedFiles:
   - docs/models/components/TaxpayerCertificationState.md
   - docs/models/components/TemporalTaxYear.md
   - docs/models/components/TenderOffer.md
+  - docs/models/components/TenderOfferType.md
   - docs/models/components/TimeHorizon.md
   - docs/models/components/TimeInForce.md
   - docs/models/components/TimeUnit.md
@@ -1686,12 +1795,12 @@ generatedFiles:
   - docs/models/components/TradeAllocationPriceAdjustmentAmount.md
   - docs/models/components/TradeAllocationPriceAdjustmentType.md
   - docs/models/components/TradeAllocationQuantity.md
+  - docs/models/components/TradeAllocationSettlementDate.md
   - docs/models/components/TradeAllocationSideModifier.md
   - docs/models/components/TradeAllocationSpecialInstructions.md
   - docs/models/components/TradeAllocationState.md
   - docs/models/components/TradeAllocationToSide.md
   - docs/models/components/TradeAllocationWhenIssued.md
-  - docs/models/components/TradeBrokerCapacity.md
   - docs/models/components/TradeConfirmationDeliveryPreference.md
   - docs/models/components/TradeCreate.md
   - docs/models/components/TradeCreateAssetType.md
@@ -1699,9 +1808,14 @@ generatedFiles:
   - docs/models/components/TradeCreateIdentifierType.md
   - docs/models/components/TradeCreateSide.md
   - docs/models/components/TradeDate.md
-  - docs/models/components/TradePrevailingMarketPrice.md
-  - docs/models/components/TradePriceAdjustmentType.md
   - docs/models/components/TradeValueMultiplier.md
+  - docs/models/components/TradingExecutedPrice.md
+  - docs/models/components/TradingExecutedPriceType.md
+  - docs/models/components/TradingExecutions.md
+  - docs/models/components/TradingFee.md
+  - docs/models/components/TradingFeeAmount.md
+  - docs/models/components/TradingFeeType.md
+  - docs/models/components/TradingStrategy.md
   - docs/models/components/Transfer.md
   - docs/models/components/TransferAccountCreate.md
   - docs/models/components/TransferCreate.md
@@ -1844,10 +1958,16 @@ generatedFiles:
   - docs/models/components/YieldRecordYieldType.md
   - docs/models/components/YieldType.md
   - docs/models/errors/Status.md
+  - docs/models/operations/AccountTransfersAcceptTransferRequest.md
+  - docs/models/operations/AccountTransfersAcceptTransferResponse.md
   - docs/models/operations/AccountTransfersCreateTransferRequest.md
   - docs/models/operations/AccountTransfersCreateTransferResponse.md
   - docs/models/operations/AccountTransfersGetTransferRequest.md
   - docs/models/operations/AccountTransfersGetTransferResponse.md
+  - docs/models/operations/AccountTransfersListTransfersRequest.md
+  - docs/models/operations/AccountTransfersListTransfersResponse.md
+  - docs/models/operations/AccountTransfersRejectTransferRequest.md
+  - docs/models/operations/AccountTransfersRejectTransferResponse.md
   - docs/models/operations/AccountsAddPartyRequest.md
   - docs/models/operations/AccountsAddPartyResponse.md
   - docs/models/operations/AccountsAffirmAgreementsRequest.md
@@ -1981,6 +2101,7 @@ generatedFiles:
   - docs/models/operations/AuthenticationGenerateServiceAccountTokenSecurity.md
   - docs/models/operations/AuthenticationListSigningKeysRequest.md
   - docs/models/operations/AuthenticationListSigningKeysResponse.md
+  - docs/models/operations/AuthenticationListSigningKeysSecurity.md
   - docs/models/operations/BankRelationshipsCancelBankRelationshipRequest.md
   - docs/models/operations/BankRelationshipsCancelBankRelationshipResponse.md
   - docs/models/operations/BankRelationshipsCreateBankRelationshipRequest.md
@@ -2208,6 +2329,7 @@ generatedFiles:
   - docs/sdks/tradeallocation/README.md
   - docs/sdks/tradebooking/README.md
   - docs/sdks/wires/README.md
+  - gradle.properties
   - gradle/wrapper/gradle-wrapper.jar
   - gradle/wrapper/gradle-wrapper.properties
   - gradlew
@@ -2254,6 +2376,17 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcatsTransferDirection.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcatsTransferExternalAccount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcatsTransferState.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcceptTransferRequestCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcceptTransferResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcceptTransferResponseDeliverer.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcceptTransferResponseDirection.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcceptTransferResponseExternalAccount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcceptTransferResponseNsccStatus.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcceptTransferResponseReceiver.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcceptTransferResponseRejectCode.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcceptTransferResponseState.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcceptTransferResponseTransferExternalAccount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcceptTransferResponseTransferType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Account.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AccountAnnualIncomeRangeUsd.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AccountCatAccountHolderType.java
@@ -2342,15 +2475,23 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityAccountTransfer.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityAction.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityActivityDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityAllocation.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityBondDefault.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityBondDefaultQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityBrokerCapacity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityCapitalGains.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityCapitalGainsCorporateActionGeneralInformation.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityCapitalGainsPaymentDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityCapitalGainsQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityCashDividend.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityCashDividendCashRate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityCashDividendCorporateActionGeneralInformation.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityCashDividendFpsl.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityCashDividendPaymentDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityCashDividendQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityCashDividendRecordDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityCashInLieu.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityCashInLieuCorporateActionGeneralInformation.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityCashRate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityCommission.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityContributionType.java
@@ -2476,6 +2617,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivitySettleDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivitySettled.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivitySide.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivitySideModifier.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivitySpinoff.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivitySpinoffCorporateActionGeneralInformation.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivitySpinoffQuantity.java
@@ -2501,7 +2643,14 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityTenderOffer.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityTenderOfferCashRate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityTenderOfferCorporateActionGeneralInformation.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityTenderOfferType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityTrade.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityTradeBrokerCapacity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityTradePrevailingMarketPrice.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityTradePriceAdjustmentAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityTradePriceAdjustmentPercent.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityTradePriceAdjustmentRecord.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityTradePriceAdjustmentType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityTransfer.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityTransferType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityType.java
@@ -2530,11 +2679,13 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Agreement.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AgreementSource.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AgreementState.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Allocation.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AllocationPercentage.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Amount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Amount1.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Amount2.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AnnualIncomeRangeUsd.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Any.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AskMinimumQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AskQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Asset.java
@@ -2575,6 +2726,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketOrderCreateIdentifierType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketOrderCreateOrderType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketOrderCreateSide.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketOrderCreateSpecialReportingInstructions.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketOrderCreateTimeInForce.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketOrderCumulativeNotionalValue.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketOrderFilledQuantity.java
@@ -2585,8 +2737,14 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketOrderOrderType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketOrderQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketOrderSide.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketOrderSpecialReportingInstructions.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketOrderTimeInForce.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketState.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketTradingExecutedPrice.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketTradingExecutedPricePrice.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketTradingExecutedPriceType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketTradingExecutions.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketTradingExecutionsQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BatchCreateUploadLinksRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BatchCreateUploadLinksResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Beneficiary.java
@@ -2607,9 +2765,30 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BidQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BirthDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BirthDateVerified.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BondDefault.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BondYield.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BondYieldCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BondYieldYieldType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingFee.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingFeeAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingFeeCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingFeeCreateType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingFeeType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingLot.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingLotMoney.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingLotMoneyPrice.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingLotPrice.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingLotQuantity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingTrade.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingTradeAssetType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingTradeBrokerCapacity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingTradeIdentifierType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingTradeRouteType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingTradeSide.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingTradeSideModifier.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingTradeSpecialInstructions.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingTradeVenue.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingTradeWhenIssued.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BrokerCapacity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BusinessIndustrialClassification.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BuyingPower.java
@@ -2671,18 +2850,24 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelTradeAllocationResponseWhenIssued.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelTradeRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelTradeResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelTradeResponseAssetType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelTradeResponseBrokerCapacity.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelTradeResponsePrevailingMarketPrice.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelTradeResponsePriceAdjustmentAmount.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelTradeResponsePriceAdjustmentPercent.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelTradeResponsePriceAdjustmentRecord.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelTradeResponsePriceAdjustmentType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelTradeResponseIdentifierType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelTradeResponseLocalMarketTradeDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelTradeResponseRouteType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelTradeResponseSettlementDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelTradeResponseSide.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelTradeResponseSideModifier.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelTradeResponseSpecialInstructions.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelTradeResponseTrade.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelTradeResponseVenue.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelTradeResponseWhenIssued.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelWireWithdrawalRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelWireWithdrawalScheduleRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CapitalGains.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashDividend.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashInLieu.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournal.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalConstraints.java
@@ -2718,13 +2903,17 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CommissionCreateType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompleteTradeRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompleteTradeResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompleteTradeResponseAssetType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompleteTradeResponseBrokerCapacity.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompleteTradeResponsePrevailingMarketPrice.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompleteTradeResponsePriceAdjustmentAmount.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompleteTradeResponsePriceAdjustmentPercent.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompleteTradeResponsePriceAdjustmentRecord.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompleteTradeResponsePriceAdjustmentType.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompleteTradeResponseTrade.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompleteTradeResponseIdentifierType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompleteTradeResponseLocalMarketTradeDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompleteTradeResponseRouteType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompleteTradeResponseSettlementDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompleteTradeResponseSide.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompleteTradeResponseSideModifier.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompleteTradeResponseSpecialInstructions.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompleteTradeResponseVenue.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompleteTradeResponseWhenIssued.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompressedOrder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompressedOrderAssetType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompressedOrderCumulativeNotionalValue.java
@@ -2736,6 +2925,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompressedOrderOrderType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompressedOrderQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompressedOrderSide.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompressedOrderSpecialReportingInstructions.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CompressedOrderTimeInForce.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ConsentMethod.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ContributionConstraints.java
@@ -2767,6 +2957,8 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CustodialEnrollmentMetadataCreateDividendReinvestmentPlan.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CustodialEnrollmentMetadataCreateFdicCashSweep.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CustomerIdentification.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CustomerIdentificationBirthDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CustomerIdentificationLegalAddress.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CustomerIdentificationResult.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CustomerProfile.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CustomerProfileCreate.java
@@ -2941,11 +3133,16 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Entry.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryAccruedInterest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryAction.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryBondDefaultQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryBrokerCapacity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryCapitalGainsCorporateActionGeneralInformation.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryCapitalGainsQuantity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryCashDividendCashRate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryCashDividendCorporateActionGeneralInformation.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryCashDividendPaymentDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryCashDividendQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryCashDividendSettled.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryCashInLieuCorporateActionGeneralInformation.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryCashRate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryCommission.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryConversionCashRate.java
@@ -3063,6 +3260,11 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryTenderOfferCashRate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryTenderOfferCorporateActionGeneralInformation.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryTrade.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryTradeBrokerCapacity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryTradePrevailingMarketPrice.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryTradePriceAdjustmentAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryTradePriceAdjustmentType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryTransfer.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryTransferType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryUnitSplitCorporateActionGeneralInformation.java
@@ -3086,19 +3288,15 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EstimatedNetAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EventMessage.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Exchange.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExecutedPrice.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExecutedPriceType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Execution.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExecutionAccruedInterestAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExecutionCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExecutionDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExecutionPrevailingMarketPrice.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExecutionPrice.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExecutionPriceAdjustmentAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExecutionPriceAdjustmentType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExecutionQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExecutionState.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Executions.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExemptCustomerReason.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExerciseStyle.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExpectedNotionalCeilingAmount.java
@@ -3169,7 +3367,6 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/FullyPaidUnsettledFundsAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/FundingType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/GenerateServiceAccountTokenRequestCreate.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/GoogleProtobufAny.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/GrossAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/GrossCreditAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/HttpCallback.java
@@ -3248,6 +3445,9 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/IdentifierType1.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/IdentifierUpdate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/IdentifierUpdateType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Identity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/IdentityIdentification.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/IdentityIdentificationType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/IdentityVerification.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/IdentityVerificationResult.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/IdentityVerificationResultCreate.java
@@ -3256,6 +3456,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/IdentityVerificationTypes.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ImmediateFamilyMember.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ImmediateFamilyMemberCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Index.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/IndividualEnrollmentMetadata.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/IndividualEnrollmentMetadataCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/IndividualEnrollmentMetadataCreateDividendReinvestmentPlan.java
@@ -3425,8 +3626,10 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListScheduleSummariesResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListSigningKeysResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListSnapshotsResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListTransfersResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListWireWithdrawalSchedulesResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LlcEnrollmentMetadata.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LocalMarketTradeDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LocateIctReportResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LocateIctReportResponseProgram.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Lot.java
@@ -3434,6 +3637,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LotMoney.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LotPrice.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LotQuantity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LotTradeDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LowPricedSecurities.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LowPricedSecuritiesCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LowPricedSecuritiesPercentage.java
@@ -3445,6 +3649,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MarkPriceType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MatchAttributes.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MatchState.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MatchTypes.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Maturity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MaturityDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MaxSellQuantity.java
@@ -3529,6 +3734,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OrderStopPricePrice.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OrderStopPriceType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OrderTimeInForce.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OrderTradingStrategy.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OrderType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OrdersOptionsTradingEnrollmentMetadata.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OrdersOptionsTradingEnrollmentMetadataCreate.java
@@ -3730,18 +3936,28 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeAllocationResponseWhenIssued.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseAssetType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseBrokerCapacity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseIdentifierType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseLocalMarketTradeDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseOriginalTradeAssetType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseOriginalTradeBrokerCapacity.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseOriginalTradePrevailingMarketPrice.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseOriginalTradePriceAdjustmentAmount.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseOriginalTradePriceAdjustmentPercent.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseOriginalTradePriceAdjustmentRecord.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseOriginalTradePriceAdjustmentType.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponsePrevailingMarketPrice.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponsePriceAdjustmentAmount.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponsePriceAdjustmentPercent.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponsePriceAdjustmentRecord.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponsePriceAdjustmentType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseOriginalTradeIdentifierType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseOriginalTradeLocalMarketTradeDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseOriginalTradeRouteType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseOriginalTradeSettlementDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseOriginalTradeSide.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseOriginalTradeSideModifier.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseOriginalTradeSpecialInstructions.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseOriginalTradeVenue.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseOriginalTradeWhenIssued.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseRouteType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseSettlementDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseSide.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseSideModifier.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseSpecialInstructions.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseVenue.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RebookTradeResponseWhenIssued.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Receive.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Receiver.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RecipientBank.java
@@ -3756,6 +3972,18 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RegularAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ReissueMicroDepositsRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RejectCode.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RejectTransferRequestCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RejectTransferResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RejectTransferResponseDeliverer.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RejectTransferResponseDirection.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RejectTransferResponseExternalAccount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RejectTransferResponseNsccStatus.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RejectTransferResponseReceiver.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RejectTransferResponseRejectCode.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RejectTransferResponseState.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RejectTransferResponseTransfer.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RejectTransferResponseTransferExternalAccount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RejectTransferResponseTransferType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RelatedPep.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RelatedPepCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RelatedPepDetails.java
@@ -3823,6 +4051,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Security.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SelfieVerified.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SeriesDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ServiceAccountCreds.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SettleDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Settled.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SettlementConvention.java
@@ -3874,6 +4103,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TaxpayerCertificationState.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TemporalTaxYear.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TenderOffer.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TenderOfferType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TimeHorizon.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TimeInForce.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TimeUnit.java
@@ -3903,12 +4133,12 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeAllocationPriceAdjustmentAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeAllocationPriceAdjustmentType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeAllocationQuantity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeAllocationSettlementDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeAllocationSideModifier.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeAllocationSpecialInstructions.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeAllocationState.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeAllocationToSide.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeAllocationWhenIssued.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeBrokerCapacity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeConfirmationDeliveryPreference.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeCreateAssetType.java
@@ -3916,9 +4146,14 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeCreateIdentifierType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeCreateSide.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeDate.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradePrevailingMarketPrice.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradePriceAdjustmentType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeValueMultiplier.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradingExecutedPrice.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradingExecutedPriceType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradingExecutions.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradingFee.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradingFeeAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradingFeeType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradingStrategy.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Transfer.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TransferAccountCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TransferCreate.java
@@ -4063,12 +4298,21 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/errors/AuthException.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/errors/SDKError.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/errors/Status.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountTransfersAcceptTransferRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountTransfersAcceptTransferRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountTransfersAcceptTransferResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountTransfersCreateTransferRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountTransfersCreateTransferRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountTransfersCreateTransferResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountTransfersGetTransferRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountTransfersGetTransferRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountTransfersGetTransferResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountTransfersListTransfersRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountTransfersListTransfersRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountTransfersListTransfersResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountTransfersRejectTransferRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountTransfersRejectTransferRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountTransfersRejectTransferResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsAddPartyRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsAddPartyRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsAddPartyResponse.java
@@ -4270,6 +4514,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AuthenticationListSigningKeysRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AuthenticationListSigningKeysRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AuthenticationListSigningKeysResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AuthenticationListSigningKeysSecurity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/BankRelationshipsCancelBankRelationshipRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/BankRelationshipsCancelBankRelationshipRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/BankRelationshipsCancelBankRelationshipResponse.java
@@ -4577,6 +4822,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/FormMetadata.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/HTTPClient.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/HTTPRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/utils/HasSecurity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/HeaderMetadata.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Helpers.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Hook.java
@@ -4584,10 +4830,13 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/JSON.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/LazySingletonValue.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Metadata.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Multipart.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/MultipartFormMetadata.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/utils/NameValue.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/OneOfDeserializer.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Options.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/PathParamsMetadata.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/utils/QueryEncoding.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/QueryParameter.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/QueryParameters.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/QueryParamsMetadata.java
@@ -5922,5 +6171,66 @@ examples:
           tradeAllocation_id: "01J0XX2KDN3M9QKFKRE2HYSCQM"
       requestBody:
         application/json: {"name": "accounts/02HASWB2DTMRT3DAM45P56J2T2/tradeAllocations/01J0XX2KDN3M9QKFKRE2HYSCQM", "request_id": "8a0d35c0-428c-439e-9b03-b611530fe06f", "trade_allocation": {"broker_capacity": "AGENCY", "execution_time": "2024-07-17T12:00:00Z", "from_account_id": "01HASWB2DTMRT3DAM45P56J2H3", "identifier": "AAPL", "identifier_type": "SYMBOL", "price": {}, "quantity": {}, "source_application": "Trading-App", "to_account_id": "02HASWB2DTMRT3DAM45P56J2T2", "to_side": "BUY"}}
+  AccountTransfers_ListTransfers:
+    "":
+      parameters:
+        path:
+          correspondent_id: "00000000-0000-0000-0000-000000000002"
+          account_id: "01FAKEACCOUNT"
+        query:
+          page_size: 25
+          page_token: "CgwI5uHttgYQyJXO2wESJDAxOTFjOTMxLTA3YjMtYzU0ZC0yMDNmLWU1M2U0OTBkY2FhZRoicmVjZWl2ZXIuYWNjb3VudF9pZCBpbiBbJzEwMDAwQUEnXQ"
+          filter: "deliverer.account_number == \"R9AHY8P\""
+  AccountTransfers_AcceptTransfer:
+    "":
+      parameters:
+        path:
+          correspondent_id: "00000000-0000-0000-0000-000000000002"
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          transfer_id: "00000000-0000-0000-0000-000000000000"
+      requestBody:
+        application/json: {"name": "correspondents/00000000-0000-0000-0000-000000000002/accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/transfers/00000000-0000-0000-0000-000000000000"}
+  AccountTransfers_RejectTransfer:
+    "":
+      parameters:
+        path:
+          correspondent_id: "00000000-0000-0000-0000-000000000002"
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          transfer_id: "00000000-0000-0000-0000-000000000000"
+      requestBody:
+        application/json: {"name": "correspondents/00000000-0000-0000-0000-000000000002/accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/transfers/00000000-0000-0000-0000-000000000000"}
+  ExternalAchDeposits_GetExternalAchDeposit:
+    "":
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          externalAchDeposit_id: "20230817000319"
+  ExternalAchDeposits_SimulateCreateExternalAchDeposit:
+    speakeasy-default-external-ach-deposits-simulate-create-external-ach-deposit:
+      requestBody:
+        application/json: {"amount": {}, "virtual_account_number": "24412345678901"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  ExternalAchDeposits_ForceApproveExternalAchDeposit:
+    "":
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          externalAchDeposit_id: "20230817000319"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/externalAchDeposits/20230817000319"}
+  ExternalAchDeposits_ForceRejectExternalAchDeposit:
+    "":
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          externalAchDeposit_id: "20230817000319"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/externalAchDeposits/20230817000319"}
 examplesVersion: 1.0.0
 generatedTests: {}

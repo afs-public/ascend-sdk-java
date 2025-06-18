@@ -55,6 +55,7 @@ public class EntryWithdrawalType {
   public static final EntryWithdrawalType RTP = new EntryWithdrawalType("RTP");
   public static final EntryWithdrawalType ICT = new EntryWithdrawalType("ICT");
   public static final EntryWithdrawalType JOURNAL = new EntryWithdrawalType("JOURNAL");
+  public static final EntryWithdrawalType EXTERNAL_ACH = new EntryWithdrawalType("EXTERNAL_ACH");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -130,6 +131,7 @@ public class EntryWithdrawalType {
     map.put("RTP", RTP);
     map.put("ICT", ICT);
     map.put("JOURNAL", JOURNAL);
+    map.put("EXTERNAL_ACH", EXTERNAL_ACH);
     return map;
   }
 
@@ -145,6 +147,7 @@ public class EntryWithdrawalType {
     map.put("RTP", EntryWithdrawalTypeEnum.RTP);
     map.put("ICT", EntryWithdrawalTypeEnum.ICT);
     map.put("JOURNAL", EntryWithdrawalTypeEnum.JOURNAL);
+    map.put("EXTERNAL_ACH", EntryWithdrawalTypeEnum.EXTERNAL_ACH);
     return map;
   }
 
@@ -187,6 +190,7 @@ public class EntryWithdrawalType {
     RTP("RTP"),
     ICT("ICT"),
     JOURNAL("JOURNAL"),
+    EXTERNAL_ACH("EXTERNAL_ACH"),
     ;
 
     private final String value;

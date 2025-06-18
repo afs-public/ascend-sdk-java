@@ -13,9 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 import java.util.Optional;
 
-/**
- * ActivityPrevailingMarketPrice - The price for the instrument that is prevailing in the market.
- */
+/** ActivityPrevailingMarketPrice - The price for the instrument that is prevailing in the market */
 public class ActivityPrevailingMarketPrice {
 
   /**

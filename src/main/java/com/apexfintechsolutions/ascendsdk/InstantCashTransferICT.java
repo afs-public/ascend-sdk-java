@@ -6,7 +6,6 @@ package com.apexfintechsolutions.ascendsdk;
 
 import com.apexfintechsolutions.ascendsdk.models.components.CancelIctDepositRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelIctWithdrawalRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.DateCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.IctDeposit;
 import com.apexfintechsolutions.ascendsdk.models.components.IctDepositCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.IctWithdrawal;
@@ -35,7 +34,6 @@ import com.apexfintechsolutions.ascendsdk.models.operations.IctWithdrawalsCreate
 import com.apexfintechsolutions.ascendsdk.models.operations.IctWithdrawalsGetIctWithdrawalRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.IctWithdrawalsGetIctWithdrawalRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.IctWithdrawalsGetIctWithdrawalResponse;
-import com.apexfintechsolutions.ascendsdk.models.operations.ProgramDateFilterProgram;
 import com.apexfintechsolutions.ascendsdk.models.operations.SDKMethodInterfaces.*;
 import com.apexfintechsolutions.ascendsdk.utils.HTTPClient;
 import com.apexfintechsolutions.ascendsdk.utils.HTTPRequest;
@@ -1117,48 +1115,12 @@ public class InstantCashTransferICT
    * Locate ICT Report Returns a signed link pointing to a recon report file for a specific ICT
    * batch.
    *
-   * @param correspondentId The correspondent id.
-   * @return The response from the API call
-   * @throws Exception if the API call fails
-   */
-  public IctReconReportsLocateIctReportResponse locateIctReport(String correspondentId)
-      throws Exception {
-    return locateIctReport(correspondentId, Optional.empty(), Optional.empty(), Optional.empty());
-  }
-
-  /**
-   * Locate ICT Report Returns a signed link pointing to a recon report file for a specific ICT
-   * batch.
-   *
-   * @param correspondentId The correspondent id.
-   * @param batchId The id of the ICT batch for which to locate the report.
-   * @param programDateFilterProgram The ICT program for which to locate the report.
-   * @param programDateFilterProcessDate Represents a whole or partial calendar date, such as a
-   *     birthday. The time of day and time zone are either specified elsewhere or are
-   *     insignificant. The date is relative to the Gregorian Calendar. This can represent one of
-   *     the following:
-   *     <p>A full date, with non-zero year, month, and day values * A month and day value, with a
-   *     zero year, such as an anniversary * A year on its own, with zero month and day values * A
-   *     year and month value, with a zero day, such as a credit card expiration date
-   *     <p>Related types are [google.type.TimeOfDay][google.type.TimeOfDay] and
-   *     `google.protobuf.Timestamp`.
+   * @param request The request object containing all of the parameters for the API call.
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public IctReconReportsLocateIctReportResponse locateIctReport(
-      String correspondentId,
-      Optional<String> batchId,
-      Optional<? extends ProgramDateFilterProgram> programDateFilterProgram,
-      Optional<? extends DateCreate> programDateFilterProcessDate)
-      throws Exception {
-    IctReconReportsLocateIctReportRequest request =
-        IctReconReportsLocateIctReportRequest.builder()
-            .correspondentId(correspondentId)
-            .batchId(batchId)
-            .programDateFilterProgram(programDateFilterProgram)
-            .programDateFilterProcessDate(programDateFilterProcessDate)
-            .build();
-
+      IctReconReportsLocateIctReportRequest request) throws Exception {
     String _baseUrl = this.sdkConfiguration.serverUrl;
     String _url =
         Utils.generateURL(

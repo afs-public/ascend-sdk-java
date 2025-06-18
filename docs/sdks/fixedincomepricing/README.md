@@ -26,6 +26,7 @@ import com.apexfintechsolutions.ascendsdk.models.components.OrderCostPreviewRequ
 import com.apexfintechsolutions.ascendsdk.models.components.OrderCostPreviewRequestCreateAssetType;
 import com.apexfintechsolutions.ascendsdk.models.components.OrderCostPreviewRequestCreateIdentifierType;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderPriceServicePreviewOrderCostResponse;
 import java.lang.Exception;
@@ -36,8 +37,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -98,6 +104,7 @@ import com.apexfintechsolutions.ascendsdk.models.components.RetrieveQuoteRequest
 import com.apexfintechsolutions.ascendsdk.models.components.RetrieveQuoteRequestCreateAssetType;
 import com.apexfintechsolutions.ascendsdk.models.components.RetrieveQuoteRequestCreateIdentifierType;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderPriceServiceRetrieveQuoteResponse;
 import java.lang.Exception;
@@ -108,8 +115,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 
@@ -163,6 +175,7 @@ import com.apexfintechsolutions.ascendsdk.models.components.RetrieveFixedIncomeM
 import com.apexfintechsolutions.ascendsdk.models.components.RetrieveFixedIncomeMarksRequestSecurityIdentifiersCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.RetrieveFixedIncomeMarksRequestSecurityIdentifiersCreateIdentifierType;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderPriceServiceRetrieveFixedIncomeMarksResponse;
 import java.lang.Exception;
@@ -174,8 +187,13 @@ public class Application {
 
         SDK sdk = SDK.builder()
                 .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .apiKeyAuth("<YOUR_API_KEY_HERE>")
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
                     .build())
             .build();
 

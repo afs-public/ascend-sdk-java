@@ -27,7 +27,7 @@ public class ActivityCashDividend {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("cash_rate")
-  private JsonNullable<? extends ActivityCashRate> cashRate;
+  private JsonNullable<? extends ActivityCashDividendCashRate> cashRate;
 
   /** Common fields for corporate actions */
   @JsonInclude(Include.NON_ABSENT)
@@ -98,7 +98,7 @@ public class ActivityCashDividend {
 
   @JsonCreator
   public ActivityCashDividend(
-      @JsonProperty("cash_rate") JsonNullable<? extends ActivityCashRate> cashRate,
+      @JsonProperty("cash_rate") JsonNullable<? extends ActivityCashDividendCashRate> cashRate,
       @JsonProperty("corporate_action_general_information")
           JsonNullable<? extends ActivityCashDividendCorporateActionGeneralInformation>
               corporateActionGeneralInformation,
@@ -166,8 +166,8 @@ public class ActivityCashDividend {
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<ActivityCashRate> cashRate() {
-    return (JsonNullable<ActivityCashRate>) cashRate;
+  public JsonNullable<ActivityCashDividendCashRate> cashRate() {
+    return (JsonNullable<ActivityCashDividendCashRate>) cashRate;
   }
 
   /** Common fields for corporate actions */
@@ -266,7 +266,7 @@ public class ActivityCashDividend {
    * The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash
    * will be disbursed to the shareholder
    */
-  public ActivityCashDividend withCashRate(ActivityCashRate cashRate) {
+  public ActivityCashDividend withCashRate(ActivityCashDividendCashRate cashRate) {
     Utils.checkNotNull(cashRate, "cashRate");
     this.cashRate = JsonNullable.of(cashRate);
     return this;
@@ -276,7 +276,8 @@ public class ActivityCashDividend {
    * The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash
    * will be disbursed to the shareholder
    */
-  public ActivityCashDividend withCashRate(JsonNullable<? extends ActivityCashRate> cashRate) {
+  public ActivityCashDividend withCashRate(
+      JsonNullable<? extends ActivityCashDividendCashRate> cashRate) {
     Utils.checkNotNull(cashRate, "cashRate");
     this.cashRate = cashRate;
     return this;
@@ -545,7 +546,8 @@ public class ActivityCashDividend {
 
   public static final class Builder {
 
-    private JsonNullable<? extends ActivityCashRate> cashRate = JsonNullable.undefined();
+    private JsonNullable<? extends ActivityCashDividendCashRate> cashRate =
+        JsonNullable.undefined();
 
     private JsonNullable<? extends ActivityCashDividendCorporateActionGeneralInformation>
         corporateActionGeneralInformation = JsonNullable.undefined();
@@ -583,7 +585,7 @@ public class ActivityCashDividend {
      * The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash
      * will be disbursed to the shareholder
      */
-    public Builder cashRate(ActivityCashRate cashRate) {
+    public Builder cashRate(ActivityCashDividendCashRate cashRate) {
       Utils.checkNotNull(cashRate, "cashRate");
       this.cashRate = JsonNullable.of(cashRate);
       return this;
@@ -593,7 +595,7 @@ public class ActivityCashDividend {
      * The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash
      * will be disbursed to the shareholder
      */
-    public Builder cashRate(JsonNullable<? extends ActivityCashRate> cashRate) {
+    public Builder cashRate(JsonNullable<? extends ActivityCashDividendCashRate> cashRate) {
       Utils.checkNotNull(cashRate, "cashRate");
       this.cashRate = cashRate;
       return this;
