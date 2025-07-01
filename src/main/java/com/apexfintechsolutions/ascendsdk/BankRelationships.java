@@ -10,6 +10,7 @@ import com.apexfintechsolutions.ascendsdk.models.components.BankRelationshipUpda
 import com.apexfintechsolutions.ascendsdk.models.components.CancelBankRelationshipRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ListBankRelationshipsResponse;
 import com.apexfintechsolutions.ascendsdk.models.components.ReissueMicroDepositsRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.ReuseBankRelationshipRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.VerifyMicroDepositsRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.errors.SDKError;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
@@ -28,6 +29,9 @@ import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsLis
 import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsReissueMicroDepositsRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsReissueMicroDepositsRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsReissueMicroDepositsResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsReuseBankRelationshipRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsReuseBankRelationshipRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsReuseBankRelationshipResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsUpdateBankRelationshipRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsUpdateBankRelationshipRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsUpdateBankRelationshipResponse;
@@ -58,7 +62,8 @@ public class BankRelationships
         MethodCallBankRelationshipsUpdateBankRelationship,
         MethodCallBankRelationshipsCancelBankRelationship,
         MethodCallBankRelationshipsVerifyMicroDeposits,
-        MethodCallBankRelationshipsReissueMicroDeposits {
+        MethodCallBankRelationshipsReissueMicroDeposits,
+        MethodCallBankRelationshipsReuseBankRelationship {
 
   private final SDKConfiguration sdkConfiguration;
 
@@ -1298,6 +1303,191 @@ public class BankRelationships
             .rawResponse(_httpRes);
 
     BankRelationshipsReissueMicroDepositsResponse _res = _resBuilder.build();
+
+    if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+      if (Utils.contentTypeMatches(_contentType, "application/json")) {
+        BankRelationship _out =
+            Utils.mapper()
+                .readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<BankRelationship>() {});
+        _res.withBankRelationship(Optional.ofNullable(_out));
+        return _res;
+      } else {
+        throw new SDKError(
+            _httpRes,
+            _httpRes.statusCode(),
+            "Unexpected content-type received: " + _contentType,
+            Utils.extractByteArrayFromBody(_httpRes));
+      }
+    }
+    if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "403", "404")) {
+      if (Utils.contentTypeMatches(_contentType, "application/json")) {
+        Status _out =
+            Utils.mapper()
+                .readValue(Utils.toUtf8AndClose(_httpRes.body()), new TypeReference<Status>() {});
+        throw _out;
+      } else {
+        throw new SDKError(
+            _httpRes,
+            _httpRes.statusCode(),
+            "Unexpected content-type received: " + _contentType,
+            Utils.extractByteArrayFromBody(_httpRes));
+      }
+    }
+    if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
+      // no content
+      throw new SDKError(
+          _httpRes,
+          _httpRes.statusCode(),
+          "API error occurred",
+          Utils.extractByteArrayFromBody(_httpRes));
+    }
+    if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
+      // no content
+      throw new SDKError(
+          _httpRes,
+          _httpRes.statusCode(),
+          "API error occurred",
+          Utils.extractByteArrayFromBody(_httpRes));
+    }
+    if (Utils.statusCodeMatches(_httpRes.statusCode(), "default")) {
+      if (Utils.contentTypeMatches(_contentType, "application/json")) {
+        com.apexfintechsolutions.ascendsdk.models.components.Status _out =
+            Utils.mapper()
+                .readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<
+                        com.apexfintechsolutions.ascendsdk.models.components.Status>() {});
+        _res.withStatus(Optional.ofNullable(_out));
+        return _res;
+      } else {
+        throw new SDKError(
+            _httpRes,
+            _httpRes.statusCode(),
+            "Unexpected content-type received: " + _contentType,
+            Utils.extractByteArrayFromBody(_httpRes));
+      }
+    }
+    throw new SDKError(
+        _httpRes,
+        _httpRes.statusCode(),
+        "Unexpected status code received: " + _httpRes.statusCode(),
+        Utils.extractByteArrayFromBody(_httpRes));
+  }
+
+  /**
+   * Reuse Bank Relationship Reuses an existing bank relationship for a new account. The source bank
+   * relationship must be approved. The new account must be related to the parent account of the
+   * `source_bank_relationship`. The new relationship will be created with the `USE_EXISTING`
+   * verification method in place of the source bank relationship's verification method.
+   *
+   * @return The call builder
+   */
+  public BankRelationshipsReuseBankRelationshipRequestBuilder reuseBankRelationship() {
+    return new BankRelationshipsReuseBankRelationshipRequestBuilder(this);
+  }
+
+  /**
+   * Reuse Bank Relationship Reuses an existing bank relationship for a new account. The source bank
+   * relationship must be approved. The new account must be related to the parent account of the
+   * `source_bank_relationship`. The new relationship will be created with the `USE_EXISTING`
+   * verification method in place of the source bank relationship's verification method.
+   *
+   * @param accountId The account id.
+   * @param reuseBankRelationshipRequestCreate Request to reuse a bank relationship.
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BankRelationshipsReuseBankRelationshipResponse reuseBankRelationship(
+      String accountId, ReuseBankRelationshipRequestCreate reuseBankRelationshipRequestCreate)
+      throws Exception {
+    BankRelationshipsReuseBankRelationshipRequest request =
+        BankRelationshipsReuseBankRelationshipRequest.builder()
+            .accountId(accountId)
+            .reuseBankRelationshipRequestCreate(reuseBankRelationshipRequestCreate)
+            .build();
+
+    String _baseUrl = this.sdkConfiguration.serverUrl;
+    String _url =
+        Utils.generateURL(
+            BankRelationshipsReuseBankRelationshipRequest.class,
+            _baseUrl,
+            "/transfers/v1/accounts/{account_id}/bankRelationships:reuse",
+            request,
+            null);
+
+    HTTPRequest _req = new HTTPRequest(_url, "POST");
+    Object _convertedRequest =
+        Utils.convertToShape(request, JsonShape.DEFAULT, new TypeReference<Object>() {});
+    SerializedBody _serializedRequestBody =
+        Utils.serializeRequestBody(
+            _convertedRequest, "reuseBankRelationshipRequestCreate", "json", false);
+    if (_serializedRequestBody == null) {
+      throw new Exception("Request body is required");
+    }
+    _req.setBody(Optional.ofNullable(_serializedRequestBody));
+    _req.addHeader("Accept", "application/json")
+        .addHeader("user-agent", SDKConfiguration.USER_AGENT);
+
+    Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+    Utils.configureSecurity(_req, this.sdkConfiguration.securitySource.getSecurity());
+    HTTPClient _client = this.sdkConfiguration.defaultClient;
+    HttpRequest _r =
+        sdkConfiguration
+            .hooks()
+            .beforeRequest(
+                new BeforeRequestContextImpl(
+                    "BankRelationships_ReuseBankRelationship",
+                    Optional.of(List.of()),
+                    _hookSecuritySource),
+                _req.build());
+    HttpResponse<InputStream> _httpRes;
+    try {
+      _httpRes = _client.send(_r);
+      if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "403", "404", "4XX", "5XX")) {
+        _httpRes =
+            sdkConfiguration
+                .hooks()
+                .afterError(
+                    new AfterErrorContextImpl(
+                        "BankRelationships_ReuseBankRelationship",
+                        Optional.of(List.of()),
+                        _hookSecuritySource),
+                    Optional.of(_httpRes),
+                    Optional.empty());
+      } else {
+        _httpRes =
+            sdkConfiguration
+                .hooks()
+                .afterSuccess(
+                    new AfterSuccessContextImpl(
+                        "BankRelationships_ReuseBankRelationship",
+                        Optional.of(List.of()),
+                        _hookSecuritySource),
+                    _httpRes);
+      }
+    } catch (Exception _e) {
+      _httpRes =
+          sdkConfiguration
+              .hooks()
+              .afterError(
+                  new AfterErrorContextImpl(
+                      "BankRelationships_ReuseBankRelationship",
+                      Optional.of(List.of()),
+                      _hookSecuritySource),
+                  Optional.empty(),
+                  Optional.of(_e));
+    }
+    String _contentType =
+        _httpRes.headers().firstValue("Content-Type").orElse("application/octet-stream");
+    BankRelationshipsReuseBankRelationshipResponse.Builder _resBuilder =
+        BankRelationshipsReuseBankRelationshipResponse.builder()
+            .contentType(_contentType)
+            .statusCode(_httpRes.statusCode())
+            .rawResponse(_httpRes);
+
+    BankRelationshipsReuseBankRelationshipResponse _res = _resBuilder.build();
 
     if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
       if (Utils.contentTypeMatches(_contentType, "application/json")) {

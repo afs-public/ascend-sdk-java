@@ -12,6 +12,7 @@
 * [cancelBankRelationship](#cancelbankrelationship) - Cancel Bank Relationship
 * [verifyMicroDeposits](#verifymicrodeposits) - Verify Micro Deposits
 * [reissueMicroDeposits](#reissuemicrodeposits) - Reissue Micro Deposits
+* [reuseBankRelationship](#reusebankrelationship) - Reuse Bank Relationship
 
 ## createBankRelationship
 
@@ -479,6 +480,72 @@ public class Application {
 ### Response
 
 **[BankRelationshipsReissueMicroDepositsResponse](../../models/operations/BankRelationshipsReissueMicroDepositsResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403, 404          | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## reuseBankRelationship
+
+Reuses an existing bank relationship for a new account. The source bank relationship must be approved. The new account must be related to the parent account of the `source_bank_relationship`. The new relationship will be created with the `USE_EXISTING` verification method in place of the source bank relationship's verification method.
+
+### Example Usage
+
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.ReuseBankRelationshipRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsReuseBankRelationshipResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        BankRelationshipsReuseBankRelationshipResponse res = sdk.bankRelationships().reuseBankRelationship()
+                .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Z")
+                .reuseBankRelationshipRequestCreate(ReuseBankRelationshipRequestCreate.builder()
+                    .parent("accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Z")
+                    .sourceBankRelationship("accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e")
+                    .build())
+                .call();
+
+        if (res.bankRelationship().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         | Example                                                                                             |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `accountId`                                                                                         | *String*                                                                                            | :heavy_check_mark:                                                                                  | The account id.                                                                                     | 01H8FB90ZRRFWXB4XC2JPJ1D4Z                                                                          |
+| `reuseBankRelationshipRequestCreate`                                                                | [ReuseBankRelationshipRequestCreate](../../models/components/ReuseBankRelationshipRequestCreate.md) | :heavy_check_mark:                                                                                  | N/A                                                                                                 |                                                                                                     |
+
+### Response
+
+**[BankRelationshipsReuseBankRelationshipResponse](../../models/operations/BankRelationshipsReuseBankRelationshipResponse.md)**
 
 ### Errors
 
