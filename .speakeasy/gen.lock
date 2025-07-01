@@ -1,11 +1,11 @@
 lockVersion: 2.0.0
 id: 04604b59-b953-4711-ac65-9ad5897162b4
 management:
-  docChecksum: 5ce91c7251a156c72b6a6bfd31bbe361
-  docVersion: v1:20250617:uat:6f66f0a5cade
+  docChecksum: d3f8dd362b603f2fa8400d49a4984779
+  docVersion: v1:20250630:uat:8b6dcb722a6f
   speakeasyVersion: 1.521.0
   generationVersion: 2.558.2
-  releaseVersion: 1.3.0
+  releaseVersion: 1.3.1
   configChecksum: 84ef6f9135640da4507b750720216d0b
 features:
   java:
@@ -1691,6 +1691,7 @@ generatedFiles:
   - docs/models/components/RetrieveQuoteResponseAssetType.md
   - docs/models/components/RetrieveQuoteResponseBrokerCapacity.md
   - docs/models/components/RetrieveQuoteResponseIdentifierType.md
+  - docs/models/components/ReuseBankRelationshipRequestCreate.md
   - docs/models/components/ReverseStockSplit.md
   - docs/models/components/Review.md
   - docs/models/components/RightsDistribution.md
@@ -2114,6 +2115,8 @@ generatedFiles:
   - docs/models/operations/BankRelationshipsListBankRelationshipsResponse.md
   - docs/models/operations/BankRelationshipsReissueMicroDepositsRequest.md
   - docs/models/operations/BankRelationshipsReissueMicroDepositsResponse.md
+  - docs/models/operations/BankRelationshipsReuseBankRelationshipRequest.md
+  - docs/models/operations/BankRelationshipsReuseBankRelationshipResponse.md
   - docs/models/operations/BankRelationshipsUpdateBankRelationshipRequest.md
   - docs/models/operations/BankRelationshipsUpdateBankRelationshipResponse.md
   - docs/models/operations/BankRelationshipsVerifyMicroDepositsRequest.md
@@ -4029,6 +4032,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RetrieveQuoteResponseAssetType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RetrieveQuoteResponseBrokerCapacity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RetrieveQuoteResponseIdentifierType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ReuseBankRelationshipRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ReverseStockSplit.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Review.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RightsDistribution.java
@@ -4533,6 +4537,9 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/BankRelationshipsReissueMicroDepositsRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/BankRelationshipsReissueMicroDepositsRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/BankRelationshipsReissueMicroDepositsResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/BankRelationshipsReuseBankRelationshipRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/BankRelationshipsReuseBankRelationshipRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/BankRelationshipsReuseBankRelationshipResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/BankRelationshipsUpdateBankRelationshipRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/BankRelationshipsUpdateBankRelationshipRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/BankRelationshipsUpdateBankRelationshipResponse.java
@@ -6232,5 +6239,12 @@ examples:
           externalAchDeposit_id: "20230817000319"
       requestBody:
         application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/externalAchDeposits/20230817000319"}
+  BankRelationships_ReuseBankRelationship:
+    "":
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Z"
+      requestBody:
+        application/json: {"parent": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Z", "source_bank_relationship": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e"}
 examplesVersion: 1.0.0
 generatedTests: {}

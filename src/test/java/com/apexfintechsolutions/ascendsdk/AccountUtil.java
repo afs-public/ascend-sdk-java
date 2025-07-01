@@ -68,6 +68,28 @@ public class AccountUtil {
     return response.legalNaturalPerson().get();
   }
 
+  public static Account createEnrolledAccountWithLNP(SDK sdk, LegalNaturalPerson lnpID)
+      throws Exception {
+    var account = createAccount(sdk, lnpID);
+    Thread.sleep(5000);
+    var agreements = enrollAccount(sdk, account);
+    Thread.sleep(5000);
+    affirmAgreements(sdk, account, agreements);
+
+    Thread.sleep(1000);
+
+    int attempts = 5;
+    for (int i = 0; i < attempts; i++) {
+      Account acc = getAccount(sdk, account.accountId().get());
+      if (acc.state().get() == AccountState.OPEN) {
+        return acc;
+      }
+      Thread.sleep(2000);
+    }
+
+    throw new Exception("Account never reached OPEN state!");
+  }
+
   public static Account createEnrolledAccount(SDK sdk) throws Exception {
     var person = createLnp(sdk);
     Thread.sleep(5000);

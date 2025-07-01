@@ -13,11 +13,15 @@ public class TestBankRelationships {
   private BankRelationship bankRelationship;
   private Account enrolledAccount;
 
+  private Account reUseAccount;
+
   @BeforeAll
   public void setup() throws Exception {
     sdk = SdkUtil.getSdk();
 
-    enrolledAccount = AccountUtil.createEnrolledAccount(sdk);
+    LegalNaturalPerson lnp = AccountUtil.createLnp(sdk);
+    enrolledAccount = AccountUtil.createEnrolledAccountWithLNP(sdk, lnp);
+    reUseAccount = AccountUtil.createEnrolledAccountWithLNP(sdk, lnp);
     bankRelationship = TransfersUtil.createBankRelationship(sdk, enrolledAccount);
   }
 
@@ -137,6 +141,26 @@ public class TestBankRelationships {
     Assertions.assertEquals(200, result.statusCode());
   }
 
+  @Order(7)
+  @Test
+  public void bank_relationships_transfers_reuse_bank_relationships_reuse_bank_relationships1()
+      throws Exception {
+    var request =
+        ReuseBankRelationshipRequestCreate.builder()
+            .parent("accounts/" + enrolledAccount.accountId().get())
+            .sourceBankRelationship(
+                "accounts/"
+                    + enrolledAccount.accountId().get()
+                    + "/bank_relationships/"
+                    + TransfersUtil.getBankRelationshipId(bankRelationship))
+            .build();
+
+    var result =
+        sdk.bankRelationships().reuseBankRelationship(reUseAccount.accountId().get(), request);
+    Assertions.assertEquals(200, result.statusCode());
+  }
+
+  @Order(8)
   @Test
   public void bank_relationships_transfers_cancel_bank_relationships_cancel_bank_relationships1()
       throws Exception {

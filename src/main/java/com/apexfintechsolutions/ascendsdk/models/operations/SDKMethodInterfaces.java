@@ -91,6 +91,7 @@ import com.apexfintechsolutions.ascendsdk.models.components.RetrieveContribution
 import com.apexfintechsolutions.ascendsdk.models.components.RetrieveDistributionConstraintsRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.RetrieveFixedIncomeMarksRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.RetrieveQuoteRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.ReuseBankRelationshipRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.SubmitBasketRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.TradeAllocationCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.TradeCreate;
@@ -495,6 +496,12 @@ public class SDKMethodInterfaces {
         String accountId,
         String bankRelationshipId,
         ReissueMicroDepositsRequestCreate reissueMicroDepositsRequestCreate)
+        throws Exception;
+  }
+
+  public interface MethodCallBankRelationshipsReuseBankRelationship {
+    BankRelationshipsReuseBankRelationshipResponse reuseBankRelationship(
+        String accountId, ReuseBankRelationshipRequestCreate reuseBankRelationshipRequestCreate)
         throws Exception;
   }
 
