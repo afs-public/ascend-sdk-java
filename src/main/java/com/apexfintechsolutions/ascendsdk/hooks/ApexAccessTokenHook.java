@@ -61,6 +61,17 @@ final class ApexAccessTokenHook implements Hook.BeforeRequest {
                 request.bodyPublisher().orElse(HttpRequest.BodyPublishers.noBody()))
             .header("x-api-key", security.apiKey().get());
 
+    // Re-add the original headers such that they are not lost
+    request
+        .headers()
+        .map()
+        .forEach(
+            (key, values) -> {
+              for (String value : values) {
+                requestBuilder.header(key, value);
+              }
+            });
+
     // Validate and process service account credentials
     if (security.serviceAccountCreds().isEmpty()) {
       throw new Exception("Service account credentials are empty.");
