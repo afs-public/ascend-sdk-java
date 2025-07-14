@@ -46,16 +46,20 @@ public class Employment {
   private Optional<? extends LegalNaturalPersonEmploymentStatus> employmentStatus;
 
   /**
-   * The nature of work performed at an investor's place of employment. Required if the
-   * employment_status is `EMPLOYED` or `SELF_EMPLOYED`.
+   * **Field Dependencies:**
+   *
+   * <p>Required if `employment_status` is one of: - `EMPLOYED` - `SELF_EMPLOYED`
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("occupation")
   private Optional<String> occupation;
 
   /**
-   * The start year of employment related to a person's stated employer Must be from birth year to
-   * current year, or 0 to clear start year value
+   * **Field Dependencies:**
+   *
+   * <p>Required if `employment_status` is one of: - `EMPLOYED` - `SELF_EMPLOYED`
+   *
+   * <p>Otherwise, must be empty.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("start_year")
@@ -126,8 +130,9 @@ public class Employment {
   }
 
   /**
-   * The nature of work performed at an investor's place of employment. Required if the
-   * employment_status is `EMPLOYED` or `SELF_EMPLOYED`.
+   * **Field Dependencies:**
+   *
+   * <p>Required if `employment_status` is one of: - `EMPLOYED` - `SELF_EMPLOYED`
    */
   @JsonIgnore
   public Optional<String> occupation() {
@@ -135,8 +140,11 @@ public class Employment {
   }
 
   /**
-   * The start year of employment related to a person's stated employer Must be from birth year to
-   * current year, or 0 to clear start year value
+   * **Field Dependencies:**
+   *
+   * <p>Required if `employment_status` is one of: - `EMPLOYED` - `SELF_EMPLOYED`
+   *
+   * <p>Otherwise, must be empty.
    */
   @JsonIgnore
   public Optional<Integer> startYear() {
@@ -215,8 +223,9 @@ public class Employment {
   }
 
   /**
-   * The nature of work performed at an investor's place of employment. Required if the
-   * employment_status is `EMPLOYED` or `SELF_EMPLOYED`.
+   * **Field Dependencies:**
+   *
+   * <p>Required if `employment_status` is one of: - `EMPLOYED` - `SELF_EMPLOYED`
    */
   public Employment withOccupation(String occupation) {
     Utils.checkNotNull(occupation, "occupation");
@@ -225,8 +234,9 @@ public class Employment {
   }
 
   /**
-   * The nature of work performed at an investor's place of employment. Required if the
-   * employment_status is `EMPLOYED` or `SELF_EMPLOYED`.
+   * **Field Dependencies:**
+   *
+   * <p>Required if `employment_status` is one of: - `EMPLOYED` - `SELF_EMPLOYED`
    */
   public Employment withOccupation(Optional<String> occupation) {
     Utils.checkNotNull(occupation, "occupation");
@@ -235,8 +245,11 @@ public class Employment {
   }
 
   /**
-   * The start year of employment related to a person's stated employer Must be from birth year to
-   * current year, or 0 to clear start year value
+   * **Field Dependencies:**
+   *
+   * <p>Required if `employment_status` is one of: - `EMPLOYED` - `SELF_EMPLOYED`
+   *
+   * <p>Otherwise, must be empty.
    */
   public Employment withStartYear(int startYear) {
     Utils.checkNotNull(startYear, "startYear");
@@ -245,8 +258,11 @@ public class Employment {
   }
 
   /**
-   * The start year of employment related to a person's stated employer Must be from birth year to
-   * current year, or 0 to clear start year value
+   * **Field Dependencies:**
+   *
+   * <p>Required if `employment_status` is one of: - `EMPLOYED` - `SELF_EMPLOYED`
+   *
+   * <p>Otherwise, must be empty.
    */
   public Employment withStartYear(Optional<Integer> startYear) {
     Utils.checkNotNull(startYear, "startYear");
@@ -382,8 +398,9 @@ public class Employment {
     }
 
     /**
-     * The nature of work performed at an investor's place of employment. Required if the
-     * employment_status is `EMPLOYED` or `SELF_EMPLOYED`.
+     * **Field Dependencies:**
+     *
+     * <p>Required if `employment_status` is one of: - `EMPLOYED` - `SELF_EMPLOYED`
      */
     public Builder occupation(String occupation) {
       Utils.checkNotNull(occupation, "occupation");
@@ -392,8 +409,9 @@ public class Employment {
     }
 
     /**
-     * The nature of work performed at an investor's place of employment. Required if the
-     * employment_status is `EMPLOYED` or `SELF_EMPLOYED`.
+     * **Field Dependencies:**
+     *
+     * <p>Required if `employment_status` is one of: - `EMPLOYED` - `SELF_EMPLOYED`
      */
     public Builder occupation(Optional<String> occupation) {
       Utils.checkNotNull(occupation, "occupation");
@@ -402,8 +420,11 @@ public class Employment {
     }
 
     /**
-     * The start year of employment related to a person's stated employer Must be from birth year to
-     * current year, or 0 to clear start year value
+     * **Field Dependencies:**
+     *
+     * <p>Required if `employment_status` is one of: - `EMPLOYED` - `SELF_EMPLOYED`
+     *
+     * <p>Otherwise, must be empty.
      */
     public Builder startYear(int startYear) {
       Utils.checkNotNull(startYear, "startYear");
@@ -412,8 +433,11 @@ public class Employment {
     }
 
     /**
-     * The start year of employment related to a person's stated employer Must be from birth year to
-     * current year, or 0 to clear start year value
+     * **Field Dependencies:**
+     *
+     * <p>Required if `employment_status` is one of: - `EMPLOYED` - `SELF_EMPLOYED`
+     *
+     * <p>Otherwise, must be empty.
      */
     public Builder startYear(Optional<Integer> startYear) {
       Utils.checkNotNull(startYear, "startYear");

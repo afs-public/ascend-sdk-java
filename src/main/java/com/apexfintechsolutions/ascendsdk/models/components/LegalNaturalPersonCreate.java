@@ -78,6 +78,15 @@ public class LegalNaturalPersonCreate {
   private String correspondentId;
 
   /**
+   * Customer identification id returned by the customer identification service which represents a
+   * single instance of an identity verification outcome for the specified customer. This
+   * verification result will be used as part of the full investigation.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("customer_identification_id")
+  private Optional<String> customerIdentificationId;
+
+  /**
    * Represents a whole or partial calendar date, such as a birthday. The time of day and time zone
    * are either specified elsewhere or are insignificant. The date is relative to the Gregorian
    * Calendar. This can represent one of the following:
@@ -250,6 +259,7 @@ public class LegalNaturalPersonCreate {
       @JsonProperty("control_person_company_symbols") Optional<String> controlPersonCompanySymbols,
       @JsonProperty("correspondent_employee") Optional<Boolean> correspondentEmployee,
       @JsonProperty("correspondent_id") String correspondentId,
+      @JsonProperty("customer_identification_id") Optional<String> customerIdentificationId,
       @JsonProperty("death_date") Optional<? extends DateCreate> deathDate,
       @JsonProperty("doing_business_as") Optional<? extends List<String>> doingBusinessAs,
       @JsonProperty("employment") EmploymentCreate employment,
@@ -285,6 +295,7 @@ public class LegalNaturalPersonCreate {
     Utils.checkNotNull(controlPersonCompanySymbols, "controlPersonCompanySymbols");
     Utils.checkNotNull(correspondentEmployee, "correspondentEmployee");
     Utils.checkNotNull(correspondentId, "correspondentId");
+    Utils.checkNotNull(customerIdentificationId, "customerIdentificationId");
     Utils.checkNotNull(deathDate, "deathDate");
     Utils.checkNotNull(doingBusinessAs, "doingBusinessAs");
     Utils.checkNotNull(employment, "employment");
@@ -315,6 +326,7 @@ public class LegalNaturalPersonCreate {
     this.controlPersonCompanySymbols = controlPersonCompanySymbols;
     this.correspondentEmployee = correspondentEmployee;
     this.correspondentId = correspondentId;
+    this.customerIdentificationId = customerIdentificationId;
     this.deathDate = deathDate;
     this.doingBusinessAs = doingBusinessAs;
     this.employment = employment;
@@ -356,6 +368,7 @@ public class LegalNaturalPersonCreate {
         Optional.empty(),
         Optional.empty(),
         correspondentId,
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         employment,
@@ -445,6 +458,16 @@ public class LegalNaturalPersonCreate {
   @JsonIgnore
   public String correspondentId() {
     return correspondentId;
+  }
+
+  /**
+   * Customer identification id returned by the customer identification service which represents a
+   * single instance of an identity verification outcome for the specified customer. This
+   * verification result will be used as part of the full investigation.
+   */
+  @JsonIgnore
+  public Optional<String> customerIdentificationId() {
+    return customerIdentificationId;
   }
 
   /**
@@ -763,6 +786,29 @@ public class LegalNaturalPersonCreate {
   public LegalNaturalPersonCreate withCorrespondentId(String correspondentId) {
     Utils.checkNotNull(correspondentId, "correspondentId");
     this.correspondentId = correspondentId;
+    return this;
+  }
+
+  /**
+   * Customer identification id returned by the customer identification service which represents a
+   * single instance of an identity verification outcome for the specified customer. This
+   * verification result will be used as part of the full investigation.
+   */
+  public LegalNaturalPersonCreate withCustomerIdentificationId(String customerIdentificationId) {
+    Utils.checkNotNull(customerIdentificationId, "customerIdentificationId");
+    this.customerIdentificationId = Optional.ofNullable(customerIdentificationId);
+    return this;
+  }
+
+  /**
+   * Customer identification id returned by the customer identification service which represents a
+   * single instance of an identity verification outcome for the specified customer. This
+   * verification result will be used as part of the full investigation.
+   */
+  public LegalNaturalPersonCreate withCustomerIdentificationId(
+      Optional<String> customerIdentificationId) {
+    Utils.checkNotNull(customerIdentificationId, "customerIdentificationId");
+    this.customerIdentificationId = customerIdentificationId;
     return this;
   }
 
@@ -1174,6 +1220,7 @@ public class LegalNaturalPersonCreate {
         && Objects.deepEquals(this.controlPersonCompanySymbols, other.controlPersonCompanySymbols)
         && Objects.deepEquals(this.correspondentEmployee, other.correspondentEmployee)
         && Objects.deepEquals(this.correspondentId, other.correspondentId)
+        && Objects.deepEquals(this.customerIdentificationId, other.customerIdentificationId)
         && Objects.deepEquals(this.deathDate, other.deathDate)
         && Objects.deepEquals(this.doingBusinessAs, other.doingBusinessAs)
         && Objects.deepEquals(this.employment, other.employment)
@@ -1211,6 +1258,7 @@ public class LegalNaturalPersonCreate {
         controlPersonCompanySymbols,
         correspondentEmployee,
         correspondentId,
+        customerIdentificationId,
         deathDate,
         doingBusinessAs,
         employment,
@@ -1253,6 +1301,8 @@ public class LegalNaturalPersonCreate {
         correspondentEmployee,
         "correspondentId",
         correspondentId,
+        "customerIdentificationId",
+        customerIdentificationId,
         "deathDate",
         deathDate,
         "doingBusinessAs",
@@ -1314,6 +1364,8 @@ public class LegalNaturalPersonCreate {
     private Optional<Boolean> correspondentEmployee = Optional.empty();
 
     private String correspondentId;
+
+    private Optional<String> customerIdentificationId = Optional.empty();
 
     private Optional<? extends DateCreate> deathDate = Optional.empty();
 
@@ -1473,6 +1525,28 @@ public class LegalNaturalPersonCreate {
     public Builder correspondentId(String correspondentId) {
       Utils.checkNotNull(correspondentId, "correspondentId");
       this.correspondentId = correspondentId;
+      return this;
+    }
+
+    /**
+     * Customer identification id returned by the customer identification service which represents a
+     * single instance of an identity verification outcome for the specified customer. This
+     * verification result will be used as part of the full investigation.
+     */
+    public Builder customerIdentificationId(String customerIdentificationId) {
+      Utils.checkNotNull(customerIdentificationId, "customerIdentificationId");
+      this.customerIdentificationId = Optional.ofNullable(customerIdentificationId);
+      return this;
+    }
+
+    /**
+     * Customer identification id returned by the customer identification service which represents a
+     * single instance of an identity verification outcome for the specified customer. This
+     * verification result will be used as part of the full investigation.
+     */
+    public Builder customerIdentificationId(Optional<String> customerIdentificationId) {
+      Utils.checkNotNull(customerIdentificationId, "customerIdentificationId");
+      this.customerIdentificationId = customerIdentificationId;
       return this;
     }
 
@@ -1867,6 +1941,7 @@ public class LegalNaturalPersonCreate {
           controlPersonCompanySymbols,
           correspondentEmployee,
           correspondentId,
+          customerIdentificationId,
           deathDate,
           doingBusinessAs,
           employment,

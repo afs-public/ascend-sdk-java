@@ -15,8 +15,11 @@ import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
- * PartyForeignIdentification - Foreign identification. Must be provided if the person does not have
- * a U.S. tax ID
+ * PartyForeignIdentification - **Field Dependencies:**
+ *
+ * <p>Required if `irs_form_type` is `W_8BEN`.
+ *
+ * <p>Otherwise, must be empty.
  */
 public class PartyForeignIdentification {
 

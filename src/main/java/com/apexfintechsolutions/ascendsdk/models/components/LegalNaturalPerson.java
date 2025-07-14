@@ -75,6 +75,15 @@ public class LegalNaturalPerson {
   @JsonProperty("custodian_employee")
   private Optional<Boolean> custodianEmployee;
 
+  /**
+   * Customer identification id returned by the customer identification service which represents a
+   * single instance of an identity verification outcome for the specified customer. This
+   * verification result will be used as part of the full investigation.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("customer_identification_id")
+  private Optional<String> customerIdentificationId;
+
   /** The day, month, and year of death of a legal natural person */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("death_date")
@@ -103,7 +112,13 @@ public class LegalNaturalPerson {
   @JsonProperty("finra_associated_entity")
   private Optional<String> finraAssociatedEntity;
 
-  /** Foreign identification. Must be provided if the person does not have a U.S. tax ID */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Required if `irs_form_type` is `W_8BEN`.
+   *
+   * <p>Otherwise, must be empty.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("foreign_identification")
   private JsonNullable<? extends ForeignIdentification> foreignIdentification;
@@ -136,8 +151,9 @@ public class LegalNaturalPerson {
   private Optional<Boolean> institutionalCustomer;
 
   /**
-   * Investigation id relating to the Customer Identification Program (CIP) and Customer Due
-   * Diligence (CDD).
+   * Investigation id relating a comprehensive investigation for a customer, encompassing the
+   * aggregation of identity verification results and watchlist screenings, conducted to support the
+   * Customer Identification Program (CIP) and Customer Due Diligence (CDD)
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("investigation_id")
@@ -260,6 +276,7 @@ public class LegalNaturalPerson {
       @JsonProperty("correspondent_employee") Optional<Boolean> correspondentEmployee,
       @JsonProperty("correspondent_id") Optional<String> correspondentId,
       @JsonProperty("custodian_employee") Optional<Boolean> custodianEmployee,
+      @JsonProperty("customer_identification_id") Optional<String> customerIdentificationId,
       @JsonProperty("death_date") JsonNullable<? extends DeathDate> deathDate,
       @JsonProperty("doing_business_as") Optional<? extends List<String>> doingBusinessAs,
       @JsonProperty("employment") JsonNullable<? extends Employment> employment,
@@ -302,6 +319,7 @@ public class LegalNaturalPerson {
     Utils.checkNotNull(correspondentEmployee, "correspondentEmployee");
     Utils.checkNotNull(correspondentId, "correspondentId");
     Utils.checkNotNull(custodianEmployee, "custodianEmployee");
+    Utils.checkNotNull(customerIdentificationId, "customerIdentificationId");
     Utils.checkNotNull(deathDate, "deathDate");
     Utils.checkNotNull(doingBusinessAs, "doingBusinessAs");
     Utils.checkNotNull(employment, "employment");
@@ -337,6 +355,7 @@ public class LegalNaturalPerson {
     this.correspondentEmployee = correspondentEmployee;
     this.correspondentId = correspondentId;
     this.custodianEmployee = custodianEmployee;
+    this.customerIdentificationId = customerIdentificationId;
     this.deathDate = deathDate;
     this.doingBusinessAs = doingBusinessAs;
     this.employment = employment;
@@ -370,6 +389,7 @@ public class LegalNaturalPerson {
         Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined(),
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
@@ -467,6 +487,16 @@ public class LegalNaturalPerson {
     return custodianEmployee;
   }
 
+  /**
+   * Customer identification id returned by the customer identification service which represents a
+   * single instance of an identity verification outcome for the specified customer. This
+   * verification result will be used as part of the full investigation.
+   */
+  @JsonIgnore
+  public Optional<String> customerIdentificationId() {
+    return customerIdentificationId;
+  }
+
   /** The day, month, and year of death of a legal natural person */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -503,7 +533,13 @@ public class LegalNaturalPerson {
     return finraAssociatedEntity;
   }
 
-  /** Foreign identification. Must be provided if the person does not have a U.S. tax ID */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Required if `irs_form_type` is `W_8BEN`.
+   *
+   * <p>Otherwise, must be empty.
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public JsonNullable<ForeignIdentification> foreignIdentification() {
@@ -542,8 +578,9 @@ public class LegalNaturalPerson {
   }
 
   /**
-   * Investigation id relating to the Customer Identification Program (CIP) and Customer Due
-   * Diligence (CDD).
+   * Investigation id relating a comprehensive investigation for a customer, encompassing the
+   * aggregation of identity verification results and watchlist screenings, conducted to support the
+   * Customer Identification Program (CIP) and Customer Due Diligence (CDD)
    */
   @JsonIgnore
   public Optional<String> investigationId() {
@@ -827,6 +864,29 @@ public class LegalNaturalPerson {
     return this;
   }
 
+  /**
+   * Customer identification id returned by the customer identification service which represents a
+   * single instance of an identity verification outcome for the specified customer. This
+   * verification result will be used as part of the full investigation.
+   */
+  public LegalNaturalPerson withCustomerIdentificationId(String customerIdentificationId) {
+    Utils.checkNotNull(customerIdentificationId, "customerIdentificationId");
+    this.customerIdentificationId = Optional.ofNullable(customerIdentificationId);
+    return this;
+  }
+
+  /**
+   * Customer identification id returned by the customer identification service which represents a
+   * single instance of an identity verification outcome for the specified customer. This
+   * verification result will be used as part of the full investigation.
+   */
+  public LegalNaturalPerson withCustomerIdentificationId(
+      Optional<String> customerIdentificationId) {
+    Utils.checkNotNull(customerIdentificationId, "customerIdentificationId");
+    this.customerIdentificationId = customerIdentificationId;
+    return this;
+  }
+
   /** The day, month, and year of death of a legal natural person */
   public LegalNaturalPerson withDeathDate(DeathDate deathDate) {
     Utils.checkNotNull(deathDate, "deathDate");
@@ -903,14 +963,26 @@ public class LegalNaturalPerson {
     return this;
   }
 
-  /** Foreign identification. Must be provided if the person does not have a U.S. tax ID */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Required if `irs_form_type` is `W_8BEN`.
+   *
+   * <p>Otherwise, must be empty.
+   */
   public LegalNaturalPerson withForeignIdentification(ForeignIdentification foreignIdentification) {
     Utils.checkNotNull(foreignIdentification, "foreignIdentification");
     this.foreignIdentification = JsonNullable.of(foreignIdentification);
     return this;
   }
 
-  /** Foreign identification. Must be provided if the person does not have a U.S. tax ID */
+  /**
+   * **Field Dependencies:**
+   *
+   * <p>Required if `irs_form_type` is `W_8BEN`.
+   *
+   * <p>Otherwise, must be empty.
+   */
   public LegalNaturalPerson withForeignIdentification(
       JsonNullable<? extends ForeignIdentification> foreignIdentification) {
     Utils.checkNotNull(foreignIdentification, "foreignIdentification");
@@ -990,8 +1062,9 @@ public class LegalNaturalPerson {
   }
 
   /**
-   * Investigation id relating to the Customer Identification Program (CIP) and Customer Due
-   * Diligence (CDD).
+   * Investigation id relating a comprehensive investigation for a customer, encompassing the
+   * aggregation of identity verification results and watchlist screenings, conducted to support the
+   * Customer Identification Program (CIP) and Customer Due Diligence (CDD)
    */
   public LegalNaturalPerson withInvestigationId(String investigationId) {
     Utils.checkNotNull(investigationId, "investigationId");
@@ -1000,8 +1073,9 @@ public class LegalNaturalPerson {
   }
 
   /**
-   * Investigation id relating to the Customer Identification Program (CIP) and Customer Due
-   * Diligence (CDD).
+   * Investigation id relating a comprehensive investigation for a customer, encompassing the
+   * aggregation of identity verification results and watchlist screenings, conducted to support the
+   * Customer Identification Program (CIP) and Customer Due Diligence (CDD)
    */
   public LegalNaturalPerson withInvestigationId(Optional<String> investigationId) {
     Utils.checkNotNull(investigationId, "investigationId");
@@ -1314,6 +1388,7 @@ public class LegalNaturalPerson {
         && Objects.deepEquals(this.correspondentEmployee, other.correspondentEmployee)
         && Objects.deepEquals(this.correspondentId, other.correspondentId)
         && Objects.deepEquals(this.custodianEmployee, other.custodianEmployee)
+        && Objects.deepEquals(this.customerIdentificationId, other.customerIdentificationId)
         && Objects.deepEquals(this.deathDate, other.deathDate)
         && Objects.deepEquals(this.doingBusinessAs, other.doingBusinessAs)
         && Objects.deepEquals(this.employment, other.employment)
@@ -1356,6 +1431,7 @@ public class LegalNaturalPerson {
         correspondentEmployee,
         correspondentId,
         custodianEmployee,
+        customerIdentificationId,
         deathDate,
         doingBusinessAs,
         employment,
@@ -1404,6 +1480,8 @@ public class LegalNaturalPerson {
         correspondentId,
         "custodianEmployee",
         custodianEmployee,
+        "customerIdentificationId",
+        customerIdentificationId,
         "deathDate",
         deathDate,
         "doingBusinessAs",
@@ -1475,6 +1553,8 @@ public class LegalNaturalPerson {
     private Optional<String> correspondentId = Optional.empty();
 
     private Optional<Boolean> custodianEmployee = Optional.empty();
+
+    private Optional<String> customerIdentificationId = Optional.empty();
 
     private JsonNullable<? extends DeathDate> deathDate = JsonNullable.undefined();
 
@@ -1677,6 +1757,28 @@ public class LegalNaturalPerson {
       return this;
     }
 
+    /**
+     * Customer identification id returned by the customer identification service which represents a
+     * single instance of an identity verification outcome for the specified customer. This
+     * verification result will be used as part of the full investigation.
+     */
+    public Builder customerIdentificationId(String customerIdentificationId) {
+      Utils.checkNotNull(customerIdentificationId, "customerIdentificationId");
+      this.customerIdentificationId = Optional.ofNullable(customerIdentificationId);
+      return this;
+    }
+
+    /**
+     * Customer identification id returned by the customer identification service which represents a
+     * single instance of an identity verification outcome for the specified customer. This
+     * verification result will be used as part of the full investigation.
+     */
+    public Builder customerIdentificationId(Optional<String> customerIdentificationId) {
+      Utils.checkNotNull(customerIdentificationId, "customerIdentificationId");
+      this.customerIdentificationId = customerIdentificationId;
+      return this;
+    }
+
     /** The day, month, and year of death of a legal natural person */
     public Builder deathDate(DeathDate deathDate) {
       Utils.checkNotNull(deathDate, "deathDate");
@@ -1753,14 +1855,26 @@ public class LegalNaturalPerson {
       return this;
     }
 
-    /** Foreign identification. Must be provided if the person does not have a U.S. tax ID */
+    /**
+     * **Field Dependencies:**
+     *
+     * <p>Required if `irs_form_type` is `W_8BEN`.
+     *
+     * <p>Otherwise, must be empty.
+     */
     public Builder foreignIdentification(ForeignIdentification foreignIdentification) {
       Utils.checkNotNull(foreignIdentification, "foreignIdentification");
       this.foreignIdentification = JsonNullable.of(foreignIdentification);
       return this;
     }
 
-    /** Foreign identification. Must be provided if the person does not have a U.S. tax ID */
+    /**
+     * **Field Dependencies:**
+     *
+     * <p>Required if `irs_form_type` is `W_8BEN`.
+     *
+     * <p>Otherwise, must be empty.
+     */
     public Builder foreignIdentification(
         JsonNullable<? extends ForeignIdentification> foreignIdentification) {
       Utils.checkNotNull(foreignIdentification, "foreignIdentification");
@@ -1840,8 +1954,9 @@ public class LegalNaturalPerson {
     }
 
     /**
-     * Investigation id relating to the Customer Identification Program (CIP) and Customer Due
-     * Diligence (CDD).
+     * Investigation id relating a comprehensive investigation for a customer, encompassing the
+     * aggregation of identity verification results and watchlist screenings, conducted to support
+     * the Customer Identification Program (CIP) and Customer Due Diligence (CDD)
      */
     public Builder investigationId(String investigationId) {
       Utils.checkNotNull(investigationId, "investigationId");
@@ -1850,8 +1965,9 @@ public class LegalNaturalPerson {
     }
 
     /**
-     * Investigation id relating to the Customer Identification Program (CIP) and Customer Due
-     * Diligence (CDD).
+     * Investigation id relating a comprehensive investigation for a customer, encompassing the
+     * aggregation of identity verification results and watchlist screenings, conducted to support
+     * the Customer Identification Program (CIP) and Customer Due Diligence (CDD)
      */
     public Builder investigationId(Optional<String> investigationId) {
       Utils.checkNotNull(investigationId, "investigationId");
@@ -2152,6 +2268,7 @@ public class LegalNaturalPerson {
           correspondentEmployee,
           correspondentId,
           custodianEmployee,
+          customerIdentificationId,
           deathDate,
           doingBusinessAs,
           employment,
