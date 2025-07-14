@@ -29,6 +29,13 @@ public class ActivityAccountTransfer {
   @JsonProperty("acats_control_number")
   private Optional<String> acatsControlNumber;
 
+  /**
+   * The type of asset movement being performed within the lifecycle of an account transfer process
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("account_transfer_type")
+  private Optional<? extends ActivityAccountTransferType> accountTransferType;
+
   /** Denotes whether the shares are incoming or outgoing */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("action")
@@ -63,6 +70,8 @@ public class ActivityAccountTransfer {
   public ActivityAccountTransfer(
       @JsonProperty("acats_asset_sequence_number") Optional<String> acatsAssetSequenceNumber,
       @JsonProperty("acats_control_number") Optional<String> acatsControlNumber,
+      @JsonProperty("account_transfer_type")
+          Optional<? extends ActivityAccountTransferType> accountTransferType,
       @JsonProperty("action") Optional<? extends ActivityAction> action,
       @JsonProperty("additional_instructions") Optional<String> additionalInstructions,
       @JsonProperty("contra_party_account_number") Optional<String> contraPartyAccountNumber,
@@ -71,6 +80,7 @@ public class ActivityAccountTransfer {
       @JsonProperty("method") Optional<? extends ActivityMethod> method) {
     Utils.checkNotNull(acatsAssetSequenceNumber, "acatsAssetSequenceNumber");
     Utils.checkNotNull(acatsControlNumber, "acatsControlNumber");
+    Utils.checkNotNull(accountTransferType, "accountTransferType");
     Utils.checkNotNull(action, "action");
     Utils.checkNotNull(additionalInstructions, "additionalInstructions");
     Utils.checkNotNull(contraPartyAccountNumber, "contraPartyAccountNumber");
@@ -79,6 +89,7 @@ public class ActivityAccountTransfer {
     Utils.checkNotNull(method, "method");
     this.acatsAssetSequenceNumber = acatsAssetSequenceNumber;
     this.acatsControlNumber = acatsControlNumber;
+    this.accountTransferType = accountTransferType;
     this.action = action;
     this.additionalInstructions = additionalInstructions;
     this.contraPartyAccountNumber = contraPartyAccountNumber;
@@ -89,6 +100,7 @@ public class ActivityAccountTransfer {
 
   public ActivityAccountTransfer() {
     this(
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
@@ -109,6 +121,15 @@ public class ActivityAccountTransfer {
   @JsonIgnore
   public Optional<String> acatsControlNumber() {
     return acatsControlNumber;
+  }
+
+  /**
+   * The type of asset movement being performed within the lifecycle of an account transfer process
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<ActivityAccountTransferType> accountTransferType() {
+    return (Optional<ActivityAccountTransferType>) accountTransferType;
   }
 
   /** Denotes whether the shares are incoming or outgoing */
@@ -179,6 +200,26 @@ public class ActivityAccountTransfer {
   public ActivityAccountTransfer withAcatsControlNumber(Optional<String> acatsControlNumber) {
     Utils.checkNotNull(acatsControlNumber, "acatsControlNumber");
     this.acatsControlNumber = acatsControlNumber;
+    return this;
+  }
+
+  /**
+   * The type of asset movement being performed within the lifecycle of an account transfer process
+   */
+  public ActivityAccountTransfer withAccountTransferType(
+      ActivityAccountTransferType accountTransferType) {
+    Utils.checkNotNull(accountTransferType, "accountTransferType");
+    this.accountTransferType = Optional.ofNullable(accountTransferType);
+    return this;
+  }
+
+  /**
+   * The type of asset movement being performed within the lifecycle of an account transfer process
+   */
+  public ActivityAccountTransfer withAccountTransferType(
+      Optional<? extends ActivityAccountTransferType> accountTransferType) {
+    Utils.checkNotNull(accountTransferType, "accountTransferType");
+    this.accountTransferType = accountTransferType;
     return this;
   }
 
@@ -279,6 +320,7 @@ public class ActivityAccountTransfer {
     ActivityAccountTransfer other = (ActivityAccountTransfer) o;
     return Objects.deepEquals(this.acatsAssetSequenceNumber, other.acatsAssetSequenceNumber)
         && Objects.deepEquals(this.acatsControlNumber, other.acatsControlNumber)
+        && Objects.deepEquals(this.accountTransferType, other.accountTransferType)
         && Objects.deepEquals(this.action, other.action)
         && Objects.deepEquals(this.additionalInstructions, other.additionalInstructions)
         && Objects.deepEquals(this.contraPartyAccountNumber, other.contraPartyAccountNumber)
@@ -292,6 +334,7 @@ public class ActivityAccountTransfer {
     return Objects.hash(
         acatsAssetSequenceNumber,
         acatsControlNumber,
+        accountTransferType,
         action,
         additionalInstructions,
         contraPartyAccountNumber,
@@ -308,6 +351,8 @@ public class ActivityAccountTransfer {
         acatsAssetSequenceNumber,
         "acatsControlNumber",
         acatsControlNumber,
+        "accountTransferType",
+        accountTransferType,
         "action",
         action,
         "additionalInstructions",
@@ -327,6 +372,8 @@ public class ActivityAccountTransfer {
     private Optional<String> acatsAssetSequenceNumber = Optional.empty();
 
     private Optional<String> acatsControlNumber = Optional.empty();
+
+    private Optional<? extends ActivityAccountTransferType> accountTransferType = Optional.empty();
 
     private Optional<? extends ActivityAction> action = Optional.empty();
 
@@ -369,6 +416,27 @@ public class ActivityAccountTransfer {
     public Builder acatsControlNumber(Optional<String> acatsControlNumber) {
       Utils.checkNotNull(acatsControlNumber, "acatsControlNumber");
       this.acatsControlNumber = acatsControlNumber;
+      return this;
+    }
+
+    /**
+     * The type of asset movement being performed within the lifecycle of an account transfer
+     * process
+     */
+    public Builder accountTransferType(ActivityAccountTransferType accountTransferType) {
+      Utils.checkNotNull(accountTransferType, "accountTransferType");
+      this.accountTransferType = Optional.ofNullable(accountTransferType);
+      return this;
+    }
+
+    /**
+     * The type of asset movement being performed within the lifecycle of an account transfer
+     * process
+     */
+    public Builder accountTransferType(
+        Optional<? extends ActivityAccountTransferType> accountTransferType) {
+      Utils.checkNotNull(accountTransferType, "accountTransferType");
+      this.accountTransferType = accountTransferType;
       return this;
     }
 
@@ -460,6 +528,7 @@ public class ActivityAccountTransfer {
       return new ActivityAccountTransfer(
           acatsAssetSequenceNumber,
           acatsControlNumber,
+          accountTransferType,
           action,
           additionalInstructions,
           contraPartyAccountNumber,

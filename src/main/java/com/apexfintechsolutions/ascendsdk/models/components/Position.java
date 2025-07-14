@@ -97,6 +97,14 @@ public class Position {
   private JsonNullable<? extends PendingWithdrawal> pendingWithdrawal;
 
   /**
+   * The position version for an asset/account combo. This number only increases, such that larger
+   * `position_version`s are newer than lower ones.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("position_version")
+  private Optional<String> positionVersion;
+
+  /**
    * Computed fieldsOriginal Settled Position before and as-of changesComputed based on the bucket
    * values to represet the total settled position in an account Currently defined as `free` +
    * `fpsl` + `pending_outgoing_acat` + `drip` + `pending_withdrawal`, but if/when new buckets are
@@ -138,6 +146,7 @@ public class Position {
           JsonNullable<? extends PendingOutgoingAcat> pendingOutgoingAcat,
       @JsonProperty("pending_withdrawal")
           JsonNullable<? extends PendingWithdrawal> pendingWithdrawal,
+      @JsonProperty("position_version") Optional<String> positionVersion,
       @JsonProperty("settled") JsonNullable<? extends Settled> settled,
       @JsonProperty("trade") JsonNullable<? extends PositionTrade> trade,
       @JsonProperty("unrestricted") JsonNullable<? extends Unrestricted> unrestricted) {
@@ -154,6 +163,7 @@ public class Position {
     Utils.checkNotNull(pendingDrip, "pendingDrip");
     Utils.checkNotNull(pendingOutgoingAcat, "pendingOutgoingAcat");
     Utils.checkNotNull(pendingWithdrawal, "pendingWithdrawal");
+    Utils.checkNotNull(positionVersion, "positionVersion");
     Utils.checkNotNull(settled, "settled");
     Utils.checkNotNull(trade, "trade");
     Utils.checkNotNull(unrestricted, "unrestricted");
@@ -170,6 +180,7 @@ public class Position {
     this.pendingDrip = pendingDrip;
     this.pendingOutgoingAcat = pendingOutgoingAcat;
     this.pendingWithdrawal = pendingWithdrawal;
+    this.positionVersion = positionVersion;
     this.settled = settled;
     this.trade = trade;
     this.unrestricted = unrestricted;
@@ -190,6 +201,7 @@ public class Position {
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
+        Optional.empty(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined());
@@ -294,6 +306,15 @@ public class Position {
   @JsonIgnore
   public JsonNullable<PendingWithdrawal> pendingWithdrawal() {
     return (JsonNullable<PendingWithdrawal>) pendingWithdrawal;
+  }
+
+  /**
+   * The position version for an asset/account combo. This number only increases, such that larger
+   * `position_version`s are newer than lower ones.
+   */
+  @JsonIgnore
+  public Optional<String> positionVersion() {
+    return positionVersion;
   }
 
   /**
@@ -544,6 +565,26 @@ public class Position {
   }
 
   /**
+   * The position version for an asset/account combo. This number only increases, such that larger
+   * `position_version`s are newer than lower ones.
+   */
+  public Position withPositionVersion(String positionVersion) {
+    Utils.checkNotNull(positionVersion, "positionVersion");
+    this.positionVersion = Optional.ofNullable(positionVersion);
+    return this;
+  }
+
+  /**
+   * The position version for an asset/account combo. This number only increases, such that larger
+   * `position_version`s are newer than lower ones.
+   */
+  public Position withPositionVersion(Optional<String> positionVersion) {
+    Utils.checkNotNull(positionVersion, "positionVersion");
+    this.positionVersion = positionVersion;
+    return this;
+  }
+
+  /**
    * Computed fieldsOriginal Settled Position before and as-of changesComputed based on the bucket
    * values to represet the total settled position in an account Currently defined as `free` +
    * `fpsl` + `pending_outgoing_acat` + `drip` + `pending_withdrawal`, but if/when new buckets are
@@ -627,6 +668,7 @@ public class Position {
         && Objects.deepEquals(this.pendingDrip, other.pendingDrip)
         && Objects.deepEquals(this.pendingOutgoingAcat, other.pendingOutgoingAcat)
         && Objects.deepEquals(this.pendingWithdrawal, other.pendingWithdrawal)
+        && Objects.deepEquals(this.positionVersion, other.positionVersion)
         && Objects.deepEquals(this.settled, other.settled)
         && Objects.deepEquals(this.trade, other.trade)
         && Objects.deepEquals(this.unrestricted, other.unrestricted);
@@ -648,6 +690,7 @@ public class Position {
         pendingDrip,
         pendingOutgoingAcat,
         pendingWithdrawal,
+        positionVersion,
         settled,
         trade,
         unrestricted);
@@ -683,6 +726,8 @@ public class Position {
         pendingOutgoingAcat,
         "pendingWithdrawal",
         pendingWithdrawal,
+        "positionVersion",
+        positionVersion,
         "settled",
         settled,
         "trade",
@@ -719,6 +764,8 @@ public class Position {
         JsonNullable.undefined();
 
     private JsonNullable<? extends PendingWithdrawal> pendingWithdrawal = JsonNullable.undefined();
+
+    private Optional<String> positionVersion = Optional.empty();
 
     private JsonNullable<? extends Settled> settled = JsonNullable.undefined();
 
@@ -942,6 +989,26 @@ public class Position {
     }
 
     /**
+     * The position version for an asset/account combo. This number only increases, such that larger
+     * `position_version`s are newer than lower ones.
+     */
+    public Builder positionVersion(String positionVersion) {
+      Utils.checkNotNull(positionVersion, "positionVersion");
+      this.positionVersion = Optional.ofNullable(positionVersion);
+      return this;
+    }
+
+    /**
+     * The position version for an asset/account combo. This number only increases, such that larger
+     * `position_version`s are newer than lower ones.
+     */
+    public Builder positionVersion(Optional<String> positionVersion) {
+      Utils.checkNotNull(positionVersion, "positionVersion");
+      this.positionVersion = positionVersion;
+      return this;
+    }
+
+    /**
      * Computed fieldsOriginal Settled Position before and as-of changesComputed based on the bucket
      * values to represet the total settled position in an account Currently defined as `free` +
      * `fpsl` + `pending_outgoing_acat` + `drip` + `pending_withdrawal`, but if/when new buckets are
@@ -1018,6 +1085,7 @@ public class Position {
           pendingDrip,
           pendingOutgoingAcat,
           pendingWithdrawal,
+          positionVersion,
           settled,
           trade,
           unrestricted);
