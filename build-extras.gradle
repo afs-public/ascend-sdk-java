@@ -44,8 +44,9 @@ dependencies {
     testImplementation 'org.wiremock:wiremock:3.9.1'
     testImplementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.18.2'
     testImplementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    testImplementation 'org.mockito:mockito-core:3.10.0'
 
     if (project.hasProperty("testPublishedSDK")) {
-        testImplementation 'com.apexfintechsolutions:ascendsdk:1.3.3'
+        testImplementation 'com.apexfintechsolutions:ascendsdk:1.3.4'
     }
 }
