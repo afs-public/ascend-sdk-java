@@ -140,8 +140,8 @@ public class OrderCreate {
   private DateCreate orderDate;
 
   /**
-   * The execution type of this order. For Equities: MARKET, LIMIT, or STOP are supported. For
-   * Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+   * The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual
+   * Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
    */
   @JsonProperty("order_type")
   private OrderType orderType;
@@ -190,13 +190,10 @@ public class OrderCreate {
   @JsonProperty("time_in_force")
   private TimeInForce timeInForce;
 
-  /**
-   * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
-   * orders.
-   */
+  /** Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders. */
   @JsonInclude(Include.NON_ABSENT)
-  @JsonProperty("trading_strategy")
-  private Optional<? extends TradingStrategy> tradingStrategy;
+  @JsonProperty("trading_session")
+  private Optional<? extends TradingSession> tradingSession;
 
   @JsonCreator
   public OrderCreate(
@@ -224,7 +221,7 @@ public class OrderCreate {
           Optional<? extends List<SpecialReportingInstructions>> specialReportingInstructions,
       @JsonProperty("stop_price") Optional<? extends StopPriceCreate> stopPrice,
       @JsonProperty("time_in_force") TimeInForce timeInForce,
-      @JsonProperty("trading_strategy") Optional<? extends TradingStrategy> tradingStrategy) {
+      @JsonProperty("trading_session") Optional<? extends TradingSession> tradingSession) {
     Utils.checkNotNull(assetType, "assetType");
     Utils.checkNotNull(brokerCapacity, "brokerCapacity");
     Utils.checkNotNull(clientOrderId, "clientOrderId");
@@ -247,7 +244,7 @@ public class OrderCreate {
     Utils.checkNotNull(specialReportingInstructions, "specialReportingInstructions");
     Utils.checkNotNull(stopPrice, "stopPrice");
     Utils.checkNotNull(timeInForce, "timeInForce");
-    Utils.checkNotNull(tradingStrategy, "tradingStrategy");
+    Utils.checkNotNull(tradingSession, "tradingSession");
     this.assetType = assetType;
     this.brokerCapacity = brokerCapacity;
     this.clientOrderId = clientOrderId;
@@ -270,7 +267,7 @@ public class OrderCreate {
     this.specialReportingInstructions = specialReportingInstructions;
     this.stopPrice = stopPrice;
     this.timeInForce = timeInForce;
-    this.tradingStrategy = tradingStrategy;
+    this.tradingSession = tradingSession;
   }
 
   public OrderCreate(
@@ -456,8 +453,8 @@ public class OrderCreate {
   }
 
   /**
-   * The execution type of this order. For Equities: MARKET, LIMIT, or STOP are supported. For
-   * Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+   * The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual
+   * Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
    */
   @JsonIgnore
   public OrderType orderType() {
@@ -520,14 +517,11 @@ public class OrderCreate {
     return timeInForce;
   }
 
-  /**
-   * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
-   * orders.
-   */
+  /** Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<TradingStrategy> tradingStrategy() {
-    return (Optional<TradingStrategy>) tradingStrategy;
+  public Optional<TradingSession> tradingSession() {
+    return (Optional<TradingSession>) tradingSession;
   }
 
   public static final Builder builder() {
@@ -792,8 +786,8 @@ public class OrderCreate {
   }
 
   /**
-   * The execution type of this order. For Equities: MARKET, LIMIT, or STOP are supported. For
-   * Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+   * The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual
+   * Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
    */
   public OrderCreate withOrderType(OrderType orderType) {
     Utils.checkNotNull(orderType, "orderType");
@@ -903,23 +897,17 @@ public class OrderCreate {
     return this;
   }
 
-  /**
-   * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
-   * orders.
-   */
-  public OrderCreate withTradingStrategy(TradingStrategy tradingStrategy) {
-    Utils.checkNotNull(tradingStrategy, "tradingStrategy");
-    this.tradingStrategy = Optional.ofNullable(tradingStrategy);
+  /** Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders. */
+  public OrderCreate withTradingSession(TradingSession tradingSession) {
+    Utils.checkNotNull(tradingSession, "tradingSession");
+    this.tradingSession = Optional.ofNullable(tradingSession);
     return this;
   }
 
-  /**
-   * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
-   * orders.
-   */
-  public OrderCreate withTradingStrategy(Optional<? extends TradingStrategy> tradingStrategy) {
-    Utils.checkNotNull(tradingStrategy, "tradingStrategy");
-    this.tradingStrategy = tradingStrategy;
+  /** Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders. */
+  public OrderCreate withTradingSession(Optional<? extends TradingSession> tradingSession) {
+    Utils.checkNotNull(tradingSession, "tradingSession");
+    this.tradingSession = tradingSession;
     return this;
   }
 
@@ -954,7 +942,7 @@ public class OrderCreate {
         && Objects.deepEquals(this.specialReportingInstructions, other.specialReportingInstructions)
         && Objects.deepEquals(this.stopPrice, other.stopPrice)
         && Objects.deepEquals(this.timeInForce, other.timeInForce)
-        && Objects.deepEquals(this.tradingStrategy, other.tradingStrategy);
+        && Objects.deepEquals(this.tradingSession, other.tradingSession);
   }
 
   @Override
@@ -982,7 +970,7 @@ public class OrderCreate {
         specialReportingInstructions,
         stopPrice,
         timeInForce,
-        tradingStrategy);
+        tradingSession);
   }
 
   @Override
@@ -1033,8 +1021,8 @@ public class OrderCreate {
         stopPrice,
         "timeInForce",
         timeInForce,
-        "tradingStrategy",
-        tradingStrategy);
+        "tradingSession",
+        tradingSession);
   }
 
   public static final class Builder {
@@ -1084,7 +1072,7 @@ public class OrderCreate {
 
     private TimeInForce timeInForce;
 
-    private Optional<? extends TradingStrategy> tradingStrategy = Optional.empty();
+    private Optional<? extends TradingSession> tradingSession = Optional.empty();
 
     private Builder() {
       // force use of static builder() method
@@ -1354,8 +1342,8 @@ public class OrderCreate {
     }
 
     /**
-     * The execution type of this order. For Equities: MARKET, LIMIT, or STOP are supported. For
-     * Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+     * The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual
+     * Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
      */
     public Builder orderType(OrderType orderType) {
       Utils.checkNotNull(orderType, "orderType");
@@ -1469,23 +1457,17 @@ public class OrderCreate {
       return this;
     }
 
-    /**
-     * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
-     * orders.
-     */
-    public Builder tradingStrategy(TradingStrategy tradingStrategy) {
-      Utils.checkNotNull(tradingStrategy, "tradingStrategy");
-      this.tradingStrategy = Optional.ofNullable(tradingStrategy);
+    /** Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders. */
+    public Builder tradingSession(TradingSession tradingSession) {
+      Utils.checkNotNull(tradingSession, "tradingSession");
+      this.tradingSession = Optional.ofNullable(tradingSession);
       return this;
     }
 
-    /**
-     * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
-     * orders.
-     */
-    public Builder tradingStrategy(Optional<? extends TradingStrategy> tradingStrategy) {
-      Utils.checkNotNull(tradingStrategy, "tradingStrategy");
-      this.tradingStrategy = tradingStrategy;
+    /** Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders. */
+    public Builder tradingSession(Optional<? extends TradingSession> tradingSession) {
+      Utils.checkNotNull(tradingSession, "tradingSession");
+      this.tradingSession = tradingSession;
       return this;
     }
 
@@ -1513,7 +1495,7 @@ public class OrderCreate {
           specialReportingInstructions,
           stopPrice,
           timeInForce,
-          tradingStrategy);
+          tradingSession);
     }
   }
 }

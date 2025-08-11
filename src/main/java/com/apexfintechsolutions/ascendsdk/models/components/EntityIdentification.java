@@ -41,7 +41,11 @@ public class EntityIdentification {
   @JsonProperty("region_code")
   private Optional<String> regionCode;
 
-  /** Tax id type for entities (e.g. ein, lei, etc.)) */
+  /**
+   * The entity tax id type, one of: - `ID_ENTITY_TYPE_UNSPECIFIED` - Default/Null value. - `EIN` -
+   * Employer Identification Number (US government issued, 9 digits, XX-XXXXXXX). - `LEI` - Legal
+   * Entity Identifier (20 digit alphanumeric). - `DUNS` - Dun and Bradstreet number.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("type")
   private Optional<? extends EntityIdentificationType> type;
@@ -102,7 +106,11 @@ public class EntityIdentification {
     return regionCode;
   }
 
-  /** Tax id type for entities (e.g. ein, lei, etc.)) */
+  /**
+   * The entity tax id type, one of: - `ID_ENTITY_TYPE_UNSPECIFIED` - Default/Null value. - `EIN` -
+   * Employer Identification Number (US government issued, 9 digits, XX-XXXXXXX). - `LEI` - Legal
+   * Entity Identifier (20 digit alphanumeric). - `DUNS` - Dun and Bradstreet number.
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<EntityIdentificationType> type() {
@@ -180,14 +188,22 @@ public class EntityIdentification {
     return this;
   }
 
-  /** Tax id type for entities (e.g. ein, lei, etc.)) */
+  /**
+   * The entity tax id type, one of: - `ID_ENTITY_TYPE_UNSPECIFIED` - Default/Null value. - `EIN` -
+   * Employer Identification Number (US government issued, 9 digits, XX-XXXXXXX). - `LEI` - Legal
+   * Entity Identifier (20 digit alphanumeric). - `DUNS` - Dun and Bradstreet number.
+   */
   public EntityIdentification withType(EntityIdentificationType type) {
     Utils.checkNotNull(type, "type");
     this.type = Optional.ofNullable(type);
     return this;
   }
 
-  /** Tax id type for entities (e.g. ein, lei, etc.)) */
+  /**
+   * The entity tax id type, one of: - `ID_ENTITY_TYPE_UNSPECIFIED` - Default/Null value. - `EIN` -
+   * Employer Identification Number (US government issued, 9 digits, XX-XXXXXXX). - `LEI` - Legal
+   * Entity Identifier (20 digit alphanumeric). - `DUNS` - Dun and Bradstreet number.
+   */
   public EntityIdentification withType(Optional<? extends EntityIdentificationType> type) {
     Utils.checkNotNull(type, "type");
     this.type = type;
@@ -321,14 +337,22 @@ public class EntityIdentification {
       return this;
     }
 
-    /** Tax id type for entities (e.g. ein, lei, etc.)) */
+    /**
+     * The entity tax id type, one of: - `ID_ENTITY_TYPE_UNSPECIFIED` - Default/Null value. - `EIN`
+     * - Employer Identification Number (US government issued, 9 digits, XX-XXXXXXX). - `LEI` -
+     * Legal Entity Identifier (20 digit alphanumeric). - `DUNS` - Dun and Bradstreet number.
+     */
     public Builder type(EntityIdentificationType type) {
       Utils.checkNotNull(type, "type");
       this.type = Optional.ofNullable(type);
       return this;
     }
 
-    /** Tax id type for entities (e.g. ein, lei, etc.)) */
+    /**
+     * The entity tax id type, one of: - `ID_ENTITY_TYPE_UNSPECIFIED` - Default/Null value. - `EIN`
+     * - Employer Identification Number (US government issued, 9 digits, XX-XXXXXXX). - `LEI` -
+     * Legal Entity Identifier (20 digit alphanumeric). - `DUNS` - Dun and Bradstreet number.
+     */
     public Builder type(Optional<? extends EntityIdentificationType> type) {
       Utils.checkNotNull(type, "type");
       this.type = type;

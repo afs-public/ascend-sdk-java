@@ -39,18 +39,15 @@ import java.util.Optional;
  * dealing with the `Optional` appropriately).
  */
 /**
- * OrderOrderType - The execution type of this order. For Equities: MARKET, LIMIT, or STOP are
- * supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+ * OrderOrderType - The execution type of this order. For Equities: MARKET, and LIMIT are supported.
+ * For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
  */
 @JsonDeserialize(using = OrderOrderType._Deserializer.class)
 @JsonSerialize(using = OrderOrderType._Serializer.class)
 public class OrderOrderType {
 
-  public static final OrderOrderType ORDER_TYPE_UNSPECIFIED =
-      new OrderOrderType("ORDER_TYPE_UNSPECIFIED");
   public static final OrderOrderType LIMIT = new OrderOrderType("LIMIT");
   public static final OrderOrderType MARKET = new OrderOrderType("MARKET");
-  public static final OrderOrderType STOP = new OrderOrderType("STOP");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -118,19 +115,15 @@ public class OrderOrderType {
 
   private static final Map<String, OrderOrderType> createValuesMap() {
     Map<String, OrderOrderType> map = new LinkedHashMap<>();
-    map.put("ORDER_TYPE_UNSPECIFIED", ORDER_TYPE_UNSPECIFIED);
     map.put("LIMIT", LIMIT);
     map.put("MARKET", MARKET);
-    map.put("STOP", STOP);
     return map;
   }
 
   private static final Map<String, OrderOrderTypeEnum> createEnumsMap() {
     Map<String, OrderOrderTypeEnum> map = new HashMap<>();
-    map.put("ORDER_TYPE_UNSPECIFIED", OrderOrderTypeEnum.ORDER_TYPE_UNSPECIFIED);
     map.put("LIMIT", OrderOrderTypeEnum.LIMIT);
     map.put("MARKET", OrderOrderTypeEnum.MARKET);
-    map.put("STOP", OrderOrderTypeEnum.STOP);
     return map;
   }
 
@@ -165,10 +158,8 @@ public class OrderOrderType {
   }
 
   public enum OrderOrderTypeEnum {
-    ORDER_TYPE_UNSPECIFIED("ORDER_TYPE_UNSPECIFIED"),
     LIMIT("LIMIT"),
     MARKET("MARKET"),
-    STOP("STOP"),
     ;
 
     private final String value;

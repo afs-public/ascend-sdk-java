@@ -106,6 +106,8 @@ public class CompressedOrderOrderRejectedReason {
       new CompressedOrderOrderRejectedReason("INSUFFICIENT_POSITION");
   public static final CompressedOrderOrderRejectedReason FAILED_BUYING_POWER =
       new CompressedOrderOrderRejectedReason("FAILED_BUYING_POWER");
+  public static final CompressedOrderOrderRejectedReason ROUND_UP_AMOUNT_TOO_SMALL =
+      new CompressedOrderOrderRejectedReason("ROUND_UP_AMOUNT_TOO_SMALL");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -208,6 +210,7 @@ public class CompressedOrderOrderRejectedReason {
         ANOTHER_BASKET_ORDER_FOR_ACCOUNT_HAS_FAILED_RISK_CHECKS);
     map.put("INSUFFICIENT_POSITION", INSUFFICIENT_POSITION);
     map.put("FAILED_BUYING_POWER", FAILED_BUYING_POWER);
+    map.put("ROUND_UP_AMOUNT_TOO_SMALL", ROUND_UP_AMOUNT_TOO_SMALL);
     return map;
   }
 
@@ -265,6 +268,9 @@ public class CompressedOrderOrderRejectedReason {
             .ANOTHER_BASKET_ORDER_FOR_ACCOUNT_HAS_FAILED_RISK_CHECKS);
     map.put("INSUFFICIENT_POSITION", CompressedOrderOrderRejectedReasonEnum.INSUFFICIENT_POSITION);
     map.put("FAILED_BUYING_POWER", CompressedOrderOrderRejectedReasonEnum.FAILED_BUYING_POWER);
+    map.put(
+        "ROUND_UP_AMOUNT_TOO_SMALL",
+        CompressedOrderOrderRejectedReasonEnum.ROUND_UP_AMOUNT_TOO_SMALL);
     return map;
   }
 
@@ -330,6 +336,7 @@ public class CompressedOrderOrderRejectedReason {
         "ANOTHER_BASKET_ORDER_FOR_ACCOUNT_HAS_FAILED_RISK_CHECKS"),
     INSUFFICIENT_POSITION("INSUFFICIENT_POSITION"),
     FAILED_BUYING_POWER("FAILED_BUYING_POWER"),
+    ROUND_UP_AMOUNT_TOO_SMALL("ROUND_UP_AMOUNT_TOO_SMALL"),
     ;
 
     private final String value;

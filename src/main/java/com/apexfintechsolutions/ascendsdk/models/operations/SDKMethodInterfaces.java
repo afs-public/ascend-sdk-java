@@ -421,7 +421,10 @@ public class SDKMethodInterfaces {
 
   public interface MethodCallInvestigationServiceListInvestigations {
     InvestigationServiceListInvestigationsResponse listInvestigations(
-        Optional<Integer> pageSize, Optional<String> pageToken, Optional<String> filter)
+        Optional<Integer> pageSize,
+        Optional<String> pageToken,
+        Optional<String> filter,
+        Optional<String> orderBy)
         throws Exception;
   }
 
@@ -1031,11 +1034,7 @@ public class SDKMethodInterfaces {
 
   public interface MethodCallBasketOrdersServiceListBasketOrders {
     BasketOrdersServiceListBasketOrdersResponse listBasketOrders(
-        String correspondentId,
-        String basketId,
-        Optional<Integer> pageSize,
-        Optional<String> pageToken)
-        throws Exception;
+        BasketOrdersServiceListBasketOrdersRequest request) throws Exception;
   }
 
   public interface MethodCallBasketOrdersServiceListCompressedOrders {

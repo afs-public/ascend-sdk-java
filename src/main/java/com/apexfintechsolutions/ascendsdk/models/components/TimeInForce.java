@@ -46,8 +46,6 @@ import java.util.Optional;
 @JsonSerialize(using = TimeInForce._Serializer.class)
 public class TimeInForce {
 
-  public static final TimeInForce TIME_IN_FORCE_UNSPECIFIED =
-      new TimeInForce("TIME_IN_FORCE_UNSPECIFIED");
   public static final TimeInForce DAY = new TimeInForce("DAY");
 
   // This map will grow whenever a Color gets created with a new
@@ -116,14 +114,12 @@ public class TimeInForce {
 
   private static final Map<String, TimeInForce> createValuesMap() {
     Map<String, TimeInForce> map = new LinkedHashMap<>();
-    map.put("TIME_IN_FORCE_UNSPECIFIED", TIME_IN_FORCE_UNSPECIFIED);
     map.put("DAY", DAY);
     return map;
   }
 
   private static final Map<String, TimeInForceEnum> createEnumsMap() {
     Map<String, TimeInForceEnum> map = new HashMap<>();
-    map.put("TIME_IN_FORCE_UNSPECIFIED", TimeInForceEnum.TIME_IN_FORCE_UNSPECIFIED);
     map.put("DAY", TimeInForceEnum.DAY);
     return map;
   }
@@ -159,7 +155,6 @@ public class TimeInForce {
   }
 
   public enum TimeInForceEnum {
-    TIME_IN_FORCE_UNSPECIFIED("TIME_IN_FORCE_UNSPECIFIED"),
     DAY("DAY"),
     ;
 

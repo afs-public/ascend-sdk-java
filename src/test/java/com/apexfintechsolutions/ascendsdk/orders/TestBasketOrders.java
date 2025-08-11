@@ -1,6 +1,7 @@
 package com.apexfintechsolutions.ascendsdk;
 
 import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.operations.BasketOrdersServiceListBasketOrdersRequest;
 import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.*;
@@ -81,8 +82,13 @@ public class TestBasketOrders {
   @Order(5)
   @Test
   public void test_basket_orders_orders_list_basket_orders_list_basket_orders1() throws Exception {
-    var result =
-        sdk.basketOrders().listBasketOrders(SdkUtil.getCorrespondentId(), basket.basketId().get());
+    var request =
+        BasketOrdersServiceListBasketOrdersRequest.builder()
+            .correspondentId(SdkUtil.getCorrespondentId())
+            .basketId(basket.basketId().get())
+            .build();
+
+    var result = sdk.basketOrders().listBasketOrders(request);
     Assertions.assertNotNull(result);
     Assertions.assertEquals(200, result.statusCode());
   }

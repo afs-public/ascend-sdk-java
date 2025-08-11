@@ -104,6 +104,8 @@ public class BasketOrderOrderRejectedReason {
       new BasketOrderOrderRejectedReason("INSUFFICIENT_POSITION");
   public static final BasketOrderOrderRejectedReason FAILED_BUYING_POWER =
       new BasketOrderOrderRejectedReason("FAILED_BUYING_POWER");
+  public static final BasketOrderOrderRejectedReason ROUND_UP_AMOUNT_TOO_SMALL =
+      new BasketOrderOrderRejectedReason("ROUND_UP_AMOUNT_TOO_SMALL");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -206,6 +208,7 @@ public class BasketOrderOrderRejectedReason {
         ANOTHER_BASKET_ORDER_FOR_ACCOUNT_HAS_FAILED_RISK_CHECKS);
     map.put("INSUFFICIENT_POSITION", INSUFFICIENT_POSITION);
     map.put("FAILED_BUYING_POWER", FAILED_BUYING_POWER);
+    map.put("ROUND_UP_AMOUNT_TOO_SMALL", ROUND_UP_AMOUNT_TOO_SMALL);
     return map;
   }
 
@@ -257,6 +260,8 @@ public class BasketOrderOrderRejectedReason {
         BasketOrderOrderRejectedReasonEnum.ANOTHER_BASKET_ORDER_FOR_ACCOUNT_HAS_FAILED_RISK_CHECKS);
     map.put("INSUFFICIENT_POSITION", BasketOrderOrderRejectedReasonEnum.INSUFFICIENT_POSITION);
     map.put("FAILED_BUYING_POWER", BasketOrderOrderRejectedReasonEnum.FAILED_BUYING_POWER);
+    map.put(
+        "ROUND_UP_AMOUNT_TOO_SMALL", BasketOrderOrderRejectedReasonEnum.ROUND_UP_AMOUNT_TOO_SMALL);
     return map;
   }
 
@@ -321,6 +326,7 @@ public class BasketOrderOrderRejectedReason {
         "ANOTHER_BASKET_ORDER_FOR_ACCOUNT_HAS_FAILED_RISK_CHECKS"),
     INSUFFICIENT_POSITION("INSUFFICIENT_POSITION"),
     FAILED_BUYING_POWER("FAILED_BUYING_POWER"),
+    ROUND_UP_AMOUNT_TOO_SMALL("ROUND_UP_AMOUNT_TOO_SMALL"),
     ;
 
     private final String value;

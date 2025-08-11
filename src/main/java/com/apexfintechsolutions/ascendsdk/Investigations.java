@@ -479,7 +479,8 @@ public class Investigations
    */
   public InvestigationServiceListInvestigationsResponse listInvestigationsDirect()
       throws Exception {
-    return listInvestigations(Optional.empty(), Optional.empty(), Optional.empty());
+    return listInvestigations(
+        Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -493,17 +494,26 @@ public class Investigations
    *     Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    *     Guides for more information; Filter options include:
    *     ListInvestigationStatesResponse.investigation_states
+   * @param orderBy The order in which investigations are listed. Only one field and direction can
+   *     be specified. Supported fields (followed by 'asc' or 'desc'; 'asc' is default if left
+   *     blank): - investigation_request_state - correspondent_id - scope - identity_verification -
+   *     watchlist_screen - person.given_name - person.family_name - entity.legal_name - created_at
+   *     - updated_at
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public InvestigationServiceListInvestigationsResponse listInvestigations(
-      Optional<Integer> pageSize, Optional<String> pageToken, Optional<String> filter)
+      Optional<Integer> pageSize,
+      Optional<String> pageToken,
+      Optional<String> filter,
+      Optional<String> orderBy)
       throws Exception {
     InvestigationServiceListInvestigationsRequest request =
         InvestigationServiceListInvestigationsRequest.builder()
             .pageSize(pageSize)
             .pageToken(pageToken)
             .filter(filter)
+            .orderBy(orderBy)
             .build();
 
     String _baseUrl = this.sdkConfiguration.serverUrl;

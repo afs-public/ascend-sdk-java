@@ -38,7 +38,11 @@ import java.util.Optional;
  * use of an instance in a switch expression but you can use the {@code asEnum()} method (after
  * dealing with the `Optional` appropriately).
  */
-/** InvestigationRequestState - Current state of investigation request */
+/**
+ * InvestigationRequestState - The state of an investigation request, one of: -
+ * `INVESTIGATION_REQUEST_STATE_UNSPECIFIED` - Default/Null value. - `OPEN` - The investigation
+ * request is open. - `CLOSED` - The investigation request is closed.
+ */
 @JsonDeserialize(using = InvestigationRequestState._Deserializer.class)
 @JsonSerialize(using = InvestigationRequestState._Serializer.class)
 public class InvestigationRequestState {

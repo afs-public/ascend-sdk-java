@@ -89,7 +89,10 @@ public class Person {
   @JsonProperty("middle_names")
   private Optional<String> middleNames;
 
-  /** Suffix of the person's name */
+  /**
+   * The name suffix for individuals, one of: - `NAME_SUFFIX_UNSPECIFIED` - Default/Null value. -
+   * `SR` - Senior. - `JR` - Junior. - `III` - The third. - `IV` - The fourth. - `V` - The fifth.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("name_suffix")
   private Optional<? extends InvestigationNameSuffix> nameSuffix;
@@ -264,7 +267,10 @@ public class Person {
     return middleNames;
   }
 
-  /** Suffix of the person's name */
+  /**
+   * The name suffix for individuals, one of: - `NAME_SUFFIX_UNSPECIFIED` - Default/Null value. -
+   * `SR` - Senior. - `JR` - Junior. - `III` - The third. - `IV` - The fourth. - `V` - The fifth.
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<InvestigationNameSuffix> nameSuffix() {
@@ -481,14 +487,20 @@ public class Person {
     return this;
   }
 
-  /** Suffix of the person's name */
+  /**
+   * The name suffix for individuals, one of: - `NAME_SUFFIX_UNSPECIFIED` - Default/Null value. -
+   * `SR` - Senior. - `JR` - Junior. - `III` - The third. - `IV` - The fourth. - `V` - The fifth.
+   */
   public Person withNameSuffix(InvestigationNameSuffix nameSuffix) {
     Utils.checkNotNull(nameSuffix, "nameSuffix");
     this.nameSuffix = Optional.ofNullable(nameSuffix);
     return this;
   }
 
-  /** Suffix of the person's name */
+  /**
+   * The name suffix for individuals, one of: - `NAME_SUFFIX_UNSPECIFIED` - Default/Null value. -
+   * `SR` - Senior. - `JR` - Junior. - `III` - The third. - `IV` - The fourth. - `V` - The fifth.
+   */
   public Person withNameSuffix(Optional<? extends InvestigationNameSuffix> nameSuffix) {
     Utils.checkNotNull(nameSuffix, "nameSuffix");
     this.nameSuffix = nameSuffix;
@@ -833,14 +845,20 @@ public class Person {
       return this;
     }
 
-    /** Suffix of the person's name */
+    /**
+     * The name suffix for individuals, one of: - `NAME_SUFFIX_UNSPECIFIED` - Default/Null value. -
+     * `SR` - Senior. - `JR` - Junior. - `III` - The third. - `IV` - The fourth. - `V` - The fifth.
+     */
     public Builder nameSuffix(InvestigationNameSuffix nameSuffix) {
       Utils.checkNotNull(nameSuffix, "nameSuffix");
       this.nameSuffix = Optional.ofNullable(nameSuffix);
       return this;
     }
 
-    /** Suffix of the person's name */
+    /**
+     * The name suffix for individuals, one of: - `NAME_SUFFIX_UNSPECIFIED` - Default/Null value. -
+     * `SR` - Senior. - `JR` - Junior. - `III` - The third. - `IV` - The fourth. - `V` - The fifth.
+     */
     public Builder nameSuffix(Optional<? extends InvestigationNameSuffix> nameSuffix) {
       Utils.checkNotNull(nameSuffix, "nameSuffix");
       this.nameSuffix = nameSuffix;

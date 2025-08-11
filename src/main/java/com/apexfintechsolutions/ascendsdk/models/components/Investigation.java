@@ -24,6 +24,16 @@ public class Investigation {
   @JsonProperty("audit_trail")
   private Optional<? extends List<AuditTrail>> auditTrail;
 
+  /**
+   * A unique identifier referencing a client The client ID serves as the unique identifier for the
+   * apex client positioned above the correspondent within the apex client configurator hierarchy.
+   * Moving forward, the account service will internally assign the client ID for all
+   * investigations.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_id")
+  private Optional<String> clientId;
+
   /** A unique identifier referencing a Correspondent */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("correspondent_id")
@@ -39,7 +49,13 @@ public class Investigation {
   @JsonProperty("entity")
   private JsonNullable<? extends Entity> entity;
 
-  /** Indicates the current state of identity verification */
+  /**
+   * The screen state of one screening within an investigation, one of: - `SCREEN_STATE_UNSPECIFIED`
+   * - Default/Null value. - `PENDING` - Screen result is pending. - `PASSED` - Screen result has
+   * passed. - `FAILED` - Screen result has failed. - `NEEDS_REVIEW` - Screen result needs manual
+   * review. - `DEFERRED_REVIEW` - Screen result is deferred for review at a later date. -
+   * `OUT_OF_SCOPE` - Screen state is out of scope for this investigation type.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("identity_verification")
   private Optional<? extends IdentityVerification> identityVerification;
@@ -49,12 +65,20 @@ public class Investigation {
   @JsonProperty("identity_verification_results")
   private Optional<? extends List<IdentityVerificationResult>> identityVerificationResults;
 
-  /** Used to determine who is responsible for running identity verification checks */
+  /**
+   * Used to determine who is responsible for running identity verification checks, one of: -
+   * `IDENTITY_VERIFICATION_SCOPE_UNSPECIFIED` - Default/Null value. - `PERFORMED_BY_APEX` - Run CIP
+   * and CDD checks. - `PROVIDED_BY_CLIENT` - Run CDD checks with CIP provided in request.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("identity_verification_scope")
   private Optional<? extends IdentityVerificationScope> identityVerificationScope;
 
-  /** Current state of investigation request */
+  /**
+   * The state of an investigation request, one of: - `INVESTIGATION_REQUEST_STATE_UNSPECIFIED` -
+   * Default/Null value. - `OPEN` - The investigation request is open. - `CLOSED` - The
+   * investigation request is closed.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("investigation_request_state")
   private Optional<? extends InvestigationRequestState> investigationRequestState;
@@ -79,7 +103,13 @@ public class Investigation {
   @JsonProperty("watchlist_matches")
   private Optional<? extends List<WatchlistMatch>> watchlistMatches;
 
-  /** Indicates the current state of the watchlist screen */
+  /**
+   * The screen state of one screening within an investigation, one of: - `SCREEN_STATE_UNSPECIFIED`
+   * - Default/Null value. - `PENDING` - Screen result is pending. - `PASSED` - Screen result has
+   * passed. - `FAILED` - Screen result has failed. - `NEEDS_REVIEW` - Screen result needs manual
+   * review. - `DEFERRED_REVIEW` - Screen result is deferred for review at a later date. -
+   * `OUT_OF_SCOPE` - Screen state is out of scope for this investigation type.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("watchlist_screen")
   private Optional<? extends WatchlistScreen> watchlistScreen;
@@ -87,6 +117,7 @@ public class Investigation {
   @JsonCreator
   public Investigation(
       @JsonProperty("audit_trail") Optional<? extends List<AuditTrail>> auditTrail,
+      @JsonProperty("client_id") Optional<String> clientId,
       @JsonProperty("correspondent_id") Optional<String> correspondentId,
       @JsonProperty("create_time") JsonNullable<OffsetDateTime> createTime,
       @JsonProperty("entity") JsonNullable<? extends Entity> entity,
@@ -104,6 +135,7 @@ public class Investigation {
       @JsonProperty("watchlist_matches") Optional<? extends List<WatchlistMatch>> watchlistMatches,
       @JsonProperty("watchlist_screen") Optional<? extends WatchlistScreen> watchlistScreen) {
     Utils.checkNotNull(auditTrail, "auditTrail");
+    Utils.checkNotNull(clientId, "clientId");
     Utils.checkNotNull(correspondentId, "correspondentId");
     Utils.checkNotNull(createTime, "createTime");
     Utils.checkNotNull(entity, "entity");
@@ -117,6 +149,7 @@ public class Investigation {
     Utils.checkNotNull(watchlistMatches, "watchlistMatches");
     Utils.checkNotNull(watchlistScreen, "watchlistScreen");
     this.auditTrail = auditTrail;
+    this.clientId = clientId;
     this.correspondentId = correspondentId;
     this.createTime = createTime;
     this.entity = entity;
@@ -133,6 +166,7 @@ public class Investigation {
 
   public Investigation() {
     this(
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined(),
@@ -155,6 +189,17 @@ public class Investigation {
     return (Optional<List<AuditTrail>>) auditTrail;
   }
 
+  /**
+   * A unique identifier referencing a client The client ID serves as the unique identifier for the
+   * apex client positioned above the correspondent within the apex client configurator hierarchy.
+   * Moving forward, the account service will internally assign the client ID for all
+   * investigations.
+   */
+  @JsonIgnore
+  public Optional<String> clientId() {
+    return clientId;
+  }
+
   /** A unique identifier referencing a Correspondent */
   @JsonIgnore
   public Optional<String> correspondentId() {
@@ -174,7 +219,13 @@ public class Investigation {
     return (JsonNullable<Entity>) entity;
   }
 
-  /** Indicates the current state of identity verification */
+  /**
+   * The screen state of one screening within an investigation, one of: - `SCREEN_STATE_UNSPECIFIED`
+   * - Default/Null value. - `PENDING` - Screen result is pending. - `PASSED` - Screen result has
+   * passed. - `FAILED` - Screen result has failed. - `NEEDS_REVIEW` - Screen result needs manual
+   * review. - `DEFERRED_REVIEW` - Screen result is deferred for review at a later date. -
+   * `OUT_OF_SCOPE` - Screen state is out of scope for this investigation type.
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<IdentityVerification> identityVerification() {
@@ -188,14 +239,22 @@ public class Investigation {
     return (Optional<List<IdentityVerificationResult>>) identityVerificationResults;
   }
 
-  /** Used to determine who is responsible for running identity verification checks */
+  /**
+   * Used to determine who is responsible for running identity verification checks, one of: -
+   * `IDENTITY_VERIFICATION_SCOPE_UNSPECIFIED` - Default/Null value. - `PERFORMED_BY_APEX` - Run CIP
+   * and CDD checks. - `PROVIDED_BY_CLIENT` - Run CDD checks with CIP provided in request.
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<IdentityVerificationScope> identityVerificationScope() {
     return (Optional<IdentityVerificationScope>) identityVerificationScope;
   }
 
-  /** Current state of investigation request */
+  /**
+   * The state of an investigation request, one of: - `INVESTIGATION_REQUEST_STATE_UNSPECIFIED` -
+   * Default/Null value. - `OPEN` - The investigation request is open. - `CLOSED` - The
+   * investigation request is closed.
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<InvestigationRequestState> investigationRequestState() {
@@ -228,7 +287,13 @@ public class Investigation {
     return (Optional<List<WatchlistMatch>>) watchlistMatches;
   }
 
-  /** Indicates the current state of the watchlist screen */
+  /**
+   * The screen state of one screening within an investigation, one of: - `SCREEN_STATE_UNSPECIFIED`
+   * - Default/Null value. - `PENDING` - Screen result is pending. - `PASSED` - Screen result has
+   * passed. - `FAILED` - Screen result has failed. - `NEEDS_REVIEW` - Screen result needs manual
+   * review. - `DEFERRED_REVIEW` - Screen result is deferred for review at a later date. -
+   * `OUT_OF_SCOPE` - Screen state is out of scope for this investigation type.
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<WatchlistScreen> watchlistScreen() {
@@ -250,6 +315,30 @@ public class Investigation {
   public Investigation withAuditTrail(Optional<? extends List<AuditTrail>> auditTrail) {
     Utils.checkNotNull(auditTrail, "auditTrail");
     this.auditTrail = auditTrail;
+    return this;
+  }
+
+  /**
+   * A unique identifier referencing a client The client ID serves as the unique identifier for the
+   * apex client positioned above the correspondent within the apex client configurator hierarchy.
+   * Moving forward, the account service will internally assign the client ID for all
+   * investigations.
+   */
+  public Investigation withClientId(String clientId) {
+    Utils.checkNotNull(clientId, "clientId");
+    this.clientId = Optional.ofNullable(clientId);
+    return this;
+  }
+
+  /**
+   * A unique identifier referencing a client The client ID serves as the unique identifier for the
+   * apex client positioned above the correspondent within the apex client configurator hierarchy.
+   * Moving forward, the account service will internally assign the client ID for all
+   * investigations.
+   */
+  public Investigation withClientId(Optional<String> clientId) {
+    Utils.checkNotNull(clientId, "clientId");
+    this.clientId = clientId;
     return this;
   }
 
@@ -295,14 +384,26 @@ public class Investigation {
     return this;
   }
 
-  /** Indicates the current state of identity verification */
+  /**
+   * The screen state of one screening within an investigation, one of: - `SCREEN_STATE_UNSPECIFIED`
+   * - Default/Null value. - `PENDING` - Screen result is pending. - `PASSED` - Screen result has
+   * passed. - `FAILED` - Screen result has failed. - `NEEDS_REVIEW` - Screen result needs manual
+   * review. - `DEFERRED_REVIEW` - Screen result is deferred for review at a later date. -
+   * `OUT_OF_SCOPE` - Screen state is out of scope for this investigation type.
+   */
   public Investigation withIdentityVerification(IdentityVerification identityVerification) {
     Utils.checkNotNull(identityVerification, "identityVerification");
     this.identityVerification = Optional.ofNullable(identityVerification);
     return this;
   }
 
-  /** Indicates the current state of identity verification */
+  /**
+   * The screen state of one screening within an investigation, one of: - `SCREEN_STATE_UNSPECIFIED`
+   * - Default/Null value. - `PENDING` - Screen result is pending. - `PASSED` - Screen result has
+   * passed. - `FAILED` - Screen result has failed. - `NEEDS_REVIEW` - Screen result needs manual
+   * review. - `DEFERRED_REVIEW` - Screen result is deferred for review at a later date. -
+   * `OUT_OF_SCOPE` - Screen state is out of scope for this investigation type.
+   */
   public Investigation withIdentityVerification(
       Optional<? extends IdentityVerification> identityVerification) {
     Utils.checkNotNull(identityVerification, "identityVerification");
@@ -326,7 +427,11 @@ public class Investigation {
     return this;
   }
 
-  /** Used to determine who is responsible for running identity verification checks */
+  /**
+   * Used to determine who is responsible for running identity verification checks, one of: -
+   * `IDENTITY_VERIFICATION_SCOPE_UNSPECIFIED` - Default/Null value. - `PERFORMED_BY_APEX` - Run CIP
+   * and CDD checks. - `PROVIDED_BY_CLIENT` - Run CDD checks with CIP provided in request.
+   */
   public Investigation withIdentityVerificationScope(
       IdentityVerificationScope identityVerificationScope) {
     Utils.checkNotNull(identityVerificationScope, "identityVerificationScope");
@@ -334,7 +439,11 @@ public class Investigation {
     return this;
   }
 
-  /** Used to determine who is responsible for running identity verification checks */
+  /**
+   * Used to determine who is responsible for running identity verification checks, one of: -
+   * `IDENTITY_VERIFICATION_SCOPE_UNSPECIFIED` - Default/Null value. - `PERFORMED_BY_APEX` - Run CIP
+   * and CDD checks. - `PROVIDED_BY_CLIENT` - Run CDD checks with CIP provided in request.
+   */
   public Investigation withIdentityVerificationScope(
       Optional<? extends IdentityVerificationScope> identityVerificationScope) {
     Utils.checkNotNull(identityVerificationScope, "identityVerificationScope");
@@ -342,7 +451,11 @@ public class Investigation {
     return this;
   }
 
-  /** Current state of investigation request */
+  /**
+   * The state of an investigation request, one of: - `INVESTIGATION_REQUEST_STATE_UNSPECIFIED` -
+   * Default/Null value. - `OPEN` - The investigation request is open. - `CLOSED` - The
+   * investigation request is closed.
+   */
   public Investigation withInvestigationRequestState(
       InvestigationRequestState investigationRequestState) {
     Utils.checkNotNull(investigationRequestState, "investigationRequestState");
@@ -350,7 +463,11 @@ public class Investigation {
     return this;
   }
 
-  /** Current state of investigation request */
+  /**
+   * The state of an investigation request, one of: - `INVESTIGATION_REQUEST_STATE_UNSPECIFIED` -
+   * Default/Null value. - `OPEN` - The investigation request is open. - `CLOSED` - The
+   * investigation request is closed.
+   */
   public Investigation withInvestigationRequestState(
       Optional<? extends InvestigationRequestState> investigationRequestState) {
     Utils.checkNotNull(investigationRequestState, "investigationRequestState");
@@ -415,14 +532,26 @@ public class Investigation {
     return this;
   }
 
-  /** Indicates the current state of the watchlist screen */
+  /**
+   * The screen state of one screening within an investigation, one of: - `SCREEN_STATE_UNSPECIFIED`
+   * - Default/Null value. - `PENDING` - Screen result is pending. - `PASSED` - Screen result has
+   * passed. - `FAILED` - Screen result has failed. - `NEEDS_REVIEW` - Screen result needs manual
+   * review. - `DEFERRED_REVIEW` - Screen result is deferred for review at a later date. -
+   * `OUT_OF_SCOPE` - Screen state is out of scope for this investigation type.
+   */
   public Investigation withWatchlistScreen(WatchlistScreen watchlistScreen) {
     Utils.checkNotNull(watchlistScreen, "watchlistScreen");
     this.watchlistScreen = Optional.ofNullable(watchlistScreen);
     return this;
   }
 
-  /** Indicates the current state of the watchlist screen */
+  /**
+   * The screen state of one screening within an investigation, one of: - `SCREEN_STATE_UNSPECIFIED`
+   * - Default/Null value. - `PENDING` - Screen result is pending. - `PASSED` - Screen result has
+   * passed. - `FAILED` - Screen result has failed. - `NEEDS_REVIEW` - Screen result needs manual
+   * review. - `DEFERRED_REVIEW` - Screen result is deferred for review at a later date. -
+   * `OUT_OF_SCOPE` - Screen state is out of scope for this investigation type.
+   */
   public Investigation withWatchlistScreen(Optional<? extends WatchlistScreen> watchlistScreen) {
     Utils.checkNotNull(watchlistScreen, "watchlistScreen");
     this.watchlistScreen = watchlistScreen;
@@ -439,6 +568,7 @@ public class Investigation {
     }
     Investigation other = (Investigation) o;
     return Objects.deepEquals(this.auditTrail, other.auditTrail)
+        && Objects.deepEquals(this.clientId, other.clientId)
         && Objects.deepEquals(this.correspondentId, other.correspondentId)
         && Objects.deepEquals(this.createTime, other.createTime)
         && Objects.deepEquals(this.entity, other.entity)
@@ -457,6 +587,7 @@ public class Investigation {
   public int hashCode() {
     return Objects.hash(
         auditTrail,
+        clientId,
         correspondentId,
         createTime,
         entity,
@@ -477,6 +608,8 @@ public class Investigation {
         Investigation.class,
         "auditTrail",
         auditTrail,
+        "clientId",
+        clientId,
         "correspondentId",
         correspondentId,
         "createTime",
@@ -506,6 +639,8 @@ public class Investigation {
   public static final class Builder {
 
     private Optional<? extends List<AuditTrail>> auditTrail = Optional.empty();
+
+    private Optional<String> clientId = Optional.empty();
 
     private Optional<String> correspondentId = Optional.empty();
 
@@ -552,6 +687,30 @@ public class Investigation {
       return this;
     }
 
+    /**
+     * A unique identifier referencing a client The client ID serves as the unique identifier for
+     * the apex client positioned above the correspondent within the apex client configurator
+     * hierarchy. Moving forward, the account service will internally assign the client ID for all
+     * investigations.
+     */
+    public Builder clientId(String clientId) {
+      Utils.checkNotNull(clientId, "clientId");
+      this.clientId = Optional.ofNullable(clientId);
+      return this;
+    }
+
+    /**
+     * A unique identifier referencing a client The client ID serves as the unique identifier for
+     * the apex client positioned above the correspondent within the apex client configurator
+     * hierarchy. Moving forward, the account service will internally assign the client ID for all
+     * investigations.
+     */
+    public Builder clientId(Optional<String> clientId) {
+      Utils.checkNotNull(clientId, "clientId");
+      this.clientId = clientId;
+      return this;
+    }
+
     /** A unique identifier referencing a Correspondent */
     public Builder correspondentId(String correspondentId) {
       Utils.checkNotNull(correspondentId, "correspondentId");
@@ -594,14 +753,28 @@ public class Investigation {
       return this;
     }
 
-    /** Indicates the current state of identity verification */
+    /**
+     * The screen state of one screening within an investigation, one of: -
+     * `SCREEN_STATE_UNSPECIFIED` - Default/Null value. - `PENDING` - Screen result is pending. -
+     * `PASSED` - Screen result has passed. - `FAILED` - Screen result has failed. - `NEEDS_REVIEW`
+     * - Screen result needs manual review. - `DEFERRED_REVIEW` - Screen result is deferred for
+     * review at a later date. - `OUT_OF_SCOPE` - Screen state is out of scope for this
+     * investigation type.
+     */
     public Builder identityVerification(IdentityVerification identityVerification) {
       Utils.checkNotNull(identityVerification, "identityVerification");
       this.identityVerification = Optional.ofNullable(identityVerification);
       return this;
     }
 
-    /** Indicates the current state of identity verification */
+    /**
+     * The screen state of one screening within an investigation, one of: -
+     * `SCREEN_STATE_UNSPECIFIED` - Default/Null value. - `PENDING` - Screen result is pending. -
+     * `PASSED` - Screen result has passed. - `FAILED` - Screen result has failed. - `NEEDS_REVIEW`
+     * - Screen result needs manual review. - `DEFERRED_REVIEW` - Screen result is deferred for
+     * review at a later date. - `OUT_OF_SCOPE` - Screen state is out of scope for this
+     * investigation type.
+     */
     public Builder identityVerification(
         Optional<? extends IdentityVerification> identityVerification) {
       Utils.checkNotNull(identityVerification, "identityVerification");
@@ -625,14 +798,22 @@ public class Investigation {
       return this;
     }
 
-    /** Used to determine who is responsible for running identity verification checks */
+    /**
+     * Used to determine who is responsible for running identity verification checks, one of: -
+     * `IDENTITY_VERIFICATION_SCOPE_UNSPECIFIED` - Default/Null value. - `PERFORMED_BY_APEX` - Run
+     * CIP and CDD checks. - `PROVIDED_BY_CLIENT` - Run CDD checks with CIP provided in request.
+     */
     public Builder identityVerificationScope(IdentityVerificationScope identityVerificationScope) {
       Utils.checkNotNull(identityVerificationScope, "identityVerificationScope");
       this.identityVerificationScope = Optional.ofNullable(identityVerificationScope);
       return this;
     }
 
-    /** Used to determine who is responsible for running identity verification checks */
+    /**
+     * Used to determine who is responsible for running identity verification checks, one of: -
+     * `IDENTITY_VERIFICATION_SCOPE_UNSPECIFIED` - Default/Null value. - `PERFORMED_BY_APEX` - Run
+     * CIP and CDD checks. - `PROVIDED_BY_CLIENT` - Run CDD checks with CIP provided in request.
+     */
     public Builder identityVerificationScope(
         Optional<? extends IdentityVerificationScope> identityVerificationScope) {
       Utils.checkNotNull(identityVerificationScope, "identityVerificationScope");
@@ -640,14 +821,22 @@ public class Investigation {
       return this;
     }
 
-    /** Current state of investigation request */
+    /**
+     * The state of an investigation request, one of: - `INVESTIGATION_REQUEST_STATE_UNSPECIFIED` -
+     * Default/Null value. - `OPEN` - The investigation request is open. - `CLOSED` - The
+     * investigation request is closed.
+     */
     public Builder investigationRequestState(InvestigationRequestState investigationRequestState) {
       Utils.checkNotNull(investigationRequestState, "investigationRequestState");
       this.investigationRequestState = Optional.ofNullable(investigationRequestState);
       return this;
     }
 
-    /** Current state of investigation request */
+    /**
+     * The state of an investigation request, one of: - `INVESTIGATION_REQUEST_STATE_UNSPECIFIED` -
+     * Default/Null value. - `OPEN` - The investigation request is open. - `CLOSED` - The
+     * investigation request is closed.
+     */
     public Builder investigationRequestState(
         Optional<? extends InvestigationRequestState> investigationRequestState) {
       Utils.checkNotNull(investigationRequestState, "investigationRequestState");
@@ -711,14 +900,28 @@ public class Investigation {
       return this;
     }
 
-    /** Indicates the current state of the watchlist screen */
+    /**
+     * The screen state of one screening within an investigation, one of: -
+     * `SCREEN_STATE_UNSPECIFIED` - Default/Null value. - `PENDING` - Screen result is pending. -
+     * `PASSED` - Screen result has passed. - `FAILED` - Screen result has failed. - `NEEDS_REVIEW`
+     * - Screen result needs manual review. - `DEFERRED_REVIEW` - Screen result is deferred for
+     * review at a later date. - `OUT_OF_SCOPE` - Screen state is out of scope for this
+     * investigation type.
+     */
     public Builder watchlistScreen(WatchlistScreen watchlistScreen) {
       Utils.checkNotNull(watchlistScreen, "watchlistScreen");
       this.watchlistScreen = Optional.ofNullable(watchlistScreen);
       return this;
     }
 
-    /** Indicates the current state of the watchlist screen */
+    /**
+     * The screen state of one screening within an investigation, one of: -
+     * `SCREEN_STATE_UNSPECIFIED` - Default/Null value. - `PENDING` - Screen result is pending. -
+     * `PASSED` - Screen result has passed. - `FAILED` - Screen result has failed. - `NEEDS_REVIEW`
+     * - Screen result needs manual review. - `DEFERRED_REVIEW` - Screen result is deferred for
+     * review at a later date. - `OUT_OF_SCOPE` - Screen state is out of scope for this
+     * investigation type.
+     */
     public Builder watchlistScreen(Optional<? extends WatchlistScreen> watchlistScreen) {
       Utils.checkNotNull(watchlistScreen, "watchlistScreen");
       this.watchlistScreen = watchlistScreen;
@@ -728,6 +931,7 @@ public class Investigation {
     public Investigation build() {
       return new Investigation(
           auditTrail,
+          clientId,
           correspondentId,
           createTime,
           entity,

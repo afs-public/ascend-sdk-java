@@ -5,14 +5,10 @@
 package com.apexfintechsolutions.ascendsdk.models.operations;
 
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
-import java.util.Optional;
 
 public class BasketOrdersServiceListBasketOrdersRequestBuilder {
 
-  private String correspondentId;
-  private String basketId;
-  private Optional<Integer> pageSize = Optional.empty();
-  private Optional<String> pageToken = Optional.empty();
+  private BasketOrdersServiceListBasketOrdersRequest request;
   private final SDKMethodInterfaces.MethodCallBasketOrdersServiceListBasketOrders sdk;
 
   public BasketOrdersServiceListBasketOrdersRequestBuilder(
@@ -20,44 +16,15 @@ public class BasketOrdersServiceListBasketOrdersRequestBuilder {
     this.sdk = sdk;
   }
 
-  public BasketOrdersServiceListBasketOrdersRequestBuilder correspondentId(String correspondentId) {
-    Utils.checkNotNull(correspondentId, "correspondentId");
-    this.correspondentId = correspondentId;
-    return this;
-  }
-
-  public BasketOrdersServiceListBasketOrdersRequestBuilder basketId(String basketId) {
-    Utils.checkNotNull(basketId, "basketId");
-    this.basketId = basketId;
-    return this;
-  }
-
-  public BasketOrdersServiceListBasketOrdersRequestBuilder pageSize(int pageSize) {
-    Utils.checkNotNull(pageSize, "pageSize");
-    this.pageSize = Optional.of(pageSize);
-    return this;
-  }
-
-  public BasketOrdersServiceListBasketOrdersRequestBuilder pageSize(Optional<Integer> pageSize) {
-    Utils.checkNotNull(pageSize, "pageSize");
-    this.pageSize = pageSize;
-    return this;
-  }
-
-  public BasketOrdersServiceListBasketOrdersRequestBuilder pageToken(String pageToken) {
-    Utils.checkNotNull(pageToken, "pageToken");
-    this.pageToken = Optional.of(pageToken);
-    return this;
-  }
-
-  public BasketOrdersServiceListBasketOrdersRequestBuilder pageToken(Optional<String> pageToken) {
-    Utils.checkNotNull(pageToken, "pageToken");
-    this.pageToken = pageToken;
+  public BasketOrdersServiceListBasketOrdersRequestBuilder request(
+      BasketOrdersServiceListBasketOrdersRequest request) {
+    Utils.checkNotNull(request, "request");
+    this.request = request;
     return this;
   }
 
   public BasketOrdersServiceListBasketOrdersResponse call() throws Exception {
 
-    return sdk.listBasketOrders(correspondentId, basketId, pageSize, pageToken);
+    return sdk.listBasketOrders(request);
   }
 }

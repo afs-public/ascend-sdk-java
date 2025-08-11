@@ -46,8 +46,6 @@ import java.util.Optional;
 @JsonSerialize(using = OrderTimeInForce._Serializer.class)
 public class OrderTimeInForce {
 
-  public static final OrderTimeInForce TIME_IN_FORCE_UNSPECIFIED =
-      new OrderTimeInForce("TIME_IN_FORCE_UNSPECIFIED");
   public static final OrderTimeInForce DAY = new OrderTimeInForce("DAY");
 
   // This map will grow whenever a Color gets created with a new
@@ -116,14 +114,12 @@ public class OrderTimeInForce {
 
   private static final Map<String, OrderTimeInForce> createValuesMap() {
     Map<String, OrderTimeInForce> map = new LinkedHashMap<>();
-    map.put("TIME_IN_FORCE_UNSPECIFIED", TIME_IN_FORCE_UNSPECIFIED);
     map.put("DAY", DAY);
     return map;
   }
 
   private static final Map<String, OrderTimeInForceEnum> createEnumsMap() {
     Map<String, OrderTimeInForceEnum> map = new HashMap<>();
-    map.put("TIME_IN_FORCE_UNSPECIFIED", OrderTimeInForceEnum.TIME_IN_FORCE_UNSPECIFIED);
     map.put("DAY", OrderTimeInForceEnum.DAY);
     return map;
   }
@@ -159,7 +155,6 @@ public class OrderTimeInForce {
   }
 
   public enum OrderTimeInForceEnum {
-    TIME_IN_FORCE_UNSPECIFIED("TIME_IN_FORCE_UNSPECIFIED"),
     DAY("DAY"),
     ;
 

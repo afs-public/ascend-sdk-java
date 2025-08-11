@@ -7,20 +7,77 @@ package com.apexfintechsolutions.ascendsdk.models.components;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.OffsetDateTime;
 import java.util.Objects;
+import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /** CancelOrderRequestCreate - The message to request cancellation of an existing order */
 public class CancelOrderRequestCreate {
+
+  /**
+   * Only relevant for CAT reporting when clients have Apex do CAT reporting on their behalf. A
+   * value may be provided for non-Equity orders, and will be remembered, but the value will have no
+   * impact on how they are processed. Cancel requests without this field set will default to CLIENT
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("cancel_initiator")
+  private Optional<? extends CancelOrderRequestCreateCancelInitiator> cancelInitiator;
+
+  /**
+   * Related to CAT reporting when Apex reports for the client. A value may be provided for
+   * non-Equity orders, and will be remembered, but valid timestamps will have no impact on how they
+   * are processed.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_cancel_received_time")
+  private JsonNullable<OffsetDateTime> clientCancelReceivedTime;
 
   /** Format: accounts/{account_id}/orders/{order_id} */
   @JsonProperty("name")
   private String name;
 
   @JsonCreator
-  public CancelOrderRequestCreate(@JsonProperty("name") String name) {
+  public CancelOrderRequestCreate(
+      @JsonProperty("cancel_initiator")
+          Optional<? extends CancelOrderRequestCreateCancelInitiator> cancelInitiator,
+      @JsonProperty("client_cancel_received_time")
+          JsonNullable<OffsetDateTime> clientCancelReceivedTime,
+      @JsonProperty("name") String name) {
+    Utils.checkNotNull(cancelInitiator, "cancelInitiator");
+    Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
     Utils.checkNotNull(name, "name");
+    this.cancelInitiator = cancelInitiator;
+    this.clientCancelReceivedTime = clientCancelReceivedTime;
     this.name = name;
+  }
+
+  public CancelOrderRequestCreate(String name) {
+    this(Optional.empty(), JsonNullable.undefined(), name);
+  }
+
+  /**
+   * Only relevant for CAT reporting when clients have Apex do CAT reporting on their behalf. A
+   * value may be provided for non-Equity orders, and will be remembered, but the value will have no
+   * impact on how they are processed. Cancel requests without this field set will default to CLIENT
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<CancelOrderRequestCreateCancelInitiator> cancelInitiator() {
+    return (Optional<CancelOrderRequestCreateCancelInitiator>) cancelInitiator;
+  }
+
+  /**
+   * Related to CAT reporting when Apex reports for the client. A value may be provided for
+   * non-Equity orders, and will be remembered, but valid timestamps will have no impact on how they
+   * are processed.
+   */
+  @JsonIgnore
+  public JsonNullable<OffsetDateTime> clientCancelReceivedTime() {
+    return clientCancelReceivedTime;
   }
 
   /** Format: accounts/{account_id}/orders/{order_id} */
@@ -31,6 +88,54 @@ public class CancelOrderRequestCreate {
 
   public static final Builder builder() {
     return new Builder();
+  }
+
+  /**
+   * Only relevant for CAT reporting when clients have Apex do CAT reporting on their behalf. A
+   * value may be provided for non-Equity orders, and will be remembered, but the value will have no
+   * impact on how they are processed. Cancel requests without this field set will default to CLIENT
+   */
+  public CancelOrderRequestCreate withCancelInitiator(
+      CancelOrderRequestCreateCancelInitiator cancelInitiator) {
+    Utils.checkNotNull(cancelInitiator, "cancelInitiator");
+    this.cancelInitiator = Optional.ofNullable(cancelInitiator);
+    return this;
+  }
+
+  /**
+   * Only relevant for CAT reporting when clients have Apex do CAT reporting on their behalf. A
+   * value may be provided for non-Equity orders, and will be remembered, but the value will have no
+   * impact on how they are processed. Cancel requests without this field set will default to CLIENT
+   */
+  public CancelOrderRequestCreate withCancelInitiator(
+      Optional<? extends CancelOrderRequestCreateCancelInitiator> cancelInitiator) {
+    Utils.checkNotNull(cancelInitiator, "cancelInitiator");
+    this.cancelInitiator = cancelInitiator;
+    return this;
+  }
+
+  /**
+   * Related to CAT reporting when Apex reports for the client. A value may be provided for
+   * non-Equity orders, and will be remembered, but valid timestamps will have no impact on how they
+   * are processed.
+   */
+  public CancelOrderRequestCreate withClientCancelReceivedTime(
+      OffsetDateTime clientCancelReceivedTime) {
+    Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+    this.clientCancelReceivedTime = JsonNullable.of(clientCancelReceivedTime);
+    return this;
+  }
+
+  /**
+   * Related to CAT reporting when Apex reports for the client. A value may be provided for
+   * non-Equity orders, and will be remembered, but valid timestamps will have no impact on how they
+   * are processed.
+   */
+  public CancelOrderRequestCreate withClientCancelReceivedTime(
+      JsonNullable<OffsetDateTime> clientCancelReceivedTime) {
+    Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+    this.clientCancelReceivedTime = clientCancelReceivedTime;
+    return this;
   }
 
   /** Format: accounts/{account_id}/orders/{order_id} */
@@ -49,25 +154,86 @@ public class CancelOrderRequestCreate {
       return false;
     }
     CancelOrderRequestCreate other = (CancelOrderRequestCreate) o;
-    return Objects.deepEquals(this.name, other.name);
+    return Objects.deepEquals(this.cancelInitiator, other.cancelInitiator)
+        && Objects.deepEquals(this.clientCancelReceivedTime, other.clientCancelReceivedTime)
+        && Objects.deepEquals(this.name, other.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name);
+    return Objects.hash(cancelInitiator, clientCancelReceivedTime, name);
   }
 
   @Override
   public String toString() {
-    return Utils.toString(CancelOrderRequestCreate.class, "name", name);
+    return Utils.toString(
+        CancelOrderRequestCreate.class,
+        "cancelInitiator",
+        cancelInitiator,
+        "clientCancelReceivedTime",
+        clientCancelReceivedTime,
+        "name",
+        name);
   }
 
   public static final class Builder {
+
+    private Optional<? extends CancelOrderRequestCreateCancelInitiator> cancelInitiator =
+        Optional.empty();
+
+    private JsonNullable<OffsetDateTime> clientCancelReceivedTime = JsonNullable.undefined();
 
     private String name;
 
     private Builder() {
       // force use of static builder() method
+    }
+
+    /**
+     * Only relevant for CAT reporting when clients have Apex do CAT reporting on their behalf. A
+     * value may be provided for non-Equity orders, and will be remembered, but the value will have
+     * no impact on how they are processed. Cancel requests without this field set will default to
+     * CLIENT
+     */
+    public Builder cancelInitiator(CancelOrderRequestCreateCancelInitiator cancelInitiator) {
+      Utils.checkNotNull(cancelInitiator, "cancelInitiator");
+      this.cancelInitiator = Optional.ofNullable(cancelInitiator);
+      return this;
+    }
+
+    /**
+     * Only relevant for CAT reporting when clients have Apex do CAT reporting on their behalf. A
+     * value may be provided for non-Equity orders, and will be remembered, but the value will have
+     * no impact on how they are processed. Cancel requests without this field set will default to
+     * CLIENT
+     */
+    public Builder cancelInitiator(
+        Optional<? extends CancelOrderRequestCreateCancelInitiator> cancelInitiator) {
+      Utils.checkNotNull(cancelInitiator, "cancelInitiator");
+      this.cancelInitiator = cancelInitiator;
+      return this;
+    }
+
+    /**
+     * Related to CAT reporting when Apex reports for the client. A value may be provided for
+     * non-Equity orders, and will be remembered, but valid timestamps will have no impact on how
+     * they are processed.
+     */
+    public Builder clientCancelReceivedTime(OffsetDateTime clientCancelReceivedTime) {
+      Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+      this.clientCancelReceivedTime = JsonNullable.of(clientCancelReceivedTime);
+      return this;
+    }
+
+    /**
+     * Related to CAT reporting when Apex reports for the client. A value may be provided for
+     * non-Equity orders, and will be remembered, but valid timestamps will have no impact on how
+     * they are processed.
+     */
+    public Builder clientCancelReceivedTime(JsonNullable<OffsetDateTime> clientCancelReceivedTime) {
+      Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+      this.clientCancelReceivedTime = clientCancelReceivedTime;
+      return this;
     }
 
     /** Format: accounts/{account_id}/orders/{order_id} */
@@ -78,7 +244,7 @@ public class CancelOrderRequestCreate {
     }
 
     public CancelOrderRequestCreate build() {
-      return new CancelOrderRequestCreate(name);
+      return new CancelOrderRequestCreate(cancelInitiator, clientCancelReceivedTime, name);
     }
   }
 }

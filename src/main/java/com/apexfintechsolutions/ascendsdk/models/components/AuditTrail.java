@@ -18,7 +18,12 @@ import org.openapitools.jackson.nullable.JsonNullable;
 /** AuditTrail - Audit trail details */
 public class AuditTrail {
 
-  /** The type of audit that was performed on the investigation */
+  /**
+   * The audit record type, one of: - `AUDIT_TYPE_UNSPECIFIED` - Default/Null audit type. -
+   * `INVESTIGATION_REQUEST_UPDATE` - Used to update an investigation request. -
+   * `INVESTIGATION_STATE` - Used for recording investigation state changed events. - `COMMENT` -
+   * Used for adding a comment to investigation.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("audit_type")
   private Optional<? extends AuditType> auditType;
@@ -89,7 +94,12 @@ public class AuditTrail {
         Optional.empty());
   }
 
-  /** The type of audit that was performed on the investigation */
+  /**
+   * The audit record type, one of: - `AUDIT_TYPE_UNSPECIFIED` - Default/Null audit type. -
+   * `INVESTIGATION_REQUEST_UPDATE` - Used to update an investigation request. -
+   * `INVESTIGATION_STATE` - Used for recording investigation state changed events. - `COMMENT` -
+   * Used for adding a comment to investigation.
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<AuditType> auditType() {
@@ -136,14 +146,24 @@ public class AuditTrail {
     return new Builder();
   }
 
-  /** The type of audit that was performed on the investigation */
+  /**
+   * The audit record type, one of: - `AUDIT_TYPE_UNSPECIFIED` - Default/Null audit type. -
+   * `INVESTIGATION_REQUEST_UPDATE` - Used to update an investigation request. -
+   * `INVESTIGATION_STATE` - Used for recording investigation state changed events. - `COMMENT` -
+   * Used for adding a comment to investigation.
+   */
   public AuditTrail withAuditType(AuditType auditType) {
     Utils.checkNotNull(auditType, "auditType");
     this.auditType = Optional.ofNullable(auditType);
     return this;
   }
 
-  /** The type of audit that was performed on the investigation */
+  /**
+   * The audit record type, one of: - `AUDIT_TYPE_UNSPECIFIED` - Default/Null audit type. -
+   * `INVESTIGATION_REQUEST_UPDATE` - Used to update an investigation request. -
+   * `INVESTIGATION_STATE` - Used for recording investigation state changed events. - `COMMENT` -
+   * Used for adding a comment to investigation.
+   */
   public AuditTrail withAuditType(Optional<? extends AuditType> auditType) {
     Utils.checkNotNull(auditType, "auditType");
     this.auditType = auditType;
@@ -297,14 +317,24 @@ public class AuditTrail {
       // force use of static builder() method
     }
 
-    /** The type of audit that was performed on the investigation */
+    /**
+     * The audit record type, one of: - `AUDIT_TYPE_UNSPECIFIED` - Default/Null audit type. -
+     * `INVESTIGATION_REQUEST_UPDATE` - Used to update an investigation request. -
+     * `INVESTIGATION_STATE` - Used for recording investigation state changed events. - `COMMENT` -
+     * Used for adding a comment to investigation.
+     */
     public Builder auditType(AuditType auditType) {
       Utils.checkNotNull(auditType, "auditType");
       this.auditType = Optional.ofNullable(auditType);
       return this;
     }
 
-    /** The type of audit that was performed on the investigation */
+    /**
+     * The audit record type, one of: - `AUDIT_TYPE_UNSPECIFIED` - Default/Null audit type. -
+     * `INVESTIGATION_REQUEST_UPDATE` - Used to update an investigation request. -
+     * `INVESTIGATION_STATE` - Used for recording investigation state changed events. - `COMMENT` -
+     * Used for adding a comment to investigation.
+     */
     public Builder auditType(Optional<? extends AuditType> auditType) {
       Utils.checkNotNull(auditType, "auditType");
       this.auditType = auditType;

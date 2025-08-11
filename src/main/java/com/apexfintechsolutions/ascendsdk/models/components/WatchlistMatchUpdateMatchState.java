@@ -38,7 +38,12 @@ import java.util.Optional;
  * use of an instance in a switch expression but you can use the {@code asEnum()} method (after
  * dealing with the `Optional` appropriately).
  */
-/** WatchlistMatchUpdateMatchState - Match state - whether or not the match is confirmed */
+/**
+ * WatchlistMatchUpdateMatchState - The match state for a profile, one of: - `MATCH_UNSPECIFIED` -
+ * Default/Null value. - `CONFIRMED_MATCH` - Match is confirmed. - `POTENTIAL_MATCH` - Match is a
+ * potential. - `NO_MATCH` - Match is confirmed not to be a match. - `INCONCLUSIVE` - Match is
+ * deemed to be inconclusive.
+ */
 @JsonDeserialize(using = WatchlistMatchUpdateMatchState._Deserializer.class)
 @JsonSerialize(using = WatchlistMatchUpdateMatchState._Serializer.class)
 public class WatchlistMatchUpdateMatchState {
