@@ -38,7 +38,12 @@ import java.util.Optional;
  * use of an instance in a switch expression but you can use the {@code asEnum()} method (after
  * dealing with the `Optional` appropriately).
  */
-/** EntityIdentificationType - Tax id type for entities (e.g. ein, lei, etc.)) */
+/**
+ * EntityIdentificationType - The entity tax id type, one of: - `ID_ENTITY_TYPE_UNSPECIFIED` -
+ * Default/Null value. - `EIN` - Employer Identification Number (US government issued, 9 digits,
+ * XX-XXXXXXX). - `LEI` - Legal Entity Identifier (20 digit alphanumeric). - `DUNS` - Dun and
+ * Bradstreet number.
+ */
 @JsonDeserialize(using = EntityIdentificationType._Deserializer.class)
 @JsonSerialize(using = EntityIdentificationType._Serializer.class)
 public class EntityIdentificationType {

@@ -39,17 +39,15 @@ import java.util.Optional;
  * dealing with the `Optional` appropriately).
  */
 /**
- * OrderType - The execution type of this order. For Equities: MARKET, LIMIT, or STOP are supported.
- * For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+ * OrderType - The execution type of this order. For Equities: MARKET, and LIMIT are supported. For
+ * Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
  */
 @JsonDeserialize(using = OrderType._Deserializer.class)
 @JsonSerialize(using = OrderType._Serializer.class)
 public class OrderType {
 
-  public static final OrderType ORDER_TYPE_UNSPECIFIED = new OrderType("ORDER_TYPE_UNSPECIFIED");
   public static final OrderType LIMIT = new OrderType("LIMIT");
   public static final OrderType MARKET = new OrderType("MARKET");
-  public static final OrderType STOP = new OrderType("STOP");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -117,19 +115,15 @@ public class OrderType {
 
   private static final Map<String, OrderType> createValuesMap() {
     Map<String, OrderType> map = new LinkedHashMap<>();
-    map.put("ORDER_TYPE_UNSPECIFIED", ORDER_TYPE_UNSPECIFIED);
     map.put("LIMIT", LIMIT);
     map.put("MARKET", MARKET);
-    map.put("STOP", STOP);
     return map;
   }
 
   private static final Map<String, OrderTypeEnum> createEnumsMap() {
     Map<String, OrderTypeEnum> map = new HashMap<>();
-    map.put("ORDER_TYPE_UNSPECIFIED", OrderTypeEnum.ORDER_TYPE_UNSPECIFIED);
     map.put("LIMIT", OrderTypeEnum.LIMIT);
     map.put("MARKET", OrderTypeEnum.MARKET);
-    map.put("STOP", OrderTypeEnum.STOP);
     return map;
   }
 
@@ -164,10 +158,8 @@ public class OrderType {
   }
 
   public enum OrderTypeEnum {
-    ORDER_TYPE_UNSPECIFIED("ORDER_TYPE_UNSPECIFIED"),
     LIMIT("LIMIT"),
     MARKET("MARKET"),
-    STOP("STOP"),
     ;
 
     private final String value;

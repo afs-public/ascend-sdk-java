@@ -33,19 +33,34 @@ public class InvestigationServiceListInvestigationsRequest {
   @SpeakeasyMetadata("queryParam:style=form,explode=true,name=filter")
   private Optional<String> filter;
 
+  /**
+   * The order in which investigations are listed. Only one field and direction can be specified.
+   * Supported fields (followed by 'asc' or 'desc'; 'asc' is default if left blank): -
+   * investigation_request_state - correspondent_id - scope - identity_verification -
+   * watchlist_screen - person.given_name - person.family_name - entity.legal_name - created_at -
+   * updated_at
+   */
+  @SpeakeasyMetadata("queryParam:style=form,explode=true,name=order_by")
+  private Optional<String> orderBy;
+
   @JsonCreator
   public InvestigationServiceListInvestigationsRequest(
-      Optional<Integer> pageSize, Optional<String> pageToken, Optional<String> filter) {
+      Optional<Integer> pageSize,
+      Optional<String> pageToken,
+      Optional<String> filter,
+      Optional<String> orderBy) {
     Utils.checkNotNull(pageSize, "pageSize");
     Utils.checkNotNull(pageToken, "pageToken");
     Utils.checkNotNull(filter, "filter");
+    Utils.checkNotNull(orderBy, "orderBy");
     this.pageSize = pageSize;
     this.pageToken = pageToken;
     this.filter = filter;
+    this.orderBy = orderBy;
   }
 
   public InvestigationServiceListInvestigationsRequest() {
-    this(Optional.empty(), Optional.empty(), Optional.empty());
+    this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -72,6 +87,18 @@ public class InvestigationServiceListInvestigationsRequest {
   @JsonIgnore
   public Optional<String> filter() {
     return filter;
+  }
+
+  /**
+   * The order in which investigations are listed. Only one field and direction can be specified.
+   * Supported fields (followed by 'asc' or 'desc'; 'asc' is default if left blank): -
+   * investigation_request_state - correspondent_id - scope - identity_verification -
+   * watchlist_screen - person.given_name - person.family_name - entity.legal_name - created_at -
+   * updated_at
+   */
+  @JsonIgnore
+  public Optional<String> orderBy() {
+    return orderBy;
   }
 
   public static final Builder builder() {
@@ -136,6 +163,32 @@ public class InvestigationServiceListInvestigationsRequest {
     return this;
   }
 
+  /**
+   * The order in which investigations are listed. Only one field and direction can be specified.
+   * Supported fields (followed by 'asc' or 'desc'; 'asc' is default if left blank): -
+   * investigation_request_state - correspondent_id - scope - identity_verification -
+   * watchlist_screen - person.given_name - person.family_name - entity.legal_name - created_at -
+   * updated_at
+   */
+  public InvestigationServiceListInvestigationsRequest withOrderBy(String orderBy) {
+    Utils.checkNotNull(orderBy, "orderBy");
+    this.orderBy = Optional.ofNullable(orderBy);
+    return this;
+  }
+
+  /**
+   * The order in which investigations are listed. Only one field and direction can be specified.
+   * Supported fields (followed by 'asc' or 'desc'; 'asc' is default if left blank): -
+   * investigation_request_state - correspondent_id - scope - identity_verification -
+   * watchlist_screen - person.given_name - person.family_name - entity.legal_name - created_at -
+   * updated_at
+   */
+  public InvestigationServiceListInvestigationsRequest withOrderBy(Optional<String> orderBy) {
+    Utils.checkNotNull(orderBy, "orderBy");
+    this.orderBy = orderBy;
+    return this;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -148,12 +201,13 @@ public class InvestigationServiceListInvestigationsRequest {
         (InvestigationServiceListInvestigationsRequest) o;
     return Objects.deepEquals(this.pageSize, other.pageSize)
         && Objects.deepEquals(this.pageToken, other.pageToken)
-        && Objects.deepEquals(this.filter, other.filter);
+        && Objects.deepEquals(this.filter, other.filter)
+        && Objects.deepEquals(this.orderBy, other.orderBy);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(pageSize, pageToken, filter);
+    return Objects.hash(pageSize, pageToken, filter, orderBy);
   }
 
   @Override
@@ -165,7 +219,9 @@ public class InvestigationServiceListInvestigationsRequest {
         "pageToken",
         pageToken,
         "filter",
-        filter);
+        filter,
+        "orderBy",
+        orderBy);
   }
 
   public static final class Builder {
@@ -175,6 +231,8 @@ public class InvestigationServiceListInvestigationsRequest {
     private Optional<String> pageToken = Optional.empty();
 
     private Optional<String> filter = Optional.empty();
+
+    private Optional<String> orderBy = Optional.empty();
 
     private Builder() {
       // force use of static builder() method
@@ -238,8 +296,35 @@ public class InvestigationServiceListInvestigationsRequest {
       return this;
     }
 
+    /**
+     * The order in which investigations are listed. Only one field and direction can be specified.
+     * Supported fields (followed by 'asc' or 'desc'; 'asc' is default if left blank): -
+     * investigation_request_state - correspondent_id - scope - identity_verification -
+     * watchlist_screen - person.given_name - person.family_name - entity.legal_name - created_at -
+     * updated_at
+     */
+    public Builder orderBy(String orderBy) {
+      Utils.checkNotNull(orderBy, "orderBy");
+      this.orderBy = Optional.ofNullable(orderBy);
+      return this;
+    }
+
+    /**
+     * The order in which investigations are listed. Only one field and direction can be specified.
+     * Supported fields (followed by 'asc' or 'desc'; 'asc' is default if left blank): -
+     * investigation_request_state - correspondent_id - scope - identity_verification -
+     * watchlist_screen - person.given_name - person.family_name - entity.legal_name - created_at -
+     * updated_at
+     */
+    public Builder orderBy(Optional<String> orderBy) {
+      Utils.checkNotNull(orderBy, "orderBy");
+      this.orderBy = orderBy;
+      return this;
+    }
+
     public InvestigationServiceListInvestigationsRequest build() {
-      return new InvestigationServiceListInvestigationsRequest(pageSize, pageToken, filter);
+      return new InvestigationServiceListInvestigationsRequest(
+          pageSize, pageToken, filter, orderBy);
     }
   }
 }

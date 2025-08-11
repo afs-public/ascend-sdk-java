@@ -52,6 +52,8 @@ public class BasketOrderOrderStatus {
       new BasketOrderOrderStatus("PARTIALLY_FILLED");
   public static final BasketOrderOrderStatus FILLED = new BasketOrderOrderStatus("FILLED");
   public static final BasketOrderOrderStatus REJECTED = new BasketOrderOrderStatus("REJECTED");
+  public static final BasketOrderOrderStatus REMOVED_BEFORE_SUBMISSION =
+      new BasketOrderOrderStatus("REMOVED_BEFORE_SUBMISSION");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -125,6 +127,7 @@ public class BasketOrderOrderStatus {
     map.put("PARTIALLY_FILLED", PARTIALLY_FILLED);
     map.put("FILLED", FILLED);
     map.put("REJECTED", REJECTED);
+    map.put("REMOVED_BEFORE_SUBMISSION", REMOVED_BEFORE_SUBMISSION);
     return map;
   }
 
@@ -136,6 +139,7 @@ public class BasketOrderOrderStatus {
     map.put("PARTIALLY_FILLED", BasketOrderOrderStatusEnum.PARTIALLY_FILLED);
     map.put("FILLED", BasketOrderOrderStatusEnum.FILLED);
     map.put("REJECTED", BasketOrderOrderStatusEnum.REJECTED);
+    map.put("REMOVED_BEFORE_SUBMISSION", BasketOrderOrderStatusEnum.REMOVED_BEFORE_SUBMISSION);
     return map;
   }
 
@@ -177,6 +181,7 @@ public class BasketOrderOrderStatus {
     PARTIALLY_FILLED("PARTIALLY_FILLED"),
     FILLED("FILLED"),
     REJECTED("REJECTED"),
+    REMOVED_BEFORE_SUBMISSION("REMOVED_BEFORE_SUBMISSION"),
     ;
 
     private final String value;

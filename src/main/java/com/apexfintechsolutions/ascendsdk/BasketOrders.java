@@ -856,48 +856,12 @@ public class BasketOrders
    * basket orders becomes too large, a token is returned to retrieve the next page of basket
    * orders.
    *
-   * @param correspondentId The correspondent id.
-   * @param basketId The basket id.
+   * @param request The request object containing all of the parameters for the API call.
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public BasketOrdersServiceListBasketOrdersResponse listBasketOrders(
-      String correspondentId, String basketId) throws Exception {
-    return listBasketOrders(correspondentId, basketId, Optional.empty(), Optional.empty());
-  }
-
-  /**
-   * List Basket Orders Gets a list of basket orders within a basket.
-   *
-   * <p>Upon successful submission, returns a list of basket orders for the basket. If the list of
-   * basket orders becomes too large, a token is returned to retrieve the next page of basket
-   * orders.
-   *
-   * @param correspondentId The correspondent id.
-   * @param basketId The basket id.
-   * @param pageSize The maximum number of basket orders to return. The service may return fewer
-   *     than this value. If unspecified, at most 1000 basket orders will be returned. The maximum
-   *     value is 1000; values above 1000 will be coerced to 1000.
-   * @param pageToken A page token, received from a previous `ListBasketOrders` call. Provide this
-   *     to retrieve the subsequent page. When paginating, all other parameters provided to
-   *     `ListBasketOrders` must match the call that provided the page token.
-   * @return The response from the API call
-   * @throws Exception if the API call fails
-   */
-  public BasketOrdersServiceListBasketOrdersResponse listBasketOrders(
-      String correspondentId,
-      String basketId,
-      Optional<Integer> pageSize,
-      Optional<String> pageToken)
-      throws Exception {
-    BasketOrdersServiceListBasketOrdersRequest request =
-        BasketOrdersServiceListBasketOrdersRequest.builder()
-            .correspondentId(correspondentId)
-            .basketId(basketId)
-            .pageSize(pageSize)
-            .pageToken(pageToken)
-            .build();
-
+      BasketOrdersServiceListBasketOrdersRequest request) throws Exception {
     String _baseUrl = this.sdkConfiguration.serverUrl;
     String _url =
         Utils.generateURL(

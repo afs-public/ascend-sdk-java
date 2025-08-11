@@ -37,24 +37,34 @@ public class BasketOrdersServiceListBasketOrdersRequest {
   @SpeakeasyMetadata("queryParam:style=form,explode=true,name=page_token")
   private Optional<String> pageToken;
 
+  /**
+   * Indicates whether basket orders with a status of REMOVED_BEFORE_SUBMISSION will be included in
+   * the response. By default, removed orders are not returned.
+   */
+  @SpeakeasyMetadata("queryParam:style=form,explode=true,name=show_removed")
+  private Optional<Boolean> showRemoved;
+
   @JsonCreator
   public BasketOrdersServiceListBasketOrdersRequest(
       String correspondentId,
       String basketId,
       Optional<Integer> pageSize,
-      Optional<String> pageToken) {
+      Optional<String> pageToken,
+      Optional<Boolean> showRemoved) {
     Utils.checkNotNull(correspondentId, "correspondentId");
     Utils.checkNotNull(basketId, "basketId");
     Utils.checkNotNull(pageSize, "pageSize");
     Utils.checkNotNull(pageToken, "pageToken");
+    Utils.checkNotNull(showRemoved, "showRemoved");
     this.correspondentId = correspondentId;
     this.basketId = basketId;
     this.pageSize = pageSize;
     this.pageToken = pageToken;
+    this.showRemoved = showRemoved;
   }
 
   public BasketOrdersServiceListBasketOrdersRequest(String correspondentId, String basketId) {
-    this(correspondentId, basketId, Optional.empty(), Optional.empty());
+    this(correspondentId, basketId, Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /** The correspondent id. */
@@ -87,6 +97,15 @@ public class BasketOrdersServiceListBasketOrdersRequest {
   @JsonIgnore
   public Optional<String> pageToken() {
     return pageToken;
+  }
+
+  /**
+   * Indicates whether basket orders with a status of REMOVED_BEFORE_SUBMISSION will be included in
+   * the response. By default, removed orders are not returned.
+   */
+  @JsonIgnore
+  public Optional<Boolean> showRemoved() {
+    return showRemoved;
   }
 
   public static final Builder builder() {
@@ -151,6 +170,26 @@ public class BasketOrdersServiceListBasketOrdersRequest {
     return this;
   }
 
+  /**
+   * Indicates whether basket orders with a status of REMOVED_BEFORE_SUBMISSION will be included in
+   * the response. By default, removed orders are not returned.
+   */
+  public BasketOrdersServiceListBasketOrdersRequest withShowRemoved(boolean showRemoved) {
+    Utils.checkNotNull(showRemoved, "showRemoved");
+    this.showRemoved = Optional.ofNullable(showRemoved);
+    return this;
+  }
+
+  /**
+   * Indicates whether basket orders with a status of REMOVED_BEFORE_SUBMISSION will be included in
+   * the response. By default, removed orders are not returned.
+   */
+  public BasketOrdersServiceListBasketOrdersRequest withShowRemoved(Optional<Boolean> showRemoved) {
+    Utils.checkNotNull(showRemoved, "showRemoved");
+    this.showRemoved = showRemoved;
+    return this;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -164,12 +203,13 @@ public class BasketOrdersServiceListBasketOrdersRequest {
     return Objects.deepEquals(this.correspondentId, other.correspondentId)
         && Objects.deepEquals(this.basketId, other.basketId)
         && Objects.deepEquals(this.pageSize, other.pageSize)
-        && Objects.deepEquals(this.pageToken, other.pageToken);
+        && Objects.deepEquals(this.pageToken, other.pageToken)
+        && Objects.deepEquals(this.showRemoved, other.showRemoved);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(correspondentId, basketId, pageSize, pageToken);
+    return Objects.hash(correspondentId, basketId, pageSize, pageToken, showRemoved);
   }
 
   @Override
@@ -183,7 +223,9 @@ public class BasketOrdersServiceListBasketOrdersRequest {
         "pageSize",
         pageSize,
         "pageToken",
-        pageToken);
+        pageToken,
+        "showRemoved",
+        showRemoved);
   }
 
   public static final class Builder {
@@ -195,6 +237,8 @@ public class BasketOrdersServiceListBasketOrdersRequest {
     private Optional<Integer> pageSize = Optional.empty();
 
     private Optional<String> pageToken = Optional.empty();
+
+    private Optional<Boolean> showRemoved = Optional.empty();
 
     private Builder() {
       // force use of static builder() method
@@ -258,9 +302,29 @@ public class BasketOrdersServiceListBasketOrdersRequest {
       return this;
     }
 
+    /**
+     * Indicates whether basket orders with a status of REMOVED_BEFORE_SUBMISSION will be included
+     * in the response. By default, removed orders are not returned.
+     */
+    public Builder showRemoved(boolean showRemoved) {
+      Utils.checkNotNull(showRemoved, "showRemoved");
+      this.showRemoved = Optional.ofNullable(showRemoved);
+      return this;
+    }
+
+    /**
+     * Indicates whether basket orders with a status of REMOVED_BEFORE_SUBMISSION will be included
+     * in the response. By default, removed orders are not returned.
+     */
+    public Builder showRemoved(Optional<Boolean> showRemoved) {
+      Utils.checkNotNull(showRemoved, "showRemoved");
+      this.showRemoved = showRemoved;
+      return this;
+    }
+
     public BasketOrdersServiceListBasketOrdersRequest build() {
       return new BasketOrdersServiceListBasketOrdersRequest(
-          correspondentId, basketId, pageSize, pageToken);
+          correspondentId, basketId, pageSize, pageToken, showRemoved);
     }
   }
 }

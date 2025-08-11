@@ -27,18 +27,31 @@ public class ListInvestigationsResponse {
   @JsonProperty("next_page_token")
   private Optional<String> nextPageToken;
 
+  /**
+   * The total number of investigations matching the search criteria. This is the total number of
+   * results available across all pages of the query, not the number of investigations returned in
+   * the current page. For example, if the search query matches 1,000 investigations but only 50
+   * results are returned per page, `total_size` will be 1,000.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("total_size")
+  private Optional<Integer> totalSize;
+
   @JsonCreator
   public ListInvestigationsResponse(
       @JsonProperty("investigations") Optional<? extends List<Investigation>> investigations,
-      @JsonProperty("next_page_token") Optional<String> nextPageToken) {
+      @JsonProperty("next_page_token") Optional<String> nextPageToken,
+      @JsonProperty("total_size") Optional<Integer> totalSize) {
     Utils.checkNotNull(investigations, "investigations");
     Utils.checkNotNull(nextPageToken, "nextPageToken");
+    Utils.checkNotNull(totalSize, "totalSize");
     this.investigations = investigations;
     this.nextPageToken = nextPageToken;
+    this.totalSize = totalSize;
   }
 
   public ListInvestigationsResponse() {
-    this(Optional.empty(), Optional.empty());
+    this(Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /** List of investigations matching request search criteria */
@@ -52,6 +65,17 @@ public class ListInvestigationsResponse {
   @JsonIgnore
   public Optional<String> nextPageToken() {
     return nextPageToken;
+  }
+
+  /**
+   * The total number of investigations matching the search criteria. This is the total number of
+   * results available across all pages of the query, not the number of investigations returned in
+   * the current page. For example, if the search query matches 1,000 investigations but only 50
+   * results are returned per page, `total_size` will be 1,000.
+   */
+  @JsonIgnore
+  public Optional<Integer> totalSize() {
+    return totalSize;
   }
 
   public static final Builder builder() {
@@ -87,6 +111,30 @@ public class ListInvestigationsResponse {
     return this;
   }
 
+  /**
+   * The total number of investigations matching the search criteria. This is the total number of
+   * results available across all pages of the query, not the number of investigations returned in
+   * the current page. For example, if the search query matches 1,000 investigations but only 50
+   * results are returned per page, `total_size` will be 1,000.
+   */
+  public ListInvestigationsResponse withTotalSize(int totalSize) {
+    Utils.checkNotNull(totalSize, "totalSize");
+    this.totalSize = Optional.ofNullable(totalSize);
+    return this;
+  }
+
+  /**
+   * The total number of investigations matching the search criteria. This is the total number of
+   * results available across all pages of the query, not the number of investigations returned in
+   * the current page. For example, if the search query matches 1,000 investigations but only 50
+   * results are returned per page, `total_size` will be 1,000.
+   */
+  public ListInvestigationsResponse withTotalSize(Optional<Integer> totalSize) {
+    Utils.checkNotNull(totalSize, "totalSize");
+    this.totalSize = totalSize;
+    return this;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -97,12 +145,13 @@ public class ListInvestigationsResponse {
     }
     ListInvestigationsResponse other = (ListInvestigationsResponse) o;
     return Objects.deepEquals(this.investigations, other.investigations)
-        && Objects.deepEquals(this.nextPageToken, other.nextPageToken);
+        && Objects.deepEquals(this.nextPageToken, other.nextPageToken)
+        && Objects.deepEquals(this.totalSize, other.totalSize);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(investigations, nextPageToken);
+    return Objects.hash(investigations, nextPageToken, totalSize);
   }
 
   @Override
@@ -112,7 +161,9 @@ public class ListInvestigationsResponse {
         "investigations",
         investigations,
         "nextPageToken",
-        nextPageToken);
+        nextPageToken,
+        "totalSize",
+        totalSize);
   }
 
   public static final class Builder {
@@ -120,6 +171,8 @@ public class ListInvestigationsResponse {
     private Optional<? extends List<Investigation>> investigations = Optional.empty();
 
     private Optional<String> nextPageToken = Optional.empty();
+
+    private Optional<Integer> totalSize = Optional.empty();
 
     private Builder() {
       // force use of static builder() method
@@ -153,8 +206,32 @@ public class ListInvestigationsResponse {
       return this;
     }
 
+    /**
+     * The total number of investigations matching the search criteria. This is the total number of
+     * results available across all pages of the query, not the number of investigations returned in
+     * the current page. For example, if the search query matches 1,000 investigations but only 50
+     * results are returned per page, `total_size` will be 1,000.
+     */
+    public Builder totalSize(int totalSize) {
+      Utils.checkNotNull(totalSize, "totalSize");
+      this.totalSize = Optional.ofNullable(totalSize);
+      return this;
+    }
+
+    /**
+     * The total number of investigations matching the search criteria. This is the total number of
+     * results available across all pages of the query, not the number of investigations returned in
+     * the current page. For example, if the search query matches 1,000 investigations but only 50
+     * results are returned per page, `total_size` will be 1,000.
+     */
+    public Builder totalSize(Optional<Integer> totalSize) {
+      Utils.checkNotNull(totalSize, "totalSize");
+      this.totalSize = totalSize;
+      return this;
+    }
+
     public ListInvestigationsResponse build() {
-      return new ListInvestigationsResponse(investigations, nextPageToken);
+      return new ListInvestigationsResponse(investigations, nextPageToken, totalSize);
     }
   }
 }

@@ -12,6 +12,7 @@ public class InvestigationServiceListInvestigationsRequestBuilder {
   private Optional<Integer> pageSize = Optional.empty();
   private Optional<String> pageToken = Optional.empty();
   private Optional<String> filter = Optional.empty();
+  private Optional<String> orderBy = Optional.empty();
   private final SDKMethodInterfaces.MethodCallInvestigationServiceListInvestigations sdk;
 
   public InvestigationServiceListInvestigationsRequestBuilder(
@@ -56,8 +57,20 @@ public class InvestigationServiceListInvestigationsRequestBuilder {
     return this;
   }
 
+  public InvestigationServiceListInvestigationsRequestBuilder orderBy(String orderBy) {
+    Utils.checkNotNull(orderBy, "orderBy");
+    this.orderBy = Optional.of(orderBy);
+    return this;
+  }
+
+  public InvestigationServiceListInvestigationsRequestBuilder orderBy(Optional<String> orderBy) {
+    Utils.checkNotNull(orderBy, "orderBy");
+    this.orderBy = orderBy;
+    return this;
+  }
+
   public InvestigationServiceListInvestigationsResponse call() throws Exception {
 
-    return sdk.listInvestigations(pageSize, pageToken, filter);
+    return sdk.listInvestigations(pageSize, pageToken, filter, orderBy);
   }
 }

@@ -64,6 +64,17 @@ public class CustomerIdentificationResult {
   @JsonProperty("email_verified")
   private Optional<? extends EmailVerified> emailVerified;
 
+  /**
+   * Whether or not the result is expired An expired result will cause all `VerificationState`'s to
+   * be `UNVERIFIED`, the `ExpirationState` will be `EXPIRED` Will always be `false` for synchronous
+   * checks such as `DATABASE` Will be `true` when an asynchronous check such as `DOCUMENTARY`
+   * hasn't been completed within the timeframe If `true` the `completed` field will be `false`
+   * since a check was never completed
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("expired")
+  private Optional<Boolean> expired;
+
   /** The name of the external vendor */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("external_vendor")
@@ -124,6 +135,7 @@ public class CustomerIdentificationResult {
           Optional<? extends List<String>> documentVerificationIds,
       @JsonProperty("documentary_session_uri") Optional<String> documentarySessionUri,
       @JsonProperty("email_verified") Optional<? extends EmailVerified> emailVerified,
+      @JsonProperty("expired") Optional<Boolean> expired,
       @JsonProperty("external_vendor") Optional<String> externalVendor,
       @JsonProperty("external_vendor_id") Optional<String> externalVendorId,
       @JsonProperty("identification_number_verified")
@@ -144,6 +156,7 @@ public class CustomerIdentificationResult {
     Utils.checkNotNull(documentVerificationIds, "documentVerificationIds");
     Utils.checkNotNull(documentarySessionUri, "documentarySessionUri");
     Utils.checkNotNull(emailVerified, "emailVerified");
+    Utils.checkNotNull(expired, "expired");
     Utils.checkNotNull(externalVendor, "externalVendor");
     Utils.checkNotNull(externalVendorId, "externalVendorId");
     Utils.checkNotNull(identificationNumberVerified, "identificationNumberVerified");
@@ -160,6 +173,7 @@ public class CustomerIdentificationResult {
     this.documentVerificationIds = documentVerificationIds;
     this.documentarySessionUri = documentarySessionUri;
     this.emailVerified = emailVerified;
+    this.expired = expired;
     this.externalVendor = externalVendor;
     this.externalVendorId = externalVendorId;
     this.identificationNumberVerified = identificationNumberVerified;
@@ -173,6 +187,7 @@ public class CustomerIdentificationResult {
 
   public CustomerIdentificationResult() {
     this(
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
@@ -248,6 +263,18 @@ public class CustomerIdentificationResult {
   @JsonIgnore
   public Optional<EmailVerified> emailVerified() {
     return (Optional<EmailVerified>) emailVerified;
+  }
+
+  /**
+   * Whether or not the result is expired An expired result will cause all `VerificationState`'s to
+   * be `UNVERIFIED`, the `ExpirationState` will be `EXPIRED` Will always be `false` for synchronous
+   * checks such as `DATABASE` Will be `true` when an asynchronous check such as `DOCUMENTARY`
+   * hasn't been completed within the timeframe If `true` the `completed` field will be `false`
+   * since a check was never completed
+   */
+  @JsonIgnore
+  public Optional<Boolean> expired() {
+    return expired;
   }
 
   /** The name of the external vendor */
@@ -448,6 +475,32 @@ public class CustomerIdentificationResult {
     return this;
   }
 
+  /**
+   * Whether or not the result is expired An expired result will cause all `VerificationState`'s to
+   * be `UNVERIFIED`, the `ExpirationState` will be `EXPIRED` Will always be `false` for synchronous
+   * checks such as `DATABASE` Will be `true` when an asynchronous check such as `DOCUMENTARY`
+   * hasn't been completed within the timeframe If `true` the `completed` field will be `false`
+   * since a check was never completed
+   */
+  public CustomerIdentificationResult withExpired(boolean expired) {
+    Utils.checkNotNull(expired, "expired");
+    this.expired = Optional.ofNullable(expired);
+    return this;
+  }
+
+  /**
+   * Whether or not the result is expired An expired result will cause all `VerificationState`'s to
+   * be `UNVERIFIED`, the `ExpirationState` will be `EXPIRED` Will always be `false` for synchronous
+   * checks such as `DATABASE` Will be `true` when an asynchronous check such as `DOCUMENTARY`
+   * hasn't been completed within the timeframe If `true` the `completed` field will be `false`
+   * since a check was never completed
+   */
+  public CustomerIdentificationResult withExpired(Optional<Boolean> expired) {
+    Utils.checkNotNull(expired, "expired");
+    this.expired = expired;
+    return this;
+  }
+
   /** The name of the external vendor */
   public CustomerIdentificationResult withExternalVendor(String externalVendor) {
     Utils.checkNotNull(externalVendor, "externalVendor");
@@ -606,6 +659,7 @@ public class CustomerIdentificationResult {
         && Objects.deepEquals(this.documentVerificationIds, other.documentVerificationIds)
         && Objects.deepEquals(this.documentarySessionUri, other.documentarySessionUri)
         && Objects.deepEquals(this.emailVerified, other.emailVerified)
+        && Objects.deepEquals(this.expired, other.expired)
         && Objects.deepEquals(this.externalVendor, other.externalVendor)
         && Objects.deepEquals(this.externalVendorId, other.externalVendorId)
         && Objects.deepEquals(this.identificationNumberVerified, other.identificationNumberVerified)
@@ -627,6 +681,7 @@ public class CustomerIdentificationResult {
         documentVerificationIds,
         documentarySessionUri,
         emailVerified,
+        expired,
         externalVendor,
         externalVendorId,
         identificationNumberVerified,
@@ -656,6 +711,8 @@ public class CustomerIdentificationResult {
         documentarySessionUri,
         "emailVerified",
         emailVerified,
+        "expired",
+        expired,
         "externalVendor",
         externalVendor,
         "externalVendorId",
@@ -692,6 +749,8 @@ public class CustomerIdentificationResult {
     private Optional<String> documentarySessionUri = Optional.empty();
 
     private Optional<? extends EmailVerified> emailVerified = Optional.empty();
+
+    private Optional<Boolean> expired = Optional.empty();
 
     private Optional<String> externalVendor = Optional.empty();
 
@@ -845,6 +904,32 @@ public class CustomerIdentificationResult {
       return this;
     }
 
+    /**
+     * Whether or not the result is expired An expired result will cause all `VerificationState`'s
+     * to be `UNVERIFIED`, the `ExpirationState` will be `EXPIRED` Will always be `false` for
+     * synchronous checks such as `DATABASE` Will be `true` when an asynchronous check such as
+     * `DOCUMENTARY` hasn't been completed within the timeframe If `true` the `completed` field will
+     * be `false` since a check was never completed
+     */
+    public Builder expired(boolean expired) {
+      Utils.checkNotNull(expired, "expired");
+      this.expired = Optional.ofNullable(expired);
+      return this;
+    }
+
+    /**
+     * Whether or not the result is expired An expired result will cause all `VerificationState`'s
+     * to be `UNVERIFIED`, the `ExpirationState` will be `EXPIRED` Will always be `false` for
+     * synchronous checks such as `DATABASE` Will be `true` when an asynchronous check such as
+     * `DOCUMENTARY` hasn't been completed within the timeframe If `true` the `completed` field will
+     * be `false` since a check was never completed
+     */
+    public Builder expired(Optional<Boolean> expired) {
+      Utils.checkNotNull(expired, "expired");
+      this.expired = expired;
+      return this;
+    }
+
     /** The name of the external vendor */
     public Builder externalVendor(String externalVendor) {
       Utils.checkNotNull(externalVendor, "externalVendor");
@@ -992,6 +1077,7 @@ public class CustomerIdentificationResult {
           documentVerificationIds,
           documentarySessionUri,
           emailVerified,
+          expired,
           externalVendor,
           externalVendorId,
           identificationNumberVerified,

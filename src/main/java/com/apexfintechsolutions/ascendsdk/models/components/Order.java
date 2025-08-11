@@ -66,6 +66,15 @@ public class Order {
   @JsonProperty("broker_capacity")
   private Optional<? extends OrderBrokerCapacity> brokerCapacity;
 
+  /**
+   * Output only field that is required for Equity Orders for any client who is having Apex do CAT
+   * reporting on their behalf. This field denotes the initiator of the cancel request. This field
+   * will be present when provided on the CancelOrderRequest
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("cancel_initiator")
+  private Optional<? extends CancelInitiator> cancelInitiator;
+
   /** Used to explain why an order is canceled */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("cancel_reason")
@@ -75,6 +84,14 @@ public class Order {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("cancel_rejected_reason")
   private Optional<? extends CancelRejectedReason> cancelRejectedReason;
+
+  /**
+   * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+   * will be present when provided on the CancelOrderRequest
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_cancel_received_time")
+  private JsonNullable<OffsetDateTime> clientCancelReceivedTime;
 
   /** User-supplied unique order ID. Cannot be more than 40 characters long. */
   @JsonInclude(Include.NON_ABSENT)
@@ -238,8 +255,8 @@ public class Order {
   private Optional<? extends OrderStatus> orderStatus;
 
   /**
-   * The execution type of this order. For Equities: MARKET, LIMIT, or STOP are supported. For
-   * Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+   * The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual
+   * Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("order_type")
@@ -298,13 +315,10 @@ public class Order {
   @JsonProperty("time_in_force")
   private Optional<? extends OrderTimeInForce> timeInForce;
 
-  /**
-   * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
-   * orders.
-   */
+  /** Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders. */
   @JsonInclude(Include.NON_ABSENT)
-  @JsonProperty("trading_strategy")
-  private Optional<? extends OrderTradingStrategy> tradingStrategy;
+  @JsonProperty("trading_session")
+  private Optional<? extends OrderTradingSession> tradingSession;
 
   @JsonCreator
   public Order(
@@ -313,9 +327,12 @@ public class Order {
       @JsonProperty("asset_type") Optional<? extends OrderAssetType> assetType,
       @JsonProperty("average_prices") Optional<? extends List<TradingExecutedPrice>> averagePrices,
       @JsonProperty("broker_capacity") Optional<? extends OrderBrokerCapacity> brokerCapacity,
+      @JsonProperty("cancel_initiator") Optional<? extends CancelInitiator> cancelInitiator,
       @JsonProperty("cancel_reason") Optional<String> cancelReason,
       @JsonProperty("cancel_rejected_reason")
           Optional<? extends CancelRejectedReason> cancelRejectedReason,
+      @JsonProperty("client_cancel_received_time")
+          JsonNullable<OffsetDateTime> clientCancelReceivedTime,
       @JsonProperty("client_order_id") Optional<String> clientOrderId,
       @JsonProperty("client_received_time") JsonNullable<OffsetDateTime> clientReceivedTime,
       @JsonProperty("commission") JsonNullable<? extends OrderCommission> commission,
@@ -351,14 +368,16 @@ public class Order {
           Optional<? extends List<OrderSpecialReportingInstructions>> specialReportingInstructions,
       @JsonProperty("stop_price") JsonNullable<? extends StopPrice> stopPrice,
       @JsonProperty("time_in_force") Optional<? extends OrderTimeInForce> timeInForce,
-      @JsonProperty("trading_strategy") Optional<? extends OrderTradingStrategy> tradingStrategy) {
+      @JsonProperty("trading_session") Optional<? extends OrderTradingSession> tradingSession) {
     Utils.checkNotNull(accountId, "accountId");
     Utils.checkNotNull(assetId, "assetId");
     Utils.checkNotNull(assetType, "assetType");
     Utils.checkNotNull(averagePrices, "averagePrices");
     Utils.checkNotNull(brokerCapacity, "brokerCapacity");
+    Utils.checkNotNull(cancelInitiator, "cancelInitiator");
     Utils.checkNotNull(cancelReason, "cancelReason");
     Utils.checkNotNull(cancelRejectedReason, "cancelRejectedReason");
+    Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
     Utils.checkNotNull(clientOrderId, "clientOrderId");
     Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
     Utils.checkNotNull(commission, "commission");
@@ -389,14 +408,16 @@ public class Order {
     Utils.checkNotNull(specialReportingInstructions, "specialReportingInstructions");
     Utils.checkNotNull(stopPrice, "stopPrice");
     Utils.checkNotNull(timeInForce, "timeInForce");
-    Utils.checkNotNull(tradingStrategy, "tradingStrategy");
+    Utils.checkNotNull(tradingSession, "tradingSession");
     this.accountId = accountId;
     this.assetId = assetId;
     this.assetType = assetType;
     this.averagePrices = averagePrices;
     this.brokerCapacity = brokerCapacity;
+    this.cancelInitiator = cancelInitiator;
     this.cancelReason = cancelReason;
     this.cancelRejectedReason = cancelRejectedReason;
+    this.clientCancelReceivedTime = clientCancelReceivedTime;
     this.clientOrderId = clientOrderId;
     this.clientReceivedTime = clientReceivedTime;
     this.commission = commission;
@@ -427,7 +448,7 @@ public class Order {
     this.specialReportingInstructions = specialReportingInstructions;
     this.stopPrice = stopPrice;
     this.timeInForce = timeInForce;
-    this.tradingStrategy = tradingStrategy;
+    this.tradingSession = tradingSession;
   }
 
   public Order() {
@@ -439,6 +460,8 @@ public class Order {
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
+        Optional.empty(),
+        JsonNullable.undefined(),
         Optional.empty(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
@@ -527,6 +550,17 @@ public class Order {
     return (Optional<OrderBrokerCapacity>) brokerCapacity;
   }
 
+  /**
+   * Output only field that is required for Equity Orders for any client who is having Apex do CAT
+   * reporting on their behalf. This field denotes the initiator of the cancel request. This field
+   * will be present when provided on the CancelOrderRequest
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<CancelInitiator> cancelInitiator() {
+    return (Optional<CancelInitiator>) cancelInitiator;
+  }
+
   /** Used to explain why an order is canceled */
   @JsonIgnore
   public Optional<String> cancelReason() {
@@ -538,6 +572,15 @@ public class Order {
   @JsonIgnore
   public Optional<CancelRejectedReason> cancelRejectedReason() {
     return (Optional<CancelRejectedReason>) cancelRejectedReason;
+  }
+
+  /**
+   * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+   * will be present when provided on the CancelOrderRequest
+   */
+  @JsonIgnore
+  public JsonNullable<OffsetDateTime> clientCancelReceivedTime() {
+    return clientCancelReceivedTime;
   }
 
   /** User-supplied unique order ID. Cannot be more than 40 characters long. */
@@ -737,8 +780,8 @@ public class Order {
   }
 
   /**
-   * The execution type of this order. For Equities: MARKET, LIMIT, or STOP are supported. For
-   * Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+   * The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual
+   * Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -813,14 +856,11 @@ public class Order {
     return (Optional<OrderTimeInForce>) timeInForce;
   }
 
-  /**
-   * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
-   * orders.
-   */
+  /** Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<OrderTradingStrategy> tradingStrategy() {
-    return (Optional<OrderTradingStrategy>) tradingStrategy;
+  public Optional<OrderTradingSession> tradingSession() {
+    return (Optional<OrderTradingSession>) tradingSession;
   }
 
   public static final Builder builder() {
@@ -941,6 +981,28 @@ public class Order {
     return this;
   }
 
+  /**
+   * Output only field that is required for Equity Orders for any client who is having Apex do CAT
+   * reporting on their behalf. This field denotes the initiator of the cancel request. This field
+   * will be present when provided on the CancelOrderRequest
+   */
+  public Order withCancelInitiator(CancelInitiator cancelInitiator) {
+    Utils.checkNotNull(cancelInitiator, "cancelInitiator");
+    this.cancelInitiator = Optional.ofNullable(cancelInitiator);
+    return this;
+  }
+
+  /**
+   * Output only field that is required for Equity Orders for any client who is having Apex do CAT
+   * reporting on their behalf. This field denotes the initiator of the cancel request. This field
+   * will be present when provided on the CancelOrderRequest
+   */
+  public Order withCancelInitiator(Optional<? extends CancelInitiator> cancelInitiator) {
+    Utils.checkNotNull(cancelInitiator, "cancelInitiator");
+    this.cancelInitiator = cancelInitiator;
+    return this;
+  }
+
   /** Used to explain why an order is canceled */
   public Order withCancelReason(String cancelReason) {
     Utils.checkNotNull(cancelReason, "cancelReason");
@@ -967,6 +1029,26 @@ public class Order {
       Optional<? extends CancelRejectedReason> cancelRejectedReason) {
     Utils.checkNotNull(cancelRejectedReason, "cancelRejectedReason");
     this.cancelRejectedReason = cancelRejectedReason;
+    return this;
+  }
+
+  /**
+   * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+   * will be present when provided on the CancelOrderRequest
+   */
+  public Order withClientCancelReceivedTime(OffsetDateTime clientCancelReceivedTime) {
+    Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+    this.clientCancelReceivedTime = JsonNullable.of(clientCancelReceivedTime);
+    return this;
+  }
+
+  /**
+   * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+   * will be present when provided on the CancelOrderRequest
+   */
+  public Order withClientCancelReceivedTime(JsonNullable<OffsetDateTime> clientCancelReceivedTime) {
+    Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+    this.clientCancelReceivedTime = clientCancelReceivedTime;
     return this;
   }
 
@@ -1383,8 +1465,8 @@ public class Order {
   }
 
   /**
-   * The execution type of this order. For Equities: MARKET, LIMIT, or STOP are supported. For
-   * Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+   * The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual
+   * Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
    */
   public Order withOrderType(OrderOrderType orderType) {
     Utils.checkNotNull(orderType, "orderType");
@@ -1393,8 +1475,8 @@ public class Order {
   }
 
   /**
-   * The execution type of this order. For Equities: MARKET, LIMIT, or STOP are supported. For
-   * Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+   * The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual
+   * Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
    */
   public Order withOrderType(Optional<? extends OrderOrderType> orderType) {
     Utils.checkNotNull(orderType, "orderType");
@@ -1540,23 +1622,17 @@ public class Order {
     return this;
   }
 
-  /**
-   * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
-   * orders.
-   */
-  public Order withTradingStrategy(OrderTradingStrategy tradingStrategy) {
-    Utils.checkNotNull(tradingStrategy, "tradingStrategy");
-    this.tradingStrategy = Optional.ofNullable(tradingStrategy);
+  /** Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders. */
+  public Order withTradingSession(OrderTradingSession tradingSession) {
+    Utils.checkNotNull(tradingSession, "tradingSession");
+    this.tradingSession = Optional.ofNullable(tradingSession);
     return this;
   }
 
-  /**
-   * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
-   * orders.
-   */
-  public Order withTradingStrategy(Optional<? extends OrderTradingStrategy> tradingStrategy) {
-    Utils.checkNotNull(tradingStrategy, "tradingStrategy");
-    this.tradingStrategy = tradingStrategy;
+  /** Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders. */
+  public Order withTradingSession(Optional<? extends OrderTradingSession> tradingSession) {
+    Utils.checkNotNull(tradingSession, "tradingSession");
+    this.tradingSession = tradingSession;
     return this;
   }
 
@@ -1574,8 +1650,10 @@ public class Order {
         && Objects.deepEquals(this.assetType, other.assetType)
         && Objects.deepEquals(this.averagePrices, other.averagePrices)
         && Objects.deepEquals(this.brokerCapacity, other.brokerCapacity)
+        && Objects.deepEquals(this.cancelInitiator, other.cancelInitiator)
         && Objects.deepEquals(this.cancelReason, other.cancelReason)
         && Objects.deepEquals(this.cancelRejectedReason, other.cancelRejectedReason)
+        && Objects.deepEquals(this.clientCancelReceivedTime, other.clientCancelReceivedTime)
         && Objects.deepEquals(this.clientOrderId, other.clientOrderId)
         && Objects.deepEquals(this.clientReceivedTime, other.clientReceivedTime)
         && Objects.deepEquals(this.commission, other.commission)
@@ -1606,7 +1684,7 @@ public class Order {
         && Objects.deepEquals(this.specialReportingInstructions, other.specialReportingInstructions)
         && Objects.deepEquals(this.stopPrice, other.stopPrice)
         && Objects.deepEquals(this.timeInForce, other.timeInForce)
-        && Objects.deepEquals(this.tradingStrategy, other.tradingStrategy);
+        && Objects.deepEquals(this.tradingSession, other.tradingSession);
   }
 
   @Override
@@ -1617,8 +1695,10 @@ public class Order {
         assetType,
         averagePrices,
         brokerCapacity,
+        cancelInitiator,
         cancelReason,
         cancelRejectedReason,
+        clientCancelReceivedTime,
         clientOrderId,
         clientReceivedTime,
         commission,
@@ -1649,7 +1729,7 @@ public class Order {
         specialReportingInstructions,
         stopPrice,
         timeInForce,
-        tradingStrategy);
+        tradingSession);
   }
 
   @Override
@@ -1666,10 +1746,14 @@ public class Order {
         averagePrices,
         "brokerCapacity",
         brokerCapacity,
+        "cancelInitiator",
+        cancelInitiator,
         "cancelReason",
         cancelReason,
         "cancelRejectedReason",
         cancelRejectedReason,
+        "clientCancelReceivedTime",
+        clientCancelReceivedTime,
         "clientOrderId",
         clientOrderId,
         "clientReceivedTime",
@@ -1730,8 +1814,8 @@ public class Order {
         stopPrice,
         "timeInForce",
         timeInForce,
-        "tradingStrategy",
-        tradingStrategy);
+        "tradingSession",
+        tradingSession);
   }
 
   public static final class Builder {
@@ -1746,9 +1830,13 @@ public class Order {
 
     private Optional<? extends OrderBrokerCapacity> brokerCapacity = Optional.empty();
 
+    private Optional<? extends CancelInitiator> cancelInitiator = Optional.empty();
+
     private Optional<String> cancelReason = Optional.empty();
 
     private Optional<? extends CancelRejectedReason> cancelRejectedReason = Optional.empty();
+
+    private JsonNullable<OffsetDateTime> clientCancelReceivedTime = JsonNullable.undefined();
 
     private Optional<String> clientOrderId = Optional.empty();
 
@@ -1814,7 +1902,7 @@ public class Order {
 
     private Optional<? extends OrderTimeInForce> timeInForce = Optional.empty();
 
-    private Optional<? extends OrderTradingStrategy> tradingStrategy = Optional.empty();
+    private Optional<? extends OrderTradingSession> tradingSession = Optional.empty();
 
     private Builder() {
       // force use of static builder() method
@@ -1936,6 +2024,28 @@ public class Order {
       return this;
     }
 
+    /**
+     * Output only field that is required for Equity Orders for any client who is having Apex do CAT
+     * reporting on their behalf. This field denotes the initiator of the cancel request. This field
+     * will be present when provided on the CancelOrderRequest
+     */
+    public Builder cancelInitiator(CancelInitiator cancelInitiator) {
+      Utils.checkNotNull(cancelInitiator, "cancelInitiator");
+      this.cancelInitiator = Optional.ofNullable(cancelInitiator);
+      return this;
+    }
+
+    /**
+     * Output only field that is required for Equity Orders for any client who is having Apex do CAT
+     * reporting on their behalf. This field denotes the initiator of the cancel request. This field
+     * will be present when provided on the CancelOrderRequest
+     */
+    public Builder cancelInitiator(Optional<? extends CancelInitiator> cancelInitiator) {
+      Utils.checkNotNull(cancelInitiator, "cancelInitiator");
+      this.cancelInitiator = cancelInitiator;
+      return this;
+    }
+
     /** Used to explain why an order is canceled */
     public Builder cancelReason(String cancelReason) {
       Utils.checkNotNull(cancelReason, "cancelReason");
@@ -1962,6 +2072,26 @@ public class Order {
         Optional<? extends CancelRejectedReason> cancelRejectedReason) {
       Utils.checkNotNull(cancelRejectedReason, "cancelRejectedReason");
       this.cancelRejectedReason = cancelRejectedReason;
+      return this;
+    }
+
+    /**
+     * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+     * will be present when provided on the CancelOrderRequest
+     */
+    public Builder clientCancelReceivedTime(OffsetDateTime clientCancelReceivedTime) {
+      Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+      this.clientCancelReceivedTime = JsonNullable.of(clientCancelReceivedTime);
+      return this;
+    }
+
+    /**
+     * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+     * will be present when provided on the CancelOrderRequest
+     */
+    public Builder clientCancelReceivedTime(JsonNullable<OffsetDateTime> clientCancelReceivedTime) {
+      Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+      this.clientCancelReceivedTime = clientCancelReceivedTime;
       return this;
     }
 
@@ -2378,8 +2508,8 @@ public class Order {
     }
 
     /**
-     * The execution type of this order. For Equities: MARKET, LIMIT, or STOP are supported. For
-     * Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+     * The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual
+     * Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
      */
     public Builder orderType(OrderOrderType orderType) {
       Utils.checkNotNull(orderType, "orderType");
@@ -2388,8 +2518,8 @@ public class Order {
     }
 
     /**
-     * The execution type of this order. For Equities: MARKET, LIMIT, or STOP are supported. For
-     * Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+     * The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual
+     * Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
      */
     public Builder orderType(Optional<? extends OrderOrderType> orderType) {
       Utils.checkNotNull(orderType, "orderType");
@@ -2539,23 +2669,17 @@ public class Order {
       return this;
     }
 
-    /**
-     * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
-     * orders.
-     */
-    public Builder tradingStrategy(OrderTradingStrategy tradingStrategy) {
-      Utils.checkNotNull(tradingStrategy, "tradingStrategy");
-      this.tradingStrategy = Optional.ofNullable(tradingStrategy);
+    /** Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders. */
+    public Builder tradingSession(OrderTradingSession tradingSession) {
+      Utils.checkNotNull(tradingSession, "tradingSession");
+      this.tradingSession = Optional.ofNullable(tradingSession);
       return this;
     }
 
-    /**
-     * Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity
-     * orders.
-     */
-    public Builder tradingStrategy(Optional<? extends OrderTradingStrategy> tradingStrategy) {
-      Utils.checkNotNull(tradingStrategy, "tradingStrategy");
-      this.tradingStrategy = tradingStrategy;
+    /** Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders. */
+    public Builder tradingSession(Optional<? extends OrderTradingSession> tradingSession) {
+      Utils.checkNotNull(tradingSession, "tradingSession");
+      this.tradingSession = tradingSession;
       return this;
     }
 
@@ -2566,8 +2690,10 @@ public class Order {
           assetType,
           averagePrices,
           brokerCapacity,
+          cancelInitiator,
           cancelReason,
           cancelRejectedReason,
+          clientCancelReceivedTime,
           clientOrderId,
           clientReceivedTime,
           commission,
@@ -2598,7 +2724,7 @@ public class Order {
           specialReportingInstructions,
           stopPrice,
           timeInForce,
-          tradingStrategy);
+          tradingSession);
     }
   }
 }

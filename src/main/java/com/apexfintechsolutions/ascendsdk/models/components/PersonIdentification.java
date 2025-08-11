@@ -41,7 +41,12 @@ public class PersonIdentification {
   @JsonProperty("region_code")
   private Optional<String> regionCode;
 
-  /** Tax id type (e.g. ssn) */
+  /**
+   * The identification type for a person, one of: - `ID_TYPE_UNSPECIFIED` - Default/Null value. -
+   * `SSN` - SSN tax type. - `ITIN` - ITIN tax type. - `FTIN` - FTIN (foreign tax id) type. -
+   * `NATIONAL_ID` - National id type. - `PASSPORT` - Passport id type. - `DRIVING_LICENSE` -
+   * Drivers license id type.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("type")
   private Optional<? extends PersonIdentificationType> type;
@@ -102,7 +107,12 @@ public class PersonIdentification {
     return regionCode;
   }
 
-  /** Tax id type (e.g. ssn) */
+  /**
+   * The identification type for a person, one of: - `ID_TYPE_UNSPECIFIED` - Default/Null value. -
+   * `SSN` - SSN tax type. - `ITIN` - ITIN tax type. - `FTIN` - FTIN (foreign tax id) type. -
+   * `NATIONAL_ID` - National id type. - `PASSPORT` - Passport id type. - `DRIVING_LICENSE` -
+   * Drivers license id type.
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<PersonIdentificationType> type() {
@@ -180,14 +190,24 @@ public class PersonIdentification {
     return this;
   }
 
-  /** Tax id type (e.g. ssn) */
+  /**
+   * The identification type for a person, one of: - `ID_TYPE_UNSPECIFIED` - Default/Null value. -
+   * `SSN` - SSN tax type. - `ITIN` - ITIN tax type. - `FTIN` - FTIN (foreign tax id) type. -
+   * `NATIONAL_ID` - National id type. - `PASSPORT` - Passport id type. - `DRIVING_LICENSE` -
+   * Drivers license id type.
+   */
   public PersonIdentification withType(PersonIdentificationType type) {
     Utils.checkNotNull(type, "type");
     this.type = Optional.ofNullable(type);
     return this;
   }
 
-  /** Tax id type (e.g. ssn) */
+  /**
+   * The identification type for a person, one of: - `ID_TYPE_UNSPECIFIED` - Default/Null value. -
+   * `SSN` - SSN tax type. - `ITIN` - ITIN tax type. - `FTIN` - FTIN (foreign tax id) type. -
+   * `NATIONAL_ID` - National id type. - `PASSPORT` - Passport id type. - `DRIVING_LICENSE` -
+   * Drivers license id type.
+   */
   public PersonIdentification withType(Optional<? extends PersonIdentificationType> type) {
     Utils.checkNotNull(type, "type");
     this.type = type;
@@ -321,14 +341,24 @@ public class PersonIdentification {
       return this;
     }
 
-    /** Tax id type (e.g. ssn) */
+    /**
+     * The identification type for a person, one of: - `ID_TYPE_UNSPECIFIED` - Default/Null value. -
+     * `SSN` - SSN tax type. - `ITIN` - ITIN tax type. - `FTIN` - FTIN (foreign tax id) type. -
+     * `NATIONAL_ID` - National id type. - `PASSPORT` - Passport id type. - `DRIVING_LICENSE` -
+     * Drivers license id type.
+     */
     public Builder type(PersonIdentificationType type) {
       Utils.checkNotNull(type, "type");
       this.type = Optional.ofNullable(type);
       return this;
     }
 
-    /** Tax id type (e.g. ssn) */
+    /**
+     * The identification type for a person, one of: - `ID_TYPE_UNSPECIFIED` - Default/Null value. -
+     * `SSN` - SSN tax type. - `ITIN` - ITIN tax type. - `FTIN` - FTIN (foreign tax id) type. -
+     * `NATIONAL_ID` - National id type. - `PASSPORT` - Passport id type. - `DRIVING_LICENSE` -
+     * Drivers license id type.
+     */
     public Builder type(Optional<? extends PersonIdentificationType> type) {
       Utils.checkNotNull(type, "type");
       this.type = type;

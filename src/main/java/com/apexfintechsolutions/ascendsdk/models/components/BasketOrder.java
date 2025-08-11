@@ -91,6 +91,11 @@ public class BasketOrder {
   @JsonProperty("currency_code")
   private Optional<String> currencyCode;
 
+  /** The execution-level details that compose this order */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("executions")
+  private Optional<? extends List<BasketTradingExecutions>> executions;
+
   /**
    * The summed quantity value across all fills in this order, up to a maximum of 5 decimal places.
    * Will be absent if an order has no fill information.
@@ -196,6 +201,7 @@ public class BasketOrder {
       @JsonProperty("cumulative_notional_value")
           JsonNullable<? extends BasketOrderCumulativeNotionalValue> cumulativeNotionalValue,
       @JsonProperty("currency_code") Optional<String> currencyCode,
+      @JsonProperty("executions") Optional<? extends List<BasketTradingExecutions>> executions,
       @JsonProperty("filled_quantity")
           JsonNullable<? extends BasketOrderFilledQuantity> filledQuantity,
       @JsonProperty("identifier") Optional<String> identifier,
@@ -224,6 +230,7 @@ public class BasketOrder {
     Utils.checkNotNull(createTime, "createTime");
     Utils.checkNotNull(cumulativeNotionalValue, "cumulativeNotionalValue");
     Utils.checkNotNull(currencyCode, "currencyCode");
+    Utils.checkNotNull(executions, "executions");
     Utils.checkNotNull(filledQuantity, "filledQuantity");
     Utils.checkNotNull(identifier, "identifier");
     Utils.checkNotNull(identifierType, "identifierType");
@@ -247,6 +254,7 @@ public class BasketOrder {
     this.createTime = createTime;
     this.cumulativeNotionalValue = cumulativeNotionalValue;
     this.currencyCode = currencyCode;
+    this.executions = executions;
     this.filledQuantity = filledQuantity;
     this.identifier = identifier;
     this.identifierType = identifierType;
@@ -273,6 +281,7 @@ public class BasketOrder {
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
+        Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty(),
@@ -372,6 +381,13 @@ public class BasketOrder {
   @JsonIgnore
   public Optional<String> currencyCode() {
     return currencyCode;
+  }
+
+  /** The execution-level details that compose this order */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<List<BasketTradingExecutions>> executions() {
+    return (Optional<List<BasketTradingExecutions>>) executions;
   }
 
   /**
@@ -678,6 +694,20 @@ public class BasketOrder {
     return this;
   }
 
+  /** The execution-level details that compose this order */
+  public BasketOrder withExecutions(List<BasketTradingExecutions> executions) {
+    Utils.checkNotNull(executions, "executions");
+    this.executions = Optional.ofNullable(executions);
+    return this;
+  }
+
+  /** The execution-level details that compose this order */
+  public BasketOrder withExecutions(Optional<? extends List<BasketTradingExecutions>> executions) {
+    Utils.checkNotNull(executions, "executions");
+    this.executions = executions;
+    return this;
+  }
+
   /**
    * The summed quantity value across all fills in this order, up to a maximum of 5 decimal places.
    * Will be absent if an order has no fill information.
@@ -934,6 +964,7 @@ public class BasketOrder {
         && Objects.deepEquals(this.createTime, other.createTime)
         && Objects.deepEquals(this.cumulativeNotionalValue, other.cumulativeNotionalValue)
         && Objects.deepEquals(this.currencyCode, other.currencyCode)
+        && Objects.deepEquals(this.executions, other.executions)
         && Objects.deepEquals(this.filledQuantity, other.filledQuantity)
         && Objects.deepEquals(this.identifier, other.identifier)
         && Objects.deepEquals(this.identifierType, other.identifierType)
@@ -962,6 +993,7 @@ public class BasketOrder {
         createTime,
         cumulativeNotionalValue,
         currencyCode,
+        executions,
         filledQuantity,
         identifier,
         identifierType,
@@ -1001,6 +1033,8 @@ public class BasketOrder {
         cumulativeNotionalValue,
         "currencyCode",
         currencyCode,
+        "executions",
+        executions,
         "filledQuantity",
         filledQuantity,
         "identifier",
@@ -1051,6 +1085,8 @@ public class BasketOrder {
         JsonNullable.undefined();
 
     private Optional<String> currencyCode = Optional.empty();
+
+    private Optional<? extends List<BasketTradingExecutions>> executions = Optional.empty();
 
     private JsonNullable<? extends BasketOrderFilledQuantity> filledQuantity =
         JsonNullable.undefined();
@@ -1270,6 +1306,20 @@ public class BasketOrder {
     public Builder currencyCode(Optional<String> currencyCode) {
       Utils.checkNotNull(currencyCode, "currencyCode");
       this.currencyCode = currencyCode;
+      return this;
+    }
+
+    /** The execution-level details that compose this order */
+    public Builder executions(List<BasketTradingExecutions> executions) {
+      Utils.checkNotNull(executions, "executions");
+      this.executions = Optional.ofNullable(executions);
+      return this;
+    }
+
+    /** The execution-level details that compose this order */
+    public Builder executions(Optional<? extends List<BasketTradingExecutions>> executions) {
+      Utils.checkNotNull(executions, "executions");
+      this.executions = executions;
       return this;
     }
 
@@ -1522,6 +1572,7 @@ public class BasketOrder {
           createTime,
           cumulativeNotionalValue,
           currencyCode,
+          executions,
           filledQuantity,
           identifier,
           identifierType,

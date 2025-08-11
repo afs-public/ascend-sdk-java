@@ -53,6 +53,8 @@ public class CompressedOrderOrderStatus {
   public static final CompressedOrderOrderStatus FILLED = new CompressedOrderOrderStatus("FILLED");
   public static final CompressedOrderOrderStatus REJECTED =
       new CompressedOrderOrderStatus("REJECTED");
+  public static final CompressedOrderOrderStatus REMOVED_BEFORE_SUBMISSION =
+      new CompressedOrderOrderStatus("REMOVED_BEFORE_SUBMISSION");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -127,6 +129,7 @@ public class CompressedOrderOrderStatus {
     map.put("PARTIALLY_FILLED", PARTIALLY_FILLED);
     map.put("FILLED", FILLED);
     map.put("REJECTED", REJECTED);
+    map.put("REMOVED_BEFORE_SUBMISSION", REMOVED_BEFORE_SUBMISSION);
     return map;
   }
 
@@ -138,6 +141,7 @@ public class CompressedOrderOrderStatus {
     map.put("PARTIALLY_FILLED", CompressedOrderOrderStatusEnum.PARTIALLY_FILLED);
     map.put("FILLED", CompressedOrderOrderStatusEnum.FILLED);
     map.put("REJECTED", CompressedOrderOrderStatusEnum.REJECTED);
+    map.put("REMOVED_BEFORE_SUBMISSION", CompressedOrderOrderStatusEnum.REMOVED_BEFORE_SUBMISSION);
     return map;
   }
 
@@ -179,6 +183,7 @@ public class CompressedOrderOrderStatus {
     PARTIALLY_FILLED("PARTIALLY_FILLED"),
     FILLED("FILLED"),
     REJECTED("REJECTED"),
+    REMOVED_BEFORE_SUBMISSION("REMOVED_BEFORE_SUBMISSION"),
     ;
 
     private final String value;

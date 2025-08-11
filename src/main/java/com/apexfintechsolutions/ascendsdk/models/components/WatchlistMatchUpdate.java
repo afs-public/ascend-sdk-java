@@ -24,7 +24,12 @@ public class WatchlistMatchUpdate {
   @JsonProperty("exclude_from_screening")
   private Optional<Boolean> excludeFromScreening;
 
-  /** Match state - whether or not the match is confirmed */
+  /**
+   * The match state for a profile, one of: - `MATCH_UNSPECIFIED` - Default/Null value. -
+   * `CONFIRMED_MATCH` - Match is confirmed. - `POTENTIAL_MATCH` - Match is a potential. -
+   * `NO_MATCH` - Match is confirmed not to be a match. - `INCONCLUSIVE` - Match is deemed to be
+   * inconclusive.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("match_state")
   private Optional<? extends WatchlistMatchUpdateMatchState> matchState;
@@ -68,7 +73,12 @@ public class WatchlistMatchUpdate {
     return excludeFromScreening;
   }
 
-  /** Match state - whether or not the match is confirmed */
+  /**
+   * The match state for a profile, one of: - `MATCH_UNSPECIFIED` - Default/Null value. -
+   * `CONFIRMED_MATCH` - Match is confirmed. - `POTENTIAL_MATCH` - Match is a potential. -
+   * `NO_MATCH` - Match is confirmed not to be a match. - `INCONCLUSIVE` - Match is deemed to be
+   * inconclusive.
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<WatchlistMatchUpdateMatchState> matchState() {
@@ -111,14 +121,24 @@ public class WatchlistMatchUpdate {
     return this;
   }
 
-  /** Match state - whether or not the match is confirmed */
+  /**
+   * The match state for a profile, one of: - `MATCH_UNSPECIFIED` - Default/Null value. -
+   * `CONFIRMED_MATCH` - Match is confirmed. - `POTENTIAL_MATCH` - Match is a potential. -
+   * `NO_MATCH` - Match is confirmed not to be a match. - `INCONCLUSIVE` - Match is deemed to be
+   * inconclusive.
+   */
   public WatchlistMatchUpdate withMatchState(WatchlistMatchUpdateMatchState matchState) {
     Utils.checkNotNull(matchState, "matchState");
     this.matchState = Optional.ofNullable(matchState);
     return this;
   }
 
-  /** Match state - whether or not the match is confirmed */
+  /**
+   * The match state for a profile, one of: - `MATCH_UNSPECIFIED` - Default/Null value. -
+   * `CONFIRMED_MATCH` - Match is confirmed. - `POTENTIAL_MATCH` - Match is a potential. -
+   * `NO_MATCH` - Match is confirmed not to be a match. - `INCONCLUSIVE` - Match is deemed to be
+   * inconclusive.
+   */
   public WatchlistMatchUpdate withMatchState(
       Optional<? extends WatchlistMatchUpdateMatchState> matchState) {
     Utils.checkNotNull(matchState, "matchState");
@@ -222,14 +242,24 @@ public class WatchlistMatchUpdate {
       return this;
     }
 
-    /** Match state - whether or not the match is confirmed */
+    /**
+     * The match state for a profile, one of: - `MATCH_UNSPECIFIED` - Default/Null value. -
+     * `CONFIRMED_MATCH` - Match is confirmed. - `POTENTIAL_MATCH` - Match is a potential. -
+     * `NO_MATCH` - Match is confirmed not to be a match. - `INCONCLUSIVE` - Match is deemed to be
+     * inconclusive.
+     */
     public Builder matchState(WatchlistMatchUpdateMatchState matchState) {
       Utils.checkNotNull(matchState, "matchState");
       this.matchState = Optional.ofNullable(matchState);
       return this;
     }
 
-    /** Match state - whether or not the match is confirmed */
+    /**
+     * The match state for a profile, one of: - `MATCH_UNSPECIFIED` - Default/Null value. -
+     * `CONFIRMED_MATCH` - Match is confirmed. - `POTENTIAL_MATCH` - Match is a potential. -
+     * `NO_MATCH` - Match is confirmed not to be a match. - `INCONCLUSIVE` - Match is deemed to be
+     * inconclusive.
+     */
     public Builder matchState(Optional<? extends WatchlistMatchUpdateMatchState> matchState) {
       Utils.checkNotNull(matchState, "matchState");
       this.matchState = matchState;

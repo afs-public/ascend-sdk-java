@@ -38,7 +38,12 @@ import java.util.Optional;
  * use of an instance in a switch expression but you can use the {@code asEnum()} method (after
  * dealing with the `Optional` appropriately).
  */
-/** PersonIdentificationType - Tax id type (e.g. ssn) */
+/**
+ * PersonIdentificationType - The identification type for a person, one of: - `ID_TYPE_UNSPECIFIED`
+ * - Default/Null value. - `SSN` - SSN tax type. - `ITIN` - ITIN tax type. - `FTIN` - FTIN (foreign
+ * tax id) type. - `NATIONAL_ID` - National id type. - `PASSPORT` - Passport id type. -
+ * `DRIVING_LICENSE` - Drivers license id type.
+ */
 @JsonDeserialize(using = PersonIdentificationType._Deserializer.class)
 @JsonSerialize(using = PersonIdentificationType._Serializer.class)
 public class PersonIdentificationType {

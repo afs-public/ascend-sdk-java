@@ -38,7 +38,11 @@ import java.util.Optional;
  * use of an instance in a switch expression but you can use the {@code asEnum()} method (after
  * dealing with the `Optional` appropriately).
  */
-/** InvestigationNameSuffix - Suffix of the person's name */
+/**
+ * InvestigationNameSuffix - The name suffix for individuals, one of: - `NAME_SUFFIX_UNSPECIFIED` -
+ * Default/Null value. - `SR` - Senior. - `JR` - Junior. - `III` - The third. - `IV` - The fourth. -
+ * `V` - The fifth.
+ */
 @JsonDeserialize(using = InvestigationNameSuffix._Deserializer.class)
 @JsonSerialize(using = InvestigationNameSuffix._Serializer.class)
 public class InvestigationNameSuffix {

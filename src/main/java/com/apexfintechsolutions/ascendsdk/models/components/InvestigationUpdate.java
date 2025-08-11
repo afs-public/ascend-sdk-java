@@ -17,17 +17,37 @@ import java.util.Optional;
 /** InvestigationUpdate - Contains investigation details of corresponding investigation */
 public class InvestigationUpdate {
 
+  /**
+   * A unique identifier referencing a client The client ID serves as the unique identifier for the
+   * apex client positioned above the correspondent within the apex client configurator hierarchy.
+   * Moving forward, the account service will internally assign the client ID for all
+   * investigations.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_id")
+  private Optional<String> clientId;
+
   /** Comment relating to why the investigation state was updated */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("comment")
   private Optional<String> comment;
 
-  /** Indicates the current state of identity verification */
+  /**
+   * The screen state of one screening within an investigation, one of: - `SCREEN_STATE_UNSPECIFIED`
+   * - Default/Null value. - `PENDING` - Screen result is pending. - `PASSED` - Screen result has
+   * passed. - `FAILED` - Screen result has failed. - `NEEDS_REVIEW` - Screen result needs manual
+   * review. - `DEFERRED_REVIEW` - Screen result is deferred for review at a later date. -
+   * `OUT_OF_SCOPE` - Screen state is out of scope for this investigation type.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("identity_verification")
   private Optional<? extends InvestigationUpdateIdentityVerification> identityVerification;
 
-  /** Current state of investigation request */
+  /**
+   * The state of an investigation request, one of: - `INVESTIGATION_REQUEST_STATE_UNSPECIFIED` -
+   * Default/Null value. - `OPEN` - The investigation request is open. - `CLOSED` - The
+   * investigation request is closed.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("investigation_request_state")
   private Optional<? extends InvestigationUpdateInvestigationRequestState>
@@ -40,6 +60,7 @@ public class InvestigationUpdate {
 
   @JsonCreator
   public InvestigationUpdate(
+      @JsonProperty("client_id") Optional<String> clientId,
       @JsonProperty("comment") Optional<String> comment,
       @JsonProperty("identity_verification")
           Optional<? extends InvestigationUpdateIdentityVerification> identityVerification,
@@ -48,10 +69,12 @@ public class InvestigationUpdate {
               investigationRequestState,
       @JsonProperty("watchlist_matches")
           Optional<? extends List<WatchlistMatchUpdate>> watchlistMatches) {
+    Utils.checkNotNull(clientId, "clientId");
     Utils.checkNotNull(comment, "comment");
     Utils.checkNotNull(identityVerification, "identityVerification");
     Utils.checkNotNull(investigationRequestState, "investigationRequestState");
     Utils.checkNotNull(watchlistMatches, "watchlistMatches");
+    this.clientId = clientId;
     this.comment = comment;
     this.identityVerification = identityVerification;
     this.investigationRequestState = investigationRequestState;
@@ -59,7 +82,18 @@ public class InvestigationUpdate {
   }
 
   public InvestigationUpdate() {
-    this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+  }
+
+  /**
+   * A unique identifier referencing a client The client ID serves as the unique identifier for the
+   * apex client positioned above the correspondent within the apex client configurator hierarchy.
+   * Moving forward, the account service will internally assign the client ID for all
+   * investigations.
+   */
+  @JsonIgnore
+  public Optional<String> clientId() {
+    return clientId;
   }
 
   /** Comment relating to why the investigation state was updated */
@@ -68,14 +102,24 @@ public class InvestigationUpdate {
     return comment;
   }
 
-  /** Indicates the current state of identity verification */
+  /**
+   * The screen state of one screening within an investigation, one of: - `SCREEN_STATE_UNSPECIFIED`
+   * - Default/Null value. - `PENDING` - Screen result is pending. - `PASSED` - Screen result has
+   * passed. - `FAILED` - Screen result has failed. - `NEEDS_REVIEW` - Screen result needs manual
+   * review. - `DEFERRED_REVIEW` - Screen result is deferred for review at a later date. -
+   * `OUT_OF_SCOPE` - Screen state is out of scope for this investigation type.
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<InvestigationUpdateIdentityVerification> identityVerification() {
     return (Optional<InvestigationUpdateIdentityVerification>) identityVerification;
   }
 
-  /** Current state of investigation request */
+  /**
+   * The state of an investigation request, one of: - `INVESTIGATION_REQUEST_STATE_UNSPECIFIED` -
+   * Default/Null value. - `OPEN` - The investigation request is open. - `CLOSED` - The
+   * investigation request is closed.
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<InvestigationUpdateInvestigationRequestState> investigationRequestState() {
@@ -93,6 +137,30 @@ public class InvestigationUpdate {
     return new Builder();
   }
 
+  /**
+   * A unique identifier referencing a client The client ID serves as the unique identifier for the
+   * apex client positioned above the correspondent within the apex client configurator hierarchy.
+   * Moving forward, the account service will internally assign the client ID for all
+   * investigations.
+   */
+  public InvestigationUpdate withClientId(String clientId) {
+    Utils.checkNotNull(clientId, "clientId");
+    this.clientId = Optional.ofNullable(clientId);
+    return this;
+  }
+
+  /**
+   * A unique identifier referencing a client The client ID serves as the unique identifier for the
+   * apex client positioned above the correspondent within the apex client configurator hierarchy.
+   * Moving forward, the account service will internally assign the client ID for all
+   * investigations.
+   */
+  public InvestigationUpdate withClientId(Optional<String> clientId) {
+    Utils.checkNotNull(clientId, "clientId");
+    this.clientId = clientId;
+    return this;
+  }
+
   /** Comment relating to why the investigation state was updated */
   public InvestigationUpdate withComment(String comment) {
     Utils.checkNotNull(comment, "comment");
@@ -107,7 +175,13 @@ public class InvestigationUpdate {
     return this;
   }
 
-  /** Indicates the current state of identity verification */
+  /**
+   * The screen state of one screening within an investigation, one of: - `SCREEN_STATE_UNSPECIFIED`
+   * - Default/Null value. - `PENDING` - Screen result is pending. - `PASSED` - Screen result has
+   * passed. - `FAILED` - Screen result has failed. - `NEEDS_REVIEW` - Screen result needs manual
+   * review. - `DEFERRED_REVIEW` - Screen result is deferred for review at a later date. -
+   * `OUT_OF_SCOPE` - Screen state is out of scope for this investigation type.
+   */
   public InvestigationUpdate withIdentityVerification(
       InvestigationUpdateIdentityVerification identityVerification) {
     Utils.checkNotNull(identityVerification, "identityVerification");
@@ -115,7 +189,13 @@ public class InvestigationUpdate {
     return this;
   }
 
-  /** Indicates the current state of identity verification */
+  /**
+   * The screen state of one screening within an investigation, one of: - `SCREEN_STATE_UNSPECIFIED`
+   * - Default/Null value. - `PENDING` - Screen result is pending. - `PASSED` - Screen result has
+   * passed. - `FAILED` - Screen result has failed. - `NEEDS_REVIEW` - Screen result needs manual
+   * review. - `DEFERRED_REVIEW` - Screen result is deferred for review at a later date. -
+   * `OUT_OF_SCOPE` - Screen state is out of scope for this investigation type.
+   */
   public InvestigationUpdate withIdentityVerification(
       Optional<? extends InvestigationUpdateIdentityVerification> identityVerification) {
     Utils.checkNotNull(identityVerification, "identityVerification");
@@ -123,7 +203,11 @@ public class InvestigationUpdate {
     return this;
   }
 
-  /** Current state of investigation request */
+  /**
+   * The state of an investigation request, one of: - `INVESTIGATION_REQUEST_STATE_UNSPECIFIED` -
+   * Default/Null value. - `OPEN` - The investigation request is open. - `CLOSED` - The
+   * investigation request is closed.
+   */
   public InvestigationUpdate withInvestigationRequestState(
       InvestigationUpdateInvestigationRequestState investigationRequestState) {
     Utils.checkNotNull(investigationRequestState, "investigationRequestState");
@@ -131,7 +215,11 @@ public class InvestigationUpdate {
     return this;
   }
 
-  /** Current state of investigation request */
+  /**
+   * The state of an investigation request, one of: - `INVESTIGATION_REQUEST_STATE_UNSPECIFIED` -
+   * Default/Null value. - `OPEN` - The investigation request is open. - `CLOSED` - The
+   * investigation request is closed.
+   */
   public InvestigationUpdate withInvestigationRequestState(
       Optional<? extends InvestigationUpdateInvestigationRequestState> investigationRequestState) {
     Utils.checkNotNull(investigationRequestState, "investigationRequestState");
@@ -163,7 +251,8 @@ public class InvestigationUpdate {
       return false;
     }
     InvestigationUpdate other = (InvestigationUpdate) o;
-    return Objects.deepEquals(this.comment, other.comment)
+    return Objects.deepEquals(this.clientId, other.clientId)
+        && Objects.deepEquals(this.comment, other.comment)
         && Objects.deepEquals(this.identityVerification, other.identityVerification)
         && Objects.deepEquals(this.investigationRequestState, other.investigationRequestState)
         && Objects.deepEquals(this.watchlistMatches, other.watchlistMatches);
@@ -171,13 +260,16 @@ public class InvestigationUpdate {
 
   @Override
   public int hashCode() {
-    return Objects.hash(comment, identityVerification, investigationRequestState, watchlistMatches);
+    return Objects.hash(
+        clientId, comment, identityVerification, investigationRequestState, watchlistMatches);
   }
 
   @Override
   public String toString() {
     return Utils.toString(
         InvestigationUpdate.class,
+        "clientId",
+        clientId,
         "comment",
         comment,
         "identityVerification",
@@ -189,6 +281,8 @@ public class InvestigationUpdate {
   }
 
   public static final class Builder {
+
+    private Optional<String> clientId = Optional.empty();
 
     private Optional<String> comment = Optional.empty();
 
@@ -202,6 +296,30 @@ public class InvestigationUpdate {
 
     private Builder() {
       // force use of static builder() method
+    }
+
+    /**
+     * A unique identifier referencing a client The client ID serves as the unique identifier for
+     * the apex client positioned above the correspondent within the apex client configurator
+     * hierarchy. Moving forward, the account service will internally assign the client ID for all
+     * investigations.
+     */
+    public Builder clientId(String clientId) {
+      Utils.checkNotNull(clientId, "clientId");
+      this.clientId = Optional.ofNullable(clientId);
+      return this;
+    }
+
+    /**
+     * A unique identifier referencing a client The client ID serves as the unique identifier for
+     * the apex client positioned above the correspondent within the apex client configurator
+     * hierarchy. Moving forward, the account service will internally assign the client ID for all
+     * investigations.
+     */
+    public Builder clientId(Optional<String> clientId) {
+      Utils.checkNotNull(clientId, "clientId");
+      this.clientId = clientId;
+      return this;
     }
 
     /** Comment relating to why the investigation state was updated */
@@ -218,7 +336,14 @@ public class InvestigationUpdate {
       return this;
     }
 
-    /** Indicates the current state of identity verification */
+    /**
+     * The screen state of one screening within an investigation, one of: -
+     * `SCREEN_STATE_UNSPECIFIED` - Default/Null value. - `PENDING` - Screen result is pending. -
+     * `PASSED` - Screen result has passed. - `FAILED` - Screen result has failed. - `NEEDS_REVIEW`
+     * - Screen result needs manual review. - `DEFERRED_REVIEW` - Screen result is deferred for
+     * review at a later date. - `OUT_OF_SCOPE` - Screen state is out of scope for this
+     * investigation type.
+     */
     public Builder identityVerification(
         InvestigationUpdateIdentityVerification identityVerification) {
       Utils.checkNotNull(identityVerification, "identityVerification");
@@ -226,7 +351,14 @@ public class InvestigationUpdate {
       return this;
     }
 
-    /** Indicates the current state of identity verification */
+    /**
+     * The screen state of one screening within an investigation, one of: -
+     * `SCREEN_STATE_UNSPECIFIED` - Default/Null value. - `PENDING` - Screen result is pending. -
+     * `PASSED` - Screen result has passed. - `FAILED` - Screen result has failed. - `NEEDS_REVIEW`
+     * - Screen result needs manual review. - `DEFERRED_REVIEW` - Screen result is deferred for
+     * review at a later date. - `OUT_OF_SCOPE` - Screen state is out of scope for this
+     * investigation type.
+     */
     public Builder identityVerification(
         Optional<? extends InvestigationUpdateIdentityVerification> identityVerification) {
       Utils.checkNotNull(identityVerification, "identityVerification");
@@ -234,7 +366,11 @@ public class InvestigationUpdate {
       return this;
     }
 
-    /** Current state of investigation request */
+    /**
+     * The state of an investigation request, one of: - `INVESTIGATION_REQUEST_STATE_UNSPECIFIED` -
+     * Default/Null value. - `OPEN` - The investigation request is open. - `CLOSED` - The
+     * investigation request is closed.
+     */
     public Builder investigationRequestState(
         InvestigationUpdateInvestigationRequestState investigationRequestState) {
       Utils.checkNotNull(investigationRequestState, "investigationRequestState");
@@ -242,7 +378,11 @@ public class InvestigationUpdate {
       return this;
     }
 
-    /** Current state of investigation request */
+    /**
+     * The state of an investigation request, one of: - `INVESTIGATION_REQUEST_STATE_UNSPECIFIED` -
+     * Default/Null value. - `OPEN` - The investigation request is open. - `CLOSED` - The
+     * investigation request is closed.
+     */
     public Builder investigationRequestState(
         Optional<? extends InvestigationUpdateInvestigationRequestState>
             investigationRequestState) {
@@ -268,7 +408,7 @@ public class InvestigationUpdate {
 
     public InvestigationUpdate build() {
       return new InvestigationUpdate(
-          comment, identityVerification, investigationRequestState, watchlistMatches);
+          clientId, comment, identityVerification, investigationRequestState, watchlistMatches);
     }
   }
 }
