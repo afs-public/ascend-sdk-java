@@ -18,15 +18,12 @@ Create a fee
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Fees_CreateFee" method="post" path="/transfers/v1/accounts/{account_id}/fees" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.DecimalCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
-import com.apexfintechsolutions.ascendsdk.models.components.TransfersFeeCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.TransfersFeeCreateType;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.FeesCreateFeeResponse;
 import java.lang.Exception;
@@ -88,6 +85,7 @@ Retrieve an existing fee
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Fees_GetFee" method="get" path="/transfers/v1/accounts/{account_id}/fees/{fee_id}" -->
 ```java
 package hello.world;
 
@@ -150,13 +148,12 @@ Cancel an existing fee
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Fees_CancelFee" method="post" path="/transfers/v1/accounts/{account_id}/fees/{fee_id}:cancel" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.CancelFeeRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.FeesCancelFeeResponse;
 import java.lang.Exception;
@@ -217,15 +214,12 @@ Create a credit
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Credits_CreateCredit" method="post" path="/transfers/v1/accounts/{account_id}/credits" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.DecimalCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
-import com.apexfintechsolutions.ascendsdk.models.components.TransfersCreditCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.TransfersCreditCreateType;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.CreditsCreateCreditResponse;
 import java.lang.Exception;
@@ -287,6 +281,7 @@ Retrieve an existing credit
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Credits_GetCredit" method="get" path="/transfers/v1/accounts/{account_id}/credits/{credit_id}" -->
 ```java
 package hello.world;
 
@@ -349,13 +344,12 @@ Cancel an existing credit
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Credits_CancelCredit" method="post" path="/transfers/v1/accounts/{account_id}/credits/{credit_id}:cancel" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.CancelCreditRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.CreditsCancelCreditResponse;
 import java.lang.Exception;

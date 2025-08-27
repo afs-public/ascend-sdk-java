@@ -28,6 +28,7 @@ Lists transfer schedule summaries that match the filter in the request
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="TransferScheduleSummaries_ListScheduleSummaries" method="get" path="/transfers/v1/schedules" -->
 ```java
 package hello.world;
 
@@ -92,18 +93,12 @@ Creates an ACH deposit transfer schedule
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchDepositSchedules_CreateAchDepositSchedule" method="post" path="/transfers/v1/accounts/{account_id}/achDepositSchedules" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.AchDepositScheduleCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.DateCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.DecimalCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.DepositScheduleDetailsCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.SchedulePropertiesCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
-import com.apexfintechsolutions.ascendsdk.models.components.TimeUnit;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchDepositSchedulesCreateAchDepositScheduleResponse;
 import java.lang.Exception;
@@ -173,6 +168,7 @@ Return a list of ACH deposit schedules for the specified account and filter para
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchDepositSchedules_ListAchDepositSchedules" method="get" path="/transfers/v1/accounts/{account_id}/achDepositSchedules" -->
 ```java
 package hello.world;
 
@@ -239,6 +235,7 @@ Gets an ACH deposit transfer schedule
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchDepositSchedules_GetAchDepositSchedule" method="get" path="/transfers/v1/accounts/{account_id}/achDepositSchedules/{achDepositSchedule_id}" -->
 ```java
 package hello.world;
 
@@ -301,13 +298,12 @@ Updates the amount of an ACH deposit transfer schedule
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchDepositSchedules_UpdateAchDepositSchedule" method="patch" path="/transfers/v1/accounts/{account_id}/achDepositSchedules/{achDepositSchedule_id}" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.AchDepositScheduleUpdate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchDepositSchedulesUpdateAchDepositScheduleResponse;
 import java.lang.Exception;
@@ -331,7 +327,6 @@ public class Application {
         AchDepositSchedulesUpdateAchDepositScheduleResponse res = sdk.scheduleTransfers().updateAchDepositSchedule()
                 .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
                 .achDepositScheduleId("40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1")
-                .updateMask("<value>")
                 .achDepositScheduleUpdate(AchDepositScheduleUpdate.builder()
                     .build())
                 .call();
@@ -369,13 +364,12 @@ Cancels an ACH deposit transfer schedule
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchDepositSchedules_CancelAchDepositSchedule" method="post" path="/transfers/v1/accounts/{account_id}/achDepositSchedules/{achDepositSchedule_id}:cancel" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.CancelAchDepositScheduleRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchDepositSchedulesCancelAchDepositScheduleResponse;
 import java.lang.Exception;
@@ -436,17 +430,12 @@ Creates an ACH withdrawal transfer schedule
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchWithdrawalSchedules_CreateAchWithdrawalSchedule" method="post" path="/transfers/v1/accounts/{account_id}/achWithdrawalSchedules" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.AchWithdrawalScheduleCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.DateCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.SchedulePropertiesCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
-import com.apexfintechsolutions.ascendsdk.models.components.TimeUnit;
-import com.apexfintechsolutions.ascendsdk.models.components.WithdrawalScheduleDetailsCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchWithdrawalSchedulesCreateAchWithdrawalScheduleResponse;
 import java.lang.Exception;
@@ -514,6 +503,7 @@ Return a list of ACH withdrawal schedules for the specified account and filter p
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchWithdrawalSchedules_ListAchWithdrawalSchedules" method="get" path="/transfers/v1/accounts/{account_id}/achWithdrawalSchedules" -->
 ```java
 package hello.world;
 
@@ -580,6 +570,7 @@ Gets an ACH withdrawal transfer schedule
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchWithdrawalSchedules_GetAchWithdrawalSchedule" method="get" path="/transfers/v1/accounts/{account_id}/achWithdrawalSchedules/{achWithdrawalSchedule_id}" -->
 ```java
 package hello.world;
 
@@ -642,13 +633,12 @@ Updates the amount of an ACH withdrawal transfer schedule
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchWithdrawalSchedules_UpdateAchWithdrawalSchedule" method="patch" path="/transfers/v1/accounts/{account_id}/achWithdrawalSchedules/{achWithdrawalSchedule_id}" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.AchWithdrawalScheduleUpdate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchWithdrawalSchedulesUpdateAchWithdrawalScheduleResponse;
 import java.lang.Exception;
@@ -672,7 +662,6 @@ public class Application {
         AchWithdrawalSchedulesUpdateAchWithdrawalScheduleResponse res = sdk.scheduleTransfers().updateAchWithdrawalSchedule()
                 .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
                 .achWithdrawalScheduleId("40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1")
-                .updateMask("<value>")
                 .achWithdrawalScheduleUpdate(AchWithdrawalScheduleUpdate.builder()
                     .build())
                 .call();
@@ -710,13 +699,12 @@ Cancels an ACH withdrawal transfer schedule
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchWithdrawalSchedules_CancelAchWithdrawalSchedule" method="post" path="/transfers/v1/accounts/{account_id}/achWithdrawalSchedules/{achWithdrawalSchedule_id}:cancel" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.CancelAchWithdrawalScheduleRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchWithdrawalSchedulesCancelAchWithdrawalScheduleResponse;
 import java.lang.Exception;
@@ -777,21 +765,12 @@ Creates a Wire withdrawal transfer schedule
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="WireWithdrawalSchedules_CreateWireWithdrawalSchedule" method="post" path="/transfers/v1/accounts/{account_id}/wireWithdrawalSchedules" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.DateCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.RecipientBankBankIdCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.RecipientBankBankIdCreateType;
-import com.apexfintechsolutions.ascendsdk.models.components.SchedulePropertiesCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
-import com.apexfintechsolutions.ascendsdk.models.components.TimeUnit;
-import com.apexfintechsolutions.ascendsdk.models.components.WireWithdrawalBeneficiaryCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.WireWithdrawalRecipientBankCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.WireWithdrawalScheduleCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.WithdrawalScheduleDetailsCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.WireWithdrawalSchedulesCreateWireWithdrawalScheduleResponse;
 import java.lang.Exception;
@@ -867,6 +846,7 @@ Return a list of Wire withdrawal schedules for the specified account and filter 
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="WireWithdrawalSchedules_ListWireWithdrawalSchedules" method="get" path="/transfers/v1/accounts/{account_id}/wireWithdrawalSchedules" -->
 ```java
 package hello.world;
 
@@ -933,6 +913,7 @@ Gets a Wire withdrawal transfer schedule
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="WireWithdrawalSchedules_GetWireWithdrawalSchedule" method="get" path="/transfers/v1/accounts/{account_id}/wireWithdrawalSchedules/{wireWithdrawalSchedule_id}" -->
 ```java
 package hello.world;
 
@@ -995,13 +976,12 @@ Updates the amount of a Wire withdrawal transfer schedule
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="WireWithdrawalSchedules_UpdateWireWithdrawalSchedule" method="patch" path="/transfers/v1/accounts/{account_id}/wireWithdrawalSchedules/{wireWithdrawalSchedule_id}" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
-import com.apexfintechsolutions.ascendsdk.models.components.WireWithdrawalScheduleUpdate;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.WireWithdrawalSchedulesUpdateWireWithdrawalScheduleResponse;
 import java.lang.Exception;
@@ -1025,7 +1005,7 @@ public class Application {
         WireWithdrawalSchedulesUpdateWireWithdrawalScheduleResponse res = sdk.scheduleTransfers().updateWireWithdrawalSchedule()
                 .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
                 .wireWithdrawalScheduleId("40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1")
-                .updateMask("{\"update_mask\":\"schedule_details.amount\"}")
+                .updateMask("[object Object]")
                 .wireWithdrawalScheduleUpdate(WireWithdrawalScheduleUpdate.builder()
                     .build())
                 .call();
@@ -1063,13 +1043,12 @@ Cancels a Wire withdrawal transfer schedule
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="WireWithdrawalSchedules_CancelWireWithdrawalSchedule" method="post" path="/transfers/v1/accounts/{account_id}/wireWithdrawalSchedules/{wireWithdrawalSchedule_id}:cancel" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.CancelWireWithdrawalScheduleRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.WireWithdrawalSchedulesCancelWireWithdrawalScheduleResponse;
 import java.lang.Exception;

@@ -4,6 +4,7 @@ generation:
   maintainOpenAPIOrder: true
   usageSnippets:
     optionalPropertyRendering: never
+    sdkInitStyle: constructor
   useClassNamesForArrayFields: true
   fixes:
     nameResolutionDec2023: true
@@ -11,21 +12,29 @@ generation:
     parameterOrderingFeb2024: true
     requestResponseComponentNamesFeb2024: true
     securityFeb2025: false
+    sharedErrorComponentsApr2025: false
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: false
+  tests:
+    generateTests: true
+    generateNewTests: false
+    skipResponseBodyAssertions: false
 java:
-  version: 1.3.5
+  version: 1.4.0
   additionalDependencies:
     - implementation:com.nimbusds:nimbus-jose-jwt:9.9.3
     - implementation:javax.servlet:javax.servlet-api:3.1.0
   additionalPlugins: []
   artifactID: ascendsdk
+  baseErrorName: SDKException
   clientServerStatusCodesAsErrors: true
   companyEmail: clientdevelopertools@apexfintechsolutions.com
   companyName: Apex Fintech Solutions
   companyURL: www.apexfintechsolutions.com
   defaultErrorName: SDKError
+  enableAsync: false
+  enableCustomCodeRegions: false
   flattenGlobalSecurity: false
   githubURL: github.com/owner/repo
   groupID: com.apexfintechsolutions
@@ -38,11 +47,13 @@ java:
       shared: models/components
       webhooks: models/webhooks
   inputModelSuffix: input
+  languageVersion: 11
   license:
     name: The MIT License (MIT)
     shortName: MIT
     url: https://mit-license.org/
   maxMethodParams: 4
+  nullFriendlyParameters: false
   ossrhURL: https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/
   outputModelSuffix: output
   projectName: ascendsdk

@@ -17,13 +17,12 @@ Retrieves retirement contribution and distribution constraints for a cash journa
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="RetirementConstraints_RetrieveCashJournalConstraints" method="post" path="/transfers/v1/cashJournals:retrieveCashJournalConstraints" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.RetrieveCashJournalConstraintsRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.RetirementConstraintsRetrieveCashJournalConstraintsResponse;
 import java.lang.Exception;
@@ -83,13 +82,12 @@ Creates a cash journal
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="CashJournals_CreateCashJournal" method="post" path="/transfers/v1/cashJournals" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.CashJournalCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalsCreateCashJournalResponse;
 import java.lang.Exception;
@@ -150,6 +148,7 @@ Gets an existing cash journal
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="CashJournals_GetCashJournal" method="get" path="/transfers/v1/cashJournals/{cashJournal_id}" -->
 ```java
 package hello.world;
 
@@ -210,13 +209,12 @@ Cancels an existing cash journal
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="CashJournals_CancelCashJournal" method="post" path="/transfers/v1/cashJournals/{cashJournal_id}:cancel" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.CancelCashJournalRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalsCancelCashJournalResponse;
 import java.lang.Exception;
@@ -275,13 +273,12 @@ Determines whether a potential cash journal will be considered first party or th
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="CashJournals_CheckPartyType" method="post" path="/transfers/v1/cashJournals:checkPartyType" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.CheckPartyTypeRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalsCheckPartyTypeResponse;
 import java.lang.Exception;

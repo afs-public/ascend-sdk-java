@@ -13,6 +13,7 @@ Calculates the cash balance for an account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="CashBalances_CalculateCashBalance" method="get" path="/transfers/v1/accounts/{account_id}:calculateCashBalance" -->
 ```java
 package hello.world;
 

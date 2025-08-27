@@ -18,6 +18,7 @@ Use this endpoint to get the current state of an investigation by request refere
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="InvestigationService_GetInvestigation" method="get" path="/investigations/v1/investigations/{investigation_id}" -->
 ```java
 package hello.world;
 
@@ -79,13 +80,12 @@ Use this endpoint to update the details of an investigation by request reference
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="InvestigationService_UpdateInvestigation" method="patch" path="/investigations/v1/investigations/{investigation_id}" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.InvestigationUpdate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.InvestigationServiceUpdateInvestigationResponse;
 import java.lang.Exception;
@@ -108,7 +108,7 @@ public class Application {
 
         InvestigationServiceUpdateInvestigationResponse res = sdk.investigations().updateInvestigation()
                 .investigationId("01HEWVF4ZSNKYRP293J53ASJCJ")
-                .updateMask("{\"update_mask\":\"identity_verification\"}")
+                .updateMask("[object Object]")
                 .investigationUpdate(InvestigationUpdate.builder()
                     .build())
                 .call();
@@ -146,6 +146,7 @@ Use this endpoint to retrieve a list of investigation summaries based on optiona
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="InvestigationService_ListInvestigations" method="get" path="/investigations/v1/investigations" -->
 ```java
 package hello.world;
 
@@ -174,7 +175,7 @@ public class Application {
 
         InvestigationServiceListInvestigationsResponse res = sdk.investigations().listInvestigations()
                 .pageSize(100)
-                .pageToken("<value>")
+                .pageToken("")
                 .filter("person.given_name == 'Jane' && person.family_name == 'Dough'")
                 .orderBy("person.given_name desc")
                 .call();
@@ -213,13 +214,12 @@ Use this endpoint to update identity verification document IDs.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="InvestigationService_LinkDocuments" method="post" path="/investigations/v1/investigations/{investigation_id}:linkDocuments" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.LinkDocumentsRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.InvestigationServiceLinkDocumentsResponse;
 import java.lang.Exception;
@@ -281,6 +281,7 @@ Gets the details of an investigation by watchlist type and valid watchlist id
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="WatchlistService_GetWatchlistItem" method="get" path="/investigations/v1/watchlists/{watchlist_id}/items/{item_id}" -->
 ```java
 package hello.world;
 
@@ -344,6 +345,7 @@ Gets a CustomerIdentification by CustomerIdentification ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="CustomerIdentificationResultService_GetCustomerIdentification" method="get" path="/cip/v1/correspondents/{correspondent_id}/customerIdentifications/{customerIdentification_id}" -->
 ```java
 package hello.world;
 

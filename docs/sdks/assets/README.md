@@ -16,6 +16,7 @@ Lists assets
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Assets_ListAssets_1" method="get" path="/assets/v1/assets" -->
 ```java
 package hello.world;
 
@@ -83,6 +84,7 @@ Gets assets
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Assets_GetAsset" method="get" path="/assets/v1/assets/{asset_id}" -->
 ```java
 package hello.world;
 
@@ -144,6 +146,7 @@ Lists assets
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Assets_ListAssets_Correspondent" method="get" path="/assets/v1/correspondents/{correspondent_id}/assets" -->
 ```java
 package hello.world;
 
@@ -211,6 +214,7 @@ Gets assets
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Assets_GetAsset_Correspondent" method="get" path="/assets/v1/correspondents/{correspondent_id}/assets/{asset_id}" -->
 ```java
 package hello.world;
 

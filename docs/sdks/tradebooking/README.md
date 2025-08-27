@@ -23,19 +23,12 @@ Creates a trade with one or more executions. Combination of (account_id, client_
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Booking_CreateTrade" method="post" path="/booking/v1/accounts/{account_id}/trades" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.DecimalCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.ExecutionCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.RouteType;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
-import com.apexfintechsolutions.ascendsdk.models.components.TradeCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.TradeCreateBrokerCapacity;
-import com.apexfintechsolutions.ascendsdk.models.components.TradeCreateIdentifierType;
-import com.apexfintechsolutions.ascendsdk.models.components.TradeCreateSide;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.BookingCreateTradeResponse;
 import java.lang.Exception;
@@ -62,25 +55,10 @@ public class Application {
                 .accountId("01FAKEACCOUNT1TYKWEYRH8S2K")
                 .tradeCreate(TradeCreate.builder()
                     .accountId("02HASWB2DTMRT3DAM45P56J2T2")
+                    .assetType(TradeCreateAssetType.EQUITY)
                     .brokerCapacity(TradeCreateBrokerCapacity.AGENCY)
                     .clientOrderId("00be5285-0623-4560-8c58-f05af2c56ba0")
                     .executions(List.of(
-                        ExecutionCreate.builder()
-                            .executionTime(OffsetDateTime.parse("2024-07-17T12:00:00Z"))
-                            .externalId("0H06HAP3A3Y")
-                            .price(DecimalCreate.builder()
-                                .build())
-                            .quantity(DecimalCreate.builder()
-                                .build())
-                            .build(),
-                        ExecutionCreate.builder()
-                            .executionTime(OffsetDateTime.parse("2024-07-17T12:00:00Z"))
-                            .externalId("0H06HAP3A3Y")
-                            .price(DecimalCreate.builder()
-                                .build())
-                            .quantity(DecimalCreate.builder()
-                                .build())
-                            .build(),
                         ExecutionCreate.builder()
                             .executionTime(OffsetDateTime.parse("2024-07-17T12:00:00Z"))
                             .externalId("0H06HAP3A3Y")
@@ -131,6 +109,7 @@ Gets a trade and all executions by trade_id.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Booking_GetTrade" method="get" path="/booking/v1/accounts/{account_id}/trades/{trade_id}" -->
 ```java
 package hello.world;
 
@@ -196,13 +175,12 @@ Complete a Trade by closing and generating any fees and withholdings if necessar
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Booking_CompleteTrade" method="post" path="/booking/v1/accounts/{account_id}/trades/{trade_id}:complete" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.CompleteTradeRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.BookingCompleteTradeResponse;
 import java.lang.Exception;
@@ -266,13 +244,12 @@ Cancel a trade and all the executions using the original trade_id. CancelTrade w
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Booking_CancelTrade" method="post" path="/booking/v1/accounts/{account_id}/trades/{trade_id}:cancel" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.CancelTradeRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.BookingCancelTradeResponse;
 import java.lang.Exception;
@@ -336,24 +313,15 @@ Rebook a trade by the original trade_id. The entire original trade's executions 
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Booking_RebookTrade" method="post" path="/booking/v1/accounts/{account_id}/trades/{trade_id}:rebook" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.DecimalCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.ExecutionCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.RebookTradeRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.RouteType;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
-import com.apexfintechsolutions.ascendsdk.models.components.TradeCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.TradeCreateBrokerCapacity;
-import com.apexfintechsolutions.ascendsdk.models.components.TradeCreateIdentifierType;
-import com.apexfintechsolutions.ascendsdk.models.components.TradeCreateSide;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.BookingRebookTradeResponse;
 import java.lang.Exception;
-import java.time.OffsetDateTime;
 import java.util.List;
 
 public class Application {
@@ -379,33 +347,10 @@ public class Application {
                     .name("accounts/02HASWB2DTMRT3DAM45P56J2T2/trades/01J0XX2KDN3M9QKFKRE2HYSCQM")
                     .trade(TradeCreate.builder()
                         .accountId("02HASWB2DTMRT3DAM45P56J2T2")
+                        .assetType(TradeCreateAssetType.EQUITY)
                         .brokerCapacity(TradeCreateBrokerCapacity.AGENCY)
                         .clientOrderId("00be5285-0623-4560-8c58-f05af2c56ba0")
-                        .executions(List.of(
-                            ExecutionCreate.builder()
-                                .executionTime(OffsetDateTime.parse("2024-07-17T12:00:00Z"))
-                                .externalId("0H06HAP3A3Y")
-                                .price(DecimalCreate.builder()
-                                    .build())
-                                .quantity(DecimalCreate.builder()
-                                    .build())
-                                .build(),
-                            ExecutionCreate.builder()
-                                .executionTime(OffsetDateTime.parse("2024-07-17T12:00:00Z"))
-                                .externalId("0H06HAP3A3Y")
-                                .price(DecimalCreate.builder()
-                                    .build())
-                                .quantity(DecimalCreate.builder()
-                                    .build())
-                                .build(),
-                            ExecutionCreate.builder()
-                                .executionTime(OffsetDateTime.parse("2024-07-17T12:00:00Z"))
-                                .externalId("0H06HAP3A3Y")
-                                .price(DecimalCreate.builder()
-                                    .build())
-                                .quantity(DecimalCreate.builder()
-                                    .build())
-                                .build()))
+                        .executions(List.of())
                         .identifier("AAPL")
                         .identifierType(TradeCreateIdentifierType.SYMBOL)
                         .routeType(RouteType.MNGD)
@@ -450,14 +395,12 @@ Create a new execution under an existing trade that is open.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Booking_CreateExecution" method="post" path="/booking/v1/accounts/{account_id}/trades/{trade_id}/executions" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.DecimalCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.ExecutionCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.BookingCreateExecutionResponse;
 import java.lang.Exception;
@@ -527,6 +470,7 @@ Gets an execution by execution_id.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Booking_GetExecution" method="get" path="/booking/v1/accounts/{account_id}/trades/{trade_id}/executions/{execution_id}" -->
 ```java
 package hello.world;
 
@@ -594,13 +538,12 @@ Cancel an execution using the original execution_id. If applicable, fees and bac
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Booking_CancelExecution" method="post" path="/booking/v1/accounts/{account_id}/trades/{trade_id}/executions/{execution_id}:cancel" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.CancelExecutionRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.BookingCancelExecutionResponse;
 import java.lang.Exception;
@@ -666,15 +609,12 @@ Rebook an execution by the original execution_id. If applicable, fees and backup
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Booking_RebookExecution" method="post" path="/booking/v1/accounts/{account_id}/trades/{trade_id}/executions/{execution_id}:rebook" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.DecimalCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.ExecutionCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.RebookExecutionRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.BookingRebookExecutionResponse;
 import java.lang.Exception;

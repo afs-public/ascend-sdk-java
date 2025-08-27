@@ -14,13 +14,12 @@ Create a batch of signed links that can be used to upload files.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="InvestorCommunicationService_BatchCreateUploadLinks" method="post" path="/investordocs/v1/uploadLinks:batchCreate" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.BatchCreateUploadLinksRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.InvestorCommunicationServiceBatchCreateUploadLinksResponse;
 import java.lang.Exception;
@@ -79,6 +78,7 @@ List documents that match search parameters.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="InvestorCommunicationService_ListDocuments" method="get" path="/investordocs/v1/documents" -->
 ```java
 package hello.world;
 
@@ -106,9 +106,6 @@ public class Application {
             .build();
 
         InvestorCommunicationServiceListDocumentsResponse res = sdk.investorDocs().listDocuments()
-                .pageSize(454807)
-                .pageToken("<value>")
-                .filter("<value>")
                 .call();
 
         if (res.listDocumentsResponse().isPresent()) {

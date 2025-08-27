@@ -14,13 +14,12 @@ CREATE Creates an account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_CreateAccount" method="post" path="/accounts/v1/accounts" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.AccountRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsCreateAccountResponse;
 import java.lang.Exception;
@@ -45,8 +44,7 @@ public class Application {
         AccountRequestCreate req = AccountRequestCreate.builder()
                 .accountGroupId("01ARZ3NDEKTSV4RRFFQ69G5FAV")
                 .correspondentId("01HPMZZM6RKMVZA1JQ63RQKJRP")
-                .parties(List.of(
-                ))
+                .parties(List.of())
                 .build();
 
         AccountsCreateAccountResponse res = sdk.accountCreation().createAccount()
@@ -84,6 +82,7 @@ READ Get Account
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_GetAccount" method="get" path="/accounts/v1/accounts/{account_id}" -->
 ```java
 package hello.world;
 

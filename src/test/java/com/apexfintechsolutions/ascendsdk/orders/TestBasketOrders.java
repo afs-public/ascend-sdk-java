@@ -13,6 +13,7 @@ public class TestBasketOrders {
   private SDK sdk;
   private Account account;
   private Basket basket;
+  private String basketOrderToRemove = UUID.randomUUID().toString();
 
   @BeforeAll
   public void setup() throws Exception {
@@ -47,6 +48,17 @@ public class TestBasketOrders {
                         .quantity(DecimalCreate.builder().value("1").build())
                         .side(BasketOrderCreateSide.BUY)
                         .timeInForce(BasketOrderCreateTimeInForce.DAY)
+                        .build(),
+                    BasketOrderCreate.builder()
+                        .accountId(OrderUtil.WITHDRAWAL_ACCOUNT_ID)
+                        .assetType(BasketOrderCreateAssetType.EQUITY)
+                        .clientOrderId(basketOrderToRemove)
+                        .identifier("SBUX")
+                        .identifierType(BasketOrderCreateIdentifierType.SYMBOL)
+                        .orderType(BasketOrderCreateOrderType.MARKET)
+                        .quantity(DecimalCreate.builder().value("1").build())
+                        .side(BasketOrderCreateSide.BUY)
+                        .timeInForce(BasketOrderCreateTimeInForce.DAY)
                         .build()))
             .build();
 
@@ -69,6 +81,22 @@ public class TestBasketOrders {
 
   @Order(4)
   @Test
+  public void test_basket_orders_orders_remove_basket_remove_basket1() throws Exception {
+    var request =
+        RemoveOrdersRequestCreate.builder()
+            .name(basket.name().get())
+            .clientOrderIds(List.of(basketOrderToRemove))
+            .build();
+
+    var result =
+        sdk.basketOrders()
+            .removeOrders(SdkUtil.getCorrespondentId(), basket.basketId().get(), request);
+    Assertions.assertNotNull(result);
+    Assertions.assertEquals(200, result.statusCode());
+  }
+
+  @Order(5)
+  @Test
   public void test_basket_orders_orders_submit_basket_submit_basket1() throws Exception {
     var request = SubmitBasketRequestCreate.builder().name(basket.name().get()).build();
 
@@ -79,7 +107,7 @@ public class TestBasketOrders {
     Assertions.assertEquals(200, result.statusCode());
   }
 
-  @Order(5)
+  @Order(6)
   @Test
   public void test_basket_orders_orders_list_basket_orders_list_basket_orders1() throws Exception {
     var request =
@@ -93,7 +121,7 @@ public class TestBasketOrders {
     Assertions.assertEquals(200, result.statusCode());
   }
 
-  @Order(6)
+  @Order(7)
   @Test
   public void test_basket_orders_orders_list_compressed_orders_list_compressed_orders1()
       throws Exception {

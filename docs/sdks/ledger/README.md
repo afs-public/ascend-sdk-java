@@ -17,6 +17,7 @@ List all Entries based on a filter
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Ledger_ListEntries" method="get" path="/ledger/v1/accounts/{account_id}/entries" -->
 ```java
 package hello.world;
 
@@ -84,6 +85,7 @@ List all Completed Activities based on a filter
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Ledger_ListActivities" method="get" path="/ledger/v1/accounts/{account_id}/activities" -->
 ```java
 package hello.world;
 
@@ -151,6 +153,7 @@ List positions based on a filter
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Ledger_ListPositions" method="get" path="/ledger/v1/accounts/{account_id}/positions" -->
 ```java
 package hello.world;
 
@@ -218,6 +221,7 @@ Get an activity
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Ledger_GetActivity" method="get" path="/ledger/v1/accounts/{account_id}/activities/{activity_id}" -->
 ```java
 package hello.world;
 
@@ -281,6 +285,7 @@ Get an entry
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Ledger_GetEntry" method="get" path="/ledger/v1/accounts/{account_id}/entries/{entry_id}" -->
 ```java
 package hello.world;
 
@@ -308,8 +313,8 @@ public class Application {
             .build();
 
         LedgerGetEntryResponse res = sdk.ledger().getEntry()
-                .accountId("{\"account_id\":\"\"}")
-                .entryId("{\"entry_id\":\"\"}")
+                .accountId("[object Object]")
+                .entryId("[object Object]")
                 .call();
 
         if (res.entry().isPresent()) {

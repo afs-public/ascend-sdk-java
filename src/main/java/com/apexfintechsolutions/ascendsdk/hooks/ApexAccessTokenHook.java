@@ -135,8 +135,10 @@ final class ApexAccessTokenHook implements Hook.BeforeRequest {
     String privateKeyContent =
         creds
             .privateKey()
+            .replace("\n", "")
             .replace("\\n", "")
             .replace("\r", "")
+            .replace("\\r", "")
             .replace("-----BEGIN PRIVATE KEY-----", "")
             .replace("-----END PRIVATE KEY-----", "");
 

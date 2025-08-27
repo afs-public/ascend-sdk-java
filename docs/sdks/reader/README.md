@@ -14,6 +14,7 @@ Gets a list of events.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Reader_ListEventMessages" method="get" path="/events/v1/messages" -->
 ```java
 package hello.world;
 
@@ -79,6 +80,7 @@ Gets the details of a specific event.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Reader_GetEventMessage" method="get" path="/events/v1/messages/{message_id}" -->
 ```java
 package hello.world;
 

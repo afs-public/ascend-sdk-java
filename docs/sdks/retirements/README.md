@@ -16,6 +16,7 @@ Lists the aggregated retirement contribution summaries by tax year
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="RetirementConstraints_ListContributionSummaries" method="get" path="/transfers/v1/accounts/{account_id}/contributionSummaries" -->
 ```java
 package hello.world;
 
@@ -80,14 +81,12 @@ Retrieves retirement contribution constraints for an account
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="RetirementConstraints_RetrieveContributionConstraints" method="post" path="/transfers/v1/accounts/{account_id}:retrieveContributionConstraints" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.Mechanism;
-import com.apexfintechsolutions.ascendsdk.models.components.RetrieveContributionConstraintsRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.RetirementConstraintsRetrieveContributionConstraintsResponse;
 import java.lang.Exception;
@@ -147,6 +146,7 @@ Lists the aggregated retirement distribution summaries by tax year
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="RetirementConstraints_ListDistributionSummaries" method="get" path="/transfers/v1/accounts/{account_id}/distributionSummaries" -->
 ```java
 package hello.world;
 
@@ -211,14 +211,12 @@ Retrieves retirement distribution constraints for an account
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="RetirementConstraints_RetrieveDistributionConstraints" method="post" path="/transfers/v1/accounts/{account_id}:retrieveDistributionConstraints" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.RetrieveDistributionConstraintsRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.RetrieveDistributionConstraintsRequestCreateMechanism;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.RetirementConstraintsRetrieveDistributionConstraintsResponse;
 import java.lang.Exception;

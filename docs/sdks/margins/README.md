@@ -13,6 +13,7 @@ Gets the buying power for an account
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="MarginsRealTime_GetBuyingPower" method="get" path="/buyingpower/v1/accounts/{account_id}/buyingPower" -->
 ```java
 package hello.world;
 

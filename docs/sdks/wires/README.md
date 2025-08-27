@@ -16,6 +16,7 @@ Gets an existing wire deposit
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="WireDeposits_GetWireDeposit" method="get" path="/transfers/v1/accounts/{account_id}/wireDeposits/{wireDeposit_id}" -->
 ```java
 package hello.world;
 
@@ -78,17 +79,12 @@ Creates a wire withdrawal
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="WireWithdrawals_CreateWireWithdrawal" method="post" path="/transfers/v1/accounts/{account_id}/wireWithdrawals" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.RecipientBankBankIdCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.RecipientBankBankIdCreateType;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
-import com.apexfintechsolutions.ascendsdk.models.components.WireWithdrawalBeneficiaryCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.WireWithdrawalCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.WireWithdrawalRecipientBankCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.WireWithdrawalsCreateWireWithdrawalResponse;
 import java.lang.Exception;
@@ -156,6 +152,7 @@ Gets an existing wire withdrawal
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="WireWithdrawals_GetWireWithdrawal" method="get" path="/transfers/v1/accounts/{account_id}/wireWithdrawals/{wireWithdrawal_id}" -->
 ```java
 package hello.world;
 
@@ -218,13 +215,12 @@ Cancels an existing wire withdrawal
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="WireWithdrawals_CancelWireWithdrawal" method="post" path="/transfers/v1/accounts/{account_id}/wireWithdrawals/{wireWithdrawal_id}:cancel" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.CancelWireWithdrawalRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.WireWithdrawalsCancelWireWithdrawalResponse;
 import java.lang.Exception;

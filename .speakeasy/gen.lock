@@ -1,30 +1,31 @@
 lockVersion: 2.0.0
 id: 04604b59-b953-4711-ac65-9ad5897162b4
 management:
-  docChecksum: 2bd542c35c9264f526c35a7888d789fb
-  docVersion: v1:20250811:uat:c8e4b50ba105
-  speakeasyVersion: 1.521.0
-  generationVersion: 2.558.2
-  releaseVersion: 1.3.5
-  configChecksum: a78a71267688a8c01ab35d4c64a46682
+  docChecksum: d1bde040cb67d385e81d1c372294d048
+  docVersion: v1:20250822:uat:240983991338
+  speakeasyVersion: 1.601.3
+  generationVersion: 2.680.0
+  releaseVersion: 1.4.0
+  configChecksum: 845ef9d0ae2c718ef03aae7cb40adbba
 features:
   java:
     additionalDependencies: 0.1.0
     additionalProperties: 0.0.1
-    core: 3.35.1
+    core: 3.45.3
     customSecuritySchemes: 0.2.0
     deprecations: 2.81.1
-    examples: 2.81.5
+    examples: 2.81.6
     flattening: 2.81.1
-    globalSecurity: 2.82.8
+    globalSecurity: 2.83.0
     globalSecurityCallbacks: 0.1.0
-    globalServerURLs: 2.82.1
+    globalServerURLs: 2.82.2
     methodSecurity: 2.82.2
     nameOverrides: 2.81.3
     nullables: 0.1.0
     openEnums: 0.2.0
-    sdkHooks: 1.0.0
+    sdkHooks: 1.1.0
     serverIDs: 2.81.1
+    tests: 0.9.1
 generatedFiles:
   - .gitattributes
   - USAGE.md
@@ -181,6 +182,8 @@ generatedFiles:
   - docs/models/components/ActivityExchangeType.md
   - docs/models/components/ActivityFactorDenominator.md
   - docs/models/components/ActivityFactorNumerator.md
+  - docs/models/components/ActivityFairMarketValue.md
+  - docs/models/components/ActivityFairMarketValueDate.md
   - docs/models/components/ActivityFee.md
   - docs/models/components/ActivityFpsl.md
   - docs/models/components/ActivityFpslAction.md
@@ -395,6 +398,7 @@ generatedFiles:
   - docs/models/components/BasketOrderCumulativeNotionalValue.md
   - docs/models/components/BasketOrderFilledQuantity.md
   - docs/models/components/BasketOrderIdentifierType.md
+  - docs/models/components/BasketOrderMaxSellQuantity.md
   - docs/models/components/BasketOrderNotionalValue.md
   - docs/models/components/BasketOrderOrderRejectedReason.md
   - docs/models/components/BasketOrderOrderStatus.md
@@ -555,6 +559,12 @@ generatedFiles:
   - docs/models/components/CashRate.md
   - docs/models/components/CashType.md
   - docs/models/components/CatAccountHolderType.md
+  - docs/models/components/CheckDeposit.md
+  - docs/models/components/CheckDepositAmount.md
+  - docs/models/components/CheckDepositRetirementContribution.md
+  - docs/models/components/CheckDepositState.md
+  - docs/models/components/CheckDepositStateState.md
+  - docs/models/components/CheckDepositType.md
   - docs/models/components/CheckPartyTypeRequestCreate.md
   - docs/models/components/CheckPartyTypeResponse.md
   - docs/models/components/CheckPartyTypeResponsePartyType.md
@@ -969,9 +979,12 @@ generatedFiles:
   - docs/models/components/ExpirationDate.md
   - docs/models/components/ExternalAccount.md
   - docs/models/components/ExternalAccountCreate.md
+  - docs/models/components/ExtraReportingData.md
   - docs/models/components/FPSLEnrollmentMetaDataCreate.md
   - docs/models/components/FactorDenominator.md
   - docs/models/components/FactorNumerator.md
+  - docs/models/components/FairMarketValue.md
+  - docs/models/components/FairMarketValueDate.md
   - docs/models/components/FdicCashSweep.md
   - docs/models/components/FederalTaxClassification.md
   - docs/models/components/FederalTaxWithholding.md
@@ -1658,6 +1671,8 @@ generatedFiles:
   - docs/models/components/RelationType.md
   - docs/models/components/RemainingContributionAllowed.md
   - docs/models/components/RemainingDistributionRequired.md
+  - docs/models/components/RemoveOrdersRequestCreate.md
+  - docs/models/components/RemoveOrdersResponse.md
   - docs/models/components/RemovePartyRequestCreate.md
   - docs/models/components/ReplacePartyRequestCreate.md
   - docs/models/components/ReportingEligibility.md
@@ -1730,6 +1745,7 @@ generatedFiles:
   - docs/models/components/ShortCode.md
   - docs/models/components/Side.md
   - docs/models/components/SideModifier.md
+  - docs/models/components/SimulateCreateCheckDepositRequestCreate.md
   - docs/models/components/SmaAmount.md
   - docs/models/components/Snapshot.md
   - docs/models/components/SnapshotProcessDate.md
@@ -2135,6 +2151,8 @@ generatedFiles:
   - docs/models/operations/BasketOrdersServiceListBasketOrdersResponse.md
   - docs/models/operations/BasketOrdersServiceListCompressedOrdersRequest.md
   - docs/models/operations/BasketOrdersServiceListCompressedOrdersResponse.md
+  - docs/models/operations/BasketOrdersServiceRemoveOrdersRequest.md
+  - docs/models/operations/BasketOrdersServiceRemoveOrdersResponse.md
   - docs/models/operations/BasketOrdersServiceSubmitBasketRequest.md
   - docs/models/operations/BasketOrdersServiceSubmitBasketResponse.md
   - docs/models/operations/BookingCancelExecutionRequest.md
@@ -2175,6 +2193,10 @@ generatedFiles:
   - docs/models/operations/CashJournalsForceRejectCashJournalResponse.md
   - docs/models/operations/CashJournalsGetCashJournalRequest.md
   - docs/models/operations/CashJournalsGetCashJournalResponse.md
+  - docs/models/operations/CheckDepositsGetCheckDepositRequest.md
+  - docs/models/operations/CheckDepositsGetCheckDepositResponse.md
+  - docs/models/operations/CheckDepositsSimulateCreateCheckDepositRequest.md
+  - docs/models/operations/CheckDepositsSimulateCreateCheckDepositResponse.md
   - docs/models/operations/CreditsCancelCreditRequest.md
   - docs/models/operations/CreditsCancelCreditResponse.md
   - docs/models/operations/CreditsCreateCreditRequest.md
@@ -2315,6 +2337,7 @@ generatedFiles:
   - docs/sdks/bankrelationships/README.md
   - docs/sdks/basketorders/README.md
   - docs/sdks/cashbalances/README.md
+  - docs/sdks/checks/README.md
   - docs/sdks/createorder/README.md
   - docs/sdks/dataretrieval/README.md
   - docs/sdks/enrollmentsandagreements/README.md
@@ -2351,6 +2374,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/BankRelationships.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/BasketOrders.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/CashBalances.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/Checks.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/CreateOrder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/DataRetrieval.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/EnrollmentsAndAgreements.java
@@ -2526,6 +2550,8 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityExchangeType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityFactorDenominator.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityFactorNumerator.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityFairMarketValue.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityFairMarketValueDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityFee.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityFpsl.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityFpslAction.java
@@ -2740,6 +2766,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketOrderCumulativeNotionalValue.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketOrderFilledQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketOrderIdentifierType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketOrderMaxSellQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketOrderNotionalValue.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketOrderOrderRejectedReason.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BasketOrderOrderStatus.java
@@ -2900,6 +2927,12 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashRate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CatAccountHolderType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckDeposit.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckDepositAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckDepositRetirementContribution.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckDepositState.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckDepositStateState.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckDepositType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckPartyTypeRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckPartyTypeResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckPartyTypeResponsePartyType.java
@@ -3314,9 +3347,12 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExpirationDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExternalAccount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExternalAccountCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExtraReportingData.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/FPSLEnrollmentMetaDataCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/FactorDenominator.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/FactorNumerator.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/FairMarketValue.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/FairMarketValueDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/FdicCashSweep.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/FederalTaxClassification.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/FederalTaxWithholding.java
@@ -4003,6 +4039,8 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RelationType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RemainingContributionAllowed.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RemainingDistributionRequired.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RemoveOrdersRequestCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RemoveOrdersResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RemovePartyRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ReplacePartyRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ReportingEligibility.java
@@ -4075,6 +4113,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ShortCode.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Side.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SideModifier.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SimulateCreateCheckDepositRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SmaAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Snapshot.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SnapshotProcessDate.java
@@ -4569,6 +4608,9 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/BasketOrdersServiceListCompressedOrdersRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/BasketOrdersServiceListCompressedOrdersRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/BasketOrdersServiceListCompressedOrdersResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/BasketOrdersServiceRemoveOrdersRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/BasketOrdersServiceRemoveOrdersRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/BasketOrdersServiceRemoveOrdersResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/BasketOrdersServiceSubmitBasketRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/BasketOrdersServiceSubmitBasketRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/BasketOrdersServiceSubmitBasketResponse.java
@@ -4630,6 +4672,12 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashJournalsGetCashJournalRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashJournalsGetCashJournalRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashJournalsGetCashJournalResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckDepositsGetCheckDepositRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckDepositsGetCheckDepositRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckDepositsGetCheckDepositResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckDepositsSimulateCreateCheckDepositRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckDepositsSimulateCreateCheckDepositRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckDepositsSimulateCreateCheckDepositResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CreditsCancelCreditRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CreditsCancelCreditRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CreditsCancelCreditResponse.java
@@ -4761,7 +4809,6 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/RetirementConstraintsRetrieveDistributionConstraintsRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/RetirementConstraintsRetrieveDistributionConstraintsRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/RetirementConstraintsRetrieveDistributionConstraintsResponse.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/SDKMethodInterfaces.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/SnapshotsListSnapshotsRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/SnapshotsListSnapshotsRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/SnapshotsListSnapshotsResponse.java
@@ -4826,15 +4873,195 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/WireWithdrawalsGetWireWithdrawalRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/WireWithdrawalsGetWireWithdrawalRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/WireWithdrawalsGetWireWithdrawalResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountTransfersAcceptTransfer.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountTransfersCreateTransfer.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountTransfersGetTransfer.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountTransfersListTransfers.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountTransfersRejectTransfer.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsAddParty.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsAffirmAgreements.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsAssignLargeTrader.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsAssignLargeTraderLegalEntity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsCloseAccount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsCreateAccount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsCreateInterestedParty.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsCreateLegalEntity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsCreateLegalNaturalPerson.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsCreateRestriction.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsCreateTrustedContact.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsDeactivateEnrollment.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsDeleteInterestedParty.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsDeleteTrustedContact.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsEndLargeTrader1.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsEndLargeTraderLegalNaturalPerson.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsEndRestriction.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsEnrollAccount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsGetAccount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsGetLegalEntity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsGetLegalNaturalPerson.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsListAccounts.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsListAgreements.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsListAvailableEnrollments.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsListAvailableEnrollments1.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsListAvailableRestrictions.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsListEnrollments.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsListEntitlements.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsListLegalEntities.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsListLegalNaturalPersons.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsRemoveParty.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsReplaceParty.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsUpdateAccount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsUpdateInterestedParty.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsUpdateLegalEntity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsUpdateLegalNaturalPerson.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsUpdateParty.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsUpdateTrustedContact.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchDepositSchedulesCancelAchDepositSchedule.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchDepositSchedulesCreateAchDepositSchedule.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchDepositSchedulesGetAchDepositSchedule.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchDepositSchedulesListAchDepositSchedules.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchDepositSchedulesUpdateAchDepositSchedule.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchDepositsCancelAchDeposit.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchDepositsCreateAchDeposit.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchDepositsForceApproveAchDeposit.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchDepositsForceNocAchDeposit.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchDepositsForceRejectAchDeposit.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchDepositsForceReturnAchDeposit.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchDepositsGetAchDeposit.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchWithdrawalSchedulesCancelAchWithdrawalSchedule.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchWithdrawalSchedulesCreateAchWithdrawalSchedule.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchWithdrawalSchedulesGetAchWithdrawalSchedule.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchWithdrawalSchedulesListAchWithdrawalSchedules.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchWithdrawalSchedulesUpdateAchWithdrawalSchedule.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchWithdrawalsCancelAchWithdrawal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchWithdrawalsCreateAchWithdrawal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchWithdrawalsForceApproveAchWithdrawal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchWithdrawalsForceNocAchWithdrawal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchWithdrawalsForceRejectAchWithdrawal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchWithdrawalsForceReturnAchWithdrawal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchWithdrawalsGetAchWithdrawal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AssetsGetAsset.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AssetsGetAssetCorrespondent.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AssetsListAssets1.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AssetsListAssetsCorrespondent.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AuthenticationGenerateServiceAccountToken.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AuthenticationListSigningKeys.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BankRelationshipsCancelBankRelationship.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BankRelationshipsCreateBankRelationship.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BankRelationshipsGetBankRelationship.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BankRelationshipsGetMicroDepositAmounts.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BankRelationshipsListBankRelationships.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BankRelationshipsReissueMicroDeposits.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BankRelationshipsReuseBankRelationship.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BankRelationshipsUpdateBankRelationship.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BankRelationshipsVerifyMicroDeposits.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BasketOrdersServiceAddOrders.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BasketOrdersServiceCreateBasket.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BasketOrdersServiceGetBasket.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BasketOrdersServiceListBasketOrders.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BasketOrdersServiceListCompressedOrders.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BasketOrdersServiceRemoveOrders.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BasketOrdersServiceSubmitBasket.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BookingCancelExecution.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BookingCancelTrade.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BookingCancelTradeAllocation.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BookingCompleteTrade.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BookingCreateExecution.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BookingCreateTrade.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BookingCreateTradeAllocation.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BookingGetExecution.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BookingGetTrade.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BookingGetTradeAllocation.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BookingRebookExecution.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BookingRebookTrade.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BookingRebookTradeAllocation.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CashBalancesCalculateCashBalance.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CashJournalsCancelCashJournal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CashJournalsCheckPartyType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CashJournalsCreateCashJournal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CashJournalsForceApproveCashJournal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CashJournalsForceRejectCashJournal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CashJournalsGetCashJournal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CheckDepositsGetCheckDeposit.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CheckDepositsSimulateCreateCheckDeposit.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CreditsCancelCredit.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CreditsCreateCredit.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CreditsGetCredit.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CustomerIdentificationResultServiceGetCustomerIdentification.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/FeesCancelFee.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/FeesCreateFee.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/FeesGetFee.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/IctDepositsCancelIctDeposit.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/IctDepositsCreateIctDeposit.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/IctDepositsForceApproveIctDeposit.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/IctDepositsForceRejectIctDeposit.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/IctDepositsGetIctDeposit.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/IctReconReportsLocateIctReport.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/IctWithdrawalsCancelIctWithdrawal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/IctWithdrawalsCreateIctWithdrawal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/IctWithdrawalsForceApproveIctWithdrawal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/IctWithdrawalsForceRejectIctWithdrawal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/IctWithdrawalsGetIctWithdrawal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/InvestigationServiceGetInvestigation.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/InvestigationServiceLinkDocuments.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/InvestigationServiceListInvestigations.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/InvestigationServiceUpdateInvestigation.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/InvestorCommunicationServiceBatchCreateUploadLinks.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/InvestorCommunicationServiceListDocuments.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/LedgerGetActivity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/LedgerGetEntry.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/LedgerListActivities.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/LedgerListEntries.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/LedgerListPositions.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/MarginsRealTimeGetBuyingPower.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/Operations.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OrderPriceServicePreviewOrderCost.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OrderPriceServiceRetrieveFixedIncomeMarks.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OrderPriceServiceRetrieveQuote.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OrderServiceCancelOrder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OrderServiceCreateOrder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OrderServiceGetOrder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/ReaderGetEventMessage.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/ReaderListEventMessages.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/RetirementConstraintsListContributionSummaries.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/RetirementConstraintsListDistributionSummaries.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/RetirementConstraintsRetrieveCashJournalConstraints.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/RetirementConstraintsRetrieveContributionConstraints.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/RetirementConstraintsRetrieveDistributionConstraints.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/SnapshotsListSnapshots.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/SubscriberCreatePushSubscription.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/SubscriberDeletePushSubscription.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/SubscriberGetPushSubscription.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/SubscriberGetPushSubscriptionDelivery.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/SubscriberListPushSubscriptionDeliveries.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/SubscriberListPushSubscriptions.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/SubscriberUpdatePushSubscription.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/TransferScheduleSummariesListScheduleSummaries.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/WatchlistServiceGetWatchlistItem.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/WireDepositsGetWireDeposit.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/WireWithdrawalSchedulesCancelWireWithdrawalSchedule.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/WireWithdrawalSchedulesCreateWireWithdrawalSchedule.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/WireWithdrawalSchedulesGetWireWithdrawalSchedule.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/WireWithdrawalSchedulesListWireWithdrawalSchedules.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/WireWithdrawalSchedulesUpdateWireWithdrawalSchedule.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/WireWithdrawalsCancelWireWithdrawal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/WireWithdrawalsCreateWireWithdrawal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/WireWithdrawalsForceApproveWireWithdrawal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/WireWithdrawalsForceRejectWireWithdrawal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/WireWithdrawalsGetWireWithdrawal.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/BackoffStrategy.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/BigDecimalString.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/BigIntegerString.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Constants.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/utils/CopiableInputStream.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Deserializers.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/EventStream.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/EventStreamLineReader.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/EventStreamMessage.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/EventStreamReader.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Exceptions.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/FormMetadata.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Globals.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/HTTPClient.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/HTTPRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/HasSecurity.java
@@ -4859,6 +5086,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/RequestBody.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/RequestMetadata.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Response.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/utils/ResponseWithBody.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Retries.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/RetryConfig.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Security.java
@@ -4871,6 +5099,14 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Types.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Utf8UrlEncoder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Utils.java
+  - src/test/java/com/apexfintechsolutions/ascendsdk/AssetsTests.java
+  - src/test/java/com/apexfintechsolutions/ascendsdk/ChecksTests.java
+  - src/test/java/com/apexfintechsolutions/ascendsdk/DataRetrievalTests.java
+  - src/test/java/com/apexfintechsolutions/ascendsdk/InvestigationsTests.java
+  - src/test/java/com/apexfintechsolutions/ascendsdk/MarginsTests.java
+  - src/test/java/com/apexfintechsolutions/ascendsdk/PersonManagementTests.java
+  - src/test/java/com/apexfintechsolutions/ascendsdk/SubscriberTests.java
+  - src/test/java/com/apexfintechsolutions/ascendsdk/TestSimulationTests.java
 examples:
   Authentication_GenerateServiceAccountToken:
     speakeasy-default-authentication-generate-service-account-token:
@@ -4886,23 +5122,39 @@ examples:
         default:
           application/json: {}
   Authentication_ListSigningKeys:
-    "":
-      parameters:
-        query:
-          page_size: 50
-          page_token: "ZXhhbXBsZQo"
+    speakeasy-default-authentication-list-signing-keys:
+      responses:
+        "200":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Reader_ListEventMessages:
-    "":
-      parameters:
-        query:
-          filter: "publish_time==timestamp(\"2023-06-13T23:48:58.343Z\")"
-          page_size: 50
-          page_token: "ZXhhbXBsZQo"
+    speakeasy-default-reader-list-event-messages:
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Reader_GetEventMessage:
-    "":
+    speakeasy-default-reader-get-event-message:
       parameters:
         path:
           message_id: "01H8MCDXH3ZXXMAA3918GRCFVE"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Subscriber_CreatePushSubscription:
     speakeasy-default-subscriber-create-push-subscription:
       requestBody:
@@ -4917,49 +5169,91 @@ examples:
         default:
           application/json: {}
   Subscriber_ListPushSubscriptions:
-    "":
-      parameters:
-        query:
-          filter: "correspondent_id==\"01H8MCDXH4HYJJAV921BDKCC83\""
-          page_size: 50
-          page_token: "ZXhhbXBsZQo"
+    speakeasy-default-subscriber-list-push-subscriptions:
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Subscriber_GetPushSubscription:
-    "":
+    speakeasy-default-subscriber-get-push-subscription:
       parameters:
         path:
           subscription_id: "01H8MCDXH4JVH7KVNB2YY42907"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Subscriber_UpdatePushSubscription:
-    "":
+    speakeasy-default-subscriber-update-push-subscription:
       parameters:
         path:
           subscription_id: "01H8MCDXH4JVH7KVNB2YY42907"
-        query: {}
       requestBody:
         application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Subscriber_DeletePushSubscription:
-    "":
+    speakeasy-default-subscriber-delete-push-subscription:
       parameters:
         path:
           subscription_id: "01H8MCDXH4JVH7KVNB2YY42907"
+      responses:
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Subscriber_GetPushSubscriptionDelivery:
-    "":
+    speakeasy-default-subscriber-get-push-subscription-delivery:
       parameters:
         path:
           subscription_id: "01H8MCDXH4JVH7KVNB2YY42907"
           delivery_id: "01H8MCDXH415BJ962YDN4B02JK"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Subscriber_ListPushSubscriptionDeliveries:
-    "":
+    speakeasy-default-subscriber-list-push-subscription-deliveries:
       parameters:
         path:
           subscription_id: "01H8MCDXH4JVH7KVNB2YY42907"
-        query:
-          filter: "event_publish_time==timestamp(\"2023-06-13T23:48:58.343Z\")"
-          page_size: 50
-          page_token: "ZXhhbXBsZQo"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_CreateLegalNaturalPerson:
     speakeasy-default-accounts-create-legal-natural-person:
       requestBody:
-        application/json: {"birth_date": {}, "citizenship_countries": ["US", "CA"], "correspondent_id": "01HPMZZM6RKMVZA1JQ63RQKJRP", "employment": {"employment_status": "EMPLOYED", "occupation": "Software Engineer"}, "family_name": "Doe", "given_name": "John", "personal_address": {}, "tax_profile": {"federal_tax_classification": "C_CORPORATION", "irs_form_type": "W_9", "legal_tax_region_code": "US", "us_tin_status": "PASSING"}}
+        application/json: {"birth_date": {}, "citizenship_countries": ["US", "CA"], "correspondent_id": "01HPMZZM6RKMVZA1JQ63RQKJRP", "employment": {"employment_status": "EMPLOYED"}, "family_name": "Doe", "given_name": "John", "personal_address": {}, "tax_profile": {"federal_tax_classification": "C_CORPORATION", "irs_form_type": "IRS_FORM_TYPE_UNSPECIFIED", "legal_tax_region_code": "US", "us_tin_status": "PASSING"}}
       responses:
         "200":
           application/json: {}
@@ -4970,43 +5264,80 @@ examples:
         default:
           application/json: {}
   Accounts_ListLegalNaturalPersons:
-    "":
-      parameters:
-        query:
-          page_size: 25
-          page_token: "AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"
-          filter: "legal_natural_person_id == \"e6716139-da77-46d1-9f15-13599161db0b\""
+    speakeasy-default-accounts-list-legal-natural-persons:
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_GetLegalNaturalPerson:
-    "":
+    speakeasy-default-accounts-get-legal-natural-person:
       parameters:
         path:
           legalNaturalPerson_id: "e6716139-da77-46d1-9f15-13599161db0b"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_UpdateLegalNaturalPerson:
-    "":
+    speakeasy-default-accounts-update-legal-natural-person:
       parameters:
         path:
           legalNaturalPerson_id: "e6716139-da77-46d1-9f15-13599161db0b"
-        query: {}
       requestBody:
         application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_AssignLargeTrader:
-    "":
+    speakeasy-default-accounts-assign-large-trader:
       parameters:
         path:
           legalNaturalPerson_id: "e6716139-da77-46d1-9f15-13599161db0b"
       requestBody:
         application/json: {"large_trader_id": "1234567890"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_EndLargeTrader_LegalNaturalPerson:
-    "":
+    speakeasy-default-accounts-end-large-trader-legal-natural-person:
       parameters:
         path:
           legalNaturalPerson_id: "e6716139-da77-46d1-9f15-13599161db0b"
       requestBody:
-        application/json: {"end_reason": "EVENT_REASON_OTHER"}
+        application/json: {"end_reason": "EVENT_REASON_ENDED"}
+      responses:
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_CreateLegalEntity:
     speakeasy-default-accounts-create-legal-entity:
       requestBody:
-        application/json: {"correspondent_id": "01HPMZZM6RKMVZA1JQ63RQKJRP", "entity_name": "Acme, Inc", "entity_type": "CORPORATION", "legal_address": {}, "operating_regions": ["US", "CA"], "registration_region": "US", "tax_id": "987-65-4321", "tax_id_type": "TAX_ID_TYPE_ITIN", "tax_profile": {"federal_tax_classification": "C_CORPORATION", "irs_form_type": "W_9", "legal_tax_region_code": "US", "us_tin_status": "PASSING"}}
+        application/json: {"correspondent_id": "01HPMZZM6RKMVZA1JQ63RQKJRP", "entity_name": "Acme, Inc", "entity_type": "CORPORATION", "legal_address": {}, "operating_regions": ["US", "CA"], "registration_region": "US", "tax_id": "987-65-4321", "tax_id_type": "TAX_ID_TYPE_SSN", "tax_profile": {"federal_tax_classification": "C_CORPORATION", "irs_form_type": "IRS_FORM_TYPE_UNSPECIFIED", "legal_tax_region_code": "US", "us_tin_status": "PASSING"}}
       responses:
         "200":
           application/json: {}
@@ -5017,38 +5348,76 @@ examples:
         default:
           application/json: {}
   Accounts_ListLegalEntities:
-    "":
-      parameters:
-        query:
-          page_size: 25
-          page_token: "AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"
+    speakeasy-default-accounts-list-legal-entities:
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_GetLegalEntity:
-    "":
+    speakeasy-default-accounts-get-legal-entity:
       parameters:
         path:
           legalEntity_id: "e6716139-da77-46d1-9f15-13599161db0b"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_UpdateLegalEntity:
-    "":
+    speakeasy-default-accounts-update-legal-entity:
       parameters:
         path:
           legalEntity_id: "42567868-9373-4872-9d24-2e33f6c19b75"
-        query: {}
       requestBody:
         application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_AssignLargeTrader_LegalEntity:
-    "":
+    speakeasy-default-accounts-assign-large-trader-legal-entity:
       parameters:
         path:
           legalEntity_id: "e6716139-da77-46d1-9f15-13599161db0b"
       requestBody:
         application/json: {"large_trader_id": "1234567890"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_EndLargeTrader_1:
-    "":
+    speakeasy-default-accounts-end-large-trader-1:
       parameters:
         path:
           legalEntity_id: "e6716139-da77-46d1-9f15-13599161db0b"
       requestBody:
-        application/json: {"end_reason": "EVENT_REASON_CREATED"}
+        application/json: {"end_reason": "EVENT_REASON_ENDED"}
+      responses:
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_CreateAccount:
     speakeasy-default-accounts-create-account:
       requestBody:
@@ -5063,275 +5432,1646 @@ examples:
         default:
           application/json: {}
   Accounts_GetAccount:
-    "":
+    speakeasy-default-accounts-get-account:
       parameters:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
-        query:
-          view: "FULL"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_ListAccounts:
-    "":
-      parameters:
-        query:
-          page_size: 25
-          page_token: "4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"
-          order_by: "state"
-          filter: "account_number == \"R9AHY8P\""
-          view: "FULL"
+    speakeasy-default-accounts-list-accounts:
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_UpdateAccount:
-    "":
+    speakeasy-default-accounts-update-account:
       parameters:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
-        query: {}
       requestBody:
         application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_AddParty:
-    "":
+    speakeasy-default-accounts-add-party:
       parameters:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
       requestBody:
         application/json: {"parent": "accounts/01HC3MAQ4DR9QN1V8MJ4CN1HMK", "party": {"email_address": "example@domain.com", "mailing_address": {}, "phone_number": {}, "relation_type": "PRIMARY_OWNER"}}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_UpdateParty:
-    "":
+    speakeasy-default-accounts-update-party:
       parameters:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
           party_id: "a58ddb02-3954-4249-a7d5-1d408def12cf"
-        query: {}
       requestBody:
         application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_ReplaceParty:
-    "":
+    speakeasy-default-accounts-replace-party:
       parameters:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
           party_id: "8096110d-fb55-4f9d-b883-b84f0b70d3ea"
       requestBody:
         application/json: {"name": "accounts/01HC3MAQ4DR9QN1V8MJ4CN1HMK/parties/8096110d-fb55-4f9d-b883-b84f0b70d3ea", "party": {"email_address": "example@domain.com", "mailing_address": {}, "phone_number": {}, "relation_type": "PRIMARY_OWNER"}}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_RemoveParty:
-    "":
+    speakeasy-default-accounts-remove-party:
       parameters:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
           party_id: "8096110d-fb55-4f9d-b883-b84f0b70d3ea"
       requestBody:
         application/json: {"name": "accounts/01HC3MAQ4DR9QN1V8MJ4CN1HMK/parties/8096110d-fb55-4f9d-b883-b84f0b70d3ea"}
+      responses:
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_CloseAccount:
-    "":
+    speakeasy-default-accounts-close-account:
       parameters:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
       requestBody:
         application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_CreateTrustedContact:
-    "":
+    speakeasy-default-accounts-create-trusted-contact:
       parameters:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
       requestBody:
         application/json: {"family_name": "Doe", "given_name": "John"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_UpdateTrustedContact:
-    "":
+    speakeasy-default-accounts-update-trusted-contact:
       parameters:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
           trustedContact_id: "8096110d-fb55-4f9d-b883-b84f0b70d3ea"
-        query: {}
       requestBody:
         application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_DeleteTrustedContact:
-    "":
+    speakeasy-default-accounts-delete-trusted-contact:
       parameters:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
           trustedContact_id: "8096110d-fb55-4f9d-b883-b84f0b70d3ea"
+      responses:
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_CreateInterestedParty:
-    "":
+    speakeasy-default-accounts-create-interested-party:
       parameters:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
       requestBody:
         application/json: {"mailing_address": {}, "recipient": "John Dough"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_UpdateInterestedParty:
-    "":
+    speakeasy-default-accounts-update-interested-party:
       parameters:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
           interestedParty_id: "ecf44f2f-7030-48ed-b937-c40891ee10c8"
-        query: {}
       requestBody:
         application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_DeleteInterestedParty:
-    "":
+    speakeasy-default-accounts-delete-interested-party:
       parameters:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
           interestedParty_id: "8096110d-fb55-4f9d-b883-b84f0b70d3ea"
+      responses:
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_ListAvailableRestrictions:
-    "":
+    speakeasy-default-accounts-list-available-restrictions:
       parameters:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_CreateRestriction:
-    "":
+    speakeasy-default-accounts-create-restriction:
       parameters:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
       requestBody:
         application/json: {"create_reason": "Some reason for creating", "restriction_code": "MARGIN_CALL_VIOLATION_REG_T"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_EndRestriction:
-    "":
+    speakeasy-default-accounts-end-restriction:
       parameters:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
           restriction_id: "FRAUD_SUSPENDED_BY_CORRESPONDENT"
       requestBody:
         application/json: {"reason": "Reason for ending the restriction"}
+      responses:
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_EnrollAccount:
-    "":
+    speakeasy-default-accounts-enroll-account:
       parameters:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
       requestBody:
         application/json: {"enrollment": {"principal_approver_id": "02HB7N66WW02WL3B6B9W29K0HW", "type": "REGISTRATION_INDIVIDUAL"}}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_ListAvailableEnrollments:
-    "":
+    speakeasy-default-accounts-list-available-enrollments:
       parameters:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
-        query:
-          page_size: 25
-          page_token: "AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"
-          filter: "enrollment_type == \"REGISTRATION_INDIVIDUAL\""
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_ListAvailableEnrollments_1:
-    "":
+    speakeasy-default-accounts-list-available-enrollments-1:
       parameters:
         path:
           accountGroup_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
-        query:
-          page_size: 25
-          page_token: "AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"
-          filter: "enrollment_type == \"REGISTRATION_INDIVIDUAL\""
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_DeactivateEnrollment:
-    "":
+    speakeasy-default-accounts-deactivate-enrollment:
       parameters:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
       requestBody:
         application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_ListEnrollments:
-    "":
+    speakeasy-default-accounts-list-enrollments:
       parameters:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
-        query:
-          page_size: 5
-          page_token: "4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_AffirmAgreements:
-    "":
+    speakeasy-default-accounts-affirm-agreements:
       parameters:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
       requestBody:
         application/json: {"account_agreement_ids": ["fa2f181c-f2fb-4bc2-b75a-79302c634ae5"]}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_ListAgreements:
-    "":
+    speakeasy-default-accounts-list-agreements:
       parameters:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
-        query:
-          page_size: 5
-          page_token: "4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Accounts_ListEntitlements:
-    "":
+    speakeasy-default-accounts-list-entitlements:
       parameters:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
-        query:
-          page_size: 5
-          page_token: "4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   InvestigationService_GetInvestigation:
-    "":
+    speakeasy-default-investigation-service-get-investigation:
       parameters:
         path:
           investigation_id: "01HEWVF4ZSNKYRP293J53ASJCJ"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   InvestigationService_UpdateInvestigation:
-    "":
+    speakeasy-default-investigation-service-update-investigation:
       parameters:
         path:
           investigation_id: "01HEWVF4ZSNKYRP293J53ASJCJ"
-        query:
-          update_mask: "{\"update_mask\":\"identity_verification\"}"
       requestBody:
         application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   InvestigationService_ListInvestigations:
-    "":
-      parameters:
-        query:
-          page_size: 100
-          filter: "person.given_name == 'Jane' && person.family_name == 'Dough'"
-          order_by: "person.given_name desc"
+    speakeasy-default-investigation-service-list-investigations:
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   InvestigationService_LinkDocuments:
-    "":
+    speakeasy-default-investigation-service-link-documents:
       parameters:
         path:
           investigation_id: "01HEWVF4ZSNKYRP293J53ASJCJ"
       requestBody:
         application/json: {"identity_verification_document_ids": ["0f01ae1f-d24c-4171-8f3f-c0b820bf3044"]}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   WatchlistService_GetWatchlistItem:
-    "":
+    speakeasy-default-watchlist-service-get-watchlist-item:
       parameters:
         path:
           watchlist_id: "DOWJONES"
           item_id: "123456"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   CustomerIdentificationResultService_GetCustomerIdentification:
-    "":
+    speakeasy-default-customer-identification-result-service-get-customer-identification:
       parameters:
         path:
           correspondent_id: "01HPMZZM6RKMVZA1JQ63RQKJRP"
           customerIdentification_id: "01HEWVF4ZSNKYRP293J53ASJCJ"
-        query:
-          view: "BASIC"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  BankRelationships_CreateBankRelationship:
+    speakeasy-default-bank-relationships-create-bank-relationship:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      requestBody:
+        application/json: {"nickname": "My Primary Bank", "verification_method": "MICRO_DEPOSIT"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  BankRelationships_ListBankRelationships:
+    speakeasy-default-bank-relationships-list-bank-relationships:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  BankRelationships_GetBankRelationship:
+    speakeasy-default-bank-relationships-get-bank-relationship:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          bankRelationship_id: "651ef9de0dee00240813e60e"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  BankRelationships_UpdateBankRelationship:
+    speakeasy-default-bank-relationships-update-bank-relationship:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          bankRelationship_id: "651ef9de0dee00240813e60e"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  BankRelationships_CancelBankRelationship:
+    speakeasy-default-bank-relationships-cancel-bank-relationship:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          bankRelationship_id: "651ef9de0dee00240813e60e"
+      requestBody:
+        application/json: {"comment": "User Request", "name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  BankRelationships_VerifyMicroDeposits:
+    speakeasy-default-bank-relationships-verify-micro-deposits:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          bankRelationship_id: "651ef9de0dee00240813e60e"
+      requestBody:
+        application/json: {"amounts": {"amount1": {}, "amount2": {}}, "name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  BankRelationships_ReissueMicroDeposits:
+    speakeasy-default-bank-relationships-reissue-micro-deposits:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          bankRelationship_id: "651ef9de0dee00240813e60e"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  BankRelationships_ReuseBankRelationship:
+    speakeasy-default-bank-relationships-reuse-bank-relationship:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Z"
+      requestBody:
+        application/json: {"parent": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Z", "source_bank_relationship": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchDeposits_CreateAchDeposit:
+    speakeasy-default-ach-deposits-create-ach-deposit:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      requestBody:
+        application/json: {"amount": {}, "bank_relationship": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e", "client_transfer_id": "179dcd33-49f8-4615-989c-560fb387c4fd"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchDeposits_GetAchDeposit:
+    speakeasy-default-ach-deposits-get-ach-deposit:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          achDeposit_id: "20230817000319"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchDeposits_CancelAchDeposit:
+    speakeasy-default-ach-deposits-cancel-ach-deposit:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          achDeposit_id: "20230817000319"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achDeposits/20230817000319"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchWithdrawals_CreateAchWithdrawal:
+    speakeasy-default-ach-withdrawals-create-ach-withdrawal:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      requestBody:
+        application/json: {"bank_relationship": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e", "client_transfer_id": "179dcd33-49f8-4615-989c-560fb387c4fd"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchWithdrawals_GetAchWithdrawal:
+    speakeasy-default-ach-withdrawals-get-ach-withdrawal:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          achWithdrawal_id: "20230620500726"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchWithdrawals_CancelAchWithdrawal:
+    speakeasy-default-ach-withdrawals-cancel-ach-withdrawal:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          achWithdrawal_id: "20230620500726"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achWithdrawals/20230620500726"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  IctDeposits_CreateIctDeposit:
+    speakeasy-default-ict-deposits-create-ict-deposit:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      requestBody:
+        application/json: {"amount": {}, "client_transfer_id": "ABC-123", "program": "DEPOSIT_ONLY", "travel_rule": {"originating_institution": {"account_id": "<id>", "title": "<value>"}}}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  IctDeposits_GetIctDeposit:
+    speakeasy-default-ict-deposits-get-ict-deposit:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          ictDeposit_id: "20240321000472"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  IctDeposits_CancelIctDeposit:
+    speakeasy-default-ict-deposits-cancel-ict-deposit:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          ictDeposit_id: "20240321000472"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/ictDeposits/20240321000472"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  IctWithdrawals_CreateIctWithdrawal:
+    speakeasy-default-ict-withdrawals-create-ict-withdrawal:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      requestBody:
+        application/json: {"client_transfer_id": "20230817000319", "program": "BROKER_PARTNER", "travel_rule": {"recipient_institution": {"account_id": "<id>", "title": "<value>"}}}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  IctWithdrawals_GetIctWithdrawal:
+    speakeasy-default-ict-withdrawals-get-ict-withdrawal:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          ictWithdrawal_id: "20240321000472"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  IctWithdrawals_CancelIctWithdrawal:
+    speakeasy-default-ict-withdrawals-cancel-ict-withdrawal:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          ictWithdrawal_id: "20240321000472"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/ictWithdrawals/20240321000472"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  IctReconReports_LocateIctReport:
+    speakeasy-default-ict-recon-reports-locate-ict-report:
+      parameters:
+        path:
+          correspondent_id: "01H8MCDXH4HYJJAV921BDKCC83"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  RetirementConstraints_ListContributionSummaries:
+    speakeasy-default-retirement-constraints-list-contribution-summaries:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  RetirementConstraints_RetrieveContributionConstraints:
+    speakeasy-default-retirement-constraints-retrieve-contribution-constraints:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      requestBody:
+        application/json: {"mechanism": "ACH", "name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  RetirementConstraints_ListDistributionSummaries:
+    speakeasy-default-retirement-constraints-list-distribution-summaries:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  RetirementConstraints_RetrieveDistributionConstraints:
+    speakeasy-default-retirement-constraints-retrieve-distribution-constraints:
+      parameters:
+        path:
+          account_id: "01H8FM6EXVH77SAW3TC8KAWMES"
+      requestBody:
+        application/json: {"mechanism": "ACH", "name": "accounts/01H8FM6EXVH77SAW3TC8KAWMES"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  RetirementConstraints_RetrieveCashJournalConstraints:
+    speakeasy-default-retirement-constraints-retrieve-cash-journal-constraints:
+      requestBody:
+        application/json: {"destination_account": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y", "source_account": "accounts/01H8FM6EXVH77SAW3TC8KAWMES"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  CashJournals_CreateCashJournal:
+    speakeasy-default-cash-journals-create-cash-journal:
+      requestBody:
+        application/json: {"client_transfer_id": "113bw03-49f8-4525-934c-560fb39dg2kd", "destination_account": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y", "source_account": "accounts/01H8FM6EXVH77SAW3TC8KAWMES"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  CashJournals_GetCashJournal:
+    speakeasy-default-cash-journals-get-cash-journal:
+      parameters:
+        path:
+          cashJournal_id: "20230817000319"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  CashJournals_CancelCashJournal:
+    speakeasy-default-cash-journals-cancel-cash-journal:
+      parameters:
+        path:
+          cashJournal_id: "20240717000319"
+      requestBody:
+        application/json: {"name": "cashJournals/20240717000319"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  CashJournals_CheckPartyType:
+    speakeasy-default-cash-journals-check-party-type:
+      requestBody:
+        application/json: {"destination_account": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y", "source_account": "accounts/01H8FM6EXVH77SAW3TC8KAWMES"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  TransferScheduleSummaries_ListScheduleSummaries:
+    speakeasy-default-transfer-schedule-summaries-list-schedule-summaries:
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchDepositSchedules_CreateAchDepositSchedule:
+    speakeasy-default-ach-deposit-schedules-create-ach-deposit-schedule:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      requestBody:
+        application/json: {"bank_relationship": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e", "schedule_details": {"amount": {}, "client_schedule_id": "ABC-123", "schedule_properties": {"start_date": {}, "time_unit": "MONTH", "unit_multiplier": 1}}}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchDepositSchedules_ListAchDepositSchedules:
+    speakeasy-default-ach-deposit-schedules-list-ach-deposit-schedules:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchDepositSchedules_GetAchDepositSchedule:
+    speakeasy-default-ach-deposit-schedules-get-ach-deposit-schedule:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          achDepositSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchDepositSchedules_UpdateAchDepositSchedule:
+    speakeasy-default-ach-deposit-schedules-update-ach-deposit-schedule:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          achDepositSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchDepositSchedules_CancelAchDepositSchedule:
+    speakeasy-default-ach-deposit-schedules-cancel-ach-deposit-schedule:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          achDepositSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achDepositSchedules/40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchWithdrawalSchedules_CreateAchWithdrawalSchedule:
+    speakeasy-default-ach-withdrawal-schedules-create-ach-withdrawal-schedule:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      requestBody:
+        application/json: {"bank_relationship": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e", "schedule_details": {"client_schedule_id": "ABC-123", "schedule_properties": {"start_date": {}, "time_unit": "MONTH", "unit_multiplier": 1}}}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchWithdrawalSchedules_ListAchWithdrawalSchedules:
+    speakeasy-default-ach-withdrawal-schedules-list-ach-withdrawal-schedules:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchWithdrawalSchedules_GetAchWithdrawalSchedule:
+    speakeasy-default-ach-withdrawal-schedules-get-ach-withdrawal-schedule:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          achWithdrawalSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchWithdrawalSchedules_UpdateAchWithdrawalSchedule:
+    speakeasy-default-ach-withdrawal-schedules-update-ach-withdrawal-schedule:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          achWithdrawalSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchWithdrawalSchedules_CancelAchWithdrawalSchedule:
+    speakeasy-default-ach-withdrawal-schedules-cancel-ach-withdrawal-schedule:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          achWithdrawalSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achWithdrawalSchedules/40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  WireWithdrawalSchedules_CreateWireWithdrawalSchedule:
+    speakeasy-default-wire-withdrawal-schedules-create-wire-withdrawal-schedule:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      requestBody:
+        application/json: {"beneficiary": {"account": "73849218650987"}, "recipient_bank": {"bank_id": {"id": "ABNANL2AXXX", "type": "BIC"}}, "schedule_details": {"client_schedule_id": "ABC-123", "schedule_properties": {"start_date": {}, "time_unit": "MONTH", "unit_multiplier": 1}}}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  WireWithdrawalSchedules_ListWireWithdrawalSchedules:
+    speakeasy-default-wire-withdrawal-schedules-list-wire-withdrawal-schedules:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  WireWithdrawalSchedules_GetWireWithdrawalSchedule:
+    speakeasy-default-wire-withdrawal-schedules-get-wire-withdrawal-schedule:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          wireWithdrawalSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  WireWithdrawalSchedules_UpdateWireWithdrawalSchedule:
+    speakeasy-default-wire-withdrawal-schedules-update-wire-withdrawal-schedule:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          wireWithdrawalSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  WireWithdrawalSchedules_CancelWireWithdrawalSchedule:
+    speakeasy-default-wire-withdrawal-schedules-cancel-wire-withdrawal-schedule:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          wireWithdrawalSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/wireWithdrawalSchedules/40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  CheckDeposits_GetCheckDeposit:
+    speakeasy-default-check-deposits-get-check-deposit:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          checkDeposit_id: "20230817000319"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  CheckDeposits_SimulateCreateCheckDeposit:
+    speakeasy-default-check-deposits-simulate-create-check-deposit:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      requestBody:
+        application/json: {"amount": {}, "parent": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchDeposits_ForceApproveAchDeposit:
+    speakeasy-default-ach-deposits-force-approve-ach-deposit:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          achDeposit_id: "20230817000319"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achDeposits/20230817000319"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchDeposits_ForceNocAchDeposit:
+    speakeasy-default-ach-deposits-force-noc-ach-deposit:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          achDeposit_id: "20230817000319"
+      requestBody:
+        application/json: {"nacha_noc": {"code": "C01"}, "name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achDeposits/20230817000319"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchDeposits_ForceRejectAchDeposit:
+    speakeasy-default-ach-deposits-force-reject-ach-deposit:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          achDeposit_id: "20230817000319"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achDeposits/20230817000319"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchDeposits_ForceReturnAchDeposit:
+    speakeasy-default-ach-deposits-force-return-ach-deposit:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          achDeposit_id: "20230817000319"
+      requestBody:
+        application/json: {"nacha_return": {"code": "R13"}, "name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achDeposits/20230817000319"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchWithdrawals_ForceApproveAchWithdrawal:
+    speakeasy-default-ach-withdrawals-force-approve-ach-withdrawal:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          achWithdrawal_id: "20230620500726"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achWithdrawals/20230620500726"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchWithdrawals_ForceNocAchWithdrawal:
+    speakeasy-default-ach-withdrawals-force-noc-ach-withdrawal:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          achWithdrawal_id: "20230620500726"
+      requestBody:
+        application/json: {"nacha_noc": {"code": "C01"}, "name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achWithdrawals/20230620500726"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchWithdrawals_ForceRejectAchWithdrawal:
+    speakeasy-default-ach-withdrawals-force-reject-ach-withdrawal:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          achWithdrawal_id: "20230620500726"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achWithdrawals/20230620500726"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AchWithdrawals_ForceReturnAchWithdrawal:
+    speakeasy-default-ach-withdrawals-force-return-ach-withdrawal:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          achWithdrawal_id: "20230620500726"
+      requestBody:
+        application/json: {"nacha_return": {"code": "R15"}, "name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achWithdrawals/20230620500726"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  BankRelationships_GetMicroDepositAmounts:
+    speakeasy-default-bank-relationships-get-micro-deposit-amounts:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          bankRelationship_id: "651ef9de0dee00240813e60e"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  IctDeposits_ForceApproveIctDeposit:
+    speakeasy-default-ict-deposits-force-approve-ict-deposit:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          ictDeposit_id: "20240321000472"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/ictDeposits/20240321000472"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  IctDeposits_ForceRejectIctDeposit:
+    speakeasy-default-ict-deposits-force-reject-ict-deposit:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          ictDeposit_id: "20240321000472"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/ictDeposits/20240321000472"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  IctWithdrawals_ForceApproveIctWithdrawal:
+    speakeasy-default-ict-withdrawals-force-approve-ict-withdrawal:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          ictWithdrawal_id: "20240321000472"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/ictWithdrawals/20240321000472"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  IctWithdrawals_ForceRejectIctWithdrawal:
+    speakeasy-default-ict-withdrawals-force-reject-ict-withdrawal:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          ictWithdrawal_id: "20240321000472"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/ictWithdrawals/20240321000472"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  WireWithdrawals_ForceApproveWireWithdrawal:
+    speakeasy-default-wire-withdrawals-force-approve-wire-withdrawal:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          wireWithdrawal_id: "20230817000319"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/wireWithdrawals/20230817000319"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  WireWithdrawals_ForceRejectWireWithdrawal:
+    speakeasy-default-wire-withdrawals-force-reject-wire-withdrawal:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          wireWithdrawal_id: "20230817000319"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/wireWithdrawals/20230817000319"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  CashJournals_ForceApproveCashJournal:
+    speakeasy-default-cash-journals-force-approve-cash-journal:
+      parameters:
+        path:
+          cashJournal_id: "20230817000319"
+      requestBody:
+        application/json: {"name": "cashJournals/20230817000319"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  CashJournals_ForceRejectCashJournal:
+    speakeasy-default-cash-journals-force-reject-cash-journal:
+      parameters:
+        path:
+          cashJournal_id: "20230817000319"
+      requestBody:
+        application/json: {"name": "cashJournals/20230817000319"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  WireDeposits_GetWireDeposit:
+    speakeasy-default-wire-deposits-get-wire-deposit:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          wireDeposit_id: "20230817000319"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  WireWithdrawals_CreateWireWithdrawal:
+    speakeasy-default-wire-withdrawals-create-wire-withdrawal:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      requestBody:
+        application/json: {"beneficiary": {"account": "73849218650987"}, "client_transfer_id": "ABC-123", "recipient_bank": {"bank_id": {"id": "ABNANL2AXXX", "type": "BIC"}}}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  WireWithdrawals_GetWireWithdrawal:
+    speakeasy-default-wire-withdrawals-get-wire-withdrawal:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          wireWithdrawal_id: "20230817000319"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  WireWithdrawals_CancelWireWithdrawal:
+    speakeasy-default-wire-withdrawals-cancel-wire-withdrawal:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          wireWithdrawal_id: "20230817000319"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/wireWithdrawals/20230817000319"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  CashBalances_CalculateCashBalance:
+    speakeasy-default-cash-balances-calculate-cash-balance:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  Fees_CreateFee:
+    speakeasy-default-fees-create-fee:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      requestBody:
+        application/json: {"amount": {}, "client_transfer_id": "179dcd33-49f8-4615-989c-560fb387c4fd", "type": "PLATFORM"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  Fees_GetFee:
+    speakeasy-default-fees-get-fee:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          fee_id: "20230823123456"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  Fees_CancelFee:
+    speakeasy-default-fees-cancel-fee:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          fee_id: "20230823123456"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/fees/20230823123456"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  Credits_CreateCredit:
+    speakeasy-default-credits-create-credit:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      requestBody:
+        application/json: {"amount": {}, "client_transfer_id": "179dcd33-49f8-4615-989c-560fb387c4fd", "type": "PROMOTIONAL"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  Credits_GetCredit:
+    speakeasy-default-credits-get-credit:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          credit_id: "20230823123456"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  Credits_CancelCredit:
+    speakeasy-default-credits-cancel-credit:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          credit_id: "20230823123456"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/credits/20230823123456"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
   AccountTransfers_CreateTransfer:
-    "":
+    speakeasy-default-account-transfers-create-transfer:
       parameters:
         path:
           correspondent_id: "00000000-0000-0000-0000-000000000002"
           account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-        query:
-          request_id: "ABC-123"
       requestBody:
         application/json: {"deliverer": {}}
-  AccountTransfers_GetTransfer:
-    "":
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  AccountTransfers_ListTransfers:
+    speakeasy-default-account-transfers-list-transfers:
+      parameters:
+        path:
+          correspondent_id: "00000000-0000-0000-0000-000000000002"
+          account_id: "01FAKEACCOUNT"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  AccountTransfers_AcceptTransfer:
+    speakeasy-default-account-transfers-accept-transfer:
       parameters:
         path:
           correspondent_id: "00000000-0000-0000-0000-000000000002"
           account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
           transfer_id: "00000000-0000-0000-0000-000000000000"
+      requestBody:
+        application/json: {"name": "correspondents/00000000-0000-0000-0000-000000000002/accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/transfers/00000000-0000-0000-0000-000000000000"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  AccountTransfers_RejectTransfer:
+    speakeasy-default-account-transfers-reject-transfer:
+      parameters:
+        path:
+          correspondent_id: "00000000-0000-0000-0000-000000000002"
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          transfer_id: "00000000-0000-0000-0000-000000000000"
+      requestBody:
+        application/json: {"name": "correspondents/00000000-0000-0000-0000-000000000002/accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/transfers/00000000-0000-0000-0000-000000000000"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  AccountTransfers_GetTransfer:
+    speakeasy-default-account-transfers-get-transfer:
+      parameters:
+        path:
+          correspondent_id: "00000000-0000-0000-0000-000000000002"
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          transfer_id: "00000000-0000-0000-0000-000000000000"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
   OrderService_CreateOrder:
-    "":
+    speakeasy-default-order-service-create-order:
       parameters:
         path:
           account_id: "01HBRQ5BW6ZAY4BNWP4GWRD80X"
       requestBody:
         application/json: {"asset_type": "EQUITY", "client_order_id": "a6d5258b-6b23-478a-8145-98e79d60427a", "identifier": "SBUX", "identifier_type": "SYMBOL", "order_date": {}, "order_type": "MARKET", "side": "BUY", "time_in_force": "DAY"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   OrderService_GetOrder:
-    "":
+    speakeasy-default-order-service-get-order:
       parameters:
         path:
           account_id: "01HBRQ5BW6ZAY4BNWP4GWRD80X"
           order_id: "ebb0c9b5-2c74-45c9-a4ab-40596b778706"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   OrderService_CancelOrder:
-    "":
+    speakeasy-default-order-service-cancel-order:
       parameters:
         path:
           account_id: "01HBRQ5BW6ZAY4BNWP4GWRD80X"
           order_id: "ebb0c9b5-2c74-45c9-a4ab-40596b778706"
       requestBody:
         application/json: {"name": "accounts/01HBRQ5BW6ZAY4BNWP4GWRD80X/orders/ebb0c9b5-2c74-45c9-a4ab-40596b778706"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   OrderPriceService_PreviewOrderCost:
     speakeasy-default-order-price-service-preview-order-cost:
       parameters:
@@ -5370,7 +7110,7 @@ examples:
         path:
           correspondent_id: "<id>"
       requestBody:
-        application/json: {"parent": "<value>", "security_identifiers": [{"identifier": "37833100", "identifier_type": "CUSIP"}, {"identifier": "37833100", "identifier_type": "CUSIP"}]}
+        application/json: {"parent": "<value>", "security_identifiers": [{"identifier": "US0378331005", "identifier_type": "ISIN"}, {"identifier": "38259P508", "identifier_type": "CUSIP"}]}
       responses:
         "200":
           application/json: {}
@@ -5381,120 +7121,473 @@ examples:
         default:
           application/json: {}
   BasketOrdersService_CreateBasket:
-    "":
+    speakeasy-default-basket-orders-service-create-basket:
       parameters:
         path:
           correspondent_id: "01HPMZZM6RKMVZA1JQ63RQKJRP"
       requestBody:
         application/json: {"client_basket_id": "39347a0d-860b-48e8-a04d-511133f057e3", "correspondent_id": "01HPMZZM6RKMVZA1JQ63RQKJRP"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   BasketOrdersService_AddOrders:
-    "":
+    speakeasy-default-basket-orders-service-add-orders:
       parameters:
         path:
           correspondent_id: "01HPMZZM6RKMVZA1JQ63RQKJRP"
           basket_id: "fffd326-72fa-4d2b-bd1f-45384fe5d521"
       requestBody:
-        application/json: {"basket_orders": [{"account_id": "01HBRQ5BW6ZAY4BNWP4GWRD80X", "asset_type": "EQUITY", "client_order_id": "a6d5258b-6b23-478a-8145-98e79d60427a", "identifier": "SBUX", "identifier_type": "SYMBOL", "order_type": "MARKET", "side": "BUY", "time_in_force": "DAY"}, {"account_id": "01HBRQ5BW6ZAY4BNWP4GWRD80X", "asset_type": "EQUITY", "client_order_id": "a6d5258b-6b23-478a-8145-98e79d60427a", "identifier": "SBUX", "identifier_type": "SYMBOL", "order_type": "MARKET", "side": "BUY", "time_in_force": "DAY"}], "name": "correspondents/01HPMZZM6RKMVZA1JQ63RQKJRP/baskets/fffd326-72fa-4d2b-bd1f-45384fe5d521"}
+        application/json: {"basket_orders": [], "name": "correspondents/01HPMZZM6RKMVZA1JQ63RQKJRP/baskets/fffd326-72fa-4d2b-bd1f-45384fe5d521"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   BasketOrdersService_GetBasket:
-    "":
+    speakeasy-default-basket-orders-service-get-basket:
       parameters:
         path:
           correspondent_id: "01HPMZZM6RKMVZA1JQ63RQKJRP"
           basket_id: "fffd326-72fa-4d2b-bd1f-45384fe5d521"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   BasketOrdersService_SubmitBasket:
-    "":
+    speakeasy-default-basket-orders-service-submit-basket:
       parameters:
         path:
           correspondent_id: "01HPMZZM6RKMVZA1JQ63RQKJRP"
           basket_id: "fffd326-72fa-4d2b-bd1f-45384fe5d521"
       requestBody:
         application/json: {"name": "correspondents/01HPMZZM6RKMVZA1JQ63RQKJRP/baskets/fffd326-72fa-4d2b-bd1f-45384fe5d521"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   BasketOrdersService_ListBasketOrders:
-    "":
+    speakeasy-default-basket-orders-service-list-basket-orders:
       parameters:
         path:
           correspondent_id: "01HPMZZM6RKMVZA1JQ63RQKJRP"
           basket_id: "fffd326-72fa-4d2b-bd1f-45384fe5d521"
-        query:
-          page_size: 25
-          page_token: "AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"
-          show_removed: true
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   BasketOrdersService_ListCompressedOrders:
-    "":
+    speakeasy-default-basket-orders-service-list-compressed-orders:
       parameters:
         path:
           correspondent_id: "01HPMZZM6RKMVZA1JQ63RQKJRP"
           basket_id: "fffd326-72fa-4d2b-bd1f-45384fe5d521"
-        query:
-          page_size: 25
-          page_token: "AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"
-  Assets_ListAssets_1:
-    "":
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  BasketOrdersService_RemoveOrders:
+    speakeasy-default-basket-orders-service-remove-orders:
       parameters:
-        query:
-          parent: "correspondents/1234"
-          page_size: 100
-          page_token: "Mv-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAD_-CAfzrRtzkAQQ1MDA3AA=="
-          filter: "(symbol == 'IBM' && usable) || symbol == 'USD'"
+        path:
+          correspondent_id: "01HPMZZM6RKMVZA1JQ63RQKJRP"
+          basket_id: "fffd326-72fa-4d2b-bd1f-45384fe5d521"
+      requestBody:
+        application/json: {"client_order_ids": ["77e4c4b9-38e7-469f-9a8d-cd8baf7c1952", "4cff908e-aaed-401d-8ec9-929e3eb18cbc"], "name": "correspondents/01HPMZZM6RKMVZA1JQ63RQKJRP/baskets/fffd326-72fa-4d2b-bd1f-45384fe5d521"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  Booking_CreateTrade:
+    speakeasy-default-booking-create-trade:
+      parameters:
+        path:
+          account_id: "01FAKEACCOUNT1TYKWEYRH8S2K"
+      requestBody:
+        application/json: {"account_id": "02HASWB2DTMRT3DAM45P56J2T2", "asset_type": "EQUITY", "broker_capacity": "AGENCY", "client_order_id": "00be5285-0623-4560-8c58-f05af2c56ba0", "executions": [{"execution_time": "2024-07-17T12:00:00Z", "external_id": "0H06HAP3A3Y", "price": {}, "quantity": {}}], "identifier": "AAPL", "identifier_type": "SYMBOL", "route_type": "MNGD", "side": "BUY", "source_application": "Trading-App"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  Booking_GetTrade:
+    speakeasy-default-booking-get-trade:
+      parameters:
+        path:
+          account_id: "01FAKEACCOUNT1TYKWEYRH8S2K"
+          trade_id: "01FAKETRADEIDPROVIDEDFROMCREATETRADE"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  Booking_CompleteTrade:
+    speakeasy-default-booking-complete-trade:
+      parameters:
+        path:
+          account_id: "02HASWB2DTMRT3DAM45P56J2T2"
+          trade_id: "01J0XX2KDN3M9QKFKRE2HYSCQM"
+      requestBody:
+        application/json: {"name": "accounts/02HASWB2DTMRT3DAM45P56J2T2/trades/01J0XX2KDN3M9QKFKRE2HYSCQM"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  Booking_CancelTrade:
+    speakeasy-default-booking-cancel-trade:
+      parameters:
+        path:
+          account_id: "01FAKEACCOUNT1TYKWEYRH8S2K"
+          trade_id: "01FAKETRADEIDPROVIDEDFROMCREATETRADE"
+      requestBody:
+        application/json: {"name": "accounts/01FAKEACCOUNT1TYKWEYRH8S2K/trades/01FAKETRADEIDPROVIDEDFROMCREATETRADE"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  Booking_RebookTrade:
+    speakeasy-default-booking-rebook-trade:
+      parameters:
+        path:
+          account_id: "02HASWB2DTMRT3DAM45P56J2T2"
+          trade_id: "01J0XX2KDN3M9QKFKRE2HYSCQM"
+      requestBody:
+        application/json: {"name": "accounts/02HASWB2DTMRT3DAM45P56J2T2/trades/01J0XX2KDN3M9QKFKRE2HYSCQM", "trade": {"account_id": "02HASWB2DTMRT3DAM45P56J2T2", "asset_type": "EQUITY", "broker_capacity": "AGENCY", "client_order_id": "00be5285-0623-4560-8c58-f05af2c56ba0", "executions": [], "identifier": "AAPL", "identifier_type": "SYMBOL", "route_type": "MNGD", "side": "BUY", "source_application": "Trading-App"}}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  Booking_CreateExecution:
+    speakeasy-default-booking-create-execution:
+      parameters:
+        path:
+          account_id: "01FAKEACCOUNT1TYKWEYRH8S2K"
+          trade_id: "01FAKETRADEIDPROVIDEDFROMCREATETRADE"
+      requestBody:
+        application/json: {"execution_time": "2024-07-17T12:00:00Z", "external_id": "0H06HAP3A3Y", "price": {}, "quantity": {}}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  Booking_GetExecution:
+    speakeasy-default-booking-get-execution:
+      parameters:
+        path:
+          account_id: "01FAKEACCOUNT1TYKWEYRH8S2K"
+          trade_id: "01FAKETRADEIDPROVIDEDFROMCREATETRADE"
+          execution_id: "01FAKEEXECUTONIDPROVIDEDFROMBOOKINGAPI"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  Booking_CancelExecution:
+    speakeasy-default-booking-cancel-execution:
+      parameters:
+        path:
+          account_id: "02HASWB2DTMRT3DAM45P56J2T2"
+          trade_id: "01J0XX2KDN3M9QKFKRE2HYSCQM"
+          execution_id: "02G0XX2KDN3M9QKFKRE2HYSCMY"
+      requestBody:
+        application/json: {"name": "accounts/02HASWB2DTMRT3DAM45P56J2T2/trades/01J0XX2KDN3M9QKFKRE2HYSCQM/executions/02G0XX2KDN3M9QKFKRE2HYSCMY"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  Booking_RebookExecution:
+    speakeasy-default-booking-rebook-execution:
+      parameters:
+        path:
+          account_id: "02HASWB2DTMRT3DAM45P56J2T2"
+          trade_id: "01J0XX2KDN3M9QKFKRE2HYSCQM"
+          execution_id: "02G0XX2KDN3M9QKFKRE2HYSCMY"
+      requestBody:
+        application/json: {"execution": {"execution_time": "2024-07-17T12:00:00Z", "external_id": "0H06HAP3A3Y", "price": {}, "quantity": {}}, "name": "accounts/02HASWB2DTMRT3DAM45P56J2T2/trades/01J0XX2KDN3M9QKFKRE2HYSCQM/executions/02G0XX2KDN3M9QKFKRE2HYSCMY"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  Booking_CreateTradeAllocation:
+    speakeasy-default-booking-create-trade-allocation:
+      parameters:
+        path:
+          account_id: "01FAKEACCOUNT1TYKWEYRH8S2K"
+      requestBody:
+        application/json: {"asset_type": "EQUITY", "broker_capacity": "AGENCY", "execution_time": "2024-07-17T12:00:00Z", "from_account_id": "01HASWB2DTMRT3DAM45P56J2H3", "identifier": "AAPL", "identifier_type": "SYMBOL", "price": {}, "quantity": {}, "source_application": "Trading-App", "to_account_id": "02HASWB2DTMRT3DAM45P56J2T2", "to_side": "BUY"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  Booking_GetTradeAllocation:
+    speakeasy-default-booking-get-trade-allocation:
+      parameters:
+        path:
+          account_id: "02HASWB2DTMRT3DAM45P56J2T2"
+          tradeAllocation_id: "01J0XX2KDN3M9QKFKRE2HYSCQM"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  Booking_CancelTradeAllocation:
+    speakeasy-default-booking-cancel-trade-allocation:
+      parameters:
+        path:
+          account_id: "02HASWB2DTMRT3DAM45P56J2T2"
+          tradeAllocation_id: "01J0XX2KDN3M9QKFKRE2HYSCQM"
+      requestBody:
+        application/json: {"name": "accounts/02HASWB2DTMRT3DAM45P56J2T2/tradeAllocations/01J0XX2KDN3M9QKFKRE2HYSCQM"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  Booking_RebookTradeAllocation:
+    speakeasy-default-booking-rebook-trade-allocation:
+      parameters:
+        path:
+          account_id: "02HASWB2DTMRT3DAM45P56J2T2"
+          tradeAllocation_id: "01J0XX2KDN3M9QKFKRE2HYSCQM"
+      requestBody:
+        application/json: {"name": "accounts/02HASWB2DTMRT3DAM45P56J2T2/tradeAllocations/01J0XX2KDN3M9QKFKRE2HYSCQM", "request_id": "8a0d35c0-428c-439e-9b03-b611530fe06f", "trade_allocation": {"asset_type": "EQUITY", "broker_capacity": "AGENCY", "execution_time": "2024-07-17T12:00:00Z", "from_account_id": "01HASWB2DTMRT3DAM45P56J2H3", "identifier": "AAPL", "identifier_type": "SYMBOL", "price": {}, "quantity": {}, "source_application": "Trading-App", "to_account_id": "02HASWB2DTMRT3DAM45P56J2T2", "to_side": "BUY"}}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  Assets_ListAssets_1:
+    speakeasy-default-assets-list-assets-1:
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Assets_GetAsset:
-    "":
+    speakeasy-default-assets-get-asset:
       parameters:
         path:
           asset_id: "8395"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Assets_ListAssets_Correspondent:
-    "":
+    speakeasy-default-assets-list-assets-correspondent:
       parameters:
         path:
           correspondent_id: "1234"
-        query:
-          page_size: 100
-          page_token: "Mv-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAD_-CAfzrRtzkAQQ1MDA3AA=="
-          filter: "(symbol == 'IBM' && usable) || symbol == 'USD'"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Assets_GetAsset_Correspondent:
-    "":
+    speakeasy-default-assets-get-asset-correspondent:
       parameters:
         path:
           correspondent_id: "8395"
           asset_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Ledger_ListEntries:
-    "":
+    speakeasy-default-ledger-list-entries:
       parameters:
         path:
           account_id: "01FAKEACCOUNT1TYKWEYRH8S2K"
-        query:
-          page_size: 0
-          page_token: "v-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAOv-CAfzbNG7ZAS8xZWYyMmM3ZS01NjdmLTBhYzgtYjZmZi1kNzYwNDI3YmI3N2Q6MjAyNC0wNi0wMgA="
-          filter: "process_date == date('2024-05-11') && account_id == '01HBRQ5BW6ZAY4BNWP4GWRD80X'"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Ledger_ListActivities:
-    "":
+    speakeasy-default-ledger-list-activities:
       parameters:
         path:
           account_id: "01FAKEACCOUNT1TYKWEYRH8S2K"
-        query:
-          page_size: 100
-          page_token: "Mv-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAI_-CAfwVsHF9ARgyMDI0LTA2LTA0OjFGQTA1MDExOjUwMDEA"
-          filter: "subtype_category == 'TRADE' && process_date >= date('2023-07-31') && settle_date >= date('2023-08-18') && side == 'BUY' &&  activity_date >= date('2023-09-15') && asset_id == 8395"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Ledger_ListPositions:
-    "":
+    speakeasy-default-ledger-list-positions:
       parameters:
         path:
           account_id: "01HBRQ5BW6ZAY4BNWP4GWRD80X"
-        query:
-          page_size: 20
-          page_token: "Mv-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAOv-CAfwFIZG3AS8xZWYyMmM4Ny0zNDI5LTAyYzItODRjNC03ODdmNTJlNDY1MTE6MjAyNC0wNi0wMgA="
-          filter: "date >= date('2023-08-31') && asset_id == 8395"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Ledger_GetActivity:
-    "":
+    speakeasy-default-ledger-get-activity:
       parameters:
         path:
           account_id: "01FAKEACCOUNT1TYKWEYRH8S2K"
           activity_id: "FAKEACTIVITYID"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   Ledger_GetEntry:
-    "":
+    speakeasy-default-ledger-get-entry:
       parameters:
         path:
           account_id: "{\"account_id\":\"\"}"
           entry_id: "{\"entry_id\":\"\"}"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  MarginsRealTime_GetBuyingPower:
+    speakeasy-default-margins-real-time-get-buying-power:
+      parameters:
+        path:
+          account_id: "01HMS9S15AKBHBD8GPW33P2PMH"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
   InvestorCommunicationService_BatchCreateUploadLinks:
     speakeasy-default-investor-communication-service-batch-create-upload-links:
       requestBody:
@@ -5520,741 +7613,28 @@ examples:
         default:
           application/json: {}
   Snapshots_ListSnapshots:
-    "":
-      parameters:
-        query:
-          filter: "snapshot_type==\"daily_accounts\"&&process_date==date(\"2023-09-30\")"
-          page_size: 500
-          page_token: "M_-BAwEBCVBhZ2VUb2tlbgH_ggABAgEMUnVubmluZ1RvdGFsAQQAAQZGaWx0ZXIBDAAAAAX_ggEyAA=="
-  MarginsRealTime_GetBuyingPower:
-    "":
-      parameters:
-        path:
-          account_id: "01HMS9S15AKBHBD8GPW33P2PMH"
-  BankRelationships_CreateBankRelationship:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-      requestBody:
-        application/json: {"nickname": "My Primary Bank", "verification_method": "MICRO_DEPOSIT"}
-  BankRelationships_ListBankRelationships:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-        query:
-          page_size: 100
-          page_token: "CMFRGgYQup3BhQgaCSkAQCKS7AAAAA=="
-          state: "APPROVED"
-  BankRelationships_GetBankRelationship:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          bankRelationship_id: "651ef9de0dee00240813e60e"
-  BankRelationships_UpdateBankRelationship:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          bankRelationship_id: "651ef9de0dee00240813e60e"
-        query:
-          update_mask: "{\"update_mask\":{\"paths\":[\"nickname\"]}}"
-      requestBody:
-        application/json: {}
-  BankRelationships_CancelBankRelationship:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          bankRelationship_id: "651ef9de0dee00240813e60e"
-      requestBody:
-        application/json: {"comment": "User Request", "name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e"}
-  BankRelationships_VerifyMicroDeposits:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          bankRelationship_id: "651ef9de0dee00240813e60e"
-      requestBody:
-        application/json: {"amounts": {"amount1": {}, "amount2": {}}, "name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e"}
-  BankRelationships_ReissueMicroDeposits:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          bankRelationship_id: "651ef9de0dee00240813e60e"
-      requestBody:
-        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e"}
-  AchDeposits_CreateAchDeposit:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-      requestBody:
-        application/json: {"amount": {}, "bank_relationship": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e", "client_transfer_id": "179dcd33-49f8-4615-989c-560fb387c4fd"}
-  AchDeposits_GetAchDeposit:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          achDeposit_id: "20230817000319"
-  AchDeposits_CancelAchDeposit:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          achDeposit_id: "20230817000319"
-      requestBody:
-        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achDeposits/20230817000319"}
-  AchWithdrawals_CreateAchWithdrawal:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-      requestBody:
-        application/json: {"bank_relationship": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e", "client_transfer_id": "179dcd33-49f8-4615-989c-560fb387c4fd"}
-  AchWithdrawals_GetAchWithdrawal:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          achWithdrawal_id: "20230620500726"
-  AchWithdrawals_CancelAchWithdrawal:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          achWithdrawal_id: "20230620500726"
-      requestBody:
-        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achWithdrawals/20230620500726"}
-  IctDeposits_CreateIctDeposit:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-      requestBody:
-        application/json: {"amount": {}, "client_transfer_id": "ABC-123", "program": "DEPOSIT_ONLY", "travel_rule": {"originating_institution": {"account_id": "<id>", "title": "<value>"}}}
-  IctDeposits_GetIctDeposit:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          ictDeposit_id: "20240321000472"
-  IctDeposits_CancelIctDeposit:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          ictDeposit_id: "20240321000472"
-      requestBody:
-        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/ictDeposits/20240321000472"}
-  IctWithdrawals_CreateIctWithdrawal:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-      requestBody:
-        application/json: {"client_transfer_id": "20230817000319", "program": "BROKER_PARTNER", "travel_rule": {"recipient_institution": {"account_id": "<id>", "title": "<value>"}}}
-  IctWithdrawals_GetIctWithdrawal:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          ictWithdrawal_id: "20240321000472"
-  IctWithdrawals_CancelIctWithdrawal:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          ictWithdrawal_id: "20240321000472"
-      requestBody:
-        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/ictWithdrawals/20240321000472"}
-  IctReconReports_LocateIctReport:
-    "":
-      parameters:
-        path:
-          correspondent_id: "01H8MCDXH4HYJJAV921BDKCC83"
-        query:
-          batch_id: "24114.108.2b2c1.001"
-          program_date_filter.program: "BROKER_PARTNER"
-  RetirementConstraints_ListContributionSummaries:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-        query:
-          page_size: 2
-          page_token: "AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZ3hh"
-  RetirementConstraints_RetrieveContributionConstraints:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-      requestBody:
-        application/json: {"mechanism": "ACH", "name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y"}
-  RetirementConstraints_ListDistributionSummaries:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-        query:
-          page_size: 2
-          page_token: "AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZ3hh"
-  RetirementConstraints_RetrieveDistributionConstraints:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FM6EXVH77SAW3TC8KAWMES"
-      requestBody:
-        application/json: {"mechanism": "ACH", "name": "accounts/01H8FM6EXVH77SAW3TC8KAWMES"}
-  RetirementConstraints_RetrieveCashJournalConstraints:
-    speakeasy-default-retirement-constraints-retrieve-cash-journal-constraints:
-      requestBody:
-        application/json: {"destination_account": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y", "source_account": "accounts/01H8FM6EXVH77SAW3TC8KAWMES"}
+    speakeasy-default-snapshots-list-snapshots:
       responses:
         "200":
           application/json: {}
         "400":
           application/json: {}
-        default:
-          application/json: {}
-  CashJournals_CreateCashJournal:
-    speakeasy-default-cash-journals-create-cash-journal:
-      requestBody:
-        application/json: {"client_transfer_id": "113bw03-49f8-4525-934c-560fb39dg2kd", "destination_account": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y", "source_account": "accounts/01H8FM6EXVH77SAW3TC8KAWMES"}
-      responses:
-        "200":
-          application/json: {}
-        "400":
+        "500":
           application/json: {}
         default:
           application/json: {}
-  CashJournals_GetCashJournal:
-    "":
-      parameters:
-        path:
-          cashJournal_id: "20230817000319"
-  CashJournals_CancelCashJournal:
-    "":
-      parameters:
-        path:
-          cashJournal_id: "20240717000319"
-      requestBody:
-        application/json: {"name": "cashJournals/20240717000319"}
-  CashJournals_CheckPartyType:
-    speakeasy-default-cash-journals-check-party-type:
-      requestBody:
-        application/json: {"destination_account": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y", "source_account": "accounts/01H8FM6EXVH77SAW3TC8KAWMES"}
-      responses:
-        "200":
-          application/json: {}
-        "400":
-          application/json: {}
-        default:
-          application/json: {}
-  TransferScheduleSummaries_ListScheduleSummaries:
-    "":
-      parameters:
-        query:
-          filter: "mechanism == 'ACH' && direction == DEPOSIT && state == 'ACTIVE' && start_date > '2024-04-05' && end_date < '2024-08-10'"
-          page_size: 100
-          page_token: "4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"
-  AchDepositSchedules_CreateAchDepositSchedule:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-      requestBody:
-        application/json: {"bank_relationship": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e", "schedule_details": {"amount": {}, "client_schedule_id": "ABC-123", "schedule_properties": {"start_date": {}, "time_unit": "MONTH", "unit_multiplier": 1}}}
-  AchDepositSchedules_ListAchDepositSchedules:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-        query:
-          filter: "state == 'ACTIVE' && start_date > '2024-04-05' && end_date < '2024-08-10'"
-          page_size: 100
-          page_token: "4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"
-  AchDepositSchedules_GetAchDepositSchedule:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          achDepositSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
-  AchDepositSchedules_UpdateAchDepositSchedule:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          achDepositSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
-        query: {}
-      requestBody:
-        application/json: {}
-  AchDepositSchedules_CancelAchDepositSchedule:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          achDepositSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
-      requestBody:
-        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achDepositSchedules/40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"}
-  AchWithdrawalSchedules_CreateAchWithdrawalSchedule:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-      requestBody:
-        application/json: {"bank_relationship": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e", "schedule_details": {"client_schedule_id": "ABC-123", "schedule_properties": {"start_date": {}, "time_unit": "MONTH", "unit_multiplier": 1}}}
-  AchWithdrawalSchedules_ListAchWithdrawalSchedules:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-        query:
-          filter: "state == 'ACTIVE' && start_date > '2024-04-05' && end_date < '2024-08-10'"
-          page_size: 100
-          page_token: "4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"
-  AchWithdrawalSchedules_GetAchWithdrawalSchedule:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          achWithdrawalSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
-  AchWithdrawalSchedules_UpdateAchWithdrawalSchedule:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          achWithdrawalSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
-        query: {}
-      requestBody:
-        application/json: {}
-  AchWithdrawalSchedules_CancelAchWithdrawalSchedule:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          achWithdrawalSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
-      requestBody:
-        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achWithdrawalSchedules/40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"}
-  WireWithdrawalSchedules_CreateWireWithdrawalSchedule:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-      requestBody:
-        application/json: {"beneficiary": {"account": "73849218650987"}, "recipient_bank": {"bank_id": {"id": "ABNANL2AXXX", "type": "BIC"}}, "schedule_details": {"client_schedule_id": "ABC-123", "schedule_properties": {"start_date": {}, "time_unit": "MONTH", "unit_multiplier": 1}}}
-  WireWithdrawalSchedules_ListWireWithdrawalSchedules:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-        query:
-          filter: "state == 'ACTIVE' && start_date > '2024-04-05' && end_date < '2024-08-10'"
-          page_size: 100
-          page_token: "4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"
-  WireWithdrawalSchedules_GetWireWithdrawalSchedule:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          wireWithdrawalSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
-  WireWithdrawalSchedules_UpdateWireWithdrawalSchedule:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          wireWithdrawalSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
-        query:
-          update_mask: "{\"update_mask\":\"schedule_details.amount\"}"
-      requestBody:
-        application/json: {}
-  WireWithdrawalSchedules_CancelWireWithdrawalSchedule:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          wireWithdrawalSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
-      requestBody:
-        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/wireWithdrawalSchedules/40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"}
-  WireDeposits_GetWireDeposit:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          wireDeposit_id: "20230817000319"
-  WireWithdrawals_CreateWireWithdrawal:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-      requestBody:
-        application/json: {"beneficiary": {"account": "73849218650987"}, "client_transfer_id": "ABC-123", "recipient_bank": {"bank_id": {"id": "ABNANL2AXXX", "type": "BIC"}}}
-  WireWithdrawals_GetWireWithdrawal:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          wireWithdrawal_id: "20230817000319"
-  WireWithdrawals_CancelWireWithdrawal:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          wireWithdrawal_id: "20230817000319"
-      requestBody:
-        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/wireWithdrawals/20230817000319"}
-  CashBalances_CalculateCashBalance:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-        query:
-          mechanism: "ACH"
-  Fees_CreateFee:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-      requestBody:
-        application/json: {"amount": {}, "client_transfer_id": "179dcd33-49f8-4615-989c-560fb387c4fd", "type": "PLATFORM"}
-  Fees_GetFee:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          fee_id: "20230823123456"
-  Fees_CancelFee:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          fee_id: "20230823123456"
-      requestBody:
-        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/fees/20230823123456"}
-  Credits_CreateCredit:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-      requestBody:
-        application/json: {"amount": {}, "client_transfer_id": "179dcd33-49f8-4615-989c-560fb387c4fd", "type": "PROMOTIONAL"}
-  Credits_GetCredit:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          credit_id: "20230823123456"
-  Credits_CancelCredit:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          credit_id: "20230823123456"
-      requestBody:
-        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/credits/20230823123456"}
-  AchDeposits_ForceApproveAchDeposit:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          achDeposit_id: "20230817000319"
-      requestBody:
-        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achDeposits/20230817000319"}
-  AchDeposits_ForceNocAchDeposit:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          achDeposit_id: "20230817000319"
-      requestBody:
-        application/json: {"nacha_noc": {"code": "C01"}, "name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achDeposits/20230817000319"}
-  AchDeposits_ForceRejectAchDeposit:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          achDeposit_id: "20230817000319"
-      requestBody:
-        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achDeposits/20230817000319"}
-  AchDeposits_ForceReturnAchDeposit:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          achDeposit_id: "20230817000319"
-      requestBody:
-        application/json: {"nacha_return": {"code": "R34"}, "name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achDeposits/20230817000319"}
-  AchWithdrawals_ForceApproveAchWithdrawal:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          achWithdrawal_id: "20230620500726"
-      requestBody:
-        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achWithdrawals/20230620500726"}
-  AchWithdrawals_ForceNocAchWithdrawal:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          achWithdrawal_id: "20230620500726"
-      requestBody:
-        application/json: {"nacha_noc": {"code": "C01"}, "name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achWithdrawals/20230620500726"}
-  AchWithdrawals_ForceRejectAchWithdrawal:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          achWithdrawal_id: "20230620500726"
-      requestBody:
-        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achWithdrawals/20230620500726"}
-  AchWithdrawals_ForceReturnAchWithdrawal:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          achWithdrawal_id: "20230620500726"
-      requestBody:
-        application/json: {"nacha_return": {"code": "R28"}, "name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achWithdrawals/20230620500726"}
-  BankRelationships_GetMicroDepositAmounts:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          bankRelationship_id: "651ef9de0dee00240813e60e"
-  IctDeposits_ForceApproveIctDeposit:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          ictDeposit_id: "20240321000472"
-      requestBody:
-        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/ictDeposits/20240321000472"}
-  IctDeposits_ForceRejectIctDeposit:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          ictDeposit_id: "20240321000472"
-      requestBody:
-        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/ictDeposits/20240321000472"}
-  IctWithdrawals_ForceApproveIctWithdrawal:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          ictWithdrawal_id: "20240321000472"
-      requestBody:
-        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/ictWithdrawals/20240321000472"}
-  IctWithdrawals_ForceRejectIctWithdrawal:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          ictWithdrawal_id: "20240321000472"
-      requestBody:
-        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/ictWithdrawals/20240321000472"}
-  WireWithdrawals_ForceApproveWireWithdrawal:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          wireWithdrawal_id: "20230817000319"
-      requestBody:
-        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/wireWithdrawals/20230817000319"}
-  WireWithdrawals_ForceRejectWireWithdrawal:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          wireWithdrawal_id: "20230817000319"
-      requestBody:
-        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/wireWithdrawals/20230817000319"}
-  CashJournals_ForceApproveCashJournal:
-    "":
-      parameters:
-        path:
-          cashJournal_id: "20230817000319"
-      requestBody:
-        application/json: {"name": "cashJournals/20230817000319"}
-  CashJournals_ForceRejectCashJournal:
-    "":
-      parameters:
-        path:
-          cashJournal_id: "20230817000319"
-      requestBody:
-        application/json: {"name": "cashJournals/20230817000319"}
-  Booking_CreateTrade:
-    "":
-      parameters:
-        path:
-          account_id: "01FAKEACCOUNT1TYKWEYRH8S2K"
-      requestBody:
-        application/json: {"account_id": "02HASWB2DTMRT3DAM45P56J2T2", "broker_capacity": "AGENCY", "client_order_id": "00be5285-0623-4560-8c58-f05af2c56ba0", "executions": [{"execution_time": "2024-07-17T12:00:00Z", "external_id": "0H06HAP3A3Y", "price": {}, "quantity": {}}, {"execution_time": "2024-07-17T12:00:00Z", "external_id": "0H06HAP3A3Y", "price": {}, "quantity": {}}, {"execution_time": "2024-07-17T12:00:00Z", "external_id": "0H06HAP3A3Y", "price": {}, "quantity": {}}], "identifier": "AAPL", "identifier_type": "SYMBOL", "route_type": "MNGD", "side": "BUY", "source_application": "Trading-App"}
-  Booking_GetTrade:
-    "":
-      parameters:
-        path:
-          account_id: "01FAKEACCOUNT1TYKWEYRH8S2K"
-          trade_id: "01FAKETRADEIDPROVIDEDFROMCREATETRADE"
-  Booking_CompleteTrade:
-    "":
-      parameters:
-        path:
-          account_id: "02HASWB2DTMRT3DAM45P56J2T2"
-          trade_id: "01J0XX2KDN3M9QKFKRE2HYSCQM"
-      requestBody:
-        application/json: {"name": "accounts/02HASWB2DTMRT3DAM45P56J2T2/trades/01J0XX2KDN3M9QKFKRE2HYSCQM"}
-  Booking_CancelTrade:
-    "":
-      parameters:
-        path:
-          account_id: "01FAKEACCOUNT1TYKWEYRH8S2K"
-          trade_id: "01FAKETRADEIDPROVIDEDFROMCREATETRADE"
-      requestBody:
-        application/json: {"name": "accounts/01FAKEACCOUNT1TYKWEYRH8S2K/trades/01FAKETRADEIDPROVIDEDFROMCREATETRADE"}
-  Booking_RebookTrade:
-    "":
-      parameters:
-        path:
-          account_id: "02HASWB2DTMRT3DAM45P56J2T2"
-          trade_id: "01J0XX2KDN3M9QKFKRE2HYSCQM"
-      requestBody:
-        application/json: {"name": "accounts/02HASWB2DTMRT3DAM45P56J2T2/trades/01J0XX2KDN3M9QKFKRE2HYSCQM", "trade": {"account_id": "02HASWB2DTMRT3DAM45P56J2T2", "broker_capacity": "AGENCY", "client_order_id": "00be5285-0623-4560-8c58-f05af2c56ba0", "executions": [{"execution_time": "2024-07-17T12:00:00Z", "external_id": "0H06HAP3A3Y", "price": {}, "quantity": {}}, {"execution_time": "2024-07-17T12:00:00Z", "external_id": "0H06HAP3A3Y", "price": {}, "quantity": {}}, {"execution_time": "2024-07-17T12:00:00Z", "external_id": "0H06HAP3A3Y", "price": {}, "quantity": {}}], "identifier": "AAPL", "identifier_type": "SYMBOL", "route_type": "MNGD", "side": "BUY", "source_application": "Trading-App"}}
-  Booking_CreateExecution:
-    "":
-      parameters:
-        path:
-          account_id: "01FAKEACCOUNT1TYKWEYRH8S2K"
-          trade_id: "01FAKETRADEIDPROVIDEDFROMCREATETRADE"
-      requestBody:
-        application/json: {"execution_time": "2024-07-17T12:00:00Z", "external_id": "0H06HAP3A3Y", "price": {}, "quantity": {}}
-  Booking_GetExecution:
-    "":
-      parameters:
-        path:
-          account_id: "01FAKEACCOUNT1TYKWEYRH8S2K"
-          trade_id: "01FAKETRADEIDPROVIDEDFROMCREATETRADE"
-          execution_id: "01FAKEEXECUTONIDPROVIDEDFROMBOOKINGAPI"
-  Booking_CancelExecution:
-    "":
-      parameters:
-        path:
-          account_id: "02HASWB2DTMRT3DAM45P56J2T2"
-          trade_id: "01J0XX2KDN3M9QKFKRE2HYSCQM"
-          execution_id: "02G0XX2KDN3M9QKFKRE2HYSCMY"
-      requestBody:
-        application/json: {"name": "accounts/02HASWB2DTMRT3DAM45P56J2T2/trades/01J0XX2KDN3M9QKFKRE2HYSCQM/executions/02G0XX2KDN3M9QKFKRE2HYSCMY"}
-  Booking_RebookExecution:
-    "":
-      parameters:
-        path:
-          account_id: "02HASWB2DTMRT3DAM45P56J2T2"
-          trade_id: "01J0XX2KDN3M9QKFKRE2HYSCQM"
-          execution_id: "02G0XX2KDN3M9QKFKRE2HYSCMY"
-      requestBody:
-        application/json: {"execution": {"execution_time": "2024-07-17T12:00:00Z", "external_id": "0H06HAP3A3Y", "price": {}, "quantity": {}}, "name": "accounts/02HASWB2DTMRT3DAM45P56J2T2/trades/01J0XX2KDN3M9QKFKRE2HYSCQM/executions/02G0XX2KDN3M9QKFKRE2HYSCMY"}
-  Booking_CreateTradeAllocation:
-    "":
-      parameters:
-        path:
-          account_id: "01FAKEACCOUNT1TYKWEYRH8S2K"
-        query:
-          request_id: "8a0d35c0-428c-439e-9b03-b611530fe06f"
-      requestBody:
-        application/json: {"broker_capacity": "AGENCY", "execution_time": "2024-07-17T12:00:00Z", "from_account_id": "01HASWB2DTMRT3DAM45P56J2H3", "identifier": "AAPL", "identifier_type": "SYMBOL", "price": {}, "quantity": {}, "source_application": "Trading-App", "to_account_id": "02HASWB2DTMRT3DAM45P56J2T2", "to_side": "BUY"}
-  Booking_GetTradeAllocation:
-    "":
-      parameters:
-        path:
-          account_id: "02HASWB2DTMRT3DAM45P56J2T2"
-          tradeAllocation_id: "01J0XX2KDN3M9QKFKRE2HYSCQM"
-  Booking_CancelTradeAllocation:
-    "":
-      parameters:
-        path:
-          account_id: "02HASWB2DTMRT3DAM45P56J2T2"
-          tradeAllocation_id: "01J0XX2KDN3M9QKFKRE2HYSCQM"
-      requestBody:
-        application/json: {"name": "accounts/02HASWB2DTMRT3DAM45P56J2T2/tradeAllocations/01J0XX2KDN3M9QKFKRE2HYSCQM"}
-  Booking_RebookTradeAllocation:
-    "":
-      parameters:
-        path:
-          account_id: "02HASWB2DTMRT3DAM45P56J2T2"
-          tradeAllocation_id: "01J0XX2KDN3M9QKFKRE2HYSCQM"
-      requestBody:
-        application/json: {"name": "accounts/02HASWB2DTMRT3DAM45P56J2T2/tradeAllocations/01J0XX2KDN3M9QKFKRE2HYSCQM", "request_id": "8a0d35c0-428c-439e-9b03-b611530fe06f", "trade_allocation": {"broker_capacity": "AGENCY", "execution_time": "2024-07-17T12:00:00Z", "from_account_id": "01HASWB2DTMRT3DAM45P56J2H3", "identifier": "AAPL", "identifier_type": "SYMBOL", "price": {}, "quantity": {}, "source_application": "Trading-App", "to_account_id": "02HASWB2DTMRT3DAM45P56J2T2", "to_side": "BUY"}}
-  AccountTransfers_ListTransfers:
-    "":
-      parameters:
-        path:
-          correspondent_id: "00000000-0000-0000-0000-000000000002"
-          account_id: "01FAKEACCOUNT"
-        query:
-          page_size: 25
-          page_token: "CgwI5uHttgYQyJXO2wESJDAxOTFjOTMxLTA3YjMtYzU0ZC0yMDNmLWU1M2U0OTBkY2FhZRoicmVjZWl2ZXIuYWNjb3VudF9pZCBpbiBbJzEwMDAwQUEnXQ"
-          filter: "deliverer.account_number == \"R9AHY8P\""
-  AccountTransfers_AcceptTransfer:
-    "":
-      parameters:
-        path:
-          correspondent_id: "00000000-0000-0000-0000-000000000002"
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          transfer_id: "00000000-0000-0000-0000-000000000000"
-      requestBody:
-        application/json: {"name": "correspondents/00000000-0000-0000-0000-000000000002/accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/transfers/00000000-0000-0000-0000-000000000000"}
-  AccountTransfers_RejectTransfer:
-    "":
-      parameters:
-        path:
-          correspondent_id: "00000000-0000-0000-0000-000000000002"
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          transfer_id: "00000000-0000-0000-0000-000000000000"
-      requestBody:
-        application/json: {"name": "correspondents/00000000-0000-0000-0000-000000000002/accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/transfers/00000000-0000-0000-0000-000000000000"}
-  ExternalAchDeposits_GetExternalAchDeposit:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          externalAchDeposit_id: "20230817000319"
-  ExternalAchDeposits_SimulateCreateExternalAchDeposit:
-    speakeasy-default-external-ach-deposits-simulate-create-external-ach-deposit:
-      requestBody:
-        application/json: {"amount": {}, "virtual_account_number": "24412345678901"}
-      responses:
-        "200":
-          application/json: {}
-        "400":
-          application/json: {}
-        default:
-          application/json: {}
-  ExternalAchDeposits_ForceApproveExternalAchDeposit:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          externalAchDeposit_id: "20230817000319"
-      requestBody:
-        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/externalAchDeposits/20230817000319"}
-  ExternalAchDeposits_ForceRejectExternalAchDeposit:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
-          externalAchDeposit_id: "20230817000319"
-      requestBody:
-        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/externalAchDeposits/20230817000319"}
-  BankRelationships_ReuseBankRelationship:
-    "":
-      parameters:
-        path:
-          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Z"
-      requestBody:
-        application/json: {"parent": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Z", "source_bank_relationship": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e"}
-examplesVersion: 1.0.0
-generatedTests: {}
+examplesVersion: 1.0.2
+generatedTests:
+  Accounts_ListLegalNaturalPersons: "2025-08-22T19:32:39Z"
+  Accounts_ListLegalEntities: "2025-08-22T19:32:39Z"
+  Accounts_ListAccounts: "2025-08-22T19:32:39Z"
+  Snapshots_ListSnapshots: "2025-08-22T19:32:39Z"
+  InvestigationService_GetInvestigation: "2025-08-22T19:32:39Z"
+  InvestigationService_ListInvestigations: "2025-08-22T19:32:39Z"
+  WatchlistService_GetWatchlistItem: "2025-08-22T19:32:39Z"
+  MarginsRealTime_GetBuyingPower: "2025-08-22T19:32:39Z"
+  Assets_ListAssets_1: "2025-08-22T19:32:39Z"
+  Assets_GetAsset: "2025-08-22T19:32:39Z"
+  Subscriber_ListPushSubscriptions: "2025-08-22T19:32:39Z"
+  CheckDeposits_GetCheckDeposit: "2025-08-22T19:32:39Z"
+  CheckDeposits_SimulateCreateCheckDeposit: "2025-08-22T19:32:39Z"

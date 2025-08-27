@@ -486,7 +486,7 @@ public class TransfersUtil {
         CashJournalCreate.builder()
             .clientTransferId(UUID.randomUUID().toString())
             .destinationAccount("accounts/" + accountId)
-            .amount(DecimalCreate.builder().value("250001.00").build())
+            .amount(DecimalCreate.builder().value("500001.00").build())
             .sourceAccount("accounts/" + getWithdrawalAccountId())
             .build();
     var res = sdk.journals().createCashJournal(req);

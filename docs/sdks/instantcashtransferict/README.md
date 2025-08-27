@@ -19,17 +19,12 @@ Creates an ICT deposit
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="IctDeposits_CreateIctDeposit" method="post" path="/transfers/v1/accounts/{account_id}/ictDeposits" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.DecimalCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.IctDepositCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.IctDepositTravelRuleCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.InstitutionCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Program;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.IctDepositsCreateIctDepositResponse;
 import java.lang.Exception;
@@ -97,6 +92,7 @@ Gets an existing ICT deposit
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="IctDeposits_GetIctDeposit" method="get" path="/transfers/v1/accounts/{account_id}/ictDeposits/{ictDeposit_id}" -->
 ```java
 package hello.world;
 
@@ -159,13 +155,12 @@ Cancels an existing ICT deposit
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="IctDeposits_CancelIctDeposit" method="post" path="/transfers/v1/accounts/{account_id}/ictDeposits/{ictDeposit_id}:cancel" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.CancelIctDepositRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.IctDepositsCancelIctDepositResponse;
 import java.lang.Exception;
@@ -226,16 +221,12 @@ Creates an ICT withdrawal
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="IctWithdrawals_CreateIctWithdrawal" method="post" path="/transfers/v1/accounts/{account_id}/ictWithdrawals" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.IctWithdrawalCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.IctWithdrawalCreateProgram;
-import com.apexfintechsolutions.ascendsdk.models.components.IctWithdrawalTravelRuleCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.InstitutionCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.IctWithdrawalsCreateIctWithdrawalResponse;
 import java.lang.Exception;
@@ -301,6 +292,7 @@ Gets an existing ICT withdrawal
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="IctWithdrawals_GetIctWithdrawal" method="get" path="/transfers/v1/accounts/{account_id}/ictWithdrawals/{ictWithdrawal_id}" -->
 ```java
 package hello.world;
 
@@ -363,13 +355,12 @@ Cancels an existing ICT withdrawal
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="IctWithdrawals_CancelIctWithdrawal" method="post" path="/transfers/v1/accounts/{account_id}/ictWithdrawals/{ictWithdrawal_id}:cancel" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.CancelIctWithdrawalRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.IctWithdrawalsCancelIctWithdrawalResponse;
 import java.lang.Exception;
@@ -430,6 +421,7 @@ Returns a signed link pointing to a recon report file for a specific ICT batch.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="IctReconReports_LocateIctReport" method="get" path="/transfers/v1/correspondents/{correspondent_id}/ictReconReports:locate" -->
 ```java
 package hello.world;
 
@@ -437,8 +429,7 @@ import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
 import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
-import com.apexfintechsolutions.ascendsdk.models.operations.IctReconReportsLocateIctReportRequest;
-import com.apexfintechsolutions.ascendsdk.models.operations.IctReconReportsLocateIctReportResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -459,6 +450,8 @@ public class Application {
 
         IctReconReportsLocateIctReportRequest req = IctReconReportsLocateIctReportRequest.builder()
                 .correspondentId("01H8MCDXH4HYJJAV921BDKCC83")
+                .batchId("24114.108.2b2c1.001")
+                .programDateFilterProgram(ProgramDateFilterProgram.BROKER_PARTNER)
                 .build();
 
         IctReconReportsLocateIctReportResponse res = sdk.instantCashTransferICT().locateIctReport()
