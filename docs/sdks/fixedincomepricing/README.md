@@ -15,18 +15,12 @@ Returns a calculation estimating the costs involved in ordering a given quantity
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="OrderPriceService_PreviewOrderCost" method="post" path="/trading/v1/accounts/{account_id}/orders:previewOrderCost" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.DecimalCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.LimitPriceCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.LimitPriceCreateType;
-import com.apexfintechsolutions.ascendsdk.models.components.OrderCostPreviewRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.OrderCostPreviewRequestCreateAssetType;
-import com.apexfintechsolutions.ascendsdk.models.components.OrderCostPreviewRequestCreateIdentifierType;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderPriceServicePreviewOrderCostResponse;
 import java.lang.Exception;
@@ -96,15 +90,12 @@ Returns quote information containing the best bid/ask for the given Fixed Income
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="OrderPriceService_RetrieveQuote" method="post" path="/trading/v1/accounts/{account_id}/orders:retrieveAssetQuote" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.RetrieveQuoteRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.RetrieveQuoteRequestCreateAssetType;
-import com.apexfintechsolutions.ascendsdk.models.components.RetrieveQuoteRequestCreateIdentifierType;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderPriceServiceRetrieveQuoteResponse;
 import java.lang.Exception;
@@ -167,15 +158,12 @@ Returns marks for a specified set of Fixed Income assets (up to 100 per request)
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="OrderPriceService_RetrieveFixedIncomeMarks" method="post" path="/trading/v1/correspondents/{correspondent_id}/prices:retrieveFixedIncomeMarks" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.RetrieveFixedIncomeMarksRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.RetrieveFixedIncomeMarksRequestSecurityIdentifiersCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.RetrieveFixedIncomeMarksRequestSecurityIdentifiersCreateIdentifierType;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderPriceServiceRetrieveFixedIncomeMarksResponse;
 import java.lang.Exception;
@@ -203,11 +191,11 @@ public class Application {
                     .parent("<value>")
                     .securityIdentifiers(List.of(
                         RetrieveFixedIncomeMarksRequestSecurityIdentifiersCreate.builder()
-                            .identifier("37833100")
-                            .identifierType(RetrieveFixedIncomeMarksRequestSecurityIdentifiersCreateIdentifierType.CUSIP)
+                            .identifier("US0378331005")
+                            .identifierType(RetrieveFixedIncomeMarksRequestSecurityIdentifiersCreateIdentifierType.ISIN)
                             .build(),
                         RetrieveFixedIncomeMarksRequestSecurityIdentifiersCreate.builder()
-                            .identifier("37833100")
+                            .identifier("38259P508")
                             .identifierType(RetrieveFixedIncomeMarksRequestSecurityIdentifiersCreateIdentifierType.CUSIP)
                             .build()))
                     .build())

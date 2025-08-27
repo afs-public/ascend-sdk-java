@@ -13,6 +13,7 @@ Returns details of a list of snapshots.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Snapshots_ListSnapshots" method="get" path="/analytics/v1/snapshots" -->
 ```java
 package hello.world;
 

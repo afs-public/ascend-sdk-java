@@ -11,6 +11,7 @@
 * [submitBasket](#submitbasket) - Submit Basket
 * [listBasketOrders](#listbasketorders) - List Basket Orders
 * [listCompressedOrders](#listcompressedorders) - List Compressed Orders
+* [removeOrders](#removeorders) - Remove Basket Orders
 
 ## createBasket
 
@@ -20,13 +21,12 @@ Creates an empty basket
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="BasketOrdersService_CreateBasket" method="post" path="/baskettrading/v1/correspondents/{correspondent_id}/baskets" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.BasketCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.BasketOrdersServiceCreateBasketResponse;
 import java.lang.Exception;
@@ -89,19 +89,12 @@ Adds a list of basket orders to a basket
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="BasketOrdersService_AddOrders" method="post" path="/baskettrading/v1/correspondents/{correspondent_id}/baskets/{basket_id}:addOrders" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.AddOrdersRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.BasketOrderCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.BasketOrderCreateAssetType;
-import com.apexfintechsolutions.ascendsdk.models.components.BasketOrderCreateIdentifierType;
-import com.apexfintechsolutions.ascendsdk.models.components.BasketOrderCreateOrderType;
-import com.apexfintechsolutions.ascendsdk.models.components.BasketOrderCreateSide;
-import com.apexfintechsolutions.ascendsdk.models.components.BasketOrderCreateTimeInForce;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.BasketOrdersServiceAddOrdersResponse;
 import java.lang.Exception;
@@ -127,27 +120,7 @@ public class Application {
                 .correspondentId("01HPMZZM6RKMVZA1JQ63RQKJRP")
                 .basketId("fffd326-72fa-4d2b-bd1f-45384fe5d521")
                 .addOrdersRequestCreate(AddOrdersRequestCreate.builder()
-                    .basketOrders(List.of(
-                        BasketOrderCreate.builder()
-                            .accountId("01HBRQ5BW6ZAY4BNWP4GWRD80X")
-                            .assetType(BasketOrderCreateAssetType.EQUITY)
-                            .clientOrderId("a6d5258b-6b23-478a-8145-98e79d60427a")
-                            .identifier("SBUX")
-                            .identifierType(BasketOrderCreateIdentifierType.SYMBOL)
-                            .orderType(BasketOrderCreateOrderType.MARKET)
-                            .side(BasketOrderCreateSide.BUY)
-                            .timeInForce(BasketOrderCreateTimeInForce.DAY)
-                            .build(),
-                        BasketOrderCreate.builder()
-                            .accountId("01HBRQ5BW6ZAY4BNWP4GWRD80X")
-                            .assetType(BasketOrderCreateAssetType.EQUITY)
-                            .clientOrderId("a6d5258b-6b23-478a-8145-98e79d60427a")
-                            .identifier("SBUX")
-                            .identifierType(BasketOrderCreateIdentifierType.SYMBOL)
-                            .orderType(BasketOrderCreateOrderType.MARKET)
-                            .side(BasketOrderCreateSide.BUY)
-                            .timeInForce(BasketOrderCreateTimeInForce.DAY)
-                            .build()))
+                    .basketOrders(List.of())
                     .name("correspondents/01HPMZZM6RKMVZA1JQ63RQKJRP/baskets/fffd326-72fa-4d2b-bd1f-45384fe5d521")
                     .build())
                 .call();
@@ -187,6 +160,7 @@ Gets a basket by basket ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="BasketOrdersService_GetBasket" method="get" path="/baskettrading/v1/correspondents/{correspondent_id}/baskets/{basket_id}" -->
 ```java
 package hello.world;
 
@@ -252,13 +226,12 @@ Submits a basket for execution in the market
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="BasketOrdersService_SubmitBasket" method="post" path="/baskettrading/v1/correspondents/{correspondent_id}/baskets/{basket_id}:submit" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
-import com.apexfintechsolutions.ascendsdk.models.components.SubmitBasketRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.BasketOrdersServiceSubmitBasketResponse;
 import java.lang.Exception;
@@ -322,6 +295,7 @@ Gets a list of basket orders within a basket.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="BasketOrdersService_ListBasketOrders" method="get" path="/baskettrading/v1/correspondents/{correspondent_id}/baskets/{basket_id}/basketOrders" -->
 ```java
 package hello.world;
 
@@ -352,6 +326,9 @@ public class Application {
         BasketOrdersServiceListBasketOrdersRequest req = BasketOrdersServiceListBasketOrdersRequest.builder()
                 .correspondentId("01HPMZZM6RKMVZA1JQ63RQKJRP")
                 .basketId("fffd326-72fa-4d2b-bd1f-45384fe5d521")
+                .pageSize(25)
+                .pageToken("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h")
+                .showRemoved(true)
                 .build();
 
         BasketOrdersServiceListBasketOrdersResponse res = sdk.basketOrders().listBasketOrders()
@@ -391,6 +368,7 @@ Gets a list of compressed orders within a basket.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="BasketOrdersService_ListCompressedOrders" method="get" path="/baskettrading/v1/correspondents/{correspondent_id}/baskets/{basket_id}/compressedOrders" -->
 ```java
 package hello.world;
 
@@ -443,6 +421,79 @@ public class Application {
 ### Response
 
 **[BasketOrdersServiceListCompressedOrdersResponse](../../models/operations/BasketOrdersServiceListCompressedOrdersResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 401, 403, 404     | application/json       |
+| models/errors/Status   | 500, 503               | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## removeOrders
+
+Removes a list of basket orders by client order ID.
+
+ Upon successful submission, returns the details of the removed basket orders.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="BasketOrdersService_RemoveOrders" method="post" path="/baskettrading/v1/correspondents/{correspondent_id}/baskets/{basket_id}:removeOrders" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.BasketOrdersServiceRemoveOrdersResponse;
+import java.lang.Exception;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        BasketOrdersServiceRemoveOrdersResponse res = sdk.basketOrders().removeOrders()
+                .correspondentId("01HPMZZM6RKMVZA1JQ63RQKJRP")
+                .basketId("fffd326-72fa-4d2b-bd1f-45384fe5d521")
+                .removeOrdersRequestCreate(RemoveOrdersRequestCreate.builder()
+                    .clientOrderIds(List.of(
+                        "77e4c4b9-38e7-469f-9a8d-cd8baf7c1952",
+                        "4cff908e-aaed-401d-8ec9-929e3eb18cbc"))
+                    .name("correspondents/01HPMZZM6RKMVZA1JQ63RQKJRP/baskets/fffd326-72fa-4d2b-bd1f-45384fe5d521")
+                    .build())
+                .call();
+
+        if (res.removeOrdersResponse().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       | Example                                                                           |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `correspondentId`                                                                 | *String*                                                                          | :heavy_check_mark:                                                                | The correspondent id.                                                             | 01HPMZZM6RKMVZA1JQ63RQKJRP                                                        |
+| `basketId`                                                                        | *String*                                                                          | :heavy_check_mark:                                                                | The basket id.                                                                    | fffd326-72fa-4d2b-bd1f-45384fe5d521                                               |
+| `removeOrdersRequestCreate`                                                       | [RemoveOrdersRequestCreate](../../models/components/RemoveOrdersRequestCreate.md) | :heavy_check_mark:                                                                | N/A                                                                               |                                                                                   |
+
+### Response
+
+**[BasketOrdersServiceRemoveOrdersResponse](../../models/operations/BasketOrdersServiceRemoveOrdersResponse.md)**
 
 ### Errors
 

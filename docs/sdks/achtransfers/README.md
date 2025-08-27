@@ -18,14 +18,12 @@ Creates an ACH deposit.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchDeposits_CreateAchDeposit" method="post" path="/transfers/v1/accounts/{account_id}/achDeposits" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.AchDepositCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.DecimalCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchDepositsCreateAchDepositResponse;
 import java.lang.Exception;
@@ -87,6 +85,7 @@ Gets an existing ACH deposit.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchDeposits_GetAchDeposit" method="get" path="/transfers/v1/accounts/{account_id}/achDeposits/{achDeposit_id}" -->
 ```java
 package hello.world;
 
@@ -149,13 +148,12 @@ Cancels an existing ACH deposit.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchDeposits_CancelAchDeposit" method="post" path="/transfers/v1/accounts/{account_id}/achDeposits/{achDeposit_id}:cancel" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.CancelAchDepositRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchDepositsCancelAchDepositResponse;
 import java.lang.Exception;
@@ -216,13 +214,12 @@ Creates an ACH withdrawal.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchWithdrawals_CreateAchWithdrawal" method="post" path="/transfers/v1/accounts/{account_id}/achWithdrawals" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.AchWithdrawalCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchWithdrawalsCreateAchWithdrawalResponse;
 import java.lang.Exception;
@@ -282,6 +279,7 @@ Gets an existing ACH withdrawal.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchWithdrawals_GetAchWithdrawal" method="get" path="/transfers/v1/accounts/{account_id}/achWithdrawals/{achWithdrawal_id}" -->
 ```java
 package hello.world;
 
@@ -344,13 +342,12 @@ Cancels an existing ACH withdrawal.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchWithdrawals_CancelAchWithdrawal" method="post" path="/transfers/v1/accounts/{account_id}/achWithdrawals/{achWithdrawal_id}:cancel" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.CancelAchWithdrawalRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchWithdrawalsCancelAchWithdrawalResponse;
 import java.lang.Exception;

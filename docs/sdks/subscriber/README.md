@@ -19,13 +19,12 @@ Creates a new push subscription for event notifications.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Subscriber_CreatePushSubscription" method="post" path="/events/v1/subscriptions" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.PushSubscriptionCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.SubscriberCreatePushSubscriptionResponse;
 import java.lang.Exception;
@@ -88,6 +87,7 @@ Gets a list of push subscriptions.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Subscriber_ListPushSubscriptions" method="get" path="/events/v1/subscriptions" -->
 ```java
 package hello.world;
 
@@ -153,6 +153,7 @@ Gets the details of a specific push subscription.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Subscriber_GetPushSubscription" method="get" path="/events/v1/subscriptions/{subscription_id}" -->
 ```java
 package hello.world;
 
@@ -214,13 +215,12 @@ Updates the details of a push subscription.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Subscriber_UpdatePushSubscription" method="patch" path="/events/v1/subscriptions/{subscription_id}" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.PushSubscriptionUpdate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.SubscriberUpdatePushSubscriptionResponse;
 import java.lang.Exception;
@@ -243,7 +243,6 @@ public class Application {
 
         SubscriberUpdatePushSubscriptionResponse res = sdk.subscriber().updatePushSubscription()
                 .subscriptionId("01H8MCDXH4JVH7KVNB2YY42907")
-                .updateMask("<value>")
                 .pushSubscriptionUpdate(PushSubscriptionUpdate.builder()
                     .build())
                 .call();
@@ -281,6 +280,7 @@ Stops receiving events from a push subscription, and then deletes it.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Subscriber_DeletePushSubscription" method="delete" path="/events/v1/subscriptions/{subscription_id}" -->
 ```java
 package hello.world;
 
@@ -340,6 +340,7 @@ Gets the details of a specific push subscription delivery.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Subscriber_GetPushSubscriptionDelivery" method="get" path="/events/v1/subscriptions/{subscription_id}/deliveries/{delivery_id}" -->
 ```java
 package hello.world;
 
@@ -403,6 +404,7 @@ Gets a list of a push subscription's event deliveries.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Subscriber_ListPushSubscriptionDeliveries" method="get" path="/events/v1/subscriptions/{subscription_id}/deliveries" -->
 ```java
 package hello.world;
 

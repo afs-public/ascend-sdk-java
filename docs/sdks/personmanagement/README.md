@@ -24,21 +24,12 @@ Creates a Legal Natural Person.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_CreateLegalNaturalPerson" method="post" path="/accounts/v1/legalNaturalPersons" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.DateCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.EmploymentCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.EmploymentStatus;
-import com.apexfintechsolutions.ascendsdk.models.components.FederalTaxClassification;
-import com.apexfintechsolutions.ascendsdk.models.components.IrsFormType;
-import com.apexfintechsolutions.ascendsdk.models.components.LegalNaturalPersonCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.PostalAddressCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
-import com.apexfintechsolutions.ascendsdk.models.components.TaxProfileCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.UsTinStatus;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsCreateLegalNaturalPersonResponse;
 import java.lang.Exception;
@@ -76,7 +67,7 @@ public class Application {
                     .build())
                 .taxProfile(TaxProfileCreate.builder()
                     .federalTaxClassification(FederalTaxClassification.C_CORPORATION)
-                    .irsFormType(IrsFormType.W9)
+                    .irsFormType(IrsFormType.IRS_FORM_TYPE_UNSPECIFIED)
                     .legalTaxRegionCode("US")
                     .usTinStatus(UsTinStatus.PASSING)
                     .build())
@@ -117,6 +108,7 @@ Gets a list of Legal Natural Person records based on search criteria.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_ListLegalNaturalPersons" method="get" path="/accounts/v1/legalNaturalPersons" -->
 ```java
 package hello.world;
 
@@ -146,7 +138,6 @@ public class Application {
         AccountsListLegalNaturalPersonsResponse res = sdk.personManagement().listLegalNaturalPersons()
                 .pageSize(25)
                 .pageToken("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h")
-                .orderBy("<value>")
                 .filter("legal_natural_person_id == \"e6716139-da77-46d1-9f15-13599161db0b\"")
                 .call();
 
@@ -184,6 +175,7 @@ Get Legal Natural Person
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_GetLegalNaturalPerson" method="get" path="/accounts/v1/legalNaturalPersons/{legalNaturalPerson_id}" -->
 ```java
 package hello.world;
 
@@ -245,13 +237,12 @@ Updates a Legal Natural Person.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_UpdateLegalNaturalPerson" method="patch" path="/accounts/v1/legalNaturalPersons/{legalNaturalPerson_id}" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.LegalNaturalPersonUpdate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsUpdateLegalNaturalPersonResponse;
 import java.lang.Exception;
@@ -274,7 +265,6 @@ public class Application {
 
         AccountsUpdateLegalNaturalPersonResponse res = sdk.personManagement().updateLegalNaturalPerson()
                 .legalNaturalPersonId("e6716139-da77-46d1-9f15-13599161db0b")
-                .updateMask("<value>")
                 .legalNaturalPersonUpdate(LegalNaturalPersonUpdate.builder()
                     .build())
                 .call();
@@ -312,13 +302,12 @@ Assigns a person's Large Trader ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_AssignLargeTrader" method="post" path="/accounts/v1/legalNaturalPersons/{legalNaturalPerson_id}/largeTrader:assign" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.AssignLargeTraderRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsAssignLargeTraderResponse;
 import java.lang.Exception;
@@ -378,14 +367,12 @@ Removes a person's Large Trader ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_EndLargeTrader_LegalNaturalPerson" method="post" path="/accounts/v1/legalNaturalPersons/{legalNaturalPerson_id}/largeTrader:remove" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.EndLargeTraderRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.EndReason;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsEndLargeTraderLegalNaturalPersonResponse;
 import java.lang.Exception;
@@ -409,7 +396,7 @@ public class Application {
         AccountsEndLargeTraderLegalNaturalPersonResponse res = sdk.personManagement().endLargeTraderLegalNaturalPerson()
                 .legalNaturalPersonId("e6716139-da77-46d1-9f15-13599161db0b")
                 .endLargeTraderRequestCreate(EndLargeTraderRequestCreate.builder()
-                    .endReason(EndReason.EVENT_REASON_OTHER)
+                    .endReason(EndReason.EVENT_REASON_ENDED)
                     .build())
                 .call();
 
@@ -443,20 +430,12 @@ Creates a Legal Entity.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_CreateLegalEntity" method="post" path="/accounts/v1/legalEntities" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.EntityType;
-import com.apexfintechsolutions.ascendsdk.models.components.FederalTaxClassification;
-import com.apexfintechsolutions.ascendsdk.models.components.IrsFormType;
-import com.apexfintechsolutions.ascendsdk.models.components.LegalEntityCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.LegalEntityCreateTaxIdType;
-import com.apexfintechsolutions.ascendsdk.models.components.PostalAddressCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
-import com.apexfintechsolutions.ascendsdk.models.components.TaxProfileCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.UsTinStatus;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsCreateLegalEntityResponse;
 import java.lang.Exception;
@@ -489,10 +468,10 @@ public class Application {
                     "CA"))
                 .registrationRegion("US")
                 .taxId("987-65-4321")
-                .taxIdType(LegalEntityCreateTaxIdType.TAX_ID_TYPE_ITIN)
+                .taxIdType(LegalEntityCreateTaxIdType.TAX_ID_TYPE_SSN)
                 .taxProfile(TaxProfileCreate.builder()
                     .federalTaxClassification(FederalTaxClassification.C_CORPORATION)
-                    .irsFormType(IrsFormType.W9)
+                    .irsFormType(IrsFormType.IRS_FORM_TYPE_UNSPECIFIED)
                     .legalTaxRegionCode("US")
                     .usTinStatus(UsTinStatus.PASSING)
                     .build())
@@ -533,6 +512,7 @@ Gets a list of Legal Entity records based on search criteria.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_ListLegalEntities" method="get" path="/accounts/v1/legalEntities" -->
 ```java
 package hello.world;
 
@@ -562,8 +542,8 @@ public class Application {
         AccountsListLegalEntitiesResponse res = sdk.personManagement().listLegalEntities()
                 .pageSize(25)
                 .pageToken("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h")
-                .orderBy("<value>")
-                .filter("<value>")
+                .orderBy("")
+                .filter("")
                 .call();
 
         if (res.listLegalEntitiesResponse().isPresent()) {
@@ -600,6 +580,7 @@ Get Legal Entity
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_GetLegalEntity" method="get" path="/accounts/v1/legalEntities/{legalEntity_id}" -->
 ```java
 package hello.world;
 
@@ -661,13 +642,12 @@ Updates a Legal Entity.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_UpdateLegalEntity" method="patch" path="/accounts/v1/legalEntities/{legalEntity_id}" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.LegalEntityUpdate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsUpdateLegalEntityResponse;
 import java.lang.Exception;
@@ -690,7 +670,6 @@ public class Application {
 
         AccountsUpdateLegalEntityResponse res = sdk.personManagement().updateLegalEntity()
                 .legalEntityId("42567868-9373-4872-9d24-2e33f6c19b75")
-                .updateMask("<value>")
                 .legalEntityUpdate(LegalEntityUpdate.builder()
                     .build())
                 .call();
@@ -728,13 +707,12 @@ Assigns a person's Large Trader ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_AssignLargeTrader_LegalEntity" method="post" path="/accounts/v1/legalEntities/{legalEntity_id}/largeTrader:assign" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.AssignLargeTraderRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsAssignLargeTraderLegalEntityResponse;
 import java.lang.Exception;
@@ -794,14 +772,12 @@ Removes a person's Large Trader ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_EndLargeTrader_1" method="post" path="/accounts/v1/legalEntities/{legalEntity_id}/largeTrader:remove" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.EndLargeTraderRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.EndReason;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsEndLargeTrader1Response;
 import java.lang.Exception;
@@ -825,7 +801,7 @@ public class Application {
         AccountsEndLargeTrader1Response res = sdk.personManagement().endLargeTrader()
                 .legalEntityId("e6716139-da77-46d1-9f15-13599161db0b")
                 .endLargeTraderRequestCreate(EndLargeTraderRequestCreate.builder()
-                    .endReason(EndReason.EVENT_REASON_CREATED)
+                    .endReason(EndReason.EVENT_REASON_ENDED)
                     .build())
                 .call();
 

@@ -19,19 +19,12 @@ Creates a new order for equity or fixed income securities.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="OrderService_CreateOrder" method="post" path="/trading/v1/accounts/{account_id}/orders" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.AssetType;
-import com.apexfintechsolutions.ascendsdk.models.components.DateCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.IdentifierType;
-import com.apexfintechsolutions.ascendsdk.models.components.OrderCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.OrderType;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
-import com.apexfintechsolutions.ascendsdk.models.components.Side;
-import com.apexfintechsolutions.ascendsdk.models.components.TimeInForce;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceCreateOrderResponse;
 import java.lang.Exception;
@@ -101,6 +94,7 @@ Gets an order by order ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="OrderService_GetOrder" method="get" path="/trading/v1/accounts/{account_id}/orders/{order_id}" -->
 ```java
 package hello.world;
 
@@ -166,13 +160,12 @@ Submits an order cancellation request by order ID. Confirmation of order cancell
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="OrderService_CancelOrder" method="post" path="/trading/v1/accounts/{account_id}/orders/{order_id}:cancel" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.CancelOrderRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceCancelOrderResponse;
 import java.lang.Exception;

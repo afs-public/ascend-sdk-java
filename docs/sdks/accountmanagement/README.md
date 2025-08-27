@@ -28,6 +28,7 @@ Gets a list of Accounts based on search criteria.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_ListAccounts" method="get" path="/accounts/v1/accounts" -->
 ```java
 package hello.world;
 
@@ -35,8 +36,7 @@ import com.apexfintechsolutions.ascendsdk.SDK;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
 import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
-import com.apexfintechsolutions.ascendsdk.models.operations.AccountsListAccountsRequest;
-import com.apexfintechsolutions.ascendsdk.models.operations.AccountsListAccountsResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -56,6 +56,11 @@ public class Application {
             .build();
 
         AccountsListAccountsRequest req = AccountsListAccountsRequest.builder()
+                .pageSize(25)
+                .pageToken("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4")
+                .orderBy("state")
+                .filter("account_number == \"R9AHY8P\"")
+                .view(View.FULL)
                 .build();
 
         AccountsListAccountsResponse res = sdk.accountManagement().listAccounts()
@@ -93,13 +98,12 @@ UPDATE Updates an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_UpdateAccount" method="patch" path="/accounts/v1/accounts/{account_id}" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.AccountRequestUpdate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsUpdateAccountResponse;
 import java.lang.Exception;
@@ -122,7 +126,6 @@ public class Application {
 
         AccountsUpdateAccountResponse res = sdk.accountManagement().updateAccount()
                 .accountId("01HC3MAQ4DR9QN1V8MJ4CN1HMK")
-                .updateMask("<value>")
                 .accountRequestUpdate(AccountRequestUpdate.builder()
                     .build())
                 .call();
@@ -160,17 +163,12 @@ Adds a party to an account
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_AddParty" method="post" path="/accounts/v1/accounts/{account_id}/parties:add" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.AddPartyRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.PartyRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.PhoneNumberCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.PostalAddressCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.RelationType;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsAddPartyResponse;
 import java.lang.Exception;
@@ -238,13 +236,12 @@ Updates a Party.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_UpdateParty" method="patch" path="/accounts/v1/accounts/{account_id}/parties/{party_id}" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.PartyRequestUpdate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsUpdatePartyResponse;
 import java.lang.Exception;
@@ -268,7 +265,6 @@ public class Application {
         AccountsUpdatePartyResponse res = sdk.accountManagement().updateParty()
                 .accountId("01HC3MAQ4DR9QN1V8MJ4CN1HMK")
                 .partyId("a58ddb02-3954-4249-a7d5-1d408def12cf")
-                .updateMask("<value>")
                 .partyRequestUpdate(PartyRequestUpdate.builder()
                     .build())
                 .call();
@@ -307,17 +303,12 @@ Replaces a party on an account
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_ReplaceParty" method="post" path="/accounts/v1/accounts/{account_id}/parties/{party_id}:replace" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.PartyRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.PhoneNumberCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.PostalAddressCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.RelationType;
-import com.apexfintechsolutions.ascendsdk.models.components.ReplacePartyRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsReplacePartyResponse;
 import java.lang.Exception;
@@ -387,13 +378,12 @@ Remove a party from an account
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_RemoveParty" method="post" path="/accounts/v1/accounts/{account_id}/parties/{party_id}:remove" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.RemovePartyRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsRemovePartyResponse;
 import java.lang.Exception;
@@ -453,13 +443,12 @@ CUSTOM Places an ACCT_MAINT_CLOSURE_PREP_BY_CORRESPONDENT restriction on the Acc
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_CloseAccount" method="post" path="/accounts/v1/accounts/{account_id}:close" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.CloseAccountRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsCloseAccountResponse;
 import java.lang.Exception;
@@ -518,13 +507,12 @@ Creates a new Trusted Contact for an account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_CreateTrustedContact" method="post" path="/accounts/v1/accounts/{account_id}/trustedContacts" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
-import com.apexfintechsolutions.ascendsdk.models.components.TrustedContactCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsCreateTrustedContactResponse;
 import java.lang.Exception;
@@ -585,13 +573,12 @@ Updates a Trusted Contact.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_UpdateTrustedContact" method="patch" path="/accounts/v1/accounts/{account_id}/trustedContacts/{trustedContact_id}" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
-import com.apexfintechsolutions.ascendsdk.models.components.TrustedContactUpdate;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsUpdateTrustedContactResponse;
 import java.lang.Exception;
@@ -615,7 +602,6 @@ public class Application {
         AccountsUpdateTrustedContactResponse res = sdk.accountManagement().updateTrustedContact()
                 .accountId("01HC3MAQ4DR9QN1V8MJ4CN1HMK")
                 .trustedContactId("8096110d-fb55-4f9d-b883-b84f0b70d3ea")
-                .updateMask("<value>")
                 .trustedContactUpdate(TrustedContactUpdate.builder()
                     .build())
                 .call();
@@ -654,6 +640,7 @@ DELETE Deletes a Trusted Contact for an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_DeleteTrustedContact" method="delete" path="/accounts/v1/accounts/{account_id}/trustedContacts/{trustedContact_id}" -->
 ```java
 package hello.world;
 
@@ -715,14 +702,12 @@ Creates an Interested Party record for an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_CreateInterestedParty" method="post" path="/accounts/v1/accounts/{account_id}/interestedParties" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.InterestedPartyCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.PostalAddressCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsCreateInterestedPartyResponse;
 import java.lang.Exception;
@@ -784,13 +769,12 @@ Updates an Interested Party.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_UpdateInterestedParty" method="patch" path="/accounts/v1/accounts/{account_id}/interestedParties/{interestedParty_id}" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.InterestedPartyUpdate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsUpdateInterestedPartyResponse;
 import java.lang.Exception;
@@ -814,7 +798,6 @@ public class Application {
         AccountsUpdateInterestedPartyResponse res = sdk.accountManagement().updateInterestedParty()
                 .accountId("01HC3MAQ4DR9QN1V8MJ4CN1HMK")
                 .interestedPartyId("ecf44f2f-7030-48ed-b937-c40891ee10c8")
-                .updateMask("<value>")
                 .interestedPartyUpdate(InterestedPartyUpdate.builder()
                     .build())
                 .call();
@@ -853,6 +836,7 @@ Deletes an Interested Party associated from an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_DeleteInterestedParty" method="delete" path="/accounts/v1/accounts/{account_id}/interestedParties/{interestedParty_id}" -->
 ```java
 package hello.world;
 
@@ -914,6 +898,7 @@ Gets a list of possible Restrictions that can be placed on an Account based on E
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_ListAvailableRestrictions" method="get" path="/accounts/v1/accounts/{account_id}/availableRestrictions" -->
 ```java
 package hello.world;
 
@@ -975,13 +960,12 @@ Applies a Restriction to an account that suspends one or more Entitlements.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_CreateRestriction" method="post" path="/accounts/v1/accounts/{account_id}/restrictions" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.RestrictionCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsCreateRestrictionResponse;
 import java.lang.Exception;
@@ -1042,13 +1026,12 @@ Ends a Restriction on an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_EndRestriction" method="post" path="/accounts/v1/accounts/{account_id}/restrictions/{restriction_id}:end" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.EndRestrictionRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsEndRestrictionResponse;
 import java.lang.Exception;

@@ -20,15 +20,12 @@ Adds an Enrollment to an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_EnrollAccount" method="post" path="/accounts/v1/accounts/{account_id}:enroll" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.EnrollAccountRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.EnrollmentCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.EnrollmentCreateType;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsEnrollAccountResponse;
 import java.lang.Exception;
@@ -91,6 +88,7 @@ Get a list of Enrollments available for an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_ListAvailableEnrollments" method="get" path="/accounts/v1/accounts/{account_id}/availableEnrollments" -->
 ```java
 package hello.world;
 
@@ -158,6 +156,7 @@ Get a list of Enrollments available for an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_ListAvailableEnrollments_1" method="get" path="/accounts/v1/accountGroups/{accountGroup_id}/availableEnrollments" -->
 ```java
 package hello.world;
 
@@ -225,13 +224,12 @@ Deactivates an Account Enrollment.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_DeactivateEnrollment" method="post" path="/accounts/v1/accounts/{account_id}/enrollments:deactivate" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.DeactivateEnrollmentRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsDeactivateEnrollmentResponse;
 import java.lang.Exception;
@@ -290,6 +288,7 @@ Gets a list of Enrollments for an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_ListEnrollments" method="get" path="/accounts/v1/accounts/{account_id}/enrollments" -->
 ```java
 package hello.world;
 
@@ -355,13 +354,12 @@ Affirm Agreements for an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_AffirmAgreements" method="post" path="/accounts/v1/accounts/{account_id}/agreements:affirm" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.AffirmAgreementsRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsAffirmAgreementsResponse;
 import java.lang.Exception;
@@ -423,6 +421,7 @@ Gets a list of Agreements on an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_ListAgreements" method="get" path="/accounts/v1/accounts/{account_id}/agreements" -->
 ```java
 package hello.world;
 
@@ -488,6 +487,7 @@ Gets a list of Entitlements for an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Accounts_ListEntitlements" method="get" path="/accounts/v1/accounts/{account_id}/entitlements" -->
 ```java
 package hello.world;
 

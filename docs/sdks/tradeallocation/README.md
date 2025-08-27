@@ -18,17 +18,12 @@ Creates a new trade allocation. These are used to allocate or distribute positio
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Booking_CreateTradeAllocation" method="post" path="/booking/v1/accounts/{account_id}/tradeAllocations" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.DecimalCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
-import com.apexfintechsolutions.ascendsdk.models.components.ToSide;
-import com.apexfintechsolutions.ascendsdk.models.components.TradeAllocationCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.TradeAllocationCreateBrokerCapacity;
-import com.apexfintechsolutions.ascendsdk.models.components.TradeAllocationCreateIdentifierType;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.BookingCreateTradeAllocationResponse;
 import java.lang.Exception;
@@ -54,6 +49,7 @@ public class Application {
                 .accountId("01FAKEACCOUNT1TYKWEYRH8S2K")
                 .requestId("8a0d35c0-428c-439e-9b03-b611530fe06f")
                 .tradeAllocationCreate(TradeAllocationCreate.builder()
+                    .assetType(TradeAllocationCreateAssetType.EQUITY)
                     .brokerCapacity(TradeAllocationCreateBrokerCapacity.AGENCY)
                     .executionTime(OffsetDateTime.parse("2024-07-17T12:00:00Z"))
                     .fromAccountId("01HASWB2DTMRT3DAM45P56J2H3")
@@ -104,6 +100,7 @@ Retrieves a trade allocation and its details.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Booking_GetTradeAllocation" method="get" path="/booking/v1/accounts/{account_id}/tradeAllocations/{tradeAllocation_id}" -->
 ```java
 package hello.world;
 
@@ -169,13 +166,12 @@ Cancel a trade allocation using the original trade_allocation_id.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Booking_CancelTradeAllocation" method="post" path="/booking/v1/accounts/{account_id}/tradeAllocations/{tradeAllocation_id}:cancel" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.CancelTradeAllocationRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.BookingCancelTradeAllocationResponse;
 import java.lang.Exception;
@@ -239,18 +235,12 @@ Rebook a trade allocation by the original trade_allocation_id. The allocation is
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="Booking_RebookTradeAllocation" method="post" path="/booking/v1/accounts/{account_id}/tradeAllocations/{tradeAllocation_id}:rebook" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.DecimalCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.RebookTradeAllocationRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
-import com.apexfintechsolutions.ascendsdk.models.components.ToSide;
-import com.apexfintechsolutions.ascendsdk.models.components.TradeAllocationCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.TradeAllocationCreateBrokerCapacity;
-import com.apexfintechsolutions.ascendsdk.models.components.TradeAllocationCreateIdentifierType;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.BookingRebookTradeAllocationResponse;
 import java.lang.Exception;
@@ -279,6 +269,7 @@ public class Application {
                     .name("accounts/02HASWB2DTMRT3DAM45P56J2T2/tradeAllocations/01J0XX2KDN3M9QKFKRE2HYSCQM")
                     .requestId("8a0d35c0-428c-439e-9b03-b611530fe06f")
                     .tradeAllocation(TradeAllocationCreate.builder()
+                        .assetType(TradeAllocationCreateAssetType.EQUITY)
                         .brokerCapacity(TradeAllocationCreateBrokerCapacity.AGENCY)
                         .executionTime(OffsetDateTime.parse("2024-07-17T12:00:00Z"))
                         .fromAccountId("01HASWB2DTMRT3DAM45P56J2H3")

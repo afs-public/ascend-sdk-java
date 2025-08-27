@@ -20,14 +20,12 @@ Creates a bank relationship.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="BankRelationships_CreateBankRelationship" method="post" path="/transfers/v1/accounts/{account_id}/bankRelationships" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.BankRelationshipCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
-import com.apexfintechsolutions.ascendsdk.models.components.VerificationMethod;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsCreateBankRelationshipResponse;
 import java.lang.Exception;
@@ -87,6 +85,7 @@ Lists bank relationships for an account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="BankRelationships_ListBankRelationships" method="get" path="/transfers/v1/accounts/{account_id}/bankRelationships" -->
 ```java
 package hello.world;
 
@@ -154,6 +153,7 @@ Gets an existing bank relationship.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="BankRelationships_GetBankRelationship" method="get" path="/transfers/v1/accounts/{account_id}/bankRelationships/{bankRelationship_id}" -->
 ```java
 package hello.world;
 
@@ -216,13 +216,12 @@ Updates an existing bank relationship.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="BankRelationships_UpdateBankRelationship" method="patch" path="/transfers/v1/accounts/{account_id}/bankRelationships/{bankRelationship_id}" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.BankRelationshipUpdate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsUpdateBankRelationshipResponse;
 import java.lang.Exception;
@@ -246,7 +245,7 @@ public class Application {
         BankRelationshipsUpdateBankRelationshipResponse res = sdk.bankRelationships().updateBankRelationship()
                 .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
                 .bankRelationshipId("651ef9de0dee00240813e60e")
-                .updateMask("{\"update_mask\":{\"paths\":[\"nickname\"]}}")
+                .updateMask("[object Object]")
                 .bankRelationshipUpdate(BankRelationshipUpdate.builder()
                     .build())
                 .call();
@@ -284,13 +283,12 @@ Cancels an existing bank relationship.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="BankRelationships_CancelBankRelationship" method="post" path="/transfers/v1/accounts/{account_id}/bankRelationships/{bankRelationship_id}:cancel" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.CancelBankRelationshipRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsCancelBankRelationshipResponse;
 import java.lang.Exception;
@@ -352,15 +350,12 @@ Verifies a pending bank relationship with the `MICRO_DEPOSIT` verification metho
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="BankRelationships_VerifyMicroDeposits" method="post" path="/transfers/v1/accounts/{account_id}/bankRelationships/{bankRelationship_id}:verifyMicroDeposits" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.DecimalCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.MicroDepositAmountsCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
-import com.apexfintechsolutions.ascendsdk.models.components.VerifyMicroDepositsRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsVerifyMicroDepositsResponse;
 import java.lang.Exception;
@@ -427,13 +422,12 @@ Reissues micro deposits after micro deposit verification has failed. The user sh
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="BankRelationships_ReissueMicroDeposits" method="post" path="/transfers/v1/accounts/{account_id}/bankRelationships/{bankRelationship_id}:reissue" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.ReissueMicroDepositsRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsReissueMicroDepositsResponse;
 import java.lang.Exception;
@@ -494,13 +488,12 @@ Reuses an existing bank relationship for a new account. The source bank relation
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="BankRelationships_ReuseBankRelationship" method="post" path="/transfers/v1/accounts/{account_id}/bankRelationships:reuse" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.ReuseBankRelationshipRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.BankRelationshipsReuseBankRelationshipResponse;
 import java.lang.Exception;

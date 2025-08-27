@@ -5,6 +5,7 @@
 
 ### Available Operations
 
+* [simulateCreateCheckDeposit](#simulatecreatecheckdeposit) - Simulate Check Deposit Creation
 * [forceApproveAchDeposit](#forceapproveachdeposit) - ACH Deposit Approval
 * [forceNocAchDeposit](#forcenocachdeposit) - NOC for a Deposit
 * [forceRejectAchDeposit](#forcerejectachdeposit) - ACH Deposit Rejection
@@ -23,19 +24,84 @@
 * [forceApproveCashJournal](#forceapprovecashjournal) - Force Approve Cash Journal
 * [forceRejectCashJournal](#forcerejectcashjournal) - Force Reject Cash Journal
 
+## simulateCreateCheckDeposit
+
+Creates a check deposit for a specific account FOR TESTING ONLY!
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="CheckDeposits_SimulateCreateCheckDeposit" method="post" path="/transfers/v1/accounts/{account_id}/checkDeposits:simulate" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckDepositsSimulateCreateCheckDepositResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        CheckDepositsSimulateCreateCheckDepositResponse res = sdk.testSimulation().simulateCreateCheckDeposit()
+                .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
+                .simulateCreateCheckDepositRequestCreate(SimulateCreateCheckDepositRequestCreate.builder()
+                    .amount(DecimalCreate.builder()
+                        .build())
+                    .parent("accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y")
+                    .build())
+                .call();
+
+        if (res.checkDeposit().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   | Example                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `accountId`                                                                                                   | *String*                                                                                                      | :heavy_check_mark:                                                                                            | The account id.                                                                                               | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                                                    |
+| `simulateCreateCheckDepositRequestCreate`                                                                     | [SimulateCreateCheckDepositRequestCreate](../../models/components/SimulateCreateCheckDepositRequestCreate.md) | :heavy_check_mark:                                                                                            | N/A                                                                                                           |                                                                                                               |
+
+### Response
+
+**[CheckDepositsSimulateCreateCheckDepositResponse](../../models/operations/CheckDepositsSimulateCreateCheckDepositResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403               | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
 ## forceApproveAchDeposit
 
 Forces approval of an existing ACH deposit that is pending review. FOR TESTING ONLY!
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchDeposits_ForceApproveAchDeposit" method="post" path="/transfers/v1/accounts/{account_id}/achDeposits/{achDeposit_id}:forceApprove" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveAchDepositRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchDepositsForceApproveAchDepositResponse;
 import java.lang.Exception;
@@ -96,15 +162,12 @@ Forces a Nacha notice of change (NOC) on a completed ACH deposit. FOR TESTING ON
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchDeposits_ForceNocAchDeposit" method="post" path="/transfers/v1/accounts/{account_id}/achDeposits/{achDeposit_id}:forceNoc" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.Code;
-import com.apexfintechsolutions.ascendsdk.models.components.ForceNocAchDepositRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.NachaNocCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchDepositsForceNocAchDepositResponse;
 import java.lang.Exception;
@@ -168,13 +231,12 @@ Forces rejection of an existing ACH deposit that is pending review. FOR TESTING 
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchDeposits_ForceRejectAchDeposit" method="post" path="/transfers/v1/accounts/{account_id}/achDeposits/{achDeposit_id}:forceReject" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectAchDepositRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchDepositsForceRejectAchDepositResponse;
 import java.lang.Exception;
@@ -235,15 +297,12 @@ Forces a Nacha return on a completed ACH deposit. FOR TESTING ONLY!
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchDeposits_ForceReturnAchDeposit" method="post" path="/transfers/v1/accounts/{account_id}/achDeposits/{achDeposit_id}:forceReturn" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.ForceReturnAchDepositRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.NachaReturnCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.NachaReturnCreateCode;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchDepositsForceReturnAchDepositResponse;
 import java.lang.Exception;
@@ -269,7 +328,7 @@ public class Application {
                 .achDepositId("20230817000319")
                 .forceReturnAchDepositRequestCreate(ForceReturnAchDepositRequestCreate.builder()
                     .nachaReturn(NachaReturnCreate.builder()
-                        .code(NachaReturnCreateCode.R34)
+                        .code(NachaReturnCreateCode.R13)
                         .build())
                     .name("accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achDeposits/20230817000319")
                     .build())
@@ -307,13 +366,12 @@ Forces approval of an existing ACH withdrawal that is pending review. FOR TESTIN
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchWithdrawals_ForceApproveAchWithdrawal" method="post" path="/transfers/v1/accounts/{account_id}/achWithdrawals/{achWithdrawal_id}:forceApprove" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveAchWithdrawalRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchWithdrawalsForceApproveAchWithdrawalResponse;
 import java.lang.Exception;
@@ -374,15 +432,12 @@ Forces a Nacha notice of change (NOC) on a completed ACH withdrawal. FOR TESTING
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchWithdrawals_ForceNocAchWithdrawal" method="post" path="/transfers/v1/accounts/{account_id}/achWithdrawals/{achWithdrawal_id}:forceNoc" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.Code;
-import com.apexfintechsolutions.ascendsdk.models.components.ForceNocAchWithdrawalRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.NachaNocCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchWithdrawalsForceNocAchWithdrawalResponse;
 import java.lang.Exception;
@@ -446,13 +501,12 @@ Forces rejection of an existing ACH withdrawal that is pending review. FOR TESTI
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchWithdrawals_ForceRejectAchWithdrawal" method="post" path="/transfers/v1/accounts/{account_id}/achWithdrawals/{achWithdrawal_id}:forceReject" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectAchWithdrawalRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchWithdrawalsForceRejectAchWithdrawalResponse;
 import java.lang.Exception;
@@ -513,15 +567,12 @@ Forces a Nacha return on a completed ACH withdrawal. FOR TESTING ONLY!
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AchWithdrawals_ForceReturnAchWithdrawal" method="post" path="/transfers/v1/accounts/{account_id}/achWithdrawals/{achWithdrawal_id}:forceReturn" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.ForceReturnAchWithdrawalRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.NachaReturnCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.NachaReturnCreateCode;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchWithdrawalsForceReturnAchWithdrawalResponse;
 import java.lang.Exception;
@@ -547,7 +598,7 @@ public class Application {
                 .achWithdrawalId("20230620500726")
                 .forceReturnAchWithdrawalRequestCreate(ForceReturnAchWithdrawalRequestCreate.builder()
                     .nachaReturn(NachaReturnCreate.builder()
-                        .code(NachaReturnCreateCode.R28)
+                        .code(NachaReturnCreateCode.R15)
                         .build())
                     .name("accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achWithdrawals/20230620500726")
                     .build())
@@ -585,6 +636,7 @@ Gets micro deposit amounts for bank relationships with the `MICRO_DEPOSIT` verif
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="BankRelationships_GetMicroDepositAmounts" method="get" path="/transfers/v1/accounts/{account_id}/bankRelationships/{bankRelationship_id}:getMicroDepositAmounts" -->
 ```java
 package hello.world;
 
@@ -647,13 +699,12 @@ Forces an approval on an existing ICT deposit pending review - FOR TESTING
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="IctDeposits_ForceApproveIctDeposit" method="post" path="/transfers/v1/accounts/{account_id}/ictDeposits/{ictDeposit_id}:forceApprove" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveIctDepositRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.IctDepositsForceApproveIctDepositResponse;
 import java.lang.Exception;
@@ -714,13 +765,12 @@ Forces a rejection on an existing ICT deposit pending review - FOR TESTING
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="IctDeposits_ForceRejectIctDeposit" method="post" path="/transfers/v1/accounts/{account_id}/ictDeposits/{ictDeposit_id}:forceReject" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectIctDepositRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.IctDepositsForceRejectIctDepositResponse;
 import java.lang.Exception;
@@ -781,13 +831,12 @@ Forces an approval on an existing ICT withdrawal pending review - FOR TESTING
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="IctWithdrawals_ForceApproveIctWithdrawal" method="post" path="/transfers/v1/accounts/{account_id}/ictWithdrawals/{ictWithdrawal_id}:forceApprove" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveIctWithdrawalRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.IctWithdrawalsForceApproveIctWithdrawalResponse;
 import java.lang.Exception;
@@ -848,13 +897,12 @@ Forces a rejection on an existing ICT withdrawal pending review - FOR TESTING
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="IctWithdrawals_ForceRejectIctWithdrawal" method="post" path="/transfers/v1/accounts/{account_id}/ictWithdrawals/{ictWithdrawal_id}:forceReject" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectIctWithdrawalRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.IctWithdrawalsForceRejectIctWithdrawalResponse;
 import java.lang.Exception;
@@ -915,13 +963,12 @@ Forces an approval on an existing wire withdrawal pending review - FOR TESTING
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="WireWithdrawals_ForceApproveWireWithdrawal" method="post" path="/transfers/v1/accounts/{account_id}/wireWithdrawals/{wireWithdrawal_id}:forceApprove" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveWireWithdrawalRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.WireWithdrawalsForceApproveWireWithdrawalResponse;
 import java.lang.Exception;
@@ -982,13 +1029,12 @@ Forces a rejection on an existing wire withdrawal pending review - FOR TESTING
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="WireWithdrawals_ForceRejectWireWithdrawal" method="post" path="/transfers/v1/accounts/{account_id}/wireWithdrawals/{wireWithdrawal_id}:forceReject" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectWireWithdrawalRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.WireWithdrawalsForceRejectWireWithdrawalResponse;
 import java.lang.Exception;
@@ -1049,13 +1095,12 @@ Forces approval of an existing cash journal that is pending review FOR TESTING O
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="CashJournals_ForceApproveCashJournal" method="post" path="/transfers/v1/cashJournals/{cashJournal_id}:forceApprove" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveCashJournalRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalsForceApproveCashJournalResponse;
 import java.lang.Exception;
@@ -1114,13 +1159,12 @@ Forces rejection of an existing cash journal that is pending review FOR TESTING 
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="CashJournals_ForceRejectCashJournal" method="post" path="/transfers/v1/cashJournals/{cashJournal_id}:forceReject" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectCashJournalRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalsForceRejectCashJournalResponse;
 import java.lang.Exception;

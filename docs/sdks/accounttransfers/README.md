@@ -17,14 +17,12 @@ Creates a transfer
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AccountTransfers_CreateTransfer" method="post" path="/acats/v1/correspondents/{correspondent_id}/accounts/{account_id}/transfers" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
-import com.apexfintechsolutions.ascendsdk.models.components.TransferAccountCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.TransferCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersCreateTransferResponse;
 import java.lang.Exception;
@@ -88,6 +86,7 @@ Lists existing transfers using a CEL filter.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AccountTransfers_ListTransfers" method="get" path="/acats/v1/correspondents/{correspondent_id}/accounts/{account_id}/transfers" -->
 ```java
 package hello.world;
 
@@ -118,6 +117,9 @@ public class Application {
         AccountTransfersListTransfersRequest req = AccountTransfersListTransfersRequest.builder()
                 .correspondentId("00000000-0000-0000-0000-000000000002")
                 .accountId("01FAKEACCOUNT")
+                .pageSize(25)
+                .pageToken("CgwI5uHttgYQyJXO2wESJDAxOTFjOTMxLTA3YjMtYzU0ZC0yMDNmLWU1M2U0OTBkY2FhZRoicmVjZWl2ZXIuYWNjb3VudF9pZCBpbiBbJzEwMDAwQUEnXQ")
+                .filter("deliverer.account_number == \"R9AHY8P\"")
                 .build();
 
         AccountTransfersListTransfersResponse res = sdk.accountTransfers().listTransfers()
@@ -155,13 +157,12 @@ Accept one side (incoming/outgoing) of an internal Ascend transfer. When both th
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AccountTransfers_AcceptTransfer" method="post" path="/acats/v1/correspondents/{correspondent_id}/accounts/{account_id}/transfers/{transfer_id}:accept" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.AcceptTransferRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersAcceptTransferResponse;
 import java.lang.Exception;
@@ -225,13 +226,12 @@ Reject one side (incoming/outgoing) of an internal Ascend transfer. Rejecting on
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AccountTransfers_RejectTransfer" method="post" path="/acats/v1/correspondents/{correspondent_id}/accounts/{account_id}/transfers/{transfer_id}:reject" -->
 ```java
 package hello.world;
 
 import com.apexfintechsolutions.ascendsdk.SDK;
-import com.apexfintechsolutions.ascendsdk.models.components.RejectTransferRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.Security;
-import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersRejectTransferResponse;
 import java.lang.Exception;
@@ -295,6 +295,7 @@ Gets an existing transfer
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="AccountTransfers_GetTransfer" method="get" path="/acats/v1/correspondents/{correspondent_id}/accounts/{account_id}/transfers/{transfer_id}" -->
 ```java
 package hello.world;
 
