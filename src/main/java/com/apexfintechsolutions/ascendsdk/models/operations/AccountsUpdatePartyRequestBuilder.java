@@ -8,6 +8,8 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.PartyRequestUpdate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsUpdateParty;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import java.util.Optional;
 
@@ -17,6 +19,7 @@ public class AccountsUpdatePartyRequestBuilder {
   private String partyId;
   private Optional<String> updateMask = Optional.empty();
   private PartyRequestUpdate partyRequestUpdate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsUpdatePartyRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -54,6 +57,18 @@ public class AccountsUpdatePartyRequestBuilder {
     return this;
   }
 
+  public AccountsUpdatePartyRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsUpdatePartyRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsUpdatePartyRequest buildRequest() {
 
     AccountsUpdatePartyRequest request =
@@ -63,9 +78,10 @@ public class AccountsUpdatePartyRequestBuilder {
   }
 
   public AccountsUpdatePartyResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountsUpdatePartyRequest, AccountsUpdatePartyResponse> operation =
-        new AccountsUpdateParty.Sync(sdkConfiguration);
+        new AccountsUpdateParty.Sync(sdkConfiguration, options);
     AccountsUpdatePartyRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

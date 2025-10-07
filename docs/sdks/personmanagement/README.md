@@ -135,15 +135,16 @@ public class Application {
                     .build())
             .build();
 
-        AccountsListLegalNaturalPersonsResponse res = sdk.personManagement().listLegalNaturalPersons()
+
+        sdk.personManagement().listLegalNaturalPersons()
                 .pageSize(25)
                 .pageToken("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h")
                 .filter("legal_natural_person_id == \"e6716139-da77-46d1-9f15-13599161db0b\"")
-                .call();
+                .callAsStream()
+                .forEach((AccountsListLegalNaturalPersonsResponse item) -> {
+                   // handle page
+                });
 
-        if (res.listLegalNaturalPersonsResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```
@@ -539,16 +540,17 @@ public class Application {
                     .build())
             .build();
 
-        AccountsListLegalEntitiesResponse res = sdk.personManagement().listLegalEntities()
+
+        sdk.personManagement().listLegalEntities()
                 .pageSize(25)
                 .pageToken("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h")
                 .orderBy("")
                 .filter("")
-                .call();
+                .callAsStream()
+                .forEach((AccountsListLegalEntitiesResponse item) -> {
+                   // handle page
+                });
 
-        if (res.listLegalEntitiesResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```

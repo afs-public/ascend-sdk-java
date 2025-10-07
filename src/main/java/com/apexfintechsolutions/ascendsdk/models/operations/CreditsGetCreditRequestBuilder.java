@@ -7,12 +7,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.CreditsGetCredit;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class CreditsGetCreditRequestBuilder {
 
   private String accountId;
   private String creditId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public CreditsGetCreditRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -31,6 +35,18 @@ public class CreditsGetCreditRequestBuilder {
     return this;
   }
 
+  public CreditsGetCreditRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public CreditsGetCreditRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private CreditsGetCreditRequest buildRequest() {
 
     CreditsGetCreditRequest request = new CreditsGetCreditRequest(accountId, creditId);
@@ -39,9 +55,10 @@ public class CreditsGetCreditRequestBuilder {
   }
 
   public CreditsGetCreditResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<CreditsGetCreditRequest, CreditsGetCreditResponse> operation =
-        new CreditsGetCredit.Sync(sdkConfiguration);
+        new CreditsGetCredit.Sync(sdkConfiguration, options);
     CreditsGetCreditRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

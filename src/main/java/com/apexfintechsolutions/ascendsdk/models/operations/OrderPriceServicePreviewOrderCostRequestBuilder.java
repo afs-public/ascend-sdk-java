@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.OrderCostPreviewRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.OrderPriceServicePreviewOrderCost;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class OrderPriceServicePreviewOrderCostRequestBuilder {
 
   private String accountId;
   private OrderCostPreviewRequestCreate orderCostPreviewRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public OrderPriceServicePreviewOrderCostRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -33,6 +37,19 @@ public class OrderPriceServicePreviewOrderCostRequestBuilder {
     return this;
   }
 
+  public OrderPriceServicePreviewOrderCostRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public OrderPriceServicePreviewOrderCostRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private OrderPriceServicePreviewOrderCostRequest buildRequest() {
 
     OrderPriceServicePreviewOrderCostRequest request =
@@ -42,10 +59,11 @@ public class OrderPriceServicePreviewOrderCostRequestBuilder {
   }
 
   public OrderPriceServicePreviewOrderCostResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             OrderPriceServicePreviewOrderCostRequest, OrderPriceServicePreviewOrderCostResponse>
-        operation = new OrderPriceServicePreviewOrderCost.Sync(sdkConfiguration);
+        operation = new OrderPriceServicePreviewOrderCost.Sync(sdkConfiguration, options);
     OrderPriceServicePreviewOrderCostRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

@@ -14,6 +14,7 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'signing'
+    id "com.adarshr.test-logger" version "4.0.0"
 }
 
 compileJava.options.encoding = "UTF-8"
@@ -26,8 +27,6 @@ repositories {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
     withSourcesJar()
     withJavadocJar()
 }
@@ -56,8 +55,12 @@ javadoc {
 }
 
 tasks.withType(Javadoc) {
-    failOnError false
-    options.addStringOption('Xdoclint:none', '-quiet')
+  failOnError = false
+  options.addStringOption('Xdoclint:none', '-quiet')
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 11
 }
 
 sourcesJar {
@@ -77,11 +80,15 @@ publishing {
             // https://github.com/gradle/gradle/issues/18619
             groupId = "com.apexfintechsolutions"
             artifactId = "ascendsdk"
-            version = "1.4.0"
+            version = "1.5.0"
 
             from components.java
 
             pom {
+                properties = [
+                    'maven.compiler.source': '11',
+                    'maven.compiler.target': '11',
+                ]
                 name = 'Apex Fintech Solutions Java SDK'
                 description = 'SDK enabling Java developers to easily integrate with the Apex Fintech Solutions API.'
                 url = 'https://github.com/owner/repo'
@@ -121,6 +128,45 @@ if (!project.hasProperty('skip.signing')) {
 }
 
 
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+}
+
+testlogger  {
+    showStandardStreams = true
+}
+
+test {
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+    finalizedBy 'mergeJUnitReports'
+}
+
+configurations {
+    antJUnit
+}
+
+task mergeJUnitReports {
+    ext {
+        resultsDir = file("$buildDir/test-results/test")
+        targetDir = file(".speakeasy/reports")
+    }
+
+    doLast {
+        ant.taskdef(
+            name: 'junitreport',
+            classname: 'org.apache.tools.ant.taskdefs.optional.junit.XMLResultAggregator',
+            classpath: configurations.antJUnit.asPath
+        )
+
+        mkdir targetDir
+
+        ant.junitreport(todir: targetDir, tofile: 'tests.xml') {
+            fileset(dir: resultsDir, includes: 'TEST-*.xml')
+        }
+    }
+}
+
 
 dependencies {
     implementation 'com.nimbusds:nimbus-jose-jwt:9.9.3'
@@ -131,6 +177,11 @@ dependencies {
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.18.2'
     api('org.openapitools:jackson-databind-nullable:0.2.6') {exclude group: 'com.fasterxml.jackson.core', module: 'jackson-databind'}
     implementation 'commons-io:commons-io:2.18.0'
+    implementation 'com.jayway.jsonpath:json-path:2.9.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
+    testImplementation 'org.mockito:mockito-core:5.14.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.4'
+    antJUnit 'org.apache.ant:ant-junit:1.9.7'
 }
 
 apply from: 'build-extras.gradle'

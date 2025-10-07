@@ -8,11 +8,15 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.LegalNaturalPersonCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsCreateLegalNaturalPerson;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AccountsCreateLegalNaturalPersonRequestBuilder {
 
   private LegalNaturalPersonCreate request;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsCreateLegalNaturalPersonRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -25,10 +29,24 @@ public class AccountsCreateLegalNaturalPersonRequestBuilder {
     return this;
   }
 
+  public AccountsCreateLegalNaturalPersonRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsCreateLegalNaturalPersonRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   public AccountsCreateLegalNaturalPersonResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<LegalNaturalPersonCreate, AccountsCreateLegalNaturalPersonResponse> operation =
-        new AccountsCreateLegalNaturalPerson.Sync(sdkConfiguration);
+        new AccountsCreateLegalNaturalPerson.Sync(sdkConfiguration, options);
 
     return operation.handleResponse(operation.doRequest(request));
   }

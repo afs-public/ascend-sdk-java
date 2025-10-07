@@ -7,12 +7,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.BankRelationshipsGetBankRelationship;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class BankRelationshipsGetBankRelationshipRequestBuilder {
 
   private String accountId;
   private String bankRelationshipId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public BankRelationshipsGetBankRelationshipRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -32,6 +36,19 @@ public class BankRelationshipsGetBankRelationshipRequestBuilder {
     return this;
   }
 
+  public BankRelationshipsGetBankRelationshipRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public BankRelationshipsGetBankRelationshipRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private BankRelationshipsGetBankRelationshipRequest buildRequest() {
 
     BankRelationshipsGetBankRelationshipRequest request =
@@ -41,11 +58,12 @@ public class BankRelationshipsGetBankRelationshipRequestBuilder {
   }
 
   public BankRelationshipsGetBankRelationshipResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             BankRelationshipsGetBankRelationshipRequest,
             BankRelationshipsGetBankRelationshipResponse>
-        operation = new BankRelationshipsGetBankRelationship.Sync(sdkConfiguration);
+        operation = new BankRelationshipsGetBankRelationship.Sync(sdkConfiguration, options);
     BankRelationshipsGetBankRelationshipRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

@@ -11,15 +11,18 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.openapitools.jackson.nullable.JsonNullableModule;
 
 public class JSON {
+  private static final ObjectMapper MAPPER =
+      new ObjectMapper()
+          .registerModule(new JavaTimeModule())
+          .registerModule(new Jdk8Module())
+          .registerModule(new JsonNullableModule())
+          .registerModule(Deserializers.STRICT_DESERIALIZERS)
+          .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+          .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+          .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+          .enable(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES);
+
   public static ObjectMapper getMapper() {
-    return new ObjectMapper()
-        .registerModule(new JavaTimeModule())
-        .registerModule(new Jdk8Module())
-        .registerModule(new JsonNullableModule())
-        .registerModule(Deserializers.STRICT_DESERIALIZERS)
-        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-        .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
-        .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-        .enable(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES);
+    return MAPPER;
   }
 }

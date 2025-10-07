@@ -8,13 +8,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelOrderRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.OrderServiceCancelOrder;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class OrderServiceCancelOrderRequestBuilder {
 
   private String accountId;
   private String orderId;
   private CancelOrderRequestCreate cancelOrderRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public OrderServiceCancelOrderRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -40,6 +44,18 @@ public class OrderServiceCancelOrderRequestBuilder {
     return this;
   }
 
+  public OrderServiceCancelOrderRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public OrderServiceCancelOrderRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private OrderServiceCancelOrderRequest buildRequest() {
 
     OrderServiceCancelOrderRequest request =
@@ -49,9 +65,10 @@ public class OrderServiceCancelOrderRequestBuilder {
   }
 
   public OrderServiceCancelOrderResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<OrderServiceCancelOrderRequest, OrderServiceCancelOrderResponse> operation =
-        new OrderServiceCancelOrder.Sync(sdkConfiguration);
+        new OrderServiceCancelOrder.Sync(sdkConfiguration, options);
     OrderServiceCancelOrderRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

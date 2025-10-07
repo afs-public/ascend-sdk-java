@@ -8,13 +8,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.RemoveOrdersRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.BasketOrdersServiceRemoveOrders;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class BasketOrdersServiceRemoveOrdersRequestBuilder {
 
   private String correspondentId;
   private String basketId;
   private RemoveOrdersRequestCreate removeOrdersRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public BasketOrdersServiceRemoveOrdersRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -40,6 +44,19 @@ public class BasketOrdersServiceRemoveOrdersRequestBuilder {
     return this;
   }
 
+  public BasketOrdersServiceRemoveOrdersRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public BasketOrdersServiceRemoveOrdersRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private BasketOrdersServiceRemoveOrdersRequest buildRequest() {
 
     BasketOrdersServiceRemoveOrdersRequest request =
@@ -50,10 +67,11 @@ public class BasketOrdersServiceRemoveOrdersRequestBuilder {
   }
 
   public BasketOrdersServiceRemoveOrdersResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             BasketOrdersServiceRemoveOrdersRequest, BasketOrdersServiceRemoveOrdersResponse>
-        operation = new BasketOrdersServiceRemoveOrders.Sync(sdkConfiguration);
+        operation = new BasketOrdersServiceRemoveOrders.Sync(sdkConfiguration, options);
     BasketOrdersServiceRemoveOrdersRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

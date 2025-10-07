@@ -168,7 +168,7 @@ public final class SessionManager<T extends SessionManager.HasSessionKey> {
             "Unexpected status code " + response.statusCode() + ": " + responseBody);
       }
       TokenResponse t = Utils.mapper().readValue(response.body(), TokenResponse.class);
-      if (!t.tokenType.orElse("").equals("Bearer")) {
+      if (!t.tokenType.orElse("").toLowerCase().equals("bearer")) {
         throw new AuthException(
             "Expected 'Bearer' token type but was '" + t.tokenType.orElse("") + "'");
       }

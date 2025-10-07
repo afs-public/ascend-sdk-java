@@ -28,6 +28,7 @@ import com.apexfintechsolutions.ascendsdk.operations.AccountTransfersCreateTrans
 import com.apexfintechsolutions.ascendsdk.operations.AccountTransfersGetTransfer;
 import com.apexfintechsolutions.ascendsdk.operations.AccountTransfersListTransfers;
 import com.apexfintechsolutions.ascendsdk.operations.AccountTransfersRejectTransfer;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
 import java.util.Optional;
 
 public class AccountTransfers {
@@ -62,7 +63,8 @@ public class AccountTransfers {
    */
   public AccountTransfersCreateTransferResponse createTransfer(
       String correspondentId, String accountId, TransferCreate transferCreate) throws Exception {
-    return createTransfer(correspondentId, accountId, Optional.empty(), transferCreate);
+    return createTransfer(
+        correspondentId, accountId, Optional.empty(), transferCreate, Optional.empty());
   }
 
   /**
@@ -77,6 +79,7 @@ public class AccountTransfers {
    *     ID do not result in duplicate transfers.
    * @param transferCreate An account transfer which contains the receiving and delivering party
    *     information, assets being transferred, NSCC status information, etc.
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -84,7 +87,8 @@ public class AccountTransfers {
       String correspondentId,
       String accountId,
       Optional<String> requestId,
-      TransferCreate transferCreate)
+      TransferCreate transferCreate,
+      Optional<Options> options)
       throws Exception {
     AccountTransfersCreateTransferRequest request =
         AccountTransfersCreateTransferRequest.builder()
@@ -94,7 +98,7 @@ public class AccountTransfers {
             .transferCreate(transferCreate)
             .build();
     RequestOperation<AccountTransfersCreateTransferRequest, AccountTransfersCreateTransferResponse>
-        operation = new AccountTransfersCreateTransfer.Sync(sdkConfiguration);
+        operation = new AccountTransfersCreateTransfer.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -120,8 +124,23 @@ public class AccountTransfers {
    */
   public AccountTransfersListTransfersResponse listTransfers(
       AccountTransfersListTransfersRequest request) throws Exception {
+    return listTransfers(request, Optional.empty());
+  }
+
+  /**
+   * List Transfers
+   *
+   * <p>Lists existing transfers using a CEL filter.
+   *
+   * @param request The request object containing all the parameters for the API call.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountTransfersListTransfersResponse listTransfers(
+      AccountTransfersListTransfersRequest request, Optional<Options> options) throws Exception {
     RequestOperation<AccountTransfersListTransfersRequest, AccountTransfersListTransfersResponse>
-        operation = new AccountTransfersListTransfers.Sync(sdkConfiguration);
+        operation = new AccountTransfersListTransfers.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -160,6 +179,33 @@ public class AccountTransfers {
       String transferId,
       AcceptTransferRequestCreate acceptTransferRequestCreate)
       throws Exception {
+    return acceptTransfer(
+        correspondentId, accountId, transferId, acceptTransferRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Accept Transfer
+   *
+   * <p>Accept one side (incoming/outgoing) of an internal Ascend transfer. When both the incoming
+   * side and outgoing side of the transfer have been accepted then bookkeeping is done immediately.
+   * If neither, or only one side of a transfer is accepted, then both sides of the internal perform
+   * bookkeeping one full settlement day after they went into the bookkeeping queue.
+   *
+   * @param correspondentId The correspondent id.
+   * @param accountId The account id.
+   * @param transferId The transfer id.
+   * @param acceptTransferRequestCreate Request to accept internal Ascend transfers.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountTransfersAcceptTransferResponse acceptTransfer(
+      String correspondentId,
+      String accountId,
+      String transferId,
+      AcceptTransferRequestCreate acceptTransferRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AccountTransfersAcceptTransferRequest request =
         AccountTransfersAcceptTransferRequest.builder()
             .correspondentId(correspondentId)
@@ -168,7 +214,7 @@ public class AccountTransfers {
             .acceptTransferRequestCreate(acceptTransferRequestCreate)
             .build();
     RequestOperation<AccountTransfersAcceptTransferRequest, AccountTransfersAcceptTransferResponse>
-        operation = new AccountTransfersAcceptTransfer.Sync(sdkConfiguration);
+        operation = new AccountTransfersAcceptTransfer.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -203,6 +249,31 @@ public class AccountTransfers {
       String transferId,
       RejectTransferRequestCreate rejectTransferRequestCreate)
       throws Exception {
+    return rejectTransfer(
+        correspondentId, accountId, transferId, rejectTransferRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Reject Transfer
+   *
+   * <p>Reject one side (incoming/outgoing) of an internal Ascend transfer. Rejecting one side
+   * automatically moves the contra side of the transfer to be rejected as well.
+   *
+   * @param correspondentId The correspondent id.
+   * @param accountId The account id.
+   * @param transferId The transfer id.
+   * @param rejectTransferRequestCreate Request to reject internal Ascend transfers.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountTransfersRejectTransferResponse rejectTransfer(
+      String correspondentId,
+      String accountId,
+      String transferId,
+      RejectTransferRequestCreate rejectTransferRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AccountTransfersRejectTransferRequest request =
         AccountTransfersRejectTransferRequest.builder()
             .correspondentId(correspondentId)
@@ -211,7 +282,7 @@ public class AccountTransfers {
             .rejectTransferRequestCreate(rejectTransferRequestCreate)
             .build();
     RequestOperation<AccountTransfersRejectTransferRequest, AccountTransfersRejectTransferResponse>
-        operation = new AccountTransfersRejectTransfer.Sync(sdkConfiguration);
+        operation = new AccountTransfersRejectTransfer.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -239,6 +310,24 @@ public class AccountTransfers {
    */
   public AccountTransfersGetTransferResponse getTransfer(
       String correspondentId, String accountId, String transferId) throws Exception {
+    return getTransfer(correspondentId, accountId, transferId, Optional.empty());
+  }
+
+  /**
+   * Get Transfer
+   *
+   * <p>Gets an existing transfer
+   *
+   * @param correspondentId The correspondent id.
+   * @param accountId The account id.
+   * @param transferId The transfer id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountTransfersGetTransferResponse getTransfer(
+      String correspondentId, String accountId, String transferId, Optional<Options> options)
+      throws Exception {
     AccountTransfersGetTransferRequest request =
         AccountTransfersGetTransferRequest.builder()
             .correspondentId(correspondentId)
@@ -246,7 +335,7 @@ public class AccountTransfers {
             .transferId(transferId)
             .build();
     RequestOperation<AccountTransfersGetTransferRequest, AccountTransfersGetTransferResponse>
-        operation = new AccountTransfersGetTransfer.Sync(sdkConfiguration);
+        operation = new AccountTransfersGetTransfer.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

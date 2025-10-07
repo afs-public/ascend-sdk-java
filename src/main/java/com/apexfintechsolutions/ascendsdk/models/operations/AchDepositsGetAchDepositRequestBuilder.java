@@ -7,12 +7,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.AchDepositsGetAchDeposit;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AchDepositsGetAchDepositRequestBuilder {
 
   private String accountId;
   private String achDepositId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AchDepositsGetAchDepositRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -31,6 +35,18 @@ public class AchDepositsGetAchDepositRequestBuilder {
     return this;
   }
 
+  public AchDepositsGetAchDepositRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AchDepositsGetAchDepositRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AchDepositsGetAchDepositRequest buildRequest() {
 
     AchDepositsGetAchDepositRequest request =
@@ -40,9 +56,10 @@ public class AchDepositsGetAchDepositRequestBuilder {
   }
 
   public AchDepositsGetAchDepositResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AchDepositsGetAchDepositRequest, AchDepositsGetAchDepositResponse> operation =
-        new AchDepositsGetAchDeposit.Sync(sdkConfiguration);
+        new AchDepositsGetAchDeposit.Sync(sdkConfiguration, options);
     AchDepositsGetAchDepositRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

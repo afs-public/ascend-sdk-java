@@ -8,7 +8,10 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.RejectTransferRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountTransfersRejectTransfer;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AccountTransfersRejectTransferRequestBuilder {
 
@@ -16,6 +19,7 @@ public class AccountTransfersRejectTransferRequestBuilder {
   private String accountId;
   private String transferId;
   private RejectTransferRequestCreate rejectTransferRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountTransfersRejectTransferRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -47,6 +51,19 @@ public class AccountTransfersRejectTransferRequestBuilder {
     return this;
   }
 
+  public AccountTransfersRejectTransferRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountTransfersRejectTransferRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountTransfersRejectTransferRequest buildRequest() {
 
     AccountTransfersRejectTransferRequest request =
@@ -57,9 +74,10 @@ public class AccountTransfersRejectTransferRequestBuilder {
   }
 
   public AccountTransfersRejectTransferResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountTransfersRejectTransferRequest, AccountTransfersRejectTransferResponse>
-        operation = new AccountTransfersRejectTransfer.Sync(sdkConfiguration);
+        operation = new AccountTransfersRejectTransfer.Sync(sdkConfiguration, options);
     AccountTransfersRejectTransferRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

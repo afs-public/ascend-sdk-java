@@ -24,6 +24,7 @@ import com.apexfintechsolutions.ascendsdk.operations.BookingCancelTradeAllocatio
 import com.apexfintechsolutions.ascendsdk.operations.BookingCreateTradeAllocation;
 import com.apexfintechsolutions.ascendsdk.operations.BookingGetTradeAllocation;
 import com.apexfintechsolutions.ascendsdk.operations.BookingRebookTradeAllocation;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
 import java.util.Optional;
 
 public class TradeAllocation {
@@ -63,7 +64,8 @@ public class TradeAllocation {
    */
   public BookingCreateTradeAllocationResponse createTradeAllocation(
       String accountId, TradeAllocationCreate tradeAllocationCreate) throws Exception {
-    return createTradeAllocation(accountId, Optional.empty(), tradeAllocationCreate);
+    return createTradeAllocation(
+        accountId, Optional.empty(), tradeAllocationCreate, Optional.empty());
   }
 
   /**
@@ -79,11 +81,15 @@ public class TradeAllocation {
    *     prevent duplicate requests from being processed.
    * @param tradeAllocationCreate A TradeAllocation represents the movement of positions between two
    *     ascend accounts.
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public BookingCreateTradeAllocationResponse createTradeAllocation(
-      String accountId, Optional<String> requestId, TradeAllocationCreate tradeAllocationCreate)
+      String accountId,
+      Optional<String> requestId,
+      TradeAllocationCreate tradeAllocationCreate,
+      Optional<Options> options)
       throws Exception {
     BookingCreateTradeAllocationRequest request =
         BookingCreateTradeAllocationRequest.builder()
@@ -92,7 +98,7 @@ public class TradeAllocation {
             .tradeAllocationCreate(tradeAllocationCreate)
             .build();
     RequestOperation<BookingCreateTradeAllocationRequest, BookingCreateTradeAllocationResponse>
-        operation = new BookingCreateTradeAllocation.Sync(sdkConfiguration);
+        operation = new BookingCreateTradeAllocation.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -123,13 +129,31 @@ public class TradeAllocation {
    */
   public BookingGetTradeAllocationResponse getTradeAllocation(
       String accountId, String tradeAllocationId) throws Exception {
+    return getTradeAllocation(accountId, tradeAllocationId, Optional.empty());
+  }
+
+  /**
+   * Get Trade Allocation
+   *
+   * <p>Retrieves a trade allocation and its details.
+   *
+   * <p>Upon successful submission, returns the trade allocation details.
+   *
+   * @param accountId The account id.
+   * @param tradeAllocationId The tradeAllocation id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BookingGetTradeAllocationResponse getTradeAllocation(
+      String accountId, String tradeAllocationId, Optional<Options> options) throws Exception {
     BookingGetTradeAllocationRequest request =
         BookingGetTradeAllocationRequest.builder()
             .accountId(accountId)
             .tradeAllocationId(tradeAllocationId)
             .build();
     RequestOperation<BookingGetTradeAllocationRequest, BookingGetTradeAllocationResponse>
-        operation = new BookingGetTradeAllocation.Sync(sdkConfiguration);
+        operation = new BookingGetTradeAllocation.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -166,6 +190,31 @@ public class TradeAllocation {
       String tradeAllocationId,
       CancelTradeAllocationRequestCreate cancelTradeAllocationRequestCreate)
       throws Exception {
+    return cancelTradeAllocation(
+        accountId, tradeAllocationId, cancelTradeAllocationRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Cancel Trade Allocation
+   *
+   * <p>Cancel a trade allocation using the original trade_allocation_id.
+   *
+   * <p>Upon successful submission, returns an empty response. CancelTradeAllocation will either
+   * cancel everything, or nothing at all if a failure occurs.
+   *
+   * @param accountId The account id.
+   * @param tradeAllocationId The tradeAllocation id.
+   * @param cancelTradeAllocationRequestCreate A request for canceling a trade allocation.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BookingCancelTradeAllocationResponse cancelTradeAllocation(
+      String accountId,
+      String tradeAllocationId,
+      CancelTradeAllocationRequestCreate cancelTradeAllocationRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     BookingCancelTradeAllocationRequest request =
         BookingCancelTradeAllocationRequest.builder()
             .accountId(accountId)
@@ -173,7 +222,7 @@ public class TradeAllocation {
             .cancelTradeAllocationRequestCreate(cancelTradeAllocationRequestCreate)
             .build();
     RequestOperation<BookingCancelTradeAllocationRequest, BookingCancelTradeAllocationResponse>
-        operation = new BookingCancelTradeAllocation.Sync(sdkConfiguration);
+        operation = new BookingCancelTradeAllocation.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -212,6 +261,32 @@ public class TradeAllocation {
       String tradeAllocationId,
       RebookTradeAllocationRequestCreate rebookTradeAllocationRequestCreate)
       throws Exception {
+    return rebookTradeAllocation(
+        accountId, tradeAllocationId, rebookTradeAllocationRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Rebook Trade Allocation
+   *
+   * <p>Rebook a trade allocation by the original trade_allocation_id. The allocation is rebooked by
+   * canceling the original allocation and creating a new one with the provided details.
+   *
+   * <p>Upon successful submission, returns both the original and new allocation, as separate
+   * resources.
+   *
+   * @param accountId The account id.
+   * @param tradeAllocationId The tradeAllocation id.
+   * @param rebookTradeAllocationRequestCreate Used to correct a trade allocation.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BookingRebookTradeAllocationResponse rebookTradeAllocation(
+      String accountId,
+      String tradeAllocationId,
+      RebookTradeAllocationRequestCreate rebookTradeAllocationRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     BookingRebookTradeAllocationRequest request =
         BookingRebookTradeAllocationRequest.builder()
             .accountId(accountId)
@@ -219,7 +294,7 @@ public class TradeAllocation {
             .rebookTradeAllocationRequestCreate(rebookTradeAllocationRequestCreate)
             .build();
     RequestOperation<BookingRebookTradeAllocationRequest, BookingRebookTradeAllocationResponse>
-        operation = new BookingRebookTradeAllocation.Sync(sdkConfiguration);
+        operation = new BookingRebookTradeAllocation.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

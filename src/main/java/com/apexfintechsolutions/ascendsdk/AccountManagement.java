@@ -81,6 +81,7 @@ import com.apexfintechsolutions.ascendsdk.operations.AccountsUpdateAccount;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsUpdateInterestedParty;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsUpdateParty;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsUpdateTrustedContact;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
 import java.util.Optional;
 
 public class AccountManagement {
@@ -112,8 +113,23 @@ public class AccountManagement {
    */
   public AccountsListAccountsResponse listAccounts(AccountsListAccountsRequest request)
       throws Exception {
+    return listAccounts(request, Optional.empty());
+  }
+
+  /**
+   * List Accounts
+   *
+   * <p>Gets a list of Accounts based on search criteria.
+   *
+   * @param request The request object containing all the parameters for the API call.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsListAccountsResponse listAccounts(
+      AccountsListAccountsRequest request, Optional<Options> options) throws Exception {
     RequestOperation<AccountsListAccountsRequest, AccountsListAccountsResponse> operation =
-        new AccountsListAccounts.Sync(sdkConfiguration);
+        new AccountsListAccounts.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -140,7 +156,7 @@ public class AccountManagement {
    */
   public AccountsUpdateAccountResponse updateAccount(
       String accountId, AccountRequestUpdate accountRequestUpdate) throws Exception {
-    return updateAccount(accountId, Optional.empty(), accountRequestUpdate);
+    return updateAccount(accountId, Optional.empty(), accountRequestUpdate, Optional.empty());
   }
 
   /**
@@ -160,11 +176,15 @@ public class AccountManagement {
    *     `investment_profile.customer_profile.total_net_worth_range_usd`
    *     `investment_profile.customer_profile.federal_tax_bracket` `wrap_fee_billed` `managed`
    * @param accountRequestUpdate A single record representing an owner or manager of an Account.
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public AccountsUpdateAccountResponse updateAccount(
-      String accountId, Optional<String> updateMask, AccountRequestUpdate accountRequestUpdate)
+      String accountId,
+      Optional<String> updateMask,
+      AccountRequestUpdate accountRequestUpdate,
+      Optional<Options> options)
       throws Exception {
     AccountsUpdateAccountRequest request =
         AccountsUpdateAccountRequest.builder()
@@ -173,7 +193,7 @@ public class AccountManagement {
             .accountRequestUpdate(accountRequestUpdate)
             .build();
     RequestOperation<AccountsUpdateAccountRequest, AccountsUpdateAccountResponse> operation =
-        new AccountsUpdateAccount.Sync(sdkConfiguration);
+        new AccountsUpdateAccount.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -200,13 +220,30 @@ public class AccountManagement {
    */
   public AccountsAddPartyResponse addParty(
       String accountId, AddPartyRequestCreate addPartyRequestCreate) throws Exception {
+    return addParty(accountId, addPartyRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Add Party
+   *
+   * <p>Adds a party to an account
+   *
+   * @param accountId The account id.
+   * @param addPartyRequestCreate A request to add a party to an account
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsAddPartyResponse addParty(
+      String accountId, AddPartyRequestCreate addPartyRequestCreate, Optional<Options> options)
+      throws Exception {
     AccountsAddPartyRequest request =
         AccountsAddPartyRequest.builder()
             .accountId(accountId)
             .addPartyRequestCreate(addPartyRequestCreate)
             .build();
     RequestOperation<AccountsAddPartyRequest, AccountsAddPartyResponse> operation =
-        new AccountsAddParty.Sync(sdkConfiguration);
+        new AccountsAddParty.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -235,7 +272,7 @@ public class AccountManagement {
    */
   public AccountsUpdatePartyResponse updateParty(
       String accountId, String partyId, PartyRequestUpdate partyRequestUpdate) throws Exception {
-    return updateParty(accountId, partyId, Optional.empty(), partyRequestUpdate);
+    return updateParty(accountId, partyId, Optional.empty(), partyRequestUpdate, Optional.empty());
   }
 
   /**
@@ -253,6 +290,7 @@ public class AccountManagement {
    *     `mailing_address.locality` `mailing_address.address_lines`
    * @param partyRequestUpdate A single record representing an owner or manager of an Account.
    *     Contains fully populated Party Identity object.
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -260,7 +298,8 @@ public class AccountManagement {
       String accountId,
       String partyId,
       Optional<String> updateMask,
-      PartyRequestUpdate partyRequestUpdate)
+      PartyRequestUpdate partyRequestUpdate,
+      Optional<Options> options)
       throws Exception {
     AccountsUpdatePartyRequest request =
         AccountsUpdatePartyRequest.builder()
@@ -270,7 +309,7 @@ public class AccountManagement {
             .partyRequestUpdate(partyRequestUpdate)
             .build();
     RequestOperation<AccountsUpdatePartyRequest, AccountsUpdatePartyResponse> operation =
-        new AccountsUpdateParty.Sync(sdkConfiguration);
+        new AccountsUpdateParty.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -299,6 +338,27 @@ public class AccountManagement {
   public AccountsReplacePartyResponse replaceParty(
       String accountId, String partyId, ReplacePartyRequestCreate replacePartyRequestCreate)
       throws Exception {
+    return replaceParty(accountId, partyId, replacePartyRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Replace Party
+   *
+   * <p>Replaces a party on an account
+   *
+   * @param accountId The account id.
+   * @param partyId The party id.
+   * @param replacePartyRequestCreate A request to replace a party on an account
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsReplacePartyResponse replaceParty(
+      String accountId,
+      String partyId,
+      ReplacePartyRequestCreate replacePartyRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AccountsReplacePartyRequest request =
         AccountsReplacePartyRequest.builder()
             .accountId(accountId)
@@ -306,7 +366,7 @@ public class AccountManagement {
             .replacePartyRequestCreate(replacePartyRequestCreate)
             .build();
     RequestOperation<AccountsReplacePartyRequest, AccountsReplacePartyResponse> operation =
-        new AccountsReplaceParty.Sync(sdkConfiguration);
+        new AccountsReplaceParty.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -335,6 +395,27 @@ public class AccountManagement {
   public AccountsRemovePartyResponse removeParty(
       String accountId, String partyId, RemovePartyRequestCreate removePartyRequestCreate)
       throws Exception {
+    return removeParty(accountId, partyId, removePartyRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Remove Party
+   *
+   * <p>Remove a party from an account
+   *
+   * @param accountId The account id.
+   * @param partyId The party id.
+   * @param removePartyRequestCreate A request to remove a party from an account
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsRemovePartyResponse removeParty(
+      String accountId,
+      String partyId,
+      RemovePartyRequestCreate removePartyRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AccountsRemovePartyRequest request =
         AccountsRemovePartyRequest.builder()
             .accountId(accountId)
@@ -342,7 +423,7 @@ public class AccountManagement {
             .removePartyRequestCreate(removePartyRequestCreate)
             .build();
     RequestOperation<AccountsRemovePartyRequest, AccountsRemovePartyResponse> operation =
-        new AccountsRemoveParty.Sync(sdkConfiguration);
+        new AccountsRemoveParty.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -371,13 +452,33 @@ public class AccountManagement {
    */
   public AccountsCloseAccountResponse closeAccount(
       String accountId, CloseAccountRequestCreate closeAccountRequestCreate) throws Exception {
+    return closeAccount(accountId, closeAccountRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Close Account
+   *
+   * <p>CUSTOM Places an ACCT_MAINT_CLOSURE_PREP_BY_CORRESPONDENT restriction on the Account ready
+   * for closure.
+   *
+   * @param accountId The account id.
+   * @param closeAccountRequestCreate The request for closing an Account.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsCloseAccountResponse closeAccount(
+      String accountId,
+      CloseAccountRequestCreate closeAccountRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AccountsCloseAccountRequest request =
         AccountsCloseAccountRequest.builder()
             .accountId(accountId)
             .closeAccountRequestCreate(closeAccountRequestCreate)
             .build();
     RequestOperation<AccountsCloseAccountRequest, AccountsCloseAccountResponse> operation =
-        new AccountsCloseAccount.Sync(sdkConfiguration);
+        new AccountsCloseAccount.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -406,13 +507,32 @@ public class AccountManagement {
    */
   public AccountsCreateTrustedContactResponse createTrustedContact(
       String accountId, TrustedContactCreate trustedContactCreate) throws Exception {
+    return createTrustedContact(accountId, trustedContactCreate, Optional.empty());
+  }
+
+  /**
+   * Create Trusted Contact
+   *
+   * <p>Creates a new Trusted Contact for an account.
+   *
+   * @param accountId The account id.
+   * @param trustedContactCreate A Trusted Contact is a person designated to verify the well being
+   *     of the account holder. Only one form of contact information is required; An account may
+   *     contain zero, one, or many.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsCreateTrustedContactResponse createTrustedContact(
+      String accountId, TrustedContactCreate trustedContactCreate, Optional<Options> options)
+      throws Exception {
     AccountsCreateTrustedContactRequest request =
         AccountsCreateTrustedContactRequest.builder()
             .accountId(accountId)
             .trustedContactCreate(trustedContactCreate)
             .build();
     RequestOperation<AccountsCreateTrustedContactRequest, AccountsCreateTrustedContactResponse>
-        operation = new AccountsCreateTrustedContact.Sync(sdkConfiguration);
+        operation = new AccountsCreateTrustedContact.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -444,7 +564,7 @@ public class AccountManagement {
       String accountId, String trustedContactId, TrustedContactUpdate trustedContactUpdate)
       throws Exception {
     return updateTrustedContact(
-        accountId, trustedContactId, Optional.empty(), trustedContactUpdate);
+        accountId, trustedContactId, Optional.empty(), trustedContactUpdate, Optional.empty());
   }
 
   /**
@@ -461,6 +581,7 @@ public class AccountManagement {
    * @param trustedContactUpdate A Trusted Contact is a person designated to verify the well being
    *     of the account holder. Only one form of contact information is required; An account may
    *     contain zero, one, or many.
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -468,7 +589,8 @@ public class AccountManagement {
       String accountId,
       String trustedContactId,
       Optional<String> updateMask,
-      TrustedContactUpdate trustedContactUpdate)
+      TrustedContactUpdate trustedContactUpdate,
+      Optional<Options> options)
       throws Exception {
     AccountsUpdateTrustedContactRequest request =
         AccountsUpdateTrustedContactRequest.builder()
@@ -478,7 +600,7 @@ public class AccountManagement {
             .trustedContactUpdate(trustedContactUpdate)
             .build();
     RequestOperation<AccountsUpdateTrustedContactRequest, AccountsUpdateTrustedContactResponse>
-        operation = new AccountsUpdateTrustedContact.Sync(sdkConfiguration);
+        operation = new AccountsUpdateTrustedContact.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -505,13 +627,29 @@ public class AccountManagement {
    */
   public AccountsDeleteTrustedContactResponse deleteTrustedContact(
       String accountId, String trustedContactId) throws Exception {
+    return deleteTrustedContact(accountId, trustedContactId, Optional.empty());
+  }
+
+  /**
+   * Delete Trusted Contact
+   *
+   * <p>DELETE Deletes a Trusted Contact for an Account.
+   *
+   * @param accountId The account id.
+   * @param trustedContactId The trustedContact id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsDeleteTrustedContactResponse deleteTrustedContact(
+      String accountId, String trustedContactId, Optional<Options> options) throws Exception {
     AccountsDeleteTrustedContactRequest request =
         AccountsDeleteTrustedContactRequest.builder()
             .accountId(accountId)
             .trustedContactId(trustedContactId)
             .build();
     RequestOperation<AccountsDeleteTrustedContactRequest, AccountsDeleteTrustedContactResponse>
-        operation = new AccountsDeleteTrustedContact.Sync(sdkConfiguration);
+        operation = new AccountsDeleteTrustedContact.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -538,13 +676,30 @@ public class AccountManagement {
    */
   public AccountsCreateInterestedPartyResponse createInterestedParty(
       String accountId, InterestedPartyCreate interestedPartyCreate) throws Exception {
+    return createInterestedParty(accountId, interestedPartyCreate, Optional.empty());
+  }
+
+  /**
+   * Create Interested Party
+   *
+   * <p>Creates an Interested Party record for an Account.
+   *
+   * @param accountId The account id.
+   * @param interestedPartyCreate An interested party.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsCreateInterestedPartyResponse createInterestedParty(
+      String accountId, InterestedPartyCreate interestedPartyCreate, Optional<Options> options)
+      throws Exception {
     AccountsCreateInterestedPartyRequest request =
         AccountsCreateInterestedPartyRequest.builder()
             .accountId(accountId)
             .interestedPartyCreate(interestedPartyCreate)
             .build();
     RequestOperation<AccountsCreateInterestedPartyRequest, AccountsCreateInterestedPartyResponse>
-        operation = new AccountsCreateInterestedParty.Sync(sdkConfiguration);
+        operation = new AccountsCreateInterestedParty.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -574,7 +729,7 @@ public class AccountManagement {
       String accountId, String interestedPartyId, InterestedPartyUpdate interestedPartyUpdate)
       throws Exception {
     return updateInterestedParty(
-        accountId, interestedPartyId, Optional.empty(), interestedPartyUpdate);
+        accountId, interestedPartyId, Optional.empty(), interestedPartyUpdate, Optional.empty());
   }
 
   /**
@@ -590,6 +745,7 @@ public class AccountManagement {
    *     `mailing_address.administrative_area` `mailing_address.locality`
    *     `mailing_address.address_lines`
    * @param interestedPartyUpdate An interested party.
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -597,7 +753,8 @@ public class AccountManagement {
       String accountId,
       String interestedPartyId,
       Optional<String> updateMask,
-      InterestedPartyUpdate interestedPartyUpdate)
+      InterestedPartyUpdate interestedPartyUpdate,
+      Optional<Options> options)
       throws Exception {
     AccountsUpdateInterestedPartyRequest request =
         AccountsUpdateInterestedPartyRequest.builder()
@@ -607,7 +764,7 @@ public class AccountManagement {
             .interestedPartyUpdate(interestedPartyUpdate)
             .build();
     RequestOperation<AccountsUpdateInterestedPartyRequest, AccountsUpdateInterestedPartyResponse>
-        operation = new AccountsUpdateInterestedParty.Sync(sdkConfiguration);
+        operation = new AccountsUpdateInterestedParty.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -634,13 +791,29 @@ public class AccountManagement {
    */
   public AccountsDeleteInterestedPartyResponse deleteInterestedParty(
       String accountId, String interestedPartyId) throws Exception {
+    return deleteInterestedParty(accountId, interestedPartyId, Optional.empty());
+  }
+
+  /**
+   * Delete Interested Party
+   *
+   * <p>Deletes an Interested Party associated from an Account.
+   *
+   * @param accountId The account id.
+   * @param interestedPartyId The interestedParty id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsDeleteInterestedPartyResponse deleteInterestedParty(
+      String accountId, String interestedPartyId, Optional<Options> options) throws Exception {
     AccountsDeleteInterestedPartyRequest request =
         AccountsDeleteInterestedPartyRequest.builder()
             .accountId(accountId)
             .interestedPartyId(interestedPartyId)
             .build();
     RequestOperation<AccountsDeleteInterestedPartyRequest, AccountsDeleteInterestedPartyResponse>
-        operation = new AccountsDeleteInterestedParty.Sync(sdkConfiguration);
+        operation = new AccountsDeleteInterestedParty.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -666,11 +839,26 @@ public class AccountManagement {
    */
   public AccountsListAvailableRestrictionsResponse listAvailableRestrictions(String accountId)
       throws Exception {
+    return listAvailableRestrictions(accountId, Optional.empty());
+  }
+
+  /**
+   * List Available Restrictions
+   *
+   * <p>Gets a list of possible Restrictions that can be placed on an Account based on Enrollments.
+   *
+   * @param accountId The account id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsListAvailableRestrictionsResponse listAvailableRestrictions(
+      String accountId, Optional<Options> options) throws Exception {
     AccountsListAvailableRestrictionsRequest request =
         AccountsListAvailableRestrictionsRequest.builder().accountId(accountId).build();
     RequestOperation<
             AccountsListAvailableRestrictionsRequest, AccountsListAvailableRestrictionsResponse>
-        operation = new AccountsListAvailableRestrictions.Sync(sdkConfiguration);
+        operation = new AccountsListAvailableRestrictions.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -697,13 +885,30 @@ public class AccountManagement {
    */
   public AccountsCreateRestrictionResponse createRestriction(
       String accountId, RestrictionCreate restrictionCreate) throws Exception {
+    return createRestriction(accountId, restrictionCreate, Optional.empty());
+  }
+
+  /**
+   * Create Restriction
+   *
+   * <p>Applies a Restriction to an account that suspends one or more Entitlements.
+   *
+   * @param accountId The account id.
+   * @param restrictionCreate An account restriction.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsCreateRestrictionResponse createRestriction(
+      String accountId, RestrictionCreate restrictionCreate, Optional<Options> options)
+      throws Exception {
     AccountsCreateRestrictionRequest request =
         AccountsCreateRestrictionRequest.builder()
             .accountId(accountId)
             .restrictionCreate(restrictionCreate)
             .build();
     RequestOperation<AccountsCreateRestrictionRequest, AccountsCreateRestrictionResponse>
-        operation = new AccountsCreateRestriction.Sync(sdkConfiguration);
+        operation = new AccountsCreateRestriction.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -734,6 +939,27 @@ public class AccountManagement {
       String restrictionId,
       EndRestrictionRequestCreate endRestrictionRequestCreate)
       throws Exception {
+    return endRestriction(accountId, restrictionId, endRestrictionRequestCreate, Optional.empty());
+  }
+
+  /**
+   * End Restriction
+   *
+   * <p>Ends a Restriction on an Account.
+   *
+   * @param accountId The account id.
+   * @param restrictionId The restriction id.
+   * @param endRestrictionRequestCreate The request for ending a Restriction on an Account.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsEndRestrictionResponse endRestriction(
+      String accountId,
+      String restrictionId,
+      EndRestrictionRequestCreate endRestrictionRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AccountsEndRestrictionRequest request =
         AccountsEndRestrictionRequest.builder()
             .accountId(accountId)
@@ -741,7 +967,7 @@ public class AccountManagement {
             .endRestrictionRequestCreate(endRestrictionRequestCreate)
             .build();
     RequestOperation<AccountsEndRestrictionRequest, AccountsEndRestrictionResponse> operation =
-        new AccountsEndRestriction.Sync(sdkConfiguration);
+        new AccountsEndRestriction.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

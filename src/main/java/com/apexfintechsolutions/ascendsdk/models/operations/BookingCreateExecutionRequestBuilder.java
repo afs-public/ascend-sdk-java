@@ -8,13 +8,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.ExecutionCreate;
 import com.apexfintechsolutions.ascendsdk.operations.BookingCreateExecution;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class BookingCreateExecutionRequestBuilder {
 
   private String accountId;
   private String tradeId;
   private ExecutionCreate executionCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public BookingCreateExecutionRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -39,6 +43,18 @@ public class BookingCreateExecutionRequestBuilder {
     return this;
   }
 
+  public BookingCreateExecutionRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public BookingCreateExecutionRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private BookingCreateExecutionRequest buildRequest() {
 
     BookingCreateExecutionRequest request =
@@ -48,9 +64,10 @@ public class BookingCreateExecutionRequestBuilder {
   }
 
   public BookingCreateExecutionResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<BookingCreateExecutionRequest, BookingCreateExecutionResponse> operation =
-        new BookingCreateExecution.Sync(sdkConfiguration);
+        new BookingCreateExecution.Sync(sdkConfiguration, options);
     BookingCreateExecutionRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

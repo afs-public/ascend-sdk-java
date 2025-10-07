@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.AssignLargeTraderRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsAssignLargeTraderLegalEntity;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AccountsAssignLargeTraderLegalEntityRequestBuilder {
 
   private String legalEntityId;
   private AssignLargeTraderRequestCreate assignLargeTraderRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsAssignLargeTraderLegalEntityRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -33,6 +37,19 @@ public class AccountsAssignLargeTraderLegalEntityRequestBuilder {
     return this;
   }
 
+  public AccountsAssignLargeTraderLegalEntityRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsAssignLargeTraderLegalEntityRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsAssignLargeTraderLegalEntityRequest buildRequest() {
 
     AccountsAssignLargeTraderLegalEntityRequest request =
@@ -43,11 +60,12 @@ public class AccountsAssignLargeTraderLegalEntityRequestBuilder {
   }
 
   public AccountsAssignLargeTraderLegalEntityResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             AccountsAssignLargeTraderLegalEntityRequest,
             AccountsAssignLargeTraderLegalEntityResponse>
-        operation = new AccountsAssignLargeTraderLegalEntity.Sync(sdkConfiguration);
+        operation = new AccountsAssignLargeTraderLegalEntity.Sync(sdkConfiguration, options);
     AccountsAssignLargeTraderLegalEntityRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

@@ -8,6 +8,8 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.TransferCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountTransfersCreateTransfer;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import java.util.Optional;
 
@@ -17,6 +19,7 @@ public class AccountTransfersCreateTransferRequestBuilder {
   private String accountId;
   private Optional<String> requestId = Optional.empty();
   private TransferCreate transferCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountTransfersCreateTransferRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -54,6 +57,19 @@ public class AccountTransfersCreateTransferRequestBuilder {
     return this;
   }
 
+  public AccountTransfersCreateTransferRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountTransfersCreateTransferRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountTransfersCreateTransferRequest buildRequest() {
 
     AccountTransfersCreateTransferRequest request =
@@ -64,9 +80,10 @@ public class AccountTransfersCreateTransferRequestBuilder {
   }
 
   public AccountTransfersCreateTransferResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountTransfersCreateTransferRequest, AccountTransfersCreateTransferResponse>
-        operation = new AccountTransfersCreateTransfer.Sync(sdkConfiguration);
+        operation = new AccountTransfersCreateTransfer.Sync(sdkConfiguration, options);
     AccountTransfersCreateTransferRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

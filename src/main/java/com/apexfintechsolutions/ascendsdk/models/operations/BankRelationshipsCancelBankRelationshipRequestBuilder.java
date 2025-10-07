@@ -8,13 +8,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelBankRelationshipRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.BankRelationshipsCancelBankRelationship;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class BankRelationshipsCancelBankRelationshipRequestBuilder {
 
   private String accountId;
   private String bankRelationshipId;
   private CancelBankRelationshipRequestCreate cancelBankRelationshipRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public BankRelationshipsCancelBankRelationshipRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -41,6 +45,20 @@ public class BankRelationshipsCancelBankRelationshipRequestBuilder {
     return this;
   }
 
+  public BankRelationshipsCancelBankRelationshipRequestBuilder retryConfig(
+      RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public BankRelationshipsCancelBankRelationshipRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private BankRelationshipsCancelBankRelationshipRequest buildRequest() {
 
     BankRelationshipsCancelBankRelationshipRequest request =
@@ -51,11 +69,12 @@ public class BankRelationshipsCancelBankRelationshipRequestBuilder {
   }
 
   public BankRelationshipsCancelBankRelationshipResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             BankRelationshipsCancelBankRelationshipRequest,
             BankRelationshipsCancelBankRelationshipResponse>
-        operation = new BankRelationshipsCancelBankRelationship.Sync(sdkConfiguration);
+        operation = new BankRelationshipsCancelBankRelationship.Sync(sdkConfiguration, options);
     BankRelationshipsCancelBankRelationshipRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

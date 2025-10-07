@@ -15,6 +15,7 @@ import com.apexfintechsolutions.ascendsdk.models.operations.AuthenticationListSi
 import com.apexfintechsolutions.ascendsdk.models.operations.AuthenticationListSigningKeysSecurity;
 import com.apexfintechsolutions.ascendsdk.operations.AuthenticationGenerateServiceAccountToken;
 import com.apexfintechsolutions.ascendsdk.operations.AuthenticationListSigningKeys;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
 import java.util.Optional;
 
 public class Authentication {
@@ -49,10 +50,30 @@ public class Authentication {
       GenerateServiceAccountTokenRequestCreate request,
       AuthenticationGenerateServiceAccountTokenSecurity security)
       throws Exception {
+    return generateServiceAccountToken(request, security, Optional.empty());
+  }
+
+  /**
+   * Generate Service Account Token
+   *
+   * <p>Creates an access token for a service account.
+   *
+   * @param request The request object containing all the parameters for the API call.
+   * @param security The security details to use for authentication.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AuthenticationGenerateServiceAccountTokenResponse generateServiceAccountToken(
+      GenerateServiceAccountTokenRequestCreate request,
+      AuthenticationGenerateServiceAccountTokenSecurity security,
+      Optional<Options> options)
+      throws Exception {
     RequestOperation<
             GenerateServiceAccountTokenRequestCreate,
             AuthenticationGenerateServiceAccountTokenResponse>
-        operation = new AuthenticationGenerateServiceAccountToken.Sync(sdkConfiguration, security);
+        operation =
+            new AuthenticationGenerateServiceAccountToken.Sync(sdkConfiguration, security, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -78,7 +99,7 @@ public class Authentication {
    */
   public AuthenticationListSigningKeysResponse listSigningKeys(
       AuthenticationListSigningKeysSecurity security) throws Exception {
-    return listSigningKeys(security, Optional.empty(), Optional.empty());
+    return listSigningKeys(security, Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -90,13 +111,15 @@ public class Authentication {
    * @param pageSize The number of entries to return in a single page; Default = 100; Maximum = 1000
    * @param pageToken Page token used for pagination; Supplying a page token returns the next page
    *     of results
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public AuthenticationListSigningKeysResponse listSigningKeys(
       AuthenticationListSigningKeysSecurity security,
       Optional<Integer> pageSize,
-      Optional<String> pageToken)
+      Optional<String> pageToken,
+      Optional<Options> options)
       throws Exception {
     AuthenticationListSigningKeysRequest request =
         AuthenticationListSigningKeysRequest.builder()
@@ -104,7 +127,7 @@ public class Authentication {
             .pageToken(pageToken)
             .build();
     RequestOperation<AuthenticationListSigningKeysRequest, AuthenticationListSigningKeysResponse>
-        operation = new AuthenticationListSigningKeys.Sync(sdkConfiguration, security);
+        operation = new AuthenticationListSigningKeys.Sync(sdkConfiguration, security, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

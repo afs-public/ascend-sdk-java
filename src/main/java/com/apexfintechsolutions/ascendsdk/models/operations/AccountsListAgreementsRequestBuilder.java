@@ -4,17 +4,29 @@
 package com.apexfintechsolutions.ascendsdk.models.operations;
 
 import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOperation;
+import static com.apexfintechsolutions.ascendsdk.utils.Exceptions.unchecked;
+import static com.apexfintechsolutions.ascendsdk.utils.Utils.toStream;
+import static com.apexfintechsolutions.ascendsdk.utils.Utils.transform;
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsListAgreements;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import com.apexfintechsolutions.ascendsdk.utils.pagination.CursorTracker;
+import com.apexfintechsolutions.ascendsdk.utils.pagination.Paginator;
+import java.io.InputStream;
+import java.net.http.HttpResponse;
+import java.util.Iterator;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class AccountsListAgreementsRequestBuilder {
 
   private String accountId;
   private Optional<Integer> pageSize = Optional.empty();
   private Optional<String> pageToken = Optional.empty();
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsListAgreementsRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -51,6 +63,18 @@ public class AccountsListAgreementsRequestBuilder {
     return this;
   }
 
+  public AccountsListAgreementsRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsListAgreementsRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsListAgreementsRequest buildRequest() {
 
     AccountsListAgreementsRequest request =
@@ -60,11 +84,46 @@ public class AccountsListAgreementsRequestBuilder {
   }
 
   public AccountsListAgreementsResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountsListAgreementsRequest, AccountsListAgreementsResponse> operation =
-        new AccountsListAgreements.Sync(sdkConfiguration);
+        new AccountsListAgreements.Sync(sdkConfiguration, options);
     AccountsListAgreementsRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Returns an iterable that performs next page calls till no more pages are returned.
+   *
+   * <p>The returned iterable can be used in a for-each loop:
+   *
+   * <pre><code>
+   * for (AccountsListAgreementsResponse page : builder.callAsIterable()) {
+   *     // Process each page
+   * }
+   * </code></pre>
+   *
+   * @return An iterable that can be used to iterate through all pages
+   */
+  public Iterable<AccountsListAgreementsResponse> callAsIterable() {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
+
+    RequestOperation<AccountsListAgreementsRequest, AccountsListAgreementsResponse> operation =
+        new AccountsListAgreements.Sync(sdkConfiguration, options);
+    AccountsListAgreementsRequest request = buildRequest();
+    Iterator<HttpResponse<InputStream>> iterator =
+        new Paginator<>(
+            request,
+            new CursorTracker<>("$.next_page_token", String.class),
+            AccountsListAgreementsRequest::withPageToken,
+            nextRequest -> unchecked(() -> operation.doRequest(request)).get());
+
+    return () -> transform(iterator, operation::handleResponse);
+  }
+
+  /** Returns a stream that performs next page calls till no more pages are returned. */
+  public Stream<AccountsListAgreementsResponse> callAsStream() {
+    return toStream(callAsIterable());
   }
 }

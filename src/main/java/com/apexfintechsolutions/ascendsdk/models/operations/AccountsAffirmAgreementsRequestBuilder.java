@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.AffirmAgreementsRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsAffirmAgreements;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AccountsAffirmAgreementsRequestBuilder {
 
   private String accountId;
   private AffirmAgreementsRequestCreate affirmAgreementsRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsAffirmAgreementsRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -33,6 +37,18 @@ public class AccountsAffirmAgreementsRequestBuilder {
     return this;
   }
 
+  public AccountsAffirmAgreementsRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsAffirmAgreementsRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsAffirmAgreementsRequest buildRequest() {
 
     AccountsAffirmAgreementsRequest request =
@@ -42,9 +58,10 @@ public class AccountsAffirmAgreementsRequestBuilder {
   }
 
   public AccountsAffirmAgreementsResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountsAffirmAgreementsRequest, AccountsAffirmAgreementsResponse> operation =
-        new AccountsAffirmAgreements.Sync(sdkConfiguration);
+        new AccountsAffirmAgreements.Sync(sdkConfiguration, options);
     AccountsAffirmAgreementsRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

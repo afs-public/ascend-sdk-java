@@ -7,11 +7,15 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.CashJournalsGetCashJournal;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class CashJournalsGetCashJournalRequestBuilder {
 
   private String cashJournalId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public CashJournalsGetCashJournalRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -24,6 +28,18 @@ public class CashJournalsGetCashJournalRequestBuilder {
     return this;
   }
 
+  public CashJournalsGetCashJournalRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public CashJournalsGetCashJournalRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private CashJournalsGetCashJournalRequest buildRequest() {
 
     CashJournalsGetCashJournalRequest request =
@@ -33,9 +49,10 @@ public class CashJournalsGetCashJournalRequestBuilder {
   }
 
   public CashJournalsGetCashJournalResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<CashJournalsGetCashJournalRequest, CashJournalsGetCashJournalResponse>
-        operation = new CashJournalsGetCashJournal.Sync(sdkConfiguration);
+        operation = new CashJournalsGetCashJournal.Sync(sdkConfiguration, options);
     CashJournalsGetCashJournalRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

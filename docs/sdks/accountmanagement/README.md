@@ -63,13 +63,13 @@ public class Application {
                 .view(View.FULL)
                 .build();
 
-        AccountsListAccountsResponse res = sdk.accountManagement().listAccounts()
-                .request(req)
-                .call();
 
-        if (res.listAccountsResponse().isPresent()) {
-            // handle response
-        }
+        sdk.accountManagement().listAccounts()
+                .callAsStream()
+                .forEach((AccountsListAccountsResponse item) -> {
+                   // handle page
+                });
+
     }
 }
 ```

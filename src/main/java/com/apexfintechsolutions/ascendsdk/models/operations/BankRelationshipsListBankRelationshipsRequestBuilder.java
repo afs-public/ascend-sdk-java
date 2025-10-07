@@ -4,11 +4,22 @@
 package com.apexfintechsolutions.ascendsdk.models.operations;
 
 import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOperation;
+import static com.apexfintechsolutions.ascendsdk.utils.Exceptions.unchecked;
+import static com.apexfintechsolutions.ascendsdk.utils.Utils.toStream;
+import static com.apexfintechsolutions.ascendsdk.utils.Utils.transform;
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.BankRelationshipsListBankRelationships;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import com.apexfintechsolutions.ascendsdk.utils.pagination.CursorTracker;
+import com.apexfintechsolutions.ascendsdk.utils.pagination.Paginator;
+import java.io.InputStream;
+import java.net.http.HttpResponse;
+import java.util.Iterator;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class BankRelationshipsListBankRelationshipsRequestBuilder {
 
@@ -16,6 +27,7 @@ public class BankRelationshipsListBankRelationshipsRequestBuilder {
   private Optional<Integer> pageSize = Optional.empty();
   private Optional<String> pageToken = Optional.empty();
   private Optional<? extends State> state = Optional.empty();
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public BankRelationshipsListBankRelationshipsRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -66,6 +78,19 @@ public class BankRelationshipsListBankRelationshipsRequestBuilder {
     return this;
   }
 
+  public BankRelationshipsListBankRelationshipsRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public BankRelationshipsListBankRelationshipsRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private BankRelationshipsListBankRelationshipsRequest buildRequest() {
 
     BankRelationshipsListBankRelationshipsRequest request =
@@ -75,13 +100,50 @@ public class BankRelationshipsListBankRelationshipsRequestBuilder {
   }
 
   public BankRelationshipsListBankRelationshipsResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             BankRelationshipsListBankRelationshipsRequest,
             BankRelationshipsListBankRelationshipsResponse>
-        operation = new BankRelationshipsListBankRelationships.Sync(sdkConfiguration);
+        operation = new BankRelationshipsListBankRelationships.Sync(sdkConfiguration, options);
     BankRelationshipsListBankRelationshipsRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Returns an iterable that performs next page calls till no more pages are returned.
+   *
+   * <p>The returned iterable can be used in a for-each loop:
+   *
+   * <pre><code>
+   * for (BankRelationshipsListBankRelationshipsResponse page : builder.callAsIterable()) {
+   *     // Process each page
+   * }
+   * </code></pre>
+   *
+   * @return An iterable that can be used to iterate through all pages
+   */
+  public Iterable<BankRelationshipsListBankRelationshipsResponse> callAsIterable() {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
+
+    RequestOperation<
+            BankRelationshipsListBankRelationshipsRequest,
+            BankRelationshipsListBankRelationshipsResponse>
+        operation = new BankRelationshipsListBankRelationships.Sync(sdkConfiguration, options);
+    BankRelationshipsListBankRelationshipsRequest request = buildRequest();
+    Iterator<HttpResponse<InputStream>> iterator =
+        new Paginator<>(
+            request,
+            new CursorTracker<>("$.next_page_token", String.class),
+            BankRelationshipsListBankRelationshipsRequest::withPageToken,
+            nextRequest -> unchecked(() -> operation.doRequest(request)).get());
+
+    return () -> transform(iterator, operation::handleResponse);
+  }
+
+  /** Returns a stream that performs next page calls till no more pages are returned. */
+  public Stream<BankRelationshipsListBankRelationshipsResponse> callAsStream() {
+    return toStream(callAsIterable());
   }
 }

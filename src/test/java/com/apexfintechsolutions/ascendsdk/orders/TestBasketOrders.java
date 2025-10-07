@@ -32,7 +32,6 @@ public class TestBasketOrders {
   @Order(2)
   @Test
   public void test_basket_orders_orders_add_orders_add_orders1() throws Exception {
-    Thread.sleep(5000);
     var request =
         AddOrdersRequestCreate.builder()
             .name(basket.name().get())

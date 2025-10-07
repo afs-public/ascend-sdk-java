@@ -8,7 +8,10 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.RebookExecutionRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.BookingRebookExecution;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class BookingRebookExecutionRequestBuilder {
 
@@ -16,6 +19,7 @@ public class BookingRebookExecutionRequestBuilder {
   private String tradeId;
   private String executionId;
   private RebookExecutionRequestCreate rebookExecutionRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public BookingRebookExecutionRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -47,6 +51,18 @@ public class BookingRebookExecutionRequestBuilder {
     return this;
   }
 
+  public BookingRebookExecutionRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public BookingRebookExecutionRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private BookingRebookExecutionRequest buildRequest() {
 
     BookingRebookExecutionRequest request =
@@ -57,9 +73,10 @@ public class BookingRebookExecutionRequestBuilder {
   }
 
   public BookingRebookExecutionResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<BookingRebookExecutionRequest, BookingRebookExecutionResponse> operation =
-        new BookingRebookExecution.Sync(sdkConfiguration);
+        new BookingRebookExecution.Sync(sdkConfiguration, options);
     BookingRebookExecutionRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

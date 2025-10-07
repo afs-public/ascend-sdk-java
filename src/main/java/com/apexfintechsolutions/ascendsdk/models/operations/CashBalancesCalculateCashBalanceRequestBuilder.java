@@ -7,6 +7,8 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.CashBalancesCalculateCashBalance;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import java.util.Optional;
 
@@ -14,6 +16,7 @@ public class CashBalancesCalculateCashBalanceRequestBuilder {
 
   private String accountId;
   private Optional<? extends Mechanism> mechanism = Optional.empty();
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public CashBalancesCalculateCashBalanceRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -39,6 +42,19 @@ public class CashBalancesCalculateCashBalanceRequestBuilder {
     return this;
   }
 
+  public CashBalancesCalculateCashBalanceRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public CashBalancesCalculateCashBalanceRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private CashBalancesCalculateCashBalanceRequest buildRequest() {
 
     CashBalancesCalculateCashBalanceRequest request =
@@ -48,10 +64,11 @@ public class CashBalancesCalculateCashBalanceRequestBuilder {
   }
 
   public CashBalancesCalculateCashBalanceResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             CashBalancesCalculateCashBalanceRequest, CashBalancesCalculateCashBalanceResponse>
-        operation = new CashBalancesCalculateCashBalance.Sync(sdkConfiguration);
+        operation = new CashBalancesCalculateCashBalance.Sync(sdkConfiguration, options);
     CashBalancesCalculateCashBalanceRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

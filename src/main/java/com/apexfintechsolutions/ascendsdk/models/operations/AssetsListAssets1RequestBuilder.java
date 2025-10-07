@@ -4,11 +4,22 @@
 package com.apexfintechsolutions.ascendsdk.models.operations;
 
 import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOperation;
+import static com.apexfintechsolutions.ascendsdk.utils.Exceptions.unchecked;
+import static com.apexfintechsolutions.ascendsdk.utils.Utils.toStream;
+import static com.apexfintechsolutions.ascendsdk.utils.Utils.transform;
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.AssetsListAssets1;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import com.apexfintechsolutions.ascendsdk.utils.pagination.CursorTracker;
+import com.apexfintechsolutions.ascendsdk.utils.pagination.Paginator;
+import java.io.InputStream;
+import java.net.http.HttpResponse;
+import java.util.Iterator;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class AssetsListAssets1RequestBuilder {
 
@@ -16,6 +27,7 @@ public class AssetsListAssets1RequestBuilder {
   private Optional<Integer> pageSize = Optional.empty();
   private Optional<String> pageToken = Optional.empty();
   private Optional<String> filter = Optional.empty();
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AssetsListAssets1RequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -70,6 +82,18 @@ public class AssetsListAssets1RequestBuilder {
     return this;
   }
 
+  public AssetsListAssets1RequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AssetsListAssets1RequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AssetsListAssets1Request buildRequest() {
 
     AssetsListAssets1Request request =
@@ -79,11 +103,46 @@ public class AssetsListAssets1RequestBuilder {
   }
 
   public AssetsListAssets1Response call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AssetsListAssets1Request, AssetsListAssets1Response> operation =
-        new AssetsListAssets1.Sync(sdkConfiguration);
+        new AssetsListAssets1.Sync(sdkConfiguration, options);
     AssetsListAssets1Request request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Returns an iterable that performs next page calls till no more pages are returned.
+   *
+   * <p>The returned iterable can be used in a for-each loop:
+   *
+   * <pre><code>
+   * for (AssetsListAssets1Response page : builder.callAsIterable()) {
+   *     // Process each page
+   * }
+   * </code></pre>
+   *
+   * @return An iterable that can be used to iterate through all pages
+   */
+  public Iterable<AssetsListAssets1Response> callAsIterable() {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
+
+    RequestOperation<AssetsListAssets1Request, AssetsListAssets1Response> operation =
+        new AssetsListAssets1.Sync(sdkConfiguration, options);
+    AssetsListAssets1Request request = buildRequest();
+    Iterator<HttpResponse<InputStream>> iterator =
+        new Paginator<>(
+            request,
+            new CursorTracker<>("$.next_page_token", String.class),
+            AssetsListAssets1Request::withPageToken,
+            nextRequest -> unchecked(() -> operation.doRequest(request)).get());
+
+    return () -> transform(iterator, operation::handleResponse);
+  }
+
+  /** Returns a stream that performs next page calls till no more pages are returned. */
+  public Stream<AssetsListAssets1Response> callAsStream() {
+    return toStream(callAsIterable());
   }
 }

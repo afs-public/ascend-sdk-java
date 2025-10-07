@@ -125,8 +125,8 @@ final class ApexAccessTokenHook implements Hook.BeforeRequest {
     accessToken = jsonNode.get("access_token").asText();
     int expiresIn = jsonNode.get("expires_in").asInt();
 
-    // Set expiration time
-    accessTokenExpiration = LocalDateTime.now().plusSeconds(expiresIn);
+    // Set expiration time with 1 hour safety buffer to refresh tokens before they actually expire
+    accessTokenExpiration = LocalDateTime.now().plusSeconds(Math.max(expiresIn - 3600, 60));
     return accessToken;
   }
 

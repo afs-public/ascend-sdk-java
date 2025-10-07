@@ -40,6 +40,7 @@ import com.apexfintechsolutions.ascendsdk.operations.AccountsListAvailableEnroll
 import com.apexfintechsolutions.ascendsdk.operations.AccountsListAvailableEnrollments1;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsListEnrollments;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsListEntitlements;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
 import java.util.Optional;
 
 public class EnrollmentsAndAgreements {
@@ -72,13 +73,32 @@ public class EnrollmentsAndAgreements {
    */
   public AccountsEnrollAccountResponse enrollAccount(
       String accountId, EnrollAccountRequestCreate enrollAccountRequestCreate) throws Exception {
+    return enrollAccount(accountId, enrollAccountRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Enroll Account
+   *
+   * <p>Adds an Enrollment to an Account.
+   *
+   * @param accountId The account id.
+   * @param enrollAccountRequestCreate The request for creating an Enrollment on an account.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsEnrollAccountResponse enrollAccount(
+      String accountId,
+      EnrollAccountRequestCreate enrollAccountRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AccountsEnrollAccountRequest request =
         AccountsEnrollAccountRequest.builder()
             .accountId(accountId)
             .enrollAccountRequestCreate(enrollAccountRequestCreate)
             .build();
     RequestOperation<AccountsEnrollAccountRequest, AccountsEnrollAccountResponse> operation =
-        new AccountsEnrollAccount.Sync(sdkConfiguration);
+        new AccountsEnrollAccount.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -105,7 +125,7 @@ public class EnrollmentsAndAgreements {
   public AccountsListAvailableEnrollmentsResponse listAvailableEnrollments(String accountId)
       throws Exception {
     return listAvailableEnrollments(
-        accountId, Optional.empty(), Optional.empty(), Optional.empty());
+        accountId, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -123,6 +143,7 @@ public class EnrollmentsAndAgreements {
    * @param filter A CEL string to filter results; See the [CEL
    *     Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    *     Guides for more information; Filter options include: `enrollment_type`
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -130,7 +151,8 @@ public class EnrollmentsAndAgreements {
       String accountId,
       Optional<Integer> pageSize,
       Optional<String> pageToken,
-      Optional<String> filter)
+      Optional<String> filter,
+      Optional<Options> options)
       throws Exception {
     AccountsListAvailableEnrollmentsRequest request =
         AccountsListAvailableEnrollmentsRequest.builder()
@@ -141,7 +163,7 @@ public class EnrollmentsAndAgreements {
             .build();
     RequestOperation<
             AccountsListAvailableEnrollmentsRequest, AccountsListAvailableEnrollmentsResponse>
-        operation = new AccountsListAvailableEnrollments.Sync(sdkConfiguration);
+        operation = new AccountsListAvailableEnrollments.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -169,7 +191,7 @@ public class EnrollmentsAndAgreements {
   public AccountsListAvailableEnrollments1Response accountsListAvailableEnrollmentsByAccountGroup(
       String accountGroupId) throws Exception {
     return accountsListAvailableEnrollmentsByAccountGroup(
-        accountGroupId, Optional.empty(), Optional.empty(), Optional.empty());
+        accountGroupId, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -187,6 +209,7 @@ public class EnrollmentsAndAgreements {
    * @param filter A CEL string to filter results; See the [CEL
    *     Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    *     Guides for more information; Filter options include: `enrollment_type`
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -194,7 +217,8 @@ public class EnrollmentsAndAgreements {
       String accountGroupId,
       Optional<Integer> pageSize,
       Optional<String> pageToken,
-      Optional<String> filter)
+      Optional<String> filter,
+      Optional<Options> options)
       throws Exception {
     AccountsListAvailableEnrollments1Request request =
         AccountsListAvailableEnrollments1Request.builder()
@@ -205,7 +229,7 @@ public class EnrollmentsAndAgreements {
             .build();
     RequestOperation<
             AccountsListAvailableEnrollments1Request, AccountsListAvailableEnrollments1Response>
-        operation = new AccountsListAvailableEnrollments1.Sync(sdkConfiguration);
+        operation = new AccountsListAvailableEnrollments1.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -234,13 +258,33 @@ public class EnrollmentsAndAgreements {
   public AccountsDeactivateEnrollmentResponse deactivateEnrollment(
       String accountId, DeactivateEnrollmentRequestCreate deactivateEnrollmentRequestCreate)
       throws Exception {
+    return deactivateEnrollment(accountId, deactivateEnrollmentRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Deactivate Enrollment
+   *
+   * <p>Deactivates an Account Enrollment.
+   *
+   * @param accountId The account id.
+   * @param deactivateEnrollmentRequestCreate The request for deactivating an Enrollment on an
+   *     account.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsDeactivateEnrollmentResponse deactivateEnrollment(
+      String accountId,
+      DeactivateEnrollmentRequestCreate deactivateEnrollmentRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AccountsDeactivateEnrollmentRequest request =
         AccountsDeactivateEnrollmentRequest.builder()
             .accountId(accountId)
             .deactivateEnrollmentRequestCreate(deactivateEnrollmentRequestCreate)
             .build();
     RequestOperation<AccountsDeactivateEnrollmentRequest, AccountsDeactivateEnrollmentResponse>
-        operation = new AccountsDeactivateEnrollment.Sync(sdkConfiguration);
+        operation = new AccountsDeactivateEnrollment.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -265,7 +309,7 @@ public class EnrollmentsAndAgreements {
    * @throws Exception if the API call fails
    */
   public AccountsListEnrollmentsResponse listEnrollments(String accountId) throws Exception {
-    return listEnrollments(accountId, Optional.empty(), Optional.empty());
+    return listEnrollments(accountId, Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -279,11 +323,16 @@ public class EnrollmentsAndAgreements {
    *     retrieve the subsequent page.
    *     <p>When paginating, all other parameters provided to `ListEnrollments` must match the call
    *     that provided the page token.
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public AccountsListEnrollmentsResponse listEnrollments(
-      String accountId, Optional<Integer> pageSize, Optional<String> pageToken) throws Exception {
+      String accountId,
+      Optional<Integer> pageSize,
+      Optional<String> pageToken,
+      Optional<Options> options)
+      throws Exception {
     AccountsListEnrollmentsRequest request =
         AccountsListEnrollmentsRequest.builder()
             .accountId(accountId)
@@ -291,7 +340,7 @@ public class EnrollmentsAndAgreements {
             .pageToken(pageToken)
             .build();
     RequestOperation<AccountsListEnrollmentsRequest, AccountsListEnrollmentsResponse> operation =
-        new AccountsListEnrollments.Sync(sdkConfiguration);
+        new AccountsListEnrollments.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -319,13 +368,32 @@ public class EnrollmentsAndAgreements {
   public AccountsAffirmAgreementsResponse affirmAgreements(
       String accountId, AffirmAgreementsRequestCreate affirmAgreementsRequestCreate)
       throws Exception {
+    return affirmAgreements(accountId, affirmAgreementsRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Affirm Agreements
+   *
+   * <p>Affirm Agreements for an Account.
+   *
+   * @param accountId The account id.
+   * @param affirmAgreementsRequestCreate The request to affirm Agreements for an Account.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsAffirmAgreementsResponse affirmAgreements(
+      String accountId,
+      AffirmAgreementsRequestCreate affirmAgreementsRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AccountsAffirmAgreementsRequest request =
         AccountsAffirmAgreementsRequest.builder()
             .accountId(accountId)
             .affirmAgreementsRequestCreate(affirmAgreementsRequestCreate)
             .build();
     RequestOperation<AccountsAffirmAgreementsRequest, AccountsAffirmAgreementsResponse> operation =
-        new AccountsAffirmAgreements.Sync(sdkConfiguration);
+        new AccountsAffirmAgreements.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -350,7 +418,7 @@ public class EnrollmentsAndAgreements {
    * @throws Exception if the API call fails
    */
   public AccountsListAgreementsResponse listAgreements(String accountId) throws Exception {
-    return listAgreements(accountId, Optional.empty(), Optional.empty());
+    return listAgreements(accountId, Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -364,11 +432,16 @@ public class EnrollmentsAndAgreements {
    *     retrieve the subsequent page.
    *     <p>When paginating, all other parameters provided to `ListAgreements` must match the call
    *     that provided the page token.
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public AccountsListAgreementsResponse listAgreements(
-      String accountId, Optional<Integer> pageSize, Optional<String> pageToken) throws Exception {
+      String accountId,
+      Optional<Integer> pageSize,
+      Optional<String> pageToken,
+      Optional<Options> options)
+      throws Exception {
     AccountsListAgreementsRequest request =
         AccountsListAgreementsRequest.builder()
             .accountId(accountId)
@@ -376,7 +449,7 @@ public class EnrollmentsAndAgreements {
             .pageToken(pageToken)
             .build();
     RequestOperation<AccountsListAgreementsRequest, AccountsListAgreementsResponse> operation =
-        new AccountsListAgreements.Sync(sdkConfiguration);
+        new AccountsListAgreements.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -401,7 +474,7 @@ public class EnrollmentsAndAgreements {
    * @throws Exception if the API call fails
    */
   public AccountsListEntitlementsResponse listEntitlements(String accountId) throws Exception {
-    return listEntitlements(accountId, Optional.empty(), Optional.empty());
+    return listEntitlements(accountId, Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -415,11 +488,16 @@ public class EnrollmentsAndAgreements {
    *     to retrieve the subsequent page.
    *     <p>When paginating, all other parameters provided to `ListEntitlements` must match the call
    *     that provided the page token.
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public AccountsListEntitlementsResponse listEntitlements(
-      String accountId, Optional<Integer> pageSize, Optional<String> pageToken) throws Exception {
+      String accountId,
+      Optional<Integer> pageSize,
+      Optional<String> pageToken,
+      Optional<Options> options)
+      throws Exception {
     AccountsListEntitlementsRequest request =
         AccountsListEntitlementsRequest.builder()
             .accountId(accountId)
@@ -427,7 +505,7 @@ public class EnrollmentsAndAgreements {
             .pageToken(pageToken)
             .build();
     RequestOperation<AccountsListEntitlementsRequest, AccountsListEntitlementsResponse> operation =
-        new AccountsListEntitlements.Sync(sdkConfiguration);
+        new AccountsListEntitlements.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

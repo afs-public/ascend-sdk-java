@@ -43,15 +43,16 @@ public class Application {
                     .build())
             .build();
 
-        RetirementConstraintsListContributionSummariesResponse res = sdk.retirements().listContributionSummaries()
+
+        sdk.retirements().listContributionSummaries()
                 .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
                 .pageSize(2)
                 .pageToken("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZ3hh")
-                .call();
+                .callAsStream()
+                .forEach((RetirementConstraintsListContributionSummariesResponse item) -> {
+                   // handle page
+                });
 
-        if (res.listContributionSummariesResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```
@@ -173,15 +174,16 @@ public class Application {
                     .build())
             .build();
 
-        RetirementConstraintsListDistributionSummariesResponse res = sdk.retirements().listDistributionSummaries()
+
+        sdk.retirements().listDistributionSummaries()
                 .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
                 .pageSize(2)
                 .pageToken("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZ3hh")
-                .call();
+                .callAsStream()
+                .forEach((RetirementConstraintsListDistributionSummariesResponse item) -> {
+                   // handle page
+                });
 
-        if (res.listDistributionSummariesResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```

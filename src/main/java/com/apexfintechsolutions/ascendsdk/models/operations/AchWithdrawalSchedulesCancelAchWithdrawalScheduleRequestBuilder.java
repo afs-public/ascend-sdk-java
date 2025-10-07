@@ -8,13 +8,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelAchWithdrawalScheduleRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AchWithdrawalSchedulesCancelAchWithdrawalSchedule;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AchWithdrawalSchedulesCancelAchWithdrawalScheduleRequestBuilder {
 
   private String accountId;
   private String achWithdrawalScheduleId;
   private CancelAchWithdrawalScheduleRequestCreate cancelAchWithdrawalScheduleRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AchWithdrawalSchedulesCancelAchWithdrawalScheduleRequestBuilder(
@@ -45,6 +49,20 @@ public class AchWithdrawalSchedulesCancelAchWithdrawalScheduleRequestBuilder {
     return this;
   }
 
+  public AchWithdrawalSchedulesCancelAchWithdrawalScheduleRequestBuilder retryConfig(
+      RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AchWithdrawalSchedulesCancelAchWithdrawalScheduleRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AchWithdrawalSchedulesCancelAchWithdrawalScheduleRequest buildRequest() {
 
     AchWithdrawalSchedulesCancelAchWithdrawalScheduleRequest request =
@@ -55,11 +73,13 @@ public class AchWithdrawalSchedulesCancelAchWithdrawalScheduleRequestBuilder {
   }
 
   public AchWithdrawalSchedulesCancelAchWithdrawalScheduleResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             AchWithdrawalSchedulesCancelAchWithdrawalScheduleRequest,
             AchWithdrawalSchedulesCancelAchWithdrawalScheduleResponse>
-        operation = new AchWithdrawalSchedulesCancelAchWithdrawalSchedule.Sync(sdkConfiguration);
+        operation =
+            new AchWithdrawalSchedulesCancelAchWithdrawalSchedule.Sync(sdkConfiguration, options);
     AchWithdrawalSchedulesCancelAchWithdrawalScheduleRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

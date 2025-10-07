@@ -173,16 +173,17 @@ public class Application {
                     .build())
             .build();
 
-        InvestigationServiceListInvestigationsResponse res = sdk.investigations().listInvestigations()
+
+        sdk.investigations().listInvestigations()
                 .pageSize(100)
                 .pageToken("")
                 .filter("person.given_name == 'Jane' && person.family_name == 'Dough'")
                 .orderBy("person.given_name desc")
-                .call();
+                .callAsStream()
+                .forEach((InvestigationServiceListInvestigationsResponse item) -> {
+                   // handle page
+                });
 
-        if (res.listInvestigationsResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```

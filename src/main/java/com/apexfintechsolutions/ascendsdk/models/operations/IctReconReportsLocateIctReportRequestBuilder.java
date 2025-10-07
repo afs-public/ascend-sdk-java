@@ -7,11 +7,15 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.IctReconReportsLocateIctReport;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class IctReconReportsLocateIctReportRequestBuilder {
 
   private IctReconReportsLocateIctReportRequest request;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public IctReconReportsLocateIctReportRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -25,10 +29,24 @@ public class IctReconReportsLocateIctReportRequestBuilder {
     return this;
   }
 
+  public IctReconReportsLocateIctReportRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public IctReconReportsLocateIctReportRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   public IctReconReportsLocateIctReportResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<IctReconReportsLocateIctReportRequest, IctReconReportsLocateIctReportResponse>
-        operation = new IctReconReportsLocateIctReport.Sync(sdkConfiguration);
+        operation = new IctReconReportsLocateIctReport.Sync(sdkConfiguration, options);
 
     return operation.handleResponse(operation.doRequest(request));
   }

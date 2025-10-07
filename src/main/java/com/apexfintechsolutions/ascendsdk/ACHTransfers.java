@@ -33,6 +33,8 @@ import com.apexfintechsolutions.ascendsdk.operations.AchDepositsGetAchDeposit;
 import com.apexfintechsolutions.ascendsdk.operations.AchWithdrawalsCancelAchWithdrawal;
 import com.apexfintechsolutions.ascendsdk.operations.AchWithdrawalsCreateAchWithdrawal;
 import com.apexfintechsolutions.ascendsdk.operations.AchWithdrawalsGetAchWithdrawal;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import java.util.Optional;
 
 public class ACHTransfers {
   private final SDKConfiguration sdkConfiguration;
@@ -64,13 +66,30 @@ public class ACHTransfers {
    */
   public AchDepositsCreateAchDepositResponse createAchDeposit(
       String accountId, AchDepositCreate achDepositCreate) throws Exception {
+    return createAchDeposit(accountId, achDepositCreate, Optional.empty());
+  }
+
+  /**
+   * Create ACH Deposit
+   *
+   * <p>Creates an ACH deposit.
+   *
+   * @param accountId The account id.
+   * @param achDepositCreate A deposit transfer using the ACH mechanism.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AchDepositsCreateAchDepositResponse createAchDeposit(
+      String accountId, AchDepositCreate achDepositCreate, Optional<Options> options)
+      throws Exception {
     AchDepositsCreateAchDepositRequest request =
         AchDepositsCreateAchDepositRequest.builder()
             .accountId(accountId)
             .achDepositCreate(achDepositCreate)
             .build();
     RequestOperation<AchDepositsCreateAchDepositRequest, AchDepositsCreateAchDepositResponse>
-        operation = new AchDepositsCreateAchDeposit.Sync(sdkConfiguration);
+        operation = new AchDepositsCreateAchDeposit.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -97,13 +116,29 @@ public class ACHTransfers {
    */
   public AchDepositsGetAchDepositResponse getAchDeposit(String accountId, String achDepositId)
       throws Exception {
+    return getAchDeposit(accountId, achDepositId, Optional.empty());
+  }
+
+  /**
+   * Get ACH Deposit
+   *
+   * <p>Gets an existing ACH deposit.
+   *
+   * @param accountId The account id.
+   * @param achDepositId The achDeposit id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AchDepositsGetAchDepositResponse getAchDeposit(
+      String accountId, String achDepositId, Optional<Options> options) throws Exception {
     AchDepositsGetAchDepositRequest request =
         AchDepositsGetAchDepositRequest.builder()
             .accountId(accountId)
             .achDepositId(achDepositId)
             .build();
     RequestOperation<AchDepositsGetAchDepositRequest, AchDepositsGetAchDepositResponse> operation =
-        new AchDepositsGetAchDeposit.Sync(sdkConfiguration);
+        new AchDepositsGetAchDeposit.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -134,6 +169,28 @@ public class ACHTransfers {
       String achDepositId,
       CancelAchDepositRequestCreate cancelAchDepositRequestCreate)
       throws Exception {
+    return cancelAchDeposit(
+        accountId, achDepositId, cancelAchDepositRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Cancel ACH Deposit
+   *
+   * <p>Cancels an existing ACH deposit.
+   *
+   * @param accountId The account id.
+   * @param achDepositId The achDeposit id.
+   * @param cancelAchDepositRequestCreate Request to cancel an existing ACH deposit.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AchDepositsCancelAchDepositResponse cancelAchDeposit(
+      String accountId,
+      String achDepositId,
+      CancelAchDepositRequestCreate cancelAchDepositRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AchDepositsCancelAchDepositRequest request =
         AchDepositsCancelAchDepositRequest.builder()
             .accountId(accountId)
@@ -141,7 +198,7 @@ public class ACHTransfers {
             .cancelAchDepositRequestCreate(cancelAchDepositRequestCreate)
             .build();
     RequestOperation<AchDepositsCancelAchDepositRequest, AchDepositsCancelAchDepositResponse>
-        operation = new AchDepositsCancelAchDeposit.Sync(sdkConfiguration);
+        operation = new AchDepositsCancelAchDeposit.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -168,6 +225,23 @@ public class ACHTransfers {
    */
   public AchWithdrawalsCreateAchWithdrawalResponse createAchWithdrawal(
       String accountId, AchWithdrawalCreate achWithdrawalCreate) throws Exception {
+    return createAchWithdrawal(accountId, achWithdrawalCreate, Optional.empty());
+  }
+
+  /**
+   * Create ACH Withdrawal
+   *
+   * <p>Creates an ACH withdrawal.
+   *
+   * @param accountId The account id.
+   * @param achWithdrawalCreate A withdrawal transfer using the ACH mechanism.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AchWithdrawalsCreateAchWithdrawalResponse createAchWithdrawal(
+      String accountId, AchWithdrawalCreate achWithdrawalCreate, Optional<Options> options)
+      throws Exception {
     AchWithdrawalsCreateAchWithdrawalRequest request =
         AchWithdrawalsCreateAchWithdrawalRequest.builder()
             .accountId(accountId)
@@ -175,7 +249,7 @@ public class ACHTransfers {
             .build();
     RequestOperation<
             AchWithdrawalsCreateAchWithdrawalRequest, AchWithdrawalsCreateAchWithdrawalResponse>
-        operation = new AchWithdrawalsCreateAchWithdrawal.Sync(sdkConfiguration);
+        operation = new AchWithdrawalsCreateAchWithdrawal.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -202,13 +276,29 @@ public class ACHTransfers {
    */
   public AchWithdrawalsGetAchWithdrawalResponse getAchWithdrawal(
       String accountId, String achWithdrawalId) throws Exception {
+    return getAchWithdrawal(accountId, achWithdrawalId, Optional.empty());
+  }
+
+  /**
+   * Get ACH Withdrawal
+   *
+   * <p>Gets an existing ACH withdrawal.
+   *
+   * @param accountId The account id.
+   * @param achWithdrawalId The achWithdrawal id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AchWithdrawalsGetAchWithdrawalResponse getAchWithdrawal(
+      String accountId, String achWithdrawalId, Optional<Options> options) throws Exception {
     AchWithdrawalsGetAchWithdrawalRequest request =
         AchWithdrawalsGetAchWithdrawalRequest.builder()
             .accountId(accountId)
             .achWithdrawalId(achWithdrawalId)
             .build();
     RequestOperation<AchWithdrawalsGetAchWithdrawalRequest, AchWithdrawalsGetAchWithdrawalResponse>
-        operation = new AchWithdrawalsGetAchWithdrawal.Sync(sdkConfiguration);
+        operation = new AchWithdrawalsGetAchWithdrawal.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -239,6 +329,28 @@ public class ACHTransfers {
       String achWithdrawalId,
       CancelAchWithdrawalRequestCreate cancelAchWithdrawalRequestCreate)
       throws Exception {
+    return cancelAchWithdrawal(
+        accountId, achWithdrawalId, cancelAchWithdrawalRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Cancel ACH Withdrawal
+   *
+   * <p>Cancels an existing ACH withdrawal.
+   *
+   * @param accountId The account id.
+   * @param achWithdrawalId The achWithdrawal id.
+   * @param cancelAchWithdrawalRequestCreate Request to cancel an existing ACH withdrawal.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AchWithdrawalsCancelAchWithdrawalResponse cancelAchWithdrawal(
+      String accountId,
+      String achWithdrawalId,
+      CancelAchWithdrawalRequestCreate cancelAchWithdrawalRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AchWithdrawalsCancelAchWithdrawalRequest request =
         AchWithdrawalsCancelAchWithdrawalRequest.builder()
             .accountId(accountId)
@@ -247,7 +359,7 @@ public class ACHTransfers {
             .build();
     RequestOperation<
             AchWithdrawalsCancelAchWithdrawalRequest, AchWithdrawalsCancelAchWithdrawalResponse>
-        operation = new AchWithdrawalsCancelAchWithdrawal.Sync(sdkConfiguration);
+        operation = new AchWithdrawalsCancelAchWithdrawal.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

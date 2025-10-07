@@ -7,11 +7,15 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.SubscriberGetPushSubscription;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class SubscriberGetPushSubscriptionRequestBuilder {
 
   private String subscriptionId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public SubscriberGetPushSubscriptionRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -24,6 +28,19 @@ public class SubscriberGetPushSubscriptionRequestBuilder {
     return this;
   }
 
+  public SubscriberGetPushSubscriptionRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public SubscriberGetPushSubscriptionRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private SubscriberGetPushSubscriptionRequest buildRequest() {
 
     SubscriberGetPushSubscriptionRequest request =
@@ -33,9 +50,10 @@ public class SubscriberGetPushSubscriptionRequestBuilder {
   }
 
   public SubscriberGetPushSubscriptionResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<SubscriberGetPushSubscriptionRequest, SubscriberGetPushSubscriptionResponse>
-        operation = new SubscriberGetPushSubscription.Sync(sdkConfiguration);
+        operation = new SubscriberGetPushSubscription.Sync(sdkConfiguration, options);
     SubscriberGetPushSubscriptionRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

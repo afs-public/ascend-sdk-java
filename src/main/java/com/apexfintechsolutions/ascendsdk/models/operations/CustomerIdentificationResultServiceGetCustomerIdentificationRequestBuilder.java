@@ -7,6 +7,8 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.CustomerIdentificationResultServiceGetCustomerIdentification;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import java.util.Optional;
 
@@ -17,6 +19,7 @@ public class CustomerIdentificationResultServiceGetCustomerIdentificationRequest
   private Optional<
           ? extends CustomerIdentificationResultServiceGetCustomerIdentificationQueryParamView>
       view = Optional.empty();
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public CustomerIdentificationResultServiceGetCustomerIdentificationRequestBuilder(
@@ -53,6 +56,20 @@ public class CustomerIdentificationResultServiceGetCustomerIdentificationRequest
     return this;
   }
 
+  public CustomerIdentificationResultServiceGetCustomerIdentificationRequestBuilder retryConfig(
+      RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public CustomerIdentificationResultServiceGetCustomerIdentificationRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private CustomerIdentificationResultServiceGetCustomerIdentificationRequest buildRequest() {
 
     CustomerIdentificationResultServiceGetCustomerIdentificationRequest request =
@@ -64,12 +81,14 @@ public class CustomerIdentificationResultServiceGetCustomerIdentificationRequest
 
   public CustomerIdentificationResultServiceGetCustomerIdentificationResponse call()
       throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             CustomerIdentificationResultServiceGetCustomerIdentificationRequest,
             CustomerIdentificationResultServiceGetCustomerIdentificationResponse>
         operation =
-            new CustomerIdentificationResultServiceGetCustomerIdentification.Sync(sdkConfiguration);
+            new CustomerIdentificationResultServiceGetCustomerIdentification.Sync(
+                sdkConfiguration, options);
     CustomerIdentificationResultServiceGetCustomerIdentificationRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

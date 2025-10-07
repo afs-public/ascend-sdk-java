@@ -13,6 +13,7 @@ import com.apexfintechsolutions.ascendsdk.models.operations.InvestorCommunicatio
 import com.apexfintechsolutions.ascendsdk.models.operations.InvestorCommunicationServiceListDocumentsResponse;
 import com.apexfintechsolutions.ascendsdk.operations.InvestorCommunicationServiceBatchCreateUploadLinks;
 import com.apexfintechsolutions.ascendsdk.operations.InvestorCommunicationServiceListDocuments;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
 import java.util.Optional;
 
 public class InvestorDocs {
@@ -44,10 +45,26 @@ public class InvestorDocs {
    */
   public InvestorCommunicationServiceBatchCreateUploadLinksResponse batchCreateUploadLinks(
       BatchCreateUploadLinksRequestCreate request) throws Exception {
+    return batchCreateUploadLinks(request, Optional.empty());
+  }
+
+  /**
+   * Batch Create Upload Links
+   *
+   * <p>Create a batch of signed links that can be used to upload files.
+   *
+   * @param request The request object containing all the parameters for the API call.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public InvestorCommunicationServiceBatchCreateUploadLinksResponse batchCreateUploadLinks(
+      BatchCreateUploadLinksRequestCreate request, Optional<Options> options) throws Exception {
     RequestOperation<
             BatchCreateUploadLinksRequestCreate,
             InvestorCommunicationServiceBatchCreateUploadLinksResponse>
-        operation = new InvestorCommunicationServiceBatchCreateUploadLinks.Sync(sdkConfiguration);
+        operation =
+            new InvestorCommunicationServiceBatchCreateUploadLinks.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -71,7 +88,7 @@ public class InvestorDocs {
    * @throws Exception if the API call fails
    */
   public InvestorCommunicationServiceListDocumentsResponse listDocumentsDirect() throws Exception {
-    return listDocuments(Optional.empty(), Optional.empty(), Optional.empty());
+    return listDocuments(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -84,11 +101,15 @@ public class InvestorDocs {
    * @param pageToken Token used to get a specific page of results
    * @param filter CEL filter to be applied against the documents; Providing a correspondent to
    *     search for is required; Only one correspondent can be searched at a time
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public InvestorCommunicationServiceListDocumentsResponse listDocuments(
-      Optional<Integer> pageSize, Optional<String> pageToken, Optional<String> filter)
+      Optional<Integer> pageSize,
+      Optional<String> pageToken,
+      Optional<String> filter,
+      Optional<Options> options)
       throws Exception {
     InvestorCommunicationServiceListDocumentsRequest request =
         InvestorCommunicationServiceListDocumentsRequest.builder()
@@ -99,7 +120,7 @@ public class InvestorDocs {
     RequestOperation<
             InvestorCommunicationServiceListDocumentsRequest,
             InvestorCommunicationServiceListDocumentsResponse>
-        operation = new InvestorCommunicationServiceListDocuments.Sync(sdkConfiguration);
+        operation = new InvestorCommunicationServiceListDocuments.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

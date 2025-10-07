@@ -7,12 +7,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.WireWithdrawalsGetWireWithdrawal;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class WireWithdrawalsGetWireWithdrawalRequestBuilder {
 
   private String accountId;
   private String wireWithdrawalId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public WireWithdrawalsGetWireWithdrawalRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -31,6 +35,19 @@ public class WireWithdrawalsGetWireWithdrawalRequestBuilder {
     return this;
   }
 
+  public WireWithdrawalsGetWireWithdrawalRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public WireWithdrawalsGetWireWithdrawalRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private WireWithdrawalsGetWireWithdrawalRequest buildRequest() {
 
     WireWithdrawalsGetWireWithdrawalRequest request =
@@ -40,10 +57,11 @@ public class WireWithdrawalsGetWireWithdrawalRequestBuilder {
   }
 
   public WireWithdrawalsGetWireWithdrawalResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             WireWithdrawalsGetWireWithdrawalRequest, WireWithdrawalsGetWireWithdrawalResponse>
-        operation = new WireWithdrawalsGetWireWithdrawal.Sync(sdkConfiguration);
+        operation = new WireWithdrawalsGetWireWithdrawal.Sync(sdkConfiguration, options);
     WireWithdrawalsGetWireWithdrawalRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

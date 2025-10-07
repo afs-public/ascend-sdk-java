@@ -7,12 +7,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.AchWithdrawalsGetAchWithdrawal;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AchWithdrawalsGetAchWithdrawalRequestBuilder {
 
   private String accountId;
   private String achWithdrawalId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AchWithdrawalsGetAchWithdrawalRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -31,6 +35,19 @@ public class AchWithdrawalsGetAchWithdrawalRequestBuilder {
     return this;
   }
 
+  public AchWithdrawalsGetAchWithdrawalRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AchWithdrawalsGetAchWithdrawalRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AchWithdrawalsGetAchWithdrawalRequest buildRequest() {
 
     AchWithdrawalsGetAchWithdrawalRequest request =
@@ -40,9 +57,10 @@ public class AchWithdrawalsGetAchWithdrawalRequestBuilder {
   }
 
   public AchWithdrawalsGetAchWithdrawalResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AchWithdrawalsGetAchWithdrawalRequest, AchWithdrawalsGetAchWithdrawalResponse>
-        operation = new AchWithdrawalsGetAchWithdrawal.Sync(sdkConfiguration);
+        operation = new AchWithdrawalsGetAchWithdrawal.Sync(sdkConfiguration, options);
     AchWithdrawalsGetAchWithdrawalRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

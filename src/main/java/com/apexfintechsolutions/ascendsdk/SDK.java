@@ -105,6 +105,8 @@ public class SDK {
 
   private final BasketOrders basketOrders;
 
+  private final AssetTradingConfig assetTradingConfig;
+
   private final TradeBooking tradeBooking;
 
   private final TradeAllocation tradeAllocation;
@@ -209,6 +211,10 @@ public class SDK {
 
   public BasketOrders basketOrders() {
     return basketOrders;
+  }
+
+  public AssetTradingConfig assetTradingConfig() {
+    return assetTradingConfig;
   }
 
   public TradeBooking tradeBooking() {
@@ -411,6 +417,7 @@ public class SDK {
     this.createOrder = new CreateOrder(sdkConfiguration);
     this.fixedIncomePricing = new FixedIncomePricing(sdkConfiguration);
     this.basketOrders = new BasketOrders(sdkConfiguration);
+    this.assetTradingConfig = new AssetTradingConfig(sdkConfiguration);
     this.tradeBooking = new TradeBooking(sdkConfiguration);
     this.tradeAllocation = new TradeAllocation(sdkConfiguration);
     this.assets = new Assets(sdkConfiguration);

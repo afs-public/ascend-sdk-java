@@ -7,6 +7,8 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsGetAccount;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import java.util.Optional;
 
@@ -14,6 +16,7 @@ public class AccountsGetAccountRequestBuilder {
 
   private String accountId;
   private Optional<? extends QueryParamView> view = Optional.empty();
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsGetAccountRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -38,6 +41,18 @@ public class AccountsGetAccountRequestBuilder {
     return this;
   }
 
+  public AccountsGetAccountRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsGetAccountRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsGetAccountRequest buildRequest() {
 
     AccountsGetAccountRequest request = new AccountsGetAccountRequest(accountId, view);
@@ -46,9 +61,10 @@ public class AccountsGetAccountRequestBuilder {
   }
 
   public AccountsGetAccountResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountsGetAccountRequest, AccountsGetAccountResponse> operation =
-        new AccountsGetAccount.Sync(sdkConfiguration);
+        new AccountsGetAccount.Sync(sdkConfiguration, options);
     AccountsGetAccountRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

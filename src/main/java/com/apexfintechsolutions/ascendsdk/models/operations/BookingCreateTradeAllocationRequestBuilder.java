@@ -8,6 +8,8 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.TradeAllocationCreate;
 import com.apexfintechsolutions.ascendsdk.operations.BookingCreateTradeAllocation;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import java.util.Optional;
 
@@ -16,6 +18,7 @@ public class BookingCreateTradeAllocationRequestBuilder {
   private String accountId;
   private Optional<String> requestId = Optional.empty();
   private TradeAllocationCreate tradeAllocationCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public BookingCreateTradeAllocationRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -47,6 +50,18 @@ public class BookingCreateTradeAllocationRequestBuilder {
     return this;
   }
 
+  public BookingCreateTradeAllocationRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public BookingCreateTradeAllocationRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private BookingCreateTradeAllocationRequest buildRequest() {
 
     BookingCreateTradeAllocationRequest request =
@@ -56,9 +71,10 @@ public class BookingCreateTradeAllocationRequestBuilder {
   }
 
   public BookingCreateTradeAllocationResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<BookingCreateTradeAllocationRequest, BookingCreateTradeAllocationResponse>
-        operation = new BookingCreateTradeAllocation.Sync(sdkConfiguration);
+        operation = new BookingCreateTradeAllocation.Sync(sdkConfiguration, options);
     BookingCreateTradeAllocationRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

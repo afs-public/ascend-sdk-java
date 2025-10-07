@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.RetrieveContributionConstraintsRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.RetirementConstraintsRetrieveContributionConstraints;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class RetirementConstraintsRetrieveContributionConstraintsRequestBuilder {
 
   private String accountId;
   private RetrieveContributionConstraintsRequestCreate retrieveContributionConstraintsRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public RetirementConstraintsRetrieveContributionConstraintsRequestBuilder(
@@ -40,6 +44,20 @@ public class RetirementConstraintsRetrieveContributionConstraintsRequestBuilder 
     return this;
   }
 
+  public RetirementConstraintsRetrieveContributionConstraintsRequestBuilder retryConfig(
+      RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public RetirementConstraintsRetrieveContributionConstraintsRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private RetirementConstraintsRetrieveContributionConstraintsRequest buildRequest() {
 
     RetirementConstraintsRetrieveContributionConstraintsRequest request =
@@ -50,11 +68,14 @@ public class RetirementConstraintsRetrieveContributionConstraintsRequestBuilder 
   }
 
   public RetirementConstraintsRetrieveContributionConstraintsResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             RetirementConstraintsRetrieveContributionConstraintsRequest,
             RetirementConstraintsRetrieveContributionConstraintsResponse>
-        operation = new RetirementConstraintsRetrieveContributionConstraints.Sync(sdkConfiguration);
+        operation =
+            new RetirementConstraintsRetrieveContributionConstraints.Sync(
+                sdkConfiguration, options);
     RetirementConstraintsRetrieveContributionConstraintsRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

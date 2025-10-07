@@ -7,12 +7,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsDeleteTrustedContact;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AccountsDeleteTrustedContactRequestBuilder {
 
   private String accountId;
   private String trustedContactId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsDeleteTrustedContactRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -31,6 +35,18 @@ public class AccountsDeleteTrustedContactRequestBuilder {
     return this;
   }
 
+  public AccountsDeleteTrustedContactRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsDeleteTrustedContactRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsDeleteTrustedContactRequest buildRequest() {
 
     AccountsDeleteTrustedContactRequest request =
@@ -40,9 +56,10 @@ public class AccountsDeleteTrustedContactRequestBuilder {
   }
 
   public AccountsDeleteTrustedContactResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountsDeleteTrustedContactRequest, AccountsDeleteTrustedContactResponse>
-        operation = new AccountsDeleteTrustedContact.Sync(sdkConfiguration);
+        operation = new AccountsDeleteTrustedContact.Sync(sdkConfiguration, options);
     AccountsDeleteTrustedContactRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

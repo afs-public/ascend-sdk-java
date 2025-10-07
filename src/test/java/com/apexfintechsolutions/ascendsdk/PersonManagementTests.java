@@ -26,7 +26,7 @@ public class PersonManagementTests {
             .serverURL(Utils.environmentVariable("SERVICE_ACCOUNT_CREDS_URL", ""))
             .security(
                 Security.builder()
-                    .apiKey(System.getenv().getOrDefault("API_KEY", ""))
+                    .apiKey(Utils.environmentVariable("API_KEY", ""))
                     .serviceAccountCreds(
                         ServiceAccountCreds.builder()
                             .privateKey(
@@ -61,7 +61,7 @@ public class PersonManagementTests {
             .serverURL(Utils.environmentVariable("SERVICE_ACCOUNT_CREDS_URL", ""))
             .security(
                 Security.builder()
-                    .apiKey(System.getenv().getOrDefault("API_KEY", ""))
+                    .apiKey(Utils.environmentVariable("API_KEY", ""))
                     .serviceAccountCreds(
                         ServiceAccountCreds.builder()
                             .privateKey(
@@ -97,7 +97,7 @@ public class PersonManagementTests {
             .serverURL(Utils.environmentVariable("SERVICE_ACCOUNT_CREDS_URL", ""))
             .security(
                 Security.builder()
-                    .apiKey(System.getenv().getOrDefault("API_KEY", ""))
+                    .apiKey(Utils.environmentVariable("API_KEY", ""))
                     .serviceAccountCreds(
                         ServiceAccountCreds.builder()
                             .privateKey(

@@ -14,6 +14,7 @@ import com.apexfintechsolutions.ascendsdk.models.operations.AccountsGetAccountRe
 import com.apexfintechsolutions.ascendsdk.models.operations.QueryParamView;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsCreateAccount;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsGetAccount;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
 import java.util.Optional;
 
 public class AccountCreation {
@@ -45,8 +46,23 @@ public class AccountCreation {
    */
   public AccountsCreateAccountResponse createAccount(AccountRequestCreate request)
       throws Exception {
+    return createAccount(request, Optional.empty());
+  }
+
+  /**
+   * Create Account
+   *
+   * <p>CREATE Creates an account.
+   *
+   * @param request The request object containing all the parameters for the API call.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsCreateAccountResponse createAccount(
+      AccountRequestCreate request, Optional<Options> options) throws Exception {
     RequestOperation<AccountRequestCreate, AccountsCreateAccountResponse> operation =
-        new AccountsCreateAccount.Sync(sdkConfiguration);
+        new AccountsCreateAccount.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -71,7 +87,7 @@ public class AccountCreation {
    * @throws Exception if the API call fails
    */
   public AccountsGetAccountResponse getAccount(String accountId) throws Exception {
-    return getAccount(accountId, Optional.empty());
+    return getAccount(accountId, Optional.empty(), Optional.empty());
   }
 
   /**
@@ -81,15 +97,17 @@ public class AccountCreation {
    *
    * @param accountId The account id.
    * @param view The view to return. Defaults to `FULL`.
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public AccountsGetAccountResponse getAccount(
-      String accountId, Optional<? extends QueryParamView> view) throws Exception {
+      String accountId, Optional<? extends QueryParamView> view, Optional<Options> options)
+      throws Exception {
     AccountsGetAccountRequest request =
         AccountsGetAccountRequest.builder().accountId(accountId).view(view).build();
     RequestOperation<AccountsGetAccountRequest, AccountsGetAccountResponse> operation =
-        new AccountsGetAccount.Sync(sdkConfiguration);
+        new AccountsGetAccount.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

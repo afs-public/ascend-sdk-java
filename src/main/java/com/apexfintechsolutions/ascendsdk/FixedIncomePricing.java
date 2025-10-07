@@ -20,6 +20,8 @@ import com.apexfintechsolutions.ascendsdk.models.operations.OrderPriceServiceRet
 import com.apexfintechsolutions.ascendsdk.operations.OrderPriceServicePreviewOrderCost;
 import com.apexfintechsolutions.ascendsdk.operations.OrderPriceServiceRetrieveFixedIncomeMarks;
 import com.apexfintechsolutions.ascendsdk.operations.OrderPriceServiceRetrieveQuote;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import java.util.Optional;
 
 public class FixedIncomePricing {
   private final SDKConfiguration sdkConfiguration;
@@ -54,6 +56,26 @@ public class FixedIncomePricing {
   public OrderPriceServicePreviewOrderCostResponse previewOrderCost(
       String accountId, OrderCostPreviewRequestCreate orderCostPreviewRequestCreate)
       throws Exception {
+    return previewOrderCost(accountId, orderCostPreviewRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Preview Order Cost
+   *
+   * <p>Returns a calculation estimating the costs involved in ordering a given quantity of a Fixed
+   * Income asset at a specified limit price.
+   *
+   * @param accountId The account id.
+   * @param orderCostPreviewRequestCreate Request object for retrieving fixed income costs
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public OrderPriceServicePreviewOrderCostResponse previewOrderCost(
+      String accountId,
+      OrderCostPreviewRequestCreate orderCostPreviewRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     OrderPriceServicePreviewOrderCostRequest request =
         OrderPriceServicePreviewOrderCostRequest.builder()
             .accountId(accountId)
@@ -61,14 +83,18 @@ public class FixedIncomePricing {
             .build();
     RequestOperation<
             OrderPriceServicePreviewOrderCostRequest, OrderPriceServicePreviewOrderCostResponse>
-        operation = new OrderPriceServicePreviewOrderCost.Sync(sdkConfiguration);
+        operation = new OrderPriceServicePreviewOrderCost.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
   /**
    * Retrieve Quote
    *
-   * <p>Returns quote information containing the best bid/ask for the given Fixed Income asset.
+   * <p>Returns quote information containing the best bid/ask for the given Fixed Income asset. For
+   * Fixed Income assets in the UAT environment, CUSIPS are subject to expiration. Therefore please
+   * refer to the [list available in the Market
+   * Simulator](https://developer.apexclearing.com/apex-fintech-solutions/docs/market-simulator#fixed-income-simulator-scenarios)
+   * for the most recent CUSIP list prior to testing.
    *
    * @return The call builder
    */
@@ -79,7 +105,11 @@ public class FixedIncomePricing {
   /**
    * Retrieve Quote
    *
-   * <p>Returns quote information containing the best bid/ask for the given Fixed Income asset.
+   * <p>Returns quote information containing the best bid/ask for the given Fixed Income asset. For
+   * Fixed Income assets in the UAT environment, CUSIPS are subject to expiration. Therefore please
+   * refer to the [list available in the Market
+   * Simulator](https://developer.apexclearing.com/apex-fintech-solutions/docs/market-simulator#fixed-income-simulator-scenarios)
+   * for the most recent CUSIP list prior to testing.
    *
    * @param accountId The account id.
    * @param retrieveQuoteRequestCreate Request object for retrieving fixed income quotes
@@ -88,13 +118,36 @@ public class FixedIncomePricing {
    */
   public OrderPriceServiceRetrieveQuoteResponse retrieveQuote(
       String accountId, RetrieveQuoteRequestCreate retrieveQuoteRequestCreate) throws Exception {
+    return retrieveQuote(accountId, retrieveQuoteRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Retrieve Quote
+   *
+   * <p>Returns quote information containing the best bid/ask for the given Fixed Income asset. For
+   * Fixed Income assets in the UAT environment, CUSIPS are subject to expiration. Therefore please
+   * refer to the [list available in the Market
+   * Simulator](https://developer.apexclearing.com/apex-fintech-solutions/docs/market-simulator#fixed-income-simulator-scenarios)
+   * for the most recent CUSIP list prior to testing.
+   *
+   * @param accountId The account id.
+   * @param retrieveQuoteRequestCreate Request object for retrieving fixed income quotes
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public OrderPriceServiceRetrieveQuoteResponse retrieveQuote(
+      String accountId,
+      RetrieveQuoteRequestCreate retrieveQuoteRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     OrderPriceServiceRetrieveQuoteRequest request =
         OrderPriceServiceRetrieveQuoteRequest.builder()
             .accountId(accountId)
             .retrieveQuoteRequestCreate(retrieveQuoteRequestCreate)
             .build();
     RequestOperation<OrderPriceServiceRetrieveQuoteRequest, OrderPriceServiceRetrieveQuoteResponse>
-        operation = new OrderPriceServiceRetrieveQuote.Sync(sdkConfiguration);
+        operation = new OrderPriceServiceRetrieveQuote.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -123,6 +176,26 @@ public class FixedIncomePricing {
       String correspondentId,
       RetrieveFixedIncomeMarksRequestCreate retrieveFixedIncomeMarksRequestCreate)
       throws Exception {
+    return retrieveFixedIncomeMarks(
+        correspondentId, retrieveFixedIncomeMarksRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Retrieve Fixed Income Marks
+   *
+   * <p>Returns marks for a specified set of Fixed Income assets (up to 100 per request)
+   *
+   * @param correspondentId The correspondent id.
+   * @param retrieveFixedIncomeMarksRequestCreate Request object for retrieving fixed income marks
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public OrderPriceServiceRetrieveFixedIncomeMarksResponse retrieveFixedIncomeMarks(
+      String correspondentId,
+      RetrieveFixedIncomeMarksRequestCreate retrieveFixedIncomeMarksRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     OrderPriceServiceRetrieveFixedIncomeMarksRequest request =
         OrderPriceServiceRetrieveFixedIncomeMarksRequest.builder()
             .correspondentId(correspondentId)
@@ -131,7 +204,7 @@ public class FixedIncomePricing {
     RequestOperation<
             OrderPriceServiceRetrieveFixedIncomeMarksRequest,
             OrderPriceServiceRetrieveFixedIncomeMarksResponse>
-        operation = new OrderPriceServiceRetrieveFixedIncomeMarks.Sync(sdkConfiguration);
+        operation = new OrderPriceServiceRetrieveFixedIncomeMarks.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

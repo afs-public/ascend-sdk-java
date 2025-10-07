@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.EndLargeTraderRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsEndLargeTraderLegalNaturalPerson;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AccountsEndLargeTraderLegalNaturalPersonRequestBuilder {
 
   private String legalNaturalPersonId;
   private EndLargeTraderRequestCreate endLargeTraderRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsEndLargeTraderLegalNaturalPersonRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -34,6 +38,20 @@ public class AccountsEndLargeTraderLegalNaturalPersonRequestBuilder {
     return this;
   }
 
+  public AccountsEndLargeTraderLegalNaturalPersonRequestBuilder retryConfig(
+      RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsEndLargeTraderLegalNaturalPersonRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsEndLargeTraderLegalNaturalPersonRequest buildRequest() {
 
     AccountsEndLargeTraderLegalNaturalPersonRequest request =
@@ -44,11 +62,12 @@ public class AccountsEndLargeTraderLegalNaturalPersonRequestBuilder {
   }
 
   public AccountsEndLargeTraderLegalNaturalPersonResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             AccountsEndLargeTraderLegalNaturalPersonRequest,
             AccountsEndLargeTraderLegalNaturalPersonResponse>
-        operation = new AccountsEndLargeTraderLegalNaturalPerson.Sync(sdkConfiguration);
+        operation = new AccountsEndLargeTraderLegalNaturalPerson.Sync(sdkConfiguration, options);
     AccountsEndLargeTraderLegalNaturalPersonRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

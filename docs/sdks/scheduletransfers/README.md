@@ -55,15 +55,16 @@ public class Application {
                     .build())
             .build();
 
-        TransferScheduleSummariesListScheduleSummariesResponse res = sdk.scheduleTransfers().listScheduleSummaries()
+
+        sdk.scheduleTransfers().listScheduleSummaries()
                 .filter("mechanism == 'ACH' && direction == DEPOSIT && state == 'ACTIVE' && start_date > '2024-04-05' && end_date < '2024-08-10'")
                 .pageSize(100)
                 .pageToken("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4")
-                .call();
+                .callAsStream()
+                .forEach((TransferScheduleSummariesListScheduleSummariesResponse item) -> {
+                   // handle page
+                });
 
-        if (res.listScheduleSummariesResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```
@@ -195,16 +196,17 @@ public class Application {
                     .build())
             .build();
 
-        AchDepositSchedulesListAchDepositSchedulesResponse res = sdk.scheduleTransfers().listAchDepositSchedules()
+
+        sdk.scheduleTransfers().listAchDepositSchedules()
                 .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
                 .filter("state == 'ACTIVE' && start_date > '2024-04-05' && end_date < '2024-08-10'")
                 .pageSize(100)
                 .pageToken("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4")
-                .call();
+                .callAsStream()
+                .forEach((AchDepositSchedulesListAchDepositSchedulesResponse item) -> {
+                   // handle page
+                });
 
-        if (res.listAchDepositSchedulesResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```
@@ -530,16 +532,17 @@ public class Application {
                     .build())
             .build();
 
-        AchWithdrawalSchedulesListAchWithdrawalSchedulesResponse res = sdk.scheduleTransfers().listAchWithdrawalSchedules()
+
+        sdk.scheduleTransfers().listAchWithdrawalSchedules()
                 .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
                 .filter("state == 'ACTIVE' && start_date > '2024-04-05' && end_date < '2024-08-10'")
                 .pageSize(100)
                 .pageToken("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4")
-                .call();
+                .callAsStream()
+                .forEach((AchWithdrawalSchedulesListAchWithdrawalSchedulesResponse item) -> {
+                   // handle page
+                });
 
-        if (res.listAchWithdrawalSchedulesResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```

@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.AchDepositCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AchDepositsCreateAchDeposit;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AchDepositsCreateAchDepositRequestBuilder {
 
   private String accountId;
   private AchDepositCreate achDepositCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AchDepositsCreateAchDepositRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -33,6 +37,18 @@ public class AchDepositsCreateAchDepositRequestBuilder {
     return this;
   }
 
+  public AchDepositsCreateAchDepositRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AchDepositsCreateAchDepositRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AchDepositsCreateAchDepositRequest buildRequest() {
 
     AchDepositsCreateAchDepositRequest request =
@@ -42,9 +58,10 @@ public class AchDepositsCreateAchDepositRequestBuilder {
   }
 
   public AchDepositsCreateAchDepositResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AchDepositsCreateAchDepositRequest, AchDepositsCreateAchDepositResponse>
-        operation = new AchDepositsCreateAchDeposit.Sync(sdkConfiguration);
+        operation = new AchDepositsCreateAchDeposit.Sync(sdkConfiguration, options);
     AchDepositsCreateAchDepositRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

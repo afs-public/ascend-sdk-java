@@ -38,8 +38,6 @@ public class ScheduleTransfersUtil {
             .createAchDepositSchedule(enrolledAccount.accountId().get(), request);
     Assertions.assertEquals(200, result.statusCode());
 
-    Thread.sleep(5000);
-
     System.out.println("Created deposit schedule: " + result.achDepositSchedule().get().toString());
 
     return result.achDepositSchedule().get();
@@ -75,8 +73,6 @@ public class ScheduleTransfersUtil {
         sdk.scheduleTransfers()
             .createAchWithdrawalSchedule(enrolledAccount.accountId().get(), request);
     Assertions.assertEquals(200, result.statusCode());
-
-    Thread.sleep(5000);
 
     System.out.println(
         "Created withdrawal schedule: " + result.achWithdrawalSchedule().get().toString());
@@ -125,8 +121,6 @@ public class ScheduleTransfersUtil {
         sdk.scheduleTransfers()
             .createWireWithdrawalSchedule(enrolledAccount.accountId().get(), request);
     Assertions.assertEquals(200, result.statusCode());
-
-    Thread.sleep(5000);
 
     System.out.println(
         "Created wire withdrawal schedule: " + result.wireWithdrawalSchedule().get().toString());

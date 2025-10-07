@@ -105,12 +105,13 @@ public class Application {
                     .build())
             .build();
 
-        InvestorCommunicationServiceListDocumentsResponse res = sdk.investorDocs().listDocuments()
-                .call();
 
-        if (res.listDocumentsResponse().isPresent()) {
-            // handle response
-        }
+        sdk.investorDocs().listDocuments()
+                .callAsStream()
+                .forEach((InvestorCommunicationServiceListDocumentsResponse item) -> {
+                   // handle page
+                });
+
     }
 }
 ```

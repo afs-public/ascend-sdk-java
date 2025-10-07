@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.EnrollAccountRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsEnrollAccount;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AccountsEnrollAccountRequestBuilder {
 
   private String accountId;
   private EnrollAccountRequestCreate enrollAccountRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsEnrollAccountRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -33,6 +37,18 @@ public class AccountsEnrollAccountRequestBuilder {
     return this;
   }
 
+  public AccountsEnrollAccountRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsEnrollAccountRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsEnrollAccountRequest buildRequest() {
 
     AccountsEnrollAccountRequest request =
@@ -42,9 +58,10 @@ public class AccountsEnrollAccountRequestBuilder {
   }
 
   public AccountsEnrollAccountResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountsEnrollAccountRequest, AccountsEnrollAccountResponse> operation =
-        new AccountsEnrollAccount.Sync(sdkConfiguration);
+        new AccountsEnrollAccount.Sync(sdkConfiguration, options);
     AccountsEnrollAccountRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

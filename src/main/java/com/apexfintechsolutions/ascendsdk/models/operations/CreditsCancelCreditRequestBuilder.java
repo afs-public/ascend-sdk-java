@@ -8,13 +8,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelCreditRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.CreditsCancelCredit;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class CreditsCancelCreditRequestBuilder {
 
   private String accountId;
   private String creditId;
   private CancelCreditRequestCreate cancelCreditRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public CreditsCancelCreditRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -40,6 +44,18 @@ public class CreditsCancelCreditRequestBuilder {
     return this;
   }
 
+  public CreditsCancelCreditRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public CreditsCancelCreditRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private CreditsCancelCreditRequest buildRequest() {
 
     CreditsCancelCreditRequest request =
@@ -49,9 +65,10 @@ public class CreditsCancelCreditRequestBuilder {
   }
 
   public CreditsCancelCreditResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<CreditsCancelCreditRequest, CreditsCancelCreditResponse> operation =
-        new CreditsCancelCredit.Sync(sdkConfiguration);
+        new CreditsCancelCredit.Sync(sdkConfiguration, options);
     CreditsCancelCreditRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

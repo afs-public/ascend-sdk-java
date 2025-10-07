@@ -16,7 +16,6 @@ public class TestCreateOrder {
     sdk = SdkUtil.getSdk();
     account = AccountUtil.createEnrolledAccount(sdk);
     order = OrderUtil.createLimitOrder(sdk, account);
-    Thread.sleep(2500);
   }
 
   @org.junit.jupiter.api.Order(1)

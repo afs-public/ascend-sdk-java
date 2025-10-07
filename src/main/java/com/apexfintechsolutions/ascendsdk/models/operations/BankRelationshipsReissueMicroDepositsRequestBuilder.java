@@ -8,13 +8,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.ReissueMicroDepositsRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.BankRelationshipsReissueMicroDeposits;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class BankRelationshipsReissueMicroDepositsRequestBuilder {
 
   private String accountId;
   private String bankRelationshipId;
   private ReissueMicroDepositsRequestCreate reissueMicroDepositsRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public BankRelationshipsReissueMicroDepositsRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -41,6 +45,19 @@ public class BankRelationshipsReissueMicroDepositsRequestBuilder {
     return this;
   }
 
+  public BankRelationshipsReissueMicroDepositsRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public BankRelationshipsReissueMicroDepositsRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private BankRelationshipsReissueMicroDepositsRequest buildRequest() {
 
     BankRelationshipsReissueMicroDepositsRequest request =
@@ -51,11 +68,12 @@ public class BankRelationshipsReissueMicroDepositsRequestBuilder {
   }
 
   public BankRelationshipsReissueMicroDepositsResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             BankRelationshipsReissueMicroDepositsRequest,
             BankRelationshipsReissueMicroDepositsResponse>
-        operation = new BankRelationshipsReissueMicroDeposits.Sync(sdkConfiguration);
+        operation = new BankRelationshipsReissueMicroDeposits.Sync(sdkConfiguration, options);
     BankRelationshipsReissueMicroDepositsRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

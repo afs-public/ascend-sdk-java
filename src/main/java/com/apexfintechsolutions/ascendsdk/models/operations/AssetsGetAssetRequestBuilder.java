@@ -7,11 +7,15 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.AssetsGetAsset;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AssetsGetAssetRequestBuilder {
 
   private String assetId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AssetsGetAssetRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -24,6 +28,18 @@ public class AssetsGetAssetRequestBuilder {
     return this;
   }
 
+  public AssetsGetAssetRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AssetsGetAssetRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AssetsGetAssetRequest buildRequest() {
 
     AssetsGetAssetRequest request = new AssetsGetAssetRequest(assetId);
@@ -32,9 +48,10 @@ public class AssetsGetAssetRequestBuilder {
   }
 
   public AssetsGetAssetResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AssetsGetAssetRequest, AssetsGetAssetResponse> operation =
-        new AssetsGetAsset.Sync(sdkConfiguration);
+        new AssetsGetAsset.Sync(sdkConfiguration, options);
     AssetsGetAssetRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

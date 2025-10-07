@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.RestrictionCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsCreateRestriction;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AccountsCreateRestrictionRequestBuilder {
 
   private String accountId;
   private RestrictionCreate restrictionCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsCreateRestrictionRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -33,6 +37,18 @@ public class AccountsCreateRestrictionRequestBuilder {
     return this;
   }
 
+  public AccountsCreateRestrictionRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsCreateRestrictionRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsCreateRestrictionRequest buildRequest() {
 
     AccountsCreateRestrictionRequest request =
@@ -42,9 +58,10 @@ public class AccountsCreateRestrictionRequestBuilder {
   }
 
   public AccountsCreateRestrictionResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountsCreateRestrictionRequest, AccountsCreateRestrictionResponse>
-        operation = new AccountsCreateRestriction.Sync(sdkConfiguration);
+        operation = new AccountsCreateRestriction.Sync(sdkConfiguration, options);
     AccountsCreateRestrictionRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

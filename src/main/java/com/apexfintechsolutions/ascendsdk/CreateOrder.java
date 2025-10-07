@@ -7,6 +7,7 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.models.components.CancelOrderRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.OrderCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.SetExtraReportingDataRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceCancelOrderRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceCancelOrderRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceCancelOrderResponse;
@@ -16,9 +17,15 @@ import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceCreateOr
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceGetOrderRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceGetOrderRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceGetOrderResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceSetExtraReportingDataRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceSetExtraReportingDataRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceSetExtraReportingDataResponse;
 import com.apexfintechsolutions.ascendsdk.operations.OrderServiceCancelOrder;
 import com.apexfintechsolutions.ascendsdk.operations.OrderServiceCreateOrder;
 import com.apexfintechsolutions.ascendsdk.operations.OrderServiceGetOrder;
+import com.apexfintechsolutions.ascendsdk.operations.OrderServiceSetExtraReportingData;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import java.util.Optional;
 
 public class CreateOrder {
   private final SDKConfiguration sdkConfiguration;
@@ -66,13 +73,37 @@ public class CreateOrder {
    */
   public OrderServiceCreateOrderResponse createOrder(String accountId, OrderCreate orderCreate)
       throws Exception {
+    return createOrder(accountId, orderCreate, Optional.empty());
+  }
+
+  /**
+   * Create Order
+   *
+   * <p>Creates a new order for equity or fixed income securities.
+   *
+   * <p>Equity quantities may be for fractional shares, whole shares, or notional dollar amounts.
+   * Fixed income orders may be specified in face value currency amounts, with prices expressed in
+   * conventional "percentage of par" values.
+   *
+   * <p>Upon successful submission, if the request is a duplicate, returns the existing order in its
+   * current state in the system. If the request is not a duplicate, returns the summary of the
+   * newly submitted order.
+   *
+   * @param accountId The account id.
+   * @param orderCreate The message describing an order
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public OrderServiceCreateOrderResponse createOrder(
+      String accountId, OrderCreate orderCreate, Optional<Options> options) throws Exception {
     OrderServiceCreateOrderRequest request =
         OrderServiceCreateOrderRequest.builder()
             .accountId(accountId)
             .orderCreate(orderCreate)
             .build();
     RequestOperation<OrderServiceCreateOrderRequest, OrderServiceCreateOrderResponse> operation =
-        new OrderServiceCreateOrder.Sync(sdkConfiguration);
+        new OrderServiceCreateOrder.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -102,10 +133,28 @@ public class CreateOrder {
    * @throws Exception if the API call fails
    */
   public OrderServiceGetOrderResponse getOrder(String accountId, String orderId) throws Exception {
+    return getOrder(accountId, orderId, Optional.empty());
+  }
+
+  /**
+   * Get Order
+   *
+   * <p>Gets an order by order ID.
+   *
+   * <p>Upon successful submission, returns the details of the queried order.
+   *
+   * @param accountId The account id.
+   * @param orderId The order id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public OrderServiceGetOrderResponse getOrder(
+      String accountId, String orderId, Optional<Options> options) throws Exception {
     OrderServiceGetOrderRequest request =
         OrderServiceGetOrderRequest.builder().accountId(accountId).orderId(orderId).build();
     RequestOperation<OrderServiceGetOrderRequest, OrderServiceGetOrderResponse> operation =
-        new OrderServiceGetOrder.Sync(sdkConfiguration);
+        new OrderServiceGetOrder.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -140,6 +189,30 @@ public class CreateOrder {
   public OrderServiceCancelOrderResponse cancelOrder(
       String accountId, String orderId, CancelOrderRequestCreate cancelOrderRequestCreate)
       throws Exception {
+    return cancelOrder(accountId, orderId, cancelOrderRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Cancel Order
+   *
+   * <p>Submits an order cancellation request by order ID. Confirmation of order cancellation
+   * requests are provided through asynchronous events.
+   *
+   * <p>Upon successful submission, returns the details of the order pending cancellation.
+   *
+   * @param accountId The account id.
+   * @param orderId The order id.
+   * @param cancelOrderRequestCreate The message to request cancellation of an existing order
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public OrderServiceCancelOrderResponse cancelOrder(
+      String accountId,
+      String orderId,
+      CancelOrderRequestCreate cancelOrderRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     OrderServiceCancelOrderRequest request =
         OrderServiceCancelOrderRequest.builder()
             .accountId(accountId)
@@ -147,7 +220,71 @@ public class CreateOrder {
             .cancelOrderRequestCreate(cancelOrderRequestCreate)
             .build();
     RequestOperation<OrderServiceCancelOrderRequest, OrderServiceCancelOrderResponse> operation =
-        new OrderServiceCancelOrder.Sync(sdkConfiguration);
+        new OrderServiceCancelOrder.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Set Extra Reporting Data
+   *
+   * <p>Sets extra reporting data to an existing order. Any SetExtraReportingDataRequest must
+   * include the name of the order and the cancel_confirmed_time
+   *
+   * @return The call builder
+   */
+  public OrderServiceSetExtraReportingDataRequestBuilder setExtraReportingData() {
+    return new OrderServiceSetExtraReportingDataRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * Set Extra Reporting Data
+   *
+   * <p>Sets extra reporting data to an existing order. Any SetExtraReportingDataRequest must
+   * include the name of the order and the cancel_confirmed_time
+   *
+   * @param accountId The account id.
+   * @param orderId The order id.
+   * @param setExtraReportingDataRequestCreate
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public OrderServiceSetExtraReportingDataResponse setExtraReportingData(
+      String accountId,
+      String orderId,
+      SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate)
+      throws Exception {
+    return setExtraReportingData(
+        accountId, orderId, setExtraReportingDataRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Set Extra Reporting Data
+   *
+   * <p>Sets extra reporting data to an existing order. Any SetExtraReportingDataRequest must
+   * include the name of the order and the cancel_confirmed_time
+   *
+   * @param accountId The account id.
+   * @param orderId The order id.
+   * @param setExtraReportingDataRequestCreate
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public OrderServiceSetExtraReportingDataResponse setExtraReportingData(
+      String accountId,
+      String orderId,
+      SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate,
+      Optional<Options> options)
+      throws Exception {
+    OrderServiceSetExtraReportingDataRequest request =
+        OrderServiceSetExtraReportingDataRequest.builder()
+            .accountId(accountId)
+            .orderId(orderId)
+            .setExtraReportingDataRequestCreate(setExtraReportingDataRequestCreate)
+            .build();
+    RequestOperation<
+            OrderServiceSetExtraReportingDataRequest, OrderServiceSetExtraReportingDataResponse>
+        operation = new OrderServiceSetExtraReportingData.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

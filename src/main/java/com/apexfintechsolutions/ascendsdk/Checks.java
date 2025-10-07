@@ -9,6 +9,8 @@ import com.apexfintechsolutions.ascendsdk.models.operations.CheckDepositsGetChec
 import com.apexfintechsolutions.ascendsdk.models.operations.CheckDepositsGetCheckDepositRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.CheckDepositsGetCheckDepositResponse;
 import com.apexfintechsolutions.ascendsdk.operations.CheckDepositsGetCheckDeposit;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import java.util.Optional;
 
 public class Checks {
   private final SDKConfiguration sdkConfiguration;
@@ -40,13 +42,29 @@ public class Checks {
    */
   public CheckDepositsGetCheckDepositResponse getCheckDeposit(
       String accountId, String checkDepositId) throws Exception {
+    return getCheckDeposit(accountId, checkDepositId, Optional.empty());
+  }
+
+  /**
+   * Get Check Deposit
+   *
+   * <p>Gets an existing check deposit.
+   *
+   * @param accountId The account id.
+   * @param checkDepositId The checkDeposit id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CheckDepositsGetCheckDepositResponse getCheckDeposit(
+      String accountId, String checkDepositId, Optional<Options> options) throws Exception {
     CheckDepositsGetCheckDepositRequest request =
         CheckDepositsGetCheckDepositRequest.builder()
             .accountId(accountId)
             .checkDepositId(checkDepositId)
             .build();
     RequestOperation<CheckDepositsGetCheckDepositRequest, CheckDepositsGetCheckDepositResponse>
-        operation = new CheckDepositsGetCheckDeposit.Sync(sdkConfiguration);
+        operation = new CheckDepositsGetCheckDeposit.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

@@ -7,11 +7,15 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsListAvailableRestrictions;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AccountsListAvailableRestrictionsRequestBuilder {
 
   private String accountId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsListAvailableRestrictionsRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -24,6 +28,19 @@ public class AccountsListAvailableRestrictionsRequestBuilder {
     return this;
   }
 
+  public AccountsListAvailableRestrictionsRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsListAvailableRestrictionsRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsListAvailableRestrictionsRequest buildRequest() {
 
     AccountsListAvailableRestrictionsRequest request =
@@ -33,10 +50,11 @@ public class AccountsListAvailableRestrictionsRequestBuilder {
   }
 
   public AccountsListAvailableRestrictionsResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             AccountsListAvailableRestrictionsRequest, AccountsListAvailableRestrictionsResponse>
-        operation = new AccountsListAvailableRestrictions.Sync(sdkConfiguration);
+        operation = new AccountsListAvailableRestrictions.Sync(sdkConfiguration, options);
     AccountsListAvailableRestrictionsRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

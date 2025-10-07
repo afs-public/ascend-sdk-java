@@ -8,13 +8,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectWireWithdrawalRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.WireWithdrawalsForceRejectWireWithdrawal;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class WireWithdrawalsForceRejectWireWithdrawalRequestBuilder {
 
   private String accountId;
   private String wireWithdrawalId;
   private ForceRejectWireWithdrawalRequestCreate forceRejectWireWithdrawalRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public WireWithdrawalsForceRejectWireWithdrawalRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -43,6 +47,20 @@ public class WireWithdrawalsForceRejectWireWithdrawalRequestBuilder {
     return this;
   }
 
+  public WireWithdrawalsForceRejectWireWithdrawalRequestBuilder retryConfig(
+      RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public WireWithdrawalsForceRejectWireWithdrawalRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private WireWithdrawalsForceRejectWireWithdrawalRequest buildRequest() {
 
     WireWithdrawalsForceRejectWireWithdrawalRequest request =
@@ -53,11 +71,12 @@ public class WireWithdrawalsForceRejectWireWithdrawalRequestBuilder {
   }
 
   public WireWithdrawalsForceRejectWireWithdrawalResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             WireWithdrawalsForceRejectWireWithdrawalRequest,
             WireWithdrawalsForceRejectWireWithdrawalResponse>
-        operation = new WireWithdrawalsForceRejectWireWithdrawal.Sync(sdkConfiguration);
+        operation = new WireWithdrawalsForceRejectWireWithdrawal.Sync(sdkConfiguration, options);
     WireWithdrawalsForceRejectWireWithdrawalRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

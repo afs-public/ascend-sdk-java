@@ -7,12 +7,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsDeleteInterestedParty;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AccountsDeleteInterestedPartyRequestBuilder {
 
   private String accountId;
   private String interestedPartyId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsDeleteInterestedPartyRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -31,6 +35,19 @@ public class AccountsDeleteInterestedPartyRequestBuilder {
     return this;
   }
 
+  public AccountsDeleteInterestedPartyRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsDeleteInterestedPartyRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsDeleteInterestedPartyRequest buildRequest() {
 
     AccountsDeleteInterestedPartyRequest request =
@@ -40,9 +57,10 @@ public class AccountsDeleteInterestedPartyRequestBuilder {
   }
 
   public AccountsDeleteInterestedPartyResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountsDeleteInterestedPartyRequest, AccountsDeleteInterestedPartyResponse>
-        operation = new AccountsDeleteInterestedParty.Sync(sdkConfiguration);
+        operation = new AccountsDeleteInterestedParty.Sync(sdkConfiguration, options);
     AccountsDeleteInterestedPartyRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

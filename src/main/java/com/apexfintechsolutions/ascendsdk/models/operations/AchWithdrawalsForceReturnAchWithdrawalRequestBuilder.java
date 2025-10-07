@@ -8,13 +8,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceReturnAchWithdrawalRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AchWithdrawalsForceReturnAchWithdrawal;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AchWithdrawalsForceReturnAchWithdrawalRequestBuilder {
 
   private String accountId;
   private String achWithdrawalId;
   private ForceReturnAchWithdrawalRequestCreate forceReturnAchWithdrawalRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AchWithdrawalsForceReturnAchWithdrawalRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -42,6 +46,19 @@ public class AchWithdrawalsForceReturnAchWithdrawalRequestBuilder {
     return this;
   }
 
+  public AchWithdrawalsForceReturnAchWithdrawalRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AchWithdrawalsForceReturnAchWithdrawalRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AchWithdrawalsForceReturnAchWithdrawalRequest buildRequest() {
 
     AchWithdrawalsForceReturnAchWithdrawalRequest request =
@@ -52,11 +69,12 @@ public class AchWithdrawalsForceReturnAchWithdrawalRequestBuilder {
   }
 
   public AchWithdrawalsForceReturnAchWithdrawalResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             AchWithdrawalsForceReturnAchWithdrawalRequest,
             AchWithdrawalsForceReturnAchWithdrawalResponse>
-        operation = new AchWithdrawalsForceReturnAchWithdrawal.Sync(sdkConfiguration);
+        operation = new AchWithdrawalsForceReturnAchWithdrawal.Sync(sdkConfiguration, options);
     AchWithdrawalsForceReturnAchWithdrawalRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

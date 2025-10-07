@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.GenerateServiceAccountTokenRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AuthenticationGenerateServiceAccountToken;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AuthenticationGenerateServiceAccountTokenRequestBuilder {
 
   private GenerateServiceAccountTokenRequestCreate request;
   private AuthenticationGenerateServiceAccountTokenSecurity security;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AuthenticationGenerateServiceAccountTokenRequestBuilder(
@@ -35,12 +39,28 @@ public class AuthenticationGenerateServiceAccountTokenRequestBuilder {
     return this;
   }
 
+  public AuthenticationGenerateServiceAccountTokenRequestBuilder retryConfig(
+      RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AuthenticationGenerateServiceAccountTokenRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   public AuthenticationGenerateServiceAccountTokenResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             GenerateServiceAccountTokenRequestCreate,
             AuthenticationGenerateServiceAccountTokenResponse>
-        operation = new AuthenticationGenerateServiceAccountToken.Sync(sdkConfiguration, security);
+        operation =
+            new AuthenticationGenerateServiceAccountToken.Sync(sdkConfiguration, security, options);
 
     return operation.handleResponse(operation.doRequest(request));
   }

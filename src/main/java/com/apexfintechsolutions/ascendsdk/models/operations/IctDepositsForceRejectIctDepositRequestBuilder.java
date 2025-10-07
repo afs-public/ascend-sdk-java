@@ -8,13 +8,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectIctDepositRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.IctDepositsForceRejectIctDeposit;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class IctDepositsForceRejectIctDepositRequestBuilder {
 
   private String accountId;
   private String ictDepositId;
   private ForceRejectIctDepositRequestCreate forceRejectIctDepositRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public IctDepositsForceRejectIctDepositRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -40,6 +44,19 @@ public class IctDepositsForceRejectIctDepositRequestBuilder {
     return this;
   }
 
+  public IctDepositsForceRejectIctDepositRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public IctDepositsForceRejectIctDepositRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private IctDepositsForceRejectIctDepositRequest buildRequest() {
 
     IctDepositsForceRejectIctDepositRequest request =
@@ -50,10 +67,11 @@ public class IctDepositsForceRejectIctDepositRequestBuilder {
   }
 
   public IctDepositsForceRejectIctDepositResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             IctDepositsForceRejectIctDepositRequest, IctDepositsForceRejectIctDepositResponse>
-        operation = new IctDepositsForceRejectIctDeposit.Sync(sdkConfiguration);
+        operation = new IctDepositsForceRejectIctDeposit.Sync(sdkConfiguration, options);
     IctDepositsForceRejectIctDepositRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

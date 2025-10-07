@@ -8,13 +8,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelWireWithdrawalRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.WireWithdrawalsCancelWireWithdrawal;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class WireWithdrawalsCancelWireWithdrawalRequestBuilder {
 
   private String accountId;
   private String wireWithdrawalId;
   private CancelWireWithdrawalRequestCreate cancelWireWithdrawalRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public WireWithdrawalsCancelWireWithdrawalRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -41,6 +45,19 @@ public class WireWithdrawalsCancelWireWithdrawalRequestBuilder {
     return this;
   }
 
+  public WireWithdrawalsCancelWireWithdrawalRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public WireWithdrawalsCancelWireWithdrawalRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private WireWithdrawalsCancelWireWithdrawalRequest buildRequest() {
 
     WireWithdrawalsCancelWireWithdrawalRequest request =
@@ -51,10 +68,11 @@ public class WireWithdrawalsCancelWireWithdrawalRequestBuilder {
   }
 
   public WireWithdrawalsCancelWireWithdrawalResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             WireWithdrawalsCancelWireWithdrawalRequest, WireWithdrawalsCancelWireWithdrawalResponse>
-        operation = new WireWithdrawalsCancelWireWithdrawal.Sync(sdkConfiguration);
+        operation = new WireWithdrawalsCancelWireWithdrawal.Sync(sdkConfiguration, options);
     WireWithdrawalsCancelWireWithdrawalRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

@@ -24,6 +24,11 @@ public class TransfersCredit {
   @JsonProperty("amount")
   private JsonNullable<? extends TransfersCreditAmount> amount;
 
+  /** Bulk upload identifier to group related credit transfers */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("bulk_upload_id")
+  private Optional<String> bulkUploadId;
+
   /**
    * External identifier supplied by the API caller. Each request must have a unique pairing of
    * client_transfer_id and account
@@ -65,6 +70,7 @@ public class TransfersCredit {
   @JsonCreator
   public TransfersCredit(
       @JsonProperty("amount") JsonNullable<? extends TransfersCreditAmount> amount,
+      @JsonProperty("bulk_upload_id") Optional<String> bulkUploadId,
       @JsonProperty("client_transfer_id") Optional<String> clientTransferId,
       @JsonProperty("description") Optional<String> description,
       @JsonProperty("fee_operating_account") Optional<String> feeOperatingAccount,
@@ -72,6 +78,7 @@ public class TransfersCredit {
       @JsonProperty("state") JsonNullable<? extends TransfersCreditState> state,
       @JsonProperty("type") Optional<? extends TransfersCreditType> type) {
     Utils.checkNotNull(amount, "amount");
+    Utils.checkNotNull(bulkUploadId, "bulkUploadId");
     Utils.checkNotNull(clientTransferId, "clientTransferId");
     Utils.checkNotNull(description, "description");
     Utils.checkNotNull(feeOperatingAccount, "feeOperatingAccount");
@@ -79,6 +86,7 @@ public class TransfersCredit {
     Utils.checkNotNull(state, "state");
     Utils.checkNotNull(type, "type");
     this.amount = amount;
+    this.bulkUploadId = bulkUploadId;
     this.clientTransferId = clientTransferId;
     this.description = description;
     this.feeOperatingAccount = feeOperatingAccount;
@@ -94,6 +102,7 @@ public class TransfersCredit {
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
+        Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty());
   }
@@ -103,6 +112,12 @@ public class TransfersCredit {
   @JsonIgnore
   public JsonNullable<TransfersCreditAmount> amount() {
     return (JsonNullable<TransfersCreditAmount>) amount;
+  }
+
+  /** Bulk upload identifier to group related credit transfers */
+  @JsonIgnore
+  public Optional<String> bulkUploadId() {
+    return bulkUploadId;
   }
 
   /**
@@ -166,6 +181,20 @@ public class TransfersCredit {
   public TransfersCredit withAmount(JsonNullable<? extends TransfersCreditAmount> amount) {
     Utils.checkNotNull(amount, "amount");
     this.amount = amount;
+    return this;
+  }
+
+  /** Bulk upload identifier to group related credit transfers */
+  public TransfersCredit withBulkUploadId(String bulkUploadId) {
+    Utils.checkNotNull(bulkUploadId, "bulkUploadId");
+    this.bulkUploadId = Optional.ofNullable(bulkUploadId);
+    return this;
+  }
+
+  /** Bulk upload identifier to group related credit transfers */
+  public TransfersCredit withBulkUploadId(Optional<String> bulkUploadId) {
+    Utils.checkNotNull(bulkUploadId, "bulkUploadId");
+    this.bulkUploadId = bulkUploadId;
     return this;
   }
 
@@ -279,6 +308,7 @@ public class TransfersCredit {
     }
     TransfersCredit other = (TransfersCredit) o;
     return Utils.enhancedDeepEquals(this.amount, other.amount)
+        && Utils.enhancedDeepEquals(this.bulkUploadId, other.bulkUploadId)
         && Utils.enhancedDeepEquals(this.clientTransferId, other.clientTransferId)
         && Utils.enhancedDeepEquals(this.description, other.description)
         && Utils.enhancedDeepEquals(this.feeOperatingAccount, other.feeOperatingAccount)
@@ -290,7 +320,14 @@ public class TransfersCredit {
   @Override
   public int hashCode() {
     return Utils.enhancedHash(
-        amount, clientTransferId, description, feeOperatingAccount, name, state, type);
+        amount,
+        bulkUploadId,
+        clientTransferId,
+        description,
+        feeOperatingAccount,
+        name,
+        state,
+        type);
   }
 
   @Override
@@ -299,6 +336,8 @@ public class TransfersCredit {
         TransfersCredit.class,
         "amount",
         amount,
+        "bulkUploadId",
+        bulkUploadId,
         "clientTransferId",
         clientTransferId,
         "description",
@@ -317,6 +356,8 @@ public class TransfersCredit {
   public static final class Builder {
 
     private JsonNullable<? extends TransfersCreditAmount> amount = JsonNullable.undefined();
+
+    private Optional<String> bulkUploadId = Optional.empty();
 
     private Optional<String> clientTransferId = Optional.empty();
 
@@ -345,6 +386,20 @@ public class TransfersCredit {
     public Builder amount(JsonNullable<? extends TransfersCreditAmount> amount) {
       Utils.checkNotNull(amount, "amount");
       this.amount = amount;
+      return this;
+    }
+
+    /** Bulk upload identifier to group related credit transfers */
+    public Builder bulkUploadId(String bulkUploadId) {
+      Utils.checkNotNull(bulkUploadId, "bulkUploadId");
+      this.bulkUploadId = Optional.ofNullable(bulkUploadId);
+      return this;
+    }
+
+    /** Bulk upload identifier to group related credit transfers */
+    public Builder bulkUploadId(Optional<String> bulkUploadId) {
+      Utils.checkNotNull(bulkUploadId, "bulkUploadId");
+      this.bulkUploadId = bulkUploadId;
       return this;
     }
 
@@ -451,7 +506,14 @@ public class TransfersCredit {
     public TransfersCredit build() {
 
       return new TransfersCredit(
-          amount, clientTransferId, description, feeOperatingAccount, name, state, type);
+          amount,
+          bulkUploadId,
+          clientTransferId,
+          description,
+          feeOperatingAccount,
+          name,
+          state,
+          type);
     }
   }
 }

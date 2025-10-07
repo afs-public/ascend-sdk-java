@@ -8,6 +8,8 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.LegalNaturalPersonUpdate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsUpdateLegalNaturalPerson;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import java.util.Optional;
 
@@ -16,6 +18,7 @@ public class AccountsUpdateLegalNaturalPersonRequestBuilder {
   private String legalNaturalPersonId;
   private Optional<String> updateMask = Optional.empty();
   private LegalNaturalPersonUpdate legalNaturalPersonUpdate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsUpdateLegalNaturalPersonRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -48,6 +51,19 @@ public class AccountsUpdateLegalNaturalPersonRequestBuilder {
     return this;
   }
 
+  public AccountsUpdateLegalNaturalPersonRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsUpdateLegalNaturalPersonRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsUpdateLegalNaturalPersonRequest buildRequest() {
 
     AccountsUpdateLegalNaturalPersonRequest request =
@@ -58,10 +74,11 @@ public class AccountsUpdateLegalNaturalPersonRequestBuilder {
   }
 
   public AccountsUpdateLegalNaturalPersonResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             AccountsUpdateLegalNaturalPersonRequest, AccountsUpdateLegalNaturalPersonResponse>
-        operation = new AccountsUpdateLegalNaturalPerson.Sync(sdkConfiguration);
+        operation = new AccountsUpdateLegalNaturalPerson.Sync(sdkConfiguration, options);
     AccountsUpdateLegalNaturalPersonRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

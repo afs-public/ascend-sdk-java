@@ -8,13 +8,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelAchDepositScheduleRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AchDepositSchedulesCancelAchDepositSchedule;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AchDepositSchedulesCancelAchDepositScheduleRequestBuilder {
 
   private String accountId;
   private String achDepositScheduleId;
   private CancelAchDepositScheduleRequestCreate cancelAchDepositScheduleRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AchDepositSchedulesCancelAchDepositScheduleRequestBuilder(
@@ -44,6 +48,20 @@ public class AchDepositSchedulesCancelAchDepositScheduleRequestBuilder {
     return this;
   }
 
+  public AchDepositSchedulesCancelAchDepositScheduleRequestBuilder retryConfig(
+      RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AchDepositSchedulesCancelAchDepositScheduleRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AchDepositSchedulesCancelAchDepositScheduleRequest buildRequest() {
 
     AchDepositSchedulesCancelAchDepositScheduleRequest request =
@@ -54,11 +72,12 @@ public class AchDepositSchedulesCancelAchDepositScheduleRequestBuilder {
   }
 
   public AchDepositSchedulesCancelAchDepositScheduleResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             AchDepositSchedulesCancelAchDepositScheduleRequest,
             AchDepositSchedulesCancelAchDepositScheduleResponse>
-        operation = new AchDepositSchedulesCancelAchDepositSchedule.Sync(sdkConfiguration);
+        operation = new AchDepositSchedulesCancelAchDepositSchedule.Sync(sdkConfiguration, options);
     AchDepositSchedulesCancelAchDepositScheduleRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

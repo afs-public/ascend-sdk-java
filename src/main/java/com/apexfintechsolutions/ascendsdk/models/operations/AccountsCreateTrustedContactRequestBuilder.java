@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.TrustedContactCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsCreateTrustedContact;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AccountsCreateTrustedContactRequestBuilder {
 
   private String accountId;
   private TrustedContactCreate trustedContactCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsCreateTrustedContactRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -33,6 +37,18 @@ public class AccountsCreateTrustedContactRequestBuilder {
     return this;
   }
 
+  public AccountsCreateTrustedContactRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsCreateTrustedContactRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsCreateTrustedContactRequest buildRequest() {
 
     AccountsCreateTrustedContactRequest request =
@@ -42,9 +58,10 @@ public class AccountsCreateTrustedContactRequestBuilder {
   }
 
   public AccountsCreateTrustedContactResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountsCreateTrustedContactRequest, AccountsCreateTrustedContactResponse>
-        operation = new AccountsCreateTrustedContact.Sync(sdkConfiguration);
+        operation = new AccountsCreateTrustedContact.Sync(sdkConfiguration, options);
     AccountsCreateTrustedContactRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

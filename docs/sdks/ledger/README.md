@@ -44,16 +44,17 @@ public class Application {
                     .build())
             .build();
 
-        LedgerListEntriesResponse res = sdk.ledger().listEntries()
+
+        sdk.ledger().listEntries()
                 .accountId("01FAKEACCOUNT1TYKWEYRH8S2K")
                 .pageSize(0)
                 .pageToken("v-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAOv-CAfzbNG7ZAS8xZWYyMmM3ZS01NjdmLTBhYzgtYjZmZi1kNzYwNDI3YmI3N2Q6MjAyNC0wNi0wMgA=")
                 .filter("process_date == date('2024-05-11') && account_id == '01HBRQ5BW6ZAY4BNWP4GWRD80X'")
-                .call();
+                .callAsStream()
+                .forEach((LedgerListEntriesResponse item) -> {
+                   // handle page
+                });
 
-        if (res.listEntriesResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```
@@ -112,16 +113,17 @@ public class Application {
                     .build())
             .build();
 
-        LedgerListActivitiesResponse res = sdk.ledger().listActivities()
+
+        sdk.ledger().listActivities()
                 .accountId("01FAKEACCOUNT1TYKWEYRH8S2K")
                 .pageSize(100)
                 .pageToken("Mv-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAI_-CAfwVsHF9ARgyMDI0LTA2LTA0OjFGQTA1MDExOjUwMDEA")
                 .filter("subtype_category == 'TRADE' && process_date >= date('2023-07-31') && settle_date >= date('2023-08-18') && side == 'BUY' &&  activity_date >= date('2023-09-15') && asset_id == 8395")
-                .call();
+                .callAsStream()
+                .forEach((LedgerListActivitiesResponse item) -> {
+                   // handle page
+                });
 
-        if (res.listActivitiesResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```
@@ -180,16 +182,17 @@ public class Application {
                     .build())
             .build();
 
-        LedgerListPositionsResponse res = sdk.ledger().listPositions()
+
+        sdk.ledger().listPositions()
                 .accountId("01HBRQ5BW6ZAY4BNWP4GWRD80X")
                 .pageSize(20)
                 .pageToken("Mv-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAOv-CAfwFIZG3AS8xZWYyMmM4Ny0zNDI5LTAyYzItODRjNC03ODdmNTJlNDY1MTE6MjAyNC0wNi0wMgA=")
                 .filter("date >= date('2023-08-31') && asset_id == 8395")
-                .call();
+                .callAsStream()
+                .forEach((LedgerListPositionsResponse item) -> {
+                   // handle page
+                });
 
-        if (res.listPositionsResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```

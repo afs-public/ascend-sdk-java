@@ -8,11 +8,15 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.BatchCreateUploadLinksRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.InvestorCommunicationServiceBatchCreateUploadLinks;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class InvestorCommunicationServiceBatchCreateUploadLinksRequestBuilder {
 
   private BatchCreateUploadLinksRequestCreate request;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public InvestorCommunicationServiceBatchCreateUploadLinksRequestBuilder(
@@ -27,12 +31,28 @@ public class InvestorCommunicationServiceBatchCreateUploadLinksRequestBuilder {
     return this;
   }
 
+  public InvestorCommunicationServiceBatchCreateUploadLinksRequestBuilder retryConfig(
+      RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public InvestorCommunicationServiceBatchCreateUploadLinksRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   public InvestorCommunicationServiceBatchCreateUploadLinksResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             BatchCreateUploadLinksRequestCreate,
             InvestorCommunicationServiceBatchCreateUploadLinksResponse>
-        operation = new InvestorCommunicationServiceBatchCreateUploadLinks.Sync(sdkConfiguration);
+        operation =
+            new InvestorCommunicationServiceBatchCreateUploadLinks.Sync(sdkConfiguration, options);
 
     return operation.handleResponse(operation.doRequest(request));
   }

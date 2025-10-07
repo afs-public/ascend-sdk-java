@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.SimulateCreateCheckDepositRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.CheckDepositsSimulateCreateCheckDeposit;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class CheckDepositsSimulateCreateCheckDepositRequestBuilder {
 
   private String accountId;
   private SimulateCreateCheckDepositRequestCreate simulateCreateCheckDepositRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public CheckDepositsSimulateCreateCheckDepositRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -35,6 +39,20 @@ public class CheckDepositsSimulateCreateCheckDepositRequestBuilder {
     return this;
   }
 
+  public CheckDepositsSimulateCreateCheckDepositRequestBuilder retryConfig(
+      RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public CheckDepositsSimulateCreateCheckDepositRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private CheckDepositsSimulateCreateCheckDepositRequest buildRequest() {
 
     CheckDepositsSimulateCreateCheckDepositRequest request =
@@ -45,11 +63,12 @@ public class CheckDepositsSimulateCreateCheckDepositRequestBuilder {
   }
 
   public CheckDepositsSimulateCreateCheckDepositResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             CheckDepositsSimulateCreateCheckDepositRequest,
             CheckDepositsSimulateCreateCheckDepositResponse>
-        operation = new CheckDepositsSimulateCreateCheckDeposit.Sync(sdkConfiguration);
+        operation = new CheckDepositsSimulateCreateCheckDeposit.Sync(sdkConfiguration, options);
     CheckDepositsSimulateCreateCheckDepositRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

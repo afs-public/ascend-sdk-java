@@ -8,11 +8,15 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.AccountRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsCreateAccount;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AccountsCreateAccountRequestBuilder {
 
   private AccountRequestCreate request;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsCreateAccountRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -25,10 +29,23 @@ public class AccountsCreateAccountRequestBuilder {
     return this;
   }
 
+  public AccountsCreateAccountRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsCreateAccountRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   public AccountsCreateAccountResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountRequestCreate, AccountsCreateAccountResponse> operation =
-        new AccountsCreateAccount.Sync(sdkConfiguration);
+        new AccountsCreateAccount.Sync(sdkConfiguration, options);
 
     return operation.handleResponse(operation.doRequest(request));
   }

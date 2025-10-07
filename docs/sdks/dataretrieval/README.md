@@ -40,15 +40,16 @@ public class Application {
                     .build())
             .build();
 
-        SnapshotsListSnapshotsResponse res = sdk.dataRetrieval().listSnapshots()
+
+        sdk.dataRetrieval().listSnapshots()
                 .filter("snapshot_type==\"daily_accounts\"&&process_date==date(\"2023-09-30\")")
                 .pageSize(500)
                 .pageToken("M_-BAwEBCVBhZ2VUb2tlbgH_ggABAgEMUnVubmluZ1RvdGFsAQQAAQZGaWx0ZXIBDAAAAAX_ggEyAA==")
-                .call();
+                .callAsStream()
+                .forEach((SnapshotsListSnapshotsResponse item) -> {
+                   // handle page
+                });
 
-        if (res.listSnapshotsResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```

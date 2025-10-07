@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.AddPartyRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsAddParty;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AccountsAddPartyRequestBuilder {
 
   private String accountId;
   private AddPartyRequestCreate addPartyRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsAddPartyRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -33,6 +37,18 @@ public class AccountsAddPartyRequestBuilder {
     return this;
   }
 
+  public AccountsAddPartyRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsAddPartyRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsAddPartyRequest buildRequest() {
 
     AccountsAddPartyRequest request = new AccountsAddPartyRequest(accountId, addPartyRequestCreate);
@@ -41,9 +57,10 @@ public class AccountsAddPartyRequestBuilder {
   }
 
   public AccountsAddPartyResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountsAddPartyRequest, AccountsAddPartyResponse> operation =
-        new AccountsAddParty.Sync(sdkConfiguration);
+        new AccountsAddParty.Sync(sdkConfiguration, options);
     AccountsAddPartyRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

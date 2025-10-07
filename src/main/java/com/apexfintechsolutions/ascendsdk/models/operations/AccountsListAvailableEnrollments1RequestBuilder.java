@@ -7,6 +7,8 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsListAvailableEnrollments1;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import java.util.Optional;
 
@@ -16,6 +18,7 @@ public class AccountsListAvailableEnrollments1RequestBuilder {
   private Optional<Integer> pageSize = Optional.empty();
   private Optional<String> pageToken = Optional.empty();
   private Optional<String> filter = Optional.empty();
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsListAvailableEnrollments1RequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -64,6 +67,19 @@ public class AccountsListAvailableEnrollments1RequestBuilder {
     return this;
   }
 
+  public AccountsListAvailableEnrollments1RequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsListAvailableEnrollments1RequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsListAvailableEnrollments1Request buildRequest() {
 
     AccountsListAvailableEnrollments1Request request =
@@ -73,10 +89,11 @@ public class AccountsListAvailableEnrollments1RequestBuilder {
   }
 
   public AccountsListAvailableEnrollments1Response call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             AccountsListAvailableEnrollments1Request, AccountsListAvailableEnrollments1Response>
-        operation = new AccountsListAvailableEnrollments1.Sync(sdkConfiguration);
+        operation = new AccountsListAvailableEnrollments1.Sync(sdkConfiguration, options);
     AccountsListAvailableEnrollments1Request request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

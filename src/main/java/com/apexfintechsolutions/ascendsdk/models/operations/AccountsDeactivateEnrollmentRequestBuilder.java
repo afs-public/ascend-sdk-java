@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.DeactivateEnrollmentRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsDeactivateEnrollment;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AccountsDeactivateEnrollmentRequestBuilder {
 
   private String accountId;
   private DeactivateEnrollmentRequestCreate deactivateEnrollmentRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsDeactivateEnrollmentRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -33,6 +37,18 @@ public class AccountsDeactivateEnrollmentRequestBuilder {
     return this;
   }
 
+  public AccountsDeactivateEnrollmentRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsDeactivateEnrollmentRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsDeactivateEnrollmentRequest buildRequest() {
 
     AccountsDeactivateEnrollmentRequest request =
@@ -42,9 +58,10 @@ public class AccountsDeactivateEnrollmentRequestBuilder {
   }
 
   public AccountsDeactivateEnrollmentResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountsDeactivateEnrollmentRequest, AccountsDeactivateEnrollmentResponse>
-        operation = new AccountsDeactivateEnrollment.Sync(sdkConfiguration);
+        operation = new AccountsDeactivateEnrollment.Sync(sdkConfiguration, options);
     AccountsDeactivateEnrollmentRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

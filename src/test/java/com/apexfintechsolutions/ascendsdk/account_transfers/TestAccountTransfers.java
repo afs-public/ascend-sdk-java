@@ -21,7 +21,6 @@ public class TestAccountTransfers {
   public void setup() throws Exception {
     sdk = SdkUtil.getSdk();
     accountId = AccountUtil.createEnrolledAccount(sdk).accountId().get();
-    Thread.sleep(5000);
     accountTransferId = AccountTransfersUtil.createAccountTransferId(sdk, accountId);
   }
 
@@ -109,7 +108,6 @@ public class TestAccountTransfers {
   @Order(5)
   public void test_account_transfers_account_transfers_get_transfer_get_transfer1()
       throws Exception {
-    Thread.sleep(5000);
     var res =
         sdk.accountTransfers()
             .getTransfer()

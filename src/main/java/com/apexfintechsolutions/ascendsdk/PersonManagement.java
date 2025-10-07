@@ -57,6 +57,7 @@ import com.apexfintechsolutions.ascendsdk.operations.AccountsListLegalEntities;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsListLegalNaturalPersons;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsUpdateLegalEntity;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsUpdateLegalNaturalPerson;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
 import java.util.Optional;
 
 public class PersonManagement {
@@ -88,8 +89,23 @@ public class PersonManagement {
    */
   public AccountsCreateLegalNaturalPersonResponse createLegalNaturalPerson(
       LegalNaturalPersonCreate request) throws Exception {
+    return createLegalNaturalPerson(request, Optional.empty());
+  }
+
+  /**
+   * Create Legal Natural Person
+   *
+   * <p>Creates a Legal Natural Person.
+   *
+   * @param request The request object containing all the parameters for the API call.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsCreateLegalNaturalPersonResponse createLegalNaturalPerson(
+      LegalNaturalPersonCreate request, Optional<Options> options) throws Exception {
     RequestOperation<LegalNaturalPersonCreate, AccountsCreateLegalNaturalPersonResponse> operation =
-        new AccountsCreateLegalNaturalPerson.Sync(sdkConfiguration);
+        new AccountsCreateLegalNaturalPerson.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -114,7 +130,7 @@ public class PersonManagement {
    */
   public AccountsListLegalNaturalPersonsResponse listLegalNaturalPersonsDirect() throws Exception {
     return listLegalNaturalPersons(
-        Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -135,6 +151,7 @@ public class PersonManagement {
    *     Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    *     Guides for more information; Filter options include: `legal_natural_person_id`
    *     `correspondent_id` `given_name` `family_name` `tax_id` `tax_id_type` `investigation_id`
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -142,7 +159,8 @@ public class PersonManagement {
       Optional<Integer> pageSize,
       Optional<String> pageToken,
       Optional<String> orderBy,
-      Optional<String> filter)
+      Optional<String> filter,
+      Optional<Options> options)
       throws Exception {
     AccountsListLegalNaturalPersonsRequest request =
         AccountsListLegalNaturalPersonsRequest.builder()
@@ -153,7 +171,7 @@ public class PersonManagement {
             .build();
     RequestOperation<
             AccountsListLegalNaturalPersonsRequest, AccountsListLegalNaturalPersonsResponse>
-        operation = new AccountsListLegalNaturalPersons.Sync(sdkConfiguration);
+        operation = new AccountsListLegalNaturalPersons.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -179,12 +197,27 @@ public class PersonManagement {
    */
   public AccountsGetLegalNaturalPersonResponse getLegalNaturalPerson(String legalNaturalPersonId)
       throws Exception {
+    return getLegalNaturalPerson(legalNaturalPersonId, Optional.empty());
+  }
+
+  /**
+   * Get Legal Natural Persons
+   *
+   * <p>Get Legal Natural Person
+   *
+   * @param legalNaturalPersonId The legalNaturalPerson id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsGetLegalNaturalPersonResponse getLegalNaturalPerson(
+      String legalNaturalPersonId, Optional<Options> options) throws Exception {
     AccountsGetLegalNaturalPersonRequest request =
         AccountsGetLegalNaturalPersonRequest.builder()
             .legalNaturalPersonId(legalNaturalPersonId)
             .build();
     RequestOperation<AccountsGetLegalNaturalPersonRequest, AccountsGetLegalNaturalPersonResponse>
-        operation = new AccountsGetLegalNaturalPerson.Sync(sdkConfiguration);
+        operation = new AccountsGetLegalNaturalPerson.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -215,7 +248,7 @@ public class PersonManagement {
       String legalNaturalPersonId, LegalNaturalPersonUpdate legalNaturalPersonUpdate)
       throws Exception {
     return updateLegalNaturalPerson(
-        legalNaturalPersonId, Optional.empty(), legalNaturalPersonUpdate);
+        legalNaturalPersonId, Optional.empty(), legalNaturalPersonUpdate, Optional.empty());
   }
 
   /**
@@ -260,13 +293,15 @@ public class PersonManagement {
    * @param legalNaturalPersonUpdate A legal natural person. This represents the full set of data
    *     for an individual. A Customer Identification Program (CIP) may be run on legal natural
    *     persons.
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public AccountsUpdateLegalNaturalPersonResponse updateLegalNaturalPerson(
       String legalNaturalPersonId,
       Optional<String> updateMask,
-      LegalNaturalPersonUpdate legalNaturalPersonUpdate)
+      LegalNaturalPersonUpdate legalNaturalPersonUpdate,
+      Optional<Options> options)
       throws Exception {
     AccountsUpdateLegalNaturalPersonRequest request =
         AccountsUpdateLegalNaturalPersonRequest.builder()
@@ -276,7 +311,7 @@ public class PersonManagement {
             .build();
     RequestOperation<
             AccountsUpdateLegalNaturalPersonRequest, AccountsUpdateLegalNaturalPersonResponse>
-        operation = new AccountsUpdateLegalNaturalPerson.Sync(sdkConfiguration);
+        operation = new AccountsUpdateLegalNaturalPerson.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -305,13 +340,34 @@ public class PersonManagement {
   public AccountsAssignLargeTraderResponse assignLargeTrader(
       String legalNaturalPersonId, AssignLargeTraderRequestCreate assignLargeTraderRequestCreate)
       throws Exception {
+    return assignLargeTrader(
+        legalNaturalPersonId, assignLargeTraderRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Assign Large Trader
+   *
+   * <p>Assigns a person's Large Trader ID.
+   *
+   * @param legalNaturalPersonId The legalNaturalPerson id.
+   * @param assignLargeTraderRequestCreate The request to assign a Large Trader ID to a Legal
+   *     Natural Person/Legal Entity.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsAssignLargeTraderResponse assignLargeTrader(
+      String legalNaturalPersonId,
+      AssignLargeTraderRequestCreate assignLargeTraderRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AccountsAssignLargeTraderRequest request =
         AccountsAssignLargeTraderRequest.builder()
             .legalNaturalPersonId(legalNaturalPersonId)
             .assignLargeTraderRequestCreate(assignLargeTraderRequestCreate)
             .build();
     RequestOperation<AccountsAssignLargeTraderRequest, AccountsAssignLargeTraderResponse>
-        operation = new AccountsAssignLargeTrader.Sync(sdkConfiguration);
+        operation = new AccountsAssignLargeTrader.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -340,6 +396,27 @@ public class PersonManagement {
   public AccountsEndLargeTraderLegalNaturalPersonResponse endLargeTraderLegalNaturalPerson(
       String legalNaturalPersonId, EndLargeTraderRequestCreate endLargeTraderRequestCreate)
       throws Exception {
+    return endLargeTraderLegalNaturalPerson(
+        legalNaturalPersonId, endLargeTraderRequestCreate, Optional.empty());
+  }
+
+  /**
+   * End Large Trader
+   *
+   * <p>Removes a person's Large Trader ID.
+   *
+   * @param legalNaturalPersonId The legalNaturalPerson id.
+   * @param endLargeTraderRequestCreate The request to end a Large Trader on a Legal Natural
+   *     Person/Legal Entity.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsEndLargeTraderLegalNaturalPersonResponse endLargeTraderLegalNaturalPerson(
+      String legalNaturalPersonId,
+      EndLargeTraderRequestCreate endLargeTraderRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AccountsEndLargeTraderLegalNaturalPersonRequest request =
         AccountsEndLargeTraderLegalNaturalPersonRequest.builder()
             .legalNaturalPersonId(legalNaturalPersonId)
@@ -348,7 +425,7 @@ public class PersonManagement {
     RequestOperation<
             AccountsEndLargeTraderLegalNaturalPersonRequest,
             AccountsEndLargeTraderLegalNaturalPersonResponse>
-        operation = new AccountsEndLargeTraderLegalNaturalPerson.Sync(sdkConfiguration);
+        operation = new AccountsEndLargeTraderLegalNaturalPerson.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -374,8 +451,23 @@ public class PersonManagement {
    */
   public AccountsCreateLegalEntityResponse createLegalEntity(LegalEntityCreate request)
       throws Exception {
+    return createLegalEntity(request, Optional.empty());
+  }
+
+  /**
+   * Create Legal Entity
+   *
+   * <p>Creates a Legal Entity.
+   *
+   * @param request The request object containing all the parameters for the API call.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsCreateLegalEntityResponse createLegalEntity(
+      LegalEntityCreate request, Optional<Options> options) throws Exception {
     RequestOperation<LegalEntityCreate, AccountsCreateLegalEntityResponse> operation =
-        new AccountsCreateLegalEntity.Sync(sdkConfiguration);
+        new AccountsCreateLegalEntity.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -400,7 +492,7 @@ public class PersonManagement {
    */
   public AccountsListLegalEntitiesResponse listLegalEntitiesDirect() throws Exception {
     return listLegalEntities(
-        Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -421,6 +513,7 @@ public class PersonManagement {
    *     Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    *     Guides for more information; Filter options include: `legal_entity_id` `investigation_id`
    *     `exempt_customer_reason` `exempt_verifying_beneficial_owners`
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -428,7 +521,8 @@ public class PersonManagement {
       Optional<Integer> pageSize,
       Optional<String> pageToken,
       Optional<String> orderBy,
-      Optional<String> filter)
+      Optional<String> filter,
+      Optional<Options> options)
       throws Exception {
     AccountsListLegalEntitiesRequest request =
         AccountsListLegalEntitiesRequest.builder()
@@ -438,7 +532,7 @@ public class PersonManagement {
             .filter(filter)
             .build();
     RequestOperation<AccountsListLegalEntitiesRequest, AccountsListLegalEntitiesResponse>
-        operation = new AccountsListLegalEntities.Sync(sdkConfiguration);
+        operation = new AccountsListLegalEntities.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -463,10 +557,25 @@ public class PersonManagement {
    * @throws Exception if the API call fails
    */
   public AccountsGetLegalEntityResponse getLegalEntity(String legalEntityId) throws Exception {
+    return getLegalEntity(legalEntityId, Optional.empty());
+  }
+
+  /**
+   * Get Legal Entity
+   *
+   * <p>Get Legal Entity
+   *
+   * @param legalEntityId The legalEntity id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsGetLegalEntityResponse getLegalEntity(
+      String legalEntityId, Optional<Options> options) throws Exception {
     AccountsGetLegalEntityRequest request =
         AccountsGetLegalEntityRequest.builder().legalEntityId(legalEntityId).build();
     RequestOperation<AccountsGetLegalEntityRequest, AccountsGetLegalEntityResponse> operation =
-        new AccountsGetLegalEntity.Sync(sdkConfiguration);
+        new AccountsGetLegalEntity.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -494,7 +603,7 @@ public class PersonManagement {
    */
   public AccountsUpdateLegalEntityResponse updateLegalEntity(
       String legalEntityId, LegalEntityUpdate legalEntityUpdate) throws Exception {
-    return updateLegalEntity(legalEntityId, Optional.empty(), legalEntityUpdate);
+    return updateLegalEntity(legalEntityId, Optional.empty(), legalEntityUpdate, Optional.empty());
   }
 
   /**
@@ -513,11 +622,15 @@ public class PersonManagement {
    *     `institutional_customer` `operating_regions` `doing_business_as`
    * @param legalEntityUpdate A legal entity. Legal entities are organizations, such as companies,
    *     that participate in financial transactions
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public AccountsUpdateLegalEntityResponse updateLegalEntity(
-      String legalEntityId, Optional<String> updateMask, LegalEntityUpdate legalEntityUpdate)
+      String legalEntityId,
+      Optional<String> updateMask,
+      LegalEntityUpdate legalEntityUpdate,
+      Optional<Options> options)
       throws Exception {
     AccountsUpdateLegalEntityRequest request =
         AccountsUpdateLegalEntityRequest.builder()
@@ -526,7 +639,7 @@ public class PersonManagement {
             .legalEntityUpdate(legalEntityUpdate)
             .build();
     RequestOperation<AccountsUpdateLegalEntityRequest, AccountsUpdateLegalEntityResponse>
-        operation = new AccountsUpdateLegalEntity.Sync(sdkConfiguration);
+        operation = new AccountsUpdateLegalEntity.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -555,6 +668,27 @@ public class PersonManagement {
   public AccountsAssignLargeTraderLegalEntityResponse assignLargeTraderLegalEntity(
       String legalEntityId, AssignLargeTraderRequestCreate assignLargeTraderRequestCreate)
       throws Exception {
+    return assignLargeTraderLegalEntity(
+        legalEntityId, assignLargeTraderRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Assign Entity Large Trader
+   *
+   * <p>Assigns a person's Large Trader ID.
+   *
+   * @param legalEntityId The legalEntity id.
+   * @param assignLargeTraderRequestCreate The request to assign a Large Trader ID to a Legal
+   *     Natural Person/Legal Entity.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsAssignLargeTraderLegalEntityResponse assignLargeTraderLegalEntity(
+      String legalEntityId,
+      AssignLargeTraderRequestCreate assignLargeTraderRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AccountsAssignLargeTraderLegalEntityRequest request =
         AccountsAssignLargeTraderLegalEntityRequest.builder()
             .legalEntityId(legalEntityId)
@@ -563,7 +697,7 @@ public class PersonManagement {
     RequestOperation<
             AccountsAssignLargeTraderLegalEntityRequest,
             AccountsAssignLargeTraderLegalEntityResponse>
-        operation = new AccountsAssignLargeTraderLegalEntity.Sync(sdkConfiguration);
+        operation = new AccountsAssignLargeTraderLegalEntity.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -592,13 +726,33 @@ public class PersonManagement {
   public AccountsEndLargeTrader1Response endLargeTrader(
       String legalEntityId, EndLargeTraderRequestCreate endLargeTraderRequestCreate)
       throws Exception {
+    return endLargeTrader(legalEntityId, endLargeTraderRequestCreate, Optional.empty());
+  }
+
+  /**
+   * End Entity Large Trader
+   *
+   * <p>Removes a person's Large Trader ID.
+   *
+   * @param legalEntityId The legalEntity id.
+   * @param endLargeTraderRequestCreate The request to end a Large Trader on a Legal Natural
+   *     Person/Legal Entity.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsEndLargeTrader1Response endLargeTrader(
+      String legalEntityId,
+      EndLargeTraderRequestCreate endLargeTraderRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AccountsEndLargeTrader1Request request =
         AccountsEndLargeTrader1Request.builder()
             .legalEntityId(legalEntityId)
             .endLargeTraderRequestCreate(endLargeTraderRequestCreate)
             .build();
     RequestOperation<AccountsEndLargeTrader1Request, AccountsEndLargeTrader1Response> operation =
-        new AccountsEndLargeTrader1.Sync(sdkConfiguration);
+        new AccountsEndLargeTrader1.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

@@ -7,12 +7,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.BookingGetTrade;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class BookingGetTradeRequestBuilder {
 
   private String accountId;
   private String tradeId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public BookingGetTradeRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -31,6 +35,18 @@ public class BookingGetTradeRequestBuilder {
     return this;
   }
 
+  public BookingGetTradeRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public BookingGetTradeRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private BookingGetTradeRequest buildRequest() {
 
     BookingGetTradeRequest request = new BookingGetTradeRequest(accountId, tradeId);
@@ -39,9 +55,10 @@ public class BookingGetTradeRequestBuilder {
   }
 
   public BookingGetTradeResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<BookingGetTradeRequest, BookingGetTradeResponse> operation =
-        new BookingGetTrade.Sync(sdkConfiguration);
+        new BookingGetTrade.Sync(sdkConfiguration, options);
     BookingGetTradeRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

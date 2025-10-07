@@ -5,15 +5,9 @@ package com.apexfintechsolutions.ascendsdk.utils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UncheckedIOException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-import java.util.Spliterator;
-import java.util.Spliterators;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -23,12 +17,8 @@ import java.util.stream.StreamSupport;
  *
  * @param <T> the type that the SSE {@code data} field is deserialized into
  */
-/**
- * @param <T>
- */
 public final class EventStream<T> implements AutoCloseable {
-
-  private final EventStreamReader reader;
+  private final BlockingParser<EventStreamMessage> parser;
   private final TypeReference<T> typeReference;
   private final ObjectMapper mapper;
   private final Optional<String> terminalMessage;
@@ -39,7 +29,9 @@ public final class EventStream<T> implements AutoCloseable {
       TypeReference<T> typeReference,
       ObjectMapper mapper,
       Optional<String> terminalMessage) {
-    this.reader = new EventStreamReader(in);
+    BufferedReader reader =
+        new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8), 8192);
+    this.parser = BlockingParser.forSSE(reader);
     this.typeReference = typeReference;
     this.mapper = mapper;
     this.terminalMessage = terminalMessage;
@@ -49,12 +41,12 @@ public final class EventStream<T> implements AutoCloseable {
    * Returns the next message. If another message does not exist returns {@code Optional.empty()}.
    *
    * @return the next message or {@code Optional.empty()} if no more messages
-   * @throws IOException
+   * @throws IOException when parsing the next message.
    */
   public Optional<T> next() throws IOException {
-    return reader
-        .readMessage() //
-        .filter(x -> !terminalMessage.isPresent() || !terminalMessage.get().equals(x.data())) //
+    return parser
+        .next() //
+        .filter(x -> terminalMessage.map(sentinel -> !sentinel.equals(x.data())).orElse(true))
         .map(x -> Utils.asType(x, mapper, typeReference));
   }
 
@@ -86,15 +78,15 @@ public final class EventStream<T> implements AutoCloseable {
     return StreamSupport.stream(
             Spliterators.spliteratorUnknownSize(
                 new Iterator<T>() {
-                  Optional<T> next = null;
+                  Optional<T> next = Optional.empty();
 
                   public T next() {
                     load();
-                    if (!next.isPresent()) {
+                    if (next.isEmpty()) {
                       throw new NoSuchElementException();
                     }
                     T v = next.get();
-                    next = null;
+                    next = Optional.empty();
                     return v;
                   }
 
@@ -104,7 +96,7 @@ public final class EventStream<T> implements AutoCloseable {
                   }
 
                   private void load() {
-                    if (next == null) {
+                    if (next.isEmpty()) {
                       try {
                         next = EventStream.this.next();
                       } catch (IOException e) {
@@ -128,7 +120,7 @@ public final class EventStream<T> implements AutoCloseable {
   }
 
   @Override
-  public void close() throws Exception {
-    reader.close();
+  public void close() throws IOException {
+    parser.close();
   }
 }

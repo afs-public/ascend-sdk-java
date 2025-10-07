@@ -9,6 +9,8 @@ import com.apexfintechsolutions.ascendsdk.models.operations.MarginsRealTimeGetBu
 import com.apexfintechsolutions.ascendsdk.models.operations.MarginsRealTimeGetBuyingPowerRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.MarginsRealTimeGetBuyingPowerResponse;
 import com.apexfintechsolutions.ascendsdk.operations.MarginsRealTimeGetBuyingPower;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import java.util.Optional;
 
 public class Margins {
   private final SDKConfiguration sdkConfiguration;
@@ -38,10 +40,25 @@ public class Margins {
    * @throws Exception if the API call fails
    */
   public MarginsRealTimeGetBuyingPowerResponse getBuyingPower(String accountId) throws Exception {
+    return getBuyingPower(accountId, Optional.empty());
+  }
+
+  /**
+   * Get Buying Power
+   *
+   * <p>Gets the buying power for an account
+   *
+   * @param accountId The account id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public MarginsRealTimeGetBuyingPowerResponse getBuyingPower(
+      String accountId, Optional<Options> options) throws Exception {
     MarginsRealTimeGetBuyingPowerRequest request =
         MarginsRealTimeGetBuyingPowerRequest.builder().accountId(accountId).build();
     RequestOperation<MarginsRealTimeGetBuyingPowerRequest, MarginsRealTimeGetBuyingPowerResponse>
-        operation = new MarginsRealTimeGetBuyingPower.Sync(sdkConfiguration);
+        operation = new MarginsRealTimeGetBuyingPower.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

@@ -8,6 +8,8 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.LegalEntityUpdate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsUpdateLegalEntity;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import java.util.Optional;
 
@@ -16,6 +18,7 @@ public class AccountsUpdateLegalEntityRequestBuilder {
   private String legalEntityId;
   private Optional<String> updateMask = Optional.empty();
   private LegalEntityUpdate legalEntityUpdate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsUpdateLegalEntityRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -47,6 +50,18 @@ public class AccountsUpdateLegalEntityRequestBuilder {
     return this;
   }
 
+  public AccountsUpdateLegalEntityRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsUpdateLegalEntityRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsUpdateLegalEntityRequest buildRequest() {
 
     AccountsUpdateLegalEntityRequest request =
@@ -56,9 +71,10 @@ public class AccountsUpdateLegalEntityRequestBuilder {
   }
 
   public AccountsUpdateLegalEntityResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountsUpdateLegalEntityRequest, AccountsUpdateLegalEntityResponse>
-        operation = new AccountsUpdateLegalEntity.Sync(sdkConfiguration);
+        operation = new AccountsUpdateLegalEntity.Sync(sdkConfiguration, options);
     AccountsUpdateLegalEntityRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

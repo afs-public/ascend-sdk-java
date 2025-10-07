@@ -4,11 +4,22 @@
 package com.apexfintechsolutions.ascendsdk.models.operations;
 
 import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOperation;
+import static com.apexfintechsolutions.ascendsdk.utils.Exceptions.unchecked;
+import static com.apexfintechsolutions.ascendsdk.utils.Utils.toStream;
+import static com.apexfintechsolutions.ascendsdk.utils.Utils.transform;
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.BasketOrdersServiceListCompressedOrders;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import com.apexfintechsolutions.ascendsdk.utils.pagination.CursorTracker;
+import com.apexfintechsolutions.ascendsdk.utils.pagination.Paginator;
+import java.io.InputStream;
+import java.net.http.HttpResponse;
+import java.util.Iterator;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class BasketOrdersServiceListCompressedOrdersRequestBuilder {
 
@@ -16,6 +27,7 @@ public class BasketOrdersServiceListCompressedOrdersRequestBuilder {
   private String basketId;
   private Optional<Integer> pageSize = Optional.empty();
   private Optional<String> pageToken = Optional.empty();
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public BasketOrdersServiceListCompressedOrdersRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -61,6 +73,20 @@ public class BasketOrdersServiceListCompressedOrdersRequestBuilder {
     return this;
   }
 
+  public BasketOrdersServiceListCompressedOrdersRequestBuilder retryConfig(
+      RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public BasketOrdersServiceListCompressedOrdersRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private BasketOrdersServiceListCompressedOrdersRequest buildRequest() {
 
     BasketOrdersServiceListCompressedOrdersRequest request =
@@ -71,13 +97,50 @@ public class BasketOrdersServiceListCompressedOrdersRequestBuilder {
   }
 
   public BasketOrdersServiceListCompressedOrdersResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             BasketOrdersServiceListCompressedOrdersRequest,
             BasketOrdersServiceListCompressedOrdersResponse>
-        operation = new BasketOrdersServiceListCompressedOrders.Sync(sdkConfiguration);
+        operation = new BasketOrdersServiceListCompressedOrders.Sync(sdkConfiguration, options);
     BasketOrdersServiceListCompressedOrdersRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Returns an iterable that performs next page calls till no more pages are returned.
+   *
+   * <p>The returned iterable can be used in a for-each loop:
+   *
+   * <pre><code>
+   * for (BasketOrdersServiceListCompressedOrdersResponse page : builder.callAsIterable()) {
+   *     // Process each page
+   * }
+   * </code></pre>
+   *
+   * @return An iterable that can be used to iterate through all pages
+   */
+  public Iterable<BasketOrdersServiceListCompressedOrdersResponse> callAsIterable() {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
+
+    RequestOperation<
+            BasketOrdersServiceListCompressedOrdersRequest,
+            BasketOrdersServiceListCompressedOrdersResponse>
+        operation = new BasketOrdersServiceListCompressedOrders.Sync(sdkConfiguration, options);
+    BasketOrdersServiceListCompressedOrdersRequest request = buildRequest();
+    Iterator<HttpResponse<InputStream>> iterator =
+        new Paginator<>(
+            request,
+            new CursorTracker<>("$.next_page_token", String.class),
+            BasketOrdersServiceListCompressedOrdersRequest::withPageToken,
+            nextRequest -> unchecked(() -> operation.doRequest(request)).get());
+
+    return () -> transform(iterator, operation::handleResponse);
+  }
+
+  /** Returns a stream that performs next page calls till no more pages are returned. */
+  public Stream<BasketOrdersServiceListCompressedOrdersResponse> callAsStream() {
+    return toStream(callAsIterable());
   }
 }

@@ -8,13 +8,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelIctDepositRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.IctDepositsCancelIctDeposit;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class IctDepositsCancelIctDepositRequestBuilder {
 
   private String accountId;
   private String ictDepositId;
   private CancelIctDepositRequestCreate cancelIctDepositRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public IctDepositsCancelIctDepositRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -40,6 +44,18 @@ public class IctDepositsCancelIctDepositRequestBuilder {
     return this;
   }
 
+  public IctDepositsCancelIctDepositRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public IctDepositsCancelIctDepositRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private IctDepositsCancelIctDepositRequest buildRequest() {
 
     IctDepositsCancelIctDepositRequest request =
@@ -50,9 +66,10 @@ public class IctDepositsCancelIctDepositRequestBuilder {
   }
 
   public IctDepositsCancelIctDepositResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<IctDepositsCancelIctDepositRequest, IctDepositsCancelIctDepositResponse>
-        operation = new IctDepositsCancelIctDeposit.Sync(sdkConfiguration);
+        operation = new IctDepositsCancelIctDeposit.Sync(sdkConfiguration, options);
     IctDepositsCancelIctDepositRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

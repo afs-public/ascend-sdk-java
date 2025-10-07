@@ -7,12 +7,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.WatchlistServiceGetWatchlistItem;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class WatchlistServiceGetWatchlistItemRequestBuilder {
 
   private String watchlistId;
   private String itemId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public WatchlistServiceGetWatchlistItemRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -31,6 +35,19 @@ public class WatchlistServiceGetWatchlistItemRequestBuilder {
     return this;
   }
 
+  public WatchlistServiceGetWatchlistItemRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public WatchlistServiceGetWatchlistItemRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private WatchlistServiceGetWatchlistItemRequest buildRequest() {
 
     WatchlistServiceGetWatchlistItemRequest request =
@@ -40,10 +57,11 @@ public class WatchlistServiceGetWatchlistItemRequestBuilder {
   }
 
   public WatchlistServiceGetWatchlistItemResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             WatchlistServiceGetWatchlistItemRequest, WatchlistServiceGetWatchlistItemResponse>
-        operation = new WatchlistServiceGetWatchlistItem.Sync(sdkConfiguration);
+        operation = new WatchlistServiceGetWatchlistItem.Sync(sdkConfiguration, options);
     WatchlistServiceGetWatchlistItemRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

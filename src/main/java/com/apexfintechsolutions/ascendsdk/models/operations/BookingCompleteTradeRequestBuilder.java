@@ -8,13 +8,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.CompleteTradeRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.BookingCompleteTrade;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class BookingCompleteTradeRequestBuilder {
 
   private String accountId;
   private String tradeId;
   private CompleteTradeRequestCreate completeTradeRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public BookingCompleteTradeRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -40,6 +44,18 @@ public class BookingCompleteTradeRequestBuilder {
     return this;
   }
 
+  public BookingCompleteTradeRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public BookingCompleteTradeRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private BookingCompleteTradeRequest buildRequest() {
 
     BookingCompleteTradeRequest request =
@@ -49,9 +65,10 @@ public class BookingCompleteTradeRequestBuilder {
   }
 
   public BookingCompleteTradeResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<BookingCompleteTradeRequest, BookingCompleteTradeResponse> operation =
-        new BookingCompleteTrade.Sync(sdkConfiguration);
+        new BookingCompleteTrade.Sync(sdkConfiguration, options);
     BookingCompleteTradeRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

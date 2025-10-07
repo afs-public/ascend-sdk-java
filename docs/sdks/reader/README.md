@@ -41,15 +41,16 @@ public class Application {
                     .build())
             .build();
 
-        ReaderListEventMessagesResponse res = sdk.reader().listEventMessages()
+
+        sdk.reader().listEventMessages()
                 .filter("publish_time==timestamp(\"2023-06-13T23:48:58.343Z\")")
                 .pageSize(50)
                 .pageToken("ZXhhbXBsZQo")
-                .call();
+                .callAsStream()
+                .forEach((ReaderListEventMessagesResponse item) -> {
+                   // handle page
+                });
 
-        if (res.listEventMessagesResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```

@@ -33,6 +33,8 @@ import com.apexfintechsolutions.ascendsdk.operations.CreditsGetCredit;
 import com.apexfintechsolutions.ascendsdk.operations.FeesCancelFee;
 import com.apexfintechsolutions.ascendsdk.operations.FeesCreateFee;
 import com.apexfintechsolutions.ascendsdk.operations.FeesGetFee;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import java.util.Optional;
 
 public class FeesAndCredits {
   private final SDKConfiguration sdkConfiguration;
@@ -65,13 +67,31 @@ public class FeesAndCredits {
    */
   public FeesCreateFeeResponse createFee(String accountId, TransfersFeeCreate transfersFeeCreate)
       throws Exception {
+    return createFee(accountId, transfersFeeCreate, Optional.empty());
+  }
+
+  /**
+   * Create Fee
+   *
+   * <p>Create a fee
+   *
+   * @param accountId The account id.
+   * @param transfersFeeCreate A transfer using the FEE mechanism. Funds are moved from a customer's
+   *     brokerage account to the firm account
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public FeesCreateFeeResponse createFee(
+      String accountId, TransfersFeeCreate transfersFeeCreate, Optional<Options> options)
+      throws Exception {
     FeesCreateFeeRequest request =
         FeesCreateFeeRequest.builder()
             .accountId(accountId)
             .transfersFeeCreate(transfersFeeCreate)
             .build();
     RequestOperation<FeesCreateFeeRequest, FeesCreateFeeResponse> operation =
-        new FeesCreateFee.Sync(sdkConfiguration);
+        new FeesCreateFee.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -97,10 +117,26 @@ public class FeesAndCredits {
    * @throws Exception if the API call fails
    */
   public FeesGetFeeResponse getFee(String accountId, String feeId) throws Exception {
+    return getFee(accountId, feeId, Optional.empty());
+  }
+
+  /**
+   * Get Fee
+   *
+   * <p>Retrieve an existing fee
+   *
+   * @param accountId The account id.
+   * @param feeId The fee id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public FeesGetFeeResponse getFee(String accountId, String feeId, Optional<Options> options)
+      throws Exception {
     FeesGetFeeRequest request =
         FeesGetFeeRequest.builder().accountId(accountId).feeId(feeId).build();
     RequestOperation<FeesGetFeeRequest, FeesGetFeeResponse> operation =
-        new FeesGetFee.Sync(sdkConfiguration);
+        new FeesGetFee.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -129,6 +165,27 @@ public class FeesAndCredits {
   public FeesCancelFeeResponse cancelFee(
       String accountId, String feeId, CancelFeeRequestCreate cancelFeeRequestCreate)
       throws Exception {
+    return cancelFee(accountId, feeId, cancelFeeRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Cancel Fee
+   *
+   * <p>Cancel an existing fee
+   *
+   * @param accountId The account id.
+   * @param feeId The fee id.
+   * @param cancelFeeRequestCreate Request to cancel an existing fee
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public FeesCancelFeeResponse cancelFee(
+      String accountId,
+      String feeId,
+      CancelFeeRequestCreate cancelFeeRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     FeesCancelFeeRequest request =
         FeesCancelFeeRequest.builder()
             .accountId(accountId)
@@ -136,7 +193,7 @@ public class FeesAndCredits {
             .cancelFeeRequestCreate(cancelFeeRequestCreate)
             .build();
     RequestOperation<FeesCancelFeeRequest, FeesCancelFeeResponse> operation =
-        new FeesCancelFee.Sync(sdkConfiguration);
+        new FeesCancelFee.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -164,13 +221,31 @@ public class FeesAndCredits {
    */
   public CreditsCreateCreditResponse createCredit(
       String accountId, TransfersCreditCreate transfersCreditCreate) throws Exception {
+    return createCredit(accountId, transfersCreditCreate, Optional.empty());
+  }
+
+  /**
+   * Create Credit
+   *
+   * <p>Create a credit
+   *
+   * @param accountId The account id.
+   * @param transfersCreditCreate A transfer using the CREDIT mechanism. Funds are moved from a firm
+   *     account to a customer's brokerage account
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CreditsCreateCreditResponse createCredit(
+      String accountId, TransfersCreditCreate transfersCreditCreate, Optional<Options> options)
+      throws Exception {
     CreditsCreateCreditRequest request =
         CreditsCreateCreditRequest.builder()
             .accountId(accountId)
             .transfersCreditCreate(transfersCreditCreate)
             .build();
     RequestOperation<CreditsCreateCreditRequest, CreditsCreateCreditResponse> operation =
-        new CreditsCreateCredit.Sync(sdkConfiguration);
+        new CreditsCreateCredit.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -196,10 +271,26 @@ public class FeesAndCredits {
    * @throws Exception if the API call fails
    */
   public CreditsGetCreditResponse getCredit(String accountId, String creditId) throws Exception {
+    return getCredit(accountId, creditId, Optional.empty());
+  }
+
+  /**
+   * Get Credit
+   *
+   * <p>Retrieve an existing credit
+   *
+   * @param accountId The account id.
+   * @param creditId The credit id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CreditsGetCreditResponse getCredit(
+      String accountId, String creditId, Optional<Options> options) throws Exception {
     CreditsGetCreditRequest request =
         CreditsGetCreditRequest.builder().accountId(accountId).creditId(creditId).build();
     RequestOperation<CreditsGetCreditRequest, CreditsGetCreditResponse> operation =
-        new CreditsGetCredit.Sync(sdkConfiguration);
+        new CreditsGetCredit.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -228,6 +319,27 @@ public class FeesAndCredits {
   public CreditsCancelCreditResponse cancelCredit(
       String accountId, String creditId, CancelCreditRequestCreate cancelCreditRequestCreate)
       throws Exception {
+    return cancelCredit(accountId, creditId, cancelCreditRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Cancel Credit
+   *
+   * <p>Cancel an existing credit
+   *
+   * @param accountId The account id.
+   * @param creditId The credit id.
+   * @param cancelCreditRequestCreate Request to cancel an existing credit
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CreditsCancelCreditResponse cancelCredit(
+      String accountId,
+      String creditId,
+      CancelCreditRequestCreate cancelCreditRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     CreditsCancelCreditRequest request =
         CreditsCancelCreditRequest.builder()
             .accountId(accountId)
@@ -235,7 +347,7 @@ public class FeesAndCredits {
             .cancelCreditRequestCreate(cancelCreditRequestCreate)
             .build();
     RequestOperation<CreditsCancelCreditRequest, CreditsCancelCreditResponse> operation =
-        new CreditsCancelCredit.Sync(sdkConfiguration);
+        new CreditsCancelCredit.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

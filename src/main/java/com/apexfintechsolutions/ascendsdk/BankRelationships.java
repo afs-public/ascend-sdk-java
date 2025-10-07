@@ -44,6 +44,7 @@ import com.apexfintechsolutions.ascendsdk.operations.BankRelationshipsReissueMic
 import com.apexfintechsolutions.ascendsdk.operations.BankRelationshipsReuseBankRelationship;
 import com.apexfintechsolutions.ascendsdk.operations.BankRelationshipsUpdateBankRelationship;
 import com.apexfintechsolutions.ascendsdk.operations.BankRelationshipsVerifyMicroDeposits;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
 import java.util.Optional;
 
 public class BankRelationships {
@@ -76,6 +77,23 @@ public class BankRelationships {
    */
   public BankRelationshipsCreateBankRelationshipResponse createBankRelationship(
       String accountId, BankRelationshipCreate bankRelationshipCreate) throws Exception {
+    return createBankRelationship(accountId, bankRelationshipCreate, Optional.empty());
+  }
+
+  /**
+   * Create Bank Relationship
+   *
+   * <p>Creates a bank relationship.
+   *
+   * @param accountId The account id.
+   * @param bankRelationshipCreate A relationship between a bank account and an Apex account.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BankRelationshipsCreateBankRelationshipResponse createBankRelationship(
+      String accountId, BankRelationshipCreate bankRelationshipCreate, Optional<Options> options)
+      throws Exception {
     BankRelationshipsCreateBankRelationshipRequest request =
         BankRelationshipsCreateBankRelationshipRequest.builder()
             .accountId(accountId)
@@ -84,7 +102,7 @@ public class BankRelationships {
     RequestOperation<
             BankRelationshipsCreateBankRelationshipRequest,
             BankRelationshipsCreateBankRelationshipResponse>
-        operation = new BankRelationshipsCreateBankRelationship.Sync(sdkConfiguration);
+        operation = new BankRelationshipsCreateBankRelationship.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -110,7 +128,8 @@ public class BankRelationships {
    */
   public BankRelationshipsListBankRelationshipsResponse listBankRelationships(String accountId)
       throws Exception {
-    return listBankRelationships(accountId, Optional.empty(), Optional.empty(), Optional.empty());
+    return listBankRelationships(
+        accountId, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -127,6 +146,7 @@ public class BankRelationships {
    *     `ListBankRelationships` must match the call that provided the page token.
    * @param state The state of bank relationships to filter by. Unspecified returns relationships of
    *     all states.
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -134,7 +154,8 @@ public class BankRelationships {
       String accountId,
       Optional<Integer> pageSize,
       Optional<String> pageToken,
-      Optional<? extends State> state)
+      Optional<? extends State> state,
+      Optional<Options> options)
       throws Exception {
     BankRelationshipsListBankRelationshipsRequest request =
         BankRelationshipsListBankRelationshipsRequest.builder()
@@ -146,7 +167,7 @@ public class BankRelationships {
     RequestOperation<
             BankRelationshipsListBankRelationshipsRequest,
             BankRelationshipsListBankRelationshipsResponse>
-        operation = new BankRelationshipsListBankRelationships.Sync(sdkConfiguration);
+        operation = new BankRelationshipsListBankRelationships.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -173,6 +194,22 @@ public class BankRelationships {
    */
   public BankRelationshipsGetBankRelationshipResponse getBankRelationship(
       String accountId, String bankRelationshipId) throws Exception {
+    return getBankRelationship(accountId, bankRelationshipId, Optional.empty());
+  }
+
+  /**
+   * Get Bank Relationship
+   *
+   * <p>Gets an existing bank relationship.
+   *
+   * @param accountId The account id.
+   * @param bankRelationshipId The bankRelationship id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BankRelationshipsGetBankRelationshipResponse getBankRelationship(
+      String accountId, String bankRelationshipId, Optional<Options> options) throws Exception {
     BankRelationshipsGetBankRelationshipRequest request =
         BankRelationshipsGetBankRelationshipRequest.builder()
             .accountId(accountId)
@@ -181,7 +218,7 @@ public class BankRelationships {
     RequestOperation<
             BankRelationshipsGetBankRelationshipRequest,
             BankRelationshipsGetBankRelationshipResponse>
-        operation = new BankRelationshipsGetBankRelationship.Sync(sdkConfiguration);
+        operation = new BankRelationshipsGetBankRelationship.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -211,7 +248,7 @@ public class BankRelationships {
       String accountId, String bankRelationshipId, BankRelationshipUpdate bankRelationshipUpdate)
       throws Exception {
     return updateBankRelationship(
-        accountId, bankRelationshipId, Optional.empty(), bankRelationshipUpdate);
+        accountId, bankRelationshipId, Optional.empty(), bankRelationshipUpdate, Optional.empty());
   }
 
   /**
@@ -223,6 +260,7 @@ public class BankRelationships {
    * @param bankRelationshipId The bankRelationship id.
    * @param updateMask The field of the bank relationship to update. Only `nickname` is supported.
    * @param bankRelationshipUpdate A relationship between a bank account and an Apex account.
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -230,7 +268,8 @@ public class BankRelationships {
       String accountId,
       String bankRelationshipId,
       Optional<String> updateMask,
-      BankRelationshipUpdate bankRelationshipUpdate)
+      BankRelationshipUpdate bankRelationshipUpdate,
+      Optional<Options> options)
       throws Exception {
     BankRelationshipsUpdateBankRelationshipRequest request =
         BankRelationshipsUpdateBankRelationshipRequest.builder()
@@ -242,7 +281,7 @@ public class BankRelationships {
     RequestOperation<
             BankRelationshipsUpdateBankRelationshipRequest,
             BankRelationshipsUpdateBankRelationshipResponse>
-        operation = new BankRelationshipsUpdateBankRelationship.Sync(sdkConfiguration);
+        operation = new BankRelationshipsUpdateBankRelationship.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -273,6 +312,28 @@ public class BankRelationships {
       String bankRelationshipId,
       CancelBankRelationshipRequestCreate cancelBankRelationshipRequestCreate)
       throws Exception {
+    return cancelBankRelationship(
+        accountId, bankRelationshipId, cancelBankRelationshipRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Cancel Bank Relationship
+   *
+   * <p>Cancels an existing bank relationship.
+   *
+   * @param accountId The account id.
+   * @param bankRelationshipId The bankRelationship id.
+   * @param cancelBankRelationshipRequestCreate Request to cancel an existing bank relationship.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BankRelationshipsCancelBankRelationshipResponse cancelBankRelationship(
+      String accountId,
+      String bankRelationshipId,
+      CancelBankRelationshipRequestCreate cancelBankRelationshipRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     BankRelationshipsCancelBankRelationshipRequest request =
         BankRelationshipsCancelBankRelationshipRequest.builder()
             .accountId(accountId)
@@ -282,7 +343,7 @@ public class BankRelationships {
     RequestOperation<
             BankRelationshipsCancelBankRelationshipRequest,
             BankRelationshipsCancelBankRelationshipResponse>
-        operation = new BankRelationshipsCancelBankRelationship.Sync(sdkConfiguration);
+        operation = new BankRelationshipsCancelBankRelationship.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -317,6 +378,30 @@ public class BankRelationships {
       String bankRelationshipId,
       VerifyMicroDepositsRequestCreate verifyMicroDepositsRequestCreate)
       throws Exception {
+    return verifyMicroDeposits(
+        accountId, bankRelationshipId, verifyMicroDepositsRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Verify Micro Deposits
+   *
+   * <p>Verifies a pending bank relationship with the `MICRO_DEPOSIT` verification method.
+   * Successful verification of the micro deposit amounts will result in the relationship moving to
+   * the `APPROVED` state. The micro deposits will be taken back from the bank account.
+   *
+   * @param accountId The account id.
+   * @param bankRelationshipId The bankRelationship id.
+   * @param verifyMicroDepositsRequestCreate Verifies micro deposits for a pending relationship.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BankRelationshipsVerifyMicroDepositsResponse verifyMicroDeposits(
+      String accountId,
+      String bankRelationshipId,
+      VerifyMicroDepositsRequestCreate verifyMicroDepositsRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     BankRelationshipsVerifyMicroDepositsRequest request =
         BankRelationshipsVerifyMicroDepositsRequest.builder()
             .accountId(accountId)
@@ -326,7 +411,7 @@ public class BankRelationships {
     RequestOperation<
             BankRelationshipsVerifyMicroDepositsRequest,
             BankRelationshipsVerifyMicroDepositsResponse>
-        operation = new BankRelationshipsVerifyMicroDeposits.Sync(sdkConfiguration);
+        operation = new BankRelationshipsVerifyMicroDeposits.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -360,6 +445,30 @@ public class BankRelationships {
       String bankRelationshipId,
       ReissueMicroDepositsRequestCreate reissueMicroDepositsRequestCreate)
       throws Exception {
+    return reissueMicroDeposits(
+        accountId, bankRelationshipId, reissueMicroDepositsRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Reissue Micro Deposits
+   *
+   * <p>Reissues micro deposits after micro deposit verification has failed. The user should have
+   * received a message that new micro deposits should be reissued.
+   *
+   * @param accountId The account id.
+   * @param bankRelationshipId The bankRelationship id.
+   * @param reissueMicroDepositsRequestCreate Request to reissue micro deposits for bank
+   *     relationship verification.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BankRelationshipsReissueMicroDepositsResponse reissueMicroDeposits(
+      String accountId,
+      String bankRelationshipId,
+      ReissueMicroDepositsRequestCreate reissueMicroDepositsRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     BankRelationshipsReissueMicroDepositsRequest request =
         BankRelationshipsReissueMicroDepositsRequest.builder()
             .accountId(accountId)
@@ -369,7 +478,7 @@ public class BankRelationships {
     RequestOperation<
             BankRelationshipsReissueMicroDepositsRequest,
             BankRelationshipsReissueMicroDepositsResponse>
-        operation = new BankRelationshipsReissueMicroDeposits.Sync(sdkConfiguration);
+        operation = new BankRelationshipsReissueMicroDeposits.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -403,6 +512,28 @@ public class BankRelationships {
   public BankRelationshipsReuseBankRelationshipResponse reuseBankRelationship(
       String accountId, ReuseBankRelationshipRequestCreate reuseBankRelationshipRequestCreate)
       throws Exception {
+    return reuseBankRelationship(accountId, reuseBankRelationshipRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Reuse Bank Relationship
+   *
+   * <p>Reuses an existing bank relationship for a new account. The source bank relationship must be
+   * approved. The new account must be related to the parent account of the
+   * `source_bank_relationship`. The new relationship will be created with the `USE_EXISTING`
+   * verification method in place of the source bank relationship's verification method.
+   *
+   * @param accountId The account id.
+   * @param reuseBankRelationshipRequestCreate Request to reuse a bank relationship.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BankRelationshipsReuseBankRelationshipResponse reuseBankRelationship(
+      String accountId,
+      ReuseBankRelationshipRequestCreate reuseBankRelationshipRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     BankRelationshipsReuseBankRelationshipRequest request =
         BankRelationshipsReuseBankRelationshipRequest.builder()
             .accountId(accountId)
@@ -411,7 +542,7 @@ public class BankRelationships {
     RequestOperation<
             BankRelationshipsReuseBankRelationshipRequest,
             BankRelationshipsReuseBankRelationshipResponse>
-        operation = new BankRelationshipsReuseBankRelationship.Sync(sdkConfiguration);
+        operation = new BankRelationshipsReuseBankRelationship.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.TransfersCreditCreate;
 import com.apexfintechsolutions.ascendsdk.operations.CreditsCreateCredit;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class CreditsCreateCreditRequestBuilder {
 
   private String accountId;
   private TransfersCreditCreate transfersCreditCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public CreditsCreateCreditRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -33,6 +37,18 @@ public class CreditsCreateCreditRequestBuilder {
     return this;
   }
 
+  public CreditsCreateCreditRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public CreditsCreateCreditRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private CreditsCreateCreditRequest buildRequest() {
 
     CreditsCreateCreditRequest request =
@@ -42,9 +58,10 @@ public class CreditsCreateCreditRequestBuilder {
   }
 
   public CreditsCreateCreditResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<CreditsCreateCreditRequest, CreditsCreateCreditResponse> operation =
-        new CreditsCreateCredit.Sync(sdkConfiguration);
+        new CreditsCreateCredit.Sync(sdkConfiguration, options);
     CreditsCreateCreditRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectCashJournalRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.CashJournalsForceRejectCashJournal;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class CashJournalsForceRejectCashJournalRequestBuilder {
 
   private String cashJournalId;
   private ForceRejectCashJournalRequestCreate forceRejectCashJournalRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public CashJournalsForceRejectCashJournalRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -33,6 +37,19 @@ public class CashJournalsForceRejectCashJournalRequestBuilder {
     return this;
   }
 
+  public CashJournalsForceRejectCashJournalRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public CashJournalsForceRejectCashJournalRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private CashJournalsForceRejectCashJournalRequest buildRequest() {
 
     CashJournalsForceRejectCashJournalRequest request =
@@ -43,10 +60,11 @@ public class CashJournalsForceRejectCashJournalRequestBuilder {
   }
 
   public CashJournalsForceRejectCashJournalResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             CashJournalsForceRejectCashJournalRequest, CashJournalsForceRejectCashJournalResponse>
-        operation = new CashJournalsForceRejectCashJournal.Sync(sdkConfiguration);
+        operation = new CashJournalsForceRejectCashJournal.Sync(sdkConfiguration, options);
     CashJournalsForceRejectCashJournalRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));
