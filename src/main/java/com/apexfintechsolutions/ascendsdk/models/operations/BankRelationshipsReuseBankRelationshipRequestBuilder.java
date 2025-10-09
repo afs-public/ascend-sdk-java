@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.ReuseBankRelationshipRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.BankRelationshipsReuseBankRelationship;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class BankRelationshipsReuseBankRelationshipRequestBuilder {
 
   private String accountId;
   private ReuseBankRelationshipRequestCreate reuseBankRelationshipRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public BankRelationshipsReuseBankRelationshipRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -33,6 +37,19 @@ public class BankRelationshipsReuseBankRelationshipRequestBuilder {
     return this;
   }
 
+  public BankRelationshipsReuseBankRelationshipRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public BankRelationshipsReuseBankRelationshipRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private BankRelationshipsReuseBankRelationshipRequest buildRequest() {
 
     BankRelationshipsReuseBankRelationshipRequest request =
@@ -43,11 +60,12 @@ public class BankRelationshipsReuseBankRelationshipRequestBuilder {
   }
 
   public BankRelationshipsReuseBankRelationshipResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             BankRelationshipsReuseBankRelationshipRequest,
             BankRelationshipsReuseBankRelationshipResponse>
-        operation = new BankRelationshipsReuseBankRelationship.Sync(sdkConfiguration);
+        operation = new BankRelationshipsReuseBankRelationship.Sync(sdkConfiguration, options);
     BankRelationshipsReuseBankRelationshipRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

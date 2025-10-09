@@ -4,17 +4,29 @@
 package com.apexfintechsolutions.ascendsdk.models.operations;
 
 import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOperation;
+import static com.apexfintechsolutions.ascendsdk.utils.Exceptions.unchecked;
+import static com.apexfintechsolutions.ascendsdk.utils.Utils.toStream;
+import static com.apexfintechsolutions.ascendsdk.utils.Utils.transform;
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.AuthenticationListSigningKeys;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import com.apexfintechsolutions.ascendsdk.utils.pagination.CursorTracker;
+import com.apexfintechsolutions.ascendsdk.utils.pagination.Paginator;
+import java.io.InputStream;
+import java.net.http.HttpResponse;
+import java.util.Iterator;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class AuthenticationListSigningKeysRequestBuilder {
 
   private AuthenticationListSigningKeysSecurity security;
   private Optional<Integer> pageSize = Optional.empty();
   private Optional<String> pageToken = Optional.empty();
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AuthenticationListSigningKeysRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -52,6 +64,19 @@ public class AuthenticationListSigningKeysRequestBuilder {
     return this;
   }
 
+  public AuthenticationListSigningKeysRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AuthenticationListSigningKeysRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AuthenticationListSigningKeysRequest buildRequest() {
 
     AuthenticationListSigningKeysRequest request =
@@ -61,11 +86,46 @@ public class AuthenticationListSigningKeysRequestBuilder {
   }
 
   public AuthenticationListSigningKeysResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AuthenticationListSigningKeysRequest, AuthenticationListSigningKeysResponse>
-        operation = new AuthenticationListSigningKeys.Sync(sdkConfiguration, security);
+        operation = new AuthenticationListSigningKeys.Sync(sdkConfiguration, security, options);
     AuthenticationListSigningKeysRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Returns an iterable that performs next page calls till no more pages are returned.
+   *
+   * <p>The returned iterable can be used in a for-each loop:
+   *
+   * <pre><code>
+   * for (AuthenticationListSigningKeysResponse page : builder.callAsIterable()) {
+   *     // Process each page
+   * }
+   * </code></pre>
+   *
+   * @return An iterable that can be used to iterate through all pages
+   */
+  public Iterable<AuthenticationListSigningKeysResponse> callAsIterable() {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
+
+    RequestOperation<AuthenticationListSigningKeysRequest, AuthenticationListSigningKeysResponse>
+        operation = new AuthenticationListSigningKeys.Sync(sdkConfiguration, security, options);
+    AuthenticationListSigningKeysRequest request = buildRequest();
+    Iterator<HttpResponse<InputStream>> iterator =
+        new Paginator<>(
+            request,
+            new CursorTracker<>("$.next_page_token", String.class),
+            AuthenticationListSigningKeysRequest::withPageToken,
+            nextRequest -> unchecked(() -> operation.doRequest(request)).get());
+
+    return () -> transform(iterator, operation::handleResponse);
+  }
+
+  /** Returns a stream that performs next page calls till no more pages are returned. */
+  public Stream<AuthenticationListSigningKeysResponse> callAsStream() {
+    return toStream(callAsIterable());
   }
 }

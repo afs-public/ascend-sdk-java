@@ -1,17 +1,17 @@
 lockVersion: 2.0.0
 id: 04604b59-b953-4711-ac65-9ad5897162b4
 management:
-  docChecksum: d1bde040cb67d385e81d1c372294d048
-  docVersion: v1:20250822:uat:240983991338
-  speakeasyVersion: 1.601.3
-  generationVersion: 2.680.0
-  releaseVersion: 1.4.0
-  configChecksum: 845ef9d0ae2c718ef03aae7cb40adbba
+  docChecksum: ada9b980acbe653e0bd359f9184c0329
+  docVersion: v1:20251003:uat:a1308663494e
+  speakeasyVersion: 1.608.0
+  generationVersion: 2.691.6
+  releaseVersion: 1.5.0
+  configChecksum: 9f8fff430af1770a58e7a0c61d6f90a0
 features:
   java:
     additionalDependencies: 0.1.0
     additionalProperties: 0.0.1
-    core: 3.45.3
+    core: 3.46.2
     customSecuritySchemes: 0.2.0
     deprecations: 2.81.1
     examples: 2.81.6
@@ -23,11 +23,12 @@ features:
     nameOverrides: 2.81.3
     nullables: 0.1.0
     openEnums: 0.2.0
+    pagination: 1.0.0
+    retries: 0.1.1
     sdkHooks: 1.1.0
     serverIDs: 2.81.1
     tests: 0.9.1
 generatedFiles:
-  - .gitattributes
   - USAGE.md
   - build.gradle
   - docs/models/components/AcatsAsset.md
@@ -362,6 +363,9 @@ generatedFiles:
   - docs/models/components/AssetEquityType.md
   - docs/models/components/AssetExpirationDate.md
   - docs/models/components/AssetIssueDate.md
+  - docs/models/components/AssetTradability.md
+  - docs/models/components/AssetTradingConfig.md
+  - docs/models/components/AssetTradingConfigAssetType.md
   - docs/models/components/AssetType.md
   - docs/models/components/AssetType1.md
   - docs/models/components/AssignLargeTraderRequestCreate.md
@@ -1283,6 +1287,7 @@ generatedFiles:
   - docs/models/components/ListAchWithdrawalSchedulesResponse.md
   - docs/models/components/ListActivitiesResponse.md
   - docs/models/components/ListAgreementsResponse.md
+  - docs/models/components/ListAssetTradingConfigsResponse.md
   - docs/models/components/ListAssetsResponse.md
   - docs/models/components/ListAvailableEnrollmentsResponse.md
   - docs/models/components/ListAvailableRestrictionsResponse.md
@@ -1377,6 +1382,7 @@ generatedFiles:
   - docs/models/components/OptionDeliverable.md
   - docs/models/components/OptionDeliverableQuantity.md
   - docs/models/components/OptionRoot.md
+  - docs/models/components/OptionRootTradability.md
   - docs/models/components/OptionType.md
   - docs/models/components/OptionsLevel.md
   - docs/models/components/Order.md
@@ -1734,6 +1740,7 @@ generatedFiles:
   - docs/models/components/SelfieVerified.md
   - docs/models/components/SeriesDate.md
   - docs/models/components/ServiceAccountCreds.md
+  - docs/models/components/SetExtraReportingDataRequestCreate.md
   - docs/models/components/SettleDate.md
   - docs/models/components/Settled.md
   - docs/models/components/SettlementConvention.md
@@ -2110,6 +2117,10 @@ generatedFiles:
   - docs/models/operations/AchWithdrawalsForceReturnAchWithdrawalResponse.md
   - docs/models/operations/AchWithdrawalsGetAchWithdrawalRequest.md
   - docs/models/operations/AchWithdrawalsGetAchWithdrawalResponse.md
+  - docs/models/operations/AssetTradingConfigServiceGetAssetTradingConfigRequest.md
+  - docs/models/operations/AssetTradingConfigServiceGetAssetTradingConfigResponse.md
+  - docs/models/operations/AssetTradingConfigServiceListAssetTradingConfigsRequest.md
+  - docs/models/operations/AssetTradingConfigServiceListAssetTradingConfigsResponse.md
   - docs/models/operations/AssetsGetAssetCorrespondentRequest.md
   - docs/models/operations/AssetsGetAssetCorrespondentResponse.md
   - docs/models/operations/AssetsGetAssetRequest.md
@@ -2270,6 +2281,8 @@ generatedFiles:
   - docs/models/operations/OrderServiceCreateOrderResponse.md
   - docs/models/operations/OrderServiceGetOrderRequest.md
   - docs/models/operations/OrderServiceGetOrderResponse.md
+  - docs/models/operations/OrderServiceSetExtraReportingDataRequest.md
+  - docs/models/operations/OrderServiceSetExtraReportingDataResponse.md
   - docs/models/operations/ProgramDateFilterProgram.md
   - docs/models/operations/QueryParamView.md
   - docs/models/operations/ReaderGetEventMessageRequest.md
@@ -2333,6 +2346,7 @@ generatedFiles:
   - docs/sdks/accounttransfers/README.md
   - docs/sdks/achtransfers/README.md
   - docs/sdks/assets/README.md
+  - docs/sdks/assettradingconfig/README.md
   - docs/sdks/authentication/README.md
   - docs/sdks/bankrelationships/README.md
   - docs/sdks/basketorders/README.md
@@ -2369,6 +2383,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/AccountCreation.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/AccountManagement.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/AccountTransfers.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/AssetTradingConfig.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/Assets.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/Authentication.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/BankRelationships.java
@@ -2730,6 +2745,9 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetEquityType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetExpirationDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetIssueDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetTradability.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetTradingConfig.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetTradingConfigAssetType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetType1.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssignLargeTraderRequestCreate.java
@@ -3651,6 +3669,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListAchWithdrawalSchedulesResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListActivitiesResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListAgreementsResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListAssetTradingConfigsResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListAssetsResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListAvailableEnrollmentsResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListAvailableRestrictionsResponse.java
@@ -3745,6 +3764,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionDeliverable.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionDeliverableQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionRoot.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionRootTradability.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionsLevel.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Order.java
@@ -4102,6 +4122,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SelfieVerified.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SeriesDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ServiceAccountCreds.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SetExtraReportingDataRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SettleDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Settled.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SettlementConvention.java
@@ -4547,6 +4568,12 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AchWithdrawalsGetAchWithdrawalRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AchWithdrawalsGetAchWithdrawalRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AchWithdrawalsGetAchWithdrawalResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AssetTradingConfigServiceGetAssetTradingConfigRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AssetTradingConfigServiceGetAssetTradingConfigRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AssetTradingConfigServiceGetAssetTradingConfigResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AssetTradingConfigServiceListAssetTradingConfigsRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AssetTradingConfigServiceListAssetTradingConfigsRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AssetTradingConfigServiceListAssetTradingConfigsResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AssetsGetAssetCorrespondentRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AssetsGetAssetCorrespondentRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AssetsGetAssetCorrespondentResponse.java
@@ -4787,6 +4814,9 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OrderServiceGetOrderRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OrderServiceGetOrderRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OrderServiceGetOrderResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OrderServiceSetExtraReportingDataRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OrderServiceSetExtraReportingDataRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OrderServiceSetExtraReportingDataResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/ProgramDateFilterProgram.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/QueryParamView.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/ReaderGetEventMessageRequest.java
@@ -4940,6 +4970,8 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchWithdrawalsForceRejectAchWithdrawal.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchWithdrawalsForceReturnAchWithdrawal.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchWithdrawalsGetAchWithdrawal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AssetTradingConfigServiceGetAssetTradingConfig.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AssetTradingConfigServiceListAssetTradingConfigs.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AssetsGetAsset.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AssetsGetAssetCorrespondent.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AssetsListAssets1.java
@@ -5021,6 +5053,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OrderServiceCancelOrder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OrderServiceCreateOrder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OrderServiceGetOrder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OrderServiceSetExtraReportingData.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/ReaderGetEventMessage.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/ReaderListEventMessages.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/RetirementConstraintsListContributionSummaries.java
@@ -5052,13 +5085,13 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/BackoffStrategy.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/BigDecimalString.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/BigIntegerString.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Blob.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/utils/BlockingParser.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Constants.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/CopiableInputStream.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Deserializers.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/EventStream.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/utils/EventStreamLineReader.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/EventStreamMessage.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/utils/EventStreamReader.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Exceptions.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/FormMetadata.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Globals.java
@@ -5083,6 +5116,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/QueryParameters.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/QueryParamsMetadata.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/RecordingClient.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Reflections.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/RequestBody.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/RequestMetadata.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Response.java
@@ -5095,12 +5129,22 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/SessionManager.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/SpeakeasyHTTPClient.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/SpeakeasyMetadata.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/utils/StreamingParser.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/TypedObject.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Types.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Utf8UrlEncoder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/Utils.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/utils/pagination/CursorTracker.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/utils/pagination/OffsetTracker.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/utils/pagination/PageTracker.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/utils/pagination/Paginator.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/utils/pagination/ProgressTrackerStrategy.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/utils/pagination/ResultsPageTracker.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/utils/reactive/ReactiveUtils.java
+  - src/test/java/com/apexfintechsolutions/ascendsdk/AssetTradingConfigTests.java
   - src/test/java/com/apexfintechsolutions/ascendsdk/AssetsTests.java
   - src/test/java/com/apexfintechsolutions/ascendsdk/ChecksTests.java
+  - src/test/java/com/apexfintechsolutions/ascendsdk/CreateOrderTests.java
   - src/test/java/com/apexfintechsolutions/ascendsdk/DataRetrievalTests.java
   - src/test/java/com/apexfintechsolutions/ascendsdk/InvestigationsTests.java
   - src/test/java/com/apexfintechsolutions/ascendsdk/MarginsTests.java
@@ -7623,6 +7667,53 @@ examples:
           application/json: {}
         default:
           application/json: {}
+  OrderService_SetExtraReportingData:
+    speakeasy-default-order-service-set-extra-reporting-data:
+      parameters:
+        path:
+          account_id: "01HBRQ5BW6ZAY4BNWP4GWRD80X"
+          order_id: "ebb0c9b5-2c74-45c9-a4ab-40596b778706"
+      requestBody:
+        application/json: {"cancel_confirmed_time": "2025-12-13T15:28:17.262732Z", "name": "accounts/01HBRQ5BW6ZAY4BNWP4GWRD80X/orders/ebb0c9b5-2c74-45c9-a4ab-40596b778706"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  AssetTradingConfigService_GetAssetTradingConfig:
+    speakeasy-default-asset-trading-config-service-get-asset-trading-config:
+      parameters:
+        path:
+          correspondent_id: "01HBRQ5BW6ZAY4BNWP4GWRD80X"
+          asset_id: "612"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  AssetTradingConfigService_ListAssetTradingConfigs:
+    speakeasy-default-asset-trading-config-service-list-asset-trading-configs:
+      parameters:
+        path:
+          correspondent_id: "01HBRQ5BW6ZAY4BNWP4GWRD80X"
+          asset_id: "[null]"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
 examplesVersion: 1.0.2
 generatedTests:
   Accounts_ListLegalNaturalPersons: "2025-08-22T19:32:39Z"
@@ -7638,3 +7729,6 @@ generatedTests:
   Subscriber_ListPushSubscriptions: "2025-08-22T19:32:39Z"
   CheckDeposits_GetCheckDeposit: "2025-08-22T19:32:39Z"
   CheckDeposits_SimulateCreateCheckDeposit: "2025-08-22T19:32:39Z"
+  OrderService_SetExtraReportingData: "2025-10-06T21:33:08Z"
+  AssetTradingConfigService_GetAssetTradingConfig: "2025-10-06T21:33:08Z"
+  AssetTradingConfigService_ListAssetTradingConfigs: "2025-10-06T21:33:08Z"

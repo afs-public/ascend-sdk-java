@@ -94,6 +94,8 @@ import com.apexfintechsolutions.ascendsdk.operations.IctWithdrawalsForceApproveI
 import com.apexfintechsolutions.ascendsdk.operations.IctWithdrawalsForceRejectIctWithdrawal;
 import com.apexfintechsolutions.ascendsdk.operations.WireWithdrawalsForceApproveWireWithdrawal;
 import com.apexfintechsolutions.ascendsdk.operations.WireWithdrawalsForceRejectWireWithdrawal;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import java.util.Optional;
 
 public class TestSimulation {
   private final SDKConfiguration sdkConfiguration;
@@ -128,6 +130,27 @@ public class TestSimulation {
       String accountId,
       SimulateCreateCheckDepositRequestCreate simulateCreateCheckDepositRequestCreate)
       throws Exception {
+    return simulateCreateCheckDeposit(
+        accountId, simulateCreateCheckDepositRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Simulate Check Deposit Creation
+   *
+   * <p>Creates a check deposit for a specific account FOR TESTING ONLY!
+   *
+   * @param accountId The account id.
+   * @param simulateCreateCheckDepositRequestCreate Request to simulate a check deposit FOR TESTING
+   *     ONLY!
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CheckDepositsSimulateCreateCheckDepositResponse simulateCreateCheckDeposit(
+      String accountId,
+      SimulateCreateCheckDepositRequestCreate simulateCreateCheckDepositRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     CheckDepositsSimulateCreateCheckDepositRequest request =
         CheckDepositsSimulateCreateCheckDepositRequest.builder()
             .accountId(accountId)
@@ -136,7 +159,7 @@ public class TestSimulation {
     RequestOperation<
             CheckDepositsSimulateCreateCheckDepositRequest,
             CheckDepositsSimulateCreateCheckDepositResponse>
-        operation = new CheckDepositsSimulateCreateCheckDeposit.Sync(sdkConfiguration);
+        operation = new CheckDepositsSimulateCreateCheckDeposit.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -168,6 +191,29 @@ public class TestSimulation {
       String achDepositId,
       ForceApproveAchDepositRequestCreate forceApproveAchDepositRequestCreate)
       throws Exception {
+    return forceApproveAchDeposit(
+        accountId, achDepositId, forceApproveAchDepositRequestCreate, Optional.empty());
+  }
+
+  /**
+   * ACH Deposit Approval
+   *
+   * <p>Forces approval of an existing ACH deposit that is pending review. FOR TESTING ONLY!
+   *
+   * @param accountId The account id.
+   * @param achDepositId The achDeposit id.
+   * @param forceApproveAchDepositRequestCreate Request to force approval of an existing ACH deposit
+   *     that is pending review. FOR TESTING ONLY!
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AchDepositsForceApproveAchDepositResponse forceApproveAchDeposit(
+      String accountId,
+      String achDepositId,
+      ForceApproveAchDepositRequestCreate forceApproveAchDepositRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AchDepositsForceApproveAchDepositRequest request =
         AchDepositsForceApproveAchDepositRequest.builder()
             .accountId(accountId)
@@ -176,7 +222,7 @@ public class TestSimulation {
             .build();
     RequestOperation<
             AchDepositsForceApproveAchDepositRequest, AchDepositsForceApproveAchDepositResponse>
-        operation = new AchDepositsForceApproveAchDeposit.Sync(sdkConfiguration);
+        operation = new AchDepositsForceApproveAchDeposit.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -208,6 +254,29 @@ public class TestSimulation {
       String achDepositId,
       ForceNocAchDepositRequestCreate forceNocAchDepositRequestCreate)
       throws Exception {
+    return forceNocAchDeposit(
+        accountId, achDepositId, forceNocAchDepositRequestCreate, Optional.empty());
+  }
+
+  /**
+   * NOC for a Deposit
+   *
+   * <p>Forces a Nacha notice of change (NOC) on a completed ACH deposit. FOR TESTING ONLY!
+   *
+   * @param accountId The account id.
+   * @param achDepositId The achDeposit id.
+   * @param forceNocAchDepositRequestCreate Request to force a Nacha notice of change (NOC) on a
+   *     completed ACH deposit. FOR TESTING ONLY!
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AchDepositsForceNocAchDepositResponse forceNocAchDeposit(
+      String accountId,
+      String achDepositId,
+      ForceNocAchDepositRequestCreate forceNocAchDepositRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AchDepositsForceNocAchDepositRequest request =
         AchDepositsForceNocAchDepositRequest.builder()
             .accountId(accountId)
@@ -215,7 +284,7 @@ public class TestSimulation {
             .forceNocAchDepositRequestCreate(forceNocAchDepositRequestCreate)
             .build();
     RequestOperation<AchDepositsForceNocAchDepositRequest, AchDepositsForceNocAchDepositResponse>
-        operation = new AchDepositsForceNocAchDeposit.Sync(sdkConfiguration);
+        operation = new AchDepositsForceNocAchDeposit.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -247,6 +316,29 @@ public class TestSimulation {
       String achDepositId,
       ForceRejectAchDepositRequestCreate forceRejectAchDepositRequestCreate)
       throws Exception {
+    return forceRejectAchDeposit(
+        accountId, achDepositId, forceRejectAchDepositRequestCreate, Optional.empty());
+  }
+
+  /**
+   * ACH Deposit Rejection
+   *
+   * <p>Forces rejection of an existing ACH deposit that is pending review. FOR TESTING ONLY!
+   *
+   * @param accountId The account id.
+   * @param achDepositId The achDeposit id.
+   * @param forceRejectAchDepositRequestCreate Request to force rejection of an existing ACH deposit
+   *     that is pending review. FOR TESTING ONLY!
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AchDepositsForceRejectAchDepositResponse forceRejectAchDeposit(
+      String accountId,
+      String achDepositId,
+      ForceRejectAchDepositRequestCreate forceRejectAchDepositRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AchDepositsForceRejectAchDepositRequest request =
         AchDepositsForceRejectAchDepositRequest.builder()
             .accountId(accountId)
@@ -255,7 +347,7 @@ public class TestSimulation {
             .build();
     RequestOperation<
             AchDepositsForceRejectAchDepositRequest, AchDepositsForceRejectAchDepositResponse>
-        operation = new AchDepositsForceRejectAchDeposit.Sync(sdkConfiguration);
+        operation = new AchDepositsForceRejectAchDeposit.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -287,6 +379,29 @@ public class TestSimulation {
       String achDepositId,
       ForceReturnAchDepositRequestCreate forceReturnAchDepositRequestCreate)
       throws Exception {
+    return forceReturnAchDeposit(
+        accountId, achDepositId, forceReturnAchDepositRequestCreate, Optional.empty());
+  }
+
+  /**
+   * ACH Deposit Return
+   *
+   * <p>Forces a Nacha return on a completed ACH deposit. FOR TESTING ONLY!
+   *
+   * @param accountId The account id.
+   * @param achDepositId The achDeposit id.
+   * @param forceReturnAchDepositRequestCreate Request to force a Nacha return on a completed ACH
+   *     deposit. FOR TESTING ONLY!
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AchDepositsForceReturnAchDepositResponse forceReturnAchDeposit(
+      String accountId,
+      String achDepositId,
+      ForceReturnAchDepositRequestCreate forceReturnAchDepositRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AchDepositsForceReturnAchDepositRequest request =
         AchDepositsForceReturnAchDepositRequest.builder()
             .accountId(accountId)
@@ -295,7 +410,7 @@ public class TestSimulation {
             .build();
     RequestOperation<
             AchDepositsForceReturnAchDepositRequest, AchDepositsForceReturnAchDepositResponse>
-        operation = new AchDepositsForceReturnAchDeposit.Sync(sdkConfiguration);
+        operation = new AchDepositsForceReturnAchDeposit.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -327,6 +442,29 @@ public class TestSimulation {
       String achWithdrawalId,
       ForceApproveAchWithdrawalRequestCreate forceApproveAchWithdrawalRequestCreate)
       throws Exception {
+    return forceApproveAchWithdrawal(
+        accountId, achWithdrawalId, forceApproveAchWithdrawalRequestCreate, Optional.empty());
+  }
+
+  /**
+   * ACH Withdrawal Approval
+   *
+   * <p>Forces approval of an existing ACH withdrawal that is pending review. FOR TESTING ONLY!
+   *
+   * @param accountId The account id.
+   * @param achWithdrawalId The achWithdrawal id.
+   * @param forceApproveAchWithdrawalRequestCreate Request to force approval of an existing ACH
+   *     withdrawal that is pending review. FOR TESTING ONLY!
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AchWithdrawalsForceApproveAchWithdrawalResponse forceApproveAchWithdrawal(
+      String accountId,
+      String achWithdrawalId,
+      ForceApproveAchWithdrawalRequestCreate forceApproveAchWithdrawalRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AchWithdrawalsForceApproveAchWithdrawalRequest request =
         AchWithdrawalsForceApproveAchWithdrawalRequest.builder()
             .accountId(accountId)
@@ -336,7 +474,7 @@ public class TestSimulation {
     RequestOperation<
             AchWithdrawalsForceApproveAchWithdrawalRequest,
             AchWithdrawalsForceApproveAchWithdrawalResponse>
-        operation = new AchWithdrawalsForceApproveAchWithdrawal.Sync(sdkConfiguration);
+        operation = new AchWithdrawalsForceApproveAchWithdrawal.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -368,6 +506,29 @@ public class TestSimulation {
       String achWithdrawalId,
       ForceNocAchWithdrawalRequestCreate forceNocAchWithdrawalRequestCreate)
       throws Exception {
+    return forceNocAchWithdrawal(
+        accountId, achWithdrawalId, forceNocAchWithdrawalRequestCreate, Optional.empty());
+  }
+
+  /**
+   * ACH Withdrawal NOC
+   *
+   * <p>Forces a Nacha notice of change (NOC) on a completed ACH withdrawal. FOR TESTING ONLY!
+   *
+   * @param accountId The account id.
+   * @param achWithdrawalId The achWithdrawal id.
+   * @param forceNocAchWithdrawalRequestCreate Request to force a Nacha notice of change (NOC) on a
+   *     completed ACH withdrawal. FOR TESTING ONLY!
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AchWithdrawalsForceNocAchWithdrawalResponse forceNocAchWithdrawal(
+      String accountId,
+      String achWithdrawalId,
+      ForceNocAchWithdrawalRequestCreate forceNocAchWithdrawalRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AchWithdrawalsForceNocAchWithdrawalRequest request =
         AchWithdrawalsForceNocAchWithdrawalRequest.builder()
             .accountId(accountId)
@@ -376,7 +537,7 @@ public class TestSimulation {
             .build();
     RequestOperation<
             AchWithdrawalsForceNocAchWithdrawalRequest, AchWithdrawalsForceNocAchWithdrawalResponse>
-        operation = new AchWithdrawalsForceNocAchWithdrawal.Sync(sdkConfiguration);
+        operation = new AchWithdrawalsForceNocAchWithdrawal.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -408,6 +569,29 @@ public class TestSimulation {
       String achWithdrawalId,
       ForceRejectAchWithdrawalRequestCreate forceRejectAchWithdrawalRequestCreate)
       throws Exception {
+    return forceRejectAchWithdrawal(
+        accountId, achWithdrawalId, forceRejectAchWithdrawalRequestCreate, Optional.empty());
+  }
+
+  /**
+   * ACH Withdrawal Rejection
+   *
+   * <p>Forces rejection of an existing ACH withdrawal that is pending review. FOR TESTING ONLY!
+   *
+   * @param accountId The account id.
+   * @param achWithdrawalId The achWithdrawal id.
+   * @param forceRejectAchWithdrawalRequestCreate Request to force rejection of an existing ACH
+   *     withdrawal that is pending review. FOR TESTING ONLY!
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AchWithdrawalsForceRejectAchWithdrawalResponse forceRejectAchWithdrawal(
+      String accountId,
+      String achWithdrawalId,
+      ForceRejectAchWithdrawalRequestCreate forceRejectAchWithdrawalRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AchWithdrawalsForceRejectAchWithdrawalRequest request =
         AchWithdrawalsForceRejectAchWithdrawalRequest.builder()
             .accountId(accountId)
@@ -417,7 +601,7 @@ public class TestSimulation {
     RequestOperation<
             AchWithdrawalsForceRejectAchWithdrawalRequest,
             AchWithdrawalsForceRejectAchWithdrawalResponse>
-        operation = new AchWithdrawalsForceRejectAchWithdrawal.Sync(sdkConfiguration);
+        operation = new AchWithdrawalsForceRejectAchWithdrawal.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -449,6 +633,29 @@ public class TestSimulation {
       String achWithdrawalId,
       ForceReturnAchWithdrawalRequestCreate forceReturnAchWithdrawalRequestCreate)
       throws Exception {
+    return forceReturnAchWithdrawal(
+        accountId, achWithdrawalId, forceReturnAchWithdrawalRequestCreate, Optional.empty());
+  }
+
+  /**
+   * ACH Withdrawal Return
+   *
+   * <p>Forces a Nacha return on a completed ACH withdrawal. FOR TESTING ONLY!
+   *
+   * @param accountId The account id.
+   * @param achWithdrawalId The achWithdrawal id.
+   * @param forceReturnAchWithdrawalRequestCreate Request to force a Nacha return on a completed ACH
+   *     withdrawal. FOR TESTING ONLY!
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AchWithdrawalsForceReturnAchWithdrawalResponse forceReturnAchWithdrawal(
+      String accountId,
+      String achWithdrawalId,
+      ForceReturnAchWithdrawalRequestCreate forceReturnAchWithdrawalRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AchWithdrawalsForceReturnAchWithdrawalRequest request =
         AchWithdrawalsForceReturnAchWithdrawalRequest.builder()
             .accountId(accountId)
@@ -458,7 +665,7 @@ public class TestSimulation {
     RequestOperation<
             AchWithdrawalsForceReturnAchWithdrawalRequest,
             AchWithdrawalsForceReturnAchWithdrawalResponse>
-        operation = new AchWithdrawalsForceReturnAchWithdrawal.Sync(sdkConfiguration);
+        operation = new AchWithdrawalsForceReturnAchWithdrawal.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -487,6 +694,23 @@ public class TestSimulation {
    */
   public BankRelationshipsGetMicroDepositAmountsResponse getMicroDepositAmounts(
       String accountId, String bankRelationshipId) throws Exception {
+    return getMicroDepositAmounts(accountId, bankRelationshipId, Optional.empty());
+  }
+
+  /**
+   * Get Relationship Micro Deposit Verification
+   *
+   * <p>Gets micro deposit amounts for bank relationships with the `MICRO_DEPOSIT` verification
+   * method. FOR TESTING ONLY!
+   *
+   * @param accountId The account id.
+   * @param bankRelationshipId The bankRelationship id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BankRelationshipsGetMicroDepositAmountsResponse getMicroDepositAmounts(
+      String accountId, String bankRelationshipId, Optional<Options> options) throws Exception {
     BankRelationshipsGetMicroDepositAmountsRequest request =
         BankRelationshipsGetMicroDepositAmountsRequest.builder()
             .accountId(accountId)
@@ -495,7 +719,7 @@ public class TestSimulation {
     RequestOperation<
             BankRelationshipsGetMicroDepositAmountsRequest,
             BankRelationshipsGetMicroDepositAmountsResponse>
-        operation = new BankRelationshipsGetMicroDepositAmounts.Sync(sdkConfiguration);
+        operation = new BankRelationshipsGetMicroDepositAmounts.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -526,6 +750,28 @@ public class TestSimulation {
       String ictDepositId,
       ForceApproveIctDepositRequestCreate forceApproveIctDepositRequestCreate)
       throws Exception {
+    return forceApproveIctDeposit(
+        accountId, ictDepositId, forceApproveIctDepositRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Force Approve ICT Deposit
+   *
+   * <p>Forces an approval on an existing ICT deposit pending review - FOR TESTING
+   *
+   * @param accountId The account id.
+   * @param ictDepositId The ictDeposit id.
+   * @param forceApproveIctDepositRequestCreate Request to simulate the approval of an ICT deposit
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public IctDepositsForceApproveIctDepositResponse forceApproveIctDeposit(
+      String accountId,
+      String ictDepositId,
+      ForceApproveIctDepositRequestCreate forceApproveIctDepositRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     IctDepositsForceApproveIctDepositRequest request =
         IctDepositsForceApproveIctDepositRequest.builder()
             .accountId(accountId)
@@ -534,7 +780,7 @@ public class TestSimulation {
             .build();
     RequestOperation<
             IctDepositsForceApproveIctDepositRequest, IctDepositsForceApproveIctDepositResponse>
-        operation = new IctDepositsForceApproveIctDeposit.Sync(sdkConfiguration);
+        operation = new IctDepositsForceApproveIctDeposit.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -565,6 +811,28 @@ public class TestSimulation {
       String ictDepositId,
       ForceRejectIctDepositRequestCreate forceRejectIctDepositRequestCreate)
       throws Exception {
+    return forceRejectIctDeposit(
+        accountId, ictDepositId, forceRejectIctDepositRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Force Reject ICT Deposit
+   *
+   * <p>Forces a rejection on an existing ICT deposit pending review - FOR TESTING
+   *
+   * @param accountId The account id.
+   * @param ictDepositId The ictDeposit id.
+   * @param forceRejectIctDepositRequestCreate Request to simulate the rejection of an ICT deposit
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public IctDepositsForceRejectIctDepositResponse forceRejectIctDeposit(
+      String accountId,
+      String ictDepositId,
+      ForceRejectIctDepositRequestCreate forceRejectIctDepositRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     IctDepositsForceRejectIctDepositRequest request =
         IctDepositsForceRejectIctDepositRequest.builder()
             .accountId(accountId)
@@ -573,7 +841,7 @@ public class TestSimulation {
             .build();
     RequestOperation<
             IctDepositsForceRejectIctDepositRequest, IctDepositsForceRejectIctDepositResponse>
-        operation = new IctDepositsForceRejectIctDeposit.Sync(sdkConfiguration);
+        operation = new IctDepositsForceRejectIctDeposit.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -605,6 +873,29 @@ public class TestSimulation {
       String ictWithdrawalId,
       ForceApproveIctWithdrawalRequestCreate forceApproveIctWithdrawalRequestCreate)
       throws Exception {
+    return forceApproveIctWithdrawal(
+        accountId, ictWithdrawalId, forceApproveIctWithdrawalRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Force Approve ICT Withdrawal
+   *
+   * <p>Forces an approval on an existing ICT withdrawal pending review - FOR TESTING
+   *
+   * @param accountId The account id.
+   * @param ictWithdrawalId The ictWithdrawal id.
+   * @param forceApproveIctWithdrawalRequestCreate Request to simulate the approval of an ICT
+   *     withdrawal
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public IctWithdrawalsForceApproveIctWithdrawalResponse forceApproveIctWithdrawal(
+      String accountId,
+      String ictWithdrawalId,
+      ForceApproveIctWithdrawalRequestCreate forceApproveIctWithdrawalRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     IctWithdrawalsForceApproveIctWithdrawalRequest request =
         IctWithdrawalsForceApproveIctWithdrawalRequest.builder()
             .accountId(accountId)
@@ -614,7 +905,7 @@ public class TestSimulation {
     RequestOperation<
             IctWithdrawalsForceApproveIctWithdrawalRequest,
             IctWithdrawalsForceApproveIctWithdrawalResponse>
-        operation = new IctWithdrawalsForceApproveIctWithdrawal.Sync(sdkConfiguration);
+        operation = new IctWithdrawalsForceApproveIctWithdrawal.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -646,6 +937,29 @@ public class TestSimulation {
       String ictWithdrawalId,
       ForceRejectIctWithdrawalRequestCreate forceRejectIctWithdrawalRequestCreate)
       throws Exception {
+    return forceRejectIctWithdrawal(
+        accountId, ictWithdrawalId, forceRejectIctWithdrawalRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Force Reject ICT Withdrawal
+   *
+   * <p>Forces a rejection on an existing ICT withdrawal pending review - FOR TESTING
+   *
+   * @param accountId The account id.
+   * @param ictWithdrawalId The ictWithdrawal id.
+   * @param forceRejectIctWithdrawalRequestCreate Request to simulate the rejection of an ICT
+   *     withdrawal
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public IctWithdrawalsForceRejectIctWithdrawalResponse forceRejectIctWithdrawal(
+      String accountId,
+      String ictWithdrawalId,
+      ForceRejectIctWithdrawalRequestCreate forceRejectIctWithdrawalRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     IctWithdrawalsForceRejectIctWithdrawalRequest request =
         IctWithdrawalsForceRejectIctWithdrawalRequest.builder()
             .accountId(accountId)
@@ -655,7 +969,7 @@ public class TestSimulation {
     RequestOperation<
             IctWithdrawalsForceRejectIctWithdrawalRequest,
             IctWithdrawalsForceRejectIctWithdrawalResponse>
-        operation = new IctWithdrawalsForceRejectIctWithdrawal.Sync(sdkConfiguration);
+        operation = new IctWithdrawalsForceRejectIctWithdrawal.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -686,6 +1000,28 @@ public class TestSimulation {
       String wireWithdrawalId,
       ForceApproveWireWithdrawalRequestCreate forceApproveWireWithdrawalRequestCreate)
       throws Exception {
+    return forceApproveWireWithdrawal(
+        accountId, wireWithdrawalId, forceApproveWireWithdrawalRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Force Approve Wire Withdrawal
+   *
+   * <p>Forces an approval on an existing wire withdrawal pending review - FOR TESTING
+   *
+   * @param accountId The account id.
+   * @param wireWithdrawalId The wireWithdrawal id.
+   * @param forceApproveWireWithdrawalRequestCreate Request to simulate approve of a wire withdrawal
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public WireWithdrawalsForceApproveWireWithdrawalResponse forceApproveWireWithdrawal(
+      String accountId,
+      String wireWithdrawalId,
+      ForceApproveWireWithdrawalRequestCreate forceApproveWireWithdrawalRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     WireWithdrawalsForceApproveWireWithdrawalRequest request =
         WireWithdrawalsForceApproveWireWithdrawalRequest.builder()
             .accountId(accountId)
@@ -695,7 +1031,7 @@ public class TestSimulation {
     RequestOperation<
             WireWithdrawalsForceApproveWireWithdrawalRequest,
             WireWithdrawalsForceApproveWireWithdrawalResponse>
-        operation = new WireWithdrawalsForceApproveWireWithdrawal.Sync(sdkConfiguration);
+        operation = new WireWithdrawalsForceApproveWireWithdrawal.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -727,6 +1063,29 @@ public class TestSimulation {
       String wireWithdrawalId,
       ForceRejectWireWithdrawalRequestCreate forceRejectWireWithdrawalRequestCreate)
       throws Exception {
+    return forceRejectWireWithdrawal(
+        accountId, wireWithdrawalId, forceRejectWireWithdrawalRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Force Reject Wire Withdrawal
+   *
+   * <p>Forces a rejection on an existing wire withdrawal pending review - FOR TESTING
+   *
+   * @param accountId The account id.
+   * @param wireWithdrawalId The wireWithdrawal id.
+   * @param forceRejectWireWithdrawalRequestCreate Request to simulate the rejection of a wire
+   *     withdrawal
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public WireWithdrawalsForceRejectWireWithdrawalResponse forceRejectWireWithdrawal(
+      String accountId,
+      String wireWithdrawalId,
+      ForceRejectWireWithdrawalRequestCreate forceRejectWireWithdrawalRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     WireWithdrawalsForceRejectWireWithdrawalRequest request =
         WireWithdrawalsForceRejectWireWithdrawalRequest.builder()
             .accountId(accountId)
@@ -736,7 +1095,7 @@ public class TestSimulation {
     RequestOperation<
             WireWithdrawalsForceRejectWireWithdrawalRequest,
             WireWithdrawalsForceRejectWireWithdrawalResponse>
-        operation = new WireWithdrawalsForceRejectWireWithdrawal.Sync(sdkConfiguration);
+        operation = new WireWithdrawalsForceRejectWireWithdrawal.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -765,6 +1124,26 @@ public class TestSimulation {
       String cashJournalId,
       ForceApproveCashJournalRequestCreate forceApproveCashJournalRequestCreate)
       throws Exception {
+    return forceApproveCashJournal(
+        cashJournalId, forceApproveCashJournalRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Force Approve Cash Journal
+   *
+   * <p>Forces approval of an existing cash journal that is pending review FOR TESTING ONLY!
+   *
+   * @param cashJournalId The cashJournal id.
+   * @param forceApproveCashJournalRequestCreate Request to force approve a pending cash journal
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CashJournalsForceApproveCashJournalResponse forceApproveCashJournal(
+      String cashJournalId,
+      ForceApproveCashJournalRequestCreate forceApproveCashJournalRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     CashJournalsForceApproveCashJournalRequest request =
         CashJournalsForceApproveCashJournalRequest.builder()
             .cashJournalId(cashJournalId)
@@ -772,7 +1151,7 @@ public class TestSimulation {
             .build();
     RequestOperation<
             CashJournalsForceApproveCashJournalRequest, CashJournalsForceApproveCashJournalResponse>
-        operation = new CashJournalsForceApproveCashJournal.Sync(sdkConfiguration);
+        operation = new CashJournalsForceApproveCashJournal.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -800,6 +1179,26 @@ public class TestSimulation {
   public CashJournalsForceRejectCashJournalResponse forceRejectCashJournal(
       String cashJournalId, ForceRejectCashJournalRequestCreate forceRejectCashJournalRequestCreate)
       throws Exception {
+    return forceRejectCashJournal(
+        cashJournalId, forceRejectCashJournalRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Force Reject Cash Journal
+   *
+   * <p>Forces rejection of an existing cash journal that is pending review FOR TESTING ONLY!
+   *
+   * @param cashJournalId The cashJournal id.
+   * @param forceRejectCashJournalRequestCreate Request to force reject a pending cash journal
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CashJournalsForceRejectCashJournalResponse forceRejectCashJournal(
+      String cashJournalId,
+      ForceRejectCashJournalRequestCreate forceRejectCashJournalRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     CashJournalsForceRejectCashJournalRequest request =
         CashJournalsForceRejectCashJournalRequest.builder()
             .cashJournalId(cashJournalId)
@@ -807,7 +1206,7 @@ public class TestSimulation {
             .build();
     RequestOperation<
             CashJournalsForceRejectCashJournalRequest, CashJournalsForceRejectCashJournalResponse>
-        operation = new CashJournalsForceRejectCashJournal.Sync(sdkConfiguration);
+        operation = new CashJournalsForceRejectCashJournal.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

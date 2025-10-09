@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.InterestedPartyCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsCreateInterestedParty;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AccountsCreateInterestedPartyRequestBuilder {
 
   private String accountId;
   private InterestedPartyCreate interestedPartyCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsCreateInterestedPartyRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -33,6 +37,19 @@ public class AccountsCreateInterestedPartyRequestBuilder {
     return this;
   }
 
+  public AccountsCreateInterestedPartyRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsCreateInterestedPartyRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsCreateInterestedPartyRequest buildRequest() {
 
     AccountsCreateInterestedPartyRequest request =
@@ -42,9 +59,10 @@ public class AccountsCreateInterestedPartyRequestBuilder {
   }
 
   public AccountsCreateInterestedPartyResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountsCreateInterestedPartyRequest, AccountsCreateInterestedPartyResponse>
-        operation = new AccountsCreateInterestedParty.Sync(sdkConfiguration);
+        operation = new AccountsCreateInterestedParty.Sync(sdkConfiguration, options);
     AccountsCreateInterestedPartyRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

@@ -114,15 +114,16 @@ public class Application {
                     .build())
             .build();
 
-        SubscriberListPushSubscriptionsResponse res = sdk.subscriber().listPushSubscriptions()
+
+        sdk.subscriber().listPushSubscriptions()
                 .filter("correspondent_id==\"01H8MCDXH4HYJJAV921BDKCC83\"")
                 .pageSize(50)
                 .pageToken("ZXhhbXBsZQo")
-                .call();
+                .callAsStream()
+                .forEach((SubscriberListPushSubscriptionsResponse item) -> {
+                   // handle page
+                });
 
-        if (res.listPushSubscriptionsResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```
@@ -431,16 +432,17 @@ public class Application {
                     .build())
             .build();
 
-        SubscriberListPushSubscriptionDeliveriesResponse res = sdk.subscriber().listPushSubscriptionDeliveries()
+
+        sdk.subscriber().listPushSubscriptionDeliveries()
                 .subscriptionId("01H8MCDXH4JVH7KVNB2YY42907")
                 .filter("event_publish_time==timestamp(\"2023-06-13T23:48:58.343Z\")")
                 .pageSize(50)
                 .pageToken("ZXhhbXBsZQo")
-                .call();
+                .callAsStream()
+                .forEach((SubscriberListPushSubscriptionDeliveriesResponse item) -> {
+                   // handle page
+                });
 
-        if (res.listPushSubscriptionDeliveriesResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```

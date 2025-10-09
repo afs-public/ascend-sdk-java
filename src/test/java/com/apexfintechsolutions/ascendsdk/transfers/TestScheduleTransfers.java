@@ -73,11 +73,12 @@ public class TestScheduleTransfers {
 
     var result =
         sdk.scheduleTransfers()
-            .updateAchDepositSchedule(
-                enrolledAccount.accountId().get(),
-                ScheduleTransfersUtil.getScheduleId(depositSchedule),
-                Optional.of("schedule_details.amount"),
-                request);
+            .updateAchDepositSchedule()
+            .accountId(enrolledAccount.accountId().get())
+            .achDepositScheduleId(ScheduleTransfersUtil.getScheduleId(depositSchedule))
+            .updateMask(Optional.of("schedule_details.amount"))
+            .achDepositScheduleUpdate(request)
+            .call();
     Assertions.assertEquals(200, result.statusCode());
   }
 
@@ -144,11 +145,12 @@ public class TestScheduleTransfers {
 
     var result =
         sdk.scheduleTransfers()
-            .updateAchWithdrawalSchedule(
-                enrolledAccount.accountId().get(),
-                ScheduleTransfersUtil.getScheduleId(withdrawalSchedule),
-                Optional.of("schedule_details.amount"),
-                request);
+            .updateAchWithdrawalSchedule()
+            .accountId(enrolledAccount.accountId().get())
+            .achWithdrawalScheduleId(ScheduleTransfersUtil.getScheduleId(withdrawalSchedule))
+            .updateMask(Optional.of("schedule_details.amount"))
+            .achWithdrawalScheduleUpdate(request)
+            .call();
     Assertions.assertEquals(200, result.statusCode());
   }
 
@@ -217,11 +219,12 @@ public class TestScheduleTransfers {
 
     var result =
         sdk.scheduleTransfers()
-            .updateWireWithdrawalSchedule(
-                enrolledAccount.accountId().get(),
-                ScheduleTransfersUtil.getScheduleId(wireWithdrawalSchedule),
-                Optional.of("schedule_details.amount"),
-                request);
+            .updateWireWithdrawalSchedule()
+            .accountId(enrolledAccount.accountId().get())
+            .wireWithdrawalScheduleId(ScheduleTransfersUtil.getScheduleId(wireWithdrawalSchedule))
+            .updateMask(Optional.of("schedule_details.amount"))
+            .wireWithdrawalScheduleUpdate(request)
+            .call();
     Assertions.assertEquals(200, result.statusCode());
   }
 

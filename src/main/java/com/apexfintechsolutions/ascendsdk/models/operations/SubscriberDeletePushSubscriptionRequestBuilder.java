@@ -7,11 +7,15 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.SubscriberDeletePushSubscription;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class SubscriberDeletePushSubscriptionRequestBuilder {
 
   private String subscriptionId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public SubscriberDeletePushSubscriptionRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -24,6 +28,19 @@ public class SubscriberDeletePushSubscriptionRequestBuilder {
     return this;
   }
 
+  public SubscriberDeletePushSubscriptionRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public SubscriberDeletePushSubscriptionRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private SubscriberDeletePushSubscriptionRequest buildRequest() {
 
     SubscriberDeletePushSubscriptionRequest request =
@@ -33,10 +50,11 @@ public class SubscriberDeletePushSubscriptionRequestBuilder {
   }
 
   public SubscriberDeletePushSubscriptionResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             SubscriberDeletePushSubscriptionRequest, SubscriberDeletePushSubscriptionResponse>
-        operation = new SubscriberDeletePushSubscription.Sync(sdkConfiguration);
+        operation = new SubscriberDeletePushSubscription.Sync(sdkConfiguration, options);
     SubscriberDeletePushSubscriptionRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

@@ -37,6 +37,7 @@ import com.apexfintechsolutions.ascendsdk.operations.BasketOrdersServiceListBask
 import com.apexfintechsolutions.ascendsdk.operations.BasketOrdersServiceListCompressedOrders;
 import com.apexfintechsolutions.ascendsdk.operations.BasketOrdersServiceRemoveOrders;
 import com.apexfintechsolutions.ascendsdk.operations.BasketOrdersServiceSubmitBasket;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
 import java.util.Optional;
 
 public class BasketOrders {
@@ -77,6 +78,27 @@ public class BasketOrders {
    */
   public BasketOrdersServiceCreateBasketResponse createBasket(
       String correspondentId, BasketCreate basketCreate) throws Exception {
+    return createBasket(correspondentId, basketCreate, Optional.empty());
+  }
+
+  /**
+   * Create Basket
+   *
+   * <p>Creates an empty basket
+   *
+   * <p>Upon successful submission, if the request is a duplicate, returns the existing basket in
+   * its current state in the system. If the request is not a duplicate, returns the summary of the
+   * newly created basket.
+   *
+   * @param correspondentId The correspondent id.
+   * @param basketCreate The message describing a basket
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BasketOrdersServiceCreateBasketResponse createBasket(
+      String correspondentId, BasketCreate basketCreate, Optional<Options> options)
+      throws Exception {
     BasketOrdersServiceCreateBasketRequest request =
         BasketOrdersServiceCreateBasketRequest.builder()
             .correspondentId(correspondentId)
@@ -84,7 +106,7 @@ public class BasketOrders {
             .build();
     RequestOperation<
             BasketOrdersServiceCreateBasketRequest, BasketOrdersServiceCreateBasketResponse>
-        operation = new BasketOrdersServiceCreateBasket.Sync(sdkConfiguration);
+        operation = new BasketOrdersServiceCreateBasket.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -119,6 +141,30 @@ public class BasketOrders {
   public BasketOrdersServiceAddOrdersResponse addOrders(
       String correspondentId, String basketId, AddOrdersRequestCreate addOrdersRequestCreate)
       throws Exception {
+    return addOrders(correspondentId, basketId, addOrdersRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Add Orders
+   *
+   * <p>Adds a list of basket orders to a basket
+   *
+   * <p>Upon successful submission, returns the basket with a new total count of orders within the
+   * basket
+   *
+   * @param correspondentId The correspondent id.
+   * @param basketId The basket id.
+   * @param addOrdersRequestCreate The message to add a list of basket orders to a basket
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BasketOrdersServiceAddOrdersResponse addOrders(
+      String correspondentId,
+      String basketId,
+      AddOrdersRequestCreate addOrdersRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     BasketOrdersServiceAddOrdersRequest request =
         BasketOrdersServiceAddOrdersRequest.builder()
             .correspondentId(correspondentId)
@@ -126,7 +172,7 @@ public class BasketOrders {
             .addOrdersRequestCreate(addOrdersRequestCreate)
             .build();
     RequestOperation<BasketOrdersServiceAddOrdersRequest, BasketOrdersServiceAddOrdersResponse>
-        operation = new BasketOrdersServiceAddOrders.Sync(sdkConfiguration);
+        operation = new BasketOrdersServiceAddOrders.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -157,13 +203,31 @@ public class BasketOrders {
    */
   public BasketOrdersServiceGetBasketResponse getBasket(String correspondentId, String basketId)
       throws Exception {
+    return getBasket(correspondentId, basketId, Optional.empty());
+  }
+
+  /**
+   * Get Basket
+   *
+   * <p>Gets a basket by basket ID.
+   *
+   * <p>Upon successful submission, returns the details of the queried basket
+   *
+   * @param correspondentId The correspondent id.
+   * @param basketId The basket id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BasketOrdersServiceGetBasketResponse getBasket(
+      String correspondentId, String basketId, Optional<Options> options) throws Exception {
     BasketOrdersServiceGetBasketRequest request =
         BasketOrdersServiceGetBasketRequest.builder()
             .correspondentId(correspondentId)
             .basketId(basketId)
             .build();
     RequestOperation<BasketOrdersServiceGetBasketRequest, BasketOrdersServiceGetBasketResponse>
-        operation = new BasketOrdersServiceGetBasket.Sync(sdkConfiguration);
+        operation = new BasketOrdersServiceGetBasket.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -200,6 +264,31 @@ public class BasketOrders {
   public BasketOrdersServiceSubmitBasketResponse submitBasket(
       String correspondentId, String basketId, SubmitBasketRequestCreate submitBasketRequestCreate)
       throws Exception {
+    return submitBasket(correspondentId, basketId, submitBasketRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Submit Basket
+   *
+   * <p>Submits a basket for execution in the market
+   *
+   * <p>Upon successful submission, if the request is a duplicate, returns the existing basket in
+   * its current state in the system. If the request is not a duplicate, returns the summary of the
+   * newly submitted basket in a SUBMITTED state
+   *
+   * @param correspondentId The correspondent id.
+   * @param basketId The basket id.
+   * @param submitBasketRequestCreate The message to submit a basket for execution in the market
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BasketOrdersServiceSubmitBasketResponse submitBasket(
+      String correspondentId,
+      String basketId,
+      SubmitBasketRequestCreate submitBasketRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     BasketOrdersServiceSubmitBasketRequest request =
         BasketOrdersServiceSubmitBasketRequest.builder()
             .correspondentId(correspondentId)
@@ -208,7 +297,7 @@ public class BasketOrders {
             .build();
     RequestOperation<
             BasketOrdersServiceSubmitBasketRequest, BasketOrdersServiceSubmitBasketResponse>
-        operation = new BasketOrdersServiceSubmitBasket.Sync(sdkConfiguration);
+        operation = new BasketOrdersServiceSubmitBasket.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -242,9 +331,29 @@ public class BasketOrders {
    */
   public BasketOrdersServiceListBasketOrdersResponse listBasketOrders(
       BasketOrdersServiceListBasketOrdersRequest request) throws Exception {
+    return listBasketOrders(request, Optional.empty());
+  }
+
+  /**
+   * List Basket Orders
+   *
+   * <p>Gets a list of basket orders within a basket.
+   *
+   * <p>Upon successful submission, returns a list of basket orders for the basket. If the list of
+   * basket orders becomes too large, a token is returned to retrieve the next page of basket
+   * orders.
+   *
+   * @param request The request object containing all the parameters for the API call.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BasketOrdersServiceListBasketOrdersResponse listBasketOrders(
+      BasketOrdersServiceListBasketOrdersRequest request, Optional<Options> options)
+      throws Exception {
     RequestOperation<
             BasketOrdersServiceListBasketOrdersRequest, BasketOrdersServiceListBasketOrdersResponse>
-        operation = new BasketOrdersServiceListBasketOrders.Sync(sdkConfiguration);
+        operation = new BasketOrdersServiceListBasketOrders.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -279,7 +388,8 @@ public class BasketOrders {
    */
   public BasketOrdersServiceListCompressedOrdersResponse listCompressedOrders(
       String correspondentId, String basketId) throws Exception {
-    return listCompressedOrders(correspondentId, basketId, Optional.empty(), Optional.empty());
+    return listCompressedOrders(
+        correspondentId, basketId, Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -299,6 +409,7 @@ public class BasketOrders {
    * @param pageToken A page token, received from a previous `ListCompressedOrders` call. Provide
    *     this to retrieve the subsequent page. When paginating, all other parameters provided to
    *     `ListCompressedOrders` must match the call that provided the page token.
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -306,7 +417,8 @@ public class BasketOrders {
       String correspondentId,
       String basketId,
       Optional<Integer> pageSize,
-      Optional<String> pageToken)
+      Optional<String> pageToken,
+      Optional<Options> options)
       throws Exception {
     BasketOrdersServiceListCompressedOrdersRequest request =
         BasketOrdersServiceListCompressedOrdersRequest.builder()
@@ -318,7 +430,7 @@ public class BasketOrders {
     RequestOperation<
             BasketOrdersServiceListCompressedOrdersRequest,
             BasketOrdersServiceListCompressedOrdersResponse>
-        operation = new BasketOrdersServiceListCompressedOrders.Sync(sdkConfiguration);
+        operation = new BasketOrdersServiceListCompressedOrders.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -352,6 +464,30 @@ public class BasketOrders {
   public BasketOrdersServiceRemoveOrdersResponse removeOrders(
       String correspondentId, String basketId, RemoveOrdersRequestCreate removeOrdersRequestCreate)
       throws Exception {
+    return removeOrders(correspondentId, basketId, removeOrdersRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Remove Basket Orders
+   *
+   * <p>Removes a list of basket orders by client order ID.
+   *
+   * <p>Upon successful submission, returns the details of the removed basket orders.
+   *
+   * @param correspondentId The correspondent id.
+   * @param basketId The basket id.
+   * @param removeOrdersRequestCreate The message to remove a list of basket orders by client order
+   *     ID.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BasketOrdersServiceRemoveOrdersResponse removeOrders(
+      String correspondentId,
+      String basketId,
+      RemoveOrdersRequestCreate removeOrdersRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     BasketOrdersServiceRemoveOrdersRequest request =
         BasketOrdersServiceRemoveOrdersRequest.builder()
             .correspondentId(correspondentId)
@@ -360,7 +496,7 @@ public class BasketOrders {
             .build();
     RequestOperation<
             BasketOrdersServiceRemoveOrdersRequest, BasketOrdersServiceRemoveOrdersResponse>
-        operation = new BasketOrdersServiceRemoveOrders.Sync(sdkConfiguration);
+        operation = new BasketOrdersServiceRemoveOrders.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

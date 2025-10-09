@@ -8,13 +8,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelFeeRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.FeesCancelFee;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class FeesCancelFeeRequestBuilder {
 
   private String accountId;
   private String feeId;
   private CancelFeeRequestCreate cancelFeeRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public FeesCancelFeeRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -40,6 +44,18 @@ public class FeesCancelFeeRequestBuilder {
     return this;
   }
 
+  public FeesCancelFeeRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public FeesCancelFeeRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private FeesCancelFeeRequest buildRequest() {
 
     FeesCancelFeeRequest request =
@@ -49,9 +65,10 @@ public class FeesCancelFeeRequestBuilder {
   }
 
   public FeesCancelFeeResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<FeesCancelFeeRequest, FeesCancelFeeResponse> operation =
-        new FeesCancelFee.Sync(sdkConfiguration);
+        new FeesCancelFee.Sync(sdkConfiguration, options);
     FeesCancelFeeRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

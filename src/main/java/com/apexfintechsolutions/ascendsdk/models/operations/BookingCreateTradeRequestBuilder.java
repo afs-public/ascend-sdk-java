@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.TradeCreate;
 import com.apexfintechsolutions.ascendsdk.operations.BookingCreateTrade;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class BookingCreateTradeRequestBuilder {
 
   private String accountId;
   private TradeCreate tradeCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public BookingCreateTradeRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -32,6 +36,18 @@ public class BookingCreateTradeRequestBuilder {
     return this;
   }
 
+  public BookingCreateTradeRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public BookingCreateTradeRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private BookingCreateTradeRequest buildRequest() {
 
     BookingCreateTradeRequest request = new BookingCreateTradeRequest(accountId, tradeCreate);
@@ -40,9 +56,10 @@ public class BookingCreateTradeRequestBuilder {
   }
 
   public BookingCreateTradeResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<BookingCreateTradeRequest, BookingCreateTradeResponse> operation =
-        new BookingCreateTrade.Sync(sdkConfiguration);
+        new BookingCreateTrade.Sync(sdkConfiguration, options);
     BookingCreateTradeRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

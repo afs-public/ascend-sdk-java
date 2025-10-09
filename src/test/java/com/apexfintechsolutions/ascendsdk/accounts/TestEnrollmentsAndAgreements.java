@@ -35,7 +35,6 @@ public class TestEnrollmentsAndAgreements {
   public void
       test_enrollments_and_agreements_list_available_enrollments_list_available_enrollments1()
           throws Exception {
-    Thread.sleep(5000);
     var res = sdk.enrollmentsAndAgreements().listAvailableEnrollments().accountId(accountId).call();
     Assertions.assertNotNull(res);
     Assertions.assertEquals(res.statusCode(), 200);

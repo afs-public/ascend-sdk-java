@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.TransfersFeeCreate;
 import com.apexfintechsolutions.ascendsdk.operations.FeesCreateFee;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class FeesCreateFeeRequestBuilder {
 
   private String accountId;
   private TransfersFeeCreate transfersFeeCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public FeesCreateFeeRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -32,6 +36,18 @@ public class FeesCreateFeeRequestBuilder {
     return this;
   }
 
+  public FeesCreateFeeRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public FeesCreateFeeRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private FeesCreateFeeRequest buildRequest() {
 
     FeesCreateFeeRequest request = new FeesCreateFeeRequest(accountId, transfersFeeCreate);
@@ -40,9 +56,10 @@ public class FeesCreateFeeRequestBuilder {
   }
 
   public FeesCreateFeeResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<FeesCreateFeeRequest, FeesCreateFeeResponse> operation =
-        new FeesCreateFee.Sync(sdkConfiguration);
+        new FeesCreateFee.Sync(sdkConfiguration, options);
     FeesCreateFeeRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

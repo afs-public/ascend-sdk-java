@@ -2,7 +2,6 @@ package com.apexfintechsolutions.ascendsdk;
 
 import com.apexfintechsolutions.ascendsdk.models.components.*;
 import java.util.List;
-import java.util.Optional;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Order;
 
@@ -49,11 +48,10 @@ public class TestInvestorDocs {
   public void investor_docs_investor_docs_list_documents_list_documents1() throws Exception {
     var result =
         sdk.investorDocs()
-            .listDocuments(
-                Optional.of(50),
-                Optional.empty(),
-                Optional.of(
-                    String.format("correspondent_id==\"%s\"", SdkUtil.getCorrespondentId())));
+            .listDocuments()
+            .pageSize(50)
+            .filter(String.format("correspondent_id==\"%s\"", SdkUtil.getCorrespondentId()))
+            .call();
     Assertions.assertEquals(200, result.statusCode());
   }
 }

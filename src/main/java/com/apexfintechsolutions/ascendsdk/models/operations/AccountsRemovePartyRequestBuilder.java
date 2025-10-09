@@ -8,13 +8,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.RemovePartyRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsRemoveParty;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AccountsRemovePartyRequestBuilder {
 
   private String accountId;
   private String partyId;
   private RemovePartyRequestCreate removePartyRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsRemovePartyRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -40,6 +44,18 @@ public class AccountsRemovePartyRequestBuilder {
     return this;
   }
 
+  public AccountsRemovePartyRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsRemovePartyRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsRemovePartyRequest buildRequest() {
 
     AccountsRemovePartyRequest request =
@@ -49,9 +65,10 @@ public class AccountsRemovePartyRequestBuilder {
   }
 
   public AccountsRemovePartyResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountsRemovePartyRequest, AccountsRemovePartyResponse> operation =
-        new AccountsRemoveParty.Sync(sdkConfiguration);
+        new AccountsRemoveParty.Sync(sdkConfiguration, options);
     AccountsRemovePartyRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

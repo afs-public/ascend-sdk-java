@@ -15,7 +15,7 @@ import org.openapitools.jackson.nullable.JsonNullable;
 /**
  * StopPrice
  *
- * <p>The stop price for this order. Only allowed for equities, when the side is SELL.
+ * <p>The stop price for this order. Only allowed for equities.
  */
 public class StopPrice {
   /**

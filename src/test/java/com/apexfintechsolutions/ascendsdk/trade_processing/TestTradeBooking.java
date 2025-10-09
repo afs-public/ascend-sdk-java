@@ -39,7 +39,6 @@ public class TestTradeBooking {
   @Order(2)
   @Test
   public void test_trade_booking_trade_processing_get_trade_get_trade1() throws Exception {
-    Thread.sleep(5000);
     var result = sdk.tradeBooking().getTrade(account, bookingTradeId[0]);
     Assertions.assertNotNull(result);
     Assertions.assertEquals(200, result.statusCode());
@@ -55,7 +54,6 @@ public class TestTradeBooking {
   @Order(4)
   @Test
   public void test_trade_booking_trade_processing_get_execution_get_execution1() throws Exception {
-    Thread.sleep(5000);
     var result = sdk.tradeBooking().getExecution(account, bookingTradeId[0], executionId);
     Assertions.assertNotNull(result);
     Assertions.assertEquals(200, result.statusCode());

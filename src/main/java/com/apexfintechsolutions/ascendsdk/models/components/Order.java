@@ -308,7 +308,7 @@ public class Order {
   @JsonProperty("special_reporting_instructions")
   private Optional<? extends List<OrderSpecialReportingInstructions>> specialReportingInstructions;
 
-  /** The stop price for this order. Only allowed for equities, when the side is SELL. */
+  /** The stop price for this order. Only allowed for equities. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("stop_price")
   private JsonNullable<? extends StopPrice> stopPrice;
@@ -857,7 +857,7 @@ public class Order {
     return (Optional<List<OrderSpecialReportingInstructions>>) specialReportingInstructions;
   }
 
-  /** The stop price for this order. Only allowed for equities, when the side is SELL. */
+  /** The stop price for this order. Only allowed for equities. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public JsonNullable<StopPrice> stopPrice() {
@@ -1621,14 +1621,14 @@ public class Order {
     return this;
   }
 
-  /** The stop price for this order. Only allowed for equities, when the side is SELL. */
+  /** The stop price for this order. Only allowed for equities. */
   public Order withStopPrice(StopPrice stopPrice) {
     Utils.checkNotNull(stopPrice, "stopPrice");
     this.stopPrice = JsonNullable.of(stopPrice);
     return this;
   }
 
-  /** The stop price for this order. Only allowed for equities, when the side is SELL. */
+  /** The stop price for this order. Only allowed for equities. */
   public Order withStopPrice(JsonNullable<? extends StopPrice> stopPrice) {
     Utils.checkNotNull(stopPrice, "stopPrice");
     this.stopPrice = stopPrice;
@@ -2693,14 +2693,14 @@ public class Order {
       return this;
     }
 
-    /** The stop price for this order. Only allowed for equities, when the side is SELL. */
+    /** The stop price for this order. Only allowed for equities. */
     public Builder stopPrice(StopPrice stopPrice) {
       Utils.checkNotNull(stopPrice, "stopPrice");
       this.stopPrice = JsonNullable.of(stopPrice);
       return this;
     }
 
-    /** The stop price for this order. Only allowed for equities, when the side is SELL. */
+    /** The stop price for this order. Only allowed for equities. */
     public Builder stopPrice(JsonNullable<? extends StopPrice> stopPrice) {
       Utils.checkNotNull(stopPrice, "stopPrice");
       this.stopPrice = stopPrice;

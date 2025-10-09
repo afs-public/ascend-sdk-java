@@ -10,6 +10,7 @@ import com.apexfintechsolutions.ascendsdk.models.operations.CashBalancesCalculat
 import com.apexfintechsolutions.ascendsdk.models.operations.CashBalancesCalculateCashBalanceResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.Mechanism;
 import com.apexfintechsolutions.ascendsdk.operations.CashBalancesCalculateCashBalance;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
 import java.util.Optional;
 
 public class CashBalances {
@@ -41,7 +42,7 @@ public class CashBalances {
    */
   public CashBalancesCalculateCashBalanceResponse calculateCashBalance(String accountId)
       throws Exception {
-    return calculateCashBalance(accountId, Optional.empty());
+    return calculateCashBalance(accountId, Optional.empty(), Optional.empty());
   }
 
   /**
@@ -52,11 +53,13 @@ public class CashBalances {
    * @param accountId The account id.
    * @param mechanism The withdraw mechanism to calculate the balance for. The mechanism determines
    *     what account activity will affect the balance.
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public CashBalancesCalculateCashBalanceResponse calculateCashBalance(
-      String accountId, Optional<? extends Mechanism> mechanism) throws Exception {
+      String accountId, Optional<? extends Mechanism> mechanism, Optional<Options> options)
+      throws Exception {
     CashBalancesCalculateCashBalanceRequest request =
         CashBalancesCalculateCashBalanceRequest.builder()
             .accountId(accountId)
@@ -64,7 +67,7 @@ public class CashBalances {
             .build();
     RequestOperation<
             CashBalancesCalculateCashBalanceRequest, CashBalancesCalculateCashBalanceResponse>
-        operation = new CashBalancesCalculateCashBalance.Sync(sdkConfiguration);
+        operation = new CashBalancesCalculateCashBalance.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

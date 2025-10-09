@@ -7,11 +7,15 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.ReaderGetEventMessage;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class ReaderGetEventMessageRequestBuilder {
 
   private String messageId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public ReaderGetEventMessageRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -24,6 +28,18 @@ public class ReaderGetEventMessageRequestBuilder {
     return this;
   }
 
+  public ReaderGetEventMessageRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public ReaderGetEventMessageRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private ReaderGetEventMessageRequest buildRequest() {
 
     ReaderGetEventMessageRequest request = new ReaderGetEventMessageRequest(messageId);
@@ -32,9 +48,10 @@ public class ReaderGetEventMessageRequestBuilder {
   }
 
   public ReaderGetEventMessageResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<ReaderGetEventMessageRequest, ReaderGetEventMessageResponse> operation =
-        new ReaderGetEventMessage.Sync(sdkConfiguration);
+        new ReaderGetEventMessage.Sync(sdkConfiguration, options);
     ReaderGetEventMessageRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

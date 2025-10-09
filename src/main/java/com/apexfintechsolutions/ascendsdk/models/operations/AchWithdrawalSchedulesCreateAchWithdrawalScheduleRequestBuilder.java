@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.AchWithdrawalScheduleCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AchWithdrawalSchedulesCreateAchWithdrawalSchedule;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AchWithdrawalSchedulesCreateAchWithdrawalScheduleRequestBuilder {
 
   private String accountId;
   private AchWithdrawalScheduleCreate achWithdrawalScheduleCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AchWithdrawalSchedulesCreateAchWithdrawalScheduleRequestBuilder(
@@ -35,6 +39,20 @@ public class AchWithdrawalSchedulesCreateAchWithdrawalScheduleRequestBuilder {
     return this;
   }
 
+  public AchWithdrawalSchedulesCreateAchWithdrawalScheduleRequestBuilder retryConfig(
+      RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AchWithdrawalSchedulesCreateAchWithdrawalScheduleRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AchWithdrawalSchedulesCreateAchWithdrawalScheduleRequest buildRequest() {
 
     AchWithdrawalSchedulesCreateAchWithdrawalScheduleRequest request =
@@ -45,11 +63,13 @@ public class AchWithdrawalSchedulesCreateAchWithdrawalScheduleRequestBuilder {
   }
 
   public AchWithdrawalSchedulesCreateAchWithdrawalScheduleResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             AchWithdrawalSchedulesCreateAchWithdrawalScheduleRequest,
             AchWithdrawalSchedulesCreateAchWithdrawalScheduleResponse>
-        operation = new AchWithdrawalSchedulesCreateAchWithdrawalSchedule.Sync(sdkConfiguration);
+        operation =
+            new AchWithdrawalSchedulesCreateAchWithdrawalSchedule.Sync(sdkConfiguration, options);
     AchWithdrawalSchedulesCreateAchWithdrawalScheduleRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

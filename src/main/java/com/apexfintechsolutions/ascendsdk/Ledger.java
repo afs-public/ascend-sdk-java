@@ -25,6 +25,7 @@ import com.apexfintechsolutions.ascendsdk.operations.LedgerGetEntry;
 import com.apexfintechsolutions.ascendsdk.operations.LedgerListActivities;
 import com.apexfintechsolutions.ascendsdk.operations.LedgerListEntries;
 import com.apexfintechsolutions.ascendsdk.operations.LedgerListPositions;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
 import java.util.Optional;
 
 public class Ledger {
@@ -55,7 +56,8 @@ public class Ledger {
    * @throws Exception if the API call fails
    */
   public LedgerListEntriesResponse listEntries(String accountId) throws Exception {
-    return listEntries(accountId, Optional.empty(), Optional.empty(), Optional.empty());
+    return listEntries(
+        accountId, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -74,6 +76,7 @@ public class Ledger {
    * @param filter A CEL string to filter results; See the [CEL
    *     Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    *     Guides for more information;
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -81,7 +84,8 @@ public class Ledger {
       String accountId,
       Optional<Integer> pageSize,
       Optional<String> pageToken,
-      Optional<String> filter)
+      Optional<String> filter,
+      Optional<Options> options)
       throws Exception {
     LedgerListEntriesRequest request =
         LedgerListEntriesRequest.builder()
@@ -91,7 +95,7 @@ public class Ledger {
             .filter(filter)
             .build();
     RequestOperation<LedgerListEntriesRequest, LedgerListEntriesResponse> operation =
-        new LedgerListEntries.Sync(sdkConfiguration);
+        new LedgerListEntries.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -116,7 +120,8 @@ public class Ledger {
    * @throws Exception if the API call fails
    */
   public LedgerListActivitiesResponse listActivities(String accountId) throws Exception {
-    return listActivities(accountId, Optional.empty(), Optional.empty(), Optional.empty());
+    return listActivities(
+        accountId, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -135,6 +140,7 @@ public class Ledger {
    * @param filter A CEL string to filter results; See the [CEL
    *     Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    *     Guides for more information;
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -142,7 +148,8 @@ public class Ledger {
       String accountId,
       Optional<Integer> pageSize,
       Optional<String> pageToken,
-      Optional<String> filter)
+      Optional<String> filter,
+      Optional<Options> options)
       throws Exception {
     LedgerListActivitiesRequest request =
         LedgerListActivitiesRequest.builder()
@@ -152,7 +159,7 @@ public class Ledger {
             .filter(filter)
             .build();
     RequestOperation<LedgerListActivitiesRequest, LedgerListActivitiesResponse> operation =
-        new LedgerListActivities.Sync(sdkConfiguration);
+        new LedgerListActivities.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -177,7 +184,8 @@ public class Ledger {
    * @throws Exception if the API call fails
    */
   public LedgerListPositionsResponse listPositions(String accountId) throws Exception {
-    return listPositions(accountId, Optional.empty(), Optional.empty(), Optional.empty());
+    return listPositions(
+        accountId, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -196,6 +204,7 @@ public class Ledger {
    * @param filter A CEL string to filter results; See the [CEL
    *     Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    *     Guides for more information;
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -203,7 +212,8 @@ public class Ledger {
       String accountId,
       Optional<Integer> pageSize,
       Optional<String> pageToken,
-      Optional<String> filter)
+      Optional<String> filter,
+      Optional<Options> options)
       throws Exception {
     LedgerListPositionsRequest request =
         LedgerListPositionsRequest.builder()
@@ -213,7 +223,7 @@ public class Ledger {
             .filter(filter)
             .build();
     RequestOperation<LedgerListPositionsRequest, LedgerListPositionsResponse> operation =
-        new LedgerListPositions.Sync(sdkConfiguration);
+        new LedgerListPositions.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -240,10 +250,26 @@ public class Ledger {
    */
   public LedgerGetActivityResponse getActivity(String accountId, String activityId)
       throws Exception {
+    return getActivity(accountId, activityId, Optional.empty());
+  }
+
+  /**
+   * Get Activity
+   *
+   * <p>Get an activity
+   *
+   * @param accountId The account id.
+   * @param activityId The activity id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public LedgerGetActivityResponse getActivity(
+      String accountId, String activityId, Optional<Options> options) throws Exception {
     LedgerGetActivityRequest request =
         LedgerGetActivityRequest.builder().accountId(accountId).activityId(activityId).build();
     RequestOperation<LedgerGetActivityRequest, LedgerGetActivityResponse> operation =
-        new LedgerGetActivity.Sync(sdkConfiguration);
+        new LedgerGetActivity.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -269,10 +295,26 @@ public class Ledger {
    * @throws Exception if the API call fails
    */
   public LedgerGetEntryResponse getEntry(String accountId, String entryId) throws Exception {
+    return getEntry(accountId, entryId, Optional.empty());
+  }
+
+  /**
+   * Get Entry
+   *
+   * <p>Get an entry
+   *
+   * @param accountId The account id.
+   * @param entryId The entry id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public LedgerGetEntryResponse getEntry(
+      String accountId, String entryId, Optional<Options> options) throws Exception {
     LedgerGetEntryRequest request =
         LedgerGetEntryRequest.builder().accountId(accountId).entryId(entryId).build();
     RequestOperation<LedgerGetEntryRequest, LedgerGetEntryResponse> operation =
-        new LedgerGetEntry.Sync(sdkConfiguration);
+        new LedgerGetEntry.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

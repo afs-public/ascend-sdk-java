@@ -7,13 +7,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.BookingGetExecution;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class BookingGetExecutionRequestBuilder {
 
   private String accountId;
   private String tradeId;
   private String executionId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public BookingGetExecutionRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -38,6 +42,18 @@ public class BookingGetExecutionRequestBuilder {
     return this;
   }
 
+  public BookingGetExecutionRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public BookingGetExecutionRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private BookingGetExecutionRequest buildRequest() {
 
     BookingGetExecutionRequest request =
@@ -47,9 +63,10 @@ public class BookingGetExecutionRequestBuilder {
   }
 
   public BookingGetExecutionResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<BookingGetExecutionRequest, BookingGetExecutionResponse> operation =
-        new BookingGetExecution.Sync(sdkConfiguration);
+        new BookingGetExecution.Sync(sdkConfiguration, options);
     BookingGetExecutionRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

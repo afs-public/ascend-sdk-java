@@ -315,15 +315,16 @@ public class Application {
                     .build())
             .build();
 
-        AccountsListEnrollmentsResponse res = sdk.enrollmentsAndAgreements().listEnrollments()
+
+        sdk.enrollmentsAndAgreements().listEnrollments()
                 .accountId("01HC3MAQ4DR9QN1V8MJ4CN1HMK")
                 .pageSize(5)
                 .pageToken("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4")
-                .call();
+                .callAsStream()
+                .forEach((AccountsListEnrollmentsResponse item) -> {
+                   // handle page
+                });
 
-        if (res.listEnrollmentsResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```
@@ -448,15 +449,16 @@ public class Application {
                     .build())
             .build();
 
-        AccountsListAgreementsResponse res = sdk.enrollmentsAndAgreements().listAgreements()
+
+        sdk.enrollmentsAndAgreements().listAgreements()
                 .accountId("01HC3MAQ4DR9QN1V8MJ4CN1HMK")
                 .pageSize(5)
                 .pageToken("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4")
-                .call();
+                .callAsStream()
+                .forEach((AccountsListAgreementsResponse item) -> {
+                   // handle page
+                });
 
-        if (res.listAgreementsResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```
@@ -514,15 +516,16 @@ public class Application {
                     .build())
             .build();
 
-        AccountsListEntitlementsResponse res = sdk.enrollmentsAndAgreements().listEntitlements()
+
+        sdk.enrollmentsAndAgreements().listEntitlements()
                 .accountId("01HC3MAQ4DR9QN1V8MJ4CN1HMK")
                 .pageSize(5)
                 .pageToken("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4")
-                .call();
+                .callAsStream()
+                .forEach((AccountsListEntitlementsResponse item) -> {
+                   // handle page
+                });
 
-        if (res.listEntitlementsResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```

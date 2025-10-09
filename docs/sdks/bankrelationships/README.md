@@ -113,16 +113,17 @@ public class Application {
                     .build())
             .build();
 
-        BankRelationshipsListBankRelationshipsResponse res = sdk.bankRelationships().listBankRelationships()
+
+        sdk.bankRelationships().listBankRelationships()
                 .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
                 .pageSize(100)
                 .pageToken("CMFRGgYQup3BhQgaCSkAQCKS7AAAAA==")
                 .state(State.APPROVED)
-                .call();
+                .callAsStream()
+                .forEach((BankRelationshipsListBankRelationshipsResponse item) -> {
+                   // handle page
+                });
 
-        if (res.listBankRelationshipsResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```

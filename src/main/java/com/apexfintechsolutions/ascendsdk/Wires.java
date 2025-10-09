@@ -23,6 +23,8 @@ import com.apexfintechsolutions.ascendsdk.operations.WireDepositsGetWireDeposit;
 import com.apexfintechsolutions.ascendsdk.operations.WireWithdrawalsCancelWireWithdrawal;
 import com.apexfintechsolutions.ascendsdk.operations.WireWithdrawalsCreateWireWithdrawal;
 import com.apexfintechsolutions.ascendsdk.operations.WireWithdrawalsGetWireWithdrawal;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import java.util.Optional;
 
 public class Wires {
   private final SDKConfiguration sdkConfiguration;
@@ -54,13 +56,29 @@ public class Wires {
    */
   public WireDepositsGetWireDepositResponse getWireDeposit(String accountId, String wireDepositId)
       throws Exception {
+    return getWireDeposit(accountId, wireDepositId, Optional.empty());
+  }
+
+  /**
+   * Get Wire Deposit
+   *
+   * <p>Gets an existing wire deposit
+   *
+   * @param accountId The account id.
+   * @param wireDepositId The wireDeposit id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public WireDepositsGetWireDepositResponse getWireDeposit(
+      String accountId, String wireDepositId, Optional<Options> options) throws Exception {
     WireDepositsGetWireDepositRequest request =
         WireDepositsGetWireDepositRequest.builder()
             .accountId(accountId)
             .wireDepositId(wireDepositId)
             .build();
     RequestOperation<WireDepositsGetWireDepositRequest, WireDepositsGetWireDepositResponse>
-        operation = new WireDepositsGetWireDeposit.Sync(sdkConfiguration);
+        operation = new WireDepositsGetWireDeposit.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -87,6 +105,23 @@ public class Wires {
    */
   public WireWithdrawalsCreateWireWithdrawalResponse createWireWithdrawal(
       String accountId, WireWithdrawalCreate wireWithdrawalCreate) throws Exception {
+    return createWireWithdrawal(accountId, wireWithdrawalCreate, Optional.empty());
+  }
+
+  /**
+   * Create Wire Withdrawal
+   *
+   * <p>Creates a wire withdrawal
+   *
+   * @param accountId The account id.
+   * @param wireWithdrawalCreate A withdrawal transfer using the wire mechanism
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public WireWithdrawalsCreateWireWithdrawalResponse createWireWithdrawal(
+      String accountId, WireWithdrawalCreate wireWithdrawalCreate, Optional<Options> options)
+      throws Exception {
     WireWithdrawalsCreateWireWithdrawalRequest request =
         WireWithdrawalsCreateWireWithdrawalRequest.builder()
             .accountId(accountId)
@@ -94,7 +129,7 @@ public class Wires {
             .build();
     RequestOperation<
             WireWithdrawalsCreateWireWithdrawalRequest, WireWithdrawalsCreateWireWithdrawalResponse>
-        operation = new WireWithdrawalsCreateWireWithdrawal.Sync(sdkConfiguration);
+        operation = new WireWithdrawalsCreateWireWithdrawal.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -121,6 +156,22 @@ public class Wires {
    */
   public WireWithdrawalsGetWireWithdrawalResponse getWireWithdrawal(
       String accountId, String wireWithdrawalId) throws Exception {
+    return getWireWithdrawal(accountId, wireWithdrawalId, Optional.empty());
+  }
+
+  /**
+   * Get Wire Withdrawal
+   *
+   * <p>Gets an existing wire withdrawal
+   *
+   * @param accountId The account id.
+   * @param wireWithdrawalId The wireWithdrawal id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public WireWithdrawalsGetWireWithdrawalResponse getWireWithdrawal(
+      String accountId, String wireWithdrawalId, Optional<Options> options) throws Exception {
     WireWithdrawalsGetWireWithdrawalRequest request =
         WireWithdrawalsGetWireWithdrawalRequest.builder()
             .accountId(accountId)
@@ -128,7 +179,7 @@ public class Wires {
             .build();
     RequestOperation<
             WireWithdrawalsGetWireWithdrawalRequest, WireWithdrawalsGetWireWithdrawalResponse>
-        operation = new WireWithdrawalsGetWireWithdrawal.Sync(sdkConfiguration);
+        operation = new WireWithdrawalsGetWireWithdrawal.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -160,6 +211,29 @@ public class Wires {
       String wireWithdrawalId,
       CancelWireWithdrawalRequestCreate cancelWireWithdrawalRequestCreate)
       throws Exception {
+    return cancelWireWithdrawal(
+        accountId, wireWithdrawalId, cancelWireWithdrawalRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Cancel Wire Withdrawal
+   *
+   * <p>Cancels an existing wire withdrawal
+   *
+   * @param accountId The account id.
+   * @param wireWithdrawalId The wireWithdrawal id.
+   * @param cancelWireWithdrawalRequestCreate Request to cancel an existing wire withdrawal. The
+   *     cancel will only succeed if the wire has not made it to the SendingToBank state
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public WireWithdrawalsCancelWireWithdrawalResponse cancelWireWithdrawal(
+      String accountId,
+      String wireWithdrawalId,
+      CancelWireWithdrawalRequestCreate cancelWireWithdrawalRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     WireWithdrawalsCancelWireWithdrawalRequest request =
         WireWithdrawalsCancelWireWithdrawalRequest.builder()
             .accountId(accountId)
@@ -168,7 +242,7 @@ public class Wires {
             .build();
     RequestOperation<
             WireWithdrawalsCancelWireWithdrawalRequest, WireWithdrawalsCancelWireWithdrawalResponse>
-        operation = new WireWithdrawalsCancelWireWithdrawal.Sync(sdkConfiguration);
+        operation = new WireWithdrawalsCancelWireWithdrawal.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

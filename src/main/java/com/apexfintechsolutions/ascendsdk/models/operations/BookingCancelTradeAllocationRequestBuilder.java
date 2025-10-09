@@ -8,13 +8,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelTradeAllocationRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.BookingCancelTradeAllocation;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class BookingCancelTradeAllocationRequestBuilder {
 
   private String accountId;
   private String tradeAllocationId;
   private CancelTradeAllocationRequestCreate cancelTradeAllocationRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public BookingCancelTradeAllocationRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -40,6 +44,18 @@ public class BookingCancelTradeAllocationRequestBuilder {
     return this;
   }
 
+  public BookingCancelTradeAllocationRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public BookingCancelTradeAllocationRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private BookingCancelTradeAllocationRequest buildRequest() {
 
     BookingCancelTradeAllocationRequest request =
@@ -50,9 +66,10 @@ public class BookingCancelTradeAllocationRequestBuilder {
   }
 
   public BookingCancelTradeAllocationResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<BookingCancelTradeAllocationRequest, BookingCancelTradeAllocationResponse>
-        operation = new BookingCancelTradeAllocation.Sync(sdkConfiguration);
+        operation = new BookingCancelTradeAllocation.Sync(sdkConfiguration, options);
     BookingCancelTradeAllocationRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.EndLargeTraderRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsEndLargeTrader1;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AccountsEndLargeTrader1RequestBuilder {
 
   private String legalEntityId;
   private EndLargeTraderRequestCreate endLargeTraderRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsEndLargeTrader1RequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -33,6 +37,18 @@ public class AccountsEndLargeTrader1RequestBuilder {
     return this;
   }
 
+  public AccountsEndLargeTrader1RequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsEndLargeTrader1RequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsEndLargeTrader1Request buildRequest() {
 
     AccountsEndLargeTrader1Request request =
@@ -42,9 +58,10 @@ public class AccountsEndLargeTrader1RequestBuilder {
   }
 
   public AccountsEndLargeTrader1Response call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountsEndLargeTrader1Request, AccountsEndLargeTrader1Response> operation =
-        new AccountsEndLargeTrader1.Sync(sdkConfiguration);
+        new AccountsEndLargeTrader1.Sync(sdkConfiguration, options);
     AccountsEndLargeTrader1Request request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

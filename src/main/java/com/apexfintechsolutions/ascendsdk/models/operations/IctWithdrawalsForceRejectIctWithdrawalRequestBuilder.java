@@ -8,13 +8,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectIctWithdrawalRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.IctWithdrawalsForceRejectIctWithdrawal;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class IctWithdrawalsForceRejectIctWithdrawalRequestBuilder {
 
   private String accountId;
   private String ictWithdrawalId;
   private ForceRejectIctWithdrawalRequestCreate forceRejectIctWithdrawalRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public IctWithdrawalsForceRejectIctWithdrawalRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -42,6 +46,19 @@ public class IctWithdrawalsForceRejectIctWithdrawalRequestBuilder {
     return this;
   }
 
+  public IctWithdrawalsForceRejectIctWithdrawalRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public IctWithdrawalsForceRejectIctWithdrawalRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private IctWithdrawalsForceRejectIctWithdrawalRequest buildRequest() {
 
     IctWithdrawalsForceRejectIctWithdrawalRequest request =
@@ -52,11 +69,12 @@ public class IctWithdrawalsForceRejectIctWithdrawalRequestBuilder {
   }
 
   public IctWithdrawalsForceRejectIctWithdrawalResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             IctWithdrawalsForceRejectIctWithdrawalRequest,
             IctWithdrawalsForceRejectIctWithdrawalResponse>
-        operation = new IctWithdrawalsForceRejectIctWithdrawal.Sync(sdkConfiguration);
+        operation = new IctWithdrawalsForceRejectIctWithdrawal.Sync(sdkConfiguration, options);
     IctWithdrawalsForceRejectIctWithdrawalRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

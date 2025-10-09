@@ -7,12 +7,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.WireDepositsGetWireDeposit;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class WireDepositsGetWireDepositRequestBuilder {
 
   private String accountId;
   private String wireDepositId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public WireDepositsGetWireDepositRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -31,6 +35,18 @@ public class WireDepositsGetWireDepositRequestBuilder {
     return this;
   }
 
+  public WireDepositsGetWireDepositRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public WireDepositsGetWireDepositRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private WireDepositsGetWireDepositRequest buildRequest() {
 
     WireDepositsGetWireDepositRequest request =
@@ -40,9 +56,10 @@ public class WireDepositsGetWireDepositRequestBuilder {
   }
 
   public WireDepositsGetWireDepositResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<WireDepositsGetWireDepositRequest, WireDepositsGetWireDepositResponse>
-        operation = new WireDepositsGetWireDeposit.Sync(sdkConfiguration);
+        operation = new WireDepositsGetWireDeposit.Sync(sdkConfiguration, options);
     WireDepositsGetWireDepositRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

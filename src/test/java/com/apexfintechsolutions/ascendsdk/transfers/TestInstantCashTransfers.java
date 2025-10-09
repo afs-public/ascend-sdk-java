@@ -20,7 +20,6 @@ public class TestInstantCashTransfers {
     enrolledAccountId = AccountUtil.createEnrolledAccount(sdk).accountId().get();
     depositId = TransfersUtil.createIctDepositId(sdk, enrolledAccountId);
     withdrawalId = TransfersUtil.createIctWithdrawalId(sdk, enrolledAccountId);
-    Thread.sleep(5000);
   }
 
   @Test

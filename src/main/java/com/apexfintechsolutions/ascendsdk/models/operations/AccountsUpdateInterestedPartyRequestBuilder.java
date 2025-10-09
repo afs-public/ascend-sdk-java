@@ -8,6 +8,8 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.InterestedPartyUpdate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsUpdateInterestedParty;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import java.util.Optional;
 
@@ -17,6 +19,7 @@ public class AccountsUpdateInterestedPartyRequestBuilder {
   private String interestedPartyId;
   private Optional<String> updateMask = Optional.empty();
   private InterestedPartyUpdate interestedPartyUpdate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsUpdateInterestedPartyRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -54,6 +57,19 @@ public class AccountsUpdateInterestedPartyRequestBuilder {
     return this;
   }
 
+  public AccountsUpdateInterestedPartyRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsUpdateInterestedPartyRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsUpdateInterestedPartyRequest buildRequest() {
 
     AccountsUpdateInterestedPartyRequest request =
@@ -64,9 +80,10 @@ public class AccountsUpdateInterestedPartyRequestBuilder {
   }
 
   public AccountsUpdateInterestedPartyResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountsUpdateInterestedPartyRequest, AccountsUpdateInterestedPartyResponse>
-        operation = new AccountsUpdateInterestedParty.Sync(sdkConfiguration);
+        operation = new AccountsUpdateInterestedParty.Sync(sdkConfiguration, options);
     AccountsUpdateInterestedPartyRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

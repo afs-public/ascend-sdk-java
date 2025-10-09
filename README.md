@@ -16,7 +16,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'com.apexfintechsolutions:ascendsdk:1.4.0'
+implementation 'com.apexfintechsolutions:ascendsdk:1.5.0'
 ```
 
 Maven:
@@ -24,7 +24,7 @@ Maven:
 <dependency>
     <groupId>com.apexfintechsolutions</groupId>
     <artifactId>ascendsdk</artifactId>
-    <version>1.4.0</version>
+    <version>1.5.0</version>
 </dependency>
 ```
 
@@ -77,6 +77,164 @@ public class Application {
 ```
 
 <!-- No SDK Example Usage [usage] -->
+
+<!-- Start Pagination [pagination] -->
+## Pagination
+
+Some of the endpoints in this SDK support pagination. To use pagination, you can make your SDK calls using the `callAsIterable` or `callAsStream` methods.
+For certain operations, you can also use the `callAsStreamUnwrapped` method that streams individual page items directly.
+
+Here's an example depicting the different ways to use pagination:
+
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.AuthenticationListSigningKeysResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.AuthenticationListSigningKeysSecurity;
+import java.lang.Exception;
+import java.lang.Iterable;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+            .build();
+
+
+        var b = sdk.authentication().listSigningKeys()
+                .security(AuthenticationListSigningKeysSecurity.builder()
+                    .apiKeyAuth(System.getenv().getOrDefault("API_KEY_AUTH", ""))
+                    .build())
+                .pageSize(50)
+                .pageToken("ZXhhbXBsZQo");
+
+        // Iterate through all pages using a traditional for-each loop
+        // Each iteration returns a complete page response
+        Iterable<AuthenticationListSigningKeysResponse> iterable = b.callAsIterable();
+        for (AuthenticationListSigningKeysResponse page : iterable) {
+            // handle page
+        }
+
+        // Stream through all pages and process individual items
+        // callAsStreamUnwrapped() flattens pages into individual items
+
+        // Stream through pages without unwrapping (each item is a complete page)
+        b.callAsStream()
+            .forEach((AuthenticationListSigningKeysResponse page) -> {
+                // handle page
+            });
+
+    }
+}
+```
+<!-- End Pagination [pagination] -->
+
+<!-- Start Retries [retries] -->
+## Retries
+
+Some of the endpoints in this SDK support retries. If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API. However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
+
+To change the default retry strategy for a single API call, you can provide a `RetryConfig` object through the `retryConfig` builder method:
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.GenerateServiceAccountTokenRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.AuthenticationGenerateServiceAccountTokenResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.AuthenticationGenerateServiceAccountTokenSecurity;
+import com.apexfintechsolutions.ascendsdk.utils.BackoffStrategy;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
+import java.lang.Exception;
+import java.util.concurrent.TimeUnit;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Status, Exception {
+
+        SDK sdk = SDK.builder()
+            .build();
+
+        GenerateServiceAccountTokenRequestCreate req = GenerateServiceAccountTokenRequestCreate.builder()
+                .jws("eyJhbGciOiAiUlMyNTYifQ.eyJuYW1lIjogImpkb3VnaCIsIm9yZ2FuaXphdGlvbiI6ICJjb3JyZXNwb25kZW50cy8xMjM0NTY3OC0xMjM0LTEyMzQtMTIzNC0xMjM0NTY3ODkxMDEiLCJkYXRldGltZSI6ICIyMDI0LTAyLTA1VDIxOjAyOjI3LjkwMTE4MFoifQ.IMy3KmYoG8Ppf+7hXN7tm7J4MrNpQLGL7WCWvhh4nZWAVKkluL3/u3KC6hZ6Mb/5p7Y54CgZ68aWT2BcP5y4VtzIZR1Chm5pxbLfgE4aJuk+FnF6K3Gc3bBjOWCL58pxY2aTb0iU/exDEA1cbMDvbCzmY5kRefDvorLOqgUS/tS2MJ2jv4RlZFPlmHv5PtOruJ8xUW19gEgGhsPXYYeSHFTE1ZlaDvyXrKtpOvlf+FVc2RTuEw529LZnzwH4/eJJR3BpSpHyJTjQqiaMT3wzpXXYKfCRqnDkSSKJDzCzTb0/uWK/Lf0uafxPXk5YLdis+dbo1zNQhVVKjwnMpk1vLw")
+                .build();
+
+        AuthenticationGenerateServiceAccountTokenResponse res = sdk.authentication().generateServiceAccountToken()
+                .request(req)
+                .security(AuthenticationGenerateServiceAccountTokenSecurity.builder()
+                    .apiKeyAuth(System.getenv().getOrDefault("API_KEY_AUTH", ""))
+                    .build())
+                .retryConfig(RetryConfig.builder()
+                    .backoff(BackoffStrategy.builder()
+                        .initialInterval(1L, TimeUnit.MILLISECONDS)
+                        .maxInterval(50L, TimeUnit.MILLISECONDS)
+                        .maxElapsedTime(1000L, TimeUnit.MILLISECONDS)
+                        .baseFactor(1.1)
+                        .jitterFactor(0.15)
+                        .retryConnectError(false)
+                        .build())
+                    .build())
+                .call();
+
+        if (res.token().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+If you'd like to override the default retry strategy for all operations that support retries, you can provide a configuration at SDK initialization:
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.GenerateServiceAccountTokenRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.AuthenticationGenerateServiceAccountTokenResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.AuthenticationGenerateServiceAccountTokenSecurity;
+import com.apexfintechsolutions.ascendsdk.utils.BackoffStrategy;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
+import java.lang.Exception;
+import java.util.concurrent.TimeUnit;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .retryConfig(RetryConfig.builder()
+                    .backoff(BackoffStrategy.builder()
+                        .initialInterval(1L, TimeUnit.MILLISECONDS)
+                        .maxInterval(50L, TimeUnit.MILLISECONDS)
+                        .maxElapsedTime(1000L, TimeUnit.MILLISECONDS)
+                        .baseFactor(1.1)
+                        .jitterFactor(0.15)
+                        .retryConnectError(false)
+                        .build())
+                    .build())
+            .build();
+
+        GenerateServiceAccountTokenRequestCreate req = GenerateServiceAccountTokenRequestCreate.builder()
+                .jws("eyJhbGciOiAiUlMyNTYifQ.eyJuYW1lIjogImpkb3VnaCIsIm9yZ2FuaXphdGlvbiI6ICJjb3JyZXNwb25kZW50cy8xMjM0NTY3OC0xMjM0LTEyMzQtMTIzNC0xMjM0NTY3ODkxMDEiLCJkYXRldGltZSI6ICIyMDI0LTAyLTA1VDIxOjAyOjI3LjkwMTE4MFoifQ.IMy3KmYoG8Ppf+7hXN7tm7J4MrNpQLGL7WCWvhh4nZWAVKkluL3/u3KC6hZ6Mb/5p7Y54CgZ68aWT2BcP5y4VtzIZR1Chm5pxbLfgE4aJuk+FnF6K3Gc3bBjOWCL58pxY2aTb0iU/exDEA1cbMDvbCzmY5kRefDvorLOqgUS/tS2MJ2jv4RlZFPlmHv5PtOruJ8xUW19gEgGhsPXYYeSHFTE1ZlaDvyXrKtpOvlf+FVc2RTuEw529LZnzwH4/eJJR3BpSpHyJTjQqiaMT3wzpXXYKfCRqnDkSSKJDzCzTb0/uWK/Lf0uafxPXk5YLdis+dbo1zNQhVVKjwnMpk1vLw")
+                .build();
+
+        AuthenticationGenerateServiceAccountTokenResponse res = sdk.authentication().generateServiceAccountToken()
+                .request(req)
+                .security(AuthenticationGenerateServiceAccountTokenSecurity.builder()
+                    .apiKeyAuth(System.getenv().getOrDefault("API_KEY_AUTH", ""))
+                    .build())
+                .call();
+
+        if (res.token().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+<!-- End Retries [retries] -->
 
 <!-- Start Error Handling [errors] -->
 ## Error Handling
@@ -292,6 +450,11 @@ public class Application {
 * [listAssetsCorrespondent](docs/sdks/assets/README.md#listassetscorrespondent) - List Assets (By Correspondent)
 * [getAssetCorrespondent](docs/sdks/assets/README.md#getassetcorrespondent) - Get Asset (By Correspondent)
 
+### [assetTradingConfig()](docs/sdks/assettradingconfig/README.md)
+
+* [getAssetTradingConfig](docs/sdks/assettradingconfig/README.md#getassettradingconfig) - Get Asset Trading Config
+* [listAssetTradingConfigs](docs/sdks/assettradingconfig/README.md#listassettradingconfigs) - List Asset Trading Configs
+
 ### [authentication()](docs/sdks/authentication/README.md)
 
 * [generateServiceAccountToken](docs/sdks/authentication/README.md#generateserviceaccounttoken) - Generate Service Account Token
@@ -331,6 +494,7 @@ public class Application {
 * [createOrder](docs/sdks/createorder/README.md#createorder) - Create Order
 * [getOrder](docs/sdks/createorder/README.md#getorder) - Get Order
 * [cancelOrder](docs/sdks/createorder/README.md#cancelorder) - Cancel Order
+* [setExtraReportingData](docs/sdks/createorder/README.md#setextrareportingdata) - Set Extra Reporting Data
 
 ### [dataRetrieval()](docs/sdks/dataretrieval/README.md)
 

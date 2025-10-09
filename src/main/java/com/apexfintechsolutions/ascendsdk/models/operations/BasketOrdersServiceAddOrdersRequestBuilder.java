@@ -8,13 +8,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.AddOrdersRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.BasketOrdersServiceAddOrders;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class BasketOrdersServiceAddOrdersRequestBuilder {
 
   private String correspondentId;
   private String basketId;
   private AddOrdersRequestCreate addOrdersRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public BasketOrdersServiceAddOrdersRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -40,6 +44,18 @@ public class BasketOrdersServiceAddOrdersRequestBuilder {
     return this;
   }
 
+  public BasketOrdersServiceAddOrdersRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public BasketOrdersServiceAddOrdersRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private BasketOrdersServiceAddOrdersRequest buildRequest() {
 
     BasketOrdersServiceAddOrdersRequest request =
@@ -49,9 +65,10 @@ public class BasketOrdersServiceAddOrdersRequestBuilder {
   }
 
   public BasketOrdersServiceAddOrdersResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<BasketOrdersServiceAddOrdersRequest, BasketOrdersServiceAddOrdersResponse>
-        operation = new BasketOrdersServiceAddOrders.Sync(sdkConfiguration);
+        operation = new BasketOrdersServiceAddOrders.Sync(sdkConfiguration, options);
     BasketOrdersServiceAddOrdersRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

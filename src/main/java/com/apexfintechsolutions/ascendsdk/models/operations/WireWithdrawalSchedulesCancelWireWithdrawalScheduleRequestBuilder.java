@@ -8,13 +8,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelWireWithdrawalScheduleRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.WireWithdrawalSchedulesCancelWireWithdrawalSchedule;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class WireWithdrawalSchedulesCancelWireWithdrawalScheduleRequestBuilder {
 
   private String accountId;
   private String wireWithdrawalScheduleId;
   private CancelWireWithdrawalScheduleRequestCreate cancelWireWithdrawalScheduleRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public WireWithdrawalSchedulesCancelWireWithdrawalScheduleRequestBuilder(
@@ -45,6 +49,20 @@ public class WireWithdrawalSchedulesCancelWireWithdrawalScheduleRequestBuilder {
     return this;
   }
 
+  public WireWithdrawalSchedulesCancelWireWithdrawalScheduleRequestBuilder retryConfig(
+      RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public WireWithdrawalSchedulesCancelWireWithdrawalScheduleRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private WireWithdrawalSchedulesCancelWireWithdrawalScheduleRequest buildRequest() {
 
     WireWithdrawalSchedulesCancelWireWithdrawalScheduleRequest request =
@@ -55,11 +73,13 @@ public class WireWithdrawalSchedulesCancelWireWithdrawalScheduleRequestBuilder {
   }
 
   public WireWithdrawalSchedulesCancelWireWithdrawalScheduleResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             WireWithdrawalSchedulesCancelWireWithdrawalScheduleRequest,
             WireWithdrawalSchedulesCancelWireWithdrawalScheduleResponse>
-        operation = new WireWithdrawalSchedulesCancelWireWithdrawalSchedule.Sync(sdkConfiguration);
+        operation =
+            new WireWithdrawalSchedulesCancelWireWithdrawalSchedule.Sync(sdkConfiguration, options);
     WireWithdrawalSchedulesCancelWireWithdrawalScheduleRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

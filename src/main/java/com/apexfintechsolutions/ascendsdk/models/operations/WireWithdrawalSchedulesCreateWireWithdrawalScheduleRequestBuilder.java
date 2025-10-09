@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.WireWithdrawalScheduleCreate;
 import com.apexfintechsolutions.ascendsdk.operations.WireWithdrawalSchedulesCreateWireWithdrawalSchedule;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class WireWithdrawalSchedulesCreateWireWithdrawalScheduleRequestBuilder {
 
   private String accountId;
   private WireWithdrawalScheduleCreate wireWithdrawalScheduleCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public WireWithdrawalSchedulesCreateWireWithdrawalScheduleRequestBuilder(
@@ -35,6 +39,20 @@ public class WireWithdrawalSchedulesCreateWireWithdrawalScheduleRequestBuilder {
     return this;
   }
 
+  public WireWithdrawalSchedulesCreateWireWithdrawalScheduleRequestBuilder retryConfig(
+      RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public WireWithdrawalSchedulesCreateWireWithdrawalScheduleRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private WireWithdrawalSchedulesCreateWireWithdrawalScheduleRequest buildRequest() {
 
     WireWithdrawalSchedulesCreateWireWithdrawalScheduleRequest request =
@@ -45,11 +63,13 @@ public class WireWithdrawalSchedulesCreateWireWithdrawalScheduleRequestBuilder {
   }
 
   public WireWithdrawalSchedulesCreateWireWithdrawalScheduleResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             WireWithdrawalSchedulesCreateWireWithdrawalScheduleRequest,
             WireWithdrawalSchedulesCreateWireWithdrawalScheduleResponse>
-        operation = new WireWithdrawalSchedulesCreateWireWithdrawalSchedule.Sync(sdkConfiguration);
+        operation =
+            new WireWithdrawalSchedulesCreateWireWithdrawalSchedule.Sync(sdkConfiguration, options);
     WireWithdrawalSchedulesCreateWireWithdrawalScheduleRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

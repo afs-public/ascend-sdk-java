@@ -48,6 +48,8 @@ import com.apexfintechsolutions.ascendsdk.operations.BookingGetExecution;
 import com.apexfintechsolutions.ascendsdk.operations.BookingGetTrade;
 import com.apexfintechsolutions.ascendsdk.operations.BookingRebookExecution;
 import com.apexfintechsolutions.ascendsdk.operations.BookingRebookTrade;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import java.util.Optional;
 
 public class TradeBooking {
   private final SDKConfiguration sdkConfiguration;
@@ -88,10 +90,31 @@ public class TradeBooking {
    */
   public BookingCreateTradeResponse createTrade(String accountId, TradeCreate tradeCreate)
       throws Exception {
+    return createTrade(accountId, tradeCreate, Optional.empty());
+  }
+
+  /**
+   * Create Trade
+   *
+   * <p>Creates a trade with one or more executions. Combination of (account_id, client_order_id,
+   * and the process_date (determined by Booking service)) determines the uniqueness of the trade.
+   *
+   * <p>Upon successful submission, returns the created trade and its details including Booking
+   * service enriched details.
+   *
+   * @param accountId The account id.
+   * @param tradeCreate A Trade represents an entire order made by a client. Trades can hold one or
+   *     many executions representing partial fills that aggregate into a whole order.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BookingCreateTradeResponse createTrade(
+      String accountId, TradeCreate tradeCreate, Optional<Options> options) throws Exception {
     BookingCreateTradeRequest request =
         BookingCreateTradeRequest.builder().accountId(accountId).tradeCreate(tradeCreate).build();
     RequestOperation<BookingCreateTradeRequest, BookingCreateTradeResponse> operation =
-        new BookingCreateTrade.Sync(sdkConfiguration);
+        new BookingCreateTrade.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -121,10 +144,28 @@ public class TradeBooking {
    * @throws Exception if the API call fails
    */
   public BookingGetTradeResponse getTrade(String accountId, String tradeId) throws Exception {
+    return getTrade(accountId, tradeId, Optional.empty());
+  }
+
+  /**
+   * Get Trade
+   *
+   * <p>Gets a trade and all executions by trade_id.
+   *
+   * <p>Upon successful submission, returns the trade details and all the execution by trade_id.
+   *
+   * @param accountId The account id.
+   * @param tradeId The trade id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BookingGetTradeResponse getTrade(
+      String accountId, String tradeId, Optional<Options> options) throws Exception {
     BookingGetTradeRequest request =
         BookingGetTradeRequest.builder().accountId(accountId).tradeId(tradeId).build();
     RequestOperation<BookingGetTradeRequest, BookingGetTradeResponse> operation =
-        new BookingGetTrade.Sync(sdkConfiguration);
+        new BookingGetTrade.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -163,6 +204,32 @@ public class TradeBooking {
   public BookingCompleteTradeResponse completeTrade(
       String accountId, String tradeId, CompleteTradeRequestCreate completeTradeRequestCreate)
       throws Exception {
+    return completeTrade(accountId, tradeId, completeTradeRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Complete Trade
+   *
+   * <p>Complete a Trade by closing and generating any fees and withholdings if necessary. Once this
+   * endpoint returns an OK, the combination of details that generated the Trade (account_id,
+   * client_order_id, and the process_date) cannot be reused.
+   *
+   * <p>Upon successful submission, returns completed trade details and all the executions. Trades
+   * that are left open will be automatically closed nightly before Ledger's EOD.
+   *
+   * @param accountId The account id.
+   * @param tradeId The trade id.
+   * @param completeTradeRequestCreate A request for completing a trade.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BookingCompleteTradeResponse completeTrade(
+      String accountId,
+      String tradeId,
+      CompleteTradeRequestCreate completeTradeRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     BookingCompleteTradeRequest request =
         BookingCompleteTradeRequest.builder()
             .accountId(accountId)
@@ -170,7 +237,7 @@ public class TradeBooking {
             .completeTradeRequestCreate(completeTradeRequestCreate)
             .build();
     RequestOperation<BookingCompleteTradeRequest, BookingCompleteTradeResponse> operation =
-        new BookingCompleteTrade.Sync(sdkConfiguration);
+        new BookingCompleteTrade.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -205,6 +272,30 @@ public class TradeBooking {
   public BookingCancelTradeResponse cancelTrade(
       String accountId, String tradeId, CancelTradeRequestCreate cancelTradeRequestCreate)
       throws Exception {
+    return cancelTrade(accountId, tradeId, cancelTradeRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Cancel Trade
+   *
+   * <p>Cancel a trade and all the executions using the original trade_id. CancelTrade will either
+   * cancel everything, or nothing at all if a failure occurs.
+   *
+   * <p>Upon successful submission, returns an empty response.
+   *
+   * @param accountId The account id.
+   * @param tradeId The trade id.
+   * @param cancelTradeRequestCreate A request for canceling all executions underneath a trade.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BookingCancelTradeResponse cancelTrade(
+      String accountId,
+      String tradeId,
+      CancelTradeRequestCreate cancelTradeRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     BookingCancelTradeRequest request =
         BookingCancelTradeRequest.builder()
             .accountId(accountId)
@@ -212,7 +303,7 @@ public class TradeBooking {
             .cancelTradeRequestCreate(cancelTradeRequestCreate)
             .build();
     RequestOperation<BookingCancelTradeRequest, BookingCancelTradeResponse> operation =
-        new BookingCancelTrade.Sync(sdkConfiguration);
+        new BookingCancelTrade.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -250,6 +341,32 @@ public class TradeBooking {
   public BookingRebookTradeResponse rebookTrade(
       String accountId, String tradeId, RebookTradeRequestCreate rebookTradeRequestCreate)
       throws Exception {
+    return rebookTrade(accountId, tradeId, rebookTradeRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Rebook Trade
+   *
+   * <p>Rebook a trade by the original trade_id. The entire original trade's executions are rebooked
+   * using the executions provided in the request. If applicable, fees and backup withholdings will
+   * be re-calculated.
+   *
+   * <p>Upon successful submission, returns the rebooked trade details and all the executions.
+   *
+   * @param accountId The account id.
+   * @param tradeId The trade id.
+   * @param rebookTradeRequestCreate Used to correct an entire fill of trades using the activity_id
+   *     that is common to all of the trades in the request
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BookingRebookTradeResponse rebookTrade(
+      String accountId,
+      String tradeId,
+      RebookTradeRequestCreate rebookTradeRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     BookingRebookTradeRequest request =
         BookingRebookTradeRequest.builder()
             .accountId(accountId)
@@ -257,7 +374,7 @@ public class TradeBooking {
             .rebookTradeRequestCreate(rebookTradeRequestCreate)
             .build();
     RequestOperation<BookingRebookTradeRequest, BookingRebookTradeResponse> operation =
-        new BookingRebookTrade.Sync(sdkConfiguration);
+        new BookingRebookTrade.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -291,6 +408,28 @@ public class TradeBooking {
    */
   public BookingCreateExecutionResponse createExecution(
       String accountId, String tradeId, ExecutionCreate executionCreate) throws Exception {
+    return createExecution(accountId, tradeId, executionCreate, Optional.empty());
+  }
+
+  /**
+   * Create Execution
+   *
+   * <p>Create a new execution under an existing trade that is open.
+   *
+   * <p>Upon successful submission, returns the created execution and its details.
+   *
+   * @param accountId The account id.
+   * @param tradeId The trade id.
+   * @param executionCreate An execution represents a partial-fill or a fill that is part of an
+   *     order. Executions are children to a Trade, which collectively represents an entire order
+   *     made by a client.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BookingCreateExecutionResponse createExecution(
+      String accountId, String tradeId, ExecutionCreate executionCreate, Optional<Options> options)
+      throws Exception {
     BookingCreateExecutionRequest request =
         BookingCreateExecutionRequest.builder()
             .accountId(accountId)
@@ -298,7 +437,7 @@ public class TradeBooking {
             .executionCreate(executionCreate)
             .build();
     RequestOperation<BookingCreateExecutionRequest, BookingCreateExecutionResponse> operation =
-        new BookingCreateExecution.Sync(sdkConfiguration);
+        new BookingCreateExecution.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -330,6 +469,26 @@ public class TradeBooking {
    */
   public BookingGetExecutionResponse getExecution(
       String accountId, String tradeId, String executionId) throws Exception {
+    return getExecution(accountId, tradeId, executionId, Optional.empty());
+  }
+
+  /**
+   * Get Execution
+   *
+   * <p>Gets an execution by execution_id.
+   *
+   * <p>Upon successful submission, returns the execution details by execution_id.
+   *
+   * @param accountId The account id.
+   * @param tradeId The trade id.
+   * @param executionId The execution id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BookingGetExecutionResponse getExecution(
+      String accountId, String tradeId, String executionId, Optional<Options> options)
+      throws Exception {
     BookingGetExecutionRequest request =
         BookingGetExecutionRequest.builder()
             .accountId(accountId)
@@ -337,7 +496,7 @@ public class TradeBooking {
             .executionId(executionId)
             .build();
     RequestOperation<BookingGetExecutionRequest, BookingGetExecutionResponse> operation =
-        new BookingGetExecution.Sync(sdkConfiguration);
+        new BookingGetExecution.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -376,6 +535,33 @@ public class TradeBooking {
       String executionId,
       CancelExecutionRequestCreate cancelExecutionRequestCreate)
       throws Exception {
+    return cancelExecution(
+        accountId, tradeId, executionId, cancelExecutionRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Cancel Execution
+   *
+   * <p>Cancel an execution using the original execution_id. If applicable, fees and backup
+   * withholdings will be re-calculated.
+   *
+   * <p>Upon successful submission, returns the execution that was canceled.
+   *
+   * @param accountId The account id.
+   * @param tradeId The trade id.
+   * @param executionId The execution id.
+   * @param cancelExecutionRequestCreate A request for canceling a single execution.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BookingCancelExecutionResponse cancelExecution(
+      String accountId,
+      String tradeId,
+      String executionId,
+      CancelExecutionRequestCreate cancelExecutionRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     BookingCancelExecutionRequest request =
         BookingCancelExecutionRequest.builder()
             .accountId(accountId)
@@ -384,7 +570,7 @@ public class TradeBooking {
             .cancelExecutionRequestCreate(cancelExecutionRequestCreate)
             .build();
     RequestOperation<BookingCancelExecutionRequest, BookingCancelExecutionResponse> operation =
-        new BookingCancelExecution.Sync(sdkConfiguration);
+        new BookingCancelExecution.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -423,6 +609,33 @@ public class TradeBooking {
       String executionId,
       RebookExecutionRequestCreate rebookExecutionRequestCreate)
       throws Exception {
+    return rebookExecution(
+        accountId, tradeId, executionId, rebookExecutionRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Rebook Execution
+   *
+   * <p>Rebook an execution by the original execution_id. If applicable, fees and backup
+   * withholdings will be re-calculated.
+   *
+   * <p>Upon successful submission, returns the rebooked execution details.
+   *
+   * @param accountId The account id.
+   * @param tradeId The trade id.
+   * @param executionId The execution id.
+   * @param rebookExecutionRequestCreate A response for the rebook execution method.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BookingRebookExecutionResponse rebookExecution(
+      String accountId,
+      String tradeId,
+      String executionId,
+      RebookExecutionRequestCreate rebookExecutionRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     BookingRebookExecutionRequest request =
         BookingRebookExecutionRequest.builder()
             .accountId(accountId)
@@ -431,7 +644,7 @@ public class TradeBooking {
             .rebookExecutionRequestCreate(rebookExecutionRequestCreate)
             .build();
     RequestOperation<BookingRebookExecutionRequest, BookingRebookExecutionResponse> operation =
-        new BookingRebookExecution.Sync(sdkConfiguration);
+        new BookingRebookExecution.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

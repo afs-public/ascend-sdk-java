@@ -8,13 +8,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectAchDepositRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AchDepositsForceRejectAchDeposit;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AchDepositsForceRejectAchDepositRequestBuilder {
 
   private String accountId;
   private String achDepositId;
   private ForceRejectAchDepositRequestCreate forceRejectAchDepositRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AchDepositsForceRejectAchDepositRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -40,6 +44,19 @@ public class AchDepositsForceRejectAchDepositRequestBuilder {
     return this;
   }
 
+  public AchDepositsForceRejectAchDepositRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AchDepositsForceRejectAchDepositRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AchDepositsForceRejectAchDepositRequest buildRequest() {
 
     AchDepositsForceRejectAchDepositRequest request =
@@ -50,10 +67,11 @@ public class AchDepositsForceRejectAchDepositRequestBuilder {
   }
 
   public AchDepositsForceRejectAchDepositResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             AchDepositsForceRejectAchDepositRequest, AchDepositsForceRejectAchDepositResponse>
-        operation = new AchDepositsForceRejectAchDeposit.Sync(sdkConfiguration);
+        operation = new AchDepositsForceRejectAchDeposit.Sync(sdkConfiguration, options);
     AchDepositsForceRejectAchDepositRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

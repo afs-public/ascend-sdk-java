@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.BasketCreate;
 import com.apexfintechsolutions.ascendsdk.operations.BasketOrdersServiceCreateBasket;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class BasketOrdersServiceCreateBasketRequestBuilder {
 
   private String correspondentId;
   private BasketCreate basketCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public BasketOrdersServiceCreateBasketRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -32,6 +36,19 @@ public class BasketOrdersServiceCreateBasketRequestBuilder {
     return this;
   }
 
+  public BasketOrdersServiceCreateBasketRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public BasketOrdersServiceCreateBasketRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private BasketOrdersServiceCreateBasketRequest buildRequest() {
 
     BasketOrdersServiceCreateBasketRequest request =
@@ -41,10 +58,11 @@ public class BasketOrdersServiceCreateBasketRequestBuilder {
   }
 
   public BasketOrdersServiceCreateBasketResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             BasketOrdersServiceCreateBasketRequest, BasketOrdersServiceCreateBasketResponse>
-        operation = new BasketOrdersServiceCreateBasket.Sync(sdkConfiguration);
+        operation = new BasketOrdersServiceCreateBasket.Sync(sdkConfiguration, options);
     BasketOrdersServiceCreateBasketRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

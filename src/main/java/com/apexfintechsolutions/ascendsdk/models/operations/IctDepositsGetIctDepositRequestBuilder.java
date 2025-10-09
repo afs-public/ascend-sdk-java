@@ -7,12 +7,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.IctDepositsGetIctDeposit;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class IctDepositsGetIctDepositRequestBuilder {
 
   private String accountId;
   private String ictDepositId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public IctDepositsGetIctDepositRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -31,6 +35,18 @@ public class IctDepositsGetIctDepositRequestBuilder {
     return this;
   }
 
+  public IctDepositsGetIctDepositRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public IctDepositsGetIctDepositRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private IctDepositsGetIctDepositRequest buildRequest() {
 
     IctDepositsGetIctDepositRequest request =
@@ -40,9 +56,10 @@ public class IctDepositsGetIctDepositRequestBuilder {
   }
 
   public IctDepositsGetIctDepositResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<IctDepositsGetIctDepositRequest, IctDepositsGetIctDepositResponse> operation =
-        new IctDepositsGetIctDeposit.Sync(sdkConfiguration);
+        new IctDepositsGetIctDeposit.Sync(sdkConfiguration, options);
     IctDepositsGetIctDepositRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

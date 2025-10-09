@@ -9,6 +9,7 @@ import com.apexfintechsolutions.ascendsdk.models.operations.SnapshotsListSnapsho
 import com.apexfintechsolutions.ascendsdk.models.operations.SnapshotsListSnapshotsRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.SnapshotsListSnapshotsResponse;
 import com.apexfintechsolutions.ascendsdk.operations.SnapshotsListSnapshots;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
 import java.util.Optional;
 
 public class DataRetrieval {
@@ -38,7 +39,7 @@ public class DataRetrieval {
    * @throws Exception if the API call fails
    */
   public SnapshotsListSnapshotsResponse listSnapshotsDirect() throws Exception {
-    return listSnapshots(Optional.empty(), Optional.empty(), Optional.empty());
+    return listSnapshots(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -53,11 +54,15 @@ public class DataRetrieval {
    *     1000.
    * @param pageToken The token for retrieving the next page of snapshots, the value of which will
    *     have been returned in a previous response.
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public SnapshotsListSnapshotsResponse listSnapshots(
-      Optional<String> filter, Optional<Integer> pageSize, Optional<String> pageToken)
+      Optional<String> filter,
+      Optional<Integer> pageSize,
+      Optional<String> pageToken,
+      Optional<Options> options)
       throws Exception {
     SnapshotsListSnapshotsRequest request =
         SnapshotsListSnapshotsRequest.builder()
@@ -66,7 +71,7 @@ public class DataRetrieval {
             .pageToken(pageToken)
             .build();
     RequestOperation<SnapshotsListSnapshotsRequest, SnapshotsListSnapshotsResponse> operation =
-        new SnapshotsListSnapshots.Sync(sdkConfiguration);
+        new SnapshotsListSnapshots.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

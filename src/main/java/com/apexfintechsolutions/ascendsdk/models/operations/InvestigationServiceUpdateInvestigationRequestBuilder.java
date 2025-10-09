@@ -8,6 +8,8 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.InvestigationUpdate;
 import com.apexfintechsolutions.ascendsdk.operations.InvestigationServiceUpdateInvestigation;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import java.util.Optional;
 
@@ -16,6 +18,7 @@ public class InvestigationServiceUpdateInvestigationRequestBuilder {
   private String investigationId;
   private Optional<String> updateMask = Optional.empty();
   private InvestigationUpdate investigationUpdate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public InvestigationServiceUpdateInvestigationRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -49,6 +52,20 @@ public class InvestigationServiceUpdateInvestigationRequestBuilder {
     return this;
   }
 
+  public InvestigationServiceUpdateInvestigationRequestBuilder retryConfig(
+      RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public InvestigationServiceUpdateInvestigationRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private InvestigationServiceUpdateInvestigationRequest buildRequest() {
 
     InvestigationServiceUpdateInvestigationRequest request =
@@ -59,11 +76,12 @@ public class InvestigationServiceUpdateInvestigationRequestBuilder {
   }
 
   public InvestigationServiceUpdateInvestigationResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             InvestigationServiceUpdateInvestigationRequest,
             InvestigationServiceUpdateInvestigationResponse>
-        operation = new InvestigationServiceUpdateInvestigation.Sync(sdkConfiguration);
+        operation = new InvestigationServiceUpdateInvestigation.Sync(sdkConfiguration, options);
     InvestigationServiceUpdateInvestigationRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

@@ -80,7 +80,6 @@ public class TestSubscriber {
   @Order(4)
   public void test_subscriber_events_delete_push_subscription_delete_push_subscription1()
       throws Exception {
-    Thread.sleep(25000);
     var res = sdk.subscriber().deletePushSubscription().subscriptionId(subscriberId).call();
     Assertions.assertNotNull(res);
     Assertions.assertEquals(res.statusCode(), 200);

@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.RetrieveQuoteRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.OrderPriceServiceRetrieveQuote;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class OrderPriceServiceRetrieveQuoteRequestBuilder {
 
   private String accountId;
   private RetrieveQuoteRequestCreate retrieveQuoteRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public OrderPriceServiceRetrieveQuoteRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -33,6 +37,19 @@ public class OrderPriceServiceRetrieveQuoteRequestBuilder {
     return this;
   }
 
+  public OrderPriceServiceRetrieveQuoteRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public OrderPriceServiceRetrieveQuoteRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private OrderPriceServiceRetrieveQuoteRequest buildRequest() {
 
     OrderPriceServiceRetrieveQuoteRequest request =
@@ -42,9 +59,10 @@ public class OrderPriceServiceRetrieveQuoteRequestBuilder {
   }
 
   public OrderPriceServiceRetrieveQuoteResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<OrderPriceServiceRetrieveQuoteRequest, OrderPriceServiceRetrieveQuoteResponse>
-        operation = new OrderPriceServiceRetrieveQuote.Sync(sdkConfiguration);
+        operation = new OrderPriceServiceRetrieveQuote.Sync(sdkConfiguration, options);
     OrderPriceServiceRetrieveQuoteRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

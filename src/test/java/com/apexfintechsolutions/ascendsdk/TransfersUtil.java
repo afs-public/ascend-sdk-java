@@ -9,12 +9,9 @@ public class TransfersUtil {
   public static BankRelationship createVerifiedBankRelationship(SDK sdk, Account enrolledAccount)
       throws Exception {
     var bankRelationship = createBankRelationship(sdk, enrolledAccount);
-    Thread.sleep(5000);
     var amounts = getCorrectMicrodepositAmounts(sdk, enrolledAccount, bankRelationship);
-    Thread.sleep(5000);
     var verifiedBankRelationship =
         verifyBankRelationship(sdk, enrolledAccount, bankRelationship, amounts);
-    Thread.sleep(5000);
     return verifiedBankRelationship;
   }
 
@@ -372,7 +369,6 @@ public class TransfersUtil {
 
     var bankRel =
         createVerifiedBankRelationship(sdk, AccountUtil.getAccount(sdk, withdrawalAccountId));
-    Thread.sleep(10000);
     var withdrawal =
         createAchWithdrawal(sdk, AccountUtil.getAccount(sdk, withdrawalAccountId), bankRel);
     return getAchWithdrawalId(withdrawal);

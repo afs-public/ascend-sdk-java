@@ -92,17 +92,18 @@ public class Application {
         SDK sdk = SDK.builder()
             .build();
 
-        AuthenticationListSigningKeysResponse res = sdk.authentication().listSigningKeys()
+
+        sdk.authentication().listSigningKeys()
                 .security(AuthenticationListSigningKeysSecurity.builder()
                     .apiKeyAuth(System.getenv().getOrDefault("API_KEY_AUTH", ""))
                     .build())
                 .pageSize(50)
                 .pageToken("ZXhhbXBsZQo")
-                .call();
+                .callAsStream()
+                .forEach((AuthenticationListSigningKeysResponse item) -> {
+                   // handle page
+                });
 
-        if (res.listSigningKeysResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```

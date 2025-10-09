@@ -8,13 +8,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.RebookTradeRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.BookingRebookTrade;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class BookingRebookTradeRequestBuilder {
 
   private String accountId;
   private String tradeId;
   private RebookTradeRequestCreate rebookTradeRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public BookingRebookTradeRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -40,6 +44,18 @@ public class BookingRebookTradeRequestBuilder {
     return this;
   }
 
+  public BookingRebookTradeRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public BookingRebookTradeRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private BookingRebookTradeRequest buildRequest() {
 
     BookingRebookTradeRequest request =
@@ -49,9 +65,10 @@ public class BookingRebookTradeRequestBuilder {
   }
 
   public BookingRebookTradeResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<BookingRebookTradeRequest, BookingRebookTradeResponse> operation =
-        new BookingRebookTrade.Sync(sdkConfiguration);
+        new BookingRebookTrade.Sync(sdkConfiguration, options);
     BookingRebookTradeRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

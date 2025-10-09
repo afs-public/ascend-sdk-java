@@ -122,13 +122,13 @@ public class Application {
                 .filter("deliverer.account_number == \"R9AHY8P\"")
                 .build();
 
-        AccountTransfersListTransfersResponse res = sdk.accountTransfers().listTransfers()
-                .request(req)
-                .call();
 
-        if (res.listTransfersResponse().isPresent()) {
-            // handle response
-        }
+        sdk.accountTransfers().listTransfers()
+                .callAsStream()
+                .forEach((AccountTransfersListTransfersResponse item) -> {
+                   // handle page
+                });
+
     }
 }
 ```

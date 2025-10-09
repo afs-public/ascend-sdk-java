@@ -4,6 +4,7 @@
 package com.apexfintechsolutions.ascendsdk.operations;
 
 import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOperation;
+import static com.apexfintechsolutions.ascendsdk.utils.Retries.NonRetryableException;
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.SecuritySource;
@@ -12,11 +13,15 @@ import com.apexfintechsolutions.ascendsdk.models.components.CheckPartyTypeRespon
 import com.apexfintechsolutions.ascendsdk.models.errors.SDKError;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalsCheckPartyTypeResponse;
+import com.apexfintechsolutions.ascendsdk.utils.BackoffStrategy;
 import com.apexfintechsolutions.ascendsdk.utils.HTTPClient;
 import com.apexfintechsolutions.ascendsdk.utils.HTTPRequest;
 import com.apexfintechsolutions.ascendsdk.utils.Hook.AfterErrorContextImpl;
 import com.apexfintechsolutions.ascendsdk.utils.Hook.AfterSuccessContextImpl;
 import com.apexfintechsolutions.ascendsdk.utils.Hook.BeforeRequestContextImpl;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.Retries;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.SerializedBody;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import com.apexfintechsolutions.ascendsdk.utils.Utils.JsonShape;
@@ -24,7 +29,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 public class CashJournalsCheckPartyType {
 
@@ -32,12 +39,31 @@ public class CashJournalsCheckPartyType {
     final SDKConfiguration sdkConfiguration;
     final String baseUrl;
     final SecuritySource securitySource;
+    final List<String> retryStatusCodes;
+    final RetryConfig retryConfig;
     final HTTPClient client;
 
-    public Base(SDKConfiguration sdkConfiguration) {
+    public Base(SDKConfiguration sdkConfiguration, Optional<Options> options) {
       this.sdkConfiguration = sdkConfiguration;
       this.baseUrl = this.sdkConfiguration.serverUrl();
       this.securitySource = this.sdkConfiguration.securitySource();
+      options.ifPresent(o -> o.validate(List.of(Options.Option.RETRY_CONFIG)));
+      this.retryStatusCodes = List.of("4XX", "5XX");
+      this.retryConfig =
+          options
+              .flatMap(Options::retryConfig)
+              .or(sdkConfiguration::retryConfig)
+              .orElse(
+                  RetryConfig.builder()
+                      .backoff(
+                          BackoffStrategy.builder()
+                              .initialInterval(500, TimeUnit.MILLISECONDS)
+                              .maxInterval(5000, TimeUnit.MILLISECONDS)
+                              .baseFactor((double) (1.5))
+                              .maxElapsedTime(15000, TimeUnit.MILLISECONDS)
+                              .retryConnectError(true)
+                              .build())
+                      .build());
       this.client = this.sdkConfiguration.client();
     }
 
@@ -45,12 +71,37 @@ public class CashJournalsCheckPartyType {
       return Optional.ofNullable(this.securitySource);
     }
 
-    HttpRequest buildRequest(CheckPartyTypeRequestCreate request) throws Exception {
+    BeforeRequestContextImpl createBeforeRequestContext() {
+      return new BeforeRequestContextImpl(
+          this.sdkConfiguration,
+          this.baseUrl,
+          "CashJournals_CheckPartyType",
+          java.util.Optional.of(java.util.List.of()),
+          securitySource());
+    }
+
+    AfterSuccessContextImpl createAfterSuccessContext() {
+      return new AfterSuccessContextImpl(
+          this.sdkConfiguration,
+          this.baseUrl,
+          "CashJournals_CheckPartyType",
+          java.util.Optional.of(java.util.List.of()),
+          securitySource());
+    }
+
+    AfterErrorContextImpl createAfterErrorContext() {
+      return new AfterErrorContextImpl(
+          this.sdkConfiguration,
+          this.baseUrl,
+          "CashJournals_CheckPartyType",
+          java.util.Optional.of(java.util.List.of()),
+          securitySource());
+    }
+
+    <T, U> HttpRequest buildRequest(T request, TypeReference<U> typeReference) throws Exception {
       String url = Utils.generateURL(this.baseUrl, "/transfers/v1/cashJournals:checkPartyType");
       HTTPRequest req = new HTTPRequest(url, "POST");
-      Object convertedRequest =
-          Utils.convertToShape(
-              request, JsonShape.DEFAULT, new TypeReference<CheckPartyTypeRequestCreate>() {});
+      Object convertedRequest = Utils.convertToShape(request, JsonShape.DEFAULT, typeReference);
       SerializedBody serializedRequestBody =
           Utils.serializeRequestBody(convertedRequest, "request", "json", false);
       if (serializedRequestBody == null) {
@@ -61,23 +112,19 @@ public class CashJournalsCheckPartyType {
           .addHeader("user-agent", SDKConfiguration.USER_AGENT);
       Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
 
-      return sdkConfiguration
-          .hooks()
-          .beforeRequest(
-              new BeforeRequestContextImpl(
-                  this.sdkConfiguration,
-                  this.baseUrl,
-                  "CashJournals_CheckPartyType",
-                  java.util.Optional.of(java.util.List.of()),
-                  securitySource()),
-              req.build());
+      return req.build();
     }
   }
 
   public static class Sync extends Base
       implements RequestOperation<CheckPartyTypeRequestCreate, CashJournalsCheckPartyTypeResponse> {
-    public Sync(SDKConfiguration sdkConfiguration) {
-      super(sdkConfiguration);
+    public Sync(SDKConfiguration sdkConfiguration, Optional<Options> options) {
+      super(sdkConfiguration, options);
+    }
+
+    private HttpRequest onBuildRequest(CheckPartyTypeRequestCreate request) throws Exception {
+      HttpRequest req = buildRequest(request, new TypeReference<CheckPartyTypeRequestCreate>() {});
+      return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
     }
 
     private HttpResponse<InputStream> onError(HttpResponse<InputStream> response, Exception error)
@@ -85,47 +132,42 @@ public class CashJournalsCheckPartyType {
       return sdkConfiguration
           .hooks()
           .afterError(
-              new AfterErrorContextImpl(
-                  this.sdkConfiguration,
-                  this.baseUrl,
-                  "CashJournals_CheckPartyType",
-                  java.util.Optional.of(java.util.List.of()),
-                  securitySource()),
-              Optional.ofNullable(response),
-              Optional.ofNullable(error));
+              createAfterErrorContext(), Optional.ofNullable(response), Optional.ofNullable(error));
     }
 
     private HttpResponse<InputStream> onSuccess(HttpResponse<InputStream> response)
         throws Exception {
-      return sdkConfiguration
-          .hooks()
-          .afterSuccess(
-              new AfterSuccessContextImpl(
-                  this.sdkConfiguration,
-                  this.baseUrl,
-                  "CashJournals_CheckPartyType",
-                  java.util.Optional.of(java.util.List.of()),
-                  securitySource()),
-              response);
+      return sdkConfiguration.hooks().afterSuccess(createAfterSuccessContext(), response);
     }
 
     @Override
     public HttpResponse<InputStream> doRequest(CheckPartyTypeRequestCreate request)
         throws Exception {
-      HttpRequest r = buildRequest(request);
-      HttpResponse<InputStream> httpRes;
-      try {
-        httpRes = client.send(r);
-        if (Utils.statusCodeMatches(httpRes.statusCode(), "400", "403", "4XX", "5XX")) {
-          httpRes = onError(httpRes, null);
-        } else {
-          httpRes = onSuccess(httpRes);
-        }
-      } catch (Exception e) {
-        httpRes = onError(null, e);
-      }
-
-      return httpRes;
+      Retries retries =
+          Retries.builder()
+              .action(
+                  () -> {
+                    HttpRequest r;
+                    try {
+                      r = onBuildRequest(request);
+                    } catch (Exception e) {
+                      throw new NonRetryableException(e);
+                    }
+                    try {
+                      HttpResponse<InputStream> httpRes = client.send(r);
+                      if (Utils.statusCodeMatches(
+                          httpRes.statusCode(), "400", "403", "4XX", "5XX")) {
+                        return onError(httpRes, null);
+                      }
+                      return httpRes;
+                    } catch (Exception e) {
+                      return onError(null, e);
+                    }
+                  })
+              .retryConfig(retryConfig)
+              .statusCodes(retryStatusCodes)
+              .build();
+      return onSuccess(retries.run());
     }
 
     @Override

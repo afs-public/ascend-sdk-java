@@ -4,17 +4,29 @@
 package com.apexfintechsolutions.ascendsdk.models.operations;
 
 import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOperation;
+import static com.apexfintechsolutions.ascendsdk.utils.Exceptions.unchecked;
+import static com.apexfintechsolutions.ascendsdk.utils.Utils.toStream;
+import static com.apexfintechsolutions.ascendsdk.utils.Utils.transform;
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.SnapshotsListSnapshots;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import com.apexfintechsolutions.ascendsdk.utils.pagination.CursorTracker;
+import com.apexfintechsolutions.ascendsdk.utils.pagination.Paginator;
+import java.io.InputStream;
+import java.net.http.HttpResponse;
+import java.util.Iterator;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class SnapshotsListSnapshotsRequestBuilder {
 
   private Optional<String> filter = Optional.empty();
   private Optional<Integer> pageSize = Optional.empty();
   private Optional<String> pageToken = Optional.empty();
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public SnapshotsListSnapshotsRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -57,6 +69,18 @@ public class SnapshotsListSnapshotsRequestBuilder {
     return this;
   }
 
+  public SnapshotsListSnapshotsRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public SnapshotsListSnapshotsRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private SnapshotsListSnapshotsRequest buildRequest() {
 
     SnapshotsListSnapshotsRequest request =
@@ -66,11 +90,46 @@ public class SnapshotsListSnapshotsRequestBuilder {
   }
 
   public SnapshotsListSnapshotsResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<SnapshotsListSnapshotsRequest, SnapshotsListSnapshotsResponse> operation =
-        new SnapshotsListSnapshots.Sync(sdkConfiguration);
+        new SnapshotsListSnapshots.Sync(sdkConfiguration, options);
     SnapshotsListSnapshotsRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Returns an iterable that performs next page calls till no more pages are returned.
+   *
+   * <p>The returned iterable can be used in a for-each loop:
+   *
+   * <pre><code>
+   * for (SnapshotsListSnapshotsResponse page : builder.callAsIterable()) {
+   *     // Process each page
+   * }
+   * </code></pre>
+   *
+   * @return An iterable that can be used to iterate through all pages
+   */
+  public Iterable<SnapshotsListSnapshotsResponse> callAsIterable() {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
+
+    RequestOperation<SnapshotsListSnapshotsRequest, SnapshotsListSnapshotsResponse> operation =
+        new SnapshotsListSnapshots.Sync(sdkConfiguration, options);
+    SnapshotsListSnapshotsRequest request = buildRequest();
+    Iterator<HttpResponse<InputStream>> iterator =
+        new Paginator<>(
+            request,
+            new CursorTracker<>("$.next_page_token", String.class),
+            SnapshotsListSnapshotsRequest::withPageToken,
+            nextRequest -> unchecked(() -> operation.doRequest(request)).get());
+
+    return () -> transform(iterator, operation::handleResponse);
+  }
+
+  /** Returns a stream that performs next page calls till no more pages are returned. */
+  public Stream<SnapshotsListSnapshotsResponse> callAsStream() {
+    return toStream(callAsIterable());
   }
 }

@@ -36,8 +36,6 @@ public class OrderUtil {
 
     Assertions.assertEquals(200, fundResponse.statusCode());
 
-    Thread.sleep(5000);
-
     Calendar c = Calendar.getInstance();
 
     String client_order_id = UUID.randomUUID().toString();
@@ -79,8 +77,6 @@ public class OrderUtil {
     var fundResponse = sdk.feesAndCredits().createCredit(account.accountId().get(), fundRequest);
 
     Assertions.assertEquals(200, fundResponse.statusCode());
-
-    Thread.sleep(5000);
 
     Calendar c = Calendar.getInstance();
 

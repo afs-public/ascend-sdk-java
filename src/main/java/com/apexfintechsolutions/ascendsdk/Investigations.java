@@ -32,6 +32,7 @@ import com.apexfintechsolutions.ascendsdk.operations.InvestigationServiceLinkDoc
 import com.apexfintechsolutions.ascendsdk.operations.InvestigationServiceListInvestigations;
 import com.apexfintechsolutions.ascendsdk.operations.InvestigationServiceUpdateInvestigation;
 import com.apexfintechsolutions.ascendsdk.operations.WatchlistServiceGetWatchlistItem;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
 import java.util.Optional;
 
 public class Investigations {
@@ -63,6 +64,21 @@ public class Investigations {
    */
   public InvestigationServiceGetInvestigationResponse getInvestigation(String investigationId)
       throws Exception {
+    return getInvestigation(investigationId, Optional.empty());
+  }
+
+  /**
+   * Get Investigations
+   *
+   * <p>Use this endpoint to get the current state of an investigation by request reference UUID.
+   *
+   * @param investigationId The investigation id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public InvestigationServiceGetInvestigationResponse getInvestigation(
+      String investigationId, Optional<Options> options) throws Exception {
     InvestigationServiceGetInvestigationRequest request =
         InvestigationServiceGetInvestigationRequest.builder()
             .investigationId(investigationId)
@@ -70,7 +86,7 @@ public class Investigations {
     RequestOperation<
             InvestigationServiceGetInvestigationRequest,
             InvestigationServiceGetInvestigationResponse>
-        operation = new InvestigationServiceGetInvestigation.Sync(sdkConfiguration);
+        operation = new InvestigationServiceGetInvestigation.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -97,7 +113,8 @@ public class Investigations {
    */
   public InvestigationServiceUpdateInvestigationResponse updateInvestigation(
       String investigationId, InvestigationUpdate investigationUpdate) throws Exception {
-    return updateInvestigation(investigationId, Optional.empty(), investigationUpdate);
+    return updateInvestigation(
+        investigationId, Optional.empty(), investigationUpdate, Optional.empty());
   }
 
   /**
@@ -110,11 +127,15 @@ public class Investigations {
    *     investigation_request_state - watchlist_matches - watchlist_id - watchlist_item_id -
    *     match_state - exclude_from_screening - comment
    * @param investigationUpdate Contains investigation details of corresponding investigation
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public InvestigationServiceUpdateInvestigationResponse updateInvestigation(
-      String investigationId, Optional<String> updateMask, InvestigationUpdate investigationUpdate)
+      String investigationId,
+      Optional<String> updateMask,
+      InvestigationUpdate investigationUpdate,
+      Optional<Options> options)
       throws Exception {
     InvestigationServiceUpdateInvestigationRequest request =
         InvestigationServiceUpdateInvestigationRequest.builder()
@@ -125,7 +146,7 @@ public class Investigations {
     RequestOperation<
             InvestigationServiceUpdateInvestigationRequest,
             InvestigationServiceUpdateInvestigationResponse>
-        operation = new InvestigationServiceUpdateInvestigation.Sync(sdkConfiguration);
+        operation = new InvestigationServiceUpdateInvestigation.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -153,7 +174,7 @@ public class Investigations {
   public InvestigationServiceListInvestigationsResponse listInvestigationsDirect()
       throws Exception {
     return listInvestigations(
-        Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -174,6 +195,7 @@ public class Investigations {
    *     blank): - investigation_request_state - correspondent_id - scope - identity_verification -
    *     watchlist_screen - person.given_name - person.family_name - entity.legal_name - created_at
    *     - updated_at
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -181,7 +203,8 @@ public class Investigations {
       Optional<Integer> pageSize,
       Optional<String> pageToken,
       Optional<String> filter,
-      Optional<String> orderBy)
+      Optional<String> orderBy,
+      Optional<Options> options)
       throws Exception {
     InvestigationServiceListInvestigationsRequest request =
         InvestigationServiceListInvestigationsRequest.builder()
@@ -193,7 +216,7 @@ public class Investigations {
     RequestOperation<
             InvestigationServiceListInvestigationsRequest,
             InvestigationServiceListInvestigationsResponse>
-        operation = new InvestigationServiceListInvestigations.Sync(sdkConfiguration);
+        operation = new InvestigationServiceListInvestigations.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -222,6 +245,26 @@ public class Investigations {
   public InvestigationServiceLinkDocumentsResponse linkDocuments(
       String investigationId, LinkDocumentsRequestCreate linkDocumentsRequestCreate)
       throws Exception {
+    return linkDocuments(investigationId, linkDocumentsRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Link Documents
+   *
+   * <p>Use this endpoint to update identity verification document IDs.
+   *
+   * @param investigationId The investigation id.
+   * @param linkDocumentsRequestCreate Custom request - adds identity verification documentIds to
+   *     investigation request
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public InvestigationServiceLinkDocumentsResponse linkDocuments(
+      String investigationId,
+      LinkDocumentsRequestCreate linkDocumentsRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     InvestigationServiceLinkDocumentsRequest request =
         InvestigationServiceLinkDocumentsRequest.builder()
             .investigationId(investigationId)
@@ -229,7 +272,7 @@ public class Investigations {
             .build();
     RequestOperation<
             InvestigationServiceLinkDocumentsRequest, InvestigationServiceLinkDocumentsResponse>
-        operation = new InvestigationServiceLinkDocuments.Sync(sdkConfiguration);
+        operation = new InvestigationServiceLinkDocuments.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -256,6 +299,22 @@ public class Investigations {
    */
   public WatchlistServiceGetWatchlistItemResponse getWatchlistItem(
       String watchlistId, String itemId) throws Exception {
+    return getWatchlistItem(watchlistId, itemId, Optional.empty());
+  }
+
+  /**
+   * Get Watchlist Item
+   *
+   * <p>Gets the details of an investigation by watchlist type and valid watchlist id
+   *
+   * @param watchlistId The watchlist id.
+   * @param itemId The item id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public WatchlistServiceGetWatchlistItemResponse getWatchlistItem(
+      String watchlistId, String itemId, Optional<Options> options) throws Exception {
     WatchlistServiceGetWatchlistItemRequest request =
         WatchlistServiceGetWatchlistItemRequest.builder()
             .watchlistId(watchlistId)
@@ -263,7 +322,7 @@ public class Investigations {
             .build();
     RequestOperation<
             WatchlistServiceGetWatchlistItemRequest, WatchlistServiceGetWatchlistItemResponse>
-        operation = new WatchlistServiceGetWatchlistItem.Sync(sdkConfiguration);
+        operation = new WatchlistServiceGetWatchlistItem.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -293,7 +352,8 @@ public class Investigations {
   public CustomerIdentificationResultServiceGetCustomerIdentificationResponse
       getCustomerIdentification(String correspondentId, String customerIdentificationId)
           throws Exception {
-    return getCustomerIdentification(correspondentId, customerIdentificationId, Optional.empty());
+    return getCustomerIdentification(
+        correspondentId, customerIdentificationId, Optional.empty(), Optional.empty());
   }
 
   /**
@@ -304,6 +364,7 @@ public class Investigations {
    * @param correspondentId The correspondent id.
    * @param customerIdentificationId The customerIdentification id.
    * @param view Optional. The view to return. Defaults to BASIC.
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -314,7 +375,8 @@ public class Investigations {
           Optional<
                   ? extends
                       CustomerIdentificationResultServiceGetCustomerIdentificationQueryParamView>
-              view)
+              view,
+          Optional<Options> options)
           throws Exception {
     CustomerIdentificationResultServiceGetCustomerIdentificationRequest request =
         CustomerIdentificationResultServiceGetCustomerIdentificationRequest.builder()
@@ -326,7 +388,8 @@ public class Investigations {
             CustomerIdentificationResultServiceGetCustomerIdentificationRequest,
             CustomerIdentificationResultServiceGetCustomerIdentificationResponse>
         operation =
-            new CustomerIdentificationResultServiceGetCustomerIdentification.Sync(sdkConfiguration);
+            new CustomerIdentificationResultServiceGetCustomerIdentification.Sync(
+                sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

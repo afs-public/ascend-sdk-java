@@ -7,12 +7,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.LedgerGetActivity;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class LedgerGetActivityRequestBuilder {
 
   private String accountId;
   private String activityId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public LedgerGetActivityRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -31,6 +35,18 @@ public class LedgerGetActivityRequestBuilder {
     return this;
   }
 
+  public LedgerGetActivityRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public LedgerGetActivityRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private LedgerGetActivityRequest buildRequest() {
 
     LedgerGetActivityRequest request = new LedgerGetActivityRequest(accountId, activityId);
@@ -39,9 +55,10 @@ public class LedgerGetActivityRequestBuilder {
   }
 
   public LedgerGetActivityResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<LedgerGetActivityRequest, LedgerGetActivityResponse> operation =
-        new LedgerGetActivity.Sync(sdkConfiguration);
+        new LedgerGetActivity.Sync(sdkConfiguration, options);
     LedgerGetActivityRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

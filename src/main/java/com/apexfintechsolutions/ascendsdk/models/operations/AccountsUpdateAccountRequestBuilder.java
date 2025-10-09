@@ -8,6 +8,8 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.AccountRequestUpdate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsUpdateAccount;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import java.util.Optional;
 
@@ -16,6 +18,7 @@ public class AccountsUpdateAccountRequestBuilder {
   private String accountId;
   private Optional<String> updateMask = Optional.empty();
   private AccountRequestUpdate accountRequestUpdate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsUpdateAccountRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -47,6 +50,18 @@ public class AccountsUpdateAccountRequestBuilder {
     return this;
   }
 
+  public AccountsUpdateAccountRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsUpdateAccountRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsUpdateAccountRequest buildRequest() {
 
     AccountsUpdateAccountRequest request =
@@ -56,9 +71,10 @@ public class AccountsUpdateAccountRequestBuilder {
   }
 
   public AccountsUpdateAccountResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountsUpdateAccountRequest, AccountsUpdateAccountResponse> operation =
-        new AccountsUpdateAccount.Sync(sdkConfiguration);
+        new AccountsUpdateAccount.Sync(sdkConfiguration, options);
     AccountsUpdateAccountRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

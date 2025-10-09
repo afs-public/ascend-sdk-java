@@ -34,6 +34,7 @@ import com.apexfintechsolutions.ascendsdk.operations.SubscriberGetPushSubscripti
 import com.apexfintechsolutions.ascendsdk.operations.SubscriberListPushSubscriptionDeliveries;
 import com.apexfintechsolutions.ascendsdk.operations.SubscriberListPushSubscriptions;
 import com.apexfintechsolutions.ascendsdk.operations.SubscriberUpdatePushSubscription;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
 import java.util.Optional;
 
 public class Subscriber {
@@ -65,8 +66,23 @@ public class Subscriber {
    */
   public SubscriberCreatePushSubscriptionResponse createPushSubscription(
       PushSubscriptionCreate request) throws Exception {
+    return createPushSubscription(request, Optional.empty());
+  }
+
+  /**
+   * Create Push Subscription
+   *
+   * <p>Creates a new push subscription for event notifications.
+   *
+   * @param request The request object containing all the parameters for the API call.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public SubscriberCreatePushSubscriptionResponse createPushSubscription(
+      PushSubscriptionCreate request, Optional<Options> options) throws Exception {
     RequestOperation<PushSubscriptionCreate, SubscriberCreatePushSubscriptionResponse> operation =
-        new SubscriberCreatePushSubscription.Sync(sdkConfiguration);
+        new SubscriberCreatePushSubscription.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -90,7 +106,8 @@ public class Subscriber {
    * @throws Exception if the API call fails
    */
   public SubscriberListPushSubscriptionsResponse listPushSubscriptionsDirect() throws Exception {
-    return listPushSubscriptions(Optional.empty(), Optional.empty(), Optional.empty());
+    return listPushSubscriptions(
+        Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -107,11 +124,15 @@ public class Subscriber {
    * @param pageSize The number of entries to return in a single page; Default = 100; Maximum = 1000
    * @param pageToken Page token used for pagination; Supplying a page token returns the next page
    *     of results
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public SubscriberListPushSubscriptionsResponse listPushSubscriptions(
-      Optional<String> filter, Optional<Integer> pageSize, Optional<String> pageToken)
+      Optional<String> filter,
+      Optional<Integer> pageSize,
+      Optional<String> pageToken,
+      Optional<Options> options)
       throws Exception {
     SubscriberListPushSubscriptionsRequest request =
         SubscriberListPushSubscriptionsRequest.builder()
@@ -121,7 +142,7 @@ public class Subscriber {
             .build();
     RequestOperation<
             SubscriberListPushSubscriptionsRequest, SubscriberListPushSubscriptionsResponse>
-        operation = new SubscriberListPushSubscriptions.Sync(sdkConfiguration);
+        operation = new SubscriberListPushSubscriptions.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -147,10 +168,25 @@ public class Subscriber {
    */
   public SubscriberGetPushSubscriptionResponse getPushSubscription(String subscriptionId)
       throws Exception {
+    return getPushSubscription(subscriptionId, Optional.empty());
+  }
+
+  /**
+   * Get Push Subscription
+   *
+   * <p>Gets the details of a specific push subscription.
+   *
+   * @param subscriptionId The subscription id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public SubscriberGetPushSubscriptionResponse getPushSubscription(
+      String subscriptionId, Optional<Options> options) throws Exception {
     SubscriberGetPushSubscriptionRequest request =
         SubscriberGetPushSubscriptionRequest.builder().subscriptionId(subscriptionId).build();
     RequestOperation<SubscriberGetPushSubscriptionRequest, SubscriberGetPushSubscriptionResponse>
-        operation = new SubscriberGetPushSubscription.Sync(sdkConfiguration);
+        operation = new SubscriberGetPushSubscription.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -177,7 +213,8 @@ public class Subscriber {
    */
   public SubscriberUpdatePushSubscriptionResponse updatePushSubscription(
       String subscriptionId, PushSubscriptionUpdate pushSubscriptionUpdate) throws Exception {
-    return updatePushSubscription(subscriptionId, Optional.empty(), pushSubscriptionUpdate);
+    return updatePushSubscription(
+        subscriptionId, Optional.empty(), pushSubscriptionUpdate, Optional.empty());
   }
 
   /**
@@ -188,13 +225,15 @@ public class Subscriber {
    * @param subscriptionId The subscription id.
    * @param updateMask The fields to update in subscription
    * @param pushSubscriptionUpdate Configuration information about a push subscription
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public SubscriberUpdatePushSubscriptionResponse updatePushSubscription(
       String subscriptionId,
       Optional<String> updateMask,
-      PushSubscriptionUpdate pushSubscriptionUpdate)
+      PushSubscriptionUpdate pushSubscriptionUpdate,
+      Optional<Options> options)
       throws Exception {
     SubscriberUpdatePushSubscriptionRequest request =
         SubscriberUpdatePushSubscriptionRequest.builder()
@@ -204,7 +243,7 @@ public class Subscriber {
             .build();
     RequestOperation<
             SubscriberUpdatePushSubscriptionRequest, SubscriberUpdatePushSubscriptionResponse>
-        operation = new SubscriberUpdatePushSubscription.Sync(sdkConfiguration);
+        operation = new SubscriberUpdatePushSubscription.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -230,11 +269,26 @@ public class Subscriber {
    */
   public SubscriberDeletePushSubscriptionResponse deletePushSubscription(String subscriptionId)
       throws Exception {
+    return deletePushSubscription(subscriptionId, Optional.empty());
+  }
+
+  /**
+   * Delete Subscription
+   *
+   * <p>Stops receiving events from a push subscription, and then deletes it.
+   *
+   * @param subscriptionId The subscription id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public SubscriberDeletePushSubscriptionResponse deletePushSubscription(
+      String subscriptionId, Optional<Options> options) throws Exception {
     SubscriberDeletePushSubscriptionRequest request =
         SubscriberDeletePushSubscriptionRequest.builder().subscriptionId(subscriptionId).build();
     RequestOperation<
             SubscriberDeletePushSubscriptionRequest, SubscriberDeletePushSubscriptionResponse>
-        operation = new SubscriberDeletePushSubscription.Sync(sdkConfiguration);
+        operation = new SubscriberDeletePushSubscription.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -261,6 +315,22 @@ public class Subscriber {
    */
   public SubscriberGetPushSubscriptionDeliveryResponse getPushSubscriptionDelivery(
       String subscriptionId, String deliveryId) throws Exception {
+    return getPushSubscriptionDelivery(subscriptionId, deliveryId, Optional.empty());
+  }
+
+  /**
+   * Get Subscription Event Delivery
+   *
+   * <p>Gets the details of a specific push subscription delivery.
+   *
+   * @param subscriptionId The subscription id.
+   * @param deliveryId The delivery id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public SubscriberGetPushSubscriptionDeliveryResponse getPushSubscriptionDelivery(
+      String subscriptionId, String deliveryId, Optional<Options> options) throws Exception {
     SubscriberGetPushSubscriptionDeliveryRequest request =
         SubscriberGetPushSubscriptionDeliveryRequest.builder()
             .subscriptionId(subscriptionId)
@@ -269,7 +339,7 @@ public class Subscriber {
     RequestOperation<
             SubscriberGetPushSubscriptionDeliveryRequest,
             SubscriberGetPushSubscriptionDeliveryResponse>
-        operation = new SubscriberGetPushSubscriptionDelivery.Sync(sdkConfiguration);
+        operation = new SubscriberGetPushSubscriptionDelivery.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -296,7 +366,7 @@ public class Subscriber {
   public SubscriberListPushSubscriptionDeliveriesResponse listPushSubscriptionDeliveries(
       String subscriptionId) throws Exception {
     return listPushSubscriptionDeliveries(
-        subscriptionId, Optional.empty(), Optional.empty(), Optional.empty());
+        subscriptionId, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -313,6 +383,7 @@ public class Subscriber {
    * @param pageSize The number of entries to return in a single page; Default = 100; Maximum = 1000
    * @param pageToken Page token used for pagination; Supplying a page token returns the next page
    *     of results
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -320,7 +391,8 @@ public class Subscriber {
       String subscriptionId,
       Optional<String> filter,
       Optional<Integer> pageSize,
-      Optional<String> pageToken)
+      Optional<String> pageToken,
+      Optional<Options> options)
       throws Exception {
     SubscriberListPushSubscriptionDeliveriesRequest request =
         SubscriberListPushSubscriptionDeliveriesRequest.builder()
@@ -332,7 +404,7 @@ public class Subscriber {
     RequestOperation<
             SubscriberListPushSubscriptionDeliveriesRequest,
             SubscriberListPushSubscriptionDeliveriesResponse>
-        operation = new SubscriberListPushSubscriptionDeliveries.Sync(sdkConfiguration);
+        operation = new SubscriberListPushSubscriptionDeliveries.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

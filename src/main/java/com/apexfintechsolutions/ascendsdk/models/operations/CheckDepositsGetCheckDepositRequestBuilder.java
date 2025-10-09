@@ -7,12 +7,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.CheckDepositsGetCheckDeposit;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class CheckDepositsGetCheckDepositRequestBuilder {
 
   private String accountId;
   private String checkDepositId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public CheckDepositsGetCheckDepositRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -31,6 +35,18 @@ public class CheckDepositsGetCheckDepositRequestBuilder {
     return this;
   }
 
+  public CheckDepositsGetCheckDepositRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public CheckDepositsGetCheckDepositRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private CheckDepositsGetCheckDepositRequest buildRequest() {
 
     CheckDepositsGetCheckDepositRequest request =
@@ -40,9 +56,10 @@ public class CheckDepositsGetCheckDepositRequestBuilder {
   }
 
   public CheckDepositsGetCheckDepositResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<CheckDepositsGetCheckDepositRequest, CheckDepositsGetCheckDepositResponse>
-        operation = new CheckDepositsGetCheckDeposit.Sync(sdkConfiguration);
+        operation = new CheckDepositsGetCheckDeposit.Sync(sdkConfiguration, options);
     CheckDepositsGetCheckDepositRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

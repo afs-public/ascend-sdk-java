@@ -7,12 +7,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.FeesGetFee;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class FeesGetFeeRequestBuilder {
 
   private String accountId;
   private String feeId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public FeesGetFeeRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -31,6 +35,18 @@ public class FeesGetFeeRequestBuilder {
     return this;
   }
 
+  public FeesGetFeeRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public FeesGetFeeRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private FeesGetFeeRequest buildRequest() {
 
     FeesGetFeeRequest request = new FeesGetFeeRequest(accountId, feeId);
@@ -39,9 +55,10 @@ public class FeesGetFeeRequestBuilder {
   }
 
   public FeesGetFeeResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<FeesGetFeeRequest, FeesGetFeeResponse> operation =
-        new FeesGetFee.Sync(sdkConfiguration);
+        new FeesGetFee.Sync(sdkConfiguration, options);
     FeesGetFeeRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

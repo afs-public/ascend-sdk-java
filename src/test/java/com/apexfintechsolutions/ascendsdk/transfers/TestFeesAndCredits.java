@@ -18,7 +18,6 @@ public class TestFeesAndCredits {
     sdk = SdkUtil.getSdk();
     enrolledAccount = AccountUtil.createEnrolledAccount(sdk);
     bankRel = TransfersUtil.createVerifiedBankRelationship(sdk, enrolledAccount);
-    Thread.sleep(5000);
     feeId = TransfersUtil.createFeeId(sdk, enrolledAccount, bankRel);
     creditId = TransfersUtil.createCreditId(sdk, enrolledAccount, bankRel);
   }

@@ -38,7 +38,6 @@ public class TestTradeAllocation {
   @Test
   public void test_trade_allocation_trade_processing_get_trade_allocation_get_trade_allocation1()
       throws Exception {
-    Thread.sleep(5000);
     var result = sdk.tradeAllocation().getTradeAllocation(account, tradeAllocationID);
     Assertions.assertNotNull(result);
     Assertions.assertEquals(200, result.statusCode());

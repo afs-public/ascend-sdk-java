@@ -8,6 +8,7 @@
 * [createOrder](#createorder) - Create Order
 * [getOrder](#getorder) - Get Order
 * [cancelOrder](#cancelorder) - Cancel Order
+* [setExtraReportingData](#setextrareportingdata) - Set Extra Reporting Data
 
 ## createOrder
 
@@ -212,6 +213,75 @@ public class Application {
 ### Response
 
 **[OrderServiceCancelOrderResponse](../../models/operations/OrderServiceCancelOrderResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 401, 403, 404     | application/json       |
+| models/errors/Status   | 500, 503               | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## setExtraReportingData
+
+Sets extra reporting data to an existing order. Any SetExtraReportingDataRequest must include the name of the order and the cancel_confirmed_time
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="OrderService_SetExtraReportingData" method="post" path="/trading/v1/accounts/{account_id}/orders/{order_id}:setExtraReportingData" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceSetExtraReportingDataResponse;
+import java.lang.Exception;
+import java.time.OffsetDateTime;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        OrderServiceSetExtraReportingDataResponse res = sdk.createOrder().setExtraReportingData()
+                .accountId("01HBRQ5BW6ZAY4BNWP4GWRD80X")
+                .orderId("ebb0c9b5-2c74-45c9-a4ab-40596b778706")
+                .setExtraReportingDataRequestCreate(SetExtraReportingDataRequestCreate.builder()
+                    .cancelConfirmedTime(OffsetDateTime.parse("2025-12-13T15:28:17.262732Z"))
+                    .name("accounts/01HBRQ5BW6ZAY4BNWP4GWRD80X/orders/ebb0c9b5-2c74-45c9-a4ab-40596b778706")
+                    .build())
+                .call();
+
+        if (res.order().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         | Example                                                                                             |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `accountId`                                                                                         | *String*                                                                                            | :heavy_check_mark:                                                                                  | The account id.                                                                                     | 01HBRQ5BW6ZAY4BNWP4GWRD80X                                                                          |
+| `orderId`                                                                                           | *String*                                                                                            | :heavy_check_mark:                                                                                  | The order id.                                                                                       | ebb0c9b5-2c74-45c9-a4ab-40596b778706                                                                |
+| `setExtraReportingDataRequestCreate`                                                                | [SetExtraReportingDataRequestCreate](../../models/components/SetExtraReportingDataRequestCreate.md) | :heavy_check_mark:                                                                                  | N/A                                                                                                 |                                                                                                     |
+
+### Response
+
+**[OrderServiceSetExtraReportingDataResponse](../../models/operations/OrderServiceSetExtraReportingDataResponse.md)**
 
 ### Errors
 

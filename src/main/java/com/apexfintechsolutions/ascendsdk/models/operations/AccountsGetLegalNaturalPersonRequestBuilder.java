@@ -7,11 +7,15 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsGetLegalNaturalPerson;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AccountsGetLegalNaturalPersonRequestBuilder {
 
   private String legalNaturalPersonId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsGetLegalNaturalPersonRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -25,6 +29,19 @@ public class AccountsGetLegalNaturalPersonRequestBuilder {
     return this;
   }
 
+  public AccountsGetLegalNaturalPersonRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsGetLegalNaturalPersonRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsGetLegalNaturalPersonRequest buildRequest() {
 
     AccountsGetLegalNaturalPersonRequest request =
@@ -34,9 +51,10 @@ public class AccountsGetLegalNaturalPersonRequestBuilder {
   }
 
   public AccountsGetLegalNaturalPersonResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountsGetLegalNaturalPersonRequest, AccountsGetLegalNaturalPersonResponse>
-        operation = new AccountsGetLegalNaturalPerson.Sync(sdkConfiguration);
+        operation = new AccountsGetLegalNaturalPerson.Sync(sdkConfiguration, options);
     AccountsGetLegalNaturalPersonRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

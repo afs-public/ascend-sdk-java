@@ -8,6 +8,8 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.AchDepositScheduleUpdate;
 import com.apexfintechsolutions.ascendsdk.operations.AchDepositSchedulesUpdateAchDepositSchedule;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import java.util.Optional;
 
@@ -17,6 +19,7 @@ public class AchDepositSchedulesUpdateAchDepositScheduleRequestBuilder {
   private String achDepositScheduleId;
   private Optional<String> updateMask = Optional.empty();
   private AchDepositScheduleUpdate achDepositScheduleUpdate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AchDepositSchedulesUpdateAchDepositScheduleRequestBuilder(
@@ -57,6 +60,20 @@ public class AchDepositSchedulesUpdateAchDepositScheduleRequestBuilder {
     return this;
   }
 
+  public AchDepositSchedulesUpdateAchDepositScheduleRequestBuilder retryConfig(
+      RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AchDepositSchedulesUpdateAchDepositScheduleRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AchDepositSchedulesUpdateAchDepositScheduleRequest buildRequest() {
 
     AchDepositSchedulesUpdateAchDepositScheduleRequest request =
@@ -67,11 +84,12 @@ public class AchDepositSchedulesUpdateAchDepositScheduleRequestBuilder {
   }
 
   public AchDepositSchedulesUpdateAchDepositScheduleResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             AchDepositSchedulesUpdateAchDepositScheduleRequest,
             AchDepositSchedulesUpdateAchDepositScheduleResponse>
-        operation = new AchDepositSchedulesUpdateAchDepositSchedule.Sync(sdkConfiguration);
+        operation = new AchDepositSchedulesUpdateAchDepositSchedule.Sync(sdkConfiguration, options);
     AchDepositSchedulesUpdateAchDepositScheduleRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.AssignLargeTraderRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsAssignLargeTrader;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AccountsAssignLargeTraderRequestBuilder {
 
   private String legalNaturalPersonId;
   private AssignLargeTraderRequestCreate assignLargeTraderRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsAssignLargeTraderRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -33,6 +37,18 @@ public class AccountsAssignLargeTraderRequestBuilder {
     return this;
   }
 
+  public AccountsAssignLargeTraderRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsAssignLargeTraderRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsAssignLargeTraderRequest buildRequest() {
 
     AccountsAssignLargeTraderRequest request =
@@ -42,9 +58,10 @@ public class AccountsAssignLargeTraderRequestBuilder {
   }
 
   public AccountsAssignLargeTraderResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountsAssignLargeTraderRequest, AccountsAssignLargeTraderResponse>
-        operation = new AccountsAssignLargeTrader.Sync(sdkConfiguration);
+        operation = new AccountsAssignLargeTrader.Sync(sdkConfiguration, options);
     AccountsAssignLargeTraderRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

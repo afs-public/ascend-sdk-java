@@ -7,12 +7,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.BasketOrdersServiceGetBasket;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class BasketOrdersServiceGetBasketRequestBuilder {
 
   private String correspondentId;
   private String basketId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public BasketOrdersServiceGetBasketRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -31,6 +35,18 @@ public class BasketOrdersServiceGetBasketRequestBuilder {
     return this;
   }
 
+  public BasketOrdersServiceGetBasketRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public BasketOrdersServiceGetBasketRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private BasketOrdersServiceGetBasketRequest buildRequest() {
 
     BasketOrdersServiceGetBasketRequest request =
@@ -40,9 +56,10 @@ public class BasketOrdersServiceGetBasketRequestBuilder {
   }
 
   public BasketOrdersServiceGetBasketResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<BasketOrdersServiceGetBasketRequest, BasketOrdersServiceGetBasketResponse>
-        operation = new BasketOrdersServiceGetBasket.Sync(sdkConfiguration);
+        operation = new BasketOrdersServiceGetBasket.Sync(sdkConfiguration, options);
     BasketOrdersServiceGetBasketRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

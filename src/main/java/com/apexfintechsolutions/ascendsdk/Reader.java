@@ -13,6 +13,7 @@ import com.apexfintechsolutions.ascendsdk.models.operations.ReaderListEventMessa
 import com.apexfintechsolutions.ascendsdk.models.operations.ReaderListEventMessagesResponse;
 import com.apexfintechsolutions.ascendsdk.operations.ReaderGetEventMessage;
 import com.apexfintechsolutions.ascendsdk.operations.ReaderListEventMessages;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
 import java.util.Optional;
 
 public class Reader {
@@ -42,7 +43,8 @@ public class Reader {
    * @throws Exception if the API call fails
    */
   public ReaderListEventMessagesResponse listEventMessagesDirect() throws Exception {
-    return listEventMessages(Optional.empty(), Optional.empty(), Optional.empty());
+    return listEventMessages(
+        Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -58,11 +60,15 @@ public class Reader {
    * @param pageSize The number of entries to return in a single page; Default = 100; Maximum = 1000
    * @param pageToken Page token used for pagination; Supplying a page token returns the next page
    *     of results
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public ReaderListEventMessagesResponse listEventMessages(
-      Optional<String> filter, Optional<Integer> pageSize, Optional<String> pageToken)
+      Optional<String> filter,
+      Optional<Integer> pageSize,
+      Optional<String> pageToken,
+      Optional<Options> options)
       throws Exception {
     ReaderListEventMessagesRequest request =
         ReaderListEventMessagesRequest.builder()
@@ -71,7 +77,7 @@ public class Reader {
             .pageToken(pageToken)
             .build();
     RequestOperation<ReaderListEventMessagesRequest, ReaderListEventMessagesResponse> operation =
-        new ReaderListEventMessages.Sync(sdkConfiguration);
+        new ReaderListEventMessages.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -96,10 +102,25 @@ public class Reader {
    * @throws Exception if the API call fails
    */
   public ReaderGetEventMessageResponse getEventMessage(String messageId) throws Exception {
+    return getEventMessage(messageId, Optional.empty());
+  }
+
+  /**
+   * Get Event Message
+   *
+   * <p>Gets the details of a specific event.
+   *
+   * @param messageId The message id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public ReaderGetEventMessageResponse getEventMessage(String messageId, Optional<Options> options)
+      throws Exception {
     ReaderGetEventMessageRequest request =
         ReaderGetEventMessageRequest.builder().messageId(messageId).build();
     RequestOperation<ReaderGetEventMessageRequest, ReaderGetEventMessageResponse> operation =
-        new ReaderGetEventMessage.Sync(sdkConfiguration);
+        new ReaderGetEventMessage.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

@@ -7,12 +7,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.AssetsGetAssetCorrespondent;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AssetsGetAssetCorrespondentRequestBuilder {
 
   private String correspondentId;
   private String assetId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AssetsGetAssetCorrespondentRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -31,6 +35,18 @@ public class AssetsGetAssetCorrespondentRequestBuilder {
     return this;
   }
 
+  public AssetsGetAssetCorrespondentRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AssetsGetAssetCorrespondentRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AssetsGetAssetCorrespondentRequest buildRequest() {
 
     AssetsGetAssetCorrespondentRequest request =
@@ -40,9 +56,10 @@ public class AssetsGetAssetCorrespondentRequestBuilder {
   }
 
   public AssetsGetAssetCorrespondentResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AssetsGetAssetCorrespondentRequest, AssetsGetAssetCorrespondentResponse>
-        operation = new AssetsGetAssetCorrespondent.Sync(sdkConfiguration);
+        operation = new AssetsGetAssetCorrespondent.Sync(sdkConfiguration, options);
     AssetsGetAssetCorrespondentRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

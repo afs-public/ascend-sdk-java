@@ -4,11 +4,22 @@
 package com.apexfintechsolutions.ascendsdk.models.operations;
 
 import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOperation;
+import static com.apexfintechsolutions.ascendsdk.utils.Exceptions.unchecked;
+import static com.apexfintechsolutions.ascendsdk.utils.Utils.toStream;
+import static com.apexfintechsolutions.ascendsdk.utils.Utils.transform;
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsListLegalEntities;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import com.apexfintechsolutions.ascendsdk.utils.pagination.CursorTracker;
+import com.apexfintechsolutions.ascendsdk.utils.pagination.Paginator;
+import java.io.InputStream;
+import java.net.http.HttpResponse;
+import java.util.Iterator;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class AccountsListLegalEntitiesRequestBuilder {
 
@@ -16,6 +27,7 @@ public class AccountsListLegalEntitiesRequestBuilder {
   private Optional<String> pageToken = Optional.empty();
   private Optional<String> orderBy = Optional.empty();
   private Optional<String> filter = Optional.empty();
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsListLegalEntitiesRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -70,6 +82,18 @@ public class AccountsListLegalEntitiesRequestBuilder {
     return this;
   }
 
+  public AccountsListLegalEntitiesRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsListLegalEntitiesRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsListLegalEntitiesRequest buildRequest() {
 
     AccountsListLegalEntitiesRequest request =
@@ -79,11 +103,46 @@ public class AccountsListLegalEntitiesRequestBuilder {
   }
 
   public AccountsListLegalEntitiesResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountsListLegalEntitiesRequest, AccountsListLegalEntitiesResponse>
-        operation = new AccountsListLegalEntities.Sync(sdkConfiguration);
+        operation = new AccountsListLegalEntities.Sync(sdkConfiguration, options);
     AccountsListLegalEntitiesRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Returns an iterable that performs next page calls till no more pages are returned.
+   *
+   * <p>The returned iterable can be used in a for-each loop:
+   *
+   * <pre><code>
+   * for (AccountsListLegalEntitiesResponse page : builder.callAsIterable()) {
+   *     // Process each page
+   * }
+   * </code></pre>
+   *
+   * @return An iterable that can be used to iterate through all pages
+   */
+  public Iterable<AccountsListLegalEntitiesResponse> callAsIterable() {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
+
+    RequestOperation<AccountsListLegalEntitiesRequest, AccountsListLegalEntitiesResponse>
+        operation = new AccountsListLegalEntities.Sync(sdkConfiguration, options);
+    AccountsListLegalEntitiesRequest request = buildRequest();
+    Iterator<HttpResponse<InputStream>> iterator =
+        new Paginator<>(
+            request,
+            new CursorTracker<>("$.next_page_token", String.class),
+            AccountsListLegalEntitiesRequest::withPageToken,
+            nextRequest -> unchecked(() -> operation.doRequest(request)).get());
+
+    return () -> transform(iterator, operation::handleResponse);
+  }
+
+  /** Returns a stream that performs next page calls till no more pages are returned. */
+  public Stream<AccountsListLegalEntitiesResponse> callAsStream() {
+    return toStream(callAsIterable());
   }
 }

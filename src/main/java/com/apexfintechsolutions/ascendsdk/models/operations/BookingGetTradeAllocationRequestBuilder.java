@@ -7,12 +7,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.BookingGetTradeAllocation;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class BookingGetTradeAllocationRequestBuilder {
 
   private String accountId;
   private String tradeAllocationId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public BookingGetTradeAllocationRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -31,6 +35,18 @@ public class BookingGetTradeAllocationRequestBuilder {
     return this;
   }
 
+  public BookingGetTradeAllocationRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public BookingGetTradeAllocationRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private BookingGetTradeAllocationRequest buildRequest() {
 
     BookingGetTradeAllocationRequest request =
@@ -40,9 +56,10 @@ public class BookingGetTradeAllocationRequestBuilder {
   }
 
   public BookingGetTradeAllocationResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<BookingGetTradeAllocationRequest, BookingGetTradeAllocationResponse>
-        operation = new BookingGetTradeAllocation.Sync(sdkConfiguration);
+        operation = new BookingGetTradeAllocation.Sync(sdkConfiguration, options);
     BookingGetTradeAllocationRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

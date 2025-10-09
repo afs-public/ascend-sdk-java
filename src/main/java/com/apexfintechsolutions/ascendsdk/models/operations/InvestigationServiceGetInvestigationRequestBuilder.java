@@ -7,11 +7,15 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.InvestigationServiceGetInvestigation;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class InvestigationServiceGetInvestigationRequestBuilder {
 
   private String investigationId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public InvestigationServiceGetInvestigationRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -25,6 +29,19 @@ public class InvestigationServiceGetInvestigationRequestBuilder {
     return this;
   }
 
+  public InvestigationServiceGetInvestigationRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public InvestigationServiceGetInvestigationRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private InvestigationServiceGetInvestigationRequest buildRequest() {
 
     InvestigationServiceGetInvestigationRequest request =
@@ -34,11 +51,12 @@ public class InvestigationServiceGetInvestigationRequestBuilder {
   }
 
   public InvestigationServiceGetInvestigationResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             InvestigationServiceGetInvestigationRequest,
             InvestigationServiceGetInvestigationResponse>
-        operation = new InvestigationServiceGetInvestigation.Sync(sdkConfiguration);
+        operation = new InvestigationServiceGetInvestigation.Sync(sdkConfiguration, options);
     InvestigationServiceGetInvestigationRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

@@ -51,9 +51,15 @@ public class FixedIncome {
   @JsonProperty("coupon_type")
   private Optional<? extends CouponType> couponType;
 
-  /** Weighted average time until a bond’s cash flows are received in years */
+  /**
+   * Weighted average time until a bond’s cash flows are received in years
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("duration")
+  @Deprecated
   private JsonNullable<? extends Duration> duration;
 
   /** date of first coupon */
@@ -304,7 +310,13 @@ public class FixedIncome {
     return (Optional<CouponType>) couponType;
   }
 
-  /** Weighted average time until a bond’s cash flows are received in years */
+  /**
+   * Weighted average time until a bond’s cash flows are received in years
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
+  @Deprecated
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public JsonNullable<Duration> duration() {
@@ -533,14 +545,26 @@ public class FixedIncome {
     return this;
   }
 
-  /** Weighted average time until a bond’s cash flows are received in years */
+  /**
+   * Weighted average time until a bond’s cash flows are received in years
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
+  @Deprecated
   public FixedIncome withDuration(Duration duration) {
     Utils.checkNotNull(duration, "duration");
     this.duration = JsonNullable.of(duration);
     return this;
   }
 
-  /** Weighted average time until a bond’s cash flows are received in years */
+  /**
+   * Weighted average time until a bond’s cash flows are received in years
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
+  @Deprecated
   public FixedIncome withDuration(JsonNullable<? extends Duration> duration) {
     Utils.checkNotNull(duration, "duration");
     this.duration = duration;
@@ -950,7 +974,7 @@ public class FixedIncome {
 
     private Optional<? extends CouponType> couponType = Optional.empty();
 
-    private JsonNullable<? extends Duration> duration = JsonNullable.undefined();
+    @Deprecated private JsonNullable<? extends Duration> duration = JsonNullable.undefined();
 
     private JsonNullable<? extends FirstCouponDate> firstCouponDate = JsonNullable.undefined();
 
@@ -1082,14 +1106,26 @@ public class FixedIncome {
       return this;
     }
 
-    /** Weighted average time until a bond’s cash flows are received in years */
+    /**
+     * Weighted average time until a bond’s cash flows are received in years
+     *
+     * @deprecated field: This will be removed in a future release, please migrate away from it as
+     *     soon as possible.
+     */
+    @Deprecated
     public Builder duration(Duration duration) {
       Utils.checkNotNull(duration, "duration");
       this.duration = JsonNullable.of(duration);
       return this;
     }
 
-    /** Weighted average time until a bond’s cash flows are received in years */
+    /**
+     * Weighted average time until a bond’s cash flows are received in years
+     *
+     * @deprecated field: This will be removed in a future release, please migrate away from it as
+     *     soon as possible.
+     */
+    @Deprecated
     public Builder duration(JsonNullable<? extends Duration> duration) {
       Utils.checkNotNull(duration, "duration");
       this.duration = duration;

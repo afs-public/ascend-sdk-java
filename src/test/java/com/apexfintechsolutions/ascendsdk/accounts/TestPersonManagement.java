@@ -19,16 +19,13 @@ public class TestPersonManagement {
   public void setup() throws Exception {
     sdk = SdkUtil.getSdk();
     lnp = AccountUtil.createLnp(sdk);
-    Thread.sleep(5000);
     largeTrader = AccountUtil.assignLargeTrader(sdk, lnp.legalNaturalPersonId().get());
 
     if (largeTrader == null) {
       throw new Exception("Failed to assign large trader");
     }
 
-    Thread.sleep(5000);
     legalEntity = AccountUtil.createLegalEntity(sdk);
-    Thread.sleep(5000);
   }
 
   @Test
@@ -84,8 +81,6 @@ public class TestPersonManagement {
   @Test
   public void person_management_accounts_end_large_trader_end_large_trader1() throws Exception {
 
-    Thread.sleep(5000);
-
     var request =
         EndLargeTraderRequestCreate.builder().endReason(EndReason.EVENT_REASON_CREATED).build();
     var result =
@@ -136,8 +131,6 @@ public class TestPersonManagement {
   public void
       person_management_accounts_end_large_trader_legal_entity_end_large_trader_legal_entity1()
           throws Exception {
-
-    Thread.sleep(5000);
 
     var request =
         EndLargeTraderRequestCreate.builder().endReason(EndReason.EVENT_REASON_CREATED).build();

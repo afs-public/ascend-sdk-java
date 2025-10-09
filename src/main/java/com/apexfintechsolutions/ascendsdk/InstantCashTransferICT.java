@@ -37,6 +37,8 @@ import com.apexfintechsolutions.ascendsdk.operations.IctReconReportsLocateIctRep
 import com.apexfintechsolutions.ascendsdk.operations.IctWithdrawalsCancelIctWithdrawal;
 import com.apexfintechsolutions.ascendsdk.operations.IctWithdrawalsCreateIctWithdrawal;
 import com.apexfintechsolutions.ascendsdk.operations.IctWithdrawalsGetIctWithdrawal;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import java.util.Optional;
 
 public class InstantCashTransferICT {
   private final SDKConfiguration sdkConfiguration;
@@ -69,13 +71,31 @@ public class InstantCashTransferICT {
    */
   public IctDepositsCreateIctDepositResponse createIctDeposit(
       String accountId, IctDepositCreate ictDepositCreate) throws Exception {
+    return createIctDeposit(accountId, ictDepositCreate, Optional.empty());
+  }
+
+  /**
+   * Create ICT Deposit
+   *
+   * <p>Creates an ICT deposit
+   *
+   * @param accountId The account id.
+   * @param ictDepositCreate An Instant Cash Transfer. Funds are moved from a configured Firm
+   *     account to a customer's brokerage account.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public IctDepositsCreateIctDepositResponse createIctDeposit(
+      String accountId, IctDepositCreate ictDepositCreate, Optional<Options> options)
+      throws Exception {
     IctDepositsCreateIctDepositRequest request =
         IctDepositsCreateIctDepositRequest.builder()
             .accountId(accountId)
             .ictDepositCreate(ictDepositCreate)
             .build();
     RequestOperation<IctDepositsCreateIctDepositRequest, IctDepositsCreateIctDepositResponse>
-        operation = new IctDepositsCreateIctDeposit.Sync(sdkConfiguration);
+        operation = new IctDepositsCreateIctDeposit.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -102,13 +122,29 @@ public class InstantCashTransferICT {
    */
   public IctDepositsGetIctDepositResponse getIctDeposit(String accountId, String ictDepositId)
       throws Exception {
+    return getIctDeposit(accountId, ictDepositId, Optional.empty());
+  }
+
+  /**
+   * Get ICT Deposit
+   *
+   * <p>Gets an existing ICT deposit
+   *
+   * @param accountId The account id.
+   * @param ictDepositId The ictDeposit id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public IctDepositsGetIctDepositResponse getIctDeposit(
+      String accountId, String ictDepositId, Optional<Options> options) throws Exception {
     IctDepositsGetIctDepositRequest request =
         IctDepositsGetIctDepositRequest.builder()
             .accountId(accountId)
             .ictDepositId(ictDepositId)
             .build();
     RequestOperation<IctDepositsGetIctDepositRequest, IctDepositsGetIctDepositResponse> operation =
-        new IctDepositsGetIctDeposit.Sync(sdkConfiguration);
+        new IctDepositsGetIctDeposit.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -139,6 +175,28 @@ public class InstantCashTransferICT {
       String ictDepositId,
       CancelIctDepositRequestCreate cancelIctDepositRequestCreate)
       throws Exception {
+    return cancelIctDeposit(
+        accountId, ictDepositId, cancelIctDepositRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Cancel ICT Deposit
+   *
+   * <p>Cancels an existing ICT deposit
+   *
+   * @param accountId The account id.
+   * @param ictDepositId The ictDeposit id.
+   * @param cancelIctDepositRequestCreate Request to cancel an existing ICT deposit
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public IctDepositsCancelIctDepositResponse cancelIctDeposit(
+      String accountId,
+      String ictDepositId,
+      CancelIctDepositRequestCreate cancelIctDepositRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     IctDepositsCancelIctDepositRequest request =
         IctDepositsCancelIctDepositRequest.builder()
             .accountId(accountId)
@@ -146,7 +204,7 @@ public class InstantCashTransferICT {
             .cancelIctDepositRequestCreate(cancelIctDepositRequestCreate)
             .build();
     RequestOperation<IctDepositsCancelIctDepositRequest, IctDepositsCancelIctDepositResponse>
-        operation = new IctDepositsCancelIctDeposit.Sync(sdkConfiguration);
+        operation = new IctDepositsCancelIctDeposit.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -174,6 +232,24 @@ public class InstantCashTransferICT {
    */
   public IctWithdrawalsCreateIctWithdrawalResponse createIctWithdrawal(
       String accountId, IctWithdrawalCreate ictWithdrawalCreate) throws Exception {
+    return createIctWithdrawal(accountId, ictWithdrawalCreate, Optional.empty());
+  }
+
+  /**
+   * Create ICT Withdrawal
+   *
+   * <p>Creates an ICT withdrawal
+   *
+   * @param accountId The account id.
+   * @param ictWithdrawalCreate An Instant Cash Transfer. Funds are moved from a customer's
+   *     brokerage account to a configured Firm account.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public IctWithdrawalsCreateIctWithdrawalResponse createIctWithdrawal(
+      String accountId, IctWithdrawalCreate ictWithdrawalCreate, Optional<Options> options)
+      throws Exception {
     IctWithdrawalsCreateIctWithdrawalRequest request =
         IctWithdrawalsCreateIctWithdrawalRequest.builder()
             .accountId(accountId)
@@ -181,7 +257,7 @@ public class InstantCashTransferICT {
             .build();
     RequestOperation<
             IctWithdrawalsCreateIctWithdrawalRequest, IctWithdrawalsCreateIctWithdrawalResponse>
-        operation = new IctWithdrawalsCreateIctWithdrawal.Sync(sdkConfiguration);
+        operation = new IctWithdrawalsCreateIctWithdrawal.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -208,13 +284,29 @@ public class InstantCashTransferICT {
    */
   public IctWithdrawalsGetIctWithdrawalResponse getIctWithdrawal(
       String accountId, String ictWithdrawalId) throws Exception {
+    return getIctWithdrawal(accountId, ictWithdrawalId, Optional.empty());
+  }
+
+  /**
+   * Get ICT Withdrawal
+   *
+   * <p>Gets an existing ICT withdrawal
+   *
+   * @param accountId The account id.
+   * @param ictWithdrawalId The ictWithdrawal id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public IctWithdrawalsGetIctWithdrawalResponse getIctWithdrawal(
+      String accountId, String ictWithdrawalId, Optional<Options> options) throws Exception {
     IctWithdrawalsGetIctWithdrawalRequest request =
         IctWithdrawalsGetIctWithdrawalRequest.builder()
             .accountId(accountId)
             .ictWithdrawalId(ictWithdrawalId)
             .build();
     RequestOperation<IctWithdrawalsGetIctWithdrawalRequest, IctWithdrawalsGetIctWithdrawalResponse>
-        operation = new IctWithdrawalsGetIctWithdrawal.Sync(sdkConfiguration);
+        operation = new IctWithdrawalsGetIctWithdrawal.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -245,6 +337,28 @@ public class InstantCashTransferICT {
       String ictWithdrawalId,
       CancelIctWithdrawalRequestCreate cancelIctWithdrawalRequestCreate)
       throws Exception {
+    return cancelIctWithdrawal(
+        accountId, ictWithdrawalId, cancelIctWithdrawalRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Cancel ICT Withdrawal
+   *
+   * <p>Cancels an existing ICT withdrawal
+   *
+   * @param accountId The account id.
+   * @param ictWithdrawalId The ictWithdrawal id.
+   * @param cancelIctWithdrawalRequestCreate Request to cancel an existing ICT withdrawal
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public IctWithdrawalsCancelIctWithdrawalResponse cancelIctWithdrawal(
+      String accountId,
+      String ictWithdrawalId,
+      CancelIctWithdrawalRequestCreate cancelIctWithdrawalRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     IctWithdrawalsCancelIctWithdrawalRequest request =
         IctWithdrawalsCancelIctWithdrawalRequest.builder()
             .accountId(accountId)
@@ -253,7 +367,7 @@ public class InstantCashTransferICT {
             .build();
     RequestOperation<
             IctWithdrawalsCancelIctWithdrawalRequest, IctWithdrawalsCancelIctWithdrawalResponse>
-        operation = new IctWithdrawalsCancelIctWithdrawal.Sync(sdkConfiguration);
+        operation = new IctWithdrawalsCancelIctWithdrawal.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -279,8 +393,23 @@ public class InstantCashTransferICT {
    */
   public IctReconReportsLocateIctReportResponse locateIctReport(
       IctReconReportsLocateIctReportRequest request) throws Exception {
+    return locateIctReport(request, Optional.empty());
+  }
+
+  /**
+   * Locate ICT Report
+   *
+   * <p>Returns a signed link pointing to a recon report file for a specific ICT batch.
+   *
+   * @param request The request object containing all the parameters for the API call.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public IctReconReportsLocateIctReportResponse locateIctReport(
+      IctReconReportsLocateIctReportRequest request, Optional<Options> options) throws Exception {
     RequestOperation<IctReconReportsLocateIctReportRequest, IctReconReportsLocateIctReportResponse>
-        operation = new IctReconReportsLocateIctReport.Sync(sdkConfiguration);
+        operation = new IctReconReportsLocateIctReport.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

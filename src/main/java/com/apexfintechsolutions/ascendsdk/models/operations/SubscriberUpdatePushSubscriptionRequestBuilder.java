@@ -8,6 +8,8 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.PushSubscriptionUpdate;
 import com.apexfintechsolutions.ascendsdk.operations.SubscriberUpdatePushSubscription;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import java.util.Optional;
 
@@ -16,6 +18,7 @@ public class SubscriberUpdatePushSubscriptionRequestBuilder {
   private String subscriptionId;
   private Optional<String> updateMask = Optional.empty();
   private PushSubscriptionUpdate pushSubscriptionUpdate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public SubscriberUpdatePushSubscriptionRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -47,6 +50,19 @@ public class SubscriberUpdatePushSubscriptionRequestBuilder {
     return this;
   }
 
+  public SubscriberUpdatePushSubscriptionRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public SubscriberUpdatePushSubscriptionRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private SubscriberUpdatePushSubscriptionRequest buildRequest() {
 
     SubscriberUpdatePushSubscriptionRequest request =
@@ -57,10 +73,11 @@ public class SubscriberUpdatePushSubscriptionRequestBuilder {
   }
 
   public SubscriberUpdatePushSubscriptionResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             SubscriberUpdatePushSubscriptionRequest, SubscriberUpdatePushSubscriptionResponse>
-        operation = new SubscriberUpdatePushSubscription.Sync(sdkConfiguration);
+        operation = new SubscriberUpdatePushSubscription.Sync(sdkConfiguration, options);
     SubscriberUpdatePushSubscriptionRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

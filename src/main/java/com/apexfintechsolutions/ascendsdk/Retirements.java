@@ -23,6 +23,7 @@ import com.apexfintechsolutions.ascendsdk.operations.RetirementConstraintsListCo
 import com.apexfintechsolutions.ascendsdk.operations.RetirementConstraintsListDistributionSummaries;
 import com.apexfintechsolutions.ascendsdk.operations.RetirementConstraintsRetrieveContributionConstraints;
 import com.apexfintechsolutions.ascendsdk.operations.RetirementConstraintsRetrieveDistributionConstraints;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
 import java.util.Optional;
 
 public class Retirements {
@@ -54,7 +55,8 @@ public class Retirements {
    */
   public RetirementConstraintsListContributionSummariesResponse listContributionSummaries(
       String accountId) throws Exception {
-    return listContributionSummaries(accountId, Optional.empty(), Optional.empty());
+    return listContributionSummaries(
+        accountId, Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -67,11 +69,16 @@ public class Retirements {
    *     (current year and prior year), maximum = 10
    * @param pageToken When paginating, this is used to retrieve a specific page from the overall
    *     response
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public RetirementConstraintsListContributionSummariesResponse listContributionSummaries(
-      String accountId, Optional<Integer> pageSize, Optional<String> pageToken) throws Exception {
+      String accountId,
+      Optional<Integer> pageSize,
+      Optional<String> pageToken,
+      Optional<Options> options)
+      throws Exception {
     RetirementConstraintsListContributionSummariesRequest request =
         RetirementConstraintsListContributionSummariesRequest.builder()
             .accountId(accountId)
@@ -81,7 +88,8 @@ public class Retirements {
     RequestOperation<
             RetirementConstraintsListContributionSummariesRequest,
             RetirementConstraintsListContributionSummariesResponse>
-        operation = new RetirementConstraintsListContributionSummaries.Sync(sdkConfiguration);
+        operation =
+            new RetirementConstraintsListContributionSummaries.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -113,6 +121,28 @@ public class Retirements {
           String accountId,
           RetrieveContributionConstraintsRequestCreate retrieveContributionConstraintsRequestCreate)
           throws Exception {
+    return retrieveContributionConstraints(
+        accountId, retrieveContributionConstraintsRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Retrieve Contribution Constraints
+   *
+   * <p>Retrieves retirement contribution constraints for an account
+   *
+   * @param accountId The account id.
+   * @param retrieveContributionConstraintsRequestCreate Request to retrieve retirement contribution
+   *     constraints
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public RetirementConstraintsRetrieveContributionConstraintsResponse
+      retrieveContributionConstraints(
+          String accountId,
+          RetrieveContributionConstraintsRequestCreate retrieveContributionConstraintsRequestCreate,
+          Optional<Options> options)
+          throws Exception {
     RetirementConstraintsRetrieveContributionConstraintsRequest request =
         RetirementConstraintsRetrieveContributionConstraintsRequest.builder()
             .accountId(accountId)
@@ -122,7 +152,9 @@ public class Retirements {
     RequestOperation<
             RetirementConstraintsRetrieveContributionConstraintsRequest,
             RetirementConstraintsRetrieveContributionConstraintsResponse>
-        operation = new RetirementConstraintsRetrieveContributionConstraints.Sync(sdkConfiguration);
+        operation =
+            new RetirementConstraintsRetrieveContributionConstraints.Sync(
+                sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -148,7 +180,8 @@ public class Retirements {
    */
   public RetirementConstraintsListDistributionSummariesResponse listDistributionSummaries(
       String accountId) throws Exception {
-    return listDistributionSummaries(accountId, Optional.empty(), Optional.empty());
+    return listDistributionSummaries(
+        accountId, Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -161,11 +194,16 @@ public class Retirements {
    *     (current year and prior year), maximum = 10
    * @param pageToken When paginating, this is used to retrieve a specific page from the overall
    *     response
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public RetirementConstraintsListDistributionSummariesResponse listDistributionSummaries(
-      String accountId, Optional<Integer> pageSize, Optional<String> pageToken) throws Exception {
+      String accountId,
+      Optional<Integer> pageSize,
+      Optional<String> pageToken,
+      Optional<Options> options)
+      throws Exception {
     RetirementConstraintsListDistributionSummariesRequest request =
         RetirementConstraintsListDistributionSummariesRequest.builder()
             .accountId(accountId)
@@ -175,7 +213,8 @@ public class Retirements {
     RequestOperation<
             RetirementConstraintsListDistributionSummariesRequest,
             RetirementConstraintsListDistributionSummariesResponse>
-        operation = new RetirementConstraintsListDistributionSummaries.Sync(sdkConfiguration);
+        operation =
+            new RetirementConstraintsListDistributionSummaries.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -207,6 +246,28 @@ public class Retirements {
           String accountId,
           RetrieveDistributionConstraintsRequestCreate retrieveDistributionConstraintsRequestCreate)
           throws Exception {
+    return retrieveDistributionConstraints(
+        accountId, retrieveDistributionConstraintsRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Retrieve Distribution Constraints
+   *
+   * <p>Retrieves retirement distribution constraints for an account
+   *
+   * @param accountId The account id.
+   * @param retrieveDistributionConstraintsRequestCreate Request to retrieve retirement distribution
+   *     constraints
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public RetirementConstraintsRetrieveDistributionConstraintsResponse
+      retrieveDistributionConstraints(
+          String accountId,
+          RetrieveDistributionConstraintsRequestCreate retrieveDistributionConstraintsRequestCreate,
+          Optional<Options> options)
+          throws Exception {
     RetirementConstraintsRetrieveDistributionConstraintsRequest request =
         RetirementConstraintsRetrieveDistributionConstraintsRequest.builder()
             .accountId(accountId)
@@ -216,7 +277,9 @@ public class Retirements {
     RequestOperation<
             RetirementConstraintsRetrieveDistributionConstraintsRequest,
             RetirementConstraintsRetrieveDistributionConstraintsResponse>
-        operation = new RetirementConstraintsRetrieveDistributionConstraints.Sync(sdkConfiguration);
+        operation =
+            new RetirementConstraintsRetrieveDistributionConstraints.Sync(
+                sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

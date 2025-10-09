@@ -25,7 +25,6 @@ public class TestAchTransfers {
     bankRel = TransfersUtil.createVerifiedBankRelationship(sdk, enrolledAccount);
     withdrawal = TransfersUtil.createAchWithdrawal(sdk, enrolledAccount, bankRel);
     deposit = TransfersUtil.createAchDeposit(sdk, enrolledAccount, bankRel);
-    Thread.sleep(5000);
   }
 
   @Order(1)

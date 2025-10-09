@@ -7,11 +7,15 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.MarginsRealTimeGetBuyingPower;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class MarginsRealTimeGetBuyingPowerRequestBuilder {
 
   private String accountId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public MarginsRealTimeGetBuyingPowerRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -24,6 +28,19 @@ public class MarginsRealTimeGetBuyingPowerRequestBuilder {
     return this;
   }
 
+  public MarginsRealTimeGetBuyingPowerRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public MarginsRealTimeGetBuyingPowerRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private MarginsRealTimeGetBuyingPowerRequest buildRequest() {
 
     MarginsRealTimeGetBuyingPowerRequest request =
@@ -33,9 +50,10 @@ public class MarginsRealTimeGetBuyingPowerRequestBuilder {
   }
 
   public MarginsRealTimeGetBuyingPowerResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<MarginsRealTimeGetBuyingPowerRequest, MarginsRealTimeGetBuyingPowerResponse>
-        operation = new MarginsRealTimeGetBuyingPower.Sync(sdkConfiguration);
+        operation = new MarginsRealTimeGetBuyingPower.Sync(sdkConfiguration, options);
     MarginsRealTimeGetBuyingPowerRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

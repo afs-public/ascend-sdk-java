@@ -21,6 +21,7 @@ import com.apexfintechsolutions.ascendsdk.operations.AssetsGetAsset;
 import com.apexfintechsolutions.ascendsdk.operations.AssetsGetAssetCorrespondent;
 import com.apexfintechsolutions.ascendsdk.operations.AssetsListAssets1;
 import com.apexfintechsolutions.ascendsdk.operations.AssetsListAssetsCorrespondent;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
 import java.util.Optional;
 
 public class Assets {
@@ -50,7 +51,8 @@ public class Assets {
    * @throws Exception if the API call fails
    */
   public AssetsListAssets1Response listAssetsDirect() throws Exception {
-    return listAssets(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    return listAssets(
+        Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -69,6 +71,7 @@ public class Assets {
    * @param filter A CEL string to filter results; See the [CEL
    *     Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    *     Guides for more information;
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -76,7 +79,8 @@ public class Assets {
       Optional<String> parent,
       Optional<Integer> pageSize,
       Optional<String> pageToken,
-      Optional<String> filter)
+      Optional<String> filter,
+      Optional<Options> options)
       throws Exception {
     AssetsListAssets1Request request =
         AssetsListAssets1Request.builder()
@@ -86,7 +90,7 @@ public class Assets {
             .filter(filter)
             .build();
     RequestOperation<AssetsListAssets1Request, AssetsListAssets1Response> operation =
-        new AssetsListAssets1.Sync(sdkConfiguration);
+        new AssetsListAssets1.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -111,9 +115,24 @@ public class Assets {
    * @throws Exception if the API call fails
    */
   public AssetsGetAssetResponse getAsset(String assetId) throws Exception {
+    return getAsset(assetId, Optional.empty());
+  }
+
+  /**
+   * Get Asset
+   *
+   * <p>Gets assets
+   *
+   * @param assetId The asset id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AssetsGetAssetResponse getAsset(String assetId, Optional<Options> options)
+      throws Exception {
     AssetsGetAssetRequest request = AssetsGetAssetRequest.builder().assetId(assetId).build();
     RequestOperation<AssetsGetAssetRequest, AssetsGetAssetResponse> operation =
-        new AssetsGetAsset.Sync(sdkConfiguration);
+        new AssetsGetAsset.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -140,7 +159,7 @@ public class Assets {
   public AssetsListAssetsCorrespondentResponse listAssetsCorrespondent(String correspondentId)
       throws Exception {
     return listAssetsCorrespondent(
-        correspondentId, Optional.empty(), Optional.empty(), Optional.empty());
+        correspondentId, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -159,6 +178,7 @@ public class Assets {
    * @param filter A CEL string to filter results; See the [CEL
    *     Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    *     Guides for more information;
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -166,7 +186,8 @@ public class Assets {
       String correspondentId,
       Optional<Integer> pageSize,
       Optional<String> pageToken,
-      Optional<String> filter)
+      Optional<String> filter,
+      Optional<Options> options)
       throws Exception {
     AssetsListAssetsCorrespondentRequest request =
         AssetsListAssetsCorrespondentRequest.builder()
@@ -176,7 +197,7 @@ public class Assets {
             .filter(filter)
             .build();
     RequestOperation<AssetsListAssetsCorrespondentRequest, AssetsListAssetsCorrespondentResponse>
-        operation = new AssetsListAssetsCorrespondent.Sync(sdkConfiguration);
+        operation = new AssetsListAssetsCorrespondent.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -203,13 +224,29 @@ public class Assets {
    */
   public AssetsGetAssetCorrespondentResponse getAssetCorrespondent(
       String correspondentId, String assetId) throws Exception {
+    return getAssetCorrespondent(correspondentId, assetId, Optional.empty());
+  }
+
+  /**
+   * Get Asset (By Correspondent)
+   *
+   * <p>Gets assets
+   *
+   * @param correspondentId The correspondent id.
+   * @param assetId The asset id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AssetsGetAssetCorrespondentResponse getAssetCorrespondent(
+      String correspondentId, String assetId, Optional<Options> options) throws Exception {
     AssetsGetAssetCorrespondentRequest request =
         AssetsGetAssetCorrespondentRequest.builder()
             .correspondentId(correspondentId)
             .assetId(assetId)
             .build();
     RequestOperation<AssetsGetAssetCorrespondentRequest, AssetsGetAssetCorrespondentResponse>
-        operation = new AssetsGetAssetCorrespondent.Sync(sdkConfiguration);
+        operation = new AssetsGetAssetCorrespondent.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

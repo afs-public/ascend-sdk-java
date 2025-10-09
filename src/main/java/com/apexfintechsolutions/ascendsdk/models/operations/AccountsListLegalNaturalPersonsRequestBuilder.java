@@ -4,11 +4,22 @@
 package com.apexfintechsolutions.ascendsdk.models.operations;
 
 import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOperation;
+import static com.apexfintechsolutions.ascendsdk.utils.Exceptions.unchecked;
+import static com.apexfintechsolutions.ascendsdk.utils.Utils.toStream;
+import static com.apexfintechsolutions.ascendsdk.utils.Utils.transform;
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsListLegalNaturalPersons;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import com.apexfintechsolutions.ascendsdk.utils.pagination.CursorTracker;
+import com.apexfintechsolutions.ascendsdk.utils.pagination.Paginator;
+import java.io.InputStream;
+import java.net.http.HttpResponse;
+import java.util.Iterator;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class AccountsListLegalNaturalPersonsRequestBuilder {
 
@@ -16,6 +27,7 @@ public class AccountsListLegalNaturalPersonsRequestBuilder {
   private Optional<String> pageToken = Optional.empty();
   private Optional<String> orderBy = Optional.empty();
   private Optional<String> filter = Optional.empty();
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsListLegalNaturalPersonsRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -70,6 +82,19 @@ public class AccountsListLegalNaturalPersonsRequestBuilder {
     return this;
   }
 
+  public AccountsListLegalNaturalPersonsRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsListLegalNaturalPersonsRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsListLegalNaturalPersonsRequest buildRequest() {
 
     AccountsListLegalNaturalPersonsRequest request =
@@ -79,12 +104,48 @@ public class AccountsListLegalNaturalPersonsRequestBuilder {
   }
 
   public AccountsListLegalNaturalPersonsResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             AccountsListLegalNaturalPersonsRequest, AccountsListLegalNaturalPersonsResponse>
-        operation = new AccountsListLegalNaturalPersons.Sync(sdkConfiguration);
+        operation = new AccountsListLegalNaturalPersons.Sync(sdkConfiguration, options);
     AccountsListLegalNaturalPersonsRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Returns an iterable that performs next page calls till no more pages are returned.
+   *
+   * <p>The returned iterable can be used in a for-each loop:
+   *
+   * <pre><code>
+   * for (AccountsListLegalNaturalPersonsResponse page : builder.callAsIterable()) {
+   *     // Process each page
+   * }
+   * </code></pre>
+   *
+   * @return An iterable that can be used to iterate through all pages
+   */
+  public Iterable<AccountsListLegalNaturalPersonsResponse> callAsIterable() {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
+
+    RequestOperation<
+            AccountsListLegalNaturalPersonsRequest, AccountsListLegalNaturalPersonsResponse>
+        operation = new AccountsListLegalNaturalPersons.Sync(sdkConfiguration, options);
+    AccountsListLegalNaturalPersonsRequest request = buildRequest();
+    Iterator<HttpResponse<InputStream>> iterator =
+        new Paginator<>(
+            request,
+            new CursorTracker<>("$.next_page_token", String.class),
+            AccountsListLegalNaturalPersonsRequest::withPageToken,
+            nextRequest -> unchecked(() -> operation.doRequest(request)).get());
+
+    return () -> transform(iterator, operation::handleResponse);
+  }
+
+  /** Returns a stream that performs next page calls till no more pages are returned. */
+  public Stream<AccountsListLegalNaturalPersonsResponse> callAsStream() {
+    return toStream(callAsIterable());
   }
 }

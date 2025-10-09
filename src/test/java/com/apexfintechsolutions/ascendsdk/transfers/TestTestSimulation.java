@@ -36,9 +36,7 @@ public class TestTestSimulation {
     lnp = AccountUtil.createLnp(sdk);
     account = AccountUtil.createEnrolledAccount(sdk);
     bankRelationship = TransfersUtil.createBankRelationship(sdk, account);
-    Thread.sleep(5000);
     microdeposits = TransfersUtil.getCorrectMicrodepositAmounts(sdk, account, bankRelationship);
-    Thread.sleep(5000);
     TransfersUtil.verifyMicroDeposits(sdk, account, bankRelationship, microdeposits);
     cashJournalId = TransfersUtil.createCashJournalId(sdk, account.accountId().get());
 
@@ -92,7 +90,6 @@ public class TestTestSimulation {
             AccountUtil.getAccount(sdk, deceasedAccountId),
             TransfersUtil.getBankRelationship(sdk, deceasedAccountId, deceasedBankRelationshipId));
     var pendingDepositId = TransfersUtil.getAchDepositId(pendingDeposit);
-    Thread.sleep(5000);
     var req =
         new ForceApproveAchDepositRequestCreate(
             "accounts/" + deceasedAccountId + "/achDeposits/" + pendingDepositId);
@@ -122,7 +119,6 @@ public class TestTestSimulation {
         "Skipping Endpoint Test: Force NOC ACH Deposit. Requires current time to be between 11:30"
             + " PM CT and 6:00 PM CT");
     var achDeposit = TransfersUtil.createAchDeposit(sdk, account, bankRelationship);
-    Thread.sleep(5000);
     var req =
         ForceNocAchDepositRequestCreate.builder()
             .nachaNoc(
@@ -163,7 +159,6 @@ public class TestTestSimulation {
             AccountUtil.getAccount(sdk, deceasedAccountId),
             TransfersUtil.getBankRelationship(sdk, deceasedAccountId, deceasedBankRelationshipId));
     var pendingDepositId = TransfersUtil.getAchDepositId(pendingDeposit);
-    Thread.sleep(5000);
 
     var req =
         new ForceRejectAchDepositRequestCreate(
@@ -196,7 +191,6 @@ public class TestTestSimulation {
             + " 11:30 PM CT and 6:00 PM CT");
 
     var achDeposit = TransfersUtil.createAchDeposit(sdk, account, bankRelationship);
-    Thread.sleep(5000);
     var req =
         ForceReturnAchDepositRequestCreate.builder()
             .nachaReturn(new NachaReturnCreate(NachaReturnCreateCode.R16))
@@ -239,7 +233,6 @@ public class TestTestSimulation {
             AccountUtil.getAccount(sdk, deceasedAccountId),
             TransfersUtil.getBankRelationship(sdk, deceasedAccountId, deceasedBankRelationshipId));
     var pendingWithdrawalId = TransfersUtil.getAchWithdrawalId(pendingWithdrawal);
-    Thread.sleep(10000);
     var req =
         new ForceApproveAchWithdrawalRequestCreate(
             "accounts/" + deceasedAccountId + "/achWithdrawals/" + pendingWithdrawalId);
@@ -311,7 +304,6 @@ public class TestTestSimulation {
             AccountUtil.getAccount(sdk, deceasedAccountId),
             TransfersUtil.getBankRelationship(sdk, deceasedAccountId, deceasedBankRelationshipId));
     var pendingWithdrawalId = TransfersUtil.getAchWithdrawalId(pendingWithdrawal);
-    Thread.sleep(5000);
     var req =
         new ForceRejectAchWithdrawalRequestCreate(
             "accounts/" + deceasedAccountId + "/achWithdrawals/" + pendingWithdrawalId);
@@ -380,7 +372,6 @@ public class TestTestSimulation {
         "Skipping Endpoint Test: Force ICT Deposit Approve. Requires current time to be between"
             + " 6:00 AM CT and 3:00 PM CT");
     var ictDepositId = TransfersUtil.createIctDepositId(sdk, deceasedAccountId);
-    Thread.sleep(10000);
     var req =
         new ForceApproveIctDepositRequestCreate(
             "accounts/" + deceasedAccountId + "/ictDeposits/" + ictDepositId);
@@ -411,7 +402,6 @@ public class TestTestSimulation {
         "Skipping Endpoint Test: Force ICT Deposit Reject. Requires current time to be between 6:00"
             + " AM CT and 3:00 PM CT");
     var pendingDepositId = TransfersUtil.createIctDepositId(sdk, deceasedAccountId);
-    Thread.sleep(10000);
 
     var req =
         new ForceRejectIctDepositRequestCreate(
@@ -445,7 +435,6 @@ public class TestTestSimulation {
             + " 6:00 AM CT and 3:00 PM CT");
     var ictWithdrawalId = TransfersUtil.createIctWithdrawalId(sdk, deceasedAccountId);
 
-    Thread.sleep(10000);
     var req =
         new ForceApproveIctWithdrawalRequestCreate(
             "accounts/" + deceasedAccountId + "/ictWithdrawals/" + ictWithdrawalId);
@@ -477,7 +466,6 @@ public class TestTestSimulation {
         "Skipping Endpoint Test: Force ICT Withdrawal Reject. Requires current time to be between"
             + " 6:00 AM CT and 3:00 PM CT");
     var pendingWithdrawalId = TransfersUtil.createIctWithdrawalId(sdk, deceasedAccountId);
-    Thread.sleep(10000);
 
     var req =
         new ForceRejectIctWithdrawalRequestCreate(
@@ -522,7 +510,6 @@ public class TestTestSimulation {
         .transfersCreditCreate(creditReq)
         .call();
 
-    Thread.sleep(5000);
     var req =
         ForceApproveCashJournalRequestCreate.builder()
             .name("cashJournals/" + cashJournalId)
@@ -569,8 +556,6 @@ public class TestTestSimulation {
 
     String wireWithdrawalId =
         TransfersUtil.createWireWithdrawalId(sdk, TransfersUtil.getWithdrawalAccountId());
-
-    Thread.sleep(5000);
 
     var request =
         ForceApproveWireWithdrawalRequestCreate.builder()

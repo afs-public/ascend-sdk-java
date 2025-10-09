@@ -36,8 +36,6 @@ public class AccountTransfersUtil {
       throw new Exception("Failed to credit account: " + creditResponse.statusCode());
     }
 
-    Thread.sleep(5000);
-
     var req =
         TransferCreate.builder()
             .assets(

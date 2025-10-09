@@ -43,16 +43,17 @@ public class Application {
                     .build())
             .build();
 
-        AssetsListAssets1Response res = sdk.assets().listAssets()
+
+        sdk.assets().listAssets()
                 .parent("correspondents/1234")
                 .pageSize(100)
                 .pageToken("Mv-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAD_-CAfzrRtzkAQQ1MDA3AA==")
                 .filter("(symbol == 'IBM' && usable) || symbol == 'USD'")
-                .call();
+                .callAsStream()
+                .forEach((AssetsListAssets1Response item) -> {
+                   // handle page
+                });
 
-        if (res.listAssetsResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```
@@ -173,16 +174,17 @@ public class Application {
                     .build())
             .build();
 
-        AssetsListAssetsCorrespondentResponse res = sdk.assets().listAssetsCorrespondent()
+
+        sdk.assets().listAssetsCorrespondent()
                 .correspondentId("1234")
                 .pageSize(100)
                 .pageToken("Mv-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAD_-CAfzrRtzkAQQ1MDA3AA==")
                 .filter("(symbol == 'IBM' && usable) || symbol == 'USD'")
-                .call();
+                .callAsStream()
+                .forEach((AssetsListAssetsCorrespondentResponse item) -> {
+                   // handle page
+                });
 
-        if (res.listAssetsResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```

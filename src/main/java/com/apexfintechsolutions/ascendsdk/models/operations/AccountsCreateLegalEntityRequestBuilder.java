@@ -8,11 +8,15 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.LegalEntityCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsCreateLegalEntity;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AccountsCreateLegalEntityRequestBuilder {
 
   private LegalEntityCreate request;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsCreateLegalEntityRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -25,10 +29,23 @@ public class AccountsCreateLegalEntityRequestBuilder {
     return this;
   }
 
+  public AccountsCreateLegalEntityRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsCreateLegalEntityRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   public AccountsCreateLegalEntityResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<LegalEntityCreate, AccountsCreateLegalEntityResponse> operation =
-        new AccountsCreateLegalEntity.Sync(sdkConfiguration);
+        new AccountsCreateLegalEntity.Sync(sdkConfiguration, options);
 
     return operation.handleResponse(operation.doRequest(request));
   }

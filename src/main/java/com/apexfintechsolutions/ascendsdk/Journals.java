@@ -26,6 +26,8 @@ import com.apexfintechsolutions.ascendsdk.operations.CashJournalsCheckPartyType;
 import com.apexfintechsolutions.ascendsdk.operations.CashJournalsCreateCashJournal;
 import com.apexfintechsolutions.ascendsdk.operations.CashJournalsGetCashJournal;
 import com.apexfintechsolutions.ascendsdk.operations.RetirementConstraintsRetrieveCashJournalConstraints;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import java.util.Optional;
 
 public class Journals {
   private final SDKConfiguration sdkConfiguration;
@@ -57,10 +59,27 @@ public class Journals {
    */
   public RetirementConstraintsRetrieveCashJournalConstraintsResponse retrieveCashJournalConstraints(
       RetrieveCashJournalConstraintsRequestCreate request) throws Exception {
+    return retrieveCashJournalConstraints(request, Optional.empty());
+  }
+
+  /**
+   * Retrieve Cash Journal Constraints
+   *
+   * <p>Retrieves retirement contribution and distribution constraints for a cash journal transfer
+   *
+   * @param request The request object containing all the parameters for the API call.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public RetirementConstraintsRetrieveCashJournalConstraintsResponse retrieveCashJournalConstraints(
+      RetrieveCashJournalConstraintsRequestCreate request, Optional<Options> options)
+      throws Exception {
     RequestOperation<
             RetrieveCashJournalConstraintsRequestCreate,
             RetirementConstraintsRetrieveCashJournalConstraintsResponse>
-        operation = new RetirementConstraintsRetrieveCashJournalConstraints.Sync(sdkConfiguration);
+        operation =
+            new RetirementConstraintsRetrieveCashJournalConstraints.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -86,8 +105,23 @@ public class Journals {
    */
   public CashJournalsCreateCashJournalResponse createCashJournal(CashJournalCreate request)
       throws Exception {
+    return createCashJournal(request, Optional.empty());
+  }
+
+  /**
+   * Create Cash Journal
+   *
+   * <p>Creates a cash journal
+   *
+   * @param request The request object containing all the parameters for the API call.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CashJournalsCreateCashJournalResponse createCashJournal(
+      CashJournalCreate request, Optional<Options> options) throws Exception {
     RequestOperation<CashJournalCreate, CashJournalsCreateCashJournalResponse> operation =
-        new CashJournalsCreateCashJournal.Sync(sdkConfiguration);
+        new CashJournalsCreateCashJournal.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -112,10 +146,25 @@ public class Journals {
    * @throws Exception if the API call fails
    */
   public CashJournalsGetCashJournalResponse getCashJournal(String cashJournalId) throws Exception {
+    return getCashJournal(cashJournalId, Optional.empty());
+  }
+
+  /**
+   * Get Cash Journal
+   *
+   * <p>Gets an existing cash journal
+   *
+   * @param cashJournalId The cashJournal id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CashJournalsGetCashJournalResponse getCashJournal(
+      String cashJournalId, Optional<Options> options) throws Exception {
     CashJournalsGetCashJournalRequest request =
         CashJournalsGetCashJournalRequest.builder().cashJournalId(cashJournalId).build();
     RequestOperation<CashJournalsGetCashJournalRequest, CashJournalsGetCashJournalResponse>
-        operation = new CashJournalsGetCashJournal.Sync(sdkConfiguration);
+        operation = new CashJournalsGetCashJournal.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -143,13 +192,32 @@ public class Journals {
   public CashJournalsCancelCashJournalResponse cancelCashJournal(
       String cashJournalId, CancelCashJournalRequestCreate cancelCashJournalRequestCreate)
       throws Exception {
+    return cancelCashJournal(cashJournalId, cancelCashJournalRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Cancel Cash Journal
+   *
+   * <p>Cancels an existing cash journal
+   *
+   * @param cashJournalId The cashJournal id.
+   * @param cancelCashJournalRequestCreate Request to cancel an existing cash journal
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CashJournalsCancelCashJournalResponse cancelCashJournal(
+      String cashJournalId,
+      CancelCashJournalRequestCreate cancelCashJournalRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     CashJournalsCancelCashJournalRequest request =
         CashJournalsCancelCashJournalRequest.builder()
             .cashJournalId(cashJournalId)
             .cancelCashJournalRequestCreate(cancelCashJournalRequestCreate)
             .build();
     RequestOperation<CashJournalsCancelCashJournalRequest, CashJournalsCancelCashJournalResponse>
-        operation = new CashJournalsCancelCashJournal.Sync(sdkConfiguration);
+        operation = new CashJournalsCancelCashJournal.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -177,8 +245,24 @@ public class Journals {
    */
   public CashJournalsCheckPartyTypeResponse checkPartyType(CheckPartyTypeRequestCreate request)
       throws Exception {
+    return checkPartyType(request, Optional.empty());
+  }
+
+  /**
+   * Retrieve Cash Journal Party
+   *
+   * <p>Determines whether a potential cash journal will be considered first party or third party
+   * given a source and destination account
+   *
+   * @param request The request object containing all the parameters for the API call.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CashJournalsCheckPartyTypeResponse checkPartyType(
+      CheckPartyTypeRequestCreate request, Optional<Options> options) throws Exception {
     RequestOperation<CheckPartyTypeRequestCreate, CashJournalsCheckPartyTypeResponse> operation =
-        new CashJournalsCheckPartyType.Sync(sdkConfiguration);
+        new CashJournalsCheckPartyType.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

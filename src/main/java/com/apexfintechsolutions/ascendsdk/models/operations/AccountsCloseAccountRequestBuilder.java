@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.CloseAccountRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsCloseAccount;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AccountsCloseAccountRequestBuilder {
 
   private String accountId;
   private CloseAccountRequestCreate closeAccountRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsCloseAccountRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -33,6 +37,18 @@ public class AccountsCloseAccountRequestBuilder {
     return this;
   }
 
+  public AccountsCloseAccountRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsCloseAccountRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsCloseAccountRequest buildRequest() {
 
     AccountsCloseAccountRequest request =
@@ -42,9 +58,10 @@ public class AccountsCloseAccountRequestBuilder {
   }
 
   public AccountsCloseAccountResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountsCloseAccountRequest, AccountsCloseAccountResponse> operation =
-        new AccountsCloseAccount.Sync(sdkConfiguration);
+        new AccountsCloseAccount.Sync(sdkConfiguration, options);
     AccountsCloseAccountRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

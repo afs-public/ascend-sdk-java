@@ -7,13 +7,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.AccountTransfersGetTransfer;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AccountTransfersGetTransferRequestBuilder {
 
   private String correspondentId;
   private String accountId;
   private String transferId;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountTransfersGetTransferRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -38,6 +42,18 @@ public class AccountTransfersGetTransferRequestBuilder {
     return this;
   }
 
+  public AccountTransfersGetTransferRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountTransfersGetTransferRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountTransfersGetTransferRequest buildRequest() {
 
     AccountTransfersGetTransferRequest request =
@@ -47,9 +63,10 @@ public class AccountTransfersGetTransferRequestBuilder {
   }
 
   public AccountTransfersGetTransferResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountTransfersGetTransferRequest, AccountTransfersGetTransferResponse>
-        operation = new AccountTransfersGetTransfer.Sync(sdkConfiguration);
+        operation = new AccountTransfersGetTransfer.Sync(sdkConfiguration, options);
     AccountTransfersGetTransferRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

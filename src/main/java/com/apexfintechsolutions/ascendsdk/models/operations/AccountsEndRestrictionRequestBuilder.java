@@ -8,13 +8,17 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.EndRestrictionRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsEndRestriction;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class AccountsEndRestrictionRequestBuilder {
 
   private String accountId;
   private String restrictionId;
   private EndRestrictionRequestCreate endRestrictionRequestCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AccountsEndRestrictionRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -40,6 +44,18 @@ public class AccountsEndRestrictionRequestBuilder {
     return this;
   }
 
+  public AccountsEndRestrictionRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AccountsEndRestrictionRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AccountsEndRestrictionRequest buildRequest() {
 
     AccountsEndRestrictionRequest request =
@@ -49,9 +65,10 @@ public class AccountsEndRestrictionRequestBuilder {
   }
 
   public AccountsEndRestrictionResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<AccountsEndRestrictionRequest, AccountsEndRestrictionResponse> operation =
-        new AccountsEndRestriction.Sync(sdkConfiguration);
+        new AccountsEndRestriction.Sync(sdkConfiguration, options);
     AccountsEndRestrictionRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

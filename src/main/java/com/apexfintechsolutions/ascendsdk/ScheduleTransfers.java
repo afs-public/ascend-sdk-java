@@ -78,6 +78,7 @@ import com.apexfintechsolutions.ascendsdk.operations.WireWithdrawalSchedulesCrea
 import com.apexfintechsolutions.ascendsdk.operations.WireWithdrawalSchedulesGetWireWithdrawalSchedule;
 import com.apexfintechsolutions.ascendsdk.operations.WireWithdrawalSchedulesListWireWithdrawalSchedules;
 import com.apexfintechsolutions.ascendsdk.operations.WireWithdrawalSchedulesUpdateWireWithdrawalSchedule;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
 import java.util.Optional;
 
 public class ScheduleTransfers {
@@ -108,7 +109,8 @@ public class ScheduleTransfers {
    */
   public TransferScheduleSummariesListScheduleSummariesResponse listScheduleSummariesDirect()
       throws Exception {
-    return listScheduleSummaries(Optional.empty(), Optional.empty(), Optional.empty());
+    return listScheduleSummaries(
+        Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -124,11 +126,15 @@ public class ScheduleTransfers {
    *     this value. If unspecified, at most 25 schedules will be returned. The maximum value is
    *     1000; values above 1000 will be coerced to 1000.
    * @param pageToken The page token to request
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public TransferScheduleSummariesListScheduleSummariesResponse listScheduleSummaries(
-      Optional<String> filter, Optional<Integer> pageSize, Optional<String> pageToken)
+      Optional<String> filter,
+      Optional<Integer> pageSize,
+      Optional<String> pageToken,
+      Optional<Options> options)
       throws Exception {
     TransferScheduleSummariesListScheduleSummariesRequest request =
         TransferScheduleSummariesListScheduleSummariesRequest.builder()
@@ -139,7 +145,8 @@ public class ScheduleTransfers {
     RequestOperation<
             TransferScheduleSummariesListScheduleSummariesRequest,
             TransferScheduleSummariesListScheduleSummariesResponse>
-        operation = new TransferScheduleSummariesListScheduleSummaries.Sync(sdkConfiguration);
+        operation =
+            new TransferScheduleSummariesListScheduleSummaries.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -166,6 +173,25 @@ public class ScheduleTransfers {
    */
   public AchDepositSchedulesCreateAchDepositScheduleResponse createAchDepositSchedule(
       String accountId, AchDepositScheduleCreate achDepositScheduleCreate) throws Exception {
+    return createAchDepositSchedule(accountId, achDepositScheduleCreate, Optional.empty());
+  }
+
+  /**
+   * Create ACH Deposit Schedule
+   *
+   * <p>Creates an ACH deposit transfer schedule
+   *
+   * @param accountId The account id.
+   * @param achDepositScheduleCreate A deposit transfer schedule using the ACH mechanism
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AchDepositSchedulesCreateAchDepositScheduleResponse createAchDepositSchedule(
+      String accountId,
+      AchDepositScheduleCreate achDepositScheduleCreate,
+      Optional<Options> options)
+      throws Exception {
     AchDepositSchedulesCreateAchDepositScheduleRequest request =
         AchDepositSchedulesCreateAchDepositScheduleRequest.builder()
             .accountId(accountId)
@@ -174,7 +200,7 @@ public class ScheduleTransfers {
     RequestOperation<
             AchDepositSchedulesCreateAchDepositScheduleRequest,
             AchDepositSchedulesCreateAchDepositScheduleResponse>
-        operation = new AchDepositSchedulesCreateAchDepositSchedule.Sync(sdkConfiguration);
+        operation = new AchDepositSchedulesCreateAchDepositSchedule.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -200,7 +226,8 @@ public class ScheduleTransfers {
    */
   public AchDepositSchedulesListAchDepositSchedulesResponse listAchDepositSchedules(
       String accountId) throws Exception {
-    return listAchDepositSchedules(accountId, Optional.empty(), Optional.empty(), Optional.empty());
+    return listAchDepositSchedules(
+        accountId, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -216,6 +243,7 @@ public class ScheduleTransfers {
    *     this value. If unspecified, at most 25 schedules will be returned. The maximum value is
    *     1000; values above 1000 will be coerced to 1000.
    * @param pageToken The page token to request
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -223,7 +251,8 @@ public class ScheduleTransfers {
       String accountId,
       Optional<String> filter,
       Optional<Integer> pageSize,
-      Optional<String> pageToken)
+      Optional<String> pageToken,
+      Optional<Options> options)
       throws Exception {
     AchDepositSchedulesListAchDepositSchedulesRequest request =
         AchDepositSchedulesListAchDepositSchedulesRequest.builder()
@@ -235,7 +264,7 @@ public class ScheduleTransfers {
     RequestOperation<
             AchDepositSchedulesListAchDepositSchedulesRequest,
             AchDepositSchedulesListAchDepositSchedulesResponse>
-        operation = new AchDepositSchedulesListAchDepositSchedules.Sync(sdkConfiguration);
+        operation = new AchDepositSchedulesListAchDepositSchedules.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -262,6 +291,22 @@ public class ScheduleTransfers {
    */
   public AchDepositSchedulesGetAchDepositScheduleResponse getAchDepositSchedule(
       String accountId, String achDepositScheduleId) throws Exception {
+    return getAchDepositSchedule(accountId, achDepositScheduleId, Optional.empty());
+  }
+
+  /**
+   * Get ACH Deposit Schedule
+   *
+   * <p>Gets an ACH deposit transfer schedule
+   *
+   * @param accountId The account id.
+   * @param achDepositScheduleId The achDepositSchedule id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AchDepositSchedulesGetAchDepositScheduleResponse getAchDepositSchedule(
+      String accountId, String achDepositScheduleId, Optional<Options> options) throws Exception {
     AchDepositSchedulesGetAchDepositScheduleRequest request =
         AchDepositSchedulesGetAchDepositScheduleRequest.builder()
             .accountId(accountId)
@@ -270,7 +315,7 @@ public class ScheduleTransfers {
     RequestOperation<
             AchDepositSchedulesGetAchDepositScheduleRequest,
             AchDepositSchedulesGetAchDepositScheduleResponse>
-        operation = new AchDepositSchedulesGetAchDepositSchedule.Sync(sdkConfiguration);
+        operation = new AchDepositSchedulesGetAchDepositSchedule.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -302,7 +347,11 @@ public class ScheduleTransfers {
       AchDepositScheduleUpdate achDepositScheduleUpdate)
       throws Exception {
     return updateAchDepositSchedule(
-        accountId, achDepositScheduleId, Optional.empty(), achDepositScheduleUpdate);
+        accountId,
+        achDepositScheduleId,
+        Optional.empty(),
+        achDepositScheduleUpdate,
+        Optional.empty());
   }
 
   /**
@@ -315,6 +364,7 @@ public class ScheduleTransfers {
    * @param updateMask A field mask representing the update. Note: only the
    *     'schedule_details.amount' field of a schedule is currently updatable
    * @param achDepositScheduleUpdate A deposit transfer schedule using the ACH mechanism
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -322,7 +372,8 @@ public class ScheduleTransfers {
       String accountId,
       String achDepositScheduleId,
       Optional<String> updateMask,
-      AchDepositScheduleUpdate achDepositScheduleUpdate)
+      AchDepositScheduleUpdate achDepositScheduleUpdate,
+      Optional<Options> options)
       throws Exception {
     AchDepositSchedulesUpdateAchDepositScheduleRequest request =
         AchDepositSchedulesUpdateAchDepositScheduleRequest.builder()
@@ -334,7 +385,7 @@ public class ScheduleTransfers {
     RequestOperation<
             AchDepositSchedulesUpdateAchDepositScheduleRequest,
             AchDepositSchedulesUpdateAchDepositScheduleResponse>
-        operation = new AchDepositSchedulesUpdateAchDepositSchedule.Sync(sdkConfiguration);
+        operation = new AchDepositSchedulesUpdateAchDepositSchedule.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -365,6 +416,28 @@ public class ScheduleTransfers {
       String achDepositScheduleId,
       CancelAchDepositScheduleRequestCreate cancelAchDepositScheduleRequestCreate)
       throws Exception {
+    return cancelAchDepositSchedule(
+        accountId, achDepositScheduleId, cancelAchDepositScheduleRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Cancel ACH Deposit Schedule
+   *
+   * <p>Cancels an ACH deposit transfer schedule
+   *
+   * @param accountId The account id.
+   * @param achDepositScheduleId The achDepositSchedule id.
+   * @param cancelAchDepositScheduleRequestCreate Request to cancel an ACH deposit transfer schedule
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AchDepositSchedulesCancelAchDepositScheduleResponse cancelAchDepositSchedule(
+      String accountId,
+      String achDepositScheduleId,
+      CancelAchDepositScheduleRequestCreate cancelAchDepositScheduleRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AchDepositSchedulesCancelAchDepositScheduleRequest request =
         AchDepositSchedulesCancelAchDepositScheduleRequest.builder()
             .accountId(accountId)
@@ -374,7 +447,7 @@ public class ScheduleTransfers {
     RequestOperation<
             AchDepositSchedulesCancelAchDepositScheduleRequest,
             AchDepositSchedulesCancelAchDepositScheduleResponse>
-        operation = new AchDepositSchedulesCancelAchDepositSchedule.Sync(sdkConfiguration);
+        operation = new AchDepositSchedulesCancelAchDepositSchedule.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -402,6 +475,25 @@ public class ScheduleTransfers {
    */
   public AchWithdrawalSchedulesCreateAchWithdrawalScheduleResponse createAchWithdrawalSchedule(
       String accountId, AchWithdrawalScheduleCreate achWithdrawalScheduleCreate) throws Exception {
+    return createAchWithdrawalSchedule(accountId, achWithdrawalScheduleCreate, Optional.empty());
+  }
+
+  /**
+   * Create ACH Withdrawal Schedule
+   *
+   * <p>Creates an ACH withdrawal transfer schedule
+   *
+   * @param accountId The account id.
+   * @param achWithdrawalScheduleCreate A withdrawal transfer schedule using the ACH mechanism
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AchWithdrawalSchedulesCreateAchWithdrawalScheduleResponse createAchWithdrawalSchedule(
+      String accountId,
+      AchWithdrawalScheduleCreate achWithdrawalScheduleCreate,
+      Optional<Options> options)
+      throws Exception {
     AchWithdrawalSchedulesCreateAchWithdrawalScheduleRequest request =
         AchWithdrawalSchedulesCreateAchWithdrawalScheduleRequest.builder()
             .accountId(accountId)
@@ -410,7 +502,8 @@ public class ScheduleTransfers {
     RequestOperation<
             AchWithdrawalSchedulesCreateAchWithdrawalScheduleRequest,
             AchWithdrawalSchedulesCreateAchWithdrawalScheduleResponse>
-        operation = new AchWithdrawalSchedulesCreateAchWithdrawalSchedule.Sync(sdkConfiguration);
+        operation =
+            new AchWithdrawalSchedulesCreateAchWithdrawalSchedule.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -438,7 +531,7 @@ public class ScheduleTransfers {
   public AchWithdrawalSchedulesListAchWithdrawalSchedulesResponse listAchWithdrawalSchedules(
       String accountId) throws Exception {
     return listAchWithdrawalSchedules(
-        accountId, Optional.empty(), Optional.empty(), Optional.empty());
+        accountId, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -454,6 +547,7 @@ public class ScheduleTransfers {
    *     this value. If unspecified, at most 25 schedules will be returned. The maximum value is
    *     1000; values above 1000 will be coerced to 1000.
    * @param pageToken The page token to request
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -461,7 +555,8 @@ public class ScheduleTransfers {
       String accountId,
       Optional<String> filter,
       Optional<Integer> pageSize,
-      Optional<String> pageToken)
+      Optional<String> pageToken,
+      Optional<Options> options)
       throws Exception {
     AchWithdrawalSchedulesListAchWithdrawalSchedulesRequest request =
         AchWithdrawalSchedulesListAchWithdrawalSchedulesRequest.builder()
@@ -473,7 +568,8 @@ public class ScheduleTransfers {
     RequestOperation<
             AchWithdrawalSchedulesListAchWithdrawalSchedulesRequest,
             AchWithdrawalSchedulesListAchWithdrawalSchedulesResponse>
-        operation = new AchWithdrawalSchedulesListAchWithdrawalSchedules.Sync(sdkConfiguration);
+        operation =
+            new AchWithdrawalSchedulesListAchWithdrawalSchedules.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -500,6 +596,23 @@ public class ScheduleTransfers {
    */
   public AchWithdrawalSchedulesGetAchWithdrawalScheduleResponse getAchWithdrawalSchedule(
       String accountId, String achWithdrawalScheduleId) throws Exception {
+    return getAchWithdrawalSchedule(accountId, achWithdrawalScheduleId, Optional.empty());
+  }
+
+  /**
+   * Get ACH Withdrawal Schedule
+   *
+   * <p>Gets an ACH withdrawal transfer schedule
+   *
+   * @param accountId The account id.
+   * @param achWithdrawalScheduleId The achWithdrawalSchedule id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AchWithdrawalSchedulesGetAchWithdrawalScheduleResponse getAchWithdrawalSchedule(
+      String accountId, String achWithdrawalScheduleId, Optional<Options> options)
+      throws Exception {
     AchWithdrawalSchedulesGetAchWithdrawalScheduleRequest request =
         AchWithdrawalSchedulesGetAchWithdrawalScheduleRequest.builder()
             .accountId(accountId)
@@ -508,7 +621,8 @@ public class ScheduleTransfers {
     RequestOperation<
             AchWithdrawalSchedulesGetAchWithdrawalScheduleRequest,
             AchWithdrawalSchedulesGetAchWithdrawalScheduleResponse>
-        operation = new AchWithdrawalSchedulesGetAchWithdrawalSchedule.Sync(sdkConfiguration);
+        operation =
+            new AchWithdrawalSchedulesGetAchWithdrawalSchedule.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -541,7 +655,11 @@ public class ScheduleTransfers {
       AchWithdrawalScheduleUpdate achWithdrawalScheduleUpdate)
       throws Exception {
     return updateAchWithdrawalSchedule(
-        accountId, achWithdrawalScheduleId, Optional.empty(), achWithdrawalScheduleUpdate);
+        accountId,
+        achWithdrawalScheduleId,
+        Optional.empty(),
+        achWithdrawalScheduleUpdate,
+        Optional.empty());
   }
 
   /**
@@ -554,6 +672,7 @@ public class ScheduleTransfers {
    * @param updateMask A field mask representing the update. Note: only the
    *     'schedule_details.amount' field of a schedule is currently updatable
    * @param achWithdrawalScheduleUpdate A withdrawal transfer schedule using the ACH mechanism
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -561,7 +680,8 @@ public class ScheduleTransfers {
       String accountId,
       String achWithdrawalScheduleId,
       Optional<String> updateMask,
-      AchWithdrawalScheduleUpdate achWithdrawalScheduleUpdate)
+      AchWithdrawalScheduleUpdate achWithdrawalScheduleUpdate,
+      Optional<Options> options)
       throws Exception {
     AchWithdrawalSchedulesUpdateAchWithdrawalScheduleRequest request =
         AchWithdrawalSchedulesUpdateAchWithdrawalScheduleRequest.builder()
@@ -573,7 +693,8 @@ public class ScheduleTransfers {
     RequestOperation<
             AchWithdrawalSchedulesUpdateAchWithdrawalScheduleRequest,
             AchWithdrawalSchedulesUpdateAchWithdrawalScheduleResponse>
-        operation = new AchWithdrawalSchedulesUpdateAchWithdrawalSchedule.Sync(sdkConfiguration);
+        operation =
+            new AchWithdrawalSchedulesUpdateAchWithdrawalSchedule.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -606,6 +727,32 @@ public class ScheduleTransfers {
       String achWithdrawalScheduleId,
       CancelAchWithdrawalScheduleRequestCreate cancelAchWithdrawalScheduleRequestCreate)
       throws Exception {
+    return cancelAchWithdrawalSchedule(
+        accountId,
+        achWithdrawalScheduleId,
+        cancelAchWithdrawalScheduleRequestCreate,
+        Optional.empty());
+  }
+
+  /**
+   * Cancel ACH Withdrawal Schedule
+   *
+   * <p>Cancels an ACH withdrawal transfer schedule
+   *
+   * @param accountId The account id.
+   * @param achWithdrawalScheduleId The achWithdrawalSchedule id.
+   * @param cancelAchWithdrawalScheduleRequestCreate Request to cancel an ACH withdrawal transfer
+   *     schedule
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AchWithdrawalSchedulesCancelAchWithdrawalScheduleResponse cancelAchWithdrawalSchedule(
+      String accountId,
+      String achWithdrawalScheduleId,
+      CancelAchWithdrawalScheduleRequestCreate cancelAchWithdrawalScheduleRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     AchWithdrawalSchedulesCancelAchWithdrawalScheduleRequest request =
         AchWithdrawalSchedulesCancelAchWithdrawalScheduleRequest.builder()
             .accountId(accountId)
@@ -615,7 +762,8 @@ public class ScheduleTransfers {
     RequestOperation<
             AchWithdrawalSchedulesCancelAchWithdrawalScheduleRequest,
             AchWithdrawalSchedulesCancelAchWithdrawalScheduleResponse>
-        operation = new AchWithdrawalSchedulesCancelAchWithdrawalSchedule.Sync(sdkConfiguration);
+        operation =
+            new AchWithdrawalSchedulesCancelAchWithdrawalSchedule.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -644,6 +792,25 @@ public class ScheduleTransfers {
   public WireWithdrawalSchedulesCreateWireWithdrawalScheduleResponse createWireWithdrawalSchedule(
       String accountId, WireWithdrawalScheduleCreate wireWithdrawalScheduleCreate)
       throws Exception {
+    return createWireWithdrawalSchedule(accountId, wireWithdrawalScheduleCreate, Optional.empty());
+  }
+
+  /**
+   * Create Wire Withdrawal Schedule
+   *
+   * <p>Creates a Wire withdrawal transfer schedule
+   *
+   * @param accountId The account id.
+   * @param wireWithdrawalScheduleCreate A withdrawal transfer schedule using the Wire mechanism
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public WireWithdrawalSchedulesCreateWireWithdrawalScheduleResponse createWireWithdrawalSchedule(
+      String accountId,
+      WireWithdrawalScheduleCreate wireWithdrawalScheduleCreate,
+      Optional<Options> options)
+      throws Exception {
     WireWithdrawalSchedulesCreateWireWithdrawalScheduleRequest request =
         WireWithdrawalSchedulesCreateWireWithdrawalScheduleRequest.builder()
             .accountId(accountId)
@@ -652,7 +819,8 @@ public class ScheduleTransfers {
     RequestOperation<
             WireWithdrawalSchedulesCreateWireWithdrawalScheduleRequest,
             WireWithdrawalSchedulesCreateWireWithdrawalScheduleResponse>
-        operation = new WireWithdrawalSchedulesCreateWireWithdrawalSchedule.Sync(sdkConfiguration);
+        operation =
+            new WireWithdrawalSchedulesCreateWireWithdrawalSchedule.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -680,7 +848,7 @@ public class ScheduleTransfers {
   public WireWithdrawalSchedulesListWireWithdrawalSchedulesResponse listWireWithdrawalSchedules(
       String accountId) throws Exception {
     return listWireWithdrawalSchedules(
-        accountId, Optional.empty(), Optional.empty(), Optional.empty());
+        accountId, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -696,6 +864,7 @@ public class ScheduleTransfers {
    *     this value. If unspecified, at most 25 schedules will be returned. The maximum value is
    *     1000; values above 1000 will be coerced to 1000.
    * @param pageToken The page token to request
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -703,7 +872,8 @@ public class ScheduleTransfers {
       String accountId,
       Optional<String> filter,
       Optional<Integer> pageSize,
-      Optional<String> pageToken)
+      Optional<String> pageToken,
+      Optional<Options> options)
       throws Exception {
     WireWithdrawalSchedulesListWireWithdrawalSchedulesRequest request =
         WireWithdrawalSchedulesListWireWithdrawalSchedulesRequest.builder()
@@ -715,7 +885,8 @@ public class ScheduleTransfers {
     RequestOperation<
             WireWithdrawalSchedulesListWireWithdrawalSchedulesRequest,
             WireWithdrawalSchedulesListWireWithdrawalSchedulesResponse>
-        operation = new WireWithdrawalSchedulesListWireWithdrawalSchedules.Sync(sdkConfiguration);
+        operation =
+            new WireWithdrawalSchedulesListWireWithdrawalSchedules.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -743,6 +914,23 @@ public class ScheduleTransfers {
    */
   public WireWithdrawalSchedulesGetWireWithdrawalScheduleResponse getWireWithdrawalSchedule(
       String accountId, String wireWithdrawalScheduleId) throws Exception {
+    return getWireWithdrawalSchedule(accountId, wireWithdrawalScheduleId, Optional.empty());
+  }
+
+  /**
+   * Get Wire Withdrawal Schedule
+   *
+   * <p>Gets a Wire withdrawal transfer schedule
+   *
+   * @param accountId The account id.
+   * @param wireWithdrawalScheduleId The wireWithdrawalSchedule id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public WireWithdrawalSchedulesGetWireWithdrawalScheduleResponse getWireWithdrawalSchedule(
+      String accountId, String wireWithdrawalScheduleId, Optional<Options> options)
+      throws Exception {
     WireWithdrawalSchedulesGetWireWithdrawalScheduleRequest request =
         WireWithdrawalSchedulesGetWireWithdrawalScheduleRequest.builder()
             .accountId(accountId)
@@ -751,7 +939,8 @@ public class ScheduleTransfers {
     RequestOperation<
             WireWithdrawalSchedulesGetWireWithdrawalScheduleRequest,
             WireWithdrawalSchedulesGetWireWithdrawalScheduleResponse>
-        operation = new WireWithdrawalSchedulesGetWireWithdrawalSchedule.Sync(sdkConfiguration);
+        operation =
+            new WireWithdrawalSchedulesGetWireWithdrawalSchedule.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -784,7 +973,11 @@ public class ScheduleTransfers {
       WireWithdrawalScheduleUpdate wireWithdrawalScheduleUpdate)
       throws Exception {
     return updateWireWithdrawalSchedule(
-        accountId, wireWithdrawalScheduleId, Optional.empty(), wireWithdrawalScheduleUpdate);
+        accountId,
+        wireWithdrawalScheduleId,
+        Optional.empty(),
+        wireWithdrawalScheduleUpdate,
+        Optional.empty());
   }
 
   /**
@@ -797,6 +990,7 @@ public class ScheduleTransfers {
    * @param updateMask A field mask representing the update. Note: only the
    *     'schedule_details.amount' field of a schedule is currently updatable
    * @param wireWithdrawalScheduleUpdate A withdrawal transfer schedule using the Wire mechanism
+   * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -804,7 +998,8 @@ public class ScheduleTransfers {
       String accountId,
       String wireWithdrawalScheduleId,
       Optional<String> updateMask,
-      WireWithdrawalScheduleUpdate wireWithdrawalScheduleUpdate)
+      WireWithdrawalScheduleUpdate wireWithdrawalScheduleUpdate,
+      Optional<Options> options)
       throws Exception {
     WireWithdrawalSchedulesUpdateWireWithdrawalScheduleRequest request =
         WireWithdrawalSchedulesUpdateWireWithdrawalScheduleRequest.builder()
@@ -816,7 +1011,8 @@ public class ScheduleTransfers {
     RequestOperation<
             WireWithdrawalSchedulesUpdateWireWithdrawalScheduleRequest,
             WireWithdrawalSchedulesUpdateWireWithdrawalScheduleResponse>
-        operation = new WireWithdrawalSchedulesUpdateWireWithdrawalSchedule.Sync(sdkConfiguration);
+        operation =
+            new WireWithdrawalSchedulesUpdateWireWithdrawalSchedule.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -849,6 +1045,32 @@ public class ScheduleTransfers {
       String wireWithdrawalScheduleId,
       CancelWireWithdrawalScheduleRequestCreate cancelWireWithdrawalScheduleRequestCreate)
       throws Exception {
+    return cancelWireWithdrawalSchedule(
+        accountId,
+        wireWithdrawalScheduleId,
+        cancelWireWithdrawalScheduleRequestCreate,
+        Optional.empty());
+  }
+
+  /**
+   * Cancel Wire Withdrawal Schedule
+   *
+   * <p>Cancels a Wire withdrawal transfer schedule
+   *
+   * @param accountId The account id.
+   * @param wireWithdrawalScheduleId The wireWithdrawalSchedule id.
+   * @param cancelWireWithdrawalScheduleRequestCreate Request to cancel a Wire withdrawal transfer
+   *     schedule
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public WireWithdrawalSchedulesCancelWireWithdrawalScheduleResponse cancelWireWithdrawalSchedule(
+      String accountId,
+      String wireWithdrawalScheduleId,
+      CancelWireWithdrawalScheduleRequestCreate cancelWireWithdrawalScheduleRequestCreate,
+      Optional<Options> options)
+      throws Exception {
     WireWithdrawalSchedulesCancelWireWithdrawalScheduleRequest request =
         WireWithdrawalSchedulesCancelWireWithdrawalScheduleRequest.builder()
             .accountId(accountId)
@@ -858,7 +1080,8 @@ public class ScheduleTransfers {
     RequestOperation<
             WireWithdrawalSchedulesCancelWireWithdrawalScheduleRequest,
             WireWithdrawalSchedulesCancelWireWithdrawalScheduleResponse>
-        operation = new WireWithdrawalSchedulesCancelWireWithdrawalSchedule.Sync(sdkConfiguration);
+        operation =
+            new WireWithdrawalSchedulesCancelWireWithdrawalSchedule.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

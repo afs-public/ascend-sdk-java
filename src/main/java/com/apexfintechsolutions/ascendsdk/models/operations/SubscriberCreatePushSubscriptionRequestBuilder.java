@@ -8,11 +8,15 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.PushSubscriptionCreate;
 import com.apexfintechsolutions.ascendsdk.operations.SubscriberCreatePushSubscription;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class SubscriberCreatePushSubscriptionRequestBuilder {
 
   private PushSubscriptionCreate request;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public SubscriberCreatePushSubscriptionRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -25,10 +29,24 @@ public class SubscriberCreatePushSubscriptionRequestBuilder {
     return this;
   }
 
+  public SubscriberCreatePushSubscriptionRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public SubscriberCreatePushSubscriptionRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   public SubscriberCreatePushSubscriptionResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<PushSubscriptionCreate, SubscriberCreatePushSubscriptionResponse> operation =
-        new SubscriberCreatePushSubscription.Sync(sdkConfiguration);
+        new SubscriberCreatePushSubscription.Sync(sdkConfiguration, options);
 
     return operation.handleResponse(operation.doRequest(request));
   }

@@ -331,13 +331,13 @@ public class Application {
                 .showRemoved(true)
                 .build();
 
-        BasketOrdersServiceListBasketOrdersResponse res = sdk.basketOrders().listBasketOrders()
-                .request(req)
-                .call();
 
-        if (res.listBasketOrdersResponse().isPresent()) {
-            // handle response
-        }
+        sdk.basketOrders().listBasketOrders()
+                .callAsStream()
+                .forEach((BasketOrdersServiceListBasketOrdersResponse item) -> {
+                   // handle page
+                });
+
     }
 }
 ```
@@ -395,16 +395,17 @@ public class Application {
                     .build())
             .build();
 
-        BasketOrdersServiceListCompressedOrdersResponse res = sdk.basketOrders().listCompressedOrders()
+
+        sdk.basketOrders().listCompressedOrders()
                 .correspondentId("01HPMZZM6RKMVZA1JQ63RQKJRP")
                 .basketId("fffd326-72fa-4d2b-bd1f-45384fe5d521")
                 .pageSize(25)
                 .pageToken("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h")
-                .call();
+                .callAsStream()
+                .forEach((BasketOrdersServiceListCompressedOrdersResponse item) -> {
+                   // handle page
+                });
 
-        if (res.listCompressedOrdersResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```

@@ -4,11 +4,22 @@
 package com.apexfintechsolutions.ascendsdk.models.operations;
 
 import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOperation;
+import static com.apexfintechsolutions.ascendsdk.utils.Exceptions.unchecked;
+import static com.apexfintechsolutions.ascendsdk.utils.Utils.toStream;
+import static com.apexfintechsolutions.ascendsdk.utils.Utils.transform;
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.operations.AchDepositSchedulesListAchDepositSchedules;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import com.apexfintechsolutions.ascendsdk.utils.pagination.CursorTracker;
+import com.apexfintechsolutions.ascendsdk.utils.pagination.Paginator;
+import java.io.InputStream;
+import java.net.http.HttpResponse;
+import java.util.Iterator;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class AchDepositSchedulesListAchDepositSchedulesRequestBuilder {
 
@@ -16,6 +27,7 @@ public class AchDepositSchedulesListAchDepositSchedulesRequestBuilder {
   private Optional<String> filter = Optional.empty();
   private Optional<Integer> pageSize = Optional.empty();
   private Optional<String> pageToken = Optional.empty();
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public AchDepositSchedulesListAchDepositSchedulesRequestBuilder(
@@ -67,6 +79,20 @@ public class AchDepositSchedulesListAchDepositSchedulesRequestBuilder {
     return this;
   }
 
+  public AchDepositSchedulesListAchDepositSchedulesRequestBuilder retryConfig(
+      RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public AchDepositSchedulesListAchDepositSchedulesRequestBuilder retryConfig(
+      Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private AchDepositSchedulesListAchDepositSchedulesRequest buildRequest() {
 
     AchDepositSchedulesListAchDepositSchedulesRequest request =
@@ -77,13 +103,50 @@ public class AchDepositSchedulesListAchDepositSchedulesRequestBuilder {
   }
 
   public AchDepositSchedulesListAchDepositSchedulesResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<
             AchDepositSchedulesListAchDepositSchedulesRequest,
             AchDepositSchedulesListAchDepositSchedulesResponse>
-        operation = new AchDepositSchedulesListAchDepositSchedules.Sync(sdkConfiguration);
+        operation = new AchDepositSchedulesListAchDepositSchedules.Sync(sdkConfiguration, options);
     AchDepositSchedulesListAchDepositSchedulesRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Returns an iterable that performs next page calls till no more pages are returned.
+   *
+   * <p>The returned iterable can be used in a for-each loop:
+   *
+   * <pre><code>
+   * for (AchDepositSchedulesListAchDepositSchedulesResponse page : builder.callAsIterable()) {
+   *     // Process each page
+   * }
+   * </code></pre>
+   *
+   * @return An iterable that can be used to iterate through all pages
+   */
+  public Iterable<AchDepositSchedulesListAchDepositSchedulesResponse> callAsIterable() {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
+
+    RequestOperation<
+            AchDepositSchedulesListAchDepositSchedulesRequest,
+            AchDepositSchedulesListAchDepositSchedulesResponse>
+        operation = new AchDepositSchedulesListAchDepositSchedules.Sync(sdkConfiguration, options);
+    AchDepositSchedulesListAchDepositSchedulesRequest request = buildRequest();
+    Iterator<HttpResponse<InputStream>> iterator =
+        new Paginator<>(
+            request,
+            new CursorTracker<>("$.next_page_token", String.class),
+            AchDepositSchedulesListAchDepositSchedulesRequest::withPageToken,
+            nextRequest -> unchecked(() -> operation.doRequest(request)).get());
+
+    return () -> transform(iterator, operation::handleResponse);
+  }
+
+  /** Returns a stream that performs next page calls till no more pages are returned. */
+  public Stream<AchDepositSchedulesListAchDepositSchedulesResponse> callAsStream() {
+    return toStream(callAsIterable());
   }
 }

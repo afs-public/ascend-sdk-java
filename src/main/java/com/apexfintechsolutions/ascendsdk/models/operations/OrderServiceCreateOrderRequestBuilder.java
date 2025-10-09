@@ -8,12 +8,16 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
 import com.apexfintechsolutions.ascendsdk.models.components.OrderCreate;
 import com.apexfintechsolutions.ascendsdk.operations.OrderServiceCreateOrder;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
+import java.util.Optional;
 
 public class OrderServiceCreateOrderRequestBuilder {
 
   private String accountId;
   private OrderCreate orderCreate;
+  private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
   public OrderServiceCreateOrderRequestBuilder(SDKConfiguration sdkConfiguration) {
@@ -32,6 +36,18 @@ public class OrderServiceCreateOrderRequestBuilder {
     return this;
   }
 
+  public OrderServiceCreateOrderRequestBuilder retryConfig(RetryConfig retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = Optional.of(retryConfig);
+    return this;
+  }
+
+  public OrderServiceCreateOrderRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+    Utils.checkNotNull(retryConfig, "retryConfig");
+    this.retryConfig = retryConfig;
+    return this;
+  }
+
   private OrderServiceCreateOrderRequest buildRequest() {
 
     OrderServiceCreateOrderRequest request =
@@ -41,9 +57,10 @@ public class OrderServiceCreateOrderRequestBuilder {
   }
 
   public OrderServiceCreateOrderResponse call() throws Exception {
+    Optional<Options> options = Optional.of(Options.builder().retryConfig(retryConfig).build());
 
     RequestOperation<OrderServiceCreateOrderRequest, OrderServiceCreateOrderResponse> operation =
-        new OrderServiceCreateOrder.Sync(sdkConfiguration);
+        new OrderServiceCreateOrder.Sync(sdkConfiguration, options);
     OrderServiceCreateOrderRequest request = buildRequest();
 
     return operation.handleResponse(operation.doRequest(request));

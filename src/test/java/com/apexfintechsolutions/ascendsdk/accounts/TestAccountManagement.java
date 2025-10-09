@@ -23,7 +23,6 @@ public class TestAccountManagement {
     lnp = AccountUtil.createLnp(sdk);
     account = AccountUtil.createAccount(sdk, lnp);
     legalEntity = AccountUtil.createLegalEntity(sdk);
-    Thread.sleep(5000);
     addPartyId =
         AccountUtil.getAddPartyId(
             sdk, account.accountId().get(), legalEntity.legalEntityId().get());
@@ -87,7 +86,6 @@ public class TestAccountManagement {
   @Test
   @Order(4)
   public void test_account_management_accounts_remove_party_remove_party1() throws Exception {
-    Thread.sleep(5000);
     var req =
         RemovePartyRequestCreate.builder()
             .authorizedByPartyIds(
@@ -133,7 +131,6 @@ public class TestAccountManagement {
   @Order(3)
   public void test_account_management_accounts_delete_trusted_contact_delete_trusted_contact1()
       throws Exception {
-    Thread.sleep(5000);
     var res =
         sdk.accountManagement()
             .deleteTrustedContact()
@@ -171,7 +168,6 @@ public class TestAccountManagement {
   @Order(3)
   public void test_account_management_accounts_delete_interested_party_delete_interested_party1()
       throws Exception {
-    Thread.sleep(5000);
     var res =
         sdk.accountManagement()
             .deleteInterestedParty()
@@ -205,7 +201,6 @@ public class TestAccountManagement {
   @Test
   @Order(2)
   public void test_account_management_accounts_end_restriction_end_restrictions() throws Exception {
-    Thread.sleep(5000);
     var req = EndRestrictionRequestCreate.builder().reason("Some reason for removing").build();
     var res =
         sdk.accountManagement()
