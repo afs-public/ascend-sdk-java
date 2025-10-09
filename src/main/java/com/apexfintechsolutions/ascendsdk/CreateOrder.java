@@ -17,12 +17,16 @@ import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceCreateOr
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceGetOrderRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceGetOrderRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceGetOrderResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceListCorrespondentOrdersRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceListCorrespondentOrdersRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceListCorrespondentOrdersResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceSetExtraReportingDataRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceSetExtraReportingDataRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceSetExtraReportingDataResponse;
 import com.apexfintechsolutions.ascendsdk.operations.OrderServiceCancelOrder;
 import com.apexfintechsolutions.ascendsdk.operations.OrderServiceCreateOrder;
 import com.apexfintechsolutions.ascendsdk.operations.OrderServiceGetOrder;
+import com.apexfintechsolutions.ascendsdk.operations.OrderServiceListCorrespondentOrders;
 import com.apexfintechsolutions.ascendsdk.operations.OrderServiceSetExtraReportingData;
 import com.apexfintechsolutions.ascendsdk.utils.Options;
 import java.util.Optional;
@@ -285,6 +289,77 @@ public class CreateOrder {
     RequestOperation<
             OrderServiceSetExtraReportingDataRequest, OrderServiceSetExtraReportingDataResponse>
         operation = new OrderServiceSetExtraReportingData.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * List Correspondent Orders
+   *
+   * <p>Lists orders matching the specified filter criteria. Results are paginated and sorted in the
+   * reverse order of their creation.
+   *
+   * @return The call builder
+   */
+  public OrderServiceListCorrespondentOrdersRequestBuilder listCorrespondentOrders() {
+    return new OrderServiceListCorrespondentOrdersRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * List Correspondent Orders
+   *
+   * <p>Lists orders matching the specified filter criteria. Results are paginated and sorted in the
+   * reverse order of their creation.
+   *
+   * @param correspondentId The correspondent id.
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public OrderServiceListCorrespondentOrdersResponse listCorrespondentOrders(String correspondentId)
+      throws Exception {
+    return listCorrespondentOrders(
+        correspondentId, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+  }
+
+  /**
+   * List Correspondent Orders
+   *
+   * <p>Lists orders matching the specified filter criteria. Results are paginated and sorted in the
+   * reverse order of their creation.
+   *
+   * @param correspondentId The correspondent id.
+   * @param filter CEL filter string expressing what orders should be listed. The only properties
+   *     available for filtering are the boolean `open` and `order_date`. Each of these represent
+   *     fields on the Orders object, and more details about each can be found attached to the
+   *     properties.
+   *     <p>If `open` is not provided, both "open" and "not open" orders will be returned. All
+   *     `order_date` searches are limited to orders within the most recent 365 days. If no
+   *     `order_date` is specified, the default will search between now and 365 days ago.
+   * @param pageSize The number of records to return in a single page. The maximum page size is 100.
+   *     If a value is not provided, the default of 100 will be used. If a value less than one, or
+   *     greater than the maximum, is provided, the default value will be used.
+   * @param pageToken The token for the next page of content to fetch. When paginating, all other
+   *     parameters provided to `ListOrders` must match the call that provided the page token.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public OrderServiceListCorrespondentOrdersResponse listCorrespondentOrders(
+      String correspondentId,
+      Optional<String> filter,
+      Optional<Integer> pageSize,
+      Optional<String> pageToken,
+      Optional<Options> options)
+      throws Exception {
+    OrderServiceListCorrespondentOrdersRequest request =
+        OrderServiceListCorrespondentOrdersRequest.builder()
+            .correspondentId(correspondentId)
+            .filter(filter)
+            .pageSize(pageSize)
+            .pageToken(pageToken)
+            .build();
+    RequestOperation<
+            OrderServiceListCorrespondentOrdersRequest, OrderServiceListCorrespondentOrdersResponse>
+        operation = new OrderServiceListCorrespondentOrders.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

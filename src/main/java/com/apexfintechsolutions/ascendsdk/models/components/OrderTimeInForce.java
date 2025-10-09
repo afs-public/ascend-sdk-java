@@ -48,6 +48,7 @@ import java.util.Optional;
 public class OrderTimeInForce {
 
   public static final OrderTimeInForce DAY = new OrderTimeInForce("DAY");
+  public static final OrderTimeInForce GOOD_TILL_DATE = new OrderTimeInForce("GOOD_TILL_DATE");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -116,12 +117,14 @@ public class OrderTimeInForce {
   private static final Map<String, OrderTimeInForce> createValuesMap() {
     Map<String, OrderTimeInForce> map = new LinkedHashMap<>();
     map.put("DAY", DAY);
+    map.put("GOOD_TILL_DATE", GOOD_TILL_DATE);
     return map;
   }
 
   private static final Map<String, OrderTimeInForceEnum> createEnumsMap() {
     Map<String, OrderTimeInForceEnum> map = new HashMap<>();
     map.put("DAY", OrderTimeInForceEnum.DAY);
+    map.put("GOOD_TILL_DATE", OrderTimeInForceEnum.GOOD_TILL_DATE);
     return map;
   }
 
@@ -157,6 +160,7 @@ public class OrderTimeInForce {
 
   public enum OrderTimeInForceEnum {
     DAY("DAY"),
+    GOOD_TILL_DATE("GOOD_TILL_DATE"),
     ;
 
     private final String value;
