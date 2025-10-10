@@ -16,7 +16,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'com.apexfintechsolutions:ascendsdk:1.5.0'
+implementation 'com.apexfintechsolutions:ascendsdk:1.5.1'
 ```
 
 Maven:
@@ -24,7 +24,7 @@ Maven:
 <dependency>
     <groupId>com.apexfintechsolutions</groupId>
     <artifactId>ascendsdk</artifactId>
-    <version>1.5.0</version>
+    <version>1.5.1</version>
 </dependency>
 ```
 
@@ -495,6 +495,7 @@ public class Application {
 * [getOrder](docs/sdks/createorder/README.md#getorder) - Get Order
 * [cancelOrder](docs/sdks/createorder/README.md#cancelorder) - Cancel Order
 * [setExtraReportingData](docs/sdks/createorder/README.md#setextrareportingdata) - Set Extra Reporting Data
+* [listCorrespondentOrders](docs/sdks/createorder/README.md#listcorrespondentorders) - List Correspondent Orders
 
 ### [dataRetrieval()](docs/sdks/dataretrieval/README.md)
 

@@ -37,6 +37,15 @@ public class CancelOrderRequestCreate {
   @JsonProperty("client_cancel_received_time")
   private JsonNullable<OffsetDateTime> clientCancelReceivedTime;
 
+  /**
+   * Related to CAT reporting when Apex reports for the client. Denotes the time the client sent the
+   * cancel request to Apex. A value may be provided for non-Equity orders, and will be remembered,
+   * but valid timestamps will have no impact on how they are processed.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_cancel_sent_time")
+  private JsonNullable<OffsetDateTime> clientCancelSentTime;
+
   /** Format: accounts/{account_id}/orders/{order_id} */
   @JsonProperty("name")
   private String name;
@@ -47,17 +56,20 @@ public class CancelOrderRequestCreate {
           Optional<? extends CancelOrderRequestCreateCancelInitiator> cancelInitiator,
       @JsonProperty("client_cancel_received_time")
           JsonNullable<OffsetDateTime> clientCancelReceivedTime,
+      @JsonProperty("client_cancel_sent_time") JsonNullable<OffsetDateTime> clientCancelSentTime,
       @JsonProperty("name") String name) {
     Utils.checkNotNull(cancelInitiator, "cancelInitiator");
     Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+    Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
     Utils.checkNotNull(name, "name");
     this.cancelInitiator = cancelInitiator;
     this.clientCancelReceivedTime = clientCancelReceivedTime;
+    this.clientCancelSentTime = clientCancelSentTime;
     this.name = name;
   }
 
   public CancelOrderRequestCreate(String name) {
-    this(Optional.empty(), JsonNullable.undefined(), name);
+    this(Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(), name);
   }
 
   /**
@@ -79,6 +91,16 @@ public class CancelOrderRequestCreate {
   @JsonIgnore
   public JsonNullable<OffsetDateTime> clientCancelReceivedTime() {
     return clientCancelReceivedTime;
+  }
+
+  /**
+   * Related to CAT reporting when Apex reports for the client. Denotes the time the client sent the
+   * cancel request to Apex. A value may be provided for non-Equity orders, and will be remembered,
+   * but valid timestamps will have no impact on how they are processed.
+   */
+  @JsonIgnore
+  public JsonNullable<OffsetDateTime> clientCancelSentTime() {
+    return clientCancelSentTime;
   }
 
   /** Format: accounts/{account_id}/orders/{order_id} */
@@ -139,6 +161,29 @@ public class CancelOrderRequestCreate {
     return this;
   }
 
+  /**
+   * Related to CAT reporting when Apex reports for the client. Denotes the time the client sent the
+   * cancel request to Apex. A value may be provided for non-Equity orders, and will be remembered,
+   * but valid timestamps will have no impact on how they are processed.
+   */
+  public CancelOrderRequestCreate withClientCancelSentTime(OffsetDateTime clientCancelSentTime) {
+    Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
+    this.clientCancelSentTime = JsonNullable.of(clientCancelSentTime);
+    return this;
+  }
+
+  /**
+   * Related to CAT reporting when Apex reports for the client. Denotes the time the client sent the
+   * cancel request to Apex. A value may be provided for non-Equity orders, and will be remembered,
+   * but valid timestamps will have no impact on how they are processed.
+   */
+  public CancelOrderRequestCreate withClientCancelSentTime(
+      JsonNullable<OffsetDateTime> clientCancelSentTime) {
+    Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
+    this.clientCancelSentTime = clientCancelSentTime;
+    return this;
+  }
+
   /** Format: accounts/{account_id}/orders/{order_id} */
   public CancelOrderRequestCreate withName(String name) {
     Utils.checkNotNull(name, "name");
@@ -157,12 +202,14 @@ public class CancelOrderRequestCreate {
     CancelOrderRequestCreate other = (CancelOrderRequestCreate) o;
     return Utils.enhancedDeepEquals(this.cancelInitiator, other.cancelInitiator)
         && Utils.enhancedDeepEquals(this.clientCancelReceivedTime, other.clientCancelReceivedTime)
+        && Utils.enhancedDeepEquals(this.clientCancelSentTime, other.clientCancelSentTime)
         && Utils.enhancedDeepEquals(this.name, other.name);
   }
 
   @Override
   public int hashCode() {
-    return Utils.enhancedHash(cancelInitiator, clientCancelReceivedTime, name);
+    return Utils.enhancedHash(
+        cancelInitiator, clientCancelReceivedTime, clientCancelSentTime, name);
   }
 
   @Override
@@ -173,6 +220,8 @@ public class CancelOrderRequestCreate {
         cancelInitiator,
         "clientCancelReceivedTime",
         clientCancelReceivedTime,
+        "clientCancelSentTime",
+        clientCancelSentTime,
         "name",
         name);
   }
@@ -184,6 +233,8 @@ public class CancelOrderRequestCreate {
         Optional.empty();
 
     private JsonNullable<OffsetDateTime> clientCancelReceivedTime = JsonNullable.undefined();
+
+    private JsonNullable<OffsetDateTime> clientCancelSentTime = JsonNullable.undefined();
 
     private String name;
 
@@ -238,6 +289,28 @@ public class CancelOrderRequestCreate {
       return this;
     }
 
+    /**
+     * Related to CAT reporting when Apex reports for the client. Denotes the time the client sent
+     * the cancel request to Apex. A value may be provided for non-Equity orders, and will be
+     * remembered, but valid timestamps will have no impact on how they are processed.
+     */
+    public Builder clientCancelSentTime(OffsetDateTime clientCancelSentTime) {
+      Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
+      this.clientCancelSentTime = JsonNullable.of(clientCancelSentTime);
+      return this;
+    }
+
+    /**
+     * Related to CAT reporting when Apex reports for the client. Denotes the time the client sent
+     * the cancel request to Apex. A value may be provided for non-Equity orders, and will be
+     * remembered, but valid timestamps will have no impact on how they are processed.
+     */
+    public Builder clientCancelSentTime(JsonNullable<OffsetDateTime> clientCancelSentTime) {
+      Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
+      this.clientCancelSentTime = clientCancelSentTime;
+      return this;
+    }
+
     /** Format: accounts/{account_id}/orders/{order_id} */
     public Builder name(String name) {
       Utils.checkNotNull(name, "name");
@@ -247,7 +320,8 @@ public class CancelOrderRequestCreate {
 
     public CancelOrderRequestCreate build() {
 
-      return new CancelOrderRequestCreate(cancelInitiator, clientCancelReceivedTime, name);
+      return new CancelOrderRequestCreate(
+          cancelInitiator, clientCancelReceivedTime, clientCancelSentTime, name);
     }
   }
 }

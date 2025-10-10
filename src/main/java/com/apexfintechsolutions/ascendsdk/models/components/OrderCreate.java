@@ -48,6 +48,16 @@ public class OrderCreate {
   @JsonProperty("client_received_time")
   private JsonNullable<OffsetDateTime> clientReceivedTime;
 
+  /**
+   * Only relevant for CAT reporting when clients have Apex do CAT reporting on their behalf.
+   * Denotes the time the client sent the order to Apex. A value may be provided for non-Equity
+   * orders, and will be remembered, but valid timestamps will have no impact on how they are
+   * processed.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_sent_time")
+  private JsonNullable<OffsetDateTime> clientSentTime;
+
   /** A custom commission applied to an order */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("commission")
@@ -141,8 +151,9 @@ public class OrderCreate {
   private DateCreate orderDate;
 
   /**
-   * The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual
-   * Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+   * The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are
+   * supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is
+   * supported.
    */
   @JsonProperty("order_type")
   private OrderType orderType;
@@ -191,6 +202,22 @@ public class OrderCreate {
   @JsonProperty("time_in_force")
   private TimeInForce timeInForce;
 
+  /**
+   * Represents a whole or partial calendar date, such as a birthday. The time of day and time zone
+   * are either specified elsewhere or are insignificant. The date is relative to the Gregorian
+   * Calendar. This can represent one of the following:
+   *
+   * <p>* A full date, with non-zero year, month, and day values * A month and day value, with a
+   * zero year, such as an anniversary * A year on its own, with zero month and day values * A year
+   * and month value, with a zero day, such as a credit card expiration date
+   *
+   * <p>Related types are [google.type.TimeOfDay][google.type.TimeOfDay] and
+   * `google.protobuf.Timestamp`.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("time_in_force_expiration_date")
+  private Optional<? extends DateCreate> timeInForceExpirationDate;
+
   /** Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("trading_session")
@@ -202,6 +229,7 @@ public class OrderCreate {
       @JsonProperty("broker_capacity") Optional<? extends BrokerCapacity> brokerCapacity,
       @JsonProperty("client_order_id") String clientOrderId,
       @JsonProperty("client_received_time") JsonNullable<OffsetDateTime> clientReceivedTime,
+      @JsonProperty("client_sent_time") JsonNullable<OffsetDateTime> clientSentTime,
       @JsonProperty("commission") Optional<? extends CommissionCreate> commission,
       @JsonProperty("currency_code") Optional<String> currencyCode,
       @JsonProperty("fees") Optional<? extends List<FeeCreate>> fees,
@@ -222,11 +250,14 @@ public class OrderCreate {
           Optional<? extends List<SpecialReportingInstructions>> specialReportingInstructions,
       @JsonProperty("stop_price") Optional<? extends StopPriceCreate> stopPrice,
       @JsonProperty("time_in_force") TimeInForce timeInForce,
+      @JsonProperty("time_in_force_expiration_date")
+          Optional<? extends DateCreate> timeInForceExpirationDate,
       @JsonProperty("trading_session") Optional<? extends TradingSession> tradingSession) {
     Utils.checkNotNull(assetType, "assetType");
     Utils.checkNotNull(brokerCapacity, "brokerCapacity");
     Utils.checkNotNull(clientOrderId, "clientOrderId");
     Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
+    Utils.checkNotNull(clientSentTime, "clientSentTime");
     Utils.checkNotNull(commission, "commission");
     Utils.checkNotNull(currencyCode, "currencyCode");
     Utils.checkNotNull(fees, "fees");
@@ -245,11 +276,13 @@ public class OrderCreate {
     Utils.checkNotNull(specialReportingInstructions, "specialReportingInstructions");
     Utils.checkNotNull(stopPrice, "stopPrice");
     Utils.checkNotNull(timeInForce, "timeInForce");
+    Utils.checkNotNull(timeInForceExpirationDate, "timeInForceExpirationDate");
     Utils.checkNotNull(tradingSession, "tradingSession");
     this.assetType = assetType;
     this.brokerCapacity = brokerCapacity;
     this.clientOrderId = clientOrderId;
     this.clientReceivedTime = clientReceivedTime;
+    this.clientSentTime = clientSentTime;
     this.commission = commission;
     this.currencyCode = currencyCode;
     this.fees = fees;
@@ -268,6 +301,7 @@ public class OrderCreate {
     this.specialReportingInstructions = specialReportingInstructions;
     this.stopPrice = stopPrice;
     this.timeInForce = timeInForce;
+    this.timeInForceExpirationDate = timeInForceExpirationDate;
     this.tradingSession = tradingSession;
   }
 
@@ -284,6 +318,7 @@ public class OrderCreate {
         assetType,
         Optional.empty(),
         clientOrderId,
+        JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
         Optional.empty(),
@@ -303,6 +338,7 @@ public class OrderCreate {
         Optional.empty(),
         Optional.empty(),
         timeInForce,
+        Optional.empty(),
         Optional.empty());
   }
 
@@ -339,6 +375,17 @@ public class OrderCreate {
   @JsonIgnore
   public JsonNullable<OffsetDateTime> clientReceivedTime() {
     return clientReceivedTime;
+  }
+
+  /**
+   * Only relevant for CAT reporting when clients have Apex do CAT reporting on their behalf.
+   * Denotes the time the client sent the order to Apex. A value may be provided for non-Equity
+   * orders, and will be remembered, but valid timestamps will have no impact on how they are
+   * processed.
+   */
+  @JsonIgnore
+  public JsonNullable<OffsetDateTime> clientSentTime() {
+    return clientSentTime;
   }
 
   /** A custom commission applied to an order */
@@ -454,8 +501,9 @@ public class OrderCreate {
   }
 
   /**
-   * The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual
-   * Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+   * The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are
+   * supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is
+   * supported.
    */
   @JsonIgnore
   public OrderType orderType() {
@@ -516,6 +564,24 @@ public class OrderCreate {
   @JsonIgnore
   public TimeInForce timeInForce() {
     return timeInForce;
+  }
+
+  /**
+   * Represents a whole or partial calendar date, such as a birthday. The time of day and time zone
+   * are either specified elsewhere or are insignificant. The date is relative to the Gregorian
+   * Calendar. This can represent one of the following:
+   *
+   * <p>* A full date, with non-zero year, month, and day values * A month and day value, with a
+   * zero year, such as an anniversary * A year on its own, with zero month and day values * A year
+   * and month value, with a zero day, such as a credit card expiration date
+   *
+   * <p>Related types are [google.type.TimeOfDay][google.type.TimeOfDay] and
+   * `google.protobuf.Timestamp`.
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<DateCreate> timeInForceExpirationDate() {
+    return (Optional<DateCreate>) timeInForceExpirationDate;
   }
 
   /** Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders. */
@@ -585,6 +651,30 @@ public class OrderCreate {
   public OrderCreate withClientReceivedTime(JsonNullable<OffsetDateTime> clientReceivedTime) {
     Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
     this.clientReceivedTime = clientReceivedTime;
+    return this;
+  }
+
+  /**
+   * Only relevant for CAT reporting when clients have Apex do CAT reporting on their behalf.
+   * Denotes the time the client sent the order to Apex. A value may be provided for non-Equity
+   * orders, and will be remembered, but valid timestamps will have no impact on how they are
+   * processed.
+   */
+  public OrderCreate withClientSentTime(OffsetDateTime clientSentTime) {
+    Utils.checkNotNull(clientSentTime, "clientSentTime");
+    this.clientSentTime = JsonNullable.of(clientSentTime);
+    return this;
+  }
+
+  /**
+   * Only relevant for CAT reporting when clients have Apex do CAT reporting on their behalf.
+   * Denotes the time the client sent the order to Apex. A value may be provided for non-Equity
+   * orders, and will be remembered, but valid timestamps will have no impact on how they are
+   * processed.
+   */
+  public OrderCreate withClientSentTime(JsonNullable<OffsetDateTime> clientSentTime) {
+    Utils.checkNotNull(clientSentTime, "clientSentTime");
+    this.clientSentTime = clientSentTime;
     return this;
   }
 
@@ -787,8 +877,9 @@ public class OrderCreate {
   }
 
   /**
-   * The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual
-   * Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+   * The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are
+   * supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is
+   * supported.
    */
   public OrderCreate withOrderType(OrderType orderType) {
     Utils.checkNotNull(orderType, "orderType");
@@ -898,6 +989,43 @@ public class OrderCreate {
     return this;
   }
 
+  /**
+   * Represents a whole or partial calendar date, such as a birthday. The time of day and time zone
+   * are either specified elsewhere or are insignificant. The date is relative to the Gregorian
+   * Calendar. This can represent one of the following:
+   *
+   * <p>* A full date, with non-zero year, month, and day values * A month and day value, with a
+   * zero year, such as an anniversary * A year on its own, with zero month and day values * A year
+   * and month value, with a zero day, such as a credit card expiration date
+   *
+   * <p>Related types are [google.type.TimeOfDay][google.type.TimeOfDay] and
+   * `google.protobuf.Timestamp`.
+   */
+  public OrderCreate withTimeInForceExpirationDate(DateCreate timeInForceExpirationDate) {
+    Utils.checkNotNull(timeInForceExpirationDate, "timeInForceExpirationDate");
+    this.timeInForceExpirationDate = Optional.ofNullable(timeInForceExpirationDate);
+    return this;
+  }
+
+  /**
+   * Represents a whole or partial calendar date, such as a birthday. The time of day and time zone
+   * are either specified elsewhere or are insignificant. The date is relative to the Gregorian
+   * Calendar. This can represent one of the following:
+   *
+   * <p>* A full date, with non-zero year, month, and day values * A month and day value, with a
+   * zero year, such as an anniversary * A year on its own, with zero month and day values * A year
+   * and month value, with a zero day, such as a credit card expiration date
+   *
+   * <p>Related types are [google.type.TimeOfDay][google.type.TimeOfDay] and
+   * `google.protobuf.Timestamp`.
+   */
+  public OrderCreate withTimeInForceExpirationDate(
+      Optional<? extends DateCreate> timeInForceExpirationDate) {
+    Utils.checkNotNull(timeInForceExpirationDate, "timeInForceExpirationDate");
+    this.timeInForceExpirationDate = timeInForceExpirationDate;
+    return this;
+  }
+
   /** Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders. */
   public OrderCreate withTradingSession(TradingSession tradingSession) {
     Utils.checkNotNull(tradingSession, "tradingSession");
@@ -925,6 +1053,7 @@ public class OrderCreate {
         && Utils.enhancedDeepEquals(this.brokerCapacity, other.brokerCapacity)
         && Utils.enhancedDeepEquals(this.clientOrderId, other.clientOrderId)
         && Utils.enhancedDeepEquals(this.clientReceivedTime, other.clientReceivedTime)
+        && Utils.enhancedDeepEquals(this.clientSentTime, other.clientSentTime)
         && Utils.enhancedDeepEquals(this.commission, other.commission)
         && Utils.enhancedDeepEquals(this.currencyCode, other.currencyCode)
         && Utils.enhancedDeepEquals(this.fees, other.fees)
@@ -945,6 +1074,7 @@ public class OrderCreate {
             this.specialReportingInstructions, other.specialReportingInstructions)
         && Utils.enhancedDeepEquals(this.stopPrice, other.stopPrice)
         && Utils.enhancedDeepEquals(this.timeInForce, other.timeInForce)
+        && Utils.enhancedDeepEquals(this.timeInForceExpirationDate, other.timeInForceExpirationDate)
         && Utils.enhancedDeepEquals(this.tradingSession, other.tradingSession);
   }
 
@@ -955,6 +1085,7 @@ public class OrderCreate {
         brokerCapacity,
         clientOrderId,
         clientReceivedTime,
+        clientSentTime,
         commission,
         currencyCode,
         fees,
@@ -973,6 +1104,7 @@ public class OrderCreate {
         specialReportingInstructions,
         stopPrice,
         timeInForce,
+        timeInForceExpirationDate,
         tradingSession);
   }
 
@@ -988,6 +1120,8 @@ public class OrderCreate {
         clientOrderId,
         "clientReceivedTime",
         clientReceivedTime,
+        "clientSentTime",
+        clientSentTime,
         "commission",
         commission,
         "currencyCode",
@@ -1024,6 +1158,8 @@ public class OrderCreate {
         stopPrice,
         "timeInForce",
         timeInForce,
+        "timeInForceExpirationDate",
+        timeInForceExpirationDate,
         "tradingSession",
         tradingSession);
   }
@@ -1038,6 +1174,8 @@ public class OrderCreate {
     private String clientOrderId;
 
     private JsonNullable<OffsetDateTime> clientReceivedTime = JsonNullable.undefined();
+
+    private JsonNullable<OffsetDateTime> clientSentTime = JsonNullable.undefined();
 
     private Optional<? extends CommissionCreate> commission = Optional.empty();
 
@@ -1075,6 +1213,8 @@ public class OrderCreate {
     private Optional<? extends StopPriceCreate> stopPrice = Optional.empty();
 
     private TimeInForce timeInForce;
+
+    private Optional<? extends DateCreate> timeInForceExpirationDate = Optional.empty();
 
     private Optional<? extends TradingSession> tradingSession = Optional.empty();
 
@@ -1140,6 +1280,30 @@ public class OrderCreate {
     public Builder clientReceivedTime(JsonNullable<OffsetDateTime> clientReceivedTime) {
       Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
       this.clientReceivedTime = clientReceivedTime;
+      return this;
+    }
+
+    /**
+     * Only relevant for CAT reporting when clients have Apex do CAT reporting on their behalf.
+     * Denotes the time the client sent the order to Apex. A value may be provided for non-Equity
+     * orders, and will be remembered, but valid timestamps will have no impact on how they are
+     * processed.
+     */
+    public Builder clientSentTime(OffsetDateTime clientSentTime) {
+      Utils.checkNotNull(clientSentTime, "clientSentTime");
+      this.clientSentTime = JsonNullable.of(clientSentTime);
+      return this;
+    }
+
+    /**
+     * Only relevant for CAT reporting when clients have Apex do CAT reporting on their behalf.
+     * Denotes the time the client sent the order to Apex. A value may be provided for non-Equity
+     * orders, and will be remembered, but valid timestamps will have no impact on how they are
+     * processed.
+     */
+    public Builder clientSentTime(JsonNullable<OffsetDateTime> clientSentTime) {
+      Utils.checkNotNull(clientSentTime, "clientSentTime");
+      this.clientSentTime = clientSentTime;
       return this;
     }
 
@@ -1346,8 +1510,9 @@ public class OrderCreate {
     }
 
     /**
-     * The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual
-     * Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+     * The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are
+     * supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is
+     * supported.
      */
     public Builder orderType(OrderType orderType) {
       Utils.checkNotNull(orderType, "orderType");
@@ -1461,6 +1626,43 @@ public class OrderCreate {
       return this;
     }
 
+    /**
+     * Represents a whole or partial calendar date, such as a birthday. The time of day and time
+     * zone are either specified elsewhere or are insignificant. The date is relative to the
+     * Gregorian Calendar. This can represent one of the following:
+     *
+     * <p>* A full date, with non-zero year, month, and day values * A month and day value, with a
+     * zero year, such as an anniversary * A year on its own, with zero month and day values * A
+     * year and month value, with a zero day, such as a credit card expiration date
+     *
+     * <p>Related types are [google.type.TimeOfDay][google.type.TimeOfDay] and
+     * `google.protobuf.Timestamp`.
+     */
+    public Builder timeInForceExpirationDate(DateCreate timeInForceExpirationDate) {
+      Utils.checkNotNull(timeInForceExpirationDate, "timeInForceExpirationDate");
+      this.timeInForceExpirationDate = Optional.ofNullable(timeInForceExpirationDate);
+      return this;
+    }
+
+    /**
+     * Represents a whole or partial calendar date, such as a birthday. The time of day and time
+     * zone are either specified elsewhere or are insignificant. The date is relative to the
+     * Gregorian Calendar. This can represent one of the following:
+     *
+     * <p>* A full date, with non-zero year, month, and day values * A month and day value, with a
+     * zero year, such as an anniversary * A year on its own, with zero month and day values * A
+     * year and month value, with a zero day, such as a credit card expiration date
+     *
+     * <p>Related types are [google.type.TimeOfDay][google.type.TimeOfDay] and
+     * `google.protobuf.Timestamp`.
+     */
+    public Builder timeInForceExpirationDate(
+        Optional<? extends DateCreate> timeInForceExpirationDate) {
+      Utils.checkNotNull(timeInForceExpirationDate, "timeInForceExpirationDate");
+      this.timeInForceExpirationDate = timeInForceExpirationDate;
+      return this;
+    }
+
     /** Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders. */
     public Builder tradingSession(TradingSession tradingSession) {
       Utils.checkNotNull(tradingSession, "tradingSession");
@@ -1482,6 +1684,7 @@ public class OrderCreate {
           brokerCapacity,
           clientOrderId,
           clientReceivedTime,
+          clientSentTime,
           commission,
           currencyCode,
           fees,
@@ -1500,6 +1703,7 @@ public class OrderCreate {
           specialReportingInstructions,
           stopPrice,
           timeInForce,
+          timeInForceExpirationDate,
           tradingSession);
     }
   }

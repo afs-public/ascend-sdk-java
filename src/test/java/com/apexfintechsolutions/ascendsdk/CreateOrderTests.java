@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
 import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.components.SetExtraReportingDataRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceListCorrespondentOrdersResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceSetExtraReportingDataResponse;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import java.time.OffsetDateTime;
@@ -51,6 +52,42 @@ public class CreateOrderTests {
                     .name(
                         "accounts/01K6P14WKCJT0G38KKHY52M4BQ/orders/a73f4471-832c-4ff2-9b14-f44420592a67")
                     .build())
+            .call();
+    assertEquals(200, res.statusCode());
+  }
+
+  @Test
+  public void testCreateOrder_CreateOrderListCorrespondentOrders() throws Exception {
+
+    var testHttpClient = Utils.createTestHTTPClient("CreateOrder_ListCorrespondentOrders");
+    SDK sdk =
+        SDK.builder()
+            .serverURL(Utils.environmentVariable("SERVICE_ACCOUNT_CREDS_URL", ""))
+            .security(
+                Security.builder()
+                    .apiKey(Utils.environmentVariable("API_KEY", ""))
+                    .serviceAccountCreds(
+                        ServiceAccountCreds.builder()
+                            .privateKey(
+                                System.getenv()
+                                    .getOrDefault("SERVICE_ACCOUNT_CREDS_PRIVATE_KEY", ""))
+                            .name(System.getenv().getOrDefault("SERVICE_ACCOUNT_CREDS_NAME", ""))
+                            .organization(
+                                System.getenv()
+                                    .getOrDefault("SERVICE_ACCOUNT_CREDS_ORGANIZATION", ""))
+                            .type(System.getenv().getOrDefault("SERVICE_ACCOUNT_CREDS_TYPE", ""))
+                            .build())
+                    .build())
+            .client(testHttpClient)
+            .build();
+
+    OrderServiceListCorrespondentOrdersResponse res =
+        sdk.createOrder()
+            .listCorrespondentOrders()
+            .correspondentId(Utils.environmentVariable("CORRESPONDENT_ID", ""))
+            .filter("")
+            .pageSize(25)
+            .pageToken("")
             .call();
     assertEquals(200, res.statusCode());
   }

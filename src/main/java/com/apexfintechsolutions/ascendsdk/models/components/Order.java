@@ -94,6 +94,14 @@ public class Order {
   @JsonProperty("client_cancel_received_time")
   private JsonNullable<OffsetDateTime> clientCancelReceivedTime;
 
+  /**
+   * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+   * will be present when provided on the CancelOrderRequest
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_cancel_sent_time")
+  private JsonNullable<OffsetDateTime> clientCancelSentTime;
+
   /** User-supplied unique order ID. Cannot be more than 40 characters long. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("client_order_id")
@@ -107,6 +115,16 @@ public class Order {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("client_received_time")
   private JsonNullable<OffsetDateTime> clientReceivedTime;
+
+  /**
+   * Only relevant for CAT reporting when clients have Apex do CAT reporting on their behalf.
+   * Denotes the time the client sent the order to Apex. A value may be provided for non-Equity
+   * orders, and will be remembered, but valid timestamps will have no impact on how they are
+   * processed.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_sent_time")
+  private JsonNullable<OffsetDateTime> clientSentTime;
 
   /**
    * A custom commission to be applied to this order. When specifying an AMOUNT type, the value
@@ -231,6 +249,15 @@ public class Order {
   private JsonNullable<? extends NotionalValue> notionalValue;
 
   /**
+   * A value derived from the order_status, indicating whether the order is still open. The statuses
+   * that indicate an order is open are: PENDING_NEW, NEW, PENDING_QUEUED, QUEUED, PARTIALLY_FILLED,
+   * and PENDING_CANCEL. An order with any other status is not considered open.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("open")
+  private Optional<Boolean> open;
+
+  /**
    * The date on which the order will go to the market: must either be "today" or the next valid
    * trading day. If the current day is not a valid trading day, then the next valid market day must
    * be specified. If the current time is within 5 minutes prior to market close, the next valid
@@ -261,8 +288,9 @@ public class Order {
   private Optional<? extends OrderStatus> orderStatus;
 
   /**
-   * The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual
-   * Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+   * The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are
+   * supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is
+   * supported.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("order_type")
@@ -321,6 +349,14 @@ public class Order {
   @JsonProperty("time_in_force")
   private Optional<? extends OrderTimeInForce> timeInForce;
 
+  /**
+   * The date till which a GOOD_TILL_DATE order will remain valid. If the order is a STOP/MIT order
+   * with TimeInForce as GOOD_TILL_DATE, then this must be populated.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("time_in_force_expiration_date")
+  private JsonNullable<? extends TimeInForceExpirationDate> timeInForceExpirationDate;
+
   /** Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("trading_session")
@@ -339,8 +375,10 @@ public class Order {
           Optional<? extends CancelRejectedReason> cancelRejectedReason,
       @JsonProperty("client_cancel_received_time")
           JsonNullable<OffsetDateTime> clientCancelReceivedTime,
+      @JsonProperty("client_cancel_sent_time") JsonNullable<OffsetDateTime> clientCancelSentTime,
       @JsonProperty("client_order_id") Optional<String> clientOrderId,
       @JsonProperty("client_received_time") JsonNullable<OffsetDateTime> clientReceivedTime,
+      @JsonProperty("client_sent_time") JsonNullable<OffsetDateTime> clientSentTime,
       @JsonProperty("commission") JsonNullable<? extends OrderCommission> commission,
       @JsonProperty("create_time") JsonNullable<OffsetDateTime> createTime,
       @JsonProperty("cumulative_notional_value")
@@ -360,6 +398,7 @@ public class Order {
       @JsonProperty("max_sell_quantity") JsonNullable<? extends MaxSellQuantity> maxSellQuantity,
       @JsonProperty("name") Optional<String> name,
       @JsonProperty("notional_value") JsonNullable<? extends NotionalValue> notionalValue,
+      @JsonProperty("open") Optional<Boolean> open,
       @JsonProperty("order_date") JsonNullable<? extends OrderDate> orderDate,
       @JsonProperty("order_id") Optional<String> orderId,
       @JsonProperty("order_rejected_reason")
@@ -376,6 +415,8 @@ public class Order {
           Optional<? extends List<OrderSpecialReportingInstructions>> specialReportingInstructions,
       @JsonProperty("stop_price") JsonNullable<? extends StopPrice> stopPrice,
       @JsonProperty("time_in_force") Optional<? extends OrderTimeInForce> timeInForce,
+      @JsonProperty("time_in_force_expiration_date")
+          JsonNullable<? extends TimeInForceExpirationDate> timeInForceExpirationDate,
       @JsonProperty("trading_session") Optional<? extends OrderTradingSession> tradingSession) {
     Utils.checkNotNull(accountId, "accountId");
     Utils.checkNotNull(assetId, "assetId");
@@ -386,8 +427,10 @@ public class Order {
     Utils.checkNotNull(cancelReason, "cancelReason");
     Utils.checkNotNull(cancelRejectedReason, "cancelRejectedReason");
     Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+    Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
     Utils.checkNotNull(clientOrderId, "clientOrderId");
     Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
+    Utils.checkNotNull(clientSentTime, "clientSentTime");
     Utils.checkNotNull(commission, "commission");
     Utils.checkNotNull(createTime, "createTime");
     Utils.checkNotNull(cumulativeNotionalValue, "cumulativeNotionalValue");
@@ -405,6 +448,7 @@ public class Order {
     Utils.checkNotNull(maxSellQuantity, "maxSellQuantity");
     Utils.checkNotNull(name, "name");
     Utils.checkNotNull(notionalValue, "notionalValue");
+    Utils.checkNotNull(open, "open");
     Utils.checkNotNull(orderDate, "orderDate");
     Utils.checkNotNull(orderId, "orderId");
     Utils.checkNotNull(orderRejectedReason, "orderRejectedReason");
@@ -417,6 +461,7 @@ public class Order {
     Utils.checkNotNull(specialReportingInstructions, "specialReportingInstructions");
     Utils.checkNotNull(stopPrice, "stopPrice");
     Utils.checkNotNull(timeInForce, "timeInForce");
+    Utils.checkNotNull(timeInForceExpirationDate, "timeInForceExpirationDate");
     Utils.checkNotNull(tradingSession, "tradingSession");
     this.accountId = accountId;
     this.assetId = assetId;
@@ -427,8 +472,10 @@ public class Order {
     this.cancelReason = cancelReason;
     this.cancelRejectedReason = cancelRejectedReason;
     this.clientCancelReceivedTime = clientCancelReceivedTime;
+    this.clientCancelSentTime = clientCancelSentTime;
     this.clientOrderId = clientOrderId;
     this.clientReceivedTime = clientReceivedTime;
+    this.clientSentTime = clientSentTime;
     this.commission = commission;
     this.createTime = createTime;
     this.cumulativeNotionalValue = cumulativeNotionalValue;
@@ -446,6 +493,7 @@ public class Order {
     this.maxSellQuantity = maxSellQuantity;
     this.name = name;
     this.notionalValue = notionalValue;
+    this.open = open;
     this.orderDate = orderDate;
     this.orderId = orderId;
     this.orderRejectedReason = orderRejectedReason;
@@ -458,6 +506,7 @@ public class Order {
     this.specialReportingInstructions = specialReportingInstructions;
     this.stopPrice = stopPrice;
     this.timeInForce = timeInForce;
+    this.timeInForceExpirationDate = timeInForceExpirationDate;
     this.tradingSession = tradingSession;
   }
 
@@ -472,30 +521,10 @@ public class Order {
         Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined(),
-        Optional.empty(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        Optional.empty(),
-        Optional.empty(),
-        JsonNullable.undefined(),
-        Optional.empty(),
-        JsonNullable.undefined(),
-        Optional.empty(),
-        Optional.empty(),
-        Optional.empty(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
-        Optional.empty(),
-        Optional.empty(),
-        Optional.empty(),
-        Optional.empty(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
@@ -503,6 +532,30 @@ public class Order {
         Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty(),
+        JsonNullable.undefined(),
+        Optional.empty(),
+        Optional.empty(),
+        Optional.empty(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        Optional.empty(),
+        JsonNullable.undefined(),
+        Optional.empty(),
+        JsonNullable.undefined(),
+        Optional.empty(),
+        Optional.empty(),
+        Optional.empty(),
+        Optional.empty(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        Optional.empty(),
+        Optional.empty(),
+        JsonNullable.undefined(),
+        Optional.empty(),
+        JsonNullable.undefined(),
         Optional.empty());
   }
 
@@ -594,6 +647,15 @@ public class Order {
     return clientCancelReceivedTime;
   }
 
+  /**
+   * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+   * will be present when provided on the CancelOrderRequest
+   */
+  @JsonIgnore
+  public JsonNullable<OffsetDateTime> clientCancelSentTime() {
+    return clientCancelSentTime;
+  }
+
   /** User-supplied unique order ID. Cannot be more than 40 characters long. */
   @JsonIgnore
   public Optional<String> clientOrderId() {
@@ -608,6 +670,17 @@ public class Order {
   @JsonIgnore
   public JsonNullable<OffsetDateTime> clientReceivedTime() {
     return clientReceivedTime;
+  }
+
+  /**
+   * Only relevant for CAT reporting when clients have Apex do CAT reporting on their behalf.
+   * Denotes the time the client sent the order to Apex. A value may be provided for non-Equity
+   * orders, and will be remembered, but valid timestamps will have no impact on how they are
+   * processed.
+   */
+  @JsonIgnore
+  public JsonNullable<OffsetDateTime> clientSentTime() {
+    return clientSentTime;
   }
 
   /**
@@ -761,6 +834,16 @@ public class Order {
   }
 
   /**
+   * A value derived from the order_status, indicating whether the order is still open. The statuses
+   * that indicate an order is open are: PENDING_NEW, NEW, PENDING_QUEUED, QUEUED, PARTIALLY_FILLED,
+   * and PENDING_CANCEL. An order with any other status is not considered open.
+   */
+  @JsonIgnore
+  public Optional<Boolean> open() {
+    return open;
+  }
+
+  /**
    * The date on which the order will go to the market: must either be "today" or the next valid
    * trading day. If the current day is not a valid trading day, then the next valid market day must
    * be specified. If the current time is within 5 minutes prior to market close, the next valid
@@ -798,8 +881,9 @@ public class Order {
   }
 
   /**
-   * The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual
-   * Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+   * The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are
+   * supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is
+   * supported.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -872,6 +956,16 @@ public class Order {
   @JsonIgnore
   public Optional<OrderTimeInForce> timeInForce() {
     return (Optional<OrderTimeInForce>) timeInForce;
+  }
+
+  /**
+   * The date till which a GOOD_TILL_DATE order will remain valid. If the order is a STOP/MIT order
+   * with TimeInForce as GOOD_TILL_DATE, then this must be populated.
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<TimeInForceExpirationDate> timeInForceExpirationDate() {
+    return (JsonNullable<TimeInForceExpirationDate>) timeInForceExpirationDate;
   }
 
   /** Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders. */
@@ -1070,6 +1164,26 @@ public class Order {
     return this;
   }
 
+  /**
+   * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+   * will be present when provided on the CancelOrderRequest
+   */
+  public Order withClientCancelSentTime(OffsetDateTime clientCancelSentTime) {
+    Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
+    this.clientCancelSentTime = JsonNullable.of(clientCancelSentTime);
+    return this;
+  }
+
+  /**
+   * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+   * will be present when provided on the CancelOrderRequest
+   */
+  public Order withClientCancelSentTime(JsonNullable<OffsetDateTime> clientCancelSentTime) {
+    Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
+    this.clientCancelSentTime = clientCancelSentTime;
+    return this;
+  }
+
   /** User-supplied unique order ID. Cannot be more than 40 characters long. */
   public Order withClientOrderId(String clientOrderId) {
     Utils.checkNotNull(clientOrderId, "clientOrderId");
@@ -1103,6 +1217,30 @@ public class Order {
   public Order withClientReceivedTime(JsonNullable<OffsetDateTime> clientReceivedTime) {
     Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
     this.clientReceivedTime = clientReceivedTime;
+    return this;
+  }
+
+  /**
+   * Only relevant for CAT reporting when clients have Apex do CAT reporting on their behalf.
+   * Denotes the time the client sent the order to Apex. A value may be provided for non-Equity
+   * orders, and will be remembered, but valid timestamps will have no impact on how they are
+   * processed.
+   */
+  public Order withClientSentTime(OffsetDateTime clientSentTime) {
+    Utils.checkNotNull(clientSentTime, "clientSentTime");
+    this.clientSentTime = JsonNullable.of(clientSentTime);
+    return this;
+  }
+
+  /**
+   * Only relevant for CAT reporting when clients have Apex do CAT reporting on their behalf.
+   * Denotes the time the client sent the order to Apex. A value may be provided for non-Equity
+   * orders, and will be remembered, but valid timestamps will have no impact on how they are
+   * processed.
+   */
+  public Order withClientSentTime(JsonNullable<OffsetDateTime> clientSentTime) {
+    Utils.checkNotNull(clientSentTime, "clientSentTime");
+    this.clientSentTime = clientSentTime;
     return this;
   }
 
@@ -1421,6 +1559,28 @@ public class Order {
   }
 
   /**
+   * A value derived from the order_status, indicating whether the order is still open. The statuses
+   * that indicate an order is open are: PENDING_NEW, NEW, PENDING_QUEUED, QUEUED, PARTIALLY_FILLED,
+   * and PENDING_CANCEL. An order with any other status is not considered open.
+   */
+  public Order withOpen(boolean open) {
+    Utils.checkNotNull(open, "open");
+    this.open = Optional.ofNullable(open);
+    return this;
+  }
+
+  /**
+   * A value derived from the order_status, indicating whether the order is still open. The statuses
+   * that indicate an order is open are: PENDING_NEW, NEW, PENDING_QUEUED, QUEUED, PARTIALLY_FILLED,
+   * and PENDING_CANCEL. An order with any other status is not considered open.
+   */
+  public Order withOpen(Optional<Boolean> open) {
+    Utils.checkNotNull(open, "open");
+    this.open = open;
+    return this;
+  }
+
+  /**
    * The date on which the order will go to the market: must either be "today" or the next valid
    * trading day. If the current day is not a valid trading day, then the next valid market day must
    * be specified. If the current time is within 5 minutes prior to market close, the next valid
@@ -1498,8 +1658,9 @@ public class Order {
   }
 
   /**
-   * The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual
-   * Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+   * The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are
+   * supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is
+   * supported.
    */
   public Order withOrderType(OrderOrderType orderType) {
     Utils.checkNotNull(orderType, "orderType");
@@ -1508,8 +1669,9 @@ public class Order {
   }
 
   /**
-   * The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual
-   * Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+   * The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are
+   * supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is
+   * supported.
    */
   public Order withOrderType(Optional<? extends OrderOrderType> orderType) {
     Utils.checkNotNull(orderType, "orderType");
@@ -1655,6 +1817,27 @@ public class Order {
     return this;
   }
 
+  /**
+   * The date till which a GOOD_TILL_DATE order will remain valid. If the order is a STOP/MIT order
+   * with TimeInForce as GOOD_TILL_DATE, then this must be populated.
+   */
+  public Order withTimeInForceExpirationDate(TimeInForceExpirationDate timeInForceExpirationDate) {
+    Utils.checkNotNull(timeInForceExpirationDate, "timeInForceExpirationDate");
+    this.timeInForceExpirationDate = JsonNullable.of(timeInForceExpirationDate);
+    return this;
+  }
+
+  /**
+   * The date till which a GOOD_TILL_DATE order will remain valid. If the order is a STOP/MIT order
+   * with TimeInForce as GOOD_TILL_DATE, then this must be populated.
+   */
+  public Order withTimeInForceExpirationDate(
+      JsonNullable<? extends TimeInForceExpirationDate> timeInForceExpirationDate) {
+    Utils.checkNotNull(timeInForceExpirationDate, "timeInForceExpirationDate");
+    this.timeInForceExpirationDate = timeInForceExpirationDate;
+    return this;
+  }
+
   /** Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders. */
   public Order withTradingSession(OrderTradingSession tradingSession) {
     Utils.checkNotNull(tradingSession, "tradingSession");
@@ -1687,8 +1870,10 @@ public class Order {
         && Utils.enhancedDeepEquals(this.cancelReason, other.cancelReason)
         && Utils.enhancedDeepEquals(this.cancelRejectedReason, other.cancelRejectedReason)
         && Utils.enhancedDeepEquals(this.clientCancelReceivedTime, other.clientCancelReceivedTime)
+        && Utils.enhancedDeepEquals(this.clientCancelSentTime, other.clientCancelSentTime)
         && Utils.enhancedDeepEquals(this.clientOrderId, other.clientOrderId)
         && Utils.enhancedDeepEquals(this.clientReceivedTime, other.clientReceivedTime)
+        && Utils.enhancedDeepEquals(this.clientSentTime, other.clientSentTime)
         && Utils.enhancedDeepEquals(this.commission, other.commission)
         && Utils.enhancedDeepEquals(this.createTime, other.createTime)
         && Utils.enhancedDeepEquals(this.cumulativeNotionalValue, other.cumulativeNotionalValue)
@@ -1707,6 +1892,7 @@ public class Order {
         && Utils.enhancedDeepEquals(this.maxSellQuantity, other.maxSellQuantity)
         && Utils.enhancedDeepEquals(this.name, other.name)
         && Utils.enhancedDeepEquals(this.notionalValue, other.notionalValue)
+        && Utils.enhancedDeepEquals(this.open, other.open)
         && Utils.enhancedDeepEquals(this.orderDate, other.orderDate)
         && Utils.enhancedDeepEquals(this.orderId, other.orderId)
         && Utils.enhancedDeepEquals(this.orderRejectedReason, other.orderRejectedReason)
@@ -1720,6 +1906,7 @@ public class Order {
             this.specialReportingInstructions, other.specialReportingInstructions)
         && Utils.enhancedDeepEquals(this.stopPrice, other.stopPrice)
         && Utils.enhancedDeepEquals(this.timeInForce, other.timeInForce)
+        && Utils.enhancedDeepEquals(this.timeInForceExpirationDate, other.timeInForceExpirationDate)
         && Utils.enhancedDeepEquals(this.tradingSession, other.tradingSession);
   }
 
@@ -1735,8 +1922,10 @@ public class Order {
         cancelReason,
         cancelRejectedReason,
         clientCancelReceivedTime,
+        clientCancelSentTime,
         clientOrderId,
         clientReceivedTime,
+        clientSentTime,
         commission,
         createTime,
         cumulativeNotionalValue,
@@ -1754,6 +1943,7 @@ public class Order {
         maxSellQuantity,
         name,
         notionalValue,
+        open,
         orderDate,
         orderId,
         orderRejectedReason,
@@ -1766,6 +1956,7 @@ public class Order {
         specialReportingInstructions,
         stopPrice,
         timeInForce,
+        timeInForceExpirationDate,
         tradingSession);
   }
 
@@ -1791,10 +1982,14 @@ public class Order {
         cancelRejectedReason,
         "clientCancelReceivedTime",
         clientCancelReceivedTime,
+        "clientCancelSentTime",
+        clientCancelSentTime,
         "clientOrderId",
         clientOrderId,
         "clientReceivedTime",
         clientReceivedTime,
+        "clientSentTime",
+        clientSentTime,
         "commission",
         commission,
         "createTime",
@@ -1829,6 +2024,8 @@ public class Order {
         name,
         "notionalValue",
         notionalValue,
+        "open",
+        open,
         "orderDate",
         orderDate,
         "orderId",
@@ -1853,6 +2050,8 @@ public class Order {
         stopPrice,
         "timeInForce",
         timeInForce,
+        "timeInForceExpirationDate",
+        timeInForceExpirationDate,
         "tradingSession",
         tradingSession);
   }
@@ -1878,9 +2077,13 @@ public class Order {
 
     private JsonNullable<OffsetDateTime> clientCancelReceivedTime = JsonNullable.undefined();
 
+    private JsonNullable<OffsetDateTime> clientCancelSentTime = JsonNullable.undefined();
+
     private Optional<String> clientOrderId = Optional.empty();
 
     private JsonNullable<OffsetDateTime> clientReceivedTime = JsonNullable.undefined();
+
+    private JsonNullable<OffsetDateTime> clientSentTime = JsonNullable.undefined();
 
     private JsonNullable<? extends OrderCommission> commission = JsonNullable.undefined();
 
@@ -1918,6 +2121,8 @@ public class Order {
 
     private JsonNullable<? extends NotionalValue> notionalValue = JsonNullable.undefined();
 
+    private Optional<Boolean> open = Optional.empty();
+
     private JsonNullable<? extends OrderDate> orderDate = JsonNullable.undefined();
 
     private Optional<String> orderId = Optional.empty();
@@ -1944,6 +2149,9 @@ public class Order {
     private JsonNullable<? extends StopPrice> stopPrice = JsonNullable.undefined();
 
     private Optional<? extends OrderTimeInForce> timeInForce = Optional.empty();
+
+    private JsonNullable<? extends TimeInForceExpirationDate> timeInForceExpirationDate =
+        JsonNullable.undefined();
 
     private Optional<? extends OrderTradingSession> tradingSession = Optional.empty();
 
@@ -2138,6 +2346,26 @@ public class Order {
       return this;
     }
 
+    /**
+     * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+     * will be present when provided on the CancelOrderRequest
+     */
+    public Builder clientCancelSentTime(OffsetDateTime clientCancelSentTime) {
+      Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
+      this.clientCancelSentTime = JsonNullable.of(clientCancelSentTime);
+      return this;
+    }
+
+    /**
+     * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+     * will be present when provided on the CancelOrderRequest
+     */
+    public Builder clientCancelSentTime(JsonNullable<OffsetDateTime> clientCancelSentTime) {
+      Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
+      this.clientCancelSentTime = clientCancelSentTime;
+      return this;
+    }
+
     /** User-supplied unique order ID. Cannot be more than 40 characters long. */
     public Builder clientOrderId(String clientOrderId) {
       Utils.checkNotNull(clientOrderId, "clientOrderId");
@@ -2171,6 +2399,30 @@ public class Order {
     public Builder clientReceivedTime(JsonNullable<OffsetDateTime> clientReceivedTime) {
       Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
       this.clientReceivedTime = clientReceivedTime;
+      return this;
+    }
+
+    /**
+     * Only relevant for CAT reporting when clients have Apex do CAT reporting on their behalf.
+     * Denotes the time the client sent the order to Apex. A value may be provided for non-Equity
+     * orders, and will be remembered, but valid timestamps will have no impact on how they are
+     * processed.
+     */
+    public Builder clientSentTime(OffsetDateTime clientSentTime) {
+      Utils.checkNotNull(clientSentTime, "clientSentTime");
+      this.clientSentTime = JsonNullable.of(clientSentTime);
+      return this;
+    }
+
+    /**
+     * Only relevant for CAT reporting when clients have Apex do CAT reporting on their behalf.
+     * Denotes the time the client sent the order to Apex. A value may be provided for non-Equity
+     * orders, and will be remembered, but valid timestamps will have no impact on how they are
+     * processed.
+     */
+    public Builder clientSentTime(JsonNullable<OffsetDateTime> clientSentTime) {
+      Utils.checkNotNull(clientSentTime, "clientSentTime");
+      this.clientSentTime = clientSentTime;
       return this;
     }
 
@@ -2489,6 +2741,28 @@ public class Order {
     }
 
     /**
+     * A value derived from the order_status, indicating whether the order is still open. The
+     * statuses that indicate an order is open are: PENDING_NEW, NEW, PENDING_QUEUED, QUEUED,
+     * PARTIALLY_FILLED, and PENDING_CANCEL. An order with any other status is not considered open.
+     */
+    public Builder open(boolean open) {
+      Utils.checkNotNull(open, "open");
+      this.open = Optional.ofNullable(open);
+      return this;
+    }
+
+    /**
+     * A value derived from the order_status, indicating whether the order is still open. The
+     * statuses that indicate an order is open are: PENDING_NEW, NEW, PENDING_QUEUED, QUEUED,
+     * PARTIALLY_FILLED, and PENDING_CANCEL. An order with any other status is not considered open.
+     */
+    public Builder open(Optional<Boolean> open) {
+      Utils.checkNotNull(open, "open");
+      this.open = open;
+      return this;
+    }
+
+    /**
      * The date on which the order will go to the market: must either be "today" or the next valid
      * trading day. If the current day is not a valid trading day, then the next valid market day
      * must be specified. If the current time is within 5 minutes prior to market close, the next
@@ -2566,8 +2840,9 @@ public class Order {
     }
 
     /**
-     * The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual
-     * Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+     * The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are
+     * supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is
+     * supported.
      */
     public Builder orderType(OrderOrderType orderType) {
       Utils.checkNotNull(orderType, "orderType");
@@ -2576,8 +2851,9 @@ public class Order {
     }
 
     /**
-     * The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual
-     * Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+     * The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are
+     * supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is
+     * supported.
      */
     public Builder orderType(Optional<? extends OrderOrderType> orderType) {
       Utils.checkNotNull(orderType, "orderType");
@@ -2727,6 +3003,27 @@ public class Order {
       return this;
     }
 
+    /**
+     * The date till which a GOOD_TILL_DATE order will remain valid. If the order is a STOP/MIT
+     * order with TimeInForce as GOOD_TILL_DATE, then this must be populated.
+     */
+    public Builder timeInForceExpirationDate(TimeInForceExpirationDate timeInForceExpirationDate) {
+      Utils.checkNotNull(timeInForceExpirationDate, "timeInForceExpirationDate");
+      this.timeInForceExpirationDate = JsonNullable.of(timeInForceExpirationDate);
+      return this;
+    }
+
+    /**
+     * The date till which a GOOD_TILL_DATE order will remain valid. If the order is a STOP/MIT
+     * order with TimeInForce as GOOD_TILL_DATE, then this must be populated.
+     */
+    public Builder timeInForceExpirationDate(
+        JsonNullable<? extends TimeInForceExpirationDate> timeInForceExpirationDate) {
+      Utils.checkNotNull(timeInForceExpirationDate, "timeInForceExpirationDate");
+      this.timeInForceExpirationDate = timeInForceExpirationDate;
+      return this;
+    }
+
     /** Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders. */
     public Builder tradingSession(OrderTradingSession tradingSession) {
       Utils.checkNotNull(tradingSession, "tradingSession");
@@ -2753,8 +3050,10 @@ public class Order {
           cancelReason,
           cancelRejectedReason,
           clientCancelReceivedTime,
+          clientCancelSentTime,
           clientOrderId,
           clientReceivedTime,
+          clientSentTime,
           commission,
           createTime,
           cumulativeNotionalValue,
@@ -2772,6 +3071,7 @@ public class Order {
           maxSellQuantity,
           name,
           notionalValue,
+          open,
           orderDate,
           orderId,
           orderRejectedReason,
@@ -2784,6 +3084,7 @@ public class Order {
           specialReportingInstructions,
           stopPrice,
           timeInForce,
+          timeInForceExpirationDate,
           tradingSession);
     }
   }
