@@ -16,7 +16,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'com.apexfintechsolutions:ascendsdk:1.5.1'
+implementation 'com.apexfintechsolutions:ascendsdk:1.6.0'
 ```
 
 Maven:
@@ -24,7 +24,7 @@ Maven:
 <dependency>
     <groupId>com.apexfintechsolutions</groupId>
     <artifactId>ascendsdk</artifactId>
-    <version>1.5.1</version>
+    <version>1.6.0</version>
 </dependency>
 ```
 
@@ -489,14 +489,6 @@ public class Application {
 
 * [getCheckDeposit](docs/sdks/checks/README.md#getcheckdeposit) - Get Check Deposit
 
-### [createOrder()](docs/sdks/createorder/README.md)
-
-* [createOrder](docs/sdks/createorder/README.md#createorder) - Create Order
-* [getOrder](docs/sdks/createorder/README.md#getorder) - Get Order
-* [cancelOrder](docs/sdks/createorder/README.md#cancelorder) - Cancel Order
-* [setExtraReportingData](docs/sdks/createorder/README.md#setextrareportingdata) - Set Extra Reporting Data
-* [listCorrespondentOrders](docs/sdks/createorder/README.md#listcorrespondentorders) - List Correspondent Orders
-
 ### [dataRetrieval()](docs/sdks/dataretrieval/README.md)
 
 * [listSnapshots](docs/sdks/dataretrieval/README.md#listsnapshots) - List Snapshots
@@ -570,6 +562,14 @@ public class Application {
 ### [margins()](docs/sdks/margins/README.md)
 
 * [getBuyingPower](docs/sdks/margins/README.md#getbuyingpower) - Get Buying Power
+
+### [orders()](docs/sdks/orders/README.md)
+
+* [createOrder](docs/sdks/orders/README.md#createorder) - Create Order
+* [getOrder](docs/sdks/orders/README.md#getorder) - Get Order
+* [cancelOrder](docs/sdks/orders/README.md#cancelorder) - Cancel Order
+* [setExtraReportingData](docs/sdks/orders/README.md#setextrareportingdata) - Set Extra Reporting Data
+* [listCorrespondentOrders](docs/sdks/orders/README.md#listcorrespondentorders) - List Correspondent Orders
 
 ### [personManagement()](docs/sdks/personmanagement/README.md)
 

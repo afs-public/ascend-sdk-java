@@ -54,6 +54,8 @@ public class LocateIctReportResponseProgram {
       new LocateIctReportResponseProgram("DEPOSIT_ONLY");
   public static final LocateIctReportResponseProgram BANKING_PARTNER =
       new LocateIctReportResponseProgram("BANKING_PARTNER");
+  public static final LocateIctReportResponseProgram MONEY_TRANSMITTER =
+      new LocateIctReportResponseProgram("MONEY_TRANSMITTER");
   public static final LocateIctReportResponseProgram WITHDRAWAL_ONLY =
       new LocateIctReportResponseProgram("WITHDRAWAL_ONLY");
   public static final LocateIctReportResponseProgram DIGITAL_PARTNER =
@@ -130,6 +132,7 @@ public class LocateIctReportResponseProgram {
     map.put("BROKER_PARTNER", BROKER_PARTNER);
     map.put("DEPOSIT_ONLY", DEPOSIT_ONLY);
     map.put("BANKING_PARTNER", BANKING_PARTNER);
+    map.put("MONEY_TRANSMITTER", MONEY_TRANSMITTER);
     map.put("WITHDRAWAL_ONLY", WITHDRAWAL_ONLY);
     map.put("DIGITAL_PARTNER", DIGITAL_PARTNER);
     return map;
@@ -141,6 +144,7 @@ public class LocateIctReportResponseProgram {
     map.put("BROKER_PARTNER", LocateIctReportResponseProgramEnum.BROKER_PARTNER);
     map.put("DEPOSIT_ONLY", LocateIctReportResponseProgramEnum.DEPOSIT_ONLY);
     map.put("BANKING_PARTNER", LocateIctReportResponseProgramEnum.BANKING_PARTNER);
+    map.put("MONEY_TRANSMITTER", LocateIctReportResponseProgramEnum.MONEY_TRANSMITTER);
     map.put("WITHDRAWAL_ONLY", LocateIctReportResponseProgramEnum.WITHDRAWAL_ONLY);
     map.put("DIGITAL_PARTNER", LocateIctReportResponseProgramEnum.DIGITAL_PARTNER);
     return map;
@@ -182,6 +186,7 @@ public class LocateIctReportResponseProgram {
     BROKER_PARTNER("BROKER_PARTNER"),
     DEPOSIT_ONLY("DEPOSIT_ONLY"),
     BANKING_PARTNER("BANKING_PARTNER"),
+    MONEY_TRANSMITTER("MONEY_TRANSMITTER"),
     WITHDRAWAL_ONLY("WITHDRAWAL_ONLY"),
     DIGITAL_PARTNER("DIGITAL_PARTNER"),
     ;

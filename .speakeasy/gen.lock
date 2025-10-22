@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 04604b59-b953-4711-ac65-9ad5897162b4
 management:
-  docChecksum: b78fe33a2e48f1cf16bb3f4d7cc3e5e8
-  docVersion: v1:20251009:uat:ac355eac4466
+  docChecksum: 834b7bdbca5fb3e122e1664978f5f38e
+  docVersion: v1:20251022:uat:75a9118ab2c9
   speakeasyVersion: 1.608.0
   generationVersion: 2.691.6
-  releaseVersion: 1.5.1
-  configChecksum: 1ea6ef7761f499ba5801efb071c7f8cd
+  releaseVersion: 1.6.0
+  configChecksum: dd1eff570a427a78acda431b1dc7e938
 features:
   java:
     additionalDependencies: 0.1.0
@@ -93,6 +93,7 @@ generatedFiles:
   - docs/models/components/AchDepositScheduleAmount.md
   - docs/models/components/AchDepositScheduleCreate.md
   - docs/models/components/AchDepositScheduleCreateType.md
+  - docs/models/components/AchDepositScheduleEndDate.md
   - docs/models/components/AchDepositScheduleIraContribution.md
   - docs/models/components/AchDepositScheduleRetirementContribution.md
   - docs/models/components/AchDepositScheduleRetirementContributionType.md
@@ -116,6 +117,7 @@ generatedFiles:
   - docs/models/components/AchWithdrawalSchedule.md
   - docs/models/components/AchWithdrawalScheduleAmount.md
   - docs/models/components/AchWithdrawalScheduleCreate.md
+  - docs/models/components/AchWithdrawalScheduleEndDate.md
   - docs/models/components/AchWithdrawalScheduleFederalTaxWithholding.md
   - docs/models/components/AchWithdrawalScheduleIraDistributionAmount.md
   - docs/models/components/AchWithdrawalScheduleIraDistributionFederalTaxWithholdingAmount.md
@@ -1744,6 +1746,7 @@ generatedFiles:
   - docs/models/components/SetExtraReportingDataRequestCreate.md
   - docs/models/components/SettleDate.md
   - docs/models/components/Settled.md
+  - docs/models/components/SettledCashAvailableToWithdraw.md
   - docs/models/components/SettlementConvention.md
   - docs/models/components/SettlementDate.md
   - docs/models/components/SettlementMethod.md
@@ -1831,6 +1834,7 @@ generatedFiles:
   - docs/models/components/TradeAllocationState.md
   - docs/models/components/TradeAllocationToSide.md
   - docs/models/components/TradeAllocationWhenIssued.md
+  - docs/models/components/TradeCashAvailableToWithdraw.md
   - docs/models/components/TradeConfirmationDeliveryPreference.md
   - docs/models/components/TradeCreate.md
   - docs/models/components/TradeCreateAssetType.md
@@ -1851,6 +1855,7 @@ generatedFiles:
   - docs/models/components/TransferCreate.md
   - docs/models/components/TransferScheduleSummary.md
   - docs/models/components/TransferScheduleSummaryAmount.md
+  - docs/models/components/TransferScheduleSummaryEndDate.md
   - docs/models/components/TransferScheduleSummaryFederalTaxWithholding.md
   - docs/models/components/TransferScheduleSummaryMechanism.md
   - docs/models/components/TransferScheduleSummaryPercentage.md
@@ -1947,6 +1952,7 @@ generatedFiles:
   - docs/models/components/WireWithdrawalScheduleAmount.md
   - docs/models/components/WireWithdrawalScheduleBeneficiary.md
   - docs/models/components/WireWithdrawalScheduleCreate.md
+  - docs/models/components/WireWithdrawalScheduleEndDate.md
   - docs/models/components/WireWithdrawalScheduleFederalTaxWithholding.md
   - docs/models/components/WireWithdrawalSchedulePercentage.md
   - docs/models/components/WireWithdrawalScheduleRecipientBankAddress.md
@@ -2356,7 +2362,6 @@ generatedFiles:
   - docs/sdks/basketorders/README.md
   - docs/sdks/cashbalances/README.md
   - docs/sdks/checks/README.md
-  - docs/sdks/createorder/README.md
   - docs/sdks/dataretrieval/README.md
   - docs/sdks/enrollmentsandagreements/README.md
   - docs/sdks/feesandcredits/README.md
@@ -2367,6 +2372,7 @@ generatedFiles:
   - docs/sdks/journals/README.md
   - docs/sdks/ledger/README.md
   - docs/sdks/margins/README.md
+  - docs/sdks/orders/README.md
   - docs/sdks/personmanagement/README.md
   - docs/sdks/reader/README.md
   - docs/sdks/retirements/README.md
@@ -2394,7 +2400,6 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/BasketOrders.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/CashBalances.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/Checks.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/CreateOrder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/DataRetrieval.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/EnrollmentsAndAgreements.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/FeesAndCredits.java
@@ -2405,6 +2410,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/Journals.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/Ledger.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/Margins.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/Orders.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/PersonManagement.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/Reader.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/Retirements.java
@@ -2479,6 +2485,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AchDepositScheduleAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AchDepositScheduleCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AchDepositScheduleCreateType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AchDepositScheduleEndDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AchDepositScheduleIraContribution.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AchDepositScheduleRetirementContribution.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AchDepositScheduleRetirementContributionType.java
@@ -2502,6 +2509,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AchWithdrawalSchedule.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AchWithdrawalScheduleAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AchWithdrawalScheduleCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AchWithdrawalScheduleEndDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AchWithdrawalScheduleFederalTaxWithholding.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AchWithdrawalScheduleIraDistributionAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AchWithdrawalScheduleIraDistributionFederalTaxWithholdingAmount.java
@@ -4130,6 +4138,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SetExtraReportingDataRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SettleDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Settled.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SettledCashAvailableToWithdraw.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SettlementConvention.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SettlementDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SettlementMethod.java
@@ -4217,6 +4226,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeAllocationState.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeAllocationToSide.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeAllocationWhenIssued.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeCashAvailableToWithdraw.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeConfirmationDeliveryPreference.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeCreateAssetType.java
@@ -4237,6 +4247,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TransferCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TransferScheduleSummary.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TransferScheduleSummaryAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TransferScheduleSummaryEndDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TransferScheduleSummaryFederalTaxWithholding.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TransferScheduleSummaryMechanism.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TransferScheduleSummaryPercentage.java
@@ -4333,6 +4344,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/WireWithdrawalScheduleAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/WireWithdrawalScheduleBeneficiary.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/WireWithdrawalScheduleCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/WireWithdrawalScheduleEndDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/WireWithdrawalScheduleFederalTaxWithholding.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/WireWithdrawalSchedulePercentage.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/WireWithdrawalScheduleRecipientBankAddress.java

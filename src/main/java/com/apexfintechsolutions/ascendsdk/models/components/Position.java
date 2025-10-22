@@ -26,12 +26,25 @@ public class Position {
   @JsonProperty("account_id")
   private Optional<String> accountId;
 
-  /** `settled` + any as of settled amounts for the date */
+  /**
+   * This field shows settled positions that have been adjusted to account for as-of transactions
+   * (transactions recorded after their actual occurrence). Unlike the settled field, which remains
+   * unchanged for historical dates when as-of transactions are recorded, the adjusted_settled field
+   * updates to reflect what the position would have been if all transactions had been recorded on
+   * their actual dates of occurrence.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("adjusted_settled")
   private JsonNullable<? extends AdjustedSettled> adjustedSettled;
 
-  /** `trade` + any as of trade amounts for the date */
+  /**
+   * This value reflects trade positions that have been adjusted due to the recording of
+   * transactions after their actual occurrence (as-of transactions). The key difference between
+   * this field and the trade field is that when an as-of transaction is recorded to the Ledger, the
+   * trade field will not change for historical dates, but the adjusted_trade field will update to
+   * reflect what the position would have been if the as-of transaction had been recorded on the
+   * date of its occurrence
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("adjusted_trade")
   private JsonNullable<? extends AdjustedTrade> adjustedTrade;
@@ -49,25 +62,28 @@ public class Position {
   @JsonProperty("correspondent_id")
   private Optional<String> correspondentId;
 
-  /** The date for which the positions were calculated */
+  /** The date for which positions were calculated */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("date")
   private JsonNullable<? extends Date> date;
 
-  /** Quantity of asset in use by the FPSL program. Should not be used by currency assets */
+  /**
+   * Represents the amount of an asset that has been loaned out via the fully paid securities
+   * lending program
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("fpsl")
   private JsonNullable<? extends PositionFpsl> fpsl;
 
   /**
-   * Quantity of asset available for allocation for use by the FPSL program. Raw bucket values.
-   * These denote that a position is allocated to this purpose. Values may be negative
+   * Represents the amount of an asset that is available to loan by the fully paid securities
+   * lending program.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("free")
   private JsonNullable<? extends Free> free;
 
-  /** The most recent date an adjustment occurred */
+  /** The most recent date a position changed in any way */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("last_adjusted_date")
   private JsonNullable<? extends LastAdjustedDate> lastAdjustedDate;
@@ -78,53 +94,68 @@ public class Position {
   private Optional<String> name;
 
   /**
-   * Quantity of currency from a dividend being reserved for reinvestment. should not be used by
-   * non-currency assets
+   * Represents the amount of cash that has been paid to an account due to a dividend or capital
+   * gain but is due to be reinvested in the security that paid the account holder
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("pending_drip")
   private JsonNullable<? extends PendingDrip> pendingDrip;
 
-  /** Quantity/ amount of asset restricted due to an outgoing acat request */
+  /**
+   * Represents the amount of an asset that is subject to a pending outgoing account transfer, but
+   * has not completed the bookkeeping phase of that account transfer
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("pending_outgoing_acat")
   private JsonNullable<? extends PendingOutgoingAcat> pendingOutgoingAcat;
 
   /**
-   * Quantity of currency being reserved for withdrawal. should not be used by non-currency assets
+   * Represents the amount of cash that has been requested for withdrawal but has not posted to the
+   * Ledger
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("pending_withdrawal")
   private JsonNullable<? extends PendingWithdrawal> pendingWithdrawal;
 
   /**
-   * The position version for an asset/account combo. This number only increases, such that larger
-   * `position_version`s are newer than lower ones.
+   * Represents a chronologically-ordered version identifier that enables efficient position state
+   * tracking and event ordering. The system guarantees that positions from earlier dates have
+   * smaller version numbers than those from later dates
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("position_version")
   private Optional<String> positionVersion;
 
   /**
-   * Computed fieldsOriginal Settled Position before and as-of changesComputed based on the bucket
-   * values to represet the total settled position in an account Currently defined as `free` +
-   * `fpsl` + `pending_outgoing_acat` + `drip` + `pending_withdrawal`, but if/when new buckets are
-   * added this value will need to change to reflect them
+   * This field refers to the quantity of assets that have completed the entire clearing and
+   * settlement cycle, where ownership of the securities has been officially transferred and payment
+   * has been fully processed. The settled position includes all transactions that have been
+   * recorded in the Ledger with process_date, activity_date, and settle_date on or before the date
+   * specified in the response.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("settled")
   private JsonNullable<? extends Settled> settled;
 
-  /** original trade position */
+  /**
+   * This field represents the total amount of an asset owned by the account including transactions
+   * that have been executed but not yet settled, commonly known as the trade date position. It
+   * includes all transactions recorded in the Ledger with process_date and activity_date on or
+   * before the date in the response, even those with future settle_dates. Unlike the settled
+   * position, which only includes completed settlements, the trade position provides a
+   * forward-looking view of ownership that accounts for pending settlements
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("trade")
   private JsonNullable<? extends PositionTrade> trade;
 
   /**
-   * Computed based on the bucket values to represent the total unrestricted position in an account.
-   * Will always be less than or equal to `settled` settled - (pending_outgoing_acat + pending_drip
-   * + pending_withdrawal) ; however, if/when the API adds new buckets, Apex may adjust this to
-   * either incorporate the new value or not
+   * This field represents the portion of a settled position that is available for trading or
+   * withdrawal without restrictions. It is calculated by subtracting positions with pending
+   * restrictions from the total settled amount (currently: settled - (pending_outgoing_acat +
+   * pending_drip + pending_withdrawal)). As new memo location categories are added to the API, Apex
+   * may update this calculation to incorporate these values. Note that the Cash and Margin systems
+   * may place additional restrictions on cash/ assets according to their business logic.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("unrestricted")
@@ -217,14 +248,27 @@ public class Position {
     return accountId;
   }
 
-  /** `settled` + any as of settled amounts for the date */
+  /**
+   * This field shows settled positions that have been adjusted to account for as-of transactions
+   * (transactions recorded after their actual occurrence). Unlike the settled field, which remains
+   * unchanged for historical dates when as-of transactions are recorded, the adjusted_settled field
+   * updates to reflect what the position would have been if all transactions had been recorded on
+   * their actual dates of occurrence.
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public JsonNullable<AdjustedSettled> adjustedSettled() {
     return (JsonNullable<AdjustedSettled>) adjustedSettled;
   }
 
-  /** `trade` + any as of trade amounts for the date */
+  /**
+   * This value reflects trade positions that have been adjusted due to the recording of
+   * transactions after their actual occurrence (as-of transactions). The key difference between
+   * this field and the trade field is that when an as-of transaction is recorded to the Ledger, the
+   * trade field will not change for historical dates, but the adjusted_trade field will update to
+   * reflect what the position would have been if the as-of transaction had been recorded on the
+   * date of its occurrence
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public JsonNullable<AdjustedTrade> adjustedTrade() {
@@ -246,14 +290,17 @@ public class Position {
     return correspondentId;
   }
 
-  /** The date for which the positions were calculated */
+  /** The date for which positions were calculated */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public JsonNullable<Date> date() {
     return (JsonNullable<Date>) date;
   }
 
-  /** Quantity of asset in use by the FPSL program. Should not be used by currency assets */
+  /**
+   * Represents the amount of an asset that has been loaned out via the fully paid securities
+   * lending program
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public JsonNullable<PositionFpsl> fpsl() {
@@ -261,8 +308,8 @@ public class Position {
   }
 
   /**
-   * Quantity of asset available for allocation for use by the FPSL program. Raw bucket values.
-   * These denote that a position is allocated to this purpose. Values may be negative
+   * Represents the amount of an asset that is available to loan by the fully paid securities
+   * lending program.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -270,7 +317,7 @@ public class Position {
     return (JsonNullable<Free>) free;
   }
 
-  /** The most recent date an adjustment occurred */
+  /** The most recent date a position changed in any way */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public JsonNullable<LastAdjustedDate> lastAdjustedDate() {
@@ -284,8 +331,8 @@ public class Position {
   }
 
   /**
-   * Quantity of currency from a dividend being reserved for reinvestment. should not be used by
-   * non-currency assets
+   * Represents the amount of cash that has been paid to an account due to a dividend or capital
+   * gain but is due to be reinvested in the security that paid the account holder
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -293,7 +340,10 @@ public class Position {
     return (JsonNullable<PendingDrip>) pendingDrip;
   }
 
-  /** Quantity/ amount of asset restricted due to an outgoing acat request */
+  /**
+   * Represents the amount of an asset that is subject to a pending outgoing account transfer, but
+   * has not completed the bookkeeping phase of that account transfer
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public JsonNullable<PendingOutgoingAcat> pendingOutgoingAcat() {
@@ -301,7 +351,8 @@ public class Position {
   }
 
   /**
-   * Quantity of currency being reserved for withdrawal. should not be used by non-currency assets
+   * Represents the amount of cash that has been requested for withdrawal but has not posted to the
+   * Ledger
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -310,8 +361,9 @@ public class Position {
   }
 
   /**
-   * The position version for an asset/account combo. This number only increases, such that larger
-   * `position_version`s are newer than lower ones.
+   * Represents a chronologically-ordered version identifier that enables efficient position state
+   * tracking and event ordering. The system guarantees that positions from earlier dates have
+   * smaller version numbers than those from later dates
    */
   @JsonIgnore
   public Optional<String> positionVersion() {
@@ -319,10 +371,11 @@ public class Position {
   }
 
   /**
-   * Computed fieldsOriginal Settled Position before and as-of changesComputed based on the bucket
-   * values to represet the total settled position in an account Currently defined as `free` +
-   * `fpsl` + `pending_outgoing_acat` + `drip` + `pending_withdrawal`, but if/when new buckets are
-   * added this value will need to change to reflect them
+   * This field refers to the quantity of assets that have completed the entire clearing and
+   * settlement cycle, where ownership of the securities has been officially transferred and payment
+   * has been fully processed. The settled position includes all transactions that have been
+   * recorded in the Ledger with process_date, activity_date, and settle_date on or before the date
+   * specified in the response.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -330,7 +383,14 @@ public class Position {
     return (JsonNullable<Settled>) settled;
   }
 
-  /** original trade position */
+  /**
+   * This field represents the total amount of an asset owned by the account including transactions
+   * that have been executed but not yet settled, commonly known as the trade date position. It
+   * includes all transactions recorded in the Ledger with process_date and activity_date on or
+   * before the date in the response, even those with future settle_dates. Unlike the settled
+   * position, which only includes completed settlements, the trade position provides a
+   * forward-looking view of ownership that accounts for pending settlements
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public JsonNullable<PositionTrade> trade() {
@@ -338,10 +398,12 @@ public class Position {
   }
 
   /**
-   * Computed based on the bucket values to represent the total unrestricted position in an account.
-   * Will always be less than or equal to `settled` settled - (pending_outgoing_acat + pending_drip
-   * + pending_withdrawal) ; however, if/when the API adds new buckets, Apex may adjust this to
-   * either incorporate the new value or not
+   * This field represents the portion of a settled position that is available for trading or
+   * withdrawal without restrictions. It is calculated by subtracting positions with pending
+   * restrictions from the total settled amount (currently: settled - (pending_outgoing_acat +
+   * pending_drip + pending_withdrawal)). As new memo location categories are added to the API, Apex
+   * may update this calculation to incorporate these values. Note that the Cash and Margin systems
+   * may place additional restrictions on cash/ assets according to their business logic.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -373,28 +435,54 @@ public class Position {
     return this;
   }
 
-  /** `settled` + any as of settled amounts for the date */
+  /**
+   * This field shows settled positions that have been adjusted to account for as-of transactions
+   * (transactions recorded after their actual occurrence). Unlike the settled field, which remains
+   * unchanged for historical dates when as-of transactions are recorded, the adjusted_settled field
+   * updates to reflect what the position would have been if all transactions had been recorded on
+   * their actual dates of occurrence.
+   */
   public Position withAdjustedSettled(AdjustedSettled adjustedSettled) {
     Utils.checkNotNull(adjustedSettled, "adjustedSettled");
     this.adjustedSettled = JsonNullable.of(adjustedSettled);
     return this;
   }
 
-  /** `settled` + any as of settled amounts for the date */
+  /**
+   * This field shows settled positions that have been adjusted to account for as-of transactions
+   * (transactions recorded after their actual occurrence). Unlike the settled field, which remains
+   * unchanged for historical dates when as-of transactions are recorded, the adjusted_settled field
+   * updates to reflect what the position would have been if all transactions had been recorded on
+   * their actual dates of occurrence.
+   */
   public Position withAdjustedSettled(JsonNullable<? extends AdjustedSettled> adjustedSettled) {
     Utils.checkNotNull(adjustedSettled, "adjustedSettled");
     this.adjustedSettled = adjustedSettled;
     return this;
   }
 
-  /** `trade` + any as of trade amounts for the date */
+  /**
+   * This value reflects trade positions that have been adjusted due to the recording of
+   * transactions after their actual occurrence (as-of transactions). The key difference between
+   * this field and the trade field is that when an as-of transaction is recorded to the Ledger, the
+   * trade field will not change for historical dates, but the adjusted_trade field will update to
+   * reflect what the position would have been if the as-of transaction had been recorded on the
+   * date of its occurrence
+   */
   public Position withAdjustedTrade(AdjustedTrade adjustedTrade) {
     Utils.checkNotNull(adjustedTrade, "adjustedTrade");
     this.adjustedTrade = JsonNullable.of(adjustedTrade);
     return this;
   }
 
-  /** `trade` + any as of trade amounts for the date */
+  /**
+   * This value reflects trade positions that have been adjusted due to the recording of
+   * transactions after their actual occurrence (as-of transactions). The key difference between
+   * this field and the trade field is that when an as-of transaction is recorded to the Ledger, the
+   * trade field will not change for historical dates, but the adjusted_trade field will update to
+   * reflect what the position would have been if the as-of transaction had been recorded on the
+   * date of its occurrence
+   */
   public Position withAdjustedTrade(JsonNullable<? extends AdjustedTrade> adjustedTrade) {
     Utils.checkNotNull(adjustedTrade, "adjustedTrade");
     this.adjustedTrade = adjustedTrade;
@@ -435,28 +523,34 @@ public class Position {
     return this;
   }
 
-  /** The date for which the positions were calculated */
+  /** The date for which positions were calculated */
   public Position withDate(Date date) {
     Utils.checkNotNull(date, "date");
     this.date = JsonNullable.of(date);
     return this;
   }
 
-  /** The date for which the positions were calculated */
+  /** The date for which positions were calculated */
   public Position withDate(JsonNullable<? extends Date> date) {
     Utils.checkNotNull(date, "date");
     this.date = date;
     return this;
   }
 
-  /** Quantity of asset in use by the FPSL program. Should not be used by currency assets */
+  /**
+   * Represents the amount of an asset that has been loaned out via the fully paid securities
+   * lending program
+   */
   public Position withFpsl(PositionFpsl fpsl) {
     Utils.checkNotNull(fpsl, "fpsl");
     this.fpsl = JsonNullable.of(fpsl);
     return this;
   }
 
-  /** Quantity of asset in use by the FPSL program. Should not be used by currency assets */
+  /**
+   * Represents the amount of an asset that has been loaned out via the fully paid securities
+   * lending program
+   */
   public Position withFpsl(JsonNullable<? extends PositionFpsl> fpsl) {
     Utils.checkNotNull(fpsl, "fpsl");
     this.fpsl = fpsl;
@@ -464,8 +558,8 @@ public class Position {
   }
 
   /**
-   * Quantity of asset available for allocation for use by the FPSL program. Raw bucket values.
-   * These denote that a position is allocated to this purpose. Values may be negative
+   * Represents the amount of an asset that is available to loan by the fully paid securities
+   * lending program.
    */
   public Position withFree(Free free) {
     Utils.checkNotNull(free, "free");
@@ -474,8 +568,8 @@ public class Position {
   }
 
   /**
-   * Quantity of asset available for allocation for use by the FPSL program. Raw bucket values.
-   * These denote that a position is allocated to this purpose. Values may be negative
+   * Represents the amount of an asset that is available to loan by the fully paid securities
+   * lending program.
    */
   public Position withFree(JsonNullable<? extends Free> free) {
     Utils.checkNotNull(free, "free");
@@ -483,14 +577,14 @@ public class Position {
     return this;
   }
 
-  /** The most recent date an adjustment occurred */
+  /** The most recent date a position changed in any way */
   public Position withLastAdjustedDate(LastAdjustedDate lastAdjustedDate) {
     Utils.checkNotNull(lastAdjustedDate, "lastAdjustedDate");
     this.lastAdjustedDate = JsonNullable.of(lastAdjustedDate);
     return this;
   }
 
-  /** The most recent date an adjustment occurred */
+  /** The most recent date a position changed in any way */
   public Position withLastAdjustedDate(JsonNullable<? extends LastAdjustedDate> lastAdjustedDate) {
     Utils.checkNotNull(lastAdjustedDate, "lastAdjustedDate");
     this.lastAdjustedDate = lastAdjustedDate;
@@ -512,8 +606,8 @@ public class Position {
   }
 
   /**
-   * Quantity of currency from a dividend being reserved for reinvestment. should not be used by
-   * non-currency assets
+   * Represents the amount of cash that has been paid to an account due to a dividend or capital
+   * gain but is due to be reinvested in the security that paid the account holder
    */
   public Position withPendingDrip(PendingDrip pendingDrip) {
     Utils.checkNotNull(pendingDrip, "pendingDrip");
@@ -522,8 +616,8 @@ public class Position {
   }
 
   /**
-   * Quantity of currency from a dividend being reserved for reinvestment. should not be used by
-   * non-currency assets
+   * Represents the amount of cash that has been paid to an account due to a dividend or capital
+   * gain but is due to be reinvested in the security that paid the account holder
    */
   public Position withPendingDrip(JsonNullable<? extends PendingDrip> pendingDrip) {
     Utils.checkNotNull(pendingDrip, "pendingDrip");
@@ -531,14 +625,20 @@ public class Position {
     return this;
   }
 
-  /** Quantity/ amount of asset restricted due to an outgoing acat request */
+  /**
+   * Represents the amount of an asset that is subject to a pending outgoing account transfer, but
+   * has not completed the bookkeeping phase of that account transfer
+   */
   public Position withPendingOutgoingAcat(PendingOutgoingAcat pendingOutgoingAcat) {
     Utils.checkNotNull(pendingOutgoingAcat, "pendingOutgoingAcat");
     this.pendingOutgoingAcat = JsonNullable.of(pendingOutgoingAcat);
     return this;
   }
 
-  /** Quantity/ amount of asset restricted due to an outgoing acat request */
+  /**
+   * Represents the amount of an asset that is subject to a pending outgoing account transfer, but
+   * has not completed the bookkeeping phase of that account transfer
+   */
   public Position withPendingOutgoingAcat(
       JsonNullable<? extends PendingOutgoingAcat> pendingOutgoingAcat) {
     Utils.checkNotNull(pendingOutgoingAcat, "pendingOutgoingAcat");
@@ -547,7 +647,8 @@ public class Position {
   }
 
   /**
-   * Quantity of currency being reserved for withdrawal. should not be used by non-currency assets
+   * Represents the amount of cash that has been requested for withdrawal but has not posted to the
+   * Ledger
    */
   public Position withPendingWithdrawal(PendingWithdrawal pendingWithdrawal) {
     Utils.checkNotNull(pendingWithdrawal, "pendingWithdrawal");
@@ -556,7 +657,8 @@ public class Position {
   }
 
   /**
-   * Quantity of currency being reserved for withdrawal. should not be used by non-currency assets
+   * Represents the amount of cash that has been requested for withdrawal but has not posted to the
+   * Ledger
    */
   public Position withPendingWithdrawal(
       JsonNullable<? extends PendingWithdrawal> pendingWithdrawal) {
@@ -566,8 +668,9 @@ public class Position {
   }
 
   /**
-   * The position version for an asset/account combo. This number only increases, such that larger
-   * `position_version`s are newer than lower ones.
+   * Represents a chronologically-ordered version identifier that enables efficient position state
+   * tracking and event ordering. The system guarantees that positions from earlier dates have
+   * smaller version numbers than those from later dates
    */
   public Position withPositionVersion(String positionVersion) {
     Utils.checkNotNull(positionVersion, "positionVersion");
@@ -576,8 +679,9 @@ public class Position {
   }
 
   /**
-   * The position version for an asset/account combo. This number only increases, such that larger
-   * `position_version`s are newer than lower ones.
+   * Represents a chronologically-ordered version identifier that enables efficient position state
+   * tracking and event ordering. The system guarantees that positions from earlier dates have
+   * smaller version numbers than those from later dates
    */
   public Position withPositionVersion(Optional<String> positionVersion) {
     Utils.checkNotNull(positionVersion, "positionVersion");
@@ -586,10 +690,11 @@ public class Position {
   }
 
   /**
-   * Computed fieldsOriginal Settled Position before and as-of changesComputed based on the bucket
-   * values to represet the total settled position in an account Currently defined as `free` +
-   * `fpsl` + `pending_outgoing_acat` + `drip` + `pending_withdrawal`, but if/when new buckets are
-   * added this value will need to change to reflect them
+   * This field refers to the quantity of assets that have completed the entire clearing and
+   * settlement cycle, where ownership of the securities has been officially transferred and payment
+   * has been fully processed. The settled position includes all transactions that have been
+   * recorded in the Ledger with process_date, activity_date, and settle_date on or before the date
+   * specified in the response.
    */
   public Position withSettled(Settled settled) {
     Utils.checkNotNull(settled, "settled");
@@ -598,10 +703,11 @@ public class Position {
   }
 
   /**
-   * Computed fieldsOriginal Settled Position before and as-of changesComputed based on the bucket
-   * values to represet the total settled position in an account Currently defined as `free` +
-   * `fpsl` + `pending_outgoing_acat` + `drip` + `pending_withdrawal`, but if/when new buckets are
-   * added this value will need to change to reflect them
+   * This field refers to the quantity of assets that have completed the entire clearing and
+   * settlement cycle, where ownership of the securities has been officially transferred and payment
+   * has been fully processed. The settled position includes all transactions that have been
+   * recorded in the Ledger with process_date, activity_date, and settle_date on or before the date
+   * specified in the response.
    */
   public Position withSettled(JsonNullable<? extends Settled> settled) {
     Utils.checkNotNull(settled, "settled");
@@ -609,14 +715,28 @@ public class Position {
     return this;
   }
 
-  /** original trade position */
+  /**
+   * This field represents the total amount of an asset owned by the account including transactions
+   * that have been executed but not yet settled, commonly known as the trade date position. It
+   * includes all transactions recorded in the Ledger with process_date and activity_date on or
+   * before the date in the response, even those with future settle_dates. Unlike the settled
+   * position, which only includes completed settlements, the trade position provides a
+   * forward-looking view of ownership that accounts for pending settlements
+   */
   public Position withTrade(PositionTrade trade) {
     Utils.checkNotNull(trade, "trade");
     this.trade = JsonNullable.of(trade);
     return this;
   }
 
-  /** original trade position */
+  /**
+   * This field represents the total amount of an asset owned by the account including transactions
+   * that have been executed but not yet settled, commonly known as the trade date position. It
+   * includes all transactions recorded in the Ledger with process_date and activity_date on or
+   * before the date in the response, even those with future settle_dates. Unlike the settled
+   * position, which only includes completed settlements, the trade position provides a
+   * forward-looking view of ownership that accounts for pending settlements
+   */
   public Position withTrade(JsonNullable<? extends PositionTrade> trade) {
     Utils.checkNotNull(trade, "trade");
     this.trade = trade;
@@ -624,10 +744,12 @@ public class Position {
   }
 
   /**
-   * Computed based on the bucket values to represent the total unrestricted position in an account.
-   * Will always be less than or equal to `settled` settled - (pending_outgoing_acat + pending_drip
-   * + pending_withdrawal) ; however, if/when the API adds new buckets, Apex may adjust this to
-   * either incorporate the new value or not
+   * This field represents the portion of a settled position that is available for trading or
+   * withdrawal without restrictions. It is calculated by subtracting positions with pending
+   * restrictions from the total settled amount (currently: settled - (pending_outgoing_acat +
+   * pending_drip + pending_withdrawal)). As new memo location categories are added to the API, Apex
+   * may update this calculation to incorporate these values. Note that the Cash and Margin systems
+   * may place additional restrictions on cash/ assets according to their business logic.
    */
   public Position withUnrestricted(Unrestricted unrestricted) {
     Utils.checkNotNull(unrestricted, "unrestricted");
@@ -636,10 +758,12 @@ public class Position {
   }
 
   /**
-   * Computed based on the bucket values to represent the total unrestricted position in an account.
-   * Will always be less than or equal to `settled` settled - (pending_outgoing_acat + pending_drip
-   * + pending_withdrawal) ; however, if/when the API adds new buckets, Apex may adjust this to
-   * either incorporate the new value or not
+   * This field represents the portion of a settled position that is available for trading or
+   * withdrawal without restrictions. It is calculated by subtracting positions with pending
+   * restrictions from the total settled amount (currently: settled - (pending_outgoing_acat +
+   * pending_drip + pending_withdrawal)). As new memo location categories are added to the API, Apex
+   * may update this calculation to incorporate these values. Note that the Cash and Margin systems
+   * may place additional restrictions on cash/ assets according to their business logic.
    */
   public Position withUnrestricted(JsonNullable<? extends Unrestricted> unrestricted) {
     Utils.checkNotNull(unrestricted, "unrestricted");
@@ -799,28 +923,54 @@ public class Position {
       return this;
     }
 
-    /** `settled` + any as of settled amounts for the date */
+    /**
+     * This field shows settled positions that have been adjusted to account for as-of transactions
+     * (transactions recorded after their actual occurrence). Unlike the settled field, which
+     * remains unchanged for historical dates when as-of transactions are recorded, the
+     * adjusted_settled field updates to reflect what the position would have been if all
+     * transactions had been recorded on their actual dates of occurrence.
+     */
     public Builder adjustedSettled(AdjustedSettled adjustedSettled) {
       Utils.checkNotNull(adjustedSettled, "adjustedSettled");
       this.adjustedSettled = JsonNullable.of(adjustedSettled);
       return this;
     }
 
-    /** `settled` + any as of settled amounts for the date */
+    /**
+     * This field shows settled positions that have been adjusted to account for as-of transactions
+     * (transactions recorded after their actual occurrence). Unlike the settled field, which
+     * remains unchanged for historical dates when as-of transactions are recorded, the
+     * adjusted_settled field updates to reflect what the position would have been if all
+     * transactions had been recorded on their actual dates of occurrence.
+     */
     public Builder adjustedSettled(JsonNullable<? extends AdjustedSettled> adjustedSettled) {
       Utils.checkNotNull(adjustedSettled, "adjustedSettled");
       this.adjustedSettled = adjustedSettled;
       return this;
     }
 
-    /** `trade` + any as of trade amounts for the date */
+    /**
+     * This value reflects trade positions that have been adjusted due to the recording of
+     * transactions after their actual occurrence (as-of transactions). The key difference between
+     * this field and the trade field is that when an as-of transaction is recorded to the Ledger,
+     * the trade field will not change for historical dates, but the adjusted_trade field will
+     * update to reflect what the position would have been if the as-of transaction had been
+     * recorded on the date of its occurrence
+     */
     public Builder adjustedTrade(AdjustedTrade adjustedTrade) {
       Utils.checkNotNull(adjustedTrade, "adjustedTrade");
       this.adjustedTrade = JsonNullable.of(adjustedTrade);
       return this;
     }
 
-    /** `trade` + any as of trade amounts for the date */
+    /**
+     * This value reflects trade positions that have been adjusted due to the recording of
+     * transactions after their actual occurrence (as-of transactions). The key difference between
+     * this field and the trade field is that when an as-of transaction is recorded to the Ledger,
+     * the trade field will not change for historical dates, but the adjusted_trade field will
+     * update to reflect what the position would have been if the as-of transaction had been
+     * recorded on the date of its occurrence
+     */
     public Builder adjustedTrade(JsonNullable<? extends AdjustedTrade> adjustedTrade) {
       Utils.checkNotNull(adjustedTrade, "adjustedTrade");
       this.adjustedTrade = adjustedTrade;
@@ -861,28 +1011,34 @@ public class Position {
       return this;
     }
 
-    /** The date for which the positions were calculated */
+    /** The date for which positions were calculated */
     public Builder date(Date date) {
       Utils.checkNotNull(date, "date");
       this.date = JsonNullable.of(date);
       return this;
     }
 
-    /** The date for which the positions were calculated */
+    /** The date for which positions were calculated */
     public Builder date(JsonNullable<? extends Date> date) {
       Utils.checkNotNull(date, "date");
       this.date = date;
       return this;
     }
 
-    /** Quantity of asset in use by the FPSL program. Should not be used by currency assets */
+    /**
+     * Represents the amount of an asset that has been loaned out via the fully paid securities
+     * lending program
+     */
     public Builder fpsl(PositionFpsl fpsl) {
       Utils.checkNotNull(fpsl, "fpsl");
       this.fpsl = JsonNullable.of(fpsl);
       return this;
     }
 
-    /** Quantity of asset in use by the FPSL program. Should not be used by currency assets */
+    /**
+     * Represents the amount of an asset that has been loaned out via the fully paid securities
+     * lending program
+     */
     public Builder fpsl(JsonNullable<? extends PositionFpsl> fpsl) {
       Utils.checkNotNull(fpsl, "fpsl");
       this.fpsl = fpsl;
@@ -890,8 +1046,8 @@ public class Position {
     }
 
     /**
-     * Quantity of asset available for allocation for use by the FPSL program. Raw bucket values.
-     * These denote that a position is allocated to this purpose. Values may be negative
+     * Represents the amount of an asset that is available to loan by the fully paid securities
+     * lending program.
      */
     public Builder free(Free free) {
       Utils.checkNotNull(free, "free");
@@ -900,8 +1056,8 @@ public class Position {
     }
 
     /**
-     * Quantity of asset available for allocation for use by the FPSL program. Raw bucket values.
-     * These denote that a position is allocated to this purpose. Values may be negative
+     * Represents the amount of an asset that is available to loan by the fully paid securities
+     * lending program.
      */
     public Builder free(JsonNullable<? extends Free> free) {
       Utils.checkNotNull(free, "free");
@@ -909,14 +1065,14 @@ public class Position {
       return this;
     }
 
-    /** The most recent date an adjustment occurred */
+    /** The most recent date a position changed in any way */
     public Builder lastAdjustedDate(LastAdjustedDate lastAdjustedDate) {
       Utils.checkNotNull(lastAdjustedDate, "lastAdjustedDate");
       this.lastAdjustedDate = JsonNullable.of(lastAdjustedDate);
       return this;
     }
 
-    /** The most recent date an adjustment occurred */
+    /** The most recent date a position changed in any way */
     public Builder lastAdjustedDate(JsonNullable<? extends LastAdjustedDate> lastAdjustedDate) {
       Utils.checkNotNull(lastAdjustedDate, "lastAdjustedDate");
       this.lastAdjustedDate = lastAdjustedDate;
@@ -938,8 +1094,8 @@ public class Position {
     }
 
     /**
-     * Quantity of currency from a dividend being reserved for reinvestment. should not be used by
-     * non-currency assets
+     * Represents the amount of cash that has been paid to an account due to a dividend or capital
+     * gain but is due to be reinvested in the security that paid the account holder
      */
     public Builder pendingDrip(PendingDrip pendingDrip) {
       Utils.checkNotNull(pendingDrip, "pendingDrip");
@@ -948,8 +1104,8 @@ public class Position {
     }
 
     /**
-     * Quantity of currency from a dividend being reserved for reinvestment. should not be used by
-     * non-currency assets
+     * Represents the amount of cash that has been paid to an account due to a dividend or capital
+     * gain but is due to be reinvested in the security that paid the account holder
      */
     public Builder pendingDrip(JsonNullable<? extends PendingDrip> pendingDrip) {
       Utils.checkNotNull(pendingDrip, "pendingDrip");
@@ -957,14 +1113,20 @@ public class Position {
       return this;
     }
 
-    /** Quantity/ amount of asset restricted due to an outgoing acat request */
+    /**
+     * Represents the amount of an asset that is subject to a pending outgoing account transfer, but
+     * has not completed the bookkeeping phase of that account transfer
+     */
     public Builder pendingOutgoingAcat(PendingOutgoingAcat pendingOutgoingAcat) {
       Utils.checkNotNull(pendingOutgoingAcat, "pendingOutgoingAcat");
       this.pendingOutgoingAcat = JsonNullable.of(pendingOutgoingAcat);
       return this;
     }
 
-    /** Quantity/ amount of asset restricted due to an outgoing acat request */
+    /**
+     * Represents the amount of an asset that is subject to a pending outgoing account transfer, but
+     * has not completed the bookkeeping phase of that account transfer
+     */
     public Builder pendingOutgoingAcat(
         JsonNullable<? extends PendingOutgoingAcat> pendingOutgoingAcat) {
       Utils.checkNotNull(pendingOutgoingAcat, "pendingOutgoingAcat");
@@ -973,7 +1135,8 @@ public class Position {
     }
 
     /**
-     * Quantity of currency being reserved for withdrawal. should not be used by non-currency assets
+     * Represents the amount of cash that has been requested for withdrawal but has not posted to
+     * the Ledger
      */
     public Builder pendingWithdrawal(PendingWithdrawal pendingWithdrawal) {
       Utils.checkNotNull(pendingWithdrawal, "pendingWithdrawal");
@@ -982,7 +1145,8 @@ public class Position {
     }
 
     /**
-     * Quantity of currency being reserved for withdrawal. should not be used by non-currency assets
+     * Represents the amount of cash that has been requested for withdrawal but has not posted to
+     * the Ledger
      */
     public Builder pendingWithdrawal(JsonNullable<? extends PendingWithdrawal> pendingWithdrawal) {
       Utils.checkNotNull(pendingWithdrawal, "pendingWithdrawal");
@@ -991,8 +1155,9 @@ public class Position {
     }
 
     /**
-     * The position version for an asset/account combo. This number only increases, such that larger
-     * `position_version`s are newer than lower ones.
+     * Represents a chronologically-ordered version identifier that enables efficient position state
+     * tracking and event ordering. The system guarantees that positions from earlier dates have
+     * smaller version numbers than those from later dates
      */
     public Builder positionVersion(String positionVersion) {
       Utils.checkNotNull(positionVersion, "positionVersion");
@@ -1001,8 +1166,9 @@ public class Position {
     }
 
     /**
-     * The position version for an asset/account combo. This number only increases, such that larger
-     * `position_version`s are newer than lower ones.
+     * Represents a chronologically-ordered version identifier that enables efficient position state
+     * tracking and event ordering. The system guarantees that positions from earlier dates have
+     * smaller version numbers than those from later dates
      */
     public Builder positionVersion(Optional<String> positionVersion) {
       Utils.checkNotNull(positionVersion, "positionVersion");
@@ -1011,10 +1177,11 @@ public class Position {
     }
 
     /**
-     * Computed fieldsOriginal Settled Position before and as-of changesComputed based on the bucket
-     * values to represet the total settled position in an account Currently defined as `free` +
-     * `fpsl` + `pending_outgoing_acat` + `drip` + `pending_withdrawal`, but if/when new buckets are
-     * added this value will need to change to reflect them
+     * This field refers to the quantity of assets that have completed the entire clearing and
+     * settlement cycle, where ownership of the securities has been officially transferred and
+     * payment has been fully processed. The settled position includes all transactions that have
+     * been recorded in the Ledger with process_date, activity_date, and settle_date on or before
+     * the date specified in the response.
      */
     public Builder settled(Settled settled) {
       Utils.checkNotNull(settled, "settled");
@@ -1023,10 +1190,11 @@ public class Position {
     }
 
     /**
-     * Computed fieldsOriginal Settled Position before and as-of changesComputed based on the bucket
-     * values to represet the total settled position in an account Currently defined as `free` +
-     * `fpsl` + `pending_outgoing_acat` + `drip` + `pending_withdrawal`, but if/when new buckets are
-     * added this value will need to change to reflect them
+     * This field refers to the quantity of assets that have completed the entire clearing and
+     * settlement cycle, where ownership of the securities has been officially transferred and
+     * payment has been fully processed. The settled position includes all transactions that have
+     * been recorded in the Ledger with process_date, activity_date, and settle_date on or before
+     * the date specified in the response.
      */
     public Builder settled(JsonNullable<? extends Settled> settled) {
       Utils.checkNotNull(settled, "settled");
@@ -1034,14 +1202,28 @@ public class Position {
       return this;
     }
 
-    /** original trade position */
+    /**
+     * This field represents the total amount of an asset owned by the account including
+     * transactions that have been executed but not yet settled, commonly known as the trade date
+     * position. It includes all transactions recorded in the Ledger with process_date and
+     * activity_date on or before the date in the response, even those with future settle_dates.
+     * Unlike the settled position, which only includes completed settlements, the trade position
+     * provides a forward-looking view of ownership that accounts for pending settlements
+     */
     public Builder trade(PositionTrade trade) {
       Utils.checkNotNull(trade, "trade");
       this.trade = JsonNullable.of(trade);
       return this;
     }
 
-    /** original trade position */
+    /**
+     * This field represents the total amount of an asset owned by the account including
+     * transactions that have been executed but not yet settled, commonly known as the trade date
+     * position. It includes all transactions recorded in the Ledger with process_date and
+     * activity_date on or before the date in the response, even those with future settle_dates.
+     * Unlike the settled position, which only includes completed settlements, the trade position
+     * provides a forward-looking view of ownership that accounts for pending settlements
+     */
     public Builder trade(JsonNullable<? extends PositionTrade> trade) {
       Utils.checkNotNull(trade, "trade");
       this.trade = trade;
@@ -1049,10 +1231,12 @@ public class Position {
     }
 
     /**
-     * Computed based on the bucket values to represent the total unrestricted position in an
-     * account. Will always be less than or equal to `settled` settled - (pending_outgoing_acat +
-     * pending_drip + pending_withdrawal) ; however, if/when the API adds new buckets, Apex may
-     * adjust this to either incorporate the new value or not
+     * This field represents the portion of a settled position that is available for trading or
+     * withdrawal without restrictions. It is calculated by subtracting positions with pending
+     * restrictions from the total settled amount (currently: settled - (pending_outgoing_acat +
+     * pending_drip + pending_withdrawal)). As new memo location categories are added to the API,
+     * Apex may update this calculation to incorporate these values. Note that the Cash and Margin
+     * systems may place additional restrictions on cash/ assets according to their business logic.
      */
     public Builder unrestricted(Unrestricted unrestricted) {
       Utils.checkNotNull(unrestricted, "unrestricted");
@@ -1061,10 +1245,12 @@ public class Position {
     }
 
     /**
-     * Computed based on the bucket values to represent the total unrestricted position in an
-     * account. Will always be less than or equal to `settled` settled - (pending_outgoing_acat +
-     * pending_drip + pending_withdrawal) ; however, if/when the API adds new buckets, Apex may
-     * adjust this to either incorporate the new value or not
+     * This field represents the portion of a settled position that is available for trading or
+     * withdrawal without restrictions. It is calculated by subtracting positions with pending
+     * restrictions from the total settled amount (currently: settled - (pending_outgoing_acat +
+     * pending_drip + pending_withdrawal)). As new memo location categories are added to the API,
+     * Apex may update this calculation to incorporate these values. Note that the Cash and Margin
+     * systems may place additional restrictions on cash/ assets according to their business logic.
      */
     public Builder unrestricted(JsonNullable<? extends Unrestricted> unrestricted) {
       Utils.checkNotNull(unrestricted, "unrestricted");

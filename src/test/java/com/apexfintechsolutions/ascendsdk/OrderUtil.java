@@ -59,7 +59,7 @@ public class OrderUtil {
             .timeInForce(TimeInForce.DAY)
             .build();
 
-    var result = sdk.createOrder().createOrder(account.accountId().get(), order);
+    var result = sdk.orders().createOrder(account.accountId().get(), order);
 
     Assertions.assertEquals(200, result.statusCode());
     return result.order().get();
@@ -105,7 +105,7 @@ public class OrderUtil {
             .timeInForce(TimeInForce.DAY)
             .build();
 
-    var result = sdk.createOrder().createOrder(account.accountId().get(), order);
+    var result = sdk.orders().createOrder(account.accountId().get(), order);
 
     Assertions.assertEquals(200, result.statusCode());
     return result.order().get();

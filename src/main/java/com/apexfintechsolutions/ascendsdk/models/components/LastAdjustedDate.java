@@ -14,7 +14,7 @@ import java.util.Optional;
 /**
  * LastAdjustedDate
  *
- * <p>The most recent date an adjustment occurred
+ * <p>The most recent date a position changed in any way
  */
 public class LastAdjustedDate {
   /**

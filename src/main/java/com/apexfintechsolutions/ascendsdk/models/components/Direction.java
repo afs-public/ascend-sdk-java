@@ -49,6 +49,7 @@ public class Direction {
   public static final Direction DIRECTION_UNSPECIFIED = new Direction("DIRECTION_UNSPECIFIED");
   public static final Direction DEPOSIT = new Direction("DEPOSIT");
   public static final Direction WITHDRAWAL = new Direction("WITHDRAWAL");
+  public static final Direction JOURNAL = new Direction("JOURNAL");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -119,6 +120,7 @@ public class Direction {
     map.put("DIRECTION_UNSPECIFIED", DIRECTION_UNSPECIFIED);
     map.put("DEPOSIT", DEPOSIT);
     map.put("WITHDRAWAL", WITHDRAWAL);
+    map.put("JOURNAL", JOURNAL);
     return map;
   }
 
@@ -127,6 +129,7 @@ public class Direction {
     map.put("DIRECTION_UNSPECIFIED", DirectionEnum.DIRECTION_UNSPECIFIED);
     map.put("DEPOSIT", DirectionEnum.DEPOSIT);
     map.put("WITHDRAWAL", DirectionEnum.WITHDRAWAL);
+    map.put("JOURNAL", DirectionEnum.JOURNAL);
     return map;
   }
 
@@ -164,6 +167,7 @@ public class Direction {
     DIRECTION_UNSPECIFIED("DIRECTION_UNSPECIFIED"),
     DEPOSIT("DEPOSIT"),
     WITHDRAWAL("WITHDRAWAL"),
+    JOURNAL("JOURNAL"),
     ;
 
     private final String value;

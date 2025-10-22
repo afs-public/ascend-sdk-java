@@ -53,6 +53,8 @@ public class IctWithdrawalProgram {
   public static final IctWithdrawalProgram DEPOSIT_ONLY = new IctWithdrawalProgram("DEPOSIT_ONLY");
   public static final IctWithdrawalProgram BANKING_PARTNER =
       new IctWithdrawalProgram("BANKING_PARTNER");
+  public static final IctWithdrawalProgram MONEY_TRANSMITTER =
+      new IctWithdrawalProgram("MONEY_TRANSMITTER");
   public static final IctWithdrawalProgram WITHDRAWAL_ONLY =
       new IctWithdrawalProgram("WITHDRAWAL_ONLY");
   public static final IctWithdrawalProgram DIGITAL_PARTNER =
@@ -128,6 +130,7 @@ public class IctWithdrawalProgram {
     map.put("BROKER_PARTNER", BROKER_PARTNER);
     map.put("DEPOSIT_ONLY", DEPOSIT_ONLY);
     map.put("BANKING_PARTNER", BANKING_PARTNER);
+    map.put("MONEY_TRANSMITTER", MONEY_TRANSMITTER);
     map.put("WITHDRAWAL_ONLY", WITHDRAWAL_ONLY);
     map.put("DIGITAL_PARTNER", DIGITAL_PARTNER);
     return map;
@@ -139,6 +142,7 @@ public class IctWithdrawalProgram {
     map.put("BROKER_PARTNER", IctWithdrawalProgramEnum.BROKER_PARTNER);
     map.put("DEPOSIT_ONLY", IctWithdrawalProgramEnum.DEPOSIT_ONLY);
     map.put("BANKING_PARTNER", IctWithdrawalProgramEnum.BANKING_PARTNER);
+    map.put("MONEY_TRANSMITTER", IctWithdrawalProgramEnum.MONEY_TRANSMITTER);
     map.put("WITHDRAWAL_ONLY", IctWithdrawalProgramEnum.WITHDRAWAL_ONLY);
     map.put("DIGITAL_PARTNER", IctWithdrawalProgramEnum.DIGITAL_PARTNER);
     return map;
@@ -179,6 +183,7 @@ public class IctWithdrawalProgram {
     BROKER_PARTNER("BROKER_PARTNER"),
     DEPOSIT_ONLY("DEPOSIT_ONLY"),
     BANKING_PARTNER("BANKING_PARTNER"),
+    MONEY_TRANSMITTER("MONEY_TRANSMITTER"),
     WITHDRAWAL_ONLY("WITHDRAWAL_ONLY"),
     DIGITAL_PARTNER("DIGITAL_PARTNER"),
     ;

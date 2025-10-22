@@ -18,6 +18,11 @@ import org.openapitools.jackson.nullable.JsonNullable;
  * <p>Common schedule properties
  */
 public class AchWithdrawalScheduleScheduleProperties {
+  /** The schedule end date if there is a finite number of occurrences */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("end_date")
+  private JsonNullable<? extends AchWithdrawalScheduleEndDate> endDate;
+
   /** The number of occurrences (empty or 0 indicates unlimited occurrences) */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("occurrences")
@@ -51,16 +56,19 @@ public class AchWithdrawalScheduleScheduleProperties {
 
   @JsonCreator
   public AchWithdrawalScheduleScheduleProperties(
+      @JsonProperty("end_date") JsonNullable<? extends AchWithdrawalScheduleEndDate> endDate,
       @JsonProperty("occurrences") Optional<Integer> occurrences,
       @JsonProperty("start_date") JsonNullable<? extends AchWithdrawalScheduleStartDate> startDate,
       @JsonProperty("state") Optional<? extends AchWithdrawalScheduleState> state,
       @JsonProperty("time_unit") Optional<? extends AchWithdrawalScheduleTimeUnit> timeUnit,
       @JsonProperty("unit_multiplier") Optional<Integer> unitMultiplier) {
+    Utils.checkNotNull(endDate, "endDate");
     Utils.checkNotNull(occurrences, "occurrences");
     Utils.checkNotNull(startDate, "startDate");
     Utils.checkNotNull(state, "state");
     Utils.checkNotNull(timeUnit, "timeUnit");
     Utils.checkNotNull(unitMultiplier, "unitMultiplier");
+    this.endDate = endDate;
     this.occurrences = occurrences;
     this.startDate = startDate;
     this.state = state;
@@ -70,11 +78,19 @@ public class AchWithdrawalScheduleScheduleProperties {
 
   public AchWithdrawalScheduleScheduleProperties() {
     this(
+        JsonNullable.undefined(),
         Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty());
+  }
+
+  /** The schedule end date if there is a finite number of occurrences */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<AchWithdrawalScheduleEndDate> endDate() {
+    return (JsonNullable<AchWithdrawalScheduleEndDate>) endDate;
   }
 
   /** The number of occurrences (empty or 0 indicates unlimited occurrences) */
@@ -118,6 +134,21 @@ public class AchWithdrawalScheduleScheduleProperties {
 
   public static Builder builder() {
     return new Builder();
+  }
+
+  /** The schedule end date if there is a finite number of occurrences */
+  public AchWithdrawalScheduleScheduleProperties withEndDate(AchWithdrawalScheduleEndDate endDate) {
+    Utils.checkNotNull(endDate, "endDate");
+    this.endDate = JsonNullable.of(endDate);
+    return this;
+  }
+
+  /** The schedule end date if there is a finite number of occurrences */
+  public AchWithdrawalScheduleScheduleProperties withEndDate(
+      JsonNullable<? extends AchWithdrawalScheduleEndDate> endDate) {
+    Utils.checkNotNull(endDate, "endDate");
+    this.endDate = endDate;
+    return this;
   }
 
   /** The number of occurrences (empty or 0 indicates unlimited occurrences) */
@@ -217,7 +248,8 @@ public class AchWithdrawalScheduleScheduleProperties {
       return false;
     }
     AchWithdrawalScheduleScheduleProperties other = (AchWithdrawalScheduleScheduleProperties) o;
-    return Utils.enhancedDeepEquals(this.occurrences, other.occurrences)
+    return Utils.enhancedDeepEquals(this.endDate, other.endDate)
+        && Utils.enhancedDeepEquals(this.occurrences, other.occurrences)
         && Utils.enhancedDeepEquals(this.startDate, other.startDate)
         && Utils.enhancedDeepEquals(this.state, other.state)
         && Utils.enhancedDeepEquals(this.timeUnit, other.timeUnit)
@@ -226,13 +258,15 @@ public class AchWithdrawalScheduleScheduleProperties {
 
   @Override
   public int hashCode() {
-    return Utils.enhancedHash(occurrences, startDate, state, timeUnit, unitMultiplier);
+    return Utils.enhancedHash(endDate, occurrences, startDate, state, timeUnit, unitMultiplier);
   }
 
   @Override
   public String toString() {
     return Utils.toString(
         AchWithdrawalScheduleScheduleProperties.class,
+        "endDate",
+        endDate,
         "occurrences",
         occurrences,
         "startDate",
@@ -248,6 +282,8 @@ public class AchWithdrawalScheduleScheduleProperties {
   @SuppressWarnings("UnusedReturnValue")
   public static final class Builder {
 
+    private JsonNullable<? extends AchWithdrawalScheduleEndDate> endDate = JsonNullable.undefined();
+
     private Optional<Integer> occurrences = Optional.empty();
 
     private JsonNullable<? extends AchWithdrawalScheduleStartDate> startDate =
@@ -261,6 +297,20 @@ public class AchWithdrawalScheduleScheduleProperties {
 
     private Builder() {
       // force use of static builder() method
+    }
+
+    /** The schedule end date if there is a finite number of occurrences */
+    public Builder endDate(AchWithdrawalScheduleEndDate endDate) {
+      Utils.checkNotNull(endDate, "endDate");
+      this.endDate = JsonNullable.of(endDate);
+      return this;
+    }
+
+    /** The schedule end date if there is a finite number of occurrences */
+    public Builder endDate(JsonNullable<? extends AchWithdrawalScheduleEndDate> endDate) {
+      Utils.checkNotNull(endDate, "endDate");
+      this.endDate = endDate;
+      return this;
     }
 
     /** The number of occurrences (empty or 0 indicates unlimited occurrences) */
@@ -348,7 +398,7 @@ public class AchWithdrawalScheduleScheduleProperties {
     public AchWithdrawalScheduleScheduleProperties build() {
 
       return new AchWithdrawalScheduleScheduleProperties(
-          occurrences, startDate, state, timeUnit, unitMultiplier);
+          endDate, occurrences, startDate, state, timeUnit, unitMultiplier);
     }
   }
 }

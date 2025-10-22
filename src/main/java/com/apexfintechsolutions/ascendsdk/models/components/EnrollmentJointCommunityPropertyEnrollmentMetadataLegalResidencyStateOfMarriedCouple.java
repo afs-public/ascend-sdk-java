@@ -275,7 +275,8 @@ public class EnrollmentJointCommunityPropertyEnrollmentMetadataLegalResidencySta
 
   // return an array just like an enum
   public static EnrollmentJointCommunityPropertyEnrollmentMetadataLegalResidencyStateOfMarriedCouple
-      [] values() {
+      []
+      values() {
     synchronized (
         EnrollmentJointCommunityPropertyEnrollmentMetadataLegalResidencyStateOfMarriedCouple
             .class) {

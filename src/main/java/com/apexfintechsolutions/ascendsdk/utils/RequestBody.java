@@ -40,8 +40,11 @@ public final class RequestBody {
 
   public static SerializedBody serialize(
       Object request, String requestField, String serializationMethod, boolean nullable)
-      throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException,
-          UnsupportedOperationException, IOException {
+      throws NoSuchFieldException,
+          IllegalArgumentException,
+          IllegalAccessException,
+          UnsupportedOperationException,
+          IOException {
     if (request == null) {
       return null;
     }
@@ -84,7 +87,9 @@ public final class RequestBody {
 
   private static SerializedBody serializeContentType(
       String fieldName, String contentType, Object value)
-      throws IllegalArgumentException, IllegalAccessException, UnsupportedOperationException,
+      throws IllegalArgumentException,
+          IllegalAccessException,
+          UnsupportedOperationException,
           IOException {
     Pattern jsonPattern = Pattern.compile("(application|text)\\/.*?\\+*json.*");
     Pattern multipartPattern = Pattern.compile("multipart\\/.*");
@@ -124,7 +129,9 @@ public final class RequestBody {
   }
 
   private static SerializedBody serializeMultipart(Object value)
-      throws IllegalArgumentException, IllegalAccessException, UnsupportedOperationException,
+      throws IllegalArgumentException,
+          IllegalAccessException,
+          UnsupportedOperationException,
           IOException {
     Multipart.Builder builder = Multipart.builder();
 

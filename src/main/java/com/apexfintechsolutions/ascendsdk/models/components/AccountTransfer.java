@@ -69,6 +69,14 @@ public class AccountTransfer {
   @JsonProperty("fair_market_value_date")
   private JsonNullable<? extends FairMarketValueDate> fairMarketValueDate;
 
+  /**
+   * Indicates whether the account transfer constitutes a gift for tax reporting purposes. Used by
+   * cost basis and tax systems to ensure proper tax treatment and reporting compliance.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("gift_transfer")
+  private Optional<Boolean> giftTransfer;
+
   /** Contra party institution for the account transfer */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("institution")
@@ -92,6 +100,7 @@ public class AccountTransfer {
       @JsonProperty("fair_market_value") JsonNullable<? extends FairMarketValue> fairMarketValue,
       @JsonProperty("fair_market_value_date")
           JsonNullable<? extends FairMarketValueDate> fairMarketValueDate,
+      @JsonProperty("gift_transfer") Optional<Boolean> giftTransfer,
       @JsonProperty("institution") Optional<String> institution,
       @JsonProperty("method") Optional<? extends Method> method) {
     Utils.checkNotNull(acatsAssetSequenceNumber, "acatsAssetSequenceNumber");
@@ -103,6 +112,7 @@ public class AccountTransfer {
     Utils.checkNotNull(contraPartyId, "contraPartyId");
     Utils.checkNotNull(fairMarketValue, "fairMarketValue");
     Utils.checkNotNull(fairMarketValueDate, "fairMarketValueDate");
+    Utils.checkNotNull(giftTransfer, "giftTransfer");
     Utils.checkNotNull(institution, "institution");
     Utils.checkNotNull(method, "method");
     this.acatsAssetSequenceNumber = acatsAssetSequenceNumber;
@@ -114,6 +124,7 @@ public class AccountTransfer {
     this.contraPartyId = contraPartyId;
     this.fairMarketValue = fairMarketValue;
     this.fairMarketValueDate = fairMarketValueDate;
+    this.giftTransfer = giftTransfer;
     this.institution = institution;
     this.method = method;
   }
@@ -129,6 +140,7 @@ public class AccountTransfer {
         Optional.empty(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
+        Optional.empty(),
         Optional.empty(),
         Optional.empty());
   }
@@ -194,6 +206,15 @@ public class AccountTransfer {
   @JsonIgnore
   public JsonNullable<FairMarketValueDate> fairMarketValueDate() {
     return (JsonNullable<FairMarketValueDate>) fairMarketValueDate;
+  }
+
+  /**
+   * Indicates whether the account transfer constitutes a gift for tax reporting purposes. Used by
+   * cost basis and tax systems to ensure proper tax treatment and reporting compliance.
+   */
+  @JsonIgnore
+  public Optional<Boolean> giftTransfer() {
+    return giftTransfer;
   }
 
   /** Contra party institution for the account transfer */
@@ -352,6 +373,26 @@ public class AccountTransfer {
     return this;
   }
 
+  /**
+   * Indicates whether the account transfer constitutes a gift for tax reporting purposes. Used by
+   * cost basis and tax systems to ensure proper tax treatment and reporting compliance.
+   */
+  public AccountTransfer withGiftTransfer(boolean giftTransfer) {
+    Utils.checkNotNull(giftTransfer, "giftTransfer");
+    this.giftTransfer = Optional.ofNullable(giftTransfer);
+    return this;
+  }
+
+  /**
+   * Indicates whether the account transfer constitutes a gift for tax reporting purposes. Used by
+   * cost basis and tax systems to ensure proper tax treatment and reporting compliance.
+   */
+  public AccountTransfer withGiftTransfer(Optional<Boolean> giftTransfer) {
+    Utils.checkNotNull(giftTransfer, "giftTransfer");
+    this.giftTransfer = giftTransfer;
+    return this;
+  }
+
   /** Contra party institution for the account transfer */
   public AccountTransfer withInstitution(String institution) {
     Utils.checkNotNull(institution, "institution");
@@ -398,6 +439,7 @@ public class AccountTransfer {
         && Utils.enhancedDeepEquals(this.contraPartyId, other.contraPartyId)
         && Utils.enhancedDeepEquals(this.fairMarketValue, other.fairMarketValue)
         && Utils.enhancedDeepEquals(this.fairMarketValueDate, other.fairMarketValueDate)
+        && Utils.enhancedDeepEquals(this.giftTransfer, other.giftTransfer)
         && Utils.enhancedDeepEquals(this.institution, other.institution)
         && Utils.enhancedDeepEquals(this.method, other.method);
   }
@@ -414,6 +456,7 @@ public class AccountTransfer {
         contraPartyId,
         fairMarketValue,
         fairMarketValueDate,
+        giftTransfer,
         institution,
         method);
   }
@@ -440,6 +483,8 @@ public class AccountTransfer {
         fairMarketValue,
         "fairMarketValueDate",
         fairMarketValueDate,
+        "giftTransfer",
+        giftTransfer,
         "institution",
         institution,
         "method",
@@ -467,6 +512,8 @@ public class AccountTransfer {
 
     private JsonNullable<? extends FairMarketValueDate> fairMarketValueDate =
         JsonNullable.undefined();
+
+    private Optional<Boolean> giftTransfer = Optional.empty();
 
     private Optional<String> institution = Optional.empty();
 
@@ -616,6 +663,26 @@ public class AccountTransfer {
       return this;
     }
 
+    /**
+     * Indicates whether the account transfer constitutes a gift for tax reporting purposes. Used by
+     * cost basis and tax systems to ensure proper tax treatment and reporting compliance.
+     */
+    public Builder giftTransfer(boolean giftTransfer) {
+      Utils.checkNotNull(giftTransfer, "giftTransfer");
+      this.giftTransfer = Optional.ofNullable(giftTransfer);
+      return this;
+    }
+
+    /**
+     * Indicates whether the account transfer constitutes a gift for tax reporting purposes. Used by
+     * cost basis and tax systems to ensure proper tax treatment and reporting compliance.
+     */
+    public Builder giftTransfer(Optional<Boolean> giftTransfer) {
+      Utils.checkNotNull(giftTransfer, "giftTransfer");
+      this.giftTransfer = giftTransfer;
+      return this;
+    }
+
     /** Contra party institution for the account transfer */
     public Builder institution(String institution) {
       Utils.checkNotNull(institution, "institution");
@@ -656,6 +723,7 @@ public class AccountTransfer {
           contraPartyId,
           fairMarketValue,
           fairMarketValueDate,
+          giftTransfer,
           institution,
           method);
     }

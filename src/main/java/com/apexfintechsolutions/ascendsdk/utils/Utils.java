@@ -301,8 +301,11 @@ public final class Utils {
 
   public static SerializedBody serializeRequestBody(
       Object request, String requestField, String serializationMethod, boolean nullable)
-      throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException,
-          UnsupportedOperationException, IOException {
+      throws NoSuchFieldException,
+          IllegalArgumentException,
+          IllegalAccessException,
+          UnsupportedOperationException,
+          IOException {
     return RequestBody.serialize(request, requestField, serializationMethod, nullable);
   }
 

@@ -89,6 +89,8 @@ public class SpecialReportingInstructions {
       new SpecialReportingInstructions("SUPPRESS_TRACE_REPORTING");
   public static final SpecialReportingInstructions WHEN_DISTRIBUTED =
       new SpecialReportingInstructions("WHEN_DISTRIBUTED");
+  public static final SpecialReportingInstructions ROUND_UP =
+      new SpecialReportingInstructions("ROUND_UP");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -182,6 +184,7 @@ public class SpecialReportingInstructions {
     map.put("THIRD_MARKET", THIRD_MARKET);
     map.put("SUPPRESS_TRACE_REPORTING", SUPPRESS_TRACE_REPORTING);
     map.put("WHEN_DISTRIBUTED", WHEN_DISTRIBUTED);
+    map.put("ROUND_UP", ROUND_UP);
     return map;
   }
 
@@ -213,6 +216,7 @@ public class SpecialReportingInstructions {
     map.put("THIRD_MARKET", SpecialReportingInstructionsEnum.THIRD_MARKET);
     map.put("SUPPRESS_TRACE_REPORTING", SpecialReportingInstructionsEnum.SUPPRESS_TRACE_REPORTING);
     map.put("WHEN_DISTRIBUTED", SpecialReportingInstructionsEnum.WHEN_DISTRIBUTED);
+    map.put("ROUND_UP", SpecialReportingInstructionsEnum.ROUND_UP);
     return map;
   }
 
@@ -272,6 +276,7 @@ public class SpecialReportingInstructions {
     THIRD_MARKET("THIRD_MARKET"),
     SUPPRESS_TRACE_REPORTING("SUPPRESS_TRACE_REPORTING"),
     WHEN_DISTRIBUTED("WHEN_DISTRIBUTED"),
+    ROUND_UP("ROUND_UP"),
     ;
 
     private final String value;

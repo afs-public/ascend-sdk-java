@@ -48,6 +48,10 @@ public class TransferScheduleSummaryMechanism {
 
   public static final TransferScheduleSummaryMechanism ACH =
       new TransferScheduleSummaryMechanism("ACH");
+  public static final TransferScheduleSummaryMechanism CASH_JOURNAL =
+      new TransferScheduleSummaryMechanism("CASH_JOURNAL");
+  public static final TransferScheduleSummaryMechanism CHECK =
+      new TransferScheduleSummaryMechanism("CHECK");
   public static final TransferScheduleSummaryMechanism WIRE =
       new TransferScheduleSummaryMechanism("WIRE");
 
@@ -119,6 +123,8 @@ public class TransferScheduleSummaryMechanism {
   private static final Map<String, TransferScheduleSummaryMechanism> createValuesMap() {
     Map<String, TransferScheduleSummaryMechanism> map = new LinkedHashMap<>();
     map.put("ACH", ACH);
+    map.put("CASH_JOURNAL", CASH_JOURNAL);
+    map.put("CHECK", CHECK);
     map.put("WIRE", WIRE);
     return map;
   }
@@ -126,6 +132,8 @@ public class TransferScheduleSummaryMechanism {
   private static final Map<String, TransferScheduleSummaryMechanismEnum> createEnumsMap() {
     Map<String, TransferScheduleSummaryMechanismEnum> map = new HashMap<>();
     map.put("ACH", TransferScheduleSummaryMechanismEnum.ACH);
+    map.put("CASH_JOURNAL", TransferScheduleSummaryMechanismEnum.CASH_JOURNAL);
+    map.put("CHECK", TransferScheduleSummaryMechanismEnum.CHECK);
     map.put("WIRE", TransferScheduleSummaryMechanismEnum.WIRE);
     return map;
   }
@@ -164,6 +172,8 @@ public class TransferScheduleSummaryMechanism {
 
   public enum TransferScheduleSummaryMechanismEnum {
     ACH("ACH"),
+    CASH_JOURNAL("CASH_JOURNAL"),
+    CHECK("CHECK"),
     WIRE("WIRE"),
     ;
 

@@ -14,7 +14,8 @@ import java.util.Optional;
 /**
  * PendingWithdrawal
  *
- * <p>Quantity of currency being reserved for withdrawal. should not be used by non-currency assets
+ * <p>Represents the amount of cash that has been requested for withdrawal but has not posted to the
+ * Ledger
  */
 public class PendingWithdrawal {
   /**

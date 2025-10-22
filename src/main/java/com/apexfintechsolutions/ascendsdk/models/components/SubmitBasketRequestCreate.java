@@ -6,7 +6,11 @@ package com.apexfintechsolutions.ascendsdk.models.components;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.OffsetDateTime;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * SubmitBasketRequestCreate
@@ -14,14 +18,40 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * <p>The message to submit a basket for execution in the market
  */
 public class SubmitBasketRequestCreate {
+  /**
+   * Time the basket submission request was sent by the client. This is a required field for clients
+   * that we report on behalf of, and it will be validated accordingly.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_basket_submit_time")
+  private JsonNullable<OffsetDateTime> clientBasketSubmitTime;
+
   /** Format: correspondents/{correspondent}/baskets/{basket} */
   @JsonProperty("name")
   private String name;
 
   @JsonCreator
-  public SubmitBasketRequestCreate(@JsonProperty("name") String name) {
+  public SubmitBasketRequestCreate(
+      @JsonProperty("client_basket_submit_time")
+          JsonNullable<OffsetDateTime> clientBasketSubmitTime,
+      @JsonProperty("name") String name) {
+    Utils.checkNotNull(clientBasketSubmitTime, "clientBasketSubmitTime");
     Utils.checkNotNull(name, "name");
+    this.clientBasketSubmitTime = clientBasketSubmitTime;
     this.name = name;
+  }
+
+  public SubmitBasketRequestCreate(String name) {
+    this(JsonNullable.undefined(), name);
+  }
+
+  /**
+   * Time the basket submission request was sent by the client. This is a required field for clients
+   * that we report on behalf of, and it will be validated accordingly.
+   */
+  @JsonIgnore
+  public JsonNullable<OffsetDateTime> clientBasketSubmitTime() {
+    return clientBasketSubmitTime;
   }
 
   /** Format: correspondents/{correspondent}/baskets/{basket} */
@@ -32,6 +62,28 @@ public class SubmitBasketRequestCreate {
 
   public static Builder builder() {
     return new Builder();
+  }
+
+  /**
+   * Time the basket submission request was sent by the client. This is a required field for clients
+   * that we report on behalf of, and it will be validated accordingly.
+   */
+  public SubmitBasketRequestCreate withClientBasketSubmitTime(
+      OffsetDateTime clientBasketSubmitTime) {
+    Utils.checkNotNull(clientBasketSubmitTime, "clientBasketSubmitTime");
+    this.clientBasketSubmitTime = JsonNullable.of(clientBasketSubmitTime);
+    return this;
+  }
+
+  /**
+   * Time the basket submission request was sent by the client. This is a required field for clients
+   * that we report on behalf of, and it will be validated accordingly.
+   */
+  public SubmitBasketRequestCreate withClientBasketSubmitTime(
+      JsonNullable<OffsetDateTime> clientBasketSubmitTime) {
+    Utils.checkNotNull(clientBasketSubmitTime, "clientBasketSubmitTime");
+    this.clientBasketSubmitTime = clientBasketSubmitTime;
+    return this;
   }
 
   /** Format: correspondents/{correspondent}/baskets/{basket} */
@@ -50,26 +102,54 @@ public class SubmitBasketRequestCreate {
       return false;
     }
     SubmitBasketRequestCreate other = (SubmitBasketRequestCreate) o;
-    return Utils.enhancedDeepEquals(this.name, other.name);
+    return Utils.enhancedDeepEquals(this.clientBasketSubmitTime, other.clientBasketSubmitTime)
+        && Utils.enhancedDeepEquals(this.name, other.name);
   }
 
   @Override
   public int hashCode() {
-    return Utils.enhancedHash(name);
+    return Utils.enhancedHash(clientBasketSubmitTime, name);
   }
 
   @Override
   public String toString() {
-    return Utils.toString(SubmitBasketRequestCreate.class, "name", name);
+    return Utils.toString(
+        SubmitBasketRequestCreate.class,
+        "clientBasketSubmitTime",
+        clientBasketSubmitTime,
+        "name",
+        name);
   }
 
   @SuppressWarnings("UnusedReturnValue")
   public static final class Builder {
 
+    private JsonNullable<OffsetDateTime> clientBasketSubmitTime = JsonNullable.undefined();
+
     private String name;
 
     private Builder() {
       // force use of static builder() method
+    }
+
+    /**
+     * Time the basket submission request was sent by the client. This is a required field for
+     * clients that we report on behalf of, and it will be validated accordingly.
+     */
+    public Builder clientBasketSubmitTime(OffsetDateTime clientBasketSubmitTime) {
+      Utils.checkNotNull(clientBasketSubmitTime, "clientBasketSubmitTime");
+      this.clientBasketSubmitTime = JsonNullable.of(clientBasketSubmitTime);
+      return this;
+    }
+
+    /**
+     * Time the basket submission request was sent by the client. This is a required field for
+     * clients that we report on behalf of, and it will be validated accordingly.
+     */
+    public Builder clientBasketSubmitTime(JsonNullable<OffsetDateTime> clientBasketSubmitTime) {
+      Utils.checkNotNull(clientBasketSubmitTime, "clientBasketSubmitTime");
+      this.clientBasketSubmitTime = clientBasketSubmitTime;
+      return this;
     }
 
     /** Format: correspondents/{correspondent}/baskets/{basket} */
@@ -81,7 +161,7 @@ public class SubmitBasketRequestCreate {
 
     public SubmitBasketRequestCreate build() {
 
-      return new SubmitBasketRequestCreate(name);
+      return new SubmitBasketRequestCreate(clientBasketSubmitTime, name);
     }
   }
 }
