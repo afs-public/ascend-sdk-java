@@ -26,7 +26,10 @@ public class AchWithdrawalSchedulesCancelAchWithdrawalScheduleResponse implement
   /** OK */
   private Optional<? extends AchWithdrawalSchedule> achWithdrawalSchedule;
 
-  /** INVALID_ARGUMENT: The request has an invalid argument. */
+  /**
+   * INVALID_ARGUMENT: The request has an invalid argument. FAILED_PRECONDITION: The schedule is in
+   * a state that doesn't allow cancellation.
+   */
   private Optional<? extends Status> status;
 
   @JsonCreator
@@ -78,7 +81,10 @@ public class AchWithdrawalSchedulesCancelAchWithdrawalScheduleResponse implement
     return (Optional<AchWithdrawalSchedule>) achWithdrawalSchedule;
   }
 
-  /** INVALID_ARGUMENT: The request has an invalid argument. */
+  /**
+   * INVALID_ARGUMENT: The request has an invalid argument. FAILED_PRECONDITION: The schedule is in
+   * a state that doesn't allow cancellation.
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<Status> status() {
@@ -128,14 +134,20 @@ public class AchWithdrawalSchedulesCancelAchWithdrawalScheduleResponse implement
     return this;
   }
 
-  /** INVALID_ARGUMENT: The request has an invalid argument. */
+  /**
+   * INVALID_ARGUMENT: The request has an invalid argument. FAILED_PRECONDITION: The schedule is in
+   * a state that doesn't allow cancellation.
+   */
   public AchWithdrawalSchedulesCancelAchWithdrawalScheduleResponse withStatus(Status status) {
     Utils.checkNotNull(status, "status");
     this.status = Optional.ofNullable(status);
     return this;
   }
 
-  /** INVALID_ARGUMENT: The request has an invalid argument. */
+  /**
+   * INVALID_ARGUMENT: The request has an invalid argument. FAILED_PRECONDITION: The schedule is in
+   * a state that doesn't allow cancellation.
+   */
   public AchWithdrawalSchedulesCancelAchWithdrawalScheduleResponse withStatus(
       Optional<? extends Status> status) {
     Utils.checkNotNull(status, "status");
@@ -234,14 +246,20 @@ public class AchWithdrawalSchedulesCancelAchWithdrawalScheduleResponse implement
       return this;
     }
 
-    /** INVALID_ARGUMENT: The request has an invalid argument. */
+    /**
+     * INVALID_ARGUMENT: The request has an invalid argument. FAILED_PRECONDITION: The schedule is
+     * in a state that doesn't allow cancellation.
+     */
     public Builder status(Status status) {
       Utils.checkNotNull(status, "status");
       this.status = Optional.ofNullable(status);
       return this;
     }
 
-    /** INVALID_ARGUMENT: The request has an invalid argument. */
+    /**
+     * INVALID_ARGUMENT: The request has an invalid argument. FAILED_PRECONDITION: The schedule is
+     * in a state that doesn't allow cancellation.
+     */
     public Builder status(Optional<? extends Status> status) {
       Utils.checkNotNull(status, "status");
       this.status = status;

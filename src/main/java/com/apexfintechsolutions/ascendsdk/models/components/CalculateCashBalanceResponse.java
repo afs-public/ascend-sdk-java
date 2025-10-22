@@ -161,6 +161,23 @@ public class CalculateCashBalanceResponse {
   private Optional<? extends List<CalculateCashBalanceResponseTransferSummary>> pendingWithdrawals;
 
   /**
+   * The account's total settled balance in USD. Net balance of settled cash and settled cash
+   * equivalents This value can be positive or negative.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("settled_cash_available_to_withdraw")
+  private JsonNullable<? extends SettledCashAvailableToWithdraw> settledCashAvailableToWithdraw;
+
+  /**
+   * The account's total trade balance in USD. Real Time net balance of cash and cash equivalents in
+   * the investor account, inclusive of current day activity. This value can be positive or
+   * negative.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("trade_cash_available_to_withdraw")
+  private JsonNullable<? extends TradeCashAvailableToWithdraw> tradeCashAvailableToWithdraw;
+
+  /**
    * The account's unadjusted available cash to withdraw in USD. It is calculated based on the
    * `open_balance_amount` and account activity. This value can be negative.
    */
@@ -221,6 +238,10 @@ public class CalculateCashBalanceResponse {
           JsonNullable<? extends PendingDebitInterestAmount> pendingDebitInterestAmount,
       @JsonProperty("pending_withdrawals")
           Optional<? extends List<CalculateCashBalanceResponseTransferSummary>> pendingWithdrawals,
+      @JsonProperty("settled_cash_available_to_withdraw")
+          JsonNullable<? extends SettledCashAvailableToWithdraw> settledCashAvailableToWithdraw,
+      @JsonProperty("trade_cash_available_to_withdraw")
+          JsonNullable<? extends TradeCashAvailableToWithdraw> tradeCashAvailableToWithdraw,
       @JsonProperty("unadjusted_available_cash_to_withdraw_amount")
           JsonNullable<? extends UnadjustedAvailableCashToWithdrawAmount>
               unadjustedAvailableCashToWithdrawAmount,
@@ -243,6 +264,8 @@ public class CalculateCashBalanceResponse {
     Utils.checkNotNull(pendingDebitDividendsAmount, "pendingDebitDividendsAmount");
     Utils.checkNotNull(pendingDebitInterestAmount, "pendingDebitInterestAmount");
     Utils.checkNotNull(pendingWithdrawals, "pendingWithdrawals");
+    Utils.checkNotNull(settledCashAvailableToWithdraw, "settledCashAvailableToWithdraw");
+    Utils.checkNotNull(tradeCashAvailableToWithdraw, "tradeCashAvailableToWithdraw");
     Utils.checkNotNull(
         unadjustedAvailableCashToWithdrawAmount, "unadjustedAvailableCashToWithdrawAmount");
     Utils.checkNotNull(withheldDepositThresholdAmount, "withheldDepositThresholdAmount");
@@ -262,6 +285,8 @@ public class CalculateCashBalanceResponse {
     this.pendingDebitDividendsAmount = pendingDebitDividendsAmount;
     this.pendingDebitInterestAmount = pendingDebitInterestAmount;
     this.pendingWithdrawals = pendingWithdrawals;
+    this.settledCashAvailableToWithdraw = settledCashAvailableToWithdraw;
+    this.tradeCashAvailableToWithdraw = tradeCashAvailableToWithdraw;
     this.unadjustedAvailableCashToWithdrawAmount = unadjustedAvailableCashToWithdrawAmount;
     this.withheldDepositThresholdAmount = withheldDepositThresholdAmount;
     this.withheldDeposits = withheldDeposits;
@@ -284,6 +309,8 @@ public class CalculateCashBalanceResponse {
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty());
@@ -456,6 +483,27 @@ public class CalculateCashBalanceResponse {
   @JsonIgnore
   public Optional<List<CalculateCashBalanceResponseTransferSummary>> pendingWithdrawals() {
     return (Optional<List<CalculateCashBalanceResponseTransferSummary>>) pendingWithdrawals;
+  }
+
+  /**
+   * The account's total settled balance in USD. Net balance of settled cash and settled cash
+   * equivalents This value can be positive or negative.
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<SettledCashAvailableToWithdraw> settledCashAvailableToWithdraw() {
+    return (JsonNullable<SettledCashAvailableToWithdraw>) settledCashAvailableToWithdraw;
+  }
+
+  /**
+   * The account's total trade balance in USD. Real Time net balance of cash and cash equivalents in
+   * the investor account, inclusive of current day activity. This value can be positive or
+   * negative.
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<TradeCashAvailableToWithdraw> tradeCashAvailableToWithdraw() {
+    return (JsonNullable<TradeCashAvailableToWithdraw>) tradeCashAvailableToWithdraw;
   }
 
   /**
@@ -869,6 +917,52 @@ public class CalculateCashBalanceResponse {
   }
 
   /**
+   * The account's total settled balance in USD. Net balance of settled cash and settled cash
+   * equivalents This value can be positive or negative.
+   */
+  public CalculateCashBalanceResponse withSettledCashAvailableToWithdraw(
+      SettledCashAvailableToWithdraw settledCashAvailableToWithdraw) {
+    Utils.checkNotNull(settledCashAvailableToWithdraw, "settledCashAvailableToWithdraw");
+    this.settledCashAvailableToWithdraw = JsonNullable.of(settledCashAvailableToWithdraw);
+    return this;
+  }
+
+  /**
+   * The account's total settled balance in USD. Net balance of settled cash and settled cash
+   * equivalents This value can be positive or negative.
+   */
+  public CalculateCashBalanceResponse withSettledCashAvailableToWithdraw(
+      JsonNullable<? extends SettledCashAvailableToWithdraw> settledCashAvailableToWithdraw) {
+    Utils.checkNotNull(settledCashAvailableToWithdraw, "settledCashAvailableToWithdraw");
+    this.settledCashAvailableToWithdraw = settledCashAvailableToWithdraw;
+    return this;
+  }
+
+  /**
+   * The account's total trade balance in USD. Real Time net balance of cash and cash equivalents in
+   * the investor account, inclusive of current day activity. This value can be positive or
+   * negative.
+   */
+  public CalculateCashBalanceResponse withTradeCashAvailableToWithdraw(
+      TradeCashAvailableToWithdraw tradeCashAvailableToWithdraw) {
+    Utils.checkNotNull(tradeCashAvailableToWithdraw, "tradeCashAvailableToWithdraw");
+    this.tradeCashAvailableToWithdraw = JsonNullable.of(tradeCashAvailableToWithdraw);
+    return this;
+  }
+
+  /**
+   * The account's total trade balance in USD. Real Time net balance of cash and cash equivalents in
+   * the investor account, inclusive of current day activity. This value can be positive or
+   * negative.
+   */
+  public CalculateCashBalanceResponse withTradeCashAvailableToWithdraw(
+      JsonNullable<? extends TradeCashAvailableToWithdraw> tradeCashAvailableToWithdraw) {
+    Utils.checkNotNull(tradeCashAvailableToWithdraw, "tradeCashAvailableToWithdraw");
+    this.tradeCashAvailableToWithdraw = tradeCashAvailableToWithdraw;
+    return this;
+  }
+
+  /**
    * The account's unadjusted available cash to withdraw in USD. It is calculated based on the
    * `open_balance_amount` and account activity. This value can be negative.
    */
@@ -978,6 +1072,10 @@ public class CalculateCashBalanceResponse {
             this.pendingDebitInterestAmount, other.pendingDebitInterestAmount)
         && Utils.enhancedDeepEquals(this.pendingWithdrawals, other.pendingWithdrawals)
         && Utils.enhancedDeepEquals(
+            this.settledCashAvailableToWithdraw, other.settledCashAvailableToWithdraw)
+        && Utils.enhancedDeepEquals(
+            this.tradeCashAvailableToWithdraw, other.tradeCashAvailableToWithdraw)
+        && Utils.enhancedDeepEquals(
             this.unadjustedAvailableCashToWithdrawAmount,
             other.unadjustedAvailableCashToWithdrawAmount)
         && Utils.enhancedDeepEquals(
@@ -1003,6 +1101,8 @@ public class CalculateCashBalanceResponse {
         pendingDebitDividendsAmount,
         pendingDebitInterestAmount,
         pendingWithdrawals,
+        settledCashAvailableToWithdraw,
+        tradeCashAvailableToWithdraw,
         unadjustedAvailableCashToWithdrawAmount,
         withheldDepositThresholdAmount,
         withheldDeposits);
@@ -1042,6 +1142,10 @@ public class CalculateCashBalanceResponse {
         pendingDebitInterestAmount,
         "pendingWithdrawals",
         pendingWithdrawals,
+        "settledCashAvailableToWithdraw",
+        settledCashAvailableToWithdraw,
+        "tradeCashAvailableToWithdraw",
+        tradeCashAvailableToWithdraw,
         "unadjustedAvailableCashToWithdrawAmount",
         unadjustedAvailableCashToWithdrawAmount,
         "withheldDepositThresholdAmount",
@@ -1094,6 +1198,12 @@ public class CalculateCashBalanceResponse {
 
     private Optional<? extends List<CalculateCashBalanceResponseTransferSummary>>
         pendingWithdrawals = Optional.empty();
+
+    private JsonNullable<? extends SettledCashAvailableToWithdraw> settledCashAvailableToWithdraw =
+        JsonNullable.undefined();
+
+    private JsonNullable<? extends TradeCashAvailableToWithdraw> tradeCashAvailableToWithdraw =
+        JsonNullable.undefined();
 
     private JsonNullable<? extends UnadjustedAvailableCashToWithdrawAmount>
         unadjustedAvailableCashToWithdrawAmount = JsonNullable.undefined();
@@ -1473,6 +1583,52 @@ public class CalculateCashBalanceResponse {
     }
 
     /**
+     * The account's total settled balance in USD. Net balance of settled cash and settled cash
+     * equivalents This value can be positive or negative.
+     */
+    public Builder settledCashAvailableToWithdraw(
+        SettledCashAvailableToWithdraw settledCashAvailableToWithdraw) {
+      Utils.checkNotNull(settledCashAvailableToWithdraw, "settledCashAvailableToWithdraw");
+      this.settledCashAvailableToWithdraw = JsonNullable.of(settledCashAvailableToWithdraw);
+      return this;
+    }
+
+    /**
+     * The account's total settled balance in USD. Net balance of settled cash and settled cash
+     * equivalents This value can be positive or negative.
+     */
+    public Builder settledCashAvailableToWithdraw(
+        JsonNullable<? extends SettledCashAvailableToWithdraw> settledCashAvailableToWithdraw) {
+      Utils.checkNotNull(settledCashAvailableToWithdraw, "settledCashAvailableToWithdraw");
+      this.settledCashAvailableToWithdraw = settledCashAvailableToWithdraw;
+      return this;
+    }
+
+    /**
+     * The account's total trade balance in USD. Real Time net balance of cash and cash equivalents
+     * in the investor account, inclusive of current day activity. This value can be positive or
+     * negative.
+     */
+    public Builder tradeCashAvailableToWithdraw(
+        TradeCashAvailableToWithdraw tradeCashAvailableToWithdraw) {
+      Utils.checkNotNull(tradeCashAvailableToWithdraw, "tradeCashAvailableToWithdraw");
+      this.tradeCashAvailableToWithdraw = JsonNullable.of(tradeCashAvailableToWithdraw);
+      return this;
+    }
+
+    /**
+     * The account's total trade balance in USD. Real Time net balance of cash and cash equivalents
+     * in the investor account, inclusive of current day activity. This value can be positive or
+     * negative.
+     */
+    public Builder tradeCashAvailableToWithdraw(
+        JsonNullable<? extends TradeCashAvailableToWithdraw> tradeCashAvailableToWithdraw) {
+      Utils.checkNotNull(tradeCashAvailableToWithdraw, "tradeCashAvailableToWithdraw");
+      this.tradeCashAvailableToWithdraw = tradeCashAvailableToWithdraw;
+      return this;
+    }
+
+    /**
      * The account's unadjusted available cash to withdraw in USD. It is calculated based on the
      * `open_balance_amount` and account activity. This value can be negative.
      */
@@ -1570,6 +1726,8 @@ public class CalculateCashBalanceResponse {
           pendingDebitDividendsAmount,
           pendingDebitInterestAmount,
           pendingWithdrawals,
+          settledCashAvailableToWithdraw,
+          tradeCashAvailableToWithdraw,
           unadjustedAvailableCashToWithdrawAmount,
           withheldDepositThresholdAmount,
           withheldDeposits);

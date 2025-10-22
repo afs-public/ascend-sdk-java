@@ -14,7 +14,8 @@ import java.util.Optional;
 /**
  * PositionFpsl
  *
- * <p>Quantity of asset in use by the FPSL program. Should not be used by currency assets
+ * <p>Represents the amount of an asset that has been loaned out via the fully paid securities
+ * lending program
  */
 public class PositionFpsl {
   /**

@@ -196,8 +196,8 @@ public class OrderCreate {
   private Optional<? extends StopPriceCreate> stopPrice;
 
   /**
-   * Must be the value "DAY". Regulatory requirements dictate that the system capture the intended
-   * time_in_force, which is why this a mandatory field.
+   * Regulatory requirements dictate that the system capture the intended time_in_force, which is
+   * why this a mandatory field.
    */
   @JsonProperty("time_in_force")
   private TimeInForce timeInForce;
@@ -558,8 +558,8 @@ public class OrderCreate {
   }
 
   /**
-   * Must be the value "DAY". Regulatory requirements dictate that the system capture the intended
-   * time_in_force, which is why this a mandatory field.
+   * Regulatory requirements dictate that the system capture the intended time_in_force, which is
+   * why this a mandatory field.
    */
   @JsonIgnore
   public TimeInForce timeInForce() {
@@ -980,8 +980,8 @@ public class OrderCreate {
   }
 
   /**
-   * Must be the value "DAY". Regulatory requirements dictate that the system capture the intended
-   * time_in_force, which is why this a mandatory field.
+   * Regulatory requirements dictate that the system capture the intended time_in_force, which is
+   * why this a mandatory field.
    */
   public OrderCreate withTimeInForce(TimeInForce timeInForce) {
     Utils.checkNotNull(timeInForce, "timeInForce");
@@ -1617,8 +1617,8 @@ public class OrderCreate {
     }
 
     /**
-     * Must be the value "DAY". Regulatory requirements dictate that the system capture the intended
-     * time_in_force, which is why this a mandatory field.
+     * Regulatory requirements dictate that the system capture the intended time_in_force, which is
+     * why this a mandatory field.
      */
     public Builder timeInForce(TimeInForce timeInForce) {
       Utils.checkNotNull(timeInForce, "timeInForce");

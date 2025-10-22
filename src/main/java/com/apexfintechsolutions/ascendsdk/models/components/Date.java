@@ -14,7 +14,7 @@ import java.util.Optional;
 /**
  * Date
  *
- * <p>The date for which the positions were calculated
+ * <p>The date for which positions were calculated
  */
 public class Date {
   /**

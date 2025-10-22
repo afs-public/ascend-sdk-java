@@ -18,6 +18,11 @@ import org.openapitools.jackson.nullable.JsonNullable;
  * <p>Common schedule properties
  */
 public class WireWithdrawalScheduleScheduleProperties {
+  /** The schedule end date if there is a finite number of occurrences */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("end_date")
+  private JsonNullable<? extends WireWithdrawalScheduleEndDate> endDate;
+
   /** The number of occurrences (empty or 0 indicates unlimited occurrences) */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("occurrences")
@@ -51,16 +56,19 @@ public class WireWithdrawalScheduleScheduleProperties {
 
   @JsonCreator
   public WireWithdrawalScheduleScheduleProperties(
+      @JsonProperty("end_date") JsonNullable<? extends WireWithdrawalScheduleEndDate> endDate,
       @JsonProperty("occurrences") Optional<Integer> occurrences,
       @JsonProperty("start_date") JsonNullable<? extends WireWithdrawalScheduleStartDate> startDate,
       @JsonProperty("state") Optional<? extends WireWithdrawalScheduleState> state,
       @JsonProperty("time_unit") Optional<? extends WireWithdrawalScheduleTimeUnit> timeUnit,
       @JsonProperty("unit_multiplier") Optional<Integer> unitMultiplier) {
+    Utils.checkNotNull(endDate, "endDate");
     Utils.checkNotNull(occurrences, "occurrences");
     Utils.checkNotNull(startDate, "startDate");
     Utils.checkNotNull(state, "state");
     Utils.checkNotNull(timeUnit, "timeUnit");
     Utils.checkNotNull(unitMultiplier, "unitMultiplier");
+    this.endDate = endDate;
     this.occurrences = occurrences;
     this.startDate = startDate;
     this.state = state;
@@ -70,11 +78,19 @@ public class WireWithdrawalScheduleScheduleProperties {
 
   public WireWithdrawalScheduleScheduleProperties() {
     this(
+        JsonNullable.undefined(),
         Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty());
+  }
+
+  /** The schedule end date if there is a finite number of occurrences */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<WireWithdrawalScheduleEndDate> endDate() {
+    return (JsonNullable<WireWithdrawalScheduleEndDate>) endDate;
   }
 
   /** The number of occurrences (empty or 0 indicates unlimited occurrences) */
@@ -118,6 +134,22 @@ public class WireWithdrawalScheduleScheduleProperties {
 
   public static Builder builder() {
     return new Builder();
+  }
+
+  /** The schedule end date if there is a finite number of occurrences */
+  public WireWithdrawalScheduleScheduleProperties withEndDate(
+      WireWithdrawalScheduleEndDate endDate) {
+    Utils.checkNotNull(endDate, "endDate");
+    this.endDate = JsonNullable.of(endDate);
+    return this;
+  }
+
+  /** The schedule end date if there is a finite number of occurrences */
+  public WireWithdrawalScheduleScheduleProperties withEndDate(
+      JsonNullable<? extends WireWithdrawalScheduleEndDate> endDate) {
+    Utils.checkNotNull(endDate, "endDate");
+    this.endDate = endDate;
+    return this;
   }
 
   /** The number of occurrences (empty or 0 indicates unlimited occurrences) */
@@ -217,7 +249,8 @@ public class WireWithdrawalScheduleScheduleProperties {
       return false;
     }
     WireWithdrawalScheduleScheduleProperties other = (WireWithdrawalScheduleScheduleProperties) o;
-    return Utils.enhancedDeepEquals(this.occurrences, other.occurrences)
+    return Utils.enhancedDeepEquals(this.endDate, other.endDate)
+        && Utils.enhancedDeepEquals(this.occurrences, other.occurrences)
         && Utils.enhancedDeepEquals(this.startDate, other.startDate)
         && Utils.enhancedDeepEquals(this.state, other.state)
         && Utils.enhancedDeepEquals(this.timeUnit, other.timeUnit)
@@ -226,13 +259,15 @@ public class WireWithdrawalScheduleScheduleProperties {
 
   @Override
   public int hashCode() {
-    return Utils.enhancedHash(occurrences, startDate, state, timeUnit, unitMultiplier);
+    return Utils.enhancedHash(endDate, occurrences, startDate, state, timeUnit, unitMultiplier);
   }
 
   @Override
   public String toString() {
     return Utils.toString(
         WireWithdrawalScheduleScheduleProperties.class,
+        "endDate",
+        endDate,
         "occurrences",
         occurrences,
         "startDate",
@@ -248,6 +283,9 @@ public class WireWithdrawalScheduleScheduleProperties {
   @SuppressWarnings("UnusedReturnValue")
   public static final class Builder {
 
+    private JsonNullable<? extends WireWithdrawalScheduleEndDate> endDate =
+        JsonNullable.undefined();
+
     private Optional<Integer> occurrences = Optional.empty();
 
     private JsonNullable<? extends WireWithdrawalScheduleStartDate> startDate =
@@ -261,6 +299,20 @@ public class WireWithdrawalScheduleScheduleProperties {
 
     private Builder() {
       // force use of static builder() method
+    }
+
+    /** The schedule end date if there is a finite number of occurrences */
+    public Builder endDate(WireWithdrawalScheduleEndDate endDate) {
+      Utils.checkNotNull(endDate, "endDate");
+      this.endDate = JsonNullable.of(endDate);
+      return this;
+    }
+
+    /** The schedule end date if there is a finite number of occurrences */
+    public Builder endDate(JsonNullable<? extends WireWithdrawalScheduleEndDate> endDate) {
+      Utils.checkNotNull(endDate, "endDate");
+      this.endDate = endDate;
+      return this;
     }
 
     /** The number of occurrences (empty or 0 indicates unlimited occurrences) */
@@ -348,7 +400,7 @@ public class WireWithdrawalScheduleScheduleProperties {
     public WireWithdrawalScheduleScheduleProperties build() {
 
       return new WireWithdrawalScheduleScheduleProperties(
-          occurrences, startDate, state, timeUnit, unitMultiplier);
+          endDate, occurrences, startDate, state, timeUnit, unitMultiplier);
     }
   }
 }

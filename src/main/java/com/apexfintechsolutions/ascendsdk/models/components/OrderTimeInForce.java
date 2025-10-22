@@ -40,8 +40,8 @@ import java.util.Optional;
 /**
  * OrderTimeInForce
  *
- * <p>Must be the value "DAY". Regulatory requirements dictate that the system capture the intended
- * time_in_force, which is why this a mandatory field.
+ * <p>Regulatory requirements dictate that the system capture the intended time_in_force, which is
+ * why this a mandatory field.
  */
 @JsonDeserialize(using = OrderTimeInForce._Deserializer.class)
 @JsonSerialize(using = OrderTimeInForce._Serializer.class)

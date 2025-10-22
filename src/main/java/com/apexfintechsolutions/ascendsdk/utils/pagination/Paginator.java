@@ -38,10 +38,13 @@ import java.util.function.Function;
 public class Paginator<ReqT, ProgressParamT> implements Iterator<HttpResponse<InputStream>> {
   /** The initial request containing pagination parameters. */
   private final ReqT initialRequest;
+
   /** The handler used to process pagination logic. */
   private final ProgressTrackerStrategy<ProgressParamT> progressTracker;
+
   /** Function that sets the value for pagination. */
   private final BiFunction<ReqT, ProgressParamT, ReqT> requestModifier;
+
   /** Function that fetches the next page of data. */
   private final Function<ReqT, HttpResponse<InputStream>> dataFetcher;
 

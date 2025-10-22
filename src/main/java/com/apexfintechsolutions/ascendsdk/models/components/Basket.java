@@ -39,6 +39,14 @@ public class Basket {
   @JsonProperty("client_basket_id")
   private Optional<String> clientBasketId;
 
+  /**
+   * Time the basket submission request was sent by the client. This is a situationally optional
+   * field that reflects the value provided by the user in the SubmitBasketRequest.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_basket_submit_time")
+  private JsonNullable<OffsetDateTime> clientBasketSubmitTime;
+
   /** Time the basket was completed */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("complete_time")
@@ -93,6 +101,8 @@ public class Basket {
       @JsonProperty("basket_order_count") Optional<String> basketOrderCount,
       @JsonProperty("basket_state") Optional<? extends BasketState> basketState,
       @JsonProperty("client_basket_id") Optional<String> clientBasketId,
+      @JsonProperty("client_basket_submit_time")
+          JsonNullable<OffsetDateTime> clientBasketSubmitTime,
       @JsonProperty("complete_time") JsonNullable<OffsetDateTime> completeTime,
       @JsonProperty("compressed_order_count") Optional<String> compressedOrderCount,
       @JsonProperty("correspondent_id") Optional<String> correspondentId,
@@ -106,6 +116,7 @@ public class Basket {
     Utils.checkNotNull(basketOrderCount, "basketOrderCount");
     Utils.checkNotNull(basketState, "basketState");
     Utils.checkNotNull(clientBasketId, "clientBasketId");
+    Utils.checkNotNull(clientBasketSubmitTime, "clientBasketSubmitTime");
     Utils.checkNotNull(completeTime, "completeTime");
     Utils.checkNotNull(compressedOrderCount, "compressedOrderCount");
     Utils.checkNotNull(correspondentId, "correspondentId");
@@ -119,6 +130,7 @@ public class Basket {
     this.basketOrderCount = basketOrderCount;
     this.basketState = basketState;
     this.clientBasketId = clientBasketId;
+    this.clientBasketSubmitTime = clientBasketSubmitTime;
     this.completeTime = completeTime;
     this.compressedOrderCount = compressedOrderCount;
     this.correspondentId = correspondentId;
@@ -136,6 +148,7 @@ public class Basket {
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
+        JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
         Optional.empty(),
@@ -170,6 +183,15 @@ public class Basket {
   @JsonIgnore
   public Optional<String> clientBasketId() {
     return clientBasketId;
+  }
+
+  /**
+   * Time the basket submission request was sent by the client. This is a situationally optional
+   * field that reflects the value provided by the user in the SubmitBasketRequest.
+   */
+  @JsonIgnore
+  public JsonNullable<OffsetDateTime> clientBasketSubmitTime() {
+    return clientBasketSubmitTime;
   }
 
   /** Time the basket was completed */
@@ -286,6 +308,26 @@ public class Basket {
   public Basket withClientBasketId(Optional<String> clientBasketId) {
     Utils.checkNotNull(clientBasketId, "clientBasketId");
     this.clientBasketId = clientBasketId;
+    return this;
+  }
+
+  /**
+   * Time the basket submission request was sent by the client. This is a situationally optional
+   * field that reflects the value provided by the user in the SubmitBasketRequest.
+   */
+  public Basket withClientBasketSubmitTime(OffsetDateTime clientBasketSubmitTime) {
+    Utils.checkNotNull(clientBasketSubmitTime, "clientBasketSubmitTime");
+    this.clientBasketSubmitTime = JsonNullable.of(clientBasketSubmitTime);
+    return this;
+  }
+
+  /**
+   * Time the basket submission request was sent by the client. This is a situationally optional
+   * field that reflects the value provided by the user in the SubmitBasketRequest.
+   */
+  public Basket withClientBasketSubmitTime(JsonNullable<OffsetDateTime> clientBasketSubmitTime) {
+    Utils.checkNotNull(clientBasketSubmitTime, "clientBasketSubmitTime");
+    this.clientBasketSubmitTime = clientBasketSubmitTime;
     return this;
   }
 
@@ -434,6 +476,7 @@ public class Basket {
         && Utils.enhancedDeepEquals(this.basketOrderCount, other.basketOrderCount)
         && Utils.enhancedDeepEquals(this.basketState, other.basketState)
         && Utils.enhancedDeepEquals(this.clientBasketId, other.clientBasketId)
+        && Utils.enhancedDeepEquals(this.clientBasketSubmitTime, other.clientBasketSubmitTime)
         && Utils.enhancedDeepEquals(this.completeTime, other.completeTime)
         && Utils.enhancedDeepEquals(this.compressedOrderCount, other.compressedOrderCount)
         && Utils.enhancedDeepEquals(this.correspondentId, other.correspondentId)
@@ -452,6 +495,7 @@ public class Basket {
         basketOrderCount,
         basketState,
         clientBasketId,
+        clientBasketSubmitTime,
         completeTime,
         compressedOrderCount,
         correspondentId,
@@ -475,6 +519,8 @@ public class Basket {
         basketState,
         "clientBasketId",
         clientBasketId,
+        "clientBasketSubmitTime",
+        clientBasketSubmitTime,
         "completeTime",
         completeTime,
         "compressedOrderCount",
@@ -505,6 +551,8 @@ public class Basket {
     private Optional<? extends BasketState> basketState = Optional.empty();
 
     private Optional<String> clientBasketId = Optional.empty();
+
+    private JsonNullable<OffsetDateTime> clientBasketSubmitTime = JsonNullable.undefined();
 
     private JsonNullable<OffsetDateTime> completeTime = JsonNullable.undefined();
 
@@ -581,6 +629,26 @@ public class Basket {
     public Builder clientBasketId(Optional<String> clientBasketId) {
       Utils.checkNotNull(clientBasketId, "clientBasketId");
       this.clientBasketId = clientBasketId;
+      return this;
+    }
+
+    /**
+     * Time the basket submission request was sent by the client. This is a situationally optional
+     * field that reflects the value provided by the user in the SubmitBasketRequest.
+     */
+    public Builder clientBasketSubmitTime(OffsetDateTime clientBasketSubmitTime) {
+      Utils.checkNotNull(clientBasketSubmitTime, "clientBasketSubmitTime");
+      this.clientBasketSubmitTime = JsonNullable.of(clientBasketSubmitTime);
+      return this;
+    }
+
+    /**
+     * Time the basket submission request was sent by the client. This is a situationally optional
+     * field that reflects the value provided by the user in the SubmitBasketRequest.
+     */
+    public Builder clientBasketSubmitTime(JsonNullable<OffsetDateTime> clientBasketSubmitTime) {
+      Utils.checkNotNull(clientBasketSubmitTime, "clientBasketSubmitTime");
+      this.clientBasketSubmitTime = clientBasketSubmitTime;
       return this;
     }
 
@@ -723,6 +791,7 @@ public class Basket {
           basketOrderCount,
           basketState,
           clientBasketId,
+          clientBasketSubmitTime,
           completeTime,
           compressedOrderCount,
           correspondentId,

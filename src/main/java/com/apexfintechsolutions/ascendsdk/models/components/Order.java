@@ -342,8 +342,8 @@ public class Order {
   private JsonNullable<? extends StopPrice> stopPrice;
 
   /**
-   * Must be the value "DAY". Regulatory requirements dictate that the system capture the intended
-   * time_in_force, which is why this a mandatory field.
+   * Regulatory requirements dictate that the system capture the intended time_in_force, which is
+   * why this a mandatory field.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("time_in_force")
@@ -949,8 +949,8 @@ public class Order {
   }
 
   /**
-   * Must be the value "DAY". Regulatory requirements dictate that the system capture the intended
-   * time_in_force, which is why this a mandatory field.
+   * Regulatory requirements dictate that the system capture the intended time_in_force, which is
+   * why this a mandatory field.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -1798,8 +1798,8 @@ public class Order {
   }
 
   /**
-   * Must be the value "DAY". Regulatory requirements dictate that the system capture the intended
-   * time_in_force, which is why this a mandatory field.
+   * Regulatory requirements dictate that the system capture the intended time_in_force, which is
+   * why this a mandatory field.
    */
   public Order withTimeInForce(OrderTimeInForce timeInForce) {
     Utils.checkNotNull(timeInForce, "timeInForce");
@@ -1808,8 +1808,8 @@ public class Order {
   }
 
   /**
-   * Must be the value "DAY". Regulatory requirements dictate that the system capture the intended
-   * time_in_force, which is why this a mandatory field.
+   * Regulatory requirements dictate that the system capture the intended time_in_force, which is
+   * why this a mandatory field.
    */
   public Order withTimeInForce(Optional<? extends OrderTimeInForce> timeInForce) {
     Utils.checkNotNull(timeInForce, "timeInForce");
@@ -2984,8 +2984,8 @@ public class Order {
     }
 
     /**
-     * Must be the value "DAY". Regulatory requirements dictate that the system capture the intended
-     * time_in_force, which is why this a mandatory field.
+     * Regulatory requirements dictate that the system capture the intended time_in_force, which is
+     * why this a mandatory field.
      */
     public Builder timeInForce(OrderTimeInForce timeInForce) {
       Utils.checkNotNull(timeInForce, "timeInForce");
@@ -2994,8 +2994,8 @@ public class Order {
     }
 
     /**
-     * Must be the value "DAY". Regulatory requirements dictate that the system capture the intended
-     * time_in_force, which is why this a mandatory field.
+     * Regulatory requirements dictate that the system capture the intended time_in_force, which is
+     * why this a mandatory field.
      */
     public Builder timeInForce(Optional<? extends OrderTimeInForce> timeInForce) {
       Utils.checkNotNull(timeInForce, "timeInForce");

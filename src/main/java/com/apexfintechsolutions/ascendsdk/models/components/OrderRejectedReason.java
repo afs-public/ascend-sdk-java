@@ -112,6 +112,12 @@ public class OrderRejectedReason {
       new OrderRejectedReason("CLIENT_RECEIVED_TIME_REQUIRED");
   public static final OrderRejectedReason CLIENT_NOT_PERMITTED_TO_USE_TRADING_SESSION =
       new OrderRejectedReason("CLIENT_NOT_PERMITTED_TO_USE_TRADING_SESSION");
+  public static final OrderRejectedReason ROUND_UP_AMOUNT_TOO_SMALL =
+      new OrderRejectedReason("ROUND_UP_AMOUNT_TOO_SMALL");
+  public static final OrderRejectedReason ASSET_NOT_SET_UP_FOR_ROUND_UPS =
+      new OrderRejectedReason("ASSET_NOT_SET_UP_FOR_ROUND_UPS");
+  public static final OrderRejectedReason BELOW_ROUND_UP_MINIMUM =
+      new OrderRejectedReason("BELOW_ROUND_UP_MINIMUM");
   public static final OrderRejectedReason STOP_PRICE_BELOW_MARKET_PRICE =
       new OrderRejectedReason("STOP_PRICE_BELOW_MARKET_PRICE");
 
@@ -223,6 +229,9 @@ public class OrderRejectedReason {
     map.put("CLIENT_RECEIVED_TIME_REQUIRED", CLIENT_RECEIVED_TIME_REQUIRED);
     map.put(
         "CLIENT_NOT_PERMITTED_TO_USE_TRADING_SESSION", CLIENT_NOT_PERMITTED_TO_USE_TRADING_SESSION);
+    map.put("ROUND_UP_AMOUNT_TOO_SMALL", ROUND_UP_AMOUNT_TOO_SMALL);
+    map.put("ASSET_NOT_SET_UP_FOR_ROUND_UPS", ASSET_NOT_SET_UP_FOR_ROUND_UPS);
+    map.put("BELOW_ROUND_UP_MINIMUM", BELOW_ROUND_UP_MINIMUM);
     map.put("STOP_PRICE_BELOW_MARKET_PRICE", STOP_PRICE_BELOW_MARKET_PRICE);
     return map;
   }
@@ -277,6 +286,10 @@ public class OrderRejectedReason {
     map.put(
         "CLIENT_NOT_PERMITTED_TO_USE_TRADING_SESSION",
         OrderRejectedReasonEnum.CLIENT_NOT_PERMITTED_TO_USE_TRADING_SESSION);
+    map.put("ROUND_UP_AMOUNT_TOO_SMALL", OrderRejectedReasonEnum.ROUND_UP_AMOUNT_TOO_SMALL);
+    map.put(
+        "ASSET_NOT_SET_UP_FOR_ROUND_UPS", OrderRejectedReasonEnum.ASSET_NOT_SET_UP_FOR_ROUND_UPS);
+    map.put("BELOW_ROUND_UP_MINIMUM", OrderRejectedReasonEnum.BELOW_ROUND_UP_MINIMUM);
     map.put("STOP_PRICE_BELOW_MARKET_PRICE", OrderRejectedReasonEnum.STOP_PRICE_BELOW_MARKET_PRICE);
     return map;
   }
@@ -347,6 +360,9 @@ public class OrderRejectedReason {
     INVALID_ORDER_QUANTITY("INVALID_ORDER_QUANTITY"),
     CLIENT_RECEIVED_TIME_REQUIRED("CLIENT_RECEIVED_TIME_REQUIRED"),
     CLIENT_NOT_PERMITTED_TO_USE_TRADING_SESSION("CLIENT_NOT_PERMITTED_TO_USE_TRADING_SESSION"),
+    ROUND_UP_AMOUNT_TOO_SMALL("ROUND_UP_AMOUNT_TOO_SMALL"),
+    ASSET_NOT_SET_UP_FOR_ROUND_UPS("ASSET_NOT_SET_UP_FOR_ROUND_UPS"),
+    BELOW_ROUND_UP_MINIMUM("BELOW_ROUND_UP_MINIMUM"),
     STOP_PRICE_BELOW_MARKET_PRICE("STOP_PRICE_BELOW_MARKET_PRICE"),
     ;
 

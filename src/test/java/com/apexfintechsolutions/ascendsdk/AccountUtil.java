@@ -3,6 +3,14 @@ package com.apexfintechsolutions.ascendsdk;
 import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsAffirmAgreementsResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsGetAccountResponse;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class AccountUtil {
@@ -63,9 +71,90 @@ public class AccountUtil {
             .build();
 
     // Submit request
-
     var response = sdk.personManagement().createLegalNaturalPerson(req);
-    return response.legalNaturalPerson().get();
+    var lnp = response.legalNaturalPerson().get();
+
+    // Upload CIP Results
+    try {
+      String lnpId = lnp.legalNaturalPersonId().get();
+
+      var uploadLinkRequest =
+          BatchCreateUploadLinksRequestCreate.builder()
+              .createDocumentUploadLinkRequest(
+                  List.of(
+                      CreateUploadLinkRequestCreate.builder()
+                          .idDocumentUploadRequest(
+                              IDDocumentUploadRequestCreate.builder()
+                                  .correspondentId(SdkUtil.getCorrespondentId())
+                                  .documentType(
+                                      IDDocumentUploadRequestCreateDocumentType
+                                          .THIRD_PARTY_CIP_RESULTS)
+                                  .legalNaturalPersonId(lnpId)
+                                  .build())
+                          .clientBatchSourceId(UUID.randomUUID().toString())
+                          .mimeType("application/json")
+                          .build()))
+              .build();
+
+      var uploadLinksRes = sdk.investorDocs().batchCreateUploadLinks(uploadLinkRequest);
+
+      // Check if upload links were created successfully
+      if (uploadLinksRes.batchCreateUploadLinksResponse().isEmpty()
+          || uploadLinksRes.batchCreateUploadLinksResponse().get().uploadLink().isEmpty()
+          || uploadLinksRes.batchCreateUploadLinksResponse().get().uploadLink().get().isEmpty()) {
+        System.err.println("Failed to create upload links or no upload links returned");
+        return lnp;
+      }
+
+      String uploadUrl =
+          uploadLinksRes
+              .batchCreateUploadLinksResponse()
+              .get()
+              .uploadLink()
+              .get()
+              .get(0)
+              .uploadLink()
+              .get();
+
+      // Upload the test.json file
+      Path testFilePath = Paths.get("../examples/test.json");
+
+      if (!Files.exists(testFilePath)) {
+        System.err.println("Test file not found at: " + testFilePath.toAbsolutePath());
+        return lnp;
+      }
+
+      // Read and validate file content
+      String jsonContent = Files.readString(testFilePath, StandardCharsets.UTF_8);
+
+      if (jsonContent == null || jsonContent.trim().isEmpty()) {
+        System.err.println("Test file is empty");
+        return lnp;
+      }
+
+      // Upload to signed URL
+      HttpClient client = HttpClient.newHttpClient();
+      HttpRequest uploadRequest =
+          HttpRequest.newBuilder()
+              .uri(new URI(uploadUrl))
+              .header("Content-Type", "application/json")
+              .PUT(HttpRequest.BodyPublishers.ofString(jsonContent))
+              .build();
+
+      HttpResponse<String> uploadResponse =
+          client.send(uploadRequest, HttpResponse.BodyHandlers.ofString());
+
+      if (uploadResponse.statusCode() != 200
+          && uploadResponse.statusCode() != 201
+          && uploadResponse.statusCode() != 204) {
+        System.err.println("Upload failed with status code: " + uploadResponse.statusCode());
+        System.err.println("Response body: " + uploadResponse.body());
+      }
+    } catch (Exception e) {
+      System.err.println("Error during document upload: " + e.getMessage());
+    }
+
+    return lnp;
   }
 
   public static Account createEnrolledAccountWithLNP(SDK sdk, LegalNaturalPerson lnpID)

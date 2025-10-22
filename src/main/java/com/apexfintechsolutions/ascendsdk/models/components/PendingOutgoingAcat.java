@@ -14,7 +14,8 @@ import java.util.Optional;
 /**
  * PendingOutgoingAcat
  *
- * <p>Quantity/ amount of asset restricted due to an outgoing acat request
+ * <p>Represents the amount of an asset that is subject to a pending outgoing account transfer, but
+ * has not completed the bookkeeping phase of that account transfer
  */
 public class PendingOutgoingAcat {
   /**

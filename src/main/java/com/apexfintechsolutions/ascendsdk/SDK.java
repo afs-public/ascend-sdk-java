@@ -99,7 +99,7 @@ public class SDK {
 
   private final AccountTransfers accountTransfers;
 
-  private final CreateOrder createOrder;
+  private final Orders orders;
 
   private final FixedIncomePricing fixedIncomePricing;
 
@@ -201,8 +201,8 @@ public class SDK {
     return accountTransfers;
   }
 
-  public CreateOrder createOrder() {
-    return createOrder;
+  public Orders orders() {
+    return orders;
   }
 
   public FixedIncomePricing fixedIncomePricing() {
@@ -414,7 +414,7 @@ public class SDK {
     this.cashBalances = new CashBalances(sdkConfiguration);
     this.feesAndCredits = new FeesAndCredits(sdkConfiguration);
     this.accountTransfers = new AccountTransfers(sdkConfiguration);
-    this.createOrder = new CreateOrder(sdkConfiguration);
+    this.orders = new Orders(sdkConfiguration);
     this.fixedIncomePricing = new FixedIncomePricing(sdkConfiguration);
     this.basketOrders = new BasketOrders(sdkConfiguration);
     this.assetTradingConfig = new AssetTradingConfig(sdkConfiguration);

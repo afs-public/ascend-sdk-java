@@ -14,10 +14,12 @@ import java.util.Optional;
 /**
  * Unrestricted
  *
- * <p>Computed based on the bucket values to represent the total unrestricted position in an
- * account. Will always be less than or equal to `settled` settled - (pending_outgoing_acat +
- * pending_drip + pending_withdrawal) ; however, if/when the API adds new buckets, Apex may adjust
- * this to either incorporate the new value or not
+ * <p>This field represents the portion of a settled position that is available for trading or
+ * withdrawal without restrictions. It is calculated by subtracting positions with pending
+ * restrictions from the total settled amount (currently: settled - (pending_outgoing_acat +
+ * pending_drip + pending_withdrawal)). As new memo location categories are added to the API, Apex
+ * may update this calculation to incorporate these values. Note that the Cash and Margin systems
+ * may place additional restrictions on cash/ assets according to their business logic.
  */
 public class Unrestricted {
   /**
