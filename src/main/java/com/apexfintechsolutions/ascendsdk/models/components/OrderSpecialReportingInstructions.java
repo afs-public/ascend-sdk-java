@@ -91,6 +91,10 @@ public class OrderSpecialReportingInstructions {
       new OrderSpecialReportingInstructions("WHEN_DISTRIBUTED");
   public static final OrderSpecialReportingInstructions ROUND_UP =
       new OrderSpecialReportingInstructions("ROUND_UP");
+  public static final OrderSpecialReportingInstructions CAT_PARENT_ALGO =
+      new OrderSpecialReportingInstructions("CAT_PARENT_ALGO");
+  public static final OrderSpecialReportingInstructions CAT_PARENT_GTC =
+      new OrderSpecialReportingInstructions("CAT_PARENT_GTC");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -185,6 +189,8 @@ public class OrderSpecialReportingInstructions {
     map.put("SUPPRESS_TRACE_REPORTING", SUPPRESS_TRACE_REPORTING);
     map.put("WHEN_DISTRIBUTED", WHEN_DISTRIBUTED);
     map.put("ROUND_UP", ROUND_UP);
+    map.put("CAT_PARENT_ALGO", CAT_PARENT_ALGO);
+    map.put("CAT_PARENT_GTC", CAT_PARENT_GTC);
     return map;
   }
 
@@ -220,6 +226,8 @@ public class OrderSpecialReportingInstructions {
         "SUPPRESS_TRACE_REPORTING", OrderSpecialReportingInstructionsEnum.SUPPRESS_TRACE_REPORTING);
     map.put("WHEN_DISTRIBUTED", OrderSpecialReportingInstructionsEnum.WHEN_DISTRIBUTED);
     map.put("ROUND_UP", OrderSpecialReportingInstructionsEnum.ROUND_UP);
+    map.put("CAT_PARENT_ALGO", OrderSpecialReportingInstructionsEnum.CAT_PARENT_ALGO);
+    map.put("CAT_PARENT_GTC", OrderSpecialReportingInstructionsEnum.CAT_PARENT_GTC);
     return map;
   }
 
@@ -281,6 +289,8 @@ public class OrderSpecialReportingInstructions {
     SUPPRESS_TRACE_REPORTING("SUPPRESS_TRACE_REPORTING"),
     WHEN_DISTRIBUTED("WHEN_DISTRIBUTED"),
     ROUND_UP("ROUND_UP"),
+    CAT_PARENT_ALGO("CAT_PARENT_ALGO"),
+    CAT_PARENT_GTC("CAT_PARENT_GTC"),
     ;
 
     private final String value;

@@ -96,4 +96,103 @@ public class TestInvestigations {
                 SdkUtil.getCorrespondentId(), first_id.customerIdentificationId().get());
     Assertions.assertEquals(result.statusCode(), 200);
   }
+
+  @Test
+  public void test_identity_lookup_service_create_identity_lookup() throws Exception {
+    var sdk = SdkUtil.getSdk();
+    Assertions.assertNotNull(sdk);
+
+    var request =
+        IdentityLookupCreate.builder()
+            .deviceMetadata(DeviceMetadataCreate.builder().ipAddress("203.0.113.42").build())
+            .identification(
+                IdentificationCreate.builder()
+                    .regionCode("US")
+                    .type(IdentificationCreateType.SSN)
+                    .value("123-45-6789")
+                    .build())
+            .phoneNumber(
+                PhoneNumberCreate.builder().e164Number("+15035550123").extension("123").build())
+            .userConsent(true)
+            .build();
+
+    var res =
+        sdk.investigations()
+            .createIdentityLookup()
+            .correspondentId(SdkUtil.getCorrespondentId())
+            .identityLookupCreate(request)
+            .call();
+
+    Assertions.assertNotNull(res);
+    Assertions.assertEquals(200, res.statusCode());
+    Assertions.assertTrue(res.identityLookup().isPresent());
+    Assertions.assertTrue(res.identityLookup().get().name().isPresent());
+
+    // Extract identity lookup ID from name
+    String name = res.identityLookup().get().name().get();
+    String[] nameParts = name.split("/");
+    String lookupId = nameParts[nameParts.length - 1];
+    Assertions.assertNotNull(lookupId);
+    Assertions.assertTrue(lookupId.length() > 0);
+  }
+
+  @Test
+  public void test_identity_lookup_service_verify_identity_lookup() throws Exception {
+    var sdk = SdkUtil.getSdk();
+    Assertions.assertNotNull(sdk);
+
+    // First create an identity lookup
+    var createRequest =
+        IdentityLookupCreate.builder()
+            .deviceMetadata(DeviceMetadataCreate.builder().ipAddress("203.0.113.42").build())
+            .identification(
+                IdentificationCreate.builder()
+                    .regionCode("US")
+                    .type(IdentificationCreateType.SSN)
+                    .value("123-45-6789")
+                    .build())
+            .phoneNumber(
+                PhoneNumberCreate.builder().e164Number("+15035550123").extension("123").build())
+            .userConsent(true)
+            .build();
+
+    var createRes =
+        sdk.investigations()
+            .createIdentityLookup()
+            .correspondentId(SdkUtil.getCorrespondentId())
+            .identityLookupCreate(createRequest)
+            .call();
+
+    Assertions.assertTrue(createRes.identityLookup().isPresent());
+    Assertions.assertTrue(createRes.identityLookup().get().name().isPresent());
+
+    // Extract identity lookup ID from name
+    String name = createRes.identityLookup().get().name().get();
+    String[] nameParts = name.split("/");
+    String lookupId = nameParts[nameParts.length - 1];
+
+    // Now verify the identity lookup
+    var verifyRequest =
+        VerifyIdentityLookupRequestCreate.builder()
+            .name("correspondents/" + SdkUtil.getCorrespondentId() + "/identityLookups/" + lookupId)
+            .verificationCode("123456") // This is a test verification code
+            .build();
+
+    try {
+      var res =
+          sdk.investigations()
+              .verifyIdentityLookup()
+              .correspondentId(SdkUtil.getCorrespondentId())
+              .identityLookupId(lookupId)
+              .verifyIdentityLookupRequestCreate(verifyRequest)
+              .call();
+
+      Assertions.assertNotNull(res);
+      Assertions.assertEquals(200, res.statusCode());
+    } catch (Exception error) {
+      // The verification may fail with invalid code, which is expected in test environment
+      // We're just testing that the endpoint is callable
+      Assertions.assertTrue(error.getMessage().toLowerCase().contains("verification"));
+    }
+  }
 }

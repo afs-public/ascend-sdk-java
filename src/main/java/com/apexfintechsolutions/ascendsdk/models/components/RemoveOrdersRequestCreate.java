@@ -6,8 +6,11 @@ package com.apexfintechsolutions.ascendsdk.models.components;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * RemoveOrdersRequestCreate
@@ -16,33 +19,62 @@ import java.util.List;
  */
 public class RemoveOrdersRequestCreate {
   /**
-   * The client order IDs of the basket orders to remove. A maximum of 500 orders can be removed
+   * Deprecated: Use `requests` instead.
+   *
+   * <p>The client order IDs of the basket orders to remove. A maximum of 500 orders can be removed
    * from a basket at a time.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
    */
+  @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("client_order_ids")
-  private List<String> clientOrderIds;
+  @Deprecated
+  private Optional<? extends List<String>> clientOrderIds;
 
   /** Format: correspondents/{correspondent}/baskets/{basket} */
   @JsonProperty("name")
   private String name;
 
+  /**
+   * Per-order removal requests with optional CAT reporting data. A maximum of 500 orders can be
+   * removed from a basket at a time.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("requests")
+  private Optional<? extends List<RemoveOrderRequestCreate>> requests;
+
   @JsonCreator
   public RemoveOrdersRequestCreate(
-      @JsonProperty("client_order_ids") List<String> clientOrderIds,
-      @JsonProperty("name") String name) {
+      @JsonProperty("client_order_ids") Optional<? extends List<String>> clientOrderIds,
+      @JsonProperty("name") String name,
+      @JsonProperty("requests") Optional<? extends List<RemoveOrderRequestCreate>> requests) {
     Utils.checkNotNull(clientOrderIds, "clientOrderIds");
     Utils.checkNotNull(name, "name");
+    Utils.checkNotNull(requests, "requests");
     this.clientOrderIds = clientOrderIds;
     this.name = name;
+    this.requests = requests;
+  }
+
+  public RemoveOrdersRequestCreate(String name) {
+    this(Optional.empty(), name, Optional.empty());
   }
 
   /**
-   * The client order IDs of the basket orders to remove. A maximum of 500 orders can be removed
+   * Deprecated: Use `requests` instead.
+   *
+   * <p>The client order IDs of the basket orders to remove. A maximum of 500 orders can be removed
    * from a basket at a time.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
    */
+  @Deprecated
+  @SuppressWarnings("unchecked")
   @JsonIgnore
-  public List<String> clientOrderIds() {
-    return clientOrderIds;
+  public Optional<List<String>> clientOrderIds() {
+    return (Optional<List<String>>) clientOrderIds;
   }
 
   /** Format: correspondents/{correspondent}/baskets/{basket} */
@@ -51,15 +83,48 @@ public class RemoveOrdersRequestCreate {
     return name;
   }
 
+  /**
+   * Per-order removal requests with optional CAT reporting data. A maximum of 500 orders can be
+   * removed from a basket at a time.
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<List<RemoveOrderRequestCreate>> requests() {
+    return (Optional<List<RemoveOrderRequestCreate>>) requests;
+  }
+
   public static Builder builder() {
     return new Builder();
   }
 
   /**
-   * The client order IDs of the basket orders to remove. A maximum of 500 orders can be removed
+   * Deprecated: Use `requests` instead.
+   *
+   * <p>The client order IDs of the basket orders to remove. A maximum of 500 orders can be removed
    * from a basket at a time.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
    */
+  @Deprecated
   public RemoveOrdersRequestCreate withClientOrderIds(List<String> clientOrderIds) {
+    Utils.checkNotNull(clientOrderIds, "clientOrderIds");
+    this.clientOrderIds = Optional.ofNullable(clientOrderIds);
+    return this;
+  }
+
+  /**
+   * Deprecated: Use `requests` instead.
+   *
+   * <p>The client order IDs of the basket orders to remove. A maximum of 500 orders can be removed
+   * from a basket at a time.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
+  @Deprecated
+  public RemoveOrdersRequestCreate withClientOrderIds(
+      Optional<? extends List<String>> clientOrderIds) {
     Utils.checkNotNull(clientOrderIds, "clientOrderIds");
     this.clientOrderIds = clientOrderIds;
     return this;
@@ -69,6 +134,27 @@ public class RemoveOrdersRequestCreate {
   public RemoveOrdersRequestCreate withName(String name) {
     Utils.checkNotNull(name, "name");
     this.name = name;
+    return this;
+  }
+
+  /**
+   * Per-order removal requests with optional CAT reporting data. A maximum of 500 orders can be
+   * removed from a basket at a time.
+   */
+  public RemoveOrdersRequestCreate withRequests(List<RemoveOrderRequestCreate> requests) {
+    Utils.checkNotNull(requests, "requests");
+    this.requests = Optional.ofNullable(requests);
+    return this;
+  }
+
+  /**
+   * Per-order removal requests with optional CAT reporting data. A maximum of 500 orders can be
+   * removed from a basket at a time.
+   */
+  public RemoveOrdersRequestCreate withRequests(
+      Optional<? extends List<RemoveOrderRequestCreate>> requests) {
+    Utils.checkNotNull(requests, "requests");
+    this.requests = requests;
     return this;
   }
 
@@ -82,36 +168,67 @@ public class RemoveOrdersRequestCreate {
     }
     RemoveOrdersRequestCreate other = (RemoveOrdersRequestCreate) o;
     return Utils.enhancedDeepEquals(this.clientOrderIds, other.clientOrderIds)
-        && Utils.enhancedDeepEquals(this.name, other.name);
+        && Utils.enhancedDeepEquals(this.name, other.name)
+        && Utils.enhancedDeepEquals(this.requests, other.requests);
   }
 
   @Override
   public int hashCode() {
-    return Utils.enhancedHash(clientOrderIds, name);
+    return Utils.enhancedHash(clientOrderIds, name, requests);
   }
 
   @Override
   public String toString() {
     return Utils.toString(
-        RemoveOrdersRequestCreate.class, "clientOrderIds", clientOrderIds, "name", name);
+        RemoveOrdersRequestCreate.class,
+        "clientOrderIds",
+        clientOrderIds,
+        "name",
+        name,
+        "requests",
+        requests);
   }
 
   @SuppressWarnings("UnusedReturnValue")
   public static final class Builder {
 
-    private List<String> clientOrderIds;
+    @Deprecated private Optional<? extends List<String>> clientOrderIds = Optional.empty();
 
     private String name;
+
+    private Optional<? extends List<RemoveOrderRequestCreate>> requests = Optional.empty();
 
     private Builder() {
       // force use of static builder() method
     }
 
     /**
-     * The client order IDs of the basket orders to remove. A maximum of 500 orders can be removed
-     * from a basket at a time.
+     * Deprecated: Use `requests` instead.
+     *
+     * <p>The client order IDs of the basket orders to remove. A maximum of 500 orders can be
+     * removed from a basket at a time.
+     *
+     * @deprecated field: This will be removed in a future release, please migrate away from it as
+     *     soon as possible.
      */
+    @Deprecated
     public Builder clientOrderIds(List<String> clientOrderIds) {
+      Utils.checkNotNull(clientOrderIds, "clientOrderIds");
+      this.clientOrderIds = Optional.ofNullable(clientOrderIds);
+      return this;
+    }
+
+    /**
+     * Deprecated: Use `requests` instead.
+     *
+     * <p>The client order IDs of the basket orders to remove. A maximum of 500 orders can be
+     * removed from a basket at a time.
+     *
+     * @deprecated field: This will be removed in a future release, please migrate away from it as
+     *     soon as possible.
+     */
+    @Deprecated
+    public Builder clientOrderIds(Optional<? extends List<String>> clientOrderIds) {
       Utils.checkNotNull(clientOrderIds, "clientOrderIds");
       this.clientOrderIds = clientOrderIds;
       return this;
@@ -124,9 +241,29 @@ public class RemoveOrdersRequestCreate {
       return this;
     }
 
+    /**
+     * Per-order removal requests with optional CAT reporting data. A maximum of 500 orders can be
+     * removed from a basket at a time.
+     */
+    public Builder requests(List<RemoveOrderRequestCreate> requests) {
+      Utils.checkNotNull(requests, "requests");
+      this.requests = Optional.ofNullable(requests);
+      return this;
+    }
+
+    /**
+     * Per-order removal requests with optional CAT reporting data. A maximum of 500 orders can be
+     * removed from a basket at a time.
+     */
+    public Builder requests(Optional<? extends List<RemoveOrderRequestCreate>> requests) {
+      Utils.checkNotNull(requests, "requests");
+      this.requests = requests;
+      return this;
+    }
+
     public RemoveOrdersRequestCreate build() {
 
-      return new RemoveOrdersRequestCreate(clientOrderIds, name);
+      return new RemoveOrdersRequestCreate(clientOrderIds, name, requests);
     }
   }
 }

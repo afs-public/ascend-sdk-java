@@ -90,6 +90,8 @@ public class RetirementDistributionCreateType {
       new RetirementDistributionCreateType("REVOCATION");
   public static final RetirementDistributionCreateType NON_REPORTABLE =
       new RetirementDistributionCreateType("NON_REPORTABLE");
+  public static final RetirementDistributionCreateType QUALIFIED_CHARITABLE_DISTRIBUTION =
+      new RetirementDistributionCreateType("QUALIFIED_CHARITABLE_DISTRIBUTION");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -183,6 +185,7 @@ public class RetirementDistributionCreateType {
     map.put("NET_INCOME_ATTRIBUTABLE", NET_INCOME_ATTRIBUTABLE);
     map.put("REVOCATION", REVOCATION);
     map.put("NON_REPORTABLE", NON_REPORTABLE);
+    map.put("QUALIFIED_CHARITABLE_DISTRIBUTION", QUALIFIED_CHARITABLE_DISTRIBUTION);
     return map;
   }
 
@@ -225,6 +228,9 @@ public class RetirementDistributionCreateType {
         "NET_INCOME_ATTRIBUTABLE", RetirementDistributionCreateTypeEnum.NET_INCOME_ATTRIBUTABLE);
     map.put("REVOCATION", RetirementDistributionCreateTypeEnum.REVOCATION);
     map.put("NON_REPORTABLE", RetirementDistributionCreateTypeEnum.NON_REPORTABLE);
+    map.put(
+        "QUALIFIED_CHARITABLE_DISTRIBUTION",
+        RetirementDistributionCreateTypeEnum.QUALIFIED_CHARITABLE_DISTRIBUTION);
     return map;
   }
 
@@ -284,6 +290,7 @@ public class RetirementDistributionCreateType {
     NET_INCOME_ATTRIBUTABLE("NET_INCOME_ATTRIBUTABLE"),
     REVOCATION("REVOCATION"),
     NON_REPORTABLE("NON_REPORTABLE"),
+    QUALIFIED_CHARITABLE_DISTRIBUTION("QUALIFIED_CHARITABLE_DISTRIBUTION"),
     ;
 
     private final String value;

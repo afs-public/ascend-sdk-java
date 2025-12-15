@@ -24,7 +24,7 @@ public class Account {
    * Indicates if the issuer of a security held by the account is permitted to communicate directly
    * with the shareholder versus through the brokerage firm; This can include sending proxy
    * statements, annual reports, and other important information directly to the shareholder's
-   * address on file with the brokerage firm
+   * address on file with the brokerage firm. By default, this is set to `false`.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("accepts_issuer_direct_communication")
@@ -65,7 +65,7 @@ public class Account {
   @JsonProperty("active_restrictions")
   private Optional<? extends List<String>> activeRestrictions;
 
-  /** A boolean to indicate if an account is advised */
+  /** A boolean to indicate if an account is advised. By default, this is set to `false`. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("advised")
   private Optional<Boolean> advised;
@@ -82,6 +82,14 @@ public class Account {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("cat_account_holder_type")
   private Optional<? extends AccountCatAccountHolderType> catAccountHolderType;
+
+  /**
+   * Indicates the CFTC (Commodity Futures Trading Commission) owner type of the account. This enum
+   * only applies to accounts regulated by the CFTC
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("cftc_owner_type")
+  private Optional<? extends CftcOwnerType> cftcOwnerType;
 
   /** The time the account was closed; If the account is not closed, this is null */
   @JsonInclude(Include.NON_ABSENT)
@@ -157,7 +165,7 @@ public class Account {
   @JsonProperty("investment_profile")
   private JsonNullable<? extends InvestmentProfile> investmentProfile;
 
-  /** A boolean to indicate if an account is managed */
+  /** A boolean to indicate if an account is managed. By default, this is set to `false`. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("managed")
   private Optional<Boolean> managed;
@@ -199,7 +207,8 @@ public class Account {
 
   /**
    * Indicates if the customer is a PDT; This is set if the account executes four or more day trades
-   * (buy and sell the same security intraday) within a period of five business days
+   * (buy and sell the same security intraday) within a period of five business days. By default,
+   * this is set to `false`.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("pattern_day_trader")
@@ -243,7 +252,10 @@ public class Account {
   @JsonProperty("trusted_contacts")
   private Optional<? extends List<TrustedContact>> trustedContacts;
 
-  /** A boolean to indicate if an account is a wrap brokerage account */
+  /**
+   * A boolean to indicate if an account is a wrap brokerage account. By default, this is set to
+   * `false`.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("wrap_fee_billed")
   private Optional<Boolean> wrapFeeBilled;
@@ -260,6 +272,7 @@ public class Account {
       @JsonProperty("agreements") Optional<? extends List<Agreement>> agreements,
       @JsonProperty("cat_account_holder_type")
           Optional<? extends AccountCatAccountHolderType> catAccountHolderType,
+      @JsonProperty("cftc_owner_type") Optional<? extends CftcOwnerType> cftcOwnerType,
       @JsonProperty("close_time") JsonNullable<OffsetDateTime> closeTime,
       @JsonProperty("correspondent_id") Optional<String> correspondentId,
       @JsonProperty("create_time") JsonNullable<OffsetDateTime> createTime,
@@ -296,6 +309,7 @@ public class Account {
     Utils.checkNotNull(advised, "advised");
     Utils.checkNotNull(agreements, "agreements");
     Utils.checkNotNull(catAccountHolderType, "catAccountHolderType");
+    Utils.checkNotNull(cftcOwnerType, "cftcOwnerType");
     Utils.checkNotNull(closeTime, "closeTime");
     Utils.checkNotNull(correspondentId, "correspondentId");
     Utils.checkNotNull(createTime, "createTime");
@@ -330,6 +344,7 @@ public class Account {
     this.advised = advised;
     this.agreements = agreements;
     this.catAccountHolderType = catAccountHolderType;
+    this.cftcOwnerType = cftcOwnerType;
     this.closeTime = closeTime;
     this.correspondentId = correspondentId;
     this.createTime = createTime;
@@ -360,6 +375,7 @@ public class Account {
 
   public Account() {
     this(
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
@@ -400,7 +416,7 @@ public class Account {
    * Indicates if the issuer of a security held by the account is permitted to communicate directly
    * with the shareholder versus through the brokerage firm; This can include sending proxy
    * statements, annual reports, and other important information directly to the shareholder's
-   * address on file with the brokerage firm
+   * address on file with the brokerage firm. By default, this is set to `false`.
    */
   @JsonIgnore
   public Optional<Boolean> acceptsIssuerDirectCommunication() {
@@ -447,7 +463,7 @@ public class Account {
     return (Optional<List<String>>) activeRestrictions;
   }
 
-  /** A boolean to indicate if an account is advised */
+  /** A boolean to indicate if an account is advised. By default, this is set to `false`. */
   @JsonIgnore
   public Optional<Boolean> advised() {
     return advised;
@@ -468,6 +484,16 @@ public class Account {
   @JsonIgnore
   public Optional<AccountCatAccountHolderType> catAccountHolderType() {
     return (Optional<AccountCatAccountHolderType>) catAccountHolderType;
+  }
+
+  /**
+   * Indicates the CFTC (Commodity Futures Trading Commission) owner type of the account. This enum
+   * only applies to accounts regulated by the CFTC
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<CftcOwnerType> cftcOwnerType() {
+    return (Optional<CftcOwnerType>) cftcOwnerType;
   }
 
   /** The time the account was closed; If the account is not closed, this is null */
@@ -562,7 +588,7 @@ public class Account {
     return (JsonNullable<InvestmentProfile>) investmentProfile;
   }
 
-  /** A boolean to indicate if an account is managed */
+  /** A boolean to indicate if an account is managed. By default, this is set to `false`. */
   @JsonIgnore
   public Optional<Boolean> managed() {
     return managed;
@@ -612,7 +638,8 @@ public class Account {
 
   /**
    * Indicates if the customer is a PDT; This is set if the account executes four or more day trades
-   * (buy and sell the same security intraday) within a period of five business days
+   * (buy and sell the same security intraday) within a period of five business days. By default,
+   * this is set to `false`.
    */
   @JsonIgnore
   public Optional<Boolean> patternDayTrader() {
@@ -669,7 +696,10 @@ public class Account {
     return (Optional<List<TrustedContact>>) trustedContacts;
   }
 
-  /** A boolean to indicate if an account is a wrap brokerage account */
+  /**
+   * A boolean to indicate if an account is a wrap brokerage account. By default, this is set to
+   * `false`.
+   */
   @JsonIgnore
   public Optional<Boolean> wrapFeeBilled() {
     return wrapFeeBilled;
@@ -683,7 +713,7 @@ public class Account {
    * Indicates if the issuer of a security held by the account is permitted to communicate directly
    * with the shareholder versus through the brokerage firm; This can include sending proxy
    * statements, annual reports, and other important information directly to the shareholder's
-   * address on file with the brokerage firm
+   * address on file with the brokerage firm. By default, this is set to `false`.
    */
   public Account withAcceptsIssuerDirectCommunication(boolean acceptsIssuerDirectCommunication) {
     Utils.checkNotNull(acceptsIssuerDirectCommunication, "acceptsIssuerDirectCommunication");
@@ -695,7 +725,7 @@ public class Account {
    * Indicates if the issuer of a security held by the account is permitted to communicate directly
    * with the shareholder versus through the brokerage firm; This can include sending proxy
    * statements, annual reports, and other important information directly to the shareholder's
-   * address on file with the brokerage firm
+   * address on file with the brokerage firm. By default, this is set to `false`.
    */
   public Account withAcceptsIssuerDirectCommunication(
       Optional<Boolean> acceptsIssuerDirectCommunication) {
@@ -790,14 +820,14 @@ public class Account {
     return this;
   }
 
-  /** A boolean to indicate if an account is advised */
+  /** A boolean to indicate if an account is advised. By default, this is set to `false`. */
   public Account withAdvised(boolean advised) {
     Utils.checkNotNull(advised, "advised");
     this.advised = Optional.ofNullable(advised);
     return this;
   }
 
-  /** A boolean to indicate if an account is advised */
+  /** A boolean to indicate if an account is advised. By default, this is set to `false`. */
   public Account withAdvised(Optional<Boolean> advised) {
     Utils.checkNotNull(advised, "advised");
     this.advised = advised;
@@ -836,6 +866,26 @@ public class Account {
       Optional<? extends AccountCatAccountHolderType> catAccountHolderType) {
     Utils.checkNotNull(catAccountHolderType, "catAccountHolderType");
     this.catAccountHolderType = catAccountHolderType;
+    return this;
+  }
+
+  /**
+   * Indicates the CFTC (Commodity Futures Trading Commission) owner type of the account. This enum
+   * only applies to accounts regulated by the CFTC
+   */
+  public Account withCftcOwnerType(CftcOwnerType cftcOwnerType) {
+    Utils.checkNotNull(cftcOwnerType, "cftcOwnerType");
+    this.cftcOwnerType = Optional.ofNullable(cftcOwnerType);
+    return this;
+  }
+
+  /**
+   * Indicates the CFTC (Commodity Futures Trading Commission) owner type of the account. This enum
+   * only applies to accounts regulated by the CFTC
+   */
+  public Account withCftcOwnerType(Optional<? extends CftcOwnerType> cftcOwnerType) {
+    Utils.checkNotNull(cftcOwnerType, "cftcOwnerType");
+    this.cftcOwnerType = cftcOwnerType;
     return this;
   }
 
@@ -1033,14 +1083,14 @@ public class Account {
     return this;
   }
 
-  /** A boolean to indicate if an account is managed */
+  /** A boolean to indicate if an account is managed. By default, this is set to `false`. */
   public Account withManaged(boolean managed) {
     Utils.checkNotNull(managed, "managed");
     this.managed = Optional.ofNullable(managed);
     return this;
   }
 
-  /** A boolean to indicate if an account is managed */
+  /** A boolean to indicate if an account is managed. By default, this is set to `false`. */
   public Account withManaged(Optional<Boolean> managed) {
     Utils.checkNotNull(managed, "managed");
     this.managed = managed;
@@ -1139,7 +1189,8 @@ public class Account {
 
   /**
    * Indicates if the customer is a PDT; This is set if the account executes four or more day trades
-   * (buy and sell the same security intraday) within a period of five business days
+   * (buy and sell the same security intraday) within a period of five business days. By default,
+   * this is set to `false`.
    */
   public Account withPatternDayTrader(boolean patternDayTrader) {
     Utils.checkNotNull(patternDayTrader, "patternDayTrader");
@@ -1149,7 +1200,8 @@ public class Account {
 
   /**
    * Indicates if the customer is a PDT; This is set if the account executes four or more day trades
-   * (buy and sell the same security intraday) within a period of five business days
+   * (buy and sell the same security intraday) within a period of five business days. By default,
+   * this is set to `false`.
    */
   public Account withPatternDayTrader(Optional<Boolean> patternDayTrader) {
     Utils.checkNotNull(patternDayTrader, "patternDayTrader");
@@ -1261,14 +1313,20 @@ public class Account {
     return this;
   }
 
-  /** A boolean to indicate if an account is a wrap brokerage account */
+  /**
+   * A boolean to indicate if an account is a wrap brokerage account. By default, this is set to
+   * `false`.
+   */
   public Account withWrapFeeBilled(boolean wrapFeeBilled) {
     Utils.checkNotNull(wrapFeeBilled, "wrapFeeBilled");
     this.wrapFeeBilled = Optional.ofNullable(wrapFeeBilled);
     return this;
   }
 
-  /** A boolean to indicate if an account is a wrap brokerage account */
+  /**
+   * A boolean to indicate if an account is a wrap brokerage account. By default, this is set to
+   * `false`.
+   */
   public Account withWrapFeeBilled(Optional<Boolean> wrapFeeBilled) {
     Utils.checkNotNull(wrapFeeBilled, "wrapFeeBilled");
     this.wrapFeeBilled = wrapFeeBilled;
@@ -1293,6 +1351,7 @@ public class Account {
         && Utils.enhancedDeepEquals(this.advised, other.advised)
         && Utils.enhancedDeepEquals(this.agreements, other.agreements)
         && Utils.enhancedDeepEquals(this.catAccountHolderType, other.catAccountHolderType)
+        && Utils.enhancedDeepEquals(this.cftcOwnerType, other.cftcOwnerType)
         && Utils.enhancedDeepEquals(this.closeTime, other.closeTime)
         && Utils.enhancedDeepEquals(this.correspondentId, other.correspondentId)
         && Utils.enhancedDeepEquals(this.createTime, other.createTime)
@@ -1332,6 +1391,7 @@ public class Account {
         advised,
         agreements,
         catAccountHolderType,
+        cftcOwnerType,
         closeTime,
         correspondentId,
         createTime,
@@ -1380,6 +1440,8 @@ public class Account {
         agreements,
         "catAccountHolderType",
         catAccountHolderType,
+        "cftcOwnerType",
+        cftcOwnerType,
         "closeTime",
         closeTime,
         "correspondentId",
@@ -1453,6 +1515,8 @@ public class Account {
 
     private Optional<? extends AccountCatAccountHolderType> catAccountHolderType = Optional.empty();
 
+    private Optional<? extends CftcOwnerType> cftcOwnerType = Optional.empty();
+
     private JsonNullable<OffsetDateTime> closeTime = JsonNullable.undefined();
 
     private Optional<String> correspondentId = Optional.empty();
@@ -1513,7 +1577,7 @@ public class Account {
      * Indicates if the issuer of a security held by the account is permitted to communicate
      * directly with the shareholder versus through the brokerage firm; This can include sending
      * proxy statements, annual reports, and other important information directly to the
-     * shareholder's address on file with the brokerage firm
+     * shareholder's address on file with the brokerage firm. By default, this is set to `false`.
      */
     public Builder acceptsIssuerDirectCommunication(boolean acceptsIssuerDirectCommunication) {
       Utils.checkNotNull(acceptsIssuerDirectCommunication, "acceptsIssuerDirectCommunication");
@@ -1525,7 +1589,7 @@ public class Account {
      * Indicates if the issuer of a security held by the account is permitted to communicate
      * directly with the shareholder versus through the brokerage firm; This can include sending
      * proxy statements, annual reports, and other important information directly to the
-     * shareholder's address on file with the brokerage firm
+     * shareholder's address on file with the brokerage firm. By default, this is set to `false`.
      */
     public Builder acceptsIssuerDirectCommunication(
         Optional<Boolean> acceptsIssuerDirectCommunication) {
@@ -1620,14 +1684,14 @@ public class Account {
       return this;
     }
 
-    /** A boolean to indicate if an account is advised */
+    /** A boolean to indicate if an account is advised. By default, this is set to `false`. */
     public Builder advised(boolean advised) {
       Utils.checkNotNull(advised, "advised");
       this.advised = Optional.ofNullable(advised);
       return this;
     }
 
-    /** A boolean to indicate if an account is advised */
+    /** A boolean to indicate if an account is advised. By default, this is set to `false`. */
     public Builder advised(Optional<Boolean> advised) {
       Utils.checkNotNull(advised, "advised");
       this.advised = advised;
@@ -1666,6 +1730,26 @@ public class Account {
         Optional<? extends AccountCatAccountHolderType> catAccountHolderType) {
       Utils.checkNotNull(catAccountHolderType, "catAccountHolderType");
       this.catAccountHolderType = catAccountHolderType;
+      return this;
+    }
+
+    /**
+     * Indicates the CFTC (Commodity Futures Trading Commission) owner type of the account. This
+     * enum only applies to accounts regulated by the CFTC
+     */
+    public Builder cftcOwnerType(CftcOwnerType cftcOwnerType) {
+      Utils.checkNotNull(cftcOwnerType, "cftcOwnerType");
+      this.cftcOwnerType = Optional.ofNullable(cftcOwnerType);
+      return this;
+    }
+
+    /**
+     * Indicates the CFTC (Commodity Futures Trading Commission) owner type of the account. This
+     * enum only applies to accounts regulated by the CFTC
+     */
+    public Builder cftcOwnerType(Optional<? extends CftcOwnerType> cftcOwnerType) {
+      Utils.checkNotNull(cftcOwnerType, "cftcOwnerType");
+      this.cftcOwnerType = cftcOwnerType;
       return this;
     }
 
@@ -1861,14 +1945,14 @@ public class Account {
       return this;
     }
 
-    /** A boolean to indicate if an account is managed */
+    /** A boolean to indicate if an account is managed. By default, this is set to `false`. */
     public Builder managed(boolean managed) {
       Utils.checkNotNull(managed, "managed");
       this.managed = Optional.ofNullable(managed);
       return this;
     }
 
-    /** A boolean to indicate if an account is managed */
+    /** A boolean to indicate if an account is managed. By default, this is set to `false`. */
     public Builder managed(Optional<Boolean> managed) {
       Utils.checkNotNull(managed, "managed");
       this.managed = managed;
@@ -1967,7 +2051,8 @@ public class Account {
 
     /**
      * Indicates if the customer is a PDT; This is set if the account executes four or more day
-     * trades (buy and sell the same security intraday) within a period of five business days
+     * trades (buy and sell the same security intraday) within a period of five business days. By
+     * default, this is set to `false`.
      */
     public Builder patternDayTrader(boolean patternDayTrader) {
       Utils.checkNotNull(patternDayTrader, "patternDayTrader");
@@ -1977,7 +2062,8 @@ public class Account {
 
     /**
      * Indicates if the customer is a PDT; This is set if the account executes four or more day
-     * trades (buy and sell the same security intraday) within a period of five business days
+     * trades (buy and sell the same security intraday) within a period of five business days. By
+     * default, this is set to `false`.
      */
     public Builder patternDayTrader(Optional<Boolean> patternDayTrader) {
       Utils.checkNotNull(patternDayTrader, "patternDayTrader");
@@ -2089,14 +2175,20 @@ public class Account {
       return this;
     }
 
-    /** A boolean to indicate if an account is a wrap brokerage account */
+    /**
+     * A boolean to indicate if an account is a wrap brokerage account. By default, this is set to
+     * `false`.
+     */
     public Builder wrapFeeBilled(boolean wrapFeeBilled) {
       Utils.checkNotNull(wrapFeeBilled, "wrapFeeBilled");
       this.wrapFeeBilled = Optional.ofNullable(wrapFeeBilled);
       return this;
     }
 
-    /** A boolean to indicate if an account is a wrap brokerage account */
+    /**
+     * A boolean to indicate if an account is a wrap brokerage account. By default, this is set to
+     * `false`.
+     */
     public Builder wrapFeeBilled(Optional<Boolean> wrapFeeBilled) {
       Utils.checkNotNull(wrapFeeBilled, "wrapFeeBilled");
       this.wrapFeeBilled = wrapFeeBilled;
@@ -2114,6 +2206,7 @@ public class Account {
           advised,
           agreements,
           catAccountHolderType,
+          cftcOwnerType,
           closeTime,
           correspondentId,
           createTime,

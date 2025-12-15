@@ -27,23 +27,34 @@ public class CorporationEnrollmentMetadataCreate {
   @JsonProperty("fdic_cash_sweep")
   private Optional<? extends FdicCashSweep> fdicCashSweep;
 
+  /**
+   * Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("money_market_fund_sweep")
+  private Optional<? extends MoneyMarketFundSweep> moneyMarketFundSweep;
+
   @JsonCreator
   public CorporationEnrollmentMetadataCreate(
       @JsonProperty("dividend_reinvestment_plan")
           Optional<? extends DividendReinvestmentPlan> dividendReinvestmentPlan,
       @JsonProperty("edd_account_enrollment_metadata")
           Optional<? extends EddAccountEnrollmentMetadataCreate> eddAccountEnrollmentMetadata,
-      @JsonProperty("fdic_cash_sweep") Optional<? extends FdicCashSweep> fdicCashSweep) {
+      @JsonProperty("fdic_cash_sweep") Optional<? extends FdicCashSweep> fdicCashSweep,
+      @JsonProperty("money_market_fund_sweep")
+          Optional<? extends MoneyMarketFundSweep> moneyMarketFundSweep) {
     Utils.checkNotNull(dividendReinvestmentPlan, "dividendReinvestmentPlan");
     Utils.checkNotNull(eddAccountEnrollmentMetadata, "eddAccountEnrollmentMetadata");
     Utils.checkNotNull(fdicCashSweep, "fdicCashSweep");
+    Utils.checkNotNull(moneyMarketFundSweep, "moneyMarketFundSweep");
     this.dividendReinvestmentPlan = dividendReinvestmentPlan;
     this.eddAccountEnrollmentMetadata = eddAccountEnrollmentMetadata;
     this.fdicCashSweep = fdicCashSweep;
+    this.moneyMarketFundSweep = moneyMarketFundSweep;
   }
 
   public CorporationEnrollmentMetadataCreate() {
-    this(Optional.empty(), Optional.empty(), Optional.empty());
+    this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */
@@ -65,6 +76,15 @@ public class CorporationEnrollmentMetadataCreate {
   @JsonIgnore
   public Optional<FdicCashSweep> fdicCashSweep() {
     return (Optional<FdicCashSweep>) fdicCashSweep;
+  }
+
+  /**
+   * Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<MoneyMarketFundSweep> moneyMarketFundSweep() {
+    return (Optional<MoneyMarketFundSweep>) moneyMarketFundSweep;
   }
 
   public static Builder builder() {
@@ -118,6 +138,26 @@ public class CorporationEnrollmentMetadataCreate {
     return this;
   }
 
+  /**
+   * Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+   */
+  public CorporationEnrollmentMetadataCreate withMoneyMarketFundSweep(
+      MoneyMarketFundSweep moneyMarketFundSweep) {
+    Utils.checkNotNull(moneyMarketFundSweep, "moneyMarketFundSweep");
+    this.moneyMarketFundSweep = Optional.ofNullable(moneyMarketFundSweep);
+    return this;
+  }
+
+  /**
+   * Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+   */
+  public CorporationEnrollmentMetadataCreate withMoneyMarketFundSweep(
+      Optional<? extends MoneyMarketFundSweep> moneyMarketFundSweep) {
+    Utils.checkNotNull(moneyMarketFundSweep, "moneyMarketFundSweep");
+    this.moneyMarketFundSweep = moneyMarketFundSweep;
+    return this;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -130,13 +170,17 @@ public class CorporationEnrollmentMetadataCreate {
     return Utils.enhancedDeepEquals(this.dividendReinvestmentPlan, other.dividendReinvestmentPlan)
         && Utils.enhancedDeepEquals(
             this.eddAccountEnrollmentMetadata, other.eddAccountEnrollmentMetadata)
-        && Utils.enhancedDeepEquals(this.fdicCashSweep, other.fdicCashSweep);
+        && Utils.enhancedDeepEquals(this.fdicCashSweep, other.fdicCashSweep)
+        && Utils.enhancedDeepEquals(this.moneyMarketFundSweep, other.moneyMarketFundSweep);
   }
 
   @Override
   public int hashCode() {
     return Utils.enhancedHash(
-        dividendReinvestmentPlan, eddAccountEnrollmentMetadata, fdicCashSweep);
+        dividendReinvestmentPlan,
+        eddAccountEnrollmentMetadata,
+        fdicCashSweep,
+        moneyMarketFundSweep);
   }
 
   @Override
@@ -148,7 +192,9 @@ public class CorporationEnrollmentMetadataCreate {
         "eddAccountEnrollmentMetadata",
         eddAccountEnrollmentMetadata,
         "fdicCashSweep",
-        fdicCashSweep);
+        fdicCashSweep,
+        "moneyMarketFundSweep",
+        moneyMarketFundSweep);
   }
 
   @SuppressWarnings("UnusedReturnValue")
@@ -161,6 +207,8 @@ public class CorporationEnrollmentMetadataCreate {
         Optional.empty();
 
     private Optional<? extends FdicCashSweep> fdicCashSweep = Optional.empty();
+
+    private Optional<? extends MoneyMarketFundSweep> moneyMarketFundSweep = Optional.empty();
 
     private Builder() {
       // force use of static builder() method
@@ -211,10 +259,32 @@ public class CorporationEnrollmentMetadataCreate {
       return this;
     }
 
+    /**
+     * Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+     */
+    public Builder moneyMarketFundSweep(MoneyMarketFundSweep moneyMarketFundSweep) {
+      Utils.checkNotNull(moneyMarketFundSweep, "moneyMarketFundSweep");
+      this.moneyMarketFundSweep = Optional.ofNullable(moneyMarketFundSweep);
+      return this;
+    }
+
+    /**
+     * Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+     */
+    public Builder moneyMarketFundSweep(
+        Optional<? extends MoneyMarketFundSweep> moneyMarketFundSweep) {
+      Utils.checkNotNull(moneyMarketFundSweep, "moneyMarketFundSweep");
+      this.moneyMarketFundSweep = moneyMarketFundSweep;
+      return this;
+    }
+
     public CorporationEnrollmentMetadataCreate build() {
 
       return new CorporationEnrollmentMetadataCreate(
-          dividendReinvestmentPlan, eddAccountEnrollmentMetadata, fdicCashSweep);
+          dividendReinvestmentPlan,
+          eddAccountEnrollmentMetadata,
+          fdicCashSweep,
+          moneyMarketFundSweep);
     }
   }
 }

@@ -19,6 +19,14 @@ import org.openapitools.jackson.nullable.JsonNullable;
  * Identity object.
  */
 public class Party {
+  /**
+   * Delivery method instruction for CFTC documents for a given Party record; Defaults to `DIGITAL`
+   * on futures account creation Only applies to CFTC regulated accounts
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("cftc_document_delivery_preference")
+  private Optional<? extends PartyCftcDocumentDeliveryPreference> cftcDocumentDeliveryPreference;
+
   /** An email address indicated for account communications. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("email_address")
@@ -121,6 +129,8 @@ public class Party {
 
   @JsonCreator
   public Party(
+      @JsonProperty("cftc_document_delivery_preference")
+          Optional<? extends PartyCftcDocumentDeliveryPreference> cftcDocumentDeliveryPreference,
       @JsonProperty("email_address") Optional<String> emailAddress,
       @JsonProperty("legal_entity") JsonNullable<? extends PartyLegalEntity> legalEntity,
       @JsonProperty("legal_natural_person")
@@ -141,6 +151,7 @@ public class Party {
       @JsonProperty("trade_confirmation_delivery_preference")
           Optional<? extends PartyTradeConfirmationDeliveryPreference>
               tradeConfirmationDeliveryPreference) {
+    Utils.checkNotNull(cftcDocumentDeliveryPreference, "cftcDocumentDeliveryPreference");
     Utils.checkNotNull(emailAddress, "emailAddress");
     Utils.checkNotNull(legalEntity, "legalEntity");
     Utils.checkNotNull(legalNaturalPerson, "legalNaturalPerson");
@@ -154,6 +165,7 @@ public class Party {
     Utils.checkNotNull(statementDeliveryPreference, "statementDeliveryPreference");
     Utils.checkNotNull(taxDocumentDeliveryPreference, "taxDocumentDeliveryPreference");
     Utils.checkNotNull(tradeConfirmationDeliveryPreference, "tradeConfirmationDeliveryPreference");
+    this.cftcDocumentDeliveryPreference = cftcDocumentDeliveryPreference;
     this.emailAddress = emailAddress;
     this.legalEntity = legalEntity;
     this.legalNaturalPerson = legalNaturalPerson;
@@ -172,6 +184,7 @@ public class Party {
   public Party() {
     this(
         Optional.empty(),
+        Optional.empty(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
@@ -184,6 +197,16 @@ public class Party {
         Optional.empty(),
         Optional.empty(),
         Optional.empty());
+  }
+
+  /**
+   * Delivery method instruction for CFTC documents for a given Party record; Defaults to `DIGITAL`
+   * on futures account creation Only applies to CFTC regulated accounts
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<PartyCftcDocumentDeliveryPreference> cftcDocumentDeliveryPreference() {
+    return (Optional<PartyCftcDocumentDeliveryPreference>) cftcDocumentDeliveryPreference;
   }
 
   /** An email address indicated for account communications. */
@@ -310,6 +333,28 @@ public class Party {
 
   public static Builder builder() {
     return new Builder();
+  }
+
+  /**
+   * Delivery method instruction for CFTC documents for a given Party record; Defaults to `DIGITAL`
+   * on futures account creation Only applies to CFTC regulated accounts
+   */
+  public Party withCftcDocumentDeliveryPreference(
+      PartyCftcDocumentDeliveryPreference cftcDocumentDeliveryPreference) {
+    Utils.checkNotNull(cftcDocumentDeliveryPreference, "cftcDocumentDeliveryPreference");
+    this.cftcDocumentDeliveryPreference = Optional.ofNullable(cftcDocumentDeliveryPreference);
+    return this;
+  }
+
+  /**
+   * Delivery method instruction for CFTC documents for a given Party record; Defaults to `DIGITAL`
+   * on futures account creation Only applies to CFTC regulated accounts
+   */
+  public Party withCftcDocumentDeliveryPreference(
+      Optional<? extends PartyCftcDocumentDeliveryPreference> cftcDocumentDeliveryPreference) {
+    Utils.checkNotNull(cftcDocumentDeliveryPreference, "cftcDocumentDeliveryPreference");
+    this.cftcDocumentDeliveryPreference = cftcDocumentDeliveryPreference;
+    return this;
   }
 
   /** An email address indicated for account communications. */
@@ -583,7 +628,9 @@ public class Party {
       return false;
     }
     Party other = (Party) o;
-    return Utils.enhancedDeepEquals(this.emailAddress, other.emailAddress)
+    return Utils.enhancedDeepEquals(
+            this.cftcDocumentDeliveryPreference, other.cftcDocumentDeliveryPreference)
+        && Utils.enhancedDeepEquals(this.emailAddress, other.emailAddress)
         && Utils.enhancedDeepEquals(this.legalEntity, other.legalEntity)
         && Utils.enhancedDeepEquals(this.legalNaturalPerson, other.legalNaturalPerson)
         && Utils.enhancedDeepEquals(this.mailingAddress, other.mailingAddress)
@@ -605,6 +652,7 @@ public class Party {
   @Override
   public int hashCode() {
     return Utils.enhancedHash(
+        cftcDocumentDeliveryPreference,
         emailAddress,
         legalEntity,
         legalNaturalPerson,
@@ -624,6 +672,8 @@ public class Party {
   public String toString() {
     return Utils.toString(
         Party.class,
+        "cftcDocumentDeliveryPreference",
+        cftcDocumentDeliveryPreference,
         "emailAddress",
         emailAddress,
         "legalEntity",
@@ -654,6 +704,9 @@ public class Party {
 
   @SuppressWarnings("UnusedReturnValue")
   public static final class Builder {
+
+    private Optional<? extends PartyCftcDocumentDeliveryPreference> cftcDocumentDeliveryPreference =
+        Optional.empty();
 
     private Optional<String> emailAddress = Optional.empty();
 
@@ -689,6 +742,28 @@ public class Party {
 
     private Builder() {
       // force use of static builder() method
+    }
+
+    /**
+     * Delivery method instruction for CFTC documents for a given Party record; Defaults to
+     * `DIGITAL` on futures account creation Only applies to CFTC regulated accounts
+     */
+    public Builder cftcDocumentDeliveryPreference(
+        PartyCftcDocumentDeliveryPreference cftcDocumentDeliveryPreference) {
+      Utils.checkNotNull(cftcDocumentDeliveryPreference, "cftcDocumentDeliveryPreference");
+      this.cftcDocumentDeliveryPreference = Optional.ofNullable(cftcDocumentDeliveryPreference);
+      return this;
+    }
+
+    /**
+     * Delivery method instruction for CFTC documents for a given Party record; Defaults to
+     * `DIGITAL` on futures account creation Only applies to CFTC regulated accounts
+     */
+    public Builder cftcDocumentDeliveryPreference(
+        Optional<? extends PartyCftcDocumentDeliveryPreference> cftcDocumentDeliveryPreference) {
+      Utils.checkNotNull(cftcDocumentDeliveryPreference, "cftcDocumentDeliveryPreference");
+      this.cftcDocumentDeliveryPreference = cftcDocumentDeliveryPreference;
+      return this;
     }
 
     /** An email address indicated for account communications. */
@@ -962,6 +1037,7 @@ public class Party {
     public Party build() {
 
       return new Party(
+          cftcDocumentDeliveryPreference,
           emailAddress,
           legalEntity,
           legalNaturalPerson,

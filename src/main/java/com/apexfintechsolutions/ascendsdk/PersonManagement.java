@@ -151,6 +151,7 @@ public class PersonManagement {
    *     Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    *     Guides for more information; Filter options include: `legal_natural_person_id`
    *     `correspondent_id` `given_name` `family_name` `tax_id` `tax_id_type` `investigation_id`
+   *     `foreign_identification.identification_number`
    * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails

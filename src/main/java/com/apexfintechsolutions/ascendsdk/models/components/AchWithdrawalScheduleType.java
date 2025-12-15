@@ -85,6 +85,8 @@ public class AchWithdrawalScheduleType {
       new AchWithdrawalScheduleType("REVOCATION");
   public static final AchWithdrawalScheduleType NON_REPORTABLE =
       new AchWithdrawalScheduleType("NON_REPORTABLE");
+  public static final AchWithdrawalScheduleType QUALIFIED_CHARITABLE_DISTRIBUTION =
+      new AchWithdrawalScheduleType("QUALIFIED_CHARITABLE_DISTRIBUTION");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -178,6 +180,7 @@ public class AchWithdrawalScheduleType {
     map.put("NET_INCOME_ATTRIBUTABLE", NET_INCOME_ATTRIBUTABLE);
     map.put("REVOCATION", REVOCATION);
     map.put("NON_REPORTABLE", NON_REPORTABLE);
+    map.put("QUALIFIED_CHARITABLE_DISTRIBUTION", QUALIFIED_CHARITABLE_DISTRIBUTION);
     return map;
   }
 
@@ -216,6 +219,9 @@ public class AchWithdrawalScheduleType {
     map.put("NET_INCOME_ATTRIBUTABLE", AchWithdrawalScheduleTypeEnum.NET_INCOME_ATTRIBUTABLE);
     map.put("REVOCATION", AchWithdrawalScheduleTypeEnum.REVOCATION);
     map.put("NON_REPORTABLE", AchWithdrawalScheduleTypeEnum.NON_REPORTABLE);
+    map.put(
+        "QUALIFIED_CHARITABLE_DISTRIBUTION",
+        AchWithdrawalScheduleTypeEnum.QUALIFIED_CHARITABLE_DISTRIBUTION);
     return map;
   }
 
@@ -274,6 +280,7 @@ public class AchWithdrawalScheduleType {
     NET_INCOME_ATTRIBUTABLE("NET_INCOME_ATTRIBUTABLE"),
     REVOCATION("REVOCATION"),
     NON_REPORTABLE("NON_REPORTABLE"),
+    QUALIFIED_CHARITABLE_DISTRIBUTION("QUALIFIED_CHARITABLE_DISTRIBUTION"),
     ;
 
     private final String value;

@@ -30,7 +30,8 @@ public class AccountTaxProfileCreate {
 
   /**
    * Indicates if the account is eligible to mark-to-market their securities and commodities
-   * holdings; Named after the related section of the IRS tax code
+   * holdings; Named after the related section of the IRS tax code. By default, this is set to
+   * `false`.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("section_475_election")
@@ -66,7 +67,8 @@ public class AccountTaxProfileCreate {
 
   /**
    * Indicates if the account is eligible to mark-to-market their securities and commodities
-   * holdings; Named after the related section of the IRS tax code
+   * holdings; Named after the related section of the IRS tax code. By default, this is set to
+   * `false`.
    */
   @JsonIgnore
   public Optional<Boolean> section475Election() {
@@ -107,7 +109,8 @@ public class AccountTaxProfileCreate {
 
   /**
    * Indicates if the account is eligible to mark-to-market their securities and commodities
-   * holdings; Named after the related section of the IRS tax code
+   * holdings; Named after the related section of the IRS tax code. By default, this is set to
+   * `false`.
    */
   public AccountTaxProfileCreate withSection475Election(boolean section475Election) {
     Utils.checkNotNull(section475Election, "section475Election");
@@ -117,7 +120,8 @@ public class AccountTaxProfileCreate {
 
   /**
    * Indicates if the account is eligible to mark-to-market their securities and commodities
-   * holdings; Named after the related section of the IRS tax code
+   * holdings; Named after the related section of the IRS tax code. By default, this is set to
+   * `false`.
    */
   public AccountTaxProfileCreate withSection475Election(Optional<Boolean> section475Election) {
     Utils.checkNotNull(section475Election, "section475Election");
@@ -196,7 +200,8 @@ public class AccountTaxProfileCreate {
 
     /**
      * Indicates if the account is eligible to mark-to-market their securities and commodities
-     * holdings; Named after the related section of the IRS tax code
+     * holdings; Named after the related section of the IRS tax code. By default, this is set to
+     * `false`.
      */
     public Builder section475Election(boolean section475Election) {
       Utils.checkNotNull(section475Election, "section475Election");
@@ -206,7 +211,8 @@ public class AccountTaxProfileCreate {
 
     /**
      * Indicates if the account is eligible to mark-to-market their securities and commodities
-     * holdings; Named after the related section of the IRS tax code
+     * holdings; Named after the related section of the IRS tax code. By default, this is set to
+     * `false`.
      */
     public Builder section475Election(Optional<Boolean> section475Election) {
       Utils.checkNotNull(section475Election, "section475Election");

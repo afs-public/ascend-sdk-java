@@ -11,6 +11,8 @@
 * [linkDocuments](#linkdocuments) - Link Documents
 * [getWatchlistItem](#getwatchlistitem) - Get Watchlist Item
 * [getCustomerIdentification](#getcustomeridentification) - Get Identity Verification
+* [createIdentityLookup](#createidentitylookup) - Create Identity Lookup
+* [verifyIdentityLookup](#verifyidentitylookup) - Verify Identity Lookup
 
 ## getInvestigation
 
@@ -406,3 +408,146 @@ public class Application {
 | models/errors/Status   | 400, 403, 404          | application/json       |
 | models/errors/Status   | 500, 503               | application/json       |
 | models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## createIdentityLookup
+
+Creates a new identity lookup and initiates verification process
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="IdentityLookupService_CreateIdentityLookup" method="post" path="/cip/v1/correspondents/{correspondent_id}/identityLookups" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.IdentityLookupServiceCreateIdentityLookupResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        IdentityLookupServiceCreateIdentityLookupResponse res = sdk.investigations().createIdentityLookup()
+                .correspondentId("01HPMZZM6RKMVZA1JQ63RQKJRP")
+                .identityLookupCreate(IdentityLookupCreate.builder()
+                    .deviceMetadata(DeviceMetadataCreate.builder()
+                        .ipAddress("203.0.113.42")
+                        .build())
+                    .identification(IdentificationCreate.builder()
+                        .regionCode("US")
+                        .type(IdentificationCreateType.SSN)
+                        .value("123-45-6789")
+                        .build())
+                    .phoneNumber(PhoneNumberCreate.builder()
+                        .build())
+                    .userConsent(true)
+                    .build())
+                .call();
+
+        if (res.identityLookup().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             | Example                                                                 |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `correspondentId`                                                       | *String*                                                                | :heavy_check_mark:                                                      | The correspondent id.                                                   | 01HPMZZM6RKMVZA1JQ63RQKJRP                                              |
+| `identityLookupCreate`                                                  | [IdentityLookupCreate](../../models/components/IdentityLookupCreate.md) | :heavy_check_mark:                                                      | N/A                                                                     |                                                                         |
+
+### Response
+
+**[IdentityLookupServiceCreateIdentityLookupResponse](../../models/operations/IdentityLookupServiceCreateIdentityLookupResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403, 404, 429     | application/json       |
+| models/errors/Status   | 500                    | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## verifyIdentityLookup
+
+Verifies an identity lookup with the provided verification code
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="IdentityLookupService_VerifyIdentityLookup" method="post" path="/cip/v1/correspondents/{correspondent_id}/identityLookups/{identityLookup_id}:verify" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.IdentityLookupServiceVerifyIdentityLookupResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        IdentityLookupServiceVerifyIdentityLookupResponse res = sdk.investigations().verifyIdentityLookup()
+                .correspondentId("01HPMZZM6RKMVZA1JQ63RQKJRP")
+                .identityLookupId("01HEWVF4ZSNKYRP293J53ASJCJ")
+                .verifyIdentityLookupRequestCreate(VerifyIdentityLookupRequestCreate.builder()
+                    .name("correspondents/01HPMZZM6RKMVZA1JQ63RQKJRP/identityLookups/01HEWVF4ZSNKYRP293J53ASJCJ")
+                    .verificationCode("123456")
+                    .build())
+                .call();
+
+        if (res.identityLookup().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       | Example                                                                                           |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `correspondentId`                                                                                 | *String*                                                                                          | :heavy_check_mark:                                                                                | The correspondent id.                                                                             | 01HPMZZM6RKMVZA1JQ63RQKJRP                                                                        |
+| `identityLookupId`                                                                                | *String*                                                                                          | :heavy_check_mark:                                                                                | The identityLookup id.                                                                            | 01HEWVF4ZSNKYRP293J53ASJCJ                                                                        |
+| `verifyIdentityLookupRequestCreate`                                                               | [VerifyIdentityLookupRequestCreate](../../models/components/VerifyIdentityLookupRequestCreate.md) | :heavy_check_mark:                                                                                | N/A                                                                                               |                                                                                                   |
+
+### Response
+
+**[IdentityLookupServiceVerifyIdentityLookupResponse](../../models/operations/IdentityLookupServiceVerifyIdentityLookupResponse.md)**
+
+### Errors
+
+| Error Type              | Status Code             | Content Type            |
+| ----------------------- | ----------------------- | ----------------------- |
+| models/errors/Status    | 400, 401, 403, 404, 429 | application/json        |
+| models/errors/Status    | 500, 504                | application/json        |
+| models/errors/SDKError  | 4XX, 5XX                | \*/\*                   |

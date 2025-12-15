@@ -8,6 +8,7 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.models.components.AddOrdersRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.BasketCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.RemoveOrdersRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.SetExtraReportingDataRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.SubmitBasketRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.operations.BasketOrdersServiceAddOrdersRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.BasketOrdersServiceAddOrdersRequestBuilder;
@@ -27,6 +28,9 @@ import com.apexfintechsolutions.ascendsdk.models.operations.BasketOrdersServiceL
 import com.apexfintechsolutions.ascendsdk.models.operations.BasketOrdersServiceRemoveOrdersRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.BasketOrdersServiceRemoveOrdersRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.BasketOrdersServiceRemoveOrdersResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.BasketOrdersServiceSetExtraReportingDataRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.BasketOrdersServiceSetExtraReportingDataRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.BasketOrdersServiceSetExtraReportingDataResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.BasketOrdersServiceSubmitBasketRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.BasketOrdersServiceSubmitBasketRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.BasketOrdersServiceSubmitBasketResponse;
@@ -36,6 +40,7 @@ import com.apexfintechsolutions.ascendsdk.operations.BasketOrdersServiceGetBaske
 import com.apexfintechsolutions.ascendsdk.operations.BasketOrdersServiceListBasketOrders;
 import com.apexfintechsolutions.ascendsdk.operations.BasketOrdersServiceListCompressedOrders;
 import com.apexfintechsolutions.ascendsdk.operations.BasketOrdersServiceRemoveOrders;
+import com.apexfintechsolutions.ascendsdk.operations.BasketOrdersServiceSetExtraReportingData;
 import com.apexfintechsolutions.ascendsdk.operations.BasketOrdersServiceSubmitBasket;
 import com.apexfintechsolutions.ascendsdk.utils.Options;
 import java.util.Optional;
@@ -497,6 +502,71 @@ public class BasketOrders {
     RequestOperation<
             BasketOrdersServiceRemoveOrdersRequest, BasketOrdersServiceRemoveOrdersResponse>
         operation = new BasketOrdersServiceRemoveOrders.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Set Extra Reporting Data
+   *
+   * <p>Sets extra reporting data to an existing basket order. Any SetExtraReportingDataRequest must
+   * include the name of the order and the cancel_confirmed_time
+   *
+   * @return The call builder
+   */
+  public BasketOrdersServiceSetExtraReportingDataRequestBuilder setExtraReportingData() {
+    return new BasketOrdersServiceSetExtraReportingDataRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * Set Extra Reporting Data
+   *
+   * <p>Sets extra reporting data to an existing basket order. Any SetExtraReportingDataRequest must
+   * include the name of the order and the cancel_confirmed_time
+   *
+   * @param correspondentId The correspondent id.
+   * @param basketId The basket id.
+   * @param setExtraReportingDataRequestCreate
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BasketOrdersServiceSetExtraReportingDataResponse setExtraReportingData(
+      String correspondentId,
+      String basketId,
+      SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate)
+      throws Exception {
+    return setExtraReportingData(
+        correspondentId, basketId, setExtraReportingDataRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Set Extra Reporting Data
+   *
+   * <p>Sets extra reporting data to an existing basket order. Any SetExtraReportingDataRequest must
+   * include the name of the order and the cancel_confirmed_time
+   *
+   * @param correspondentId The correspondent id.
+   * @param basketId The basket id.
+   * @param setExtraReportingDataRequestCreate
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public BasketOrdersServiceSetExtraReportingDataResponse setExtraReportingData(
+      String correspondentId,
+      String basketId,
+      SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate,
+      Optional<Options> options)
+      throws Exception {
+    BasketOrdersServiceSetExtraReportingDataRequest request =
+        BasketOrdersServiceSetExtraReportingDataRequest.builder()
+            .correspondentId(correspondentId)
+            .basketId(basketId)
+            .setExtraReportingDataRequestCreate(setExtraReportingDataRequestCreate)
+            .build();
+    RequestOperation<
+            BasketOrdersServiceSetExtraReportingDataRequest,
+            BasketOrdersServiceSetExtraReportingDataResponse>
+        operation = new BasketOrdersServiceSetExtraReportingData.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

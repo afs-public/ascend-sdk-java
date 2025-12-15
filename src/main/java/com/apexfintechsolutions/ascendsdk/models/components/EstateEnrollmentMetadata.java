@@ -28,21 +28,32 @@ public class EstateEnrollmentMetadata {
   private Optional<? extends EnrollmentEstateEnrollmentMetadataDividendReinvestmentPlan>
       dividendReinvestmentPlan;
 
+  /**
+   * Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("money_market_fund_sweep")
+  private Optional<? extends EnrollmentMoneyMarketFundSweep> moneyMarketFundSweep;
+
   @JsonCreator
   public EstateEnrollmentMetadata(
       @JsonProperty("certificate_of_appointment_document_id")
           Optional<String> certificateOfAppointmentDocumentId,
       @JsonProperty("dividend_reinvestment_plan")
           Optional<? extends EnrollmentEstateEnrollmentMetadataDividendReinvestmentPlan>
-              dividendReinvestmentPlan) {
+              dividendReinvestmentPlan,
+      @JsonProperty("money_market_fund_sweep")
+          Optional<? extends EnrollmentMoneyMarketFundSweep> moneyMarketFundSweep) {
     Utils.checkNotNull(certificateOfAppointmentDocumentId, "certificateOfAppointmentDocumentId");
     Utils.checkNotNull(dividendReinvestmentPlan, "dividendReinvestmentPlan");
+    Utils.checkNotNull(moneyMarketFundSweep, "moneyMarketFundSweep");
     this.certificateOfAppointmentDocumentId = certificateOfAppointmentDocumentId;
     this.dividendReinvestmentPlan = dividendReinvestmentPlan;
+    this.moneyMarketFundSweep = moneyMarketFundSweep;
   }
 
   public EstateEnrollmentMetadata() {
-    this(Optional.empty(), Optional.empty());
+    this(Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /** The document id for the certificate of appointment */
@@ -58,6 +69,15 @@ public class EstateEnrollmentMetadata {
       dividendReinvestmentPlan() {
     return (Optional<EnrollmentEstateEnrollmentMetadataDividendReinvestmentPlan>)
         dividendReinvestmentPlan;
+  }
+
+  /**
+   * Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<EnrollmentMoneyMarketFundSweep> moneyMarketFundSweep() {
+    return (Optional<EnrollmentMoneyMarketFundSweep>) moneyMarketFundSweep;
   }
 
   public static Builder builder() {
@@ -98,6 +118,26 @@ public class EstateEnrollmentMetadata {
     return this;
   }
 
+  /**
+   * Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+   */
+  public EstateEnrollmentMetadata withMoneyMarketFundSweep(
+      EnrollmentMoneyMarketFundSweep moneyMarketFundSweep) {
+    Utils.checkNotNull(moneyMarketFundSweep, "moneyMarketFundSweep");
+    this.moneyMarketFundSweep = Optional.ofNullable(moneyMarketFundSweep);
+    return this;
+  }
+
+  /**
+   * Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+   */
+  public EstateEnrollmentMetadata withMoneyMarketFundSweep(
+      Optional<? extends EnrollmentMoneyMarketFundSweep> moneyMarketFundSweep) {
+    Utils.checkNotNull(moneyMarketFundSweep, "moneyMarketFundSweep");
+    this.moneyMarketFundSweep = moneyMarketFundSweep;
+    return this;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -109,12 +149,14 @@ public class EstateEnrollmentMetadata {
     EstateEnrollmentMetadata other = (EstateEnrollmentMetadata) o;
     return Utils.enhancedDeepEquals(
             this.certificateOfAppointmentDocumentId, other.certificateOfAppointmentDocumentId)
-        && Utils.enhancedDeepEquals(this.dividendReinvestmentPlan, other.dividendReinvestmentPlan);
+        && Utils.enhancedDeepEquals(this.dividendReinvestmentPlan, other.dividendReinvestmentPlan)
+        && Utils.enhancedDeepEquals(this.moneyMarketFundSweep, other.moneyMarketFundSweep);
   }
 
   @Override
   public int hashCode() {
-    return Utils.enhancedHash(certificateOfAppointmentDocumentId, dividendReinvestmentPlan);
+    return Utils.enhancedHash(
+        certificateOfAppointmentDocumentId, dividendReinvestmentPlan, moneyMarketFundSweep);
   }
 
   @Override
@@ -124,7 +166,9 @@ public class EstateEnrollmentMetadata {
         "certificateOfAppointmentDocumentId",
         certificateOfAppointmentDocumentId,
         "dividendReinvestmentPlan",
-        dividendReinvestmentPlan);
+        dividendReinvestmentPlan,
+        "moneyMarketFundSweep",
+        moneyMarketFundSweep);
   }
 
   @SuppressWarnings("UnusedReturnValue")
@@ -134,6 +178,9 @@ public class EstateEnrollmentMetadata {
 
     private Optional<? extends EnrollmentEstateEnrollmentMetadataDividendReinvestmentPlan>
         dividendReinvestmentPlan = Optional.empty();
+
+    private Optional<? extends EnrollmentMoneyMarketFundSweep> moneyMarketFundSweep =
+        Optional.empty();
 
     private Builder() {
       // force use of static builder() method
@@ -172,10 +219,29 @@ public class EstateEnrollmentMetadata {
       return this;
     }
 
+    /**
+     * Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+     */
+    public Builder moneyMarketFundSweep(EnrollmentMoneyMarketFundSweep moneyMarketFundSweep) {
+      Utils.checkNotNull(moneyMarketFundSweep, "moneyMarketFundSweep");
+      this.moneyMarketFundSweep = Optional.ofNullable(moneyMarketFundSweep);
+      return this;
+    }
+
+    /**
+     * Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+     */
+    public Builder moneyMarketFundSweep(
+        Optional<? extends EnrollmentMoneyMarketFundSweep> moneyMarketFundSweep) {
+      Utils.checkNotNull(moneyMarketFundSweep, "moneyMarketFundSweep");
+      this.moneyMarketFundSweep = moneyMarketFundSweep;
+      return this;
+    }
+
     public EstateEnrollmentMetadata build() {
 
       return new EstateEnrollmentMetadata(
-          certificateOfAppointmentDocumentId, dividendReinvestmentPlan);
+          certificateOfAppointmentDocumentId, dividendReinvestmentPlan, moneyMarketFundSweep);
     }
   }
 }

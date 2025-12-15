@@ -21,6 +21,9 @@
 * [forceRejectIctWithdrawal](#forcerejectictwithdrawal) - Force Reject ICT Withdrawal
 * [forceApproveWireWithdrawal](#forceapprovewirewithdrawal) - Force Approve Wire Withdrawal
 * [forceRejectWireWithdrawal](#forcerejectwirewithdrawal) - Force Reject Wire Withdrawal
+* [simulateWireDeposit](#simulatewiredeposit) - Simulate Wire Deposit
+* [forceApproveWireDeposit](#forceapprovewiredeposit) - Force Approve Wire Deposit
+* [forceRejectWireDeposit](#forcerejectwiredeposit) - Force Reject Wire Deposit
 * [forceApproveCashJournal](#forceapprovecashjournal) - Force Approve Cash Journal
 * [forceRejectCashJournal](#forcerejectcashjournal) - Force Reject Cash Journal
 
@@ -1081,6 +1084,204 @@ public class Application {
 ### Response
 
 **[WireWithdrawalsForceRejectWireWithdrawalResponse](../../models/operations/WireWithdrawalsForceRejectWireWithdrawalResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403, 404          | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## simulateWireDeposit
+
+Simulates the process of creating a wire deposit - FOR TESTING
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="WireDeposits_SimulateWireDeposit" method="post" path="/transfers/v1/accounts/{account_id}/wireDeposits:simulate" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.WireDepositsSimulateWireDepositResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        WireDepositsSimulateWireDepositResponse res = sdk.testSimulation().simulateWireDeposit()
+                .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
+                .simulateWireDepositRequestCreate(SimulateWireDepositRequestCreate.builder()
+                    .amount(DecimalCreate.builder()
+                        .build())
+                    .parent("accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y")
+                    .build())
+                .call();
+
+        if (res.wireDeposit().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     | Example                                                                                         |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `accountId`                                                                                     | *String*                                                                                        | :heavy_check_mark:                                                                              | The account id.                                                                                 | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                                      |
+| `simulateWireDepositRequestCreate`                                                              | [SimulateWireDepositRequestCreate](../../models/components/SimulateWireDepositRequestCreate.md) | :heavy_check_mark:                                                                              | N/A                                                                                             |                                                                                                 |
+
+### Response
+
+**[WireDepositsSimulateWireDepositResponse](../../models/operations/WireDepositsSimulateWireDepositResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403, 404          | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## forceApproveWireDeposit
+
+Simulates the process of approving a wire deposit - FOR TESTING
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="WireDeposits_ForceApproveWireDeposit" method="post" path="/transfers/v1/accounts/{account_id}/wireDeposits/{wireDeposit_id}:forceApprove" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.WireDepositsForceApproveWireDepositResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        WireDepositsForceApproveWireDepositResponse res = sdk.testSimulation().forceApproveWireDeposit()
+                .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
+                .wireDepositId("20230817000319")
+                .forceApproveWireDepositRequestCreate(ForceApproveWireDepositRequestCreate.builder()
+                    .name("accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/wireDeposits/20230817000319")
+                    .build())
+                .call();
+
+        if (res.wireDeposit().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                               | Type                                                                                                    | Required                                                                                                | Description                                                                                             | Example                                                                                                 |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `accountId`                                                                                             | *String*                                                                                                | :heavy_check_mark:                                                                                      | The account id.                                                                                         | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                                              |
+| `wireDepositId`                                                                                         | *String*                                                                                                | :heavy_check_mark:                                                                                      | The wireDeposit id.                                                                                     | 20230817000319                                                                                          |
+| `forceApproveWireDepositRequestCreate`                                                                  | [ForceApproveWireDepositRequestCreate](../../models/components/ForceApproveWireDepositRequestCreate.md) | :heavy_check_mark:                                                                                      | N/A                                                                                                     |                                                                                                         |
+
+### Response
+
+**[WireDepositsForceApproveWireDepositResponse](../../models/operations/WireDepositsForceApproveWireDepositResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403, 404          | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## forceRejectWireDeposit
+
+Forces a rejection on an existing wire deposit pending review - FOR TESTING
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="WireDeposits_ForceRejectWireDeposit" method="post" path="/transfers/v1/accounts/{account_id}/wireDeposits/{wireDeposit_id}:forceReject" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.WireDepositsForceRejectWireDepositResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        WireDepositsForceRejectWireDepositResponse res = sdk.testSimulation().forceRejectWireDeposit()
+                .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
+                .wireDepositId("20230817000319")
+                .forceRejectWireDepositRequestCreate(ForceRejectWireDepositRequestCreate.builder()
+                    .name("accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/wireDeposits/20230817000319")
+                    .build())
+                .call();
+
+        if (res.wireDeposit().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           | Example                                                                                               |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `accountId`                                                                                           | *String*                                                                                              | :heavy_check_mark:                                                                                    | The account id.                                                                                       | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                                            |
+| `wireDepositId`                                                                                       | *String*                                                                                              | :heavy_check_mark:                                                                                    | The wireDeposit id.                                                                                   | 20230817000319                                                                                        |
+| `forceRejectWireDepositRequestCreate`                                                                 | [ForceRejectWireDepositRequestCreate](../../models/components/ForceRejectWireDepositRequestCreate.md) | :heavy_check_mark:                                                                                    | N/A                                                                                                   |                                                                                                       |
+
+### Response
+
+**[WireDepositsForceRejectWireDepositResponse](../../models/operations/WireDepositsForceRejectWireDepositResponse.md)**
 
 ### Errors
 

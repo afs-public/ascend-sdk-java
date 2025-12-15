@@ -600,4 +600,148 @@ public class TestTestSimulation {
     Assertions.assertNotNull(result);
     Assertions.assertEquals(200, result.statusCode());
   }
+
+  @Test
+  @Order(18)
+  public void test_test_simulation_transfers_simulate_wire_deposit_simulate_wire_deposit1()
+      throws Exception {
+    assumeTrue(
+        isWireHours,
+        "Skipping Endpoint Test: Simulate Wire Deposit. Requires current time to be between 7:00"
+            + " AM CT and 2:30 PM CT");
+
+    var wireDepositRequest =
+        SimulateWireDepositRequestCreate.builder()
+            .amount(DecimalCreate.builder().value("100.00").build())
+            .parent("accounts/" + account.accountId().get())
+            .domestic(true)
+            .thirdParty(false)
+            .build();
+
+    var res =
+        sdk.testSimulation()
+            .simulateWireDeposit()
+            .accountId(account.accountId().get())
+            .simulateWireDepositRequestCreate(wireDepositRequest)
+            .call();
+
+    Assertions.assertNotNull(res);
+    Assertions.assertEquals(200, res.statusCode());
+    Assertions.assertTrue(res.wireDeposit().isPresent());
+    Assertions.assertTrue(res.wireDeposit().get().name().isPresent());
+
+    // Extract wire deposit ID from name
+    String name = res.wireDeposit().get().name().get();
+    String[] wireDepositId = name.split("/");
+    String depositId = wireDepositId[wireDepositId.length - 1];
+    Assertions.assertNotNull(depositId);
+    Assertions.assertTrue(depositId.length() > 0);
+  }
+
+  @Test
+  @Order(19)
+  @org.junit.jupiter.api.Disabled(
+      "TODO: Fix wire deposit state machine - transfer already in FundsPosted state")
+  public void
+      test_test_simulation_transfers_force_approve_wire_deposit_force_approve_wire_deposit1()
+          throws Exception {
+    assumeTrue(
+        isWireHours,
+        "Skipping Endpoint Test: Force Approve Wire Deposit. Requires current time to be between"
+            + " 7:00 AM CT and 2:30 PM CT");
+
+    // First create a wire deposit
+    var wireDepositRequest =
+        SimulateWireDepositRequestCreate.builder()
+            .amount(DecimalCreate.builder().value("100.00").build())
+            .parent("accounts/" + account.accountId().get())
+            .domestic(true)
+            .thirdParty(false)
+            .build();
+
+    var createRes =
+        sdk.testSimulation()
+            .simulateWireDeposit()
+            .accountId(account.accountId().get())
+            .simulateWireDepositRequestCreate(wireDepositRequest)
+            .call();
+
+    Assertions.assertTrue(createRes.wireDeposit().isPresent());
+    Assertions.assertTrue(createRes.wireDeposit().get().name().isPresent());
+
+    // Extract wire deposit ID from name
+    String name = createRes.wireDeposit().get().name().get();
+    String[] wireDepositId = name.split("/");
+    String depositId = wireDepositId[wireDepositId.length - 1];
+
+    // Force approve the wire deposit
+    var request =
+        ForceApproveWireDepositRequestCreate.builder()
+            .name("accounts/" + account.accountId().get() + "/wireDeposits/" + depositId)
+            .build();
+
+    var res =
+        sdk.testSimulation()
+            .forceApproveWireDeposit()
+            .accountId(account.accountId().get())
+            .wireDepositId(depositId)
+            .forceApproveWireDepositRequestCreate(request)
+            .call();
+
+    Assertions.assertNotNull(res);
+    Assertions.assertEquals(200, res.statusCode());
+  }
+
+  @Test
+  @Order(20)
+  @org.junit.jupiter.api.Disabled(
+      "TODO: Fix wire deposit state machine - transfer already in FundsPosted state")
+  public void test_test_simulation_transfers_force_reject_wire_deposit_force_reject_wire_deposit1()
+      throws Exception {
+    assumeTrue(
+        isWireHours,
+        "Skipping Endpoint Test: Force Reject Wire Deposit. Requires current time to be between"
+            + " 7:00 AM CT and 2:30 PM CT");
+
+    // First create a wire deposit
+    var wireDepositRequest =
+        SimulateWireDepositRequestCreate.builder()
+            .amount(DecimalCreate.builder().value("100.00").build())
+            .parent("accounts/" + account.accountId().get())
+            .domestic(true)
+            .thirdParty(false)
+            .build();
+
+    var createRes =
+        sdk.testSimulation()
+            .simulateWireDeposit()
+            .accountId(account.accountId().get())
+            .simulateWireDepositRequestCreate(wireDepositRequest)
+            .call();
+
+    Assertions.assertTrue(createRes.wireDeposit().isPresent());
+    Assertions.assertTrue(createRes.wireDeposit().get().name().isPresent());
+
+    // Extract wire deposit ID from name
+    String name = createRes.wireDeposit().get().name().get();
+    String[] wireDepositId = name.split("/");
+    String depositId = wireDepositId[wireDepositId.length - 1];
+
+    // Force reject the wire deposit
+    var request =
+        ForceRejectWireDepositRequestCreate.builder()
+            .name("accounts/" + account.accountId().get() + "/wireDeposits/" + depositId)
+            .build();
+
+    var res =
+        sdk.testSimulation()
+            .forceRejectWireDeposit()
+            .accountId(account.accountId().get())
+            .wireDepositId(depositId)
+            .forceRejectWireDepositRequestCreate(request)
+            .call();
+
+    Assertions.assertNotNull(res);
+    Assertions.assertEquals(200, res.statusCode());
+  }
 }

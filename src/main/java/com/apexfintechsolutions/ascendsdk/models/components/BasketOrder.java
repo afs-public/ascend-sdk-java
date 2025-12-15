@@ -57,12 +57,40 @@ public class BasketOrder {
   @JsonProperty("basket_order_id")
   private Optional<String> basketOrderId;
 
+  /**
+   * Output only field that is required for Equity Orders for any client who is having Apex do CAT
+   * reporting on their behalf. This field denotes the initiator of the cancel request. This field
+   * will be present when provided on the RemoveOrderRequest
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("cancel_initiator")
+  private Optional<? extends BasketOrderCancelInitiator> cancelInitiator;
+
+  /**
+   * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+   * will be present when provided on the RemoveOrderRequest
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_cancel_received_time")
+  private JsonNullable<OffsetDateTime> clientCancelReceivedTime;
+
+  /**
+   * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+   * will be present when provided on the RemoveOrderRequest
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_cancel_sent_time")
+  private JsonNullable<OffsetDateTime> clientCancelSentTime;
+
   /** User-supplied unique order ID. Cannot be more than 40 characters long. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("client_order_id")
   private Optional<String> clientOrderId;
 
-  /** Time the order request was received by the client. Must be in the past. */
+  /**
+   * Time the order request was received by the client. Must be in the past. Timezone will default
+   * to UTC if not provided.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("client_order_received_time")
   private JsonNullable<OffsetDateTime> clientOrderReceivedTime;
@@ -93,6 +121,11 @@ public class BasketOrder {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("executions")
   private Optional<? extends List<BasketTradingExecutions>> executions;
+
+  /** Any reporting data provided by the SetExtraReportingData endpoint. */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("extra_reporting_data")
+  private JsonNullable<? extends BasketOrderExtraReportingData> extraReportingData;
 
   /**
    * The summed quantity value across all fills in this order, up to a maximum of 5 decimal places.
@@ -203,6 +236,11 @@ public class BasketOrder {
       @JsonProperty("average_prices")
           Optional<? extends List<BasketTradingExecutedPrice>> averagePrices,
       @JsonProperty("basket_order_id") Optional<String> basketOrderId,
+      @JsonProperty("cancel_initiator")
+          Optional<? extends BasketOrderCancelInitiator> cancelInitiator,
+      @JsonProperty("client_cancel_received_time")
+          JsonNullable<OffsetDateTime> clientCancelReceivedTime,
+      @JsonProperty("client_cancel_sent_time") JsonNullable<OffsetDateTime> clientCancelSentTime,
       @JsonProperty("client_order_id") Optional<String> clientOrderId,
       @JsonProperty("client_order_received_time")
           JsonNullable<OffsetDateTime> clientOrderReceivedTime,
@@ -211,6 +249,8 @@ public class BasketOrder {
           JsonNullable<? extends BasketOrderCumulativeNotionalValue> cumulativeNotionalValue,
       @JsonProperty("currency_code") Optional<String> currencyCode,
       @JsonProperty("executions") Optional<? extends List<BasketTradingExecutions>> executions,
+      @JsonProperty("extra_reporting_data")
+          JsonNullable<? extends BasketOrderExtraReportingData> extraReportingData,
       @JsonProperty("filled_quantity")
           JsonNullable<? extends BasketOrderFilledQuantity> filledQuantity,
       @JsonProperty("identifier") Optional<String> identifier,
@@ -236,12 +276,16 @@ public class BasketOrder {
     Utils.checkNotNull(assetType, "assetType");
     Utils.checkNotNull(averagePrices, "averagePrices");
     Utils.checkNotNull(basketOrderId, "basketOrderId");
+    Utils.checkNotNull(cancelInitiator, "cancelInitiator");
+    Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+    Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
     Utils.checkNotNull(clientOrderId, "clientOrderId");
     Utils.checkNotNull(clientOrderReceivedTime, "clientOrderReceivedTime");
     Utils.checkNotNull(createTime, "createTime");
     Utils.checkNotNull(cumulativeNotionalValue, "cumulativeNotionalValue");
     Utils.checkNotNull(currencyCode, "currencyCode");
     Utils.checkNotNull(executions, "executions");
+    Utils.checkNotNull(extraReportingData, "extraReportingData");
     Utils.checkNotNull(filledQuantity, "filledQuantity");
     Utils.checkNotNull(identifier, "identifier");
     Utils.checkNotNull(identifierType, "identifierType");
@@ -261,12 +305,16 @@ public class BasketOrder {
     this.assetType = assetType;
     this.averagePrices = averagePrices;
     this.basketOrderId = basketOrderId;
+    this.cancelInitiator = cancelInitiator;
+    this.clientCancelReceivedTime = clientCancelReceivedTime;
+    this.clientCancelSentTime = clientCancelSentTime;
     this.clientOrderId = clientOrderId;
     this.clientOrderReceivedTime = clientOrderReceivedTime;
     this.createTime = createTime;
     this.cumulativeNotionalValue = cumulativeNotionalValue;
     this.currencyCode = currencyCode;
     this.executions = executions;
+    this.extraReportingData = extraReportingData;
     this.filledQuantity = filledQuantity;
     this.identifier = identifier;
     this.identifierType = identifierType;
@@ -293,9 +341,13 @@ public class BasketOrder {
         Optional.empty(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
+        Optional.empty(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
         Optional.empty(),
+        JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
         Optional.empty(),
@@ -356,13 +408,45 @@ public class BasketOrder {
     return basketOrderId;
   }
 
+  /**
+   * Output only field that is required for Equity Orders for any client who is having Apex do CAT
+   * reporting on their behalf. This field denotes the initiator of the cancel request. This field
+   * will be present when provided on the RemoveOrderRequest
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<BasketOrderCancelInitiator> cancelInitiator() {
+    return (Optional<BasketOrderCancelInitiator>) cancelInitiator;
+  }
+
+  /**
+   * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+   * will be present when provided on the RemoveOrderRequest
+   */
+  @JsonIgnore
+  public JsonNullable<OffsetDateTime> clientCancelReceivedTime() {
+    return clientCancelReceivedTime;
+  }
+
+  /**
+   * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+   * will be present when provided on the RemoveOrderRequest
+   */
+  @JsonIgnore
+  public JsonNullable<OffsetDateTime> clientCancelSentTime() {
+    return clientCancelSentTime;
+  }
+
   /** User-supplied unique order ID. Cannot be more than 40 characters long. */
   @JsonIgnore
   public Optional<String> clientOrderId() {
     return clientOrderId;
   }
 
-  /** Time the order request was received by the client. Must be in the past. */
+  /**
+   * Time the order request was received by the client. Must be in the past. Timezone will default
+   * to UTC if not provided.
+   */
   @JsonIgnore
   public JsonNullable<OffsetDateTime> clientOrderReceivedTime() {
     return clientOrderReceivedTime;
@@ -399,6 +483,13 @@ public class BasketOrder {
   @JsonIgnore
   public Optional<List<BasketTradingExecutions>> executions() {
     return (Optional<List<BasketTradingExecutions>>) executions;
+  }
+
+  /** Any reporting data provided by the SetExtraReportingData endpoint. */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<BasketOrderExtraReportingData> extraReportingData() {
+    return (JsonNullable<BasketOrderExtraReportingData>) extraReportingData;
   }
 
   /**
@@ -625,6 +716,70 @@ public class BasketOrder {
     return this;
   }
 
+  /**
+   * Output only field that is required for Equity Orders for any client who is having Apex do CAT
+   * reporting on their behalf. This field denotes the initiator of the cancel request. This field
+   * will be present when provided on the RemoveOrderRequest
+   */
+  public BasketOrder withCancelInitiator(BasketOrderCancelInitiator cancelInitiator) {
+    Utils.checkNotNull(cancelInitiator, "cancelInitiator");
+    this.cancelInitiator = Optional.ofNullable(cancelInitiator);
+    return this;
+  }
+
+  /**
+   * Output only field that is required for Equity Orders for any client who is having Apex do CAT
+   * reporting on their behalf. This field denotes the initiator of the cancel request. This field
+   * will be present when provided on the RemoveOrderRequest
+   */
+  public BasketOrder withCancelInitiator(
+      Optional<? extends BasketOrderCancelInitiator> cancelInitiator) {
+    Utils.checkNotNull(cancelInitiator, "cancelInitiator");
+    this.cancelInitiator = cancelInitiator;
+    return this;
+  }
+
+  /**
+   * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+   * will be present when provided on the RemoveOrderRequest
+   */
+  public BasketOrder withClientCancelReceivedTime(OffsetDateTime clientCancelReceivedTime) {
+    Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+    this.clientCancelReceivedTime = JsonNullable.of(clientCancelReceivedTime);
+    return this;
+  }
+
+  /**
+   * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+   * will be present when provided on the RemoveOrderRequest
+   */
+  public BasketOrder withClientCancelReceivedTime(
+      JsonNullable<OffsetDateTime> clientCancelReceivedTime) {
+    Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+    this.clientCancelReceivedTime = clientCancelReceivedTime;
+    return this;
+  }
+
+  /**
+   * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+   * will be present when provided on the RemoveOrderRequest
+   */
+  public BasketOrder withClientCancelSentTime(OffsetDateTime clientCancelSentTime) {
+    Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
+    this.clientCancelSentTime = JsonNullable.of(clientCancelSentTime);
+    return this;
+  }
+
+  /**
+   * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+   * will be present when provided on the RemoveOrderRequest
+   */
+  public BasketOrder withClientCancelSentTime(JsonNullable<OffsetDateTime> clientCancelSentTime) {
+    Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
+    this.clientCancelSentTime = clientCancelSentTime;
+    return this;
+  }
+
   /** User-supplied unique order ID. Cannot be more than 40 characters long. */
   public BasketOrder withClientOrderId(String clientOrderId) {
     Utils.checkNotNull(clientOrderId, "clientOrderId");
@@ -639,14 +794,20 @@ public class BasketOrder {
     return this;
   }
 
-  /** Time the order request was received by the client. Must be in the past. */
+  /**
+   * Time the order request was received by the client. Must be in the past. Timezone will default
+   * to UTC if not provided.
+   */
   public BasketOrder withClientOrderReceivedTime(OffsetDateTime clientOrderReceivedTime) {
     Utils.checkNotNull(clientOrderReceivedTime, "clientOrderReceivedTime");
     this.clientOrderReceivedTime = JsonNullable.of(clientOrderReceivedTime);
     return this;
   }
 
-  /** Time the order request was received by the client. Must be in the past. */
+  /**
+   * Time the order request was received by the client. Must be in the past. Timezone will default
+   * to UTC if not provided.
+   */
   public BasketOrder withClientOrderReceivedTime(
       JsonNullable<OffsetDateTime> clientOrderReceivedTime) {
     Utils.checkNotNull(clientOrderReceivedTime, "clientOrderReceivedTime");
@@ -723,6 +884,21 @@ public class BasketOrder {
   public BasketOrder withExecutions(Optional<? extends List<BasketTradingExecutions>> executions) {
     Utils.checkNotNull(executions, "executions");
     this.executions = executions;
+    return this;
+  }
+
+  /** Any reporting data provided by the SetExtraReportingData endpoint. */
+  public BasketOrder withExtraReportingData(BasketOrderExtraReportingData extraReportingData) {
+    Utils.checkNotNull(extraReportingData, "extraReportingData");
+    this.extraReportingData = JsonNullable.of(extraReportingData);
+    return this;
+  }
+
+  /** Any reporting data provided by the SetExtraReportingData endpoint. */
+  public BasketOrder withExtraReportingData(
+      JsonNullable<? extends BasketOrderExtraReportingData> extraReportingData) {
+    Utils.checkNotNull(extraReportingData, "extraReportingData");
+    this.extraReportingData = extraReportingData;
     return this;
   }
 
@@ -1004,12 +1180,16 @@ public class BasketOrder {
         && Utils.enhancedDeepEquals(this.assetType, other.assetType)
         && Utils.enhancedDeepEquals(this.averagePrices, other.averagePrices)
         && Utils.enhancedDeepEquals(this.basketOrderId, other.basketOrderId)
+        && Utils.enhancedDeepEquals(this.cancelInitiator, other.cancelInitiator)
+        && Utils.enhancedDeepEquals(this.clientCancelReceivedTime, other.clientCancelReceivedTime)
+        && Utils.enhancedDeepEquals(this.clientCancelSentTime, other.clientCancelSentTime)
         && Utils.enhancedDeepEquals(this.clientOrderId, other.clientOrderId)
         && Utils.enhancedDeepEquals(this.clientOrderReceivedTime, other.clientOrderReceivedTime)
         && Utils.enhancedDeepEquals(this.createTime, other.createTime)
         && Utils.enhancedDeepEquals(this.cumulativeNotionalValue, other.cumulativeNotionalValue)
         && Utils.enhancedDeepEquals(this.currencyCode, other.currencyCode)
         && Utils.enhancedDeepEquals(this.executions, other.executions)
+        && Utils.enhancedDeepEquals(this.extraReportingData, other.extraReportingData)
         && Utils.enhancedDeepEquals(this.filledQuantity, other.filledQuantity)
         && Utils.enhancedDeepEquals(this.identifier, other.identifier)
         && Utils.enhancedDeepEquals(this.identifierType, other.identifierType)
@@ -1035,12 +1215,16 @@ public class BasketOrder {
         assetType,
         averagePrices,
         basketOrderId,
+        cancelInitiator,
+        clientCancelReceivedTime,
+        clientCancelSentTime,
         clientOrderId,
         clientOrderReceivedTime,
         createTime,
         cumulativeNotionalValue,
         currencyCode,
         executions,
+        extraReportingData,
         filledQuantity,
         identifier,
         identifierType,
@@ -1071,6 +1255,12 @@ public class BasketOrder {
         averagePrices,
         "basketOrderId",
         basketOrderId,
+        "cancelInitiator",
+        cancelInitiator,
+        "clientCancelReceivedTime",
+        clientCancelReceivedTime,
+        "clientCancelSentTime",
+        clientCancelSentTime,
         "clientOrderId",
         clientOrderId,
         "clientOrderReceivedTime",
@@ -1083,6 +1273,8 @@ public class BasketOrder {
         currencyCode,
         "executions",
         executions,
+        "extraReportingData",
+        extraReportingData,
         "filledQuantity",
         filledQuantity,
         "identifier",
@@ -1126,6 +1318,12 @@ public class BasketOrder {
 
     private Optional<String> basketOrderId = Optional.empty();
 
+    private Optional<? extends BasketOrderCancelInitiator> cancelInitiator = Optional.empty();
+
+    private JsonNullable<OffsetDateTime> clientCancelReceivedTime = JsonNullable.undefined();
+
+    private JsonNullable<OffsetDateTime> clientCancelSentTime = JsonNullable.undefined();
+
     private Optional<String> clientOrderId = Optional.empty();
 
     private JsonNullable<OffsetDateTime> clientOrderReceivedTime = JsonNullable.undefined();
@@ -1138,6 +1336,9 @@ public class BasketOrder {
     private Optional<String> currencyCode = Optional.empty();
 
     private Optional<? extends List<BasketTradingExecutions>> executions = Optional.empty();
+
+    private JsonNullable<? extends BasketOrderExtraReportingData> extraReportingData =
+        JsonNullable.undefined();
 
     private JsonNullable<? extends BasketOrderFilledQuantity> filledQuantity =
         JsonNullable.undefined();
@@ -1271,6 +1472,68 @@ public class BasketOrder {
       return this;
     }
 
+    /**
+     * Output only field that is required for Equity Orders for any client who is having Apex do CAT
+     * reporting on their behalf. This field denotes the initiator of the cancel request. This field
+     * will be present when provided on the RemoveOrderRequest
+     */
+    public Builder cancelInitiator(BasketOrderCancelInitiator cancelInitiator) {
+      Utils.checkNotNull(cancelInitiator, "cancelInitiator");
+      this.cancelInitiator = Optional.ofNullable(cancelInitiator);
+      return this;
+    }
+
+    /**
+     * Output only field that is required for Equity Orders for any client who is having Apex do CAT
+     * reporting on their behalf. This field denotes the initiator of the cancel request. This field
+     * will be present when provided on the RemoveOrderRequest
+     */
+    public Builder cancelInitiator(Optional<? extends BasketOrderCancelInitiator> cancelInitiator) {
+      Utils.checkNotNull(cancelInitiator, "cancelInitiator");
+      this.cancelInitiator = cancelInitiator;
+      return this;
+    }
+
+    /**
+     * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+     * will be present when provided on the RemoveOrderRequest
+     */
+    public Builder clientCancelReceivedTime(OffsetDateTime clientCancelReceivedTime) {
+      Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+      this.clientCancelReceivedTime = JsonNullable.of(clientCancelReceivedTime);
+      return this;
+    }
+
+    /**
+     * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+     * will be present when provided on the RemoveOrderRequest
+     */
+    public Builder clientCancelReceivedTime(JsonNullable<OffsetDateTime> clientCancelReceivedTime) {
+      Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+      this.clientCancelReceivedTime = clientCancelReceivedTime;
+      return this;
+    }
+
+    /**
+     * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+     * will be present when provided on the RemoveOrderRequest
+     */
+    public Builder clientCancelSentTime(OffsetDateTime clientCancelSentTime) {
+      Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
+      this.clientCancelSentTime = JsonNullable.of(clientCancelSentTime);
+      return this;
+    }
+
+    /**
+     * Output only field for Equity Orders related to CAT reporting on behalf of clients. This field
+     * will be present when provided on the RemoveOrderRequest
+     */
+    public Builder clientCancelSentTime(JsonNullable<OffsetDateTime> clientCancelSentTime) {
+      Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
+      this.clientCancelSentTime = clientCancelSentTime;
+      return this;
+    }
+
     /** User-supplied unique order ID. Cannot be more than 40 characters long. */
     public Builder clientOrderId(String clientOrderId) {
       Utils.checkNotNull(clientOrderId, "clientOrderId");
@@ -1285,14 +1548,20 @@ public class BasketOrder {
       return this;
     }
 
-    /** Time the order request was received by the client. Must be in the past. */
+    /**
+     * Time the order request was received by the client. Must be in the past. Timezone will default
+     * to UTC if not provided.
+     */
     public Builder clientOrderReceivedTime(OffsetDateTime clientOrderReceivedTime) {
       Utils.checkNotNull(clientOrderReceivedTime, "clientOrderReceivedTime");
       this.clientOrderReceivedTime = JsonNullable.of(clientOrderReceivedTime);
       return this;
     }
 
-    /** Time the order request was received by the client. Must be in the past. */
+    /**
+     * Time the order request was received by the client. Must be in the past. Timezone will default
+     * to UTC if not provided.
+     */
     public Builder clientOrderReceivedTime(JsonNullable<OffsetDateTime> clientOrderReceivedTime) {
       Utils.checkNotNull(clientOrderReceivedTime, "clientOrderReceivedTime");
       this.clientOrderReceivedTime = clientOrderReceivedTime;
@@ -1368,6 +1637,21 @@ public class BasketOrder {
     public Builder executions(Optional<? extends List<BasketTradingExecutions>> executions) {
       Utils.checkNotNull(executions, "executions");
       this.executions = executions;
+      return this;
+    }
+
+    /** Any reporting data provided by the SetExtraReportingData endpoint. */
+    public Builder extraReportingData(BasketOrderExtraReportingData extraReportingData) {
+      Utils.checkNotNull(extraReportingData, "extraReportingData");
+      this.extraReportingData = JsonNullable.of(extraReportingData);
+      return this;
+    }
+
+    /** Any reporting data provided by the SetExtraReportingData endpoint. */
+    public Builder extraReportingData(
+        JsonNullable<? extends BasketOrderExtraReportingData> extraReportingData) {
+      Utils.checkNotNull(extraReportingData, "extraReportingData");
+      this.extraReportingData = extraReportingData;
       return this;
     }
 
@@ -1643,12 +1927,16 @@ public class BasketOrder {
           assetType,
           averagePrices,
           basketOrderId,
+          cancelInitiator,
+          clientCancelReceivedTime,
+          clientCancelSentTime,
           clientOrderId,
           clientOrderReceivedTime,
           createTime,
           cumulativeNotionalValue,
           currencyCode,
           executions,
+          extraReportingData,
           filledQuantity,
           identifier,
           identifierType,

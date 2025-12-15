@@ -22,7 +22,7 @@ public class AccountRequestUpdate {
    * Indicates if the issuer of a security held by the account is permitted to communicate directly
    * with the shareholder versus through the brokerage firm; This can include sending proxy
    * statements, annual reports, and other important information directly to the shareholder's
-   * address on file with the brokerage firm
+   * address on file with the brokerage firm By default, this is set to `false`.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("accepts_issuer_direct_communication")
@@ -154,7 +154,7 @@ public class AccountRequestUpdate {
    * Indicates if the issuer of a security held by the account is permitted to communicate directly
    * with the shareholder versus through the brokerage firm; This can include sending proxy
    * statements, annual reports, and other important information directly to the shareholder's
-   * address on file with the brokerage firm
+   * address on file with the brokerage firm By default, this is set to `false`.
    */
   @JsonIgnore
   public Optional<Boolean> acceptsIssuerDirectCommunication() {
@@ -248,7 +248,7 @@ public class AccountRequestUpdate {
    * Indicates if the issuer of a security held by the account is permitted to communicate directly
    * with the shareholder versus through the brokerage firm; This can include sending proxy
    * statements, annual reports, and other important information directly to the shareholder's
-   * address on file with the brokerage firm
+   * address on file with the brokerage firm By default, this is set to `false`.
    */
   public AccountRequestUpdate withAcceptsIssuerDirectCommunication(
       boolean acceptsIssuerDirectCommunication) {
@@ -261,7 +261,7 @@ public class AccountRequestUpdate {
    * Indicates if the issuer of a security held by the account is permitted to communicate directly
    * with the shareholder versus through the brokerage firm; This can include sending proxy
    * statements, annual reports, and other important information directly to the shareholder's
-   * address on file with the brokerage firm
+   * address on file with the brokerage firm By default, this is set to `false`.
    */
   public AccountRequestUpdate withAcceptsIssuerDirectCommunication(
       Optional<Boolean> acceptsIssuerDirectCommunication) {
@@ -550,7 +550,7 @@ public class AccountRequestUpdate {
      * Indicates if the issuer of a security held by the account is permitted to communicate
      * directly with the shareholder versus through the brokerage firm; This can include sending
      * proxy statements, annual reports, and other important information directly to the
-     * shareholder's address on file with the brokerage firm
+     * shareholder's address on file with the brokerage firm By default, this is set to `false`.
      */
     public Builder acceptsIssuerDirectCommunication(boolean acceptsIssuerDirectCommunication) {
       Utils.checkNotNull(acceptsIssuerDirectCommunication, "acceptsIssuerDirectCommunication");
@@ -562,7 +562,7 @@ public class AccountRequestUpdate {
      * Indicates if the issuer of a security held by the account is permitted to communicate
      * directly with the shareholder versus through the brokerage firm; This can include sending
      * proxy statements, annual reports, and other important information directly to the
-     * shareholder's address on file with the brokerage firm
+     * shareholder's address on file with the brokerage firm By default, this is set to `false`.
      */
     public Builder acceptsIssuerDirectCommunication(
         Optional<Boolean> acceptsIssuerDirectCommunication) {

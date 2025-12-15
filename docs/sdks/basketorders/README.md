@@ -12,6 +12,7 @@
 * [listBasketOrders](#listbasketorders) - List Basket Orders
 * [listCompressedOrders](#listcompressedorders) - List Compressed Orders
 * [removeOrders](#removeorders) - Remove Basket Orders
+* [setExtraReportingData](#setextrareportingdata) - Set Extra Reporting Data
 
 ## createBasket
 
@@ -448,7 +449,6 @@ import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.BasketOrdersServiceRemoveOrdersResponse;
 import java.lang.Exception;
-import java.util.List;
 
 public class Application {
 
@@ -470,9 +470,6 @@ public class Application {
                 .correspondentId("01HPMZZM6RKMVZA1JQ63RQKJRP")
                 .basketId("fffd326-72fa-4d2b-bd1f-45384fe5d521")
                 .removeOrdersRequestCreate(RemoveOrdersRequestCreate.builder()
-                    .clientOrderIds(List.of(
-                        "77e4c4b9-38e7-469f-9a8d-cd8baf7c1952",
-                        "4cff908e-aaed-401d-8ec9-929e3eb18cbc"))
                     .name("correspondents/01HPMZZM6RKMVZA1JQ63RQKJRP/baskets/fffd326-72fa-4d2b-bd1f-45384fe5d521")
                     .build())
                 .call();
@@ -495,6 +492,75 @@ public class Application {
 ### Response
 
 **[BasketOrdersServiceRemoveOrdersResponse](../../models/operations/BasketOrdersServiceRemoveOrdersResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 401, 403, 404     | application/json       |
+| models/errors/Status   | 500, 503               | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## setExtraReportingData
+
+Sets extra reporting data to an existing basket order. Any SetExtraReportingDataRequest must include the name of the order and the cancel_confirmed_time
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="BasketOrdersService_SetExtraReportingData" method="post" path="/baskettrading/v1/correspondents/{correspondent_id}/baskets/{basket_id}:setExtraReportingData" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.BasketOrdersServiceSetExtraReportingDataResponse;
+import java.lang.Exception;
+import java.time.OffsetDateTime;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        BasketOrdersServiceSetExtraReportingDataResponse res = sdk.basketOrders().setExtraReportingData()
+                .correspondentId("01HPMZZM6RKMVZA1JQ63RQKJRP")
+                .basketId("fffd326-72fa-4d2b-bd1f-45384fe5d521")
+                .setExtraReportingDataRequestCreate(SetExtraReportingDataRequestCreate.builder()
+                    .cancelConfirmedTime(OffsetDateTime.parse("2025-12-13T15:28:17.262732Z"))
+                    .name("accounts/01HBRQ5BW6ZAY4BNWP4GWRD80X/orders/ebb0c9b5-2c74-45c9-a4ab-40596b778706")
+                    .build())
+                .call();
+
+        if (res.setExtraReportingDataResponse().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         | Example                                                                                             |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `correspondentId`                                                                                   | *String*                                                                                            | :heavy_check_mark:                                                                                  | The correspondent id.                                                                               | 01HPMZZM6RKMVZA1JQ63RQKJRP                                                                          |
+| `basketId`                                                                                          | *String*                                                                                            | :heavy_check_mark:                                                                                  | The basket id.                                                                                      | fffd326-72fa-4d2b-bd1f-45384fe5d521                                                                 |
+| `setExtraReportingDataRequestCreate`                                                                | [SetExtraReportingDataRequestCreate](../../models/components/SetExtraReportingDataRequestCreate.md) | :heavy_check_mark:                                                                                  | N/A                                                                                                 |                                                                                                     |
+
+### Response
+
+**[BasketOrdersServiceSetExtraReportingDataResponse](../../models/operations/BasketOrdersServiceSetExtraReportingDataResponse.md)**
 
 ### Errors
 

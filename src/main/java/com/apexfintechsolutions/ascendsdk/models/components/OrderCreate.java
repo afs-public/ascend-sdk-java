@@ -81,9 +81,10 @@ public class OrderCreate {
   private String identifier;
 
   /**
-   * A string attribute denoting the country of issuance or where the asset is trading. Only
-   * available for Mutual Fund orders. Defaults to US, when trading non US mutual funds this field
-   * must be provided Complies with ISO-3166 Alpha-2 Codes
+   * A string attribute denoting the country of issuance or where the asset is trading. * Only
+   * available for Mutual Fund and Fixed Income orders. * Only available when the identifier_type is
+   * SYMBOL or CUSIP. * Defaults to US when the identifier_type is SYMBOL or CUSIP. * Complies with
+   * ISO-3166 Alpha-2 Codes
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("identifier_issuing_region_code")
@@ -418,9 +419,10 @@ public class OrderCreate {
   }
 
   /**
-   * A string attribute denoting the country of issuance or where the asset is trading. Only
-   * available for Mutual Fund orders. Defaults to US, when trading non US mutual funds this field
-   * must be provided Complies with ISO-3166 Alpha-2 Codes
+   * A string attribute denoting the country of issuance or where the asset is trading. * Only
+   * available for Mutual Fund and Fixed Income orders. * Only available when the identifier_type is
+   * SYMBOL or CUSIP. * Defaults to US when the identifier_type is SYMBOL or CUSIP. * Complies with
+   * ISO-3166 Alpha-2 Codes
    */
   @JsonIgnore
   public Optional<String> identifierIssuingRegionCode() {
@@ -734,9 +736,10 @@ public class OrderCreate {
   }
 
   /**
-   * A string attribute denoting the country of issuance or where the asset is trading. Only
-   * available for Mutual Fund orders. Defaults to US, when trading non US mutual funds this field
-   * must be provided Complies with ISO-3166 Alpha-2 Codes
+   * A string attribute denoting the country of issuance or where the asset is trading. * Only
+   * available for Mutual Fund and Fixed Income orders. * Only available when the identifier_type is
+   * SYMBOL or CUSIP. * Defaults to US when the identifier_type is SYMBOL or CUSIP. * Complies with
+   * ISO-3166 Alpha-2 Codes
    */
   public OrderCreate withIdentifierIssuingRegionCode(String identifierIssuingRegionCode) {
     Utils.checkNotNull(identifierIssuingRegionCode, "identifierIssuingRegionCode");
@@ -745,9 +748,10 @@ public class OrderCreate {
   }
 
   /**
-   * A string attribute denoting the country of issuance or where the asset is trading. Only
-   * available for Mutual Fund orders. Defaults to US, when trading non US mutual funds this field
-   * must be provided Complies with ISO-3166 Alpha-2 Codes
+   * A string attribute denoting the country of issuance or where the asset is trading. * Only
+   * available for Mutual Fund and Fixed Income orders. * Only available when the identifier_type is
+   * SYMBOL or CUSIP. * Defaults to US when the identifier_type is SYMBOL or CUSIP. * Complies with
+   * ISO-3166 Alpha-2 Codes
    */
   public OrderCreate withIdentifierIssuingRegionCode(Optional<String> identifierIssuingRegionCode) {
     Utils.checkNotNull(identifierIssuingRegionCode, "identifierIssuingRegionCode");
@@ -1363,9 +1367,10 @@ public class OrderCreate {
     }
 
     /**
-     * A string attribute denoting the country of issuance or where the asset is trading. Only
-     * available for Mutual Fund orders. Defaults to US, when trading non US mutual funds this field
-     * must be provided Complies with ISO-3166 Alpha-2 Codes
+     * A string attribute denoting the country of issuance or where the asset is trading. * Only
+     * available for Mutual Fund and Fixed Income orders. * Only available when the identifier_type
+     * is SYMBOL or CUSIP. * Defaults to US when the identifier_type is SYMBOL or CUSIP. * Complies
+     * with ISO-3166 Alpha-2 Codes
      */
     public Builder identifierIssuingRegionCode(String identifierIssuingRegionCode) {
       Utils.checkNotNull(identifierIssuingRegionCode, "identifierIssuingRegionCode");
@@ -1374,9 +1379,10 @@ public class OrderCreate {
     }
 
     /**
-     * A string attribute denoting the country of issuance or where the asset is trading. Only
-     * available for Mutual Fund orders. Defaults to US, when trading non US mutual funds this field
-     * must be provided Complies with ISO-3166 Alpha-2 Codes
+     * A string attribute denoting the country of issuance or where the asset is trading. * Only
+     * available for Mutual Fund and Fixed Income orders. * Only available when the identifier_type
+     * is SYMBOL or CUSIP. * Defaults to US when the identifier_type is SYMBOL or CUSIP. * Complies
+     * with ISO-3166 Alpha-2 Codes
      */
     public Builder identifierIssuingRegionCode(Optional<String> identifierIssuingRegionCode) {
       Utils.checkNotNull(identifierIssuingRegionCode, "identifierIssuingRegionCode");

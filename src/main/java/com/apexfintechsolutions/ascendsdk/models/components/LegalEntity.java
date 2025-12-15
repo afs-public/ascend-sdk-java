@@ -123,7 +123,9 @@ public class LegalEntity {
   @JsonProperty("global_person_id")
   private Optional<String> globalPersonId;
 
-  /** Indicates whether the entity is an institutional customer */
+  /**
+   * Indicates whether the entity is an institutional customer. By default, this is set to `false`.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("institutional_customer")
   private Optional<Boolean> institutionalCustomer;
@@ -511,7 +513,9 @@ public class LegalEntity {
     return globalPersonId;
   }
 
-  /** Indicates whether the entity is an institutional customer */
+  /**
+   * Indicates whether the entity is an institutional customer. By default, this is set to `false`.
+   */
   @JsonIgnore
   public Optional<Boolean> institutionalCustomer() {
     return institutionalCustomer;
@@ -934,14 +938,18 @@ public class LegalEntity {
     return this;
   }
 
-  /** Indicates whether the entity is an institutional customer */
+  /**
+   * Indicates whether the entity is an institutional customer. By default, this is set to `false`.
+   */
   public LegalEntity withInstitutionalCustomer(boolean institutionalCustomer) {
     Utils.checkNotNull(institutionalCustomer, "institutionalCustomer");
     this.institutionalCustomer = Optional.ofNullable(institutionalCustomer);
     return this;
   }
 
-  /** Indicates whether the entity is an institutional customer */
+  /**
+   * Indicates whether the entity is an institutional customer. By default, this is set to `false`.
+   */
   public LegalEntity withInstitutionalCustomer(Optional<Boolean> institutionalCustomer) {
     Utils.checkNotNull(institutionalCustomer, "institutionalCustomer");
     this.institutionalCustomer = institutionalCustomer;
@@ -1747,14 +1755,20 @@ public class LegalEntity {
       return this;
     }
 
-    /** Indicates whether the entity is an institutional customer */
+    /**
+     * Indicates whether the entity is an institutional customer. By default, this is set to
+     * `false`.
+     */
     public Builder institutionalCustomer(boolean institutionalCustomer) {
       Utils.checkNotNull(institutionalCustomer, "institutionalCustomer");
       this.institutionalCustomer = Optional.ofNullable(institutionalCustomer);
       return this;
     }
 
-    /** Indicates whether the entity is an institutional customer */
+    /**
+     * Indicates whether the entity is an institutional customer. By default, this is set to
+     * `false`.
+     */
     public Builder institutionalCustomer(Optional<Boolean> institutionalCustomer) {
       Utils.checkNotNull(institutionalCustomer, "institutionalCustomer");
       this.institutionalCustomer = institutionalCustomer;

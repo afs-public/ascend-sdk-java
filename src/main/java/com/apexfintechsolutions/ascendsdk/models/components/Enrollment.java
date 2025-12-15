@@ -76,6 +76,11 @@ public class Enrollment {
   @JsonProperty("fpsl_enrollment_metadata")
   private JsonNullable<? extends FpslEnrollmentMetadata> fpslEnrollmentMetadata;
 
+  /** Metadata for the REGISTRATION_FUTURES enrollment type */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("futures_enrollment_metadata")
+  private JsonNullable<? extends FuturesEnrollmentMetadata> futuresEnrollmentMetadata;
+
   /** Metadata for the INDIVIDUAL enrollment type */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("individual_enrollment_metadata")
@@ -220,6 +225,8 @@ public class Enrollment {
               foreignJointAccountEnrollmentMetadata,
       @JsonProperty("fpsl_enrollment_metadata")
           JsonNullable<? extends FpslEnrollmentMetadata> fpslEnrollmentMetadata,
+      @JsonProperty("futures_enrollment_metadata")
+          JsonNullable<? extends FuturesEnrollmentMetadata> futuresEnrollmentMetadata,
       @JsonProperty("individual_enrollment_metadata")
           JsonNullable<? extends IndividualEnrollmentMetadata> individualEnrollmentMetadata,
       @JsonProperty("ira_beneficiary_enrollment_metadata")
@@ -275,6 +282,7 @@ public class Enrollment {
     Utils.checkNotNull(
         foreignJointAccountEnrollmentMetadata, "foreignJointAccountEnrollmentMetadata");
     Utils.checkNotNull(fpslEnrollmentMetadata, "fpslEnrollmentMetadata");
+    Utils.checkNotNull(futuresEnrollmentMetadata, "futuresEnrollmentMetadata");
     Utils.checkNotNull(individualEnrollmentMetadata, "individualEnrollmentMetadata");
     Utils.checkNotNull(iraBeneficiaryEnrollmentMetadata, "iraBeneficiaryEnrollmentMetadata");
     Utils.checkNotNull(iraRolloverEnrollmentMetadata, "iraRolloverEnrollmentMetadata");
@@ -313,6 +321,7 @@ public class Enrollment {
     this.foreignIndividualAccountEnrollmentMetadata = foreignIndividualAccountEnrollmentMetadata;
     this.foreignJointAccountEnrollmentMetadata = foreignJointAccountEnrollmentMetadata;
     this.fpslEnrollmentMetadata = fpslEnrollmentMetadata;
+    this.futuresEnrollmentMetadata = futuresEnrollmentMetadata;
     this.individualEnrollmentMetadata = individualEnrollmentMetadata;
     this.iraBeneficiaryEnrollmentMetadata = iraBeneficiaryEnrollmentMetadata;
     this.iraRolloverEnrollmentMetadata = iraRolloverEnrollmentMetadata;
@@ -344,6 +353,7 @@ public class Enrollment {
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
+        JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
@@ -447,6 +457,13 @@ public class Enrollment {
   @JsonIgnore
   public JsonNullable<FpslEnrollmentMetadata> fpslEnrollmentMetadata() {
     return (JsonNullable<FpslEnrollmentMetadata>) fpslEnrollmentMetadata;
+  }
+
+  /** Metadata for the REGISTRATION_FUTURES enrollment type */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<FuturesEnrollmentMetadata> futuresEnrollmentMetadata() {
+    return (JsonNullable<FuturesEnrollmentMetadata>) futuresEnrollmentMetadata;
   }
 
   /** Metadata for the INDIVIDUAL enrollment type */
@@ -789,6 +806,22 @@ public class Enrollment {
       JsonNullable<? extends FpslEnrollmentMetadata> fpslEnrollmentMetadata) {
     Utils.checkNotNull(fpslEnrollmentMetadata, "fpslEnrollmentMetadata");
     this.fpslEnrollmentMetadata = fpslEnrollmentMetadata;
+    return this;
+  }
+
+  /** Metadata for the REGISTRATION_FUTURES enrollment type */
+  public Enrollment withFuturesEnrollmentMetadata(
+      FuturesEnrollmentMetadata futuresEnrollmentMetadata) {
+    Utils.checkNotNull(futuresEnrollmentMetadata, "futuresEnrollmentMetadata");
+    this.futuresEnrollmentMetadata = JsonNullable.of(futuresEnrollmentMetadata);
+    return this;
+  }
+
+  /** Metadata for the REGISTRATION_FUTURES enrollment type */
+  public Enrollment withFuturesEnrollmentMetadata(
+      JsonNullable<? extends FuturesEnrollmentMetadata> futuresEnrollmentMetadata) {
+    Utils.checkNotNull(futuresEnrollmentMetadata, "futuresEnrollmentMetadata");
+    this.futuresEnrollmentMetadata = futuresEnrollmentMetadata;
     return this;
   }
 
@@ -1193,6 +1226,7 @@ public class Enrollment {
         && Utils.enhancedDeepEquals(
             this.foreignJointAccountEnrollmentMetadata, other.foreignJointAccountEnrollmentMetadata)
         && Utils.enhancedDeepEquals(this.fpslEnrollmentMetadata, other.fpslEnrollmentMetadata)
+        && Utils.enhancedDeepEquals(this.futuresEnrollmentMetadata, other.futuresEnrollmentMetadata)
         && Utils.enhancedDeepEquals(
             this.individualEnrollmentMetadata, other.individualEnrollmentMetadata)
         && Utils.enhancedDeepEquals(
@@ -1247,6 +1281,7 @@ public class Enrollment {
         foreignIndividualAccountEnrollmentMetadata,
         foreignJointAccountEnrollmentMetadata,
         fpslEnrollmentMetadata,
+        futuresEnrollmentMetadata,
         individualEnrollmentMetadata,
         iraBeneficiaryEnrollmentMetadata,
         iraRolloverEnrollmentMetadata,
@@ -1294,6 +1329,8 @@ public class Enrollment {
         foreignJointAccountEnrollmentMetadata,
         "fpslEnrollmentMetadata",
         fpslEnrollmentMetadata,
+        "futuresEnrollmentMetadata",
+        futuresEnrollmentMetadata,
         "individualEnrollmentMetadata",
         individualEnrollmentMetadata,
         "iraBeneficiaryEnrollmentMetadata",
@@ -1366,6 +1403,9 @@ public class Enrollment {
         foreignJointAccountEnrollmentMetadata = JsonNullable.undefined();
 
     private JsonNullable<? extends FpslEnrollmentMetadata> fpslEnrollmentMetadata =
+        JsonNullable.undefined();
+
+    private JsonNullable<? extends FuturesEnrollmentMetadata> futuresEnrollmentMetadata =
         JsonNullable.undefined();
 
     private JsonNullable<? extends IndividualEnrollmentMetadata> individualEnrollmentMetadata =
@@ -1599,6 +1639,21 @@ public class Enrollment {
         JsonNullable<? extends FpslEnrollmentMetadata> fpslEnrollmentMetadata) {
       Utils.checkNotNull(fpslEnrollmentMetadata, "fpslEnrollmentMetadata");
       this.fpslEnrollmentMetadata = fpslEnrollmentMetadata;
+      return this;
+    }
+
+    /** Metadata for the REGISTRATION_FUTURES enrollment type */
+    public Builder futuresEnrollmentMetadata(FuturesEnrollmentMetadata futuresEnrollmentMetadata) {
+      Utils.checkNotNull(futuresEnrollmentMetadata, "futuresEnrollmentMetadata");
+      this.futuresEnrollmentMetadata = JsonNullable.of(futuresEnrollmentMetadata);
+      return this;
+    }
+
+    /** Metadata for the REGISTRATION_FUTURES enrollment type */
+    public Builder futuresEnrollmentMetadata(
+        JsonNullable<? extends FuturesEnrollmentMetadata> futuresEnrollmentMetadata) {
+      Utils.checkNotNull(futuresEnrollmentMetadata, "futuresEnrollmentMetadata");
+      this.futuresEnrollmentMetadata = futuresEnrollmentMetadata;
       return this;
     }
 
@@ -1989,6 +2044,7 @@ public class Enrollment {
           foreignIndividualAccountEnrollmentMetadata,
           foreignJointAccountEnrollmentMetadata,
           fpslEnrollmentMetadata,
+          futuresEnrollmentMetadata,
           individualEnrollmentMetadata,
           iraBeneficiaryEnrollmentMetadata,
           iraRolloverEnrollmentMetadata,

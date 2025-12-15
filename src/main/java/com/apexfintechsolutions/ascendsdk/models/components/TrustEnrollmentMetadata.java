@@ -28,6 +28,14 @@ public class TrustEnrollmentMetadata {
   @JsonProperty("fdic_cash_sweep")
   private Optional<? extends EnrollmentTrustEnrollmentMetadataFdicCashSweep> fdicCashSweep;
 
+  /**
+   * Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("money_market_fund_sweep")
+  private Optional<? extends EnrollmentTrustEnrollmentMetadataMoneyMarketFundSweep>
+      moneyMarketFundSweep;
+
   /** Trust account is opened on behalf of */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("opened_on_behalf_of")
@@ -40,18 +48,23 @@ public class TrustEnrollmentMetadata {
               dividendReinvestmentPlan,
       @JsonProperty("fdic_cash_sweep")
           Optional<? extends EnrollmentTrustEnrollmentMetadataFdicCashSweep> fdicCashSweep,
+      @JsonProperty("money_market_fund_sweep")
+          Optional<? extends EnrollmentTrustEnrollmentMetadataMoneyMarketFundSweep>
+              moneyMarketFundSweep,
       @JsonProperty("opened_on_behalf_of")
           Optional<? extends EnrollmentOpenedOnBehalfOf> openedOnBehalfOf) {
     Utils.checkNotNull(dividendReinvestmentPlan, "dividendReinvestmentPlan");
     Utils.checkNotNull(fdicCashSweep, "fdicCashSweep");
+    Utils.checkNotNull(moneyMarketFundSweep, "moneyMarketFundSweep");
     Utils.checkNotNull(openedOnBehalfOf, "openedOnBehalfOf");
     this.dividendReinvestmentPlan = dividendReinvestmentPlan;
     this.fdicCashSweep = fdicCashSweep;
+    this.moneyMarketFundSweep = moneyMarketFundSweep;
     this.openedOnBehalfOf = openedOnBehalfOf;
   }
 
   public TrustEnrollmentMetadata() {
-    this(Optional.empty(), Optional.empty(), Optional.empty());
+    this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */
@@ -68,6 +81,15 @@ public class TrustEnrollmentMetadata {
   @JsonIgnore
   public Optional<EnrollmentTrustEnrollmentMetadataFdicCashSweep> fdicCashSweep() {
     return (Optional<EnrollmentTrustEnrollmentMetadataFdicCashSweep>) fdicCashSweep;
+  }
+
+  /**
+   * Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<EnrollmentTrustEnrollmentMetadataMoneyMarketFundSweep> moneyMarketFundSweep() {
+    return (Optional<EnrollmentTrustEnrollmentMetadataMoneyMarketFundSweep>) moneyMarketFundSweep;
   }
 
   /** Trust account is opened on behalf of */
@@ -114,6 +136,27 @@ public class TrustEnrollmentMetadata {
     return this;
   }
 
+  /**
+   * Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+   */
+  public TrustEnrollmentMetadata withMoneyMarketFundSweep(
+      EnrollmentTrustEnrollmentMetadataMoneyMarketFundSweep moneyMarketFundSweep) {
+    Utils.checkNotNull(moneyMarketFundSweep, "moneyMarketFundSweep");
+    this.moneyMarketFundSweep = Optional.ofNullable(moneyMarketFundSweep);
+    return this;
+  }
+
+  /**
+   * Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+   */
+  public TrustEnrollmentMetadata withMoneyMarketFundSweep(
+      Optional<? extends EnrollmentTrustEnrollmentMetadataMoneyMarketFundSweep>
+          moneyMarketFundSweep) {
+    Utils.checkNotNull(moneyMarketFundSweep, "moneyMarketFundSweep");
+    this.moneyMarketFundSweep = moneyMarketFundSweep;
+    return this;
+  }
+
   /** Trust account is opened on behalf of */
   public TrustEnrollmentMetadata withOpenedOnBehalfOf(EnrollmentOpenedOnBehalfOf openedOnBehalfOf) {
     Utils.checkNotNull(openedOnBehalfOf, "openedOnBehalfOf");
@@ -140,12 +183,14 @@ public class TrustEnrollmentMetadata {
     TrustEnrollmentMetadata other = (TrustEnrollmentMetadata) o;
     return Utils.enhancedDeepEquals(this.dividendReinvestmentPlan, other.dividendReinvestmentPlan)
         && Utils.enhancedDeepEquals(this.fdicCashSweep, other.fdicCashSweep)
+        && Utils.enhancedDeepEquals(this.moneyMarketFundSweep, other.moneyMarketFundSweep)
         && Utils.enhancedDeepEquals(this.openedOnBehalfOf, other.openedOnBehalfOf);
   }
 
   @Override
   public int hashCode() {
-    return Utils.enhancedHash(dividendReinvestmentPlan, fdicCashSweep, openedOnBehalfOf);
+    return Utils.enhancedHash(
+        dividendReinvestmentPlan, fdicCashSweep, moneyMarketFundSweep, openedOnBehalfOf);
   }
 
   @Override
@@ -156,6 +201,8 @@ public class TrustEnrollmentMetadata {
         dividendReinvestmentPlan,
         "fdicCashSweep",
         fdicCashSweep,
+        "moneyMarketFundSweep",
+        moneyMarketFundSweep,
         "openedOnBehalfOf",
         openedOnBehalfOf);
   }
@@ -168,6 +215,9 @@ public class TrustEnrollmentMetadata {
 
     private Optional<? extends EnrollmentTrustEnrollmentMetadataFdicCashSweep> fdicCashSweep =
         Optional.empty();
+
+    private Optional<? extends EnrollmentTrustEnrollmentMetadataMoneyMarketFundSweep>
+        moneyMarketFundSweep = Optional.empty();
 
     private Optional<? extends EnrollmentOpenedOnBehalfOf> openedOnBehalfOf = Optional.empty();
 
@@ -207,6 +257,27 @@ public class TrustEnrollmentMetadata {
       return this;
     }
 
+    /**
+     * Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+     */
+    public Builder moneyMarketFundSweep(
+        EnrollmentTrustEnrollmentMetadataMoneyMarketFundSweep moneyMarketFundSweep) {
+      Utils.checkNotNull(moneyMarketFundSweep, "moneyMarketFundSweep");
+      this.moneyMarketFundSweep = Optional.ofNullable(moneyMarketFundSweep);
+      return this;
+    }
+
+    /**
+     * Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+     */
+    public Builder moneyMarketFundSweep(
+        Optional<? extends EnrollmentTrustEnrollmentMetadataMoneyMarketFundSweep>
+            moneyMarketFundSweep) {
+      Utils.checkNotNull(moneyMarketFundSweep, "moneyMarketFundSweep");
+      this.moneyMarketFundSweep = moneyMarketFundSweep;
+      return this;
+    }
+
     /** Trust account is opened on behalf of */
     public Builder openedOnBehalfOf(EnrollmentOpenedOnBehalfOf openedOnBehalfOf) {
       Utils.checkNotNull(openedOnBehalfOf, "openedOnBehalfOf");
@@ -224,7 +295,8 @@ public class TrustEnrollmentMetadata {
 
     public TrustEnrollmentMetadata build() {
 
-      return new TrustEnrollmentMetadata(dividendReinvestmentPlan, fdicCashSweep, openedOnBehalfOf);
+      return new TrustEnrollmentMetadata(
+          dividendReinvestmentPlan, fdicCashSweep, moneyMarketFundSweep, openedOnBehalfOf);
     }
   }
 }

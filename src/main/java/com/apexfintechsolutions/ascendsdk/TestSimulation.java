@@ -10,6 +10,7 @@ import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveAchWithd
 import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveCashJournalRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveIctDepositRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveIctWithdrawalRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveWireDepositRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveWireWithdrawalRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceNocAchDepositRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceNocAchWithdrawalRequestCreate;
@@ -18,10 +19,12 @@ import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectAchWithdr
 import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectCashJournalRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectIctDepositRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectIctWithdrawalRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectWireDepositRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectWireWithdrawalRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceReturnAchDepositRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceReturnAchWithdrawalRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.SimulateCreateCheckDepositRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.SimulateWireDepositRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchDepositsForceApproveAchDepositRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchDepositsForceApproveAchDepositRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchDepositsForceApproveAchDepositResponse;
@@ -70,6 +73,15 @@ import com.apexfintechsolutions.ascendsdk.models.operations.IctWithdrawalsForceA
 import com.apexfintechsolutions.ascendsdk.models.operations.IctWithdrawalsForceRejectIctWithdrawalRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.IctWithdrawalsForceRejectIctWithdrawalRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.IctWithdrawalsForceRejectIctWithdrawalResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.WireDepositsForceApproveWireDepositRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.WireDepositsForceApproveWireDepositRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.WireDepositsForceApproveWireDepositResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.WireDepositsForceRejectWireDepositRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.WireDepositsForceRejectWireDepositRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.WireDepositsForceRejectWireDepositResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.WireDepositsSimulateWireDepositRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.WireDepositsSimulateWireDepositRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.WireDepositsSimulateWireDepositResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.WireWithdrawalsForceApproveWireWithdrawalRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.WireWithdrawalsForceApproveWireWithdrawalRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.WireWithdrawalsForceApproveWireWithdrawalResponse;
@@ -92,6 +104,9 @@ import com.apexfintechsolutions.ascendsdk.operations.IctDepositsForceApproveIctD
 import com.apexfintechsolutions.ascendsdk.operations.IctDepositsForceRejectIctDeposit;
 import com.apexfintechsolutions.ascendsdk.operations.IctWithdrawalsForceApproveIctWithdrawal;
 import com.apexfintechsolutions.ascendsdk.operations.IctWithdrawalsForceRejectIctWithdrawal;
+import com.apexfintechsolutions.ascendsdk.operations.WireDepositsForceApproveWireDeposit;
+import com.apexfintechsolutions.ascendsdk.operations.WireDepositsForceRejectWireDeposit;
+import com.apexfintechsolutions.ascendsdk.operations.WireDepositsSimulateWireDeposit;
 import com.apexfintechsolutions.ascendsdk.operations.WireWithdrawalsForceApproveWireWithdrawal;
 import com.apexfintechsolutions.ascendsdk.operations.WireWithdrawalsForceRejectWireWithdrawal;
 import com.apexfintechsolutions.ascendsdk.utils.Options;
@@ -1096,6 +1111,182 @@ public class TestSimulation {
             WireWithdrawalsForceRejectWireWithdrawalRequest,
             WireWithdrawalsForceRejectWireWithdrawalResponse>
         operation = new WireWithdrawalsForceRejectWireWithdrawal.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Simulate Wire Deposit
+   *
+   * <p>Simulates the process of creating a wire deposit - FOR TESTING
+   *
+   * @return The call builder
+   */
+  public WireDepositsSimulateWireDepositRequestBuilder simulateWireDeposit() {
+    return new WireDepositsSimulateWireDepositRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * Simulate Wire Deposit
+   *
+   * <p>Simulates the process of creating a wire deposit - FOR TESTING
+   *
+   * @param accountId The account id.
+   * @param simulateWireDepositRequestCreate Request to simulate a wire deposit - FOR TESTING
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public WireDepositsSimulateWireDepositResponse simulateWireDeposit(
+      String accountId, SimulateWireDepositRequestCreate simulateWireDepositRequestCreate)
+      throws Exception {
+    return simulateWireDeposit(accountId, simulateWireDepositRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Simulate Wire Deposit
+   *
+   * <p>Simulates the process of creating a wire deposit - FOR TESTING
+   *
+   * @param accountId The account id.
+   * @param simulateWireDepositRequestCreate Request to simulate a wire deposit - FOR TESTING
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public WireDepositsSimulateWireDepositResponse simulateWireDeposit(
+      String accountId,
+      SimulateWireDepositRequestCreate simulateWireDepositRequestCreate,
+      Optional<Options> options)
+      throws Exception {
+    WireDepositsSimulateWireDepositRequest request =
+        WireDepositsSimulateWireDepositRequest.builder()
+            .accountId(accountId)
+            .simulateWireDepositRequestCreate(simulateWireDepositRequestCreate)
+            .build();
+    RequestOperation<
+            WireDepositsSimulateWireDepositRequest, WireDepositsSimulateWireDepositResponse>
+        operation = new WireDepositsSimulateWireDeposit.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Force Approve Wire Deposit
+   *
+   * <p>Simulates the process of approving a wire deposit - FOR TESTING
+   *
+   * @return The call builder
+   */
+  public WireDepositsForceApproveWireDepositRequestBuilder forceApproveWireDeposit() {
+    return new WireDepositsForceApproveWireDepositRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * Force Approve Wire Deposit
+   *
+   * <p>Simulates the process of approving a wire deposit - FOR TESTING
+   *
+   * @param accountId The account id.
+   * @param wireDepositId The wireDeposit id.
+   * @param forceApproveWireDepositRequestCreate Request to simulate approve of a wire deposit
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public WireDepositsForceApproveWireDepositResponse forceApproveWireDeposit(
+      String accountId,
+      String wireDepositId,
+      ForceApproveWireDepositRequestCreate forceApproveWireDepositRequestCreate)
+      throws Exception {
+    return forceApproveWireDeposit(
+        accountId, wireDepositId, forceApproveWireDepositRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Force Approve Wire Deposit
+   *
+   * <p>Simulates the process of approving a wire deposit - FOR TESTING
+   *
+   * @param accountId The account id.
+   * @param wireDepositId The wireDeposit id.
+   * @param forceApproveWireDepositRequestCreate Request to simulate approve of a wire deposit
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public WireDepositsForceApproveWireDepositResponse forceApproveWireDeposit(
+      String accountId,
+      String wireDepositId,
+      ForceApproveWireDepositRequestCreate forceApproveWireDepositRequestCreate,
+      Optional<Options> options)
+      throws Exception {
+    WireDepositsForceApproveWireDepositRequest request =
+        WireDepositsForceApproveWireDepositRequest.builder()
+            .accountId(accountId)
+            .wireDepositId(wireDepositId)
+            .forceApproveWireDepositRequestCreate(forceApproveWireDepositRequestCreate)
+            .build();
+    RequestOperation<
+            WireDepositsForceApproveWireDepositRequest, WireDepositsForceApproveWireDepositResponse>
+        operation = new WireDepositsForceApproveWireDeposit.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Force Reject Wire Deposit
+   *
+   * <p>Forces a rejection on an existing wire deposit pending review - FOR TESTING
+   *
+   * @return The call builder
+   */
+  public WireDepositsForceRejectWireDepositRequestBuilder forceRejectWireDeposit() {
+    return new WireDepositsForceRejectWireDepositRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * Force Reject Wire Deposit
+   *
+   * <p>Forces a rejection on an existing wire deposit pending review - FOR TESTING
+   *
+   * @param accountId The account id.
+   * @param wireDepositId The wireDeposit id.
+   * @param forceRejectWireDepositRequestCreate Request to simulate the rejection of a wire deposit
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public WireDepositsForceRejectWireDepositResponse forceRejectWireDeposit(
+      String accountId,
+      String wireDepositId,
+      ForceRejectWireDepositRequestCreate forceRejectWireDepositRequestCreate)
+      throws Exception {
+    return forceRejectWireDeposit(
+        accountId, wireDepositId, forceRejectWireDepositRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Force Reject Wire Deposit
+   *
+   * <p>Forces a rejection on an existing wire deposit pending review - FOR TESTING
+   *
+   * @param accountId The account id.
+   * @param wireDepositId The wireDeposit id.
+   * @param forceRejectWireDepositRequestCreate Request to simulate the rejection of a wire deposit
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public WireDepositsForceRejectWireDepositResponse forceRejectWireDeposit(
+      String accountId,
+      String wireDepositId,
+      ForceRejectWireDepositRequestCreate forceRejectWireDepositRequestCreate,
+      Optional<Options> options)
+      throws Exception {
+    WireDepositsForceRejectWireDepositRequest request =
+        WireDepositsForceRejectWireDepositRequest.builder()
+            .accountId(accountId)
+            .wireDepositId(wireDepositId)
+            .forceRejectWireDepositRequestCreate(forceRejectWireDepositRequestCreate)
+            .build();
+    RequestOperation<
+            WireDepositsForceRejectWireDepositRequest, WireDepositsForceRejectWireDepositResponse>
+        operation = new WireDepositsForceRejectWireDeposit.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
