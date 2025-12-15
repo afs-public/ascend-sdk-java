@@ -19,12 +19,12 @@ import org.openapitools.jackson.nullable.JsonNullable;
  * <p>Legal natural person.
  */
 public class PartyLegalNaturalPerson {
-  /** Indicates whether the person is an accredited investor */
+  /** Indicates whether the person is an accredited investor. By default, this is set to `false`. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("accredited_investor")
   private Optional<Boolean> accreditedInvestor;
 
-  /** Indicates whether the person is an adviser */
+  /** Indicates whether the person is an adviser. By default, this is set to `false`. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("adviser")
   private Optional<Boolean> adviser;
@@ -54,7 +54,7 @@ public class PartyLegalNaturalPerson {
 
   /**
    * Indicates the related owner record is an employee of the clearing broker's correspondent
-   * customer.
+   * customer. By default, this is set to `false`.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("correspondent_employee")
@@ -68,7 +68,10 @@ public class PartyLegalNaturalPerson {
   @JsonProperty("correspondent_id")
   private Optional<String> correspondentId;
 
-  /** A flag to indicate whether this person is an employee of the correspondent. */
+  /**
+   * A flag to indicate whether this person is an employee of the correspondent. By default, this is
+   * set to `false`.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("custodian_employee")
   private Optional<Boolean> custodianEmployee;
@@ -142,7 +145,9 @@ public class PartyLegalNaturalPerson {
   @JsonProperty("identity_verification_result")
   private JsonNullable<? extends PartyIdentityVerificationResult> identityVerificationResult;
 
-  /** Indicates whether the person is an institutional customer */
+  /**
+   * Indicates whether the person is an institutional customer. By default, this is set to `false`.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("institutional_customer")
   private Optional<Boolean> institutionalCustomer;
@@ -421,13 +426,13 @@ public class PartyLegalNaturalPerson {
         JsonNullable.undefined());
   }
 
-  /** Indicates whether the person is an accredited investor */
+  /** Indicates whether the person is an accredited investor. By default, this is set to `false`. */
   @JsonIgnore
   public Optional<Boolean> accreditedInvestor() {
     return accreditedInvestor;
   }
 
-  /** Indicates whether the person is an adviser */
+  /** Indicates whether the person is an adviser. By default, this is set to `false`. */
   @JsonIgnore
   public Optional<Boolean> adviser() {
     return adviser;
@@ -463,7 +468,7 @@ public class PartyLegalNaturalPerson {
 
   /**
    * Indicates the related owner record is an employee of the clearing broker's correspondent
-   * customer.
+   * customer. By default, this is set to `false`.
    */
   @JsonIgnore
   public Optional<Boolean> correspondentEmployee() {
@@ -479,7 +484,10 @@ public class PartyLegalNaturalPerson {
     return correspondentId;
   }
 
-  /** A flag to indicate whether this person is an employee of the correspondent. */
+  /**
+   * A flag to indicate whether this person is an employee of the correspondent. By default, this is
+   * set to `false`.
+   */
   @JsonIgnore
   public Optional<Boolean> custodianEmployee() {
     return custodianEmployee;
@@ -569,7 +577,9 @@ public class PartyLegalNaturalPerson {
     return (JsonNullable<PartyIdentityVerificationResult>) identityVerificationResult;
   }
 
-  /** Indicates whether the person is an institutional customer */
+  /**
+   * Indicates whether the person is an institutional customer. By default, this is set to `false`.
+   */
   @JsonIgnore
   public Optional<Boolean> institutionalCustomer() {
     return institutionalCustomer;
@@ -720,28 +730,28 @@ public class PartyLegalNaturalPerson {
     return new Builder();
   }
 
-  /** Indicates whether the person is an accredited investor */
+  /** Indicates whether the person is an accredited investor. By default, this is set to `false`. */
   public PartyLegalNaturalPerson withAccreditedInvestor(boolean accreditedInvestor) {
     Utils.checkNotNull(accreditedInvestor, "accreditedInvestor");
     this.accreditedInvestor = Optional.ofNullable(accreditedInvestor);
     return this;
   }
 
-  /** Indicates whether the person is an accredited investor */
+  /** Indicates whether the person is an accredited investor. By default, this is set to `false`. */
   public PartyLegalNaturalPerson withAccreditedInvestor(Optional<Boolean> accreditedInvestor) {
     Utils.checkNotNull(accreditedInvestor, "accreditedInvestor");
     this.accreditedInvestor = accreditedInvestor;
     return this;
   }
 
-  /** Indicates whether the person is an adviser */
+  /** Indicates whether the person is an adviser. By default, this is set to `false`. */
   public PartyLegalNaturalPerson withAdviser(boolean adviser) {
     Utils.checkNotNull(adviser, "adviser");
     this.adviser = Optional.ofNullable(adviser);
     return this;
   }
 
-  /** Indicates whether the person is an adviser */
+  /** Indicates whether the person is an adviser. By default, this is set to `false`. */
   public PartyLegalNaturalPerson withAdviser(Optional<Boolean> adviser) {
     Utils.checkNotNull(adviser, "adviser");
     this.adviser = adviser;
@@ -811,7 +821,7 @@ public class PartyLegalNaturalPerson {
 
   /**
    * Indicates the related owner record is an employee of the clearing broker's correspondent
-   * customer.
+   * customer. By default, this is set to `false`.
    */
   public PartyLegalNaturalPerson withCorrespondentEmployee(boolean correspondentEmployee) {
     Utils.checkNotNull(correspondentEmployee, "correspondentEmployee");
@@ -821,7 +831,7 @@ public class PartyLegalNaturalPerson {
 
   /**
    * Indicates the related owner record is an employee of the clearing broker's correspondent
-   * customer.
+   * customer. By default, this is set to `false`.
    */
   public PartyLegalNaturalPerson withCorrespondentEmployee(
       Optional<Boolean> correspondentEmployee) {
@@ -850,14 +860,20 @@ public class PartyLegalNaturalPerson {
     return this;
   }
 
-  /** A flag to indicate whether this person is an employee of the correspondent. */
+  /**
+   * A flag to indicate whether this person is an employee of the correspondent. By default, this is
+   * set to `false`.
+   */
   public PartyLegalNaturalPerson withCustodianEmployee(boolean custodianEmployee) {
     Utils.checkNotNull(custodianEmployee, "custodianEmployee");
     this.custodianEmployee = Optional.ofNullable(custodianEmployee);
     return this;
   }
 
-  /** A flag to indicate whether this person is an employee of the correspondent. */
+  /**
+   * A flag to indicate whether this person is an employee of the correspondent. By default, this is
+   * set to `false`.
+   */
   public PartyLegalNaturalPerson withCustodianEmployee(Optional<Boolean> custodianEmployee) {
     Utils.checkNotNull(custodianEmployee, "custodianEmployee");
     this.custodianEmployee = custodianEmployee;
@@ -1049,14 +1065,18 @@ public class PartyLegalNaturalPerson {
     return this;
   }
 
-  /** Indicates whether the person is an institutional customer */
+  /**
+   * Indicates whether the person is an institutional customer. By default, this is set to `false`.
+   */
   public PartyLegalNaturalPerson withInstitutionalCustomer(boolean institutionalCustomer) {
     Utils.checkNotNull(institutionalCustomer, "institutionalCustomer");
     this.institutionalCustomer = Optional.ofNullable(institutionalCustomer);
     return this;
   }
 
-  /** Indicates whether the person is an institutional customer */
+  /**
+   * Indicates whether the person is an institutional customer. By default, this is set to `false`.
+   */
   public PartyLegalNaturalPerson withInstitutionalCustomer(
       Optional<Boolean> institutionalCustomer) {
     Utils.checkNotNull(institutionalCustomer, "institutionalCustomer");
@@ -1626,28 +1646,32 @@ public class PartyLegalNaturalPerson {
       // force use of static builder() method
     }
 
-    /** Indicates whether the person is an accredited investor */
+    /**
+     * Indicates whether the person is an accredited investor. By default, this is set to `false`.
+     */
     public Builder accreditedInvestor(boolean accreditedInvestor) {
       Utils.checkNotNull(accreditedInvestor, "accreditedInvestor");
       this.accreditedInvestor = Optional.ofNullable(accreditedInvestor);
       return this;
     }
 
-    /** Indicates whether the person is an accredited investor */
+    /**
+     * Indicates whether the person is an accredited investor. By default, this is set to `false`.
+     */
     public Builder accreditedInvestor(Optional<Boolean> accreditedInvestor) {
       Utils.checkNotNull(accreditedInvestor, "accreditedInvestor");
       this.accreditedInvestor = accreditedInvestor;
       return this;
     }
 
-    /** Indicates whether the person is an adviser */
+    /** Indicates whether the person is an adviser. By default, this is set to `false`. */
     public Builder adviser(boolean adviser) {
       Utils.checkNotNull(adviser, "adviser");
       this.adviser = Optional.ofNullable(adviser);
       return this;
     }
 
-    /** Indicates whether the person is an adviser */
+    /** Indicates whether the person is an adviser. By default, this is set to `false`. */
     public Builder adviser(Optional<Boolean> adviser) {
       Utils.checkNotNull(adviser, "adviser");
       this.adviser = adviser;
@@ -1714,7 +1738,7 @@ public class PartyLegalNaturalPerson {
 
     /**
      * Indicates the related owner record is an employee of the clearing broker's correspondent
-     * customer.
+     * customer. By default, this is set to `false`.
      */
     public Builder correspondentEmployee(boolean correspondentEmployee) {
       Utils.checkNotNull(correspondentEmployee, "correspondentEmployee");
@@ -1724,7 +1748,7 @@ public class PartyLegalNaturalPerson {
 
     /**
      * Indicates the related owner record is an employee of the clearing broker's correspondent
-     * customer.
+     * customer. By default, this is set to `false`.
      */
     public Builder correspondentEmployee(Optional<Boolean> correspondentEmployee) {
       Utils.checkNotNull(correspondentEmployee, "correspondentEmployee");
@@ -1752,14 +1776,20 @@ public class PartyLegalNaturalPerson {
       return this;
     }
 
-    /** A flag to indicate whether this person is an employee of the correspondent. */
+    /**
+     * A flag to indicate whether this person is an employee of the correspondent. By default, this
+     * is set to `false`.
+     */
     public Builder custodianEmployee(boolean custodianEmployee) {
       Utils.checkNotNull(custodianEmployee, "custodianEmployee");
       this.custodianEmployee = Optional.ofNullable(custodianEmployee);
       return this;
     }
 
-    /** A flag to indicate whether this person is an employee of the correspondent. */
+    /**
+     * A flag to indicate whether this person is an employee of the correspondent. By default, this
+     * is set to `false`.
+     */
     public Builder custodianEmployee(Optional<Boolean> custodianEmployee) {
       Utils.checkNotNull(custodianEmployee, "custodianEmployee");
       this.custodianEmployee = custodianEmployee;
@@ -1947,14 +1977,20 @@ public class PartyLegalNaturalPerson {
       return this;
     }
 
-    /** Indicates whether the person is an institutional customer */
+    /**
+     * Indicates whether the person is an institutional customer. By default, this is set to
+     * `false`.
+     */
     public Builder institutionalCustomer(boolean institutionalCustomer) {
       Utils.checkNotNull(institutionalCustomer, "institutionalCustomer");
       this.institutionalCustomer = Optional.ofNullable(institutionalCustomer);
       return this;
     }
 
-    /** Indicates whether the person is an institutional customer */
+    /**
+     * Indicates whether the person is an institutional customer. By default, this is set to
+     * `false`.
+     */
     public Builder institutionalCustomer(Optional<Boolean> institutionalCustomer) {
       Utils.checkNotNull(institutionalCustomer, "institutionalCustomer");
       this.institutionalCustomer = institutionalCustomer;

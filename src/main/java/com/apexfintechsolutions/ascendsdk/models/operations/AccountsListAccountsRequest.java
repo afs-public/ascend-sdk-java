@@ -30,7 +30,7 @@ public class AccountsListAccountsRequest {
 
   /**
    * The order in which accounts are listed. Can order by: `account_id` `account_number` `title`
-   * `state` `account_group_id`
+   * `state` `account_group_id` `create_time`
    */
   @SpeakeasyMetadata("queryParam:style=form,explode=true,name=order_by")
   private Optional<String> orderBy;
@@ -48,7 +48,8 @@ public class AccountsListAccountsRequest {
    * `parties.legal_entity.tax_id_type` `parties.legal_entity.tax_id`
    * `parties.legal_natural_person.foreign_identification.identification_number`
    * `parties.legal_natural_person.foreign_identification.type` `enrollments.enrollment_id`
-   * `enrollments.type` `enrollments.state` `identifiers.type` `identifiers.value`
+   * `enrollments.type` `enrollments.state` `identifiers.type` `identifiers.value` `create_time`
+   * with format of timestamp("2025-08-13T18:31:40Z")
    */
   @SpeakeasyMetadata("queryParam:style=form,explode=true,name=filter")
   private Optional<String> filter;
@@ -104,7 +105,7 @@ public class AccountsListAccountsRequest {
 
   /**
    * The order in which accounts are listed. Can order by: `account_id` `account_number` `title`
-   * `state` `account_group_id`
+   * `state` `account_group_id` `create_time`
    */
   @JsonIgnore
   public Optional<String> orderBy() {
@@ -124,7 +125,8 @@ public class AccountsListAccountsRequest {
    * `parties.legal_entity.tax_id_type` `parties.legal_entity.tax_id`
    * `parties.legal_natural_person.foreign_identification.identification_number`
    * `parties.legal_natural_person.foreign_identification.type` `enrollments.enrollment_id`
-   * `enrollments.type` `enrollments.state` `identifiers.type` `identifiers.value`
+   * `enrollments.type` `enrollments.state` `identifiers.type` `identifiers.value` `create_time`
+   * with format of timestamp("2025-08-13T18:31:40Z")
    */
   @JsonIgnore
   public Optional<String> filter() {
@@ -192,7 +194,7 @@ public class AccountsListAccountsRequest {
 
   /**
    * The order in which accounts are listed. Can order by: `account_id` `account_number` `title`
-   * `state` `account_group_id`
+   * `state` `account_group_id` `create_time`
    */
   public AccountsListAccountsRequest withOrderBy(String orderBy) {
     Utils.checkNotNull(orderBy, "orderBy");
@@ -202,7 +204,7 @@ public class AccountsListAccountsRequest {
 
   /**
    * The order in which accounts are listed. Can order by: `account_id` `account_number` `title`
-   * `state` `account_group_id`
+   * `state` `account_group_id` `create_time`
    */
   public AccountsListAccountsRequest withOrderBy(Optional<String> orderBy) {
     Utils.checkNotNull(orderBy, "orderBy");
@@ -223,7 +225,8 @@ public class AccountsListAccountsRequest {
    * `parties.legal_entity.tax_id_type` `parties.legal_entity.tax_id`
    * `parties.legal_natural_person.foreign_identification.identification_number`
    * `parties.legal_natural_person.foreign_identification.type` `enrollments.enrollment_id`
-   * `enrollments.type` `enrollments.state` `identifiers.type` `identifiers.value`
+   * `enrollments.type` `enrollments.state` `identifiers.type` `identifiers.value` `create_time`
+   * with format of timestamp("2025-08-13T18:31:40Z")
    */
   public AccountsListAccountsRequest withFilter(String filter) {
     Utils.checkNotNull(filter, "filter");
@@ -244,7 +247,8 @@ public class AccountsListAccountsRequest {
    * `parties.legal_entity.tax_id_type` `parties.legal_entity.tax_id`
    * `parties.legal_natural_person.foreign_identification.identification_number`
    * `parties.legal_natural_person.foreign_identification.type` `enrollments.enrollment_id`
-   * `enrollments.type` `enrollments.state` `identifiers.type` `identifiers.value`
+   * `enrollments.type` `enrollments.state` `identifiers.type` `identifiers.value` `create_time`
+   * with format of timestamp("2025-08-13T18:31:40Z")
    */
   public AccountsListAccountsRequest withFilter(Optional<String> filter) {
     Utils.checkNotNull(filter, "filter");
@@ -370,7 +374,7 @@ public class AccountsListAccountsRequest {
 
     /**
      * The order in which accounts are listed. Can order by: `account_id` `account_number` `title`
-     * `state` `account_group_id`
+     * `state` `account_group_id` `create_time`
      */
     public Builder orderBy(String orderBy) {
       Utils.checkNotNull(orderBy, "orderBy");
@@ -380,7 +384,7 @@ public class AccountsListAccountsRequest {
 
     /**
      * The order in which accounts are listed. Can order by: `account_id` `account_number` `title`
-     * `state` `account_group_id`
+     * `state` `account_group_id` `create_time`
      */
     public Builder orderBy(Optional<String> orderBy) {
       Utils.checkNotNull(orderBy, "orderBy");
@@ -402,7 +406,8 @@ public class AccountsListAccountsRequest {
      * `parties.legal_entity.tax_id_type` `parties.legal_entity.tax_id`
      * `parties.legal_natural_person.foreign_identification.identification_number`
      * `parties.legal_natural_person.foreign_identification.type` `enrollments.enrollment_id`
-     * `enrollments.type` `enrollments.state` `identifiers.type` `identifiers.value`
+     * `enrollments.type` `enrollments.state` `identifiers.type` `identifiers.value` `create_time`
+     * with format of timestamp("2025-08-13T18:31:40Z")
      */
     public Builder filter(String filter) {
       Utils.checkNotNull(filter, "filter");
@@ -424,7 +429,8 @@ public class AccountsListAccountsRequest {
      * `parties.legal_entity.tax_id_type` `parties.legal_entity.tax_id`
      * `parties.legal_natural_person.foreign_identification.identification_number`
      * `parties.legal_natural_person.foreign_identification.type` `enrollments.enrollment_id`
-     * `enrollments.type` `enrollments.state` `identifiers.type` `identifiers.value`
+     * `enrollments.type` `enrollments.state` `identifiers.type` `identifiers.value` `create_time`
+     * with format of timestamp("2025-08-13T18:31:40Z")
      */
     public Builder filter(Optional<String> filter) {
       Utils.checkNotNull(filter, "filter");

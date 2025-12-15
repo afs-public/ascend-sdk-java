@@ -37,6 +37,7 @@ model {
     }
 }
 
+
 jar {
     dependsOn(":generatePomFileForMavenPublication")
 
@@ -80,7 +81,7 @@ publishing {
             // https://github.com/gradle/gradle/issues/18619
             groupId = "com.apexfintechsolutions"
             artifactId = "ascendsdk"
-            version = "1.6.0"
+            version = "1.6.1"
 
             from components.java
 

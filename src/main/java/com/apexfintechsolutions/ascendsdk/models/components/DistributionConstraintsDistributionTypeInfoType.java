@@ -98,6 +98,9 @@ public class DistributionConstraintsDistributionTypeInfoType {
       new DistributionConstraintsDistributionTypeInfoType("REVOCATION");
   public static final DistributionConstraintsDistributionTypeInfoType NON_REPORTABLE =
       new DistributionConstraintsDistributionTypeInfoType("NON_REPORTABLE");
+  public static final DistributionConstraintsDistributionTypeInfoType
+      QUALIFIED_CHARITABLE_DISTRIBUTION =
+          new DistributionConstraintsDistributionTypeInfoType("QUALIFIED_CHARITABLE_DISTRIBUTION");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -196,6 +199,7 @@ public class DistributionConstraintsDistributionTypeInfoType {
     map.put("NET_INCOME_ATTRIBUTABLE", NET_INCOME_ATTRIBUTABLE);
     map.put("REVOCATION", REVOCATION);
     map.put("NON_REPORTABLE", NON_REPORTABLE);
+    map.put("QUALIFIED_CHARITABLE_DISTRIBUTION", QUALIFIED_CHARITABLE_DISTRIBUTION);
     return map;
   }
 
@@ -246,6 +250,9 @@ public class DistributionConstraintsDistributionTypeInfoType {
         DistributionConstraintsDistributionTypeInfoTypeEnum.NET_INCOME_ATTRIBUTABLE);
     map.put("REVOCATION", DistributionConstraintsDistributionTypeInfoTypeEnum.REVOCATION);
     map.put("NON_REPORTABLE", DistributionConstraintsDistributionTypeInfoTypeEnum.NON_REPORTABLE);
+    map.put(
+        "QUALIFIED_CHARITABLE_DISTRIBUTION",
+        DistributionConstraintsDistributionTypeInfoTypeEnum.QUALIFIED_CHARITABLE_DISTRIBUTION);
     return map;
   }
 
@@ -308,6 +315,7 @@ public class DistributionConstraintsDistributionTypeInfoType {
     NET_INCOME_ATTRIBUTABLE("NET_INCOME_ATTRIBUTABLE"),
     REVOCATION("REVOCATION"),
     NON_REPORTABLE("NON_REPORTABLE"),
+    QUALIFIED_CHARITABLE_DISTRIBUTION("QUALIFIED_CHARITABLE_DISTRIBUTION"),
     ;
 
     private final String value;

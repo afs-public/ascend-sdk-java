@@ -52,6 +52,8 @@ public class PartyTaxpayerCertificationState {
       new PartyTaxpayerCertificationState("CERTIFIED");
   public static final PartyTaxpayerCertificationState UNCERTIFIED =
       new PartyTaxpayerCertificationState("UNCERTIFIED");
+  public static final PartyTaxpayerCertificationState PENDING_CERTIFICATION =
+      new PartyTaxpayerCertificationState("PENDING_CERTIFICATION");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -123,6 +125,7 @@ public class PartyTaxpayerCertificationState {
     map.put("TAXPAYER_CERTIFICATION_STATE_UNSPECIFIED", TAXPAYER_CERTIFICATION_STATE_UNSPECIFIED);
     map.put("CERTIFIED", CERTIFIED);
     map.put("UNCERTIFIED", UNCERTIFIED);
+    map.put("PENDING_CERTIFICATION", PENDING_CERTIFICATION);
     return map;
   }
 
@@ -133,6 +136,7 @@ public class PartyTaxpayerCertificationState {
         PartyTaxpayerCertificationStateEnum.TAXPAYER_CERTIFICATION_STATE_UNSPECIFIED);
     map.put("CERTIFIED", PartyTaxpayerCertificationStateEnum.CERTIFIED);
     map.put("UNCERTIFIED", PartyTaxpayerCertificationStateEnum.UNCERTIFIED);
+    map.put("PENDING_CERTIFICATION", PartyTaxpayerCertificationStateEnum.PENDING_CERTIFICATION);
     return map;
   }
 
@@ -171,6 +175,7 @@ public class PartyTaxpayerCertificationState {
     TAXPAYER_CERTIFICATION_STATE_UNSPECIFIED("TAXPAYER_CERTIFICATION_STATE_UNSPECIFIED"),
     CERTIFIED("CERTIFIED"),
     UNCERTIFIED("UNCERTIFIED"),
+    PENDING_CERTIFICATION("PENDING_CERTIFICATION"),
     ;
 
     private final String value;

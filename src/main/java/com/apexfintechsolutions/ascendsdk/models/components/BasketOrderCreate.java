@@ -32,7 +32,10 @@ public class BasketOrderCreate {
   @JsonProperty("client_order_id")
   private String clientOrderId;
 
-  /** Time the order request was received by the client. Must be in the past. */
+  /**
+   * Time the order request was received by the client. Must be in the past. Timezone will default
+   * to UTC if not provided.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("client_order_received_time")
   private JsonNullable<OffsetDateTime> clientOrderReceivedTime;
@@ -44,6 +47,11 @@ public class BasketOrderCreate {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("currency_code")
   private Optional<String> currencyCode;
+
+  /** Any extra reporting data provided by the client for an order */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("extra_reporting_data")
+  private Optional<? extends ExtraReportingDataCreate> extraReportingData;
 
   /** Identifier of the asset (of the type specified in `identifier_type`). */
   @JsonProperty("identifier")
@@ -123,6 +131,8 @@ public class BasketOrderCreate {
       @JsonProperty("client_order_received_time")
           JsonNullable<OffsetDateTime> clientOrderReceivedTime,
       @JsonProperty("currency_code") Optional<String> currencyCode,
+      @JsonProperty("extra_reporting_data")
+          Optional<? extends ExtraReportingDataCreate> extraReportingData,
       @JsonProperty("identifier") String identifier,
       @JsonProperty("identifier_type") BasketOrderCreateIdentifierType identifierType,
       @JsonProperty("max_sell_quantity") Optional<? extends DecimalCreate> maxSellQuantity,
@@ -139,6 +149,7 @@ public class BasketOrderCreate {
     Utils.checkNotNull(clientOrderId, "clientOrderId");
     Utils.checkNotNull(clientOrderReceivedTime, "clientOrderReceivedTime");
     Utils.checkNotNull(currencyCode, "currencyCode");
+    Utils.checkNotNull(extraReportingData, "extraReportingData");
     Utils.checkNotNull(identifier, "identifier");
     Utils.checkNotNull(identifierType, "identifierType");
     Utils.checkNotNull(maxSellQuantity, "maxSellQuantity");
@@ -153,6 +164,7 @@ public class BasketOrderCreate {
     this.clientOrderId = clientOrderId;
     this.clientOrderReceivedTime = clientOrderReceivedTime;
     this.currencyCode = currencyCode;
+    this.extraReportingData = extraReportingData;
     this.identifier = identifier;
     this.identifierType = identifierType;
     this.maxSellQuantity = maxSellQuantity;
@@ -178,6 +190,7 @@ public class BasketOrderCreate {
         assetType,
         clientOrderId,
         JsonNullable.undefined(),
+        Optional.empty(),
         Optional.empty(),
         identifier,
         identifierType,
@@ -208,7 +221,10 @@ public class BasketOrderCreate {
     return clientOrderId;
   }
 
-  /** Time the order request was received by the client. Must be in the past. */
+  /**
+   * Time the order request was received by the client. Must be in the past. Timezone will default
+   * to UTC if not provided.
+   */
   @JsonIgnore
   public JsonNullable<OffsetDateTime> clientOrderReceivedTime() {
     return clientOrderReceivedTime;
@@ -221,6 +237,13 @@ public class BasketOrderCreate {
   @JsonIgnore
   public Optional<String> currencyCode() {
     return currencyCode;
+  }
+
+  /** Any extra reporting data provided by the client for an order */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<ExtraReportingDataCreate> extraReportingData() {
+    return (Optional<ExtraReportingDataCreate>) extraReportingData;
   }
 
   /** Identifier of the asset (of the type specified in `identifier_type`). */
@@ -337,14 +360,20 @@ public class BasketOrderCreate {
     return this;
   }
 
-  /** Time the order request was received by the client. Must be in the past. */
+  /**
+   * Time the order request was received by the client. Must be in the past. Timezone will default
+   * to UTC if not provided.
+   */
   public BasketOrderCreate withClientOrderReceivedTime(OffsetDateTime clientOrderReceivedTime) {
     Utils.checkNotNull(clientOrderReceivedTime, "clientOrderReceivedTime");
     this.clientOrderReceivedTime = JsonNullable.of(clientOrderReceivedTime);
     return this;
   }
 
-  /** Time the order request was received by the client. Must be in the past. */
+  /**
+   * Time the order request was received by the client. Must be in the past. Timezone will default
+   * to UTC if not provided.
+   */
   public BasketOrderCreate withClientOrderReceivedTime(
       JsonNullable<OffsetDateTime> clientOrderReceivedTime) {
     Utils.checkNotNull(clientOrderReceivedTime, "clientOrderReceivedTime");
@@ -369,6 +398,21 @@ public class BasketOrderCreate {
   public BasketOrderCreate withCurrencyCode(Optional<String> currencyCode) {
     Utils.checkNotNull(currencyCode, "currencyCode");
     this.currencyCode = currencyCode;
+    return this;
+  }
+
+  /** Any extra reporting data provided by the client for an order */
+  public BasketOrderCreate withExtraReportingData(ExtraReportingDataCreate extraReportingData) {
+    Utils.checkNotNull(extraReportingData, "extraReportingData");
+    this.extraReportingData = Optional.ofNullable(extraReportingData);
+    return this;
+  }
+
+  /** Any extra reporting data provided by the client for an order */
+  public BasketOrderCreate withExtraReportingData(
+      Optional<? extends ExtraReportingDataCreate> extraReportingData) {
+    Utils.checkNotNull(extraReportingData, "extraReportingData");
+    this.extraReportingData = extraReportingData;
     return this;
   }
 
@@ -532,6 +576,7 @@ public class BasketOrderCreate {
         && Utils.enhancedDeepEquals(this.clientOrderId, other.clientOrderId)
         && Utils.enhancedDeepEquals(this.clientOrderReceivedTime, other.clientOrderReceivedTime)
         && Utils.enhancedDeepEquals(this.currencyCode, other.currencyCode)
+        && Utils.enhancedDeepEquals(this.extraReportingData, other.extraReportingData)
         && Utils.enhancedDeepEquals(this.identifier, other.identifier)
         && Utils.enhancedDeepEquals(this.identifierType, other.identifierType)
         && Utils.enhancedDeepEquals(this.maxSellQuantity, other.maxSellQuantity)
@@ -552,6 +597,7 @@ public class BasketOrderCreate {
         clientOrderId,
         clientOrderReceivedTime,
         currencyCode,
+        extraReportingData,
         identifier,
         identifierType,
         maxSellQuantity,
@@ -577,6 +623,8 @@ public class BasketOrderCreate {
         clientOrderReceivedTime,
         "currencyCode",
         currencyCode,
+        "extraReportingData",
+        extraReportingData,
         "identifier",
         identifier,
         "identifierType",
@@ -609,6 +657,8 @@ public class BasketOrderCreate {
     private JsonNullable<OffsetDateTime> clientOrderReceivedTime = JsonNullable.undefined();
 
     private Optional<String> currencyCode = Optional.empty();
+
+    private Optional<? extends ExtraReportingDataCreate> extraReportingData = Optional.empty();
 
     private String identifier;
 
@@ -654,14 +704,20 @@ public class BasketOrderCreate {
       return this;
     }
 
-    /** Time the order request was received by the client. Must be in the past. */
+    /**
+     * Time the order request was received by the client. Must be in the past. Timezone will default
+     * to UTC if not provided.
+     */
     public Builder clientOrderReceivedTime(OffsetDateTime clientOrderReceivedTime) {
       Utils.checkNotNull(clientOrderReceivedTime, "clientOrderReceivedTime");
       this.clientOrderReceivedTime = JsonNullable.of(clientOrderReceivedTime);
       return this;
     }
 
-    /** Time the order request was received by the client. Must be in the past. */
+    /**
+     * Time the order request was received by the client. Must be in the past. Timezone will default
+     * to UTC if not provided.
+     */
     public Builder clientOrderReceivedTime(JsonNullable<OffsetDateTime> clientOrderReceivedTime) {
       Utils.checkNotNull(clientOrderReceivedTime, "clientOrderReceivedTime");
       this.clientOrderReceivedTime = clientOrderReceivedTime;
@@ -685,6 +741,21 @@ public class BasketOrderCreate {
     public Builder currencyCode(Optional<String> currencyCode) {
       Utils.checkNotNull(currencyCode, "currencyCode");
       this.currencyCode = currencyCode;
+      return this;
+    }
+
+    /** Any extra reporting data provided by the client for an order */
+    public Builder extraReportingData(ExtraReportingDataCreate extraReportingData) {
+      Utils.checkNotNull(extraReportingData, "extraReportingData");
+      this.extraReportingData = Optional.ofNullable(extraReportingData);
+      return this;
+    }
+
+    /** Any extra reporting data provided by the client for an order */
+    public Builder extraReportingData(
+        Optional<? extends ExtraReportingDataCreate> extraReportingData) {
+      Utils.checkNotNull(extraReportingData, "extraReportingData");
+      this.extraReportingData = extraReportingData;
       return this;
     }
 
@@ -850,6 +921,7 @@ public class BasketOrderCreate {
           clientOrderId,
           clientOrderReceivedTime,
           currencyCode,
+          extraReportingData,
           identifier,
           identifierType,
           maxSellQuantity,

@@ -38,6 +38,7 @@ public class AccountsListLegalNaturalPersonsRequest {
    * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    * Guides for more information; Filter options include: `legal_natural_person_id`
    * `correspondent_id` `given_name` `family_name` `tax_id` `tax_id_type` `investigation_id`
+   * `foreign_identification.identification_number`
    */
   @SpeakeasyMetadata("queryParam:style=form,explode=true,name=filter")
   private Optional<String> filter;
@@ -96,6 +97,7 @@ public class AccountsListLegalNaturalPersonsRequest {
    * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    * Guides for more information; Filter options include: `legal_natural_person_id`
    * `correspondent_id` `given_name` `family_name` `tax_id` `tax_id_type` `investigation_id`
+   * `foreign_identification.identification_number`
    */
   @JsonIgnore
   public Optional<String> filter() {
@@ -174,6 +176,7 @@ public class AccountsListLegalNaturalPersonsRequest {
    * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    * Guides for more information; Filter options include: `legal_natural_person_id`
    * `correspondent_id` `given_name` `family_name` `tax_id` `tax_id_type` `investigation_id`
+   * `foreign_identification.identification_number`
    */
   public AccountsListLegalNaturalPersonsRequest withFilter(String filter) {
     Utils.checkNotNull(filter, "filter");
@@ -187,6 +190,7 @@ public class AccountsListLegalNaturalPersonsRequest {
    * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    * Guides for more information; Filter options include: `legal_natural_person_id`
    * `correspondent_id` `given_name` `family_name` `tax_id` `tax_id_type` `investigation_id`
+   * `foreign_identification.identification_number`
    */
   public AccountsListLegalNaturalPersonsRequest withFilter(Optional<String> filter) {
     Utils.checkNotNull(filter, "filter");
@@ -311,6 +315,7 @@ public class AccountsListLegalNaturalPersonsRequest {
      * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
      * Guides for more information; Filter options include: `legal_natural_person_id`
      * `correspondent_id` `given_name` `family_name` `tax_id` `tax_id_type` `investigation_id`
+     * `foreign_identification.identification_number`
      */
     public Builder filter(String filter) {
       Utils.checkNotNull(filter, "filter");
@@ -324,6 +329,7 @@ public class AccountsListLegalNaturalPersonsRequest {
      * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
      * Guides for more information; Filter options include: `legal_natural_person_id`
      * `correspondent_id` `given_name` `family_name` `tax_id` `tax_id_type` `investigation_id`
+     * `foreign_identification.identification_number`
      */
     public Builder filter(Optional<String> filter) {
       Utils.checkNotNull(filter, "filter");

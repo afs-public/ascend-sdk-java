@@ -98,6 +98,10 @@ public class TransferScheduleSummaryRetirementDistributionType {
       new TransferScheduleSummaryRetirementDistributionType("REVOCATION");
   public static final TransferScheduleSummaryRetirementDistributionType NON_REPORTABLE =
       new TransferScheduleSummaryRetirementDistributionType("NON_REPORTABLE");
+  public static final TransferScheduleSummaryRetirementDistributionType
+      QUALIFIED_CHARITABLE_DISTRIBUTION =
+          new TransferScheduleSummaryRetirementDistributionType(
+              "QUALIFIED_CHARITABLE_DISTRIBUTION");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -196,6 +200,7 @@ public class TransferScheduleSummaryRetirementDistributionType {
     map.put("NET_INCOME_ATTRIBUTABLE", NET_INCOME_ATTRIBUTABLE);
     map.put("REVOCATION", REVOCATION);
     map.put("NON_REPORTABLE", NON_REPORTABLE);
+    map.put("QUALIFIED_CHARITABLE_DISTRIBUTION", QUALIFIED_CHARITABLE_DISTRIBUTION);
     return map;
   }
 
@@ -248,6 +253,9 @@ public class TransferScheduleSummaryRetirementDistributionType {
         TransferScheduleSummaryRetirementDistributionTypeEnum.NET_INCOME_ATTRIBUTABLE);
     map.put("REVOCATION", TransferScheduleSummaryRetirementDistributionTypeEnum.REVOCATION);
     map.put("NON_REPORTABLE", TransferScheduleSummaryRetirementDistributionTypeEnum.NON_REPORTABLE);
+    map.put(
+        "QUALIFIED_CHARITABLE_DISTRIBUTION",
+        TransferScheduleSummaryRetirementDistributionTypeEnum.QUALIFIED_CHARITABLE_DISTRIBUTION);
     return map;
   }
 
@@ -310,6 +318,7 @@ public class TransferScheduleSummaryRetirementDistributionType {
     NET_INCOME_ATTRIBUTABLE("NET_INCOME_ATTRIBUTABLE"),
     REVOCATION("REVOCATION"),
     NON_REPORTABLE("NON_REPORTABLE"),
+    QUALIFIED_CHARITABLE_DISTRIBUTION("QUALIFIED_CHARITABLE_DISTRIBUTION"),
     ;
 
     private final String value;

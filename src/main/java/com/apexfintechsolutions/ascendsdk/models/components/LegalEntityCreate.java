@@ -122,7 +122,9 @@ public class LegalEntityCreate {
   @JsonProperty("formation_date")
   private Optional<? extends DateCreate> formationDate;
 
-  /** Indicates whether the entity is an institutional customer */
+  /**
+   * Indicates whether the entity is an institutional customer. By default, this is set to `false`.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("institutional_customer")
   private Optional<Boolean> institutionalCustomer;
@@ -198,7 +200,10 @@ public class LegalEntityCreate {
   @JsonProperty("revocable_trust")
   private Optional<Boolean> revocableTrust;
 
-  /** Boolean indicator whether the LE is subject to backup withholding */
+  /**
+   * Boolean indicator whether the LE is subject to backup withholding. By default, this is set to
+   * `false`.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("subject_to_backup_withholding")
   private Optional<Boolean> subjectToBackupWithholding;
@@ -479,7 +484,9 @@ public class LegalEntityCreate {
     return (Optional<DateCreate>) formationDate;
   }
 
-  /** Indicates whether the entity is an institutional customer */
+  /**
+   * Indicates whether the entity is an institutional customer. By default, this is set to `false`.
+   */
   @JsonIgnore
   public Optional<Boolean> institutionalCustomer() {
     return institutionalCustomer;
@@ -569,7 +576,10 @@ public class LegalEntityCreate {
     return revocableTrust;
   }
 
-  /** Boolean indicator whether the LE is subject to backup withholding */
+  /**
+   * Boolean indicator whether the LE is subject to backup withholding. By default, this is set to
+   * `false`.
+   */
   @JsonIgnore
   public Optional<Boolean> subjectToBackupWithholding() {
     return subjectToBackupWithholding;
@@ -859,14 +869,18 @@ public class LegalEntityCreate {
     return this;
   }
 
-  /** Indicates whether the entity is an institutional customer */
+  /**
+   * Indicates whether the entity is an institutional customer. By default, this is set to `false`.
+   */
   public LegalEntityCreate withInstitutionalCustomer(boolean institutionalCustomer) {
     Utils.checkNotNull(institutionalCustomer, "institutionalCustomer");
     this.institutionalCustomer = Optional.ofNullable(institutionalCustomer);
     return this;
   }
 
-  /** Indicates whether the entity is an institutional customer */
+  /**
+   * Indicates whether the entity is an institutional customer. By default, this is set to `false`.
+   */
   public LegalEntityCreate withInstitutionalCustomer(Optional<Boolean> institutionalCustomer) {
     Utils.checkNotNull(institutionalCustomer, "institutionalCustomer");
     this.institutionalCustomer = institutionalCustomer;
@@ -1009,14 +1023,20 @@ public class LegalEntityCreate {
     return this;
   }
 
-  /** Boolean indicator whether the LE is subject to backup withholding */
+  /**
+   * Boolean indicator whether the LE is subject to backup withholding. By default, this is set to
+   * `false`.
+   */
   public LegalEntityCreate withSubjectToBackupWithholding(boolean subjectToBackupWithholding) {
     Utils.checkNotNull(subjectToBackupWithholding, "subjectToBackupWithholding");
     this.subjectToBackupWithholding = Optional.ofNullable(subjectToBackupWithholding);
     return this;
   }
 
-  /** Boolean indicator whether the LE is subject to backup withholding */
+  /**
+   * Boolean indicator whether the LE is subject to backup withholding. By default, this is set to
+   * `false`.
+   */
   public LegalEntityCreate withSubjectToBackupWithholding(
       Optional<Boolean> subjectToBackupWithholding) {
     Utils.checkNotNull(subjectToBackupWithholding, "subjectToBackupWithholding");
@@ -1511,14 +1531,20 @@ public class LegalEntityCreate {
       return this;
     }
 
-    /** Indicates whether the entity is an institutional customer */
+    /**
+     * Indicates whether the entity is an institutional customer. By default, this is set to
+     * `false`.
+     */
     public Builder institutionalCustomer(boolean institutionalCustomer) {
       Utils.checkNotNull(institutionalCustomer, "institutionalCustomer");
       this.institutionalCustomer = Optional.ofNullable(institutionalCustomer);
       return this;
     }
 
-    /** Indicates whether the entity is an institutional customer */
+    /**
+     * Indicates whether the entity is an institutional customer. By default, this is set to
+     * `false`.
+     */
     public Builder institutionalCustomer(Optional<Boolean> institutionalCustomer) {
       Utils.checkNotNull(institutionalCustomer, "institutionalCustomer");
       this.institutionalCustomer = institutionalCustomer;
@@ -1659,14 +1685,20 @@ public class LegalEntityCreate {
       return this;
     }
 
-    /** Boolean indicator whether the LE is subject to backup withholding */
+    /**
+     * Boolean indicator whether the LE is subject to backup withholding. By default, this is set to
+     * `false`.
+     */
     public Builder subjectToBackupWithholding(boolean subjectToBackupWithholding) {
       Utils.checkNotNull(subjectToBackupWithholding, "subjectToBackupWithholding");
       this.subjectToBackupWithholding = Optional.ofNullable(subjectToBackupWithholding);
       return this;
     }
 
-    /** Boolean indicator whether the LE is subject to backup withholding */
+    /**
+     * Boolean indicator whether the LE is subject to backup withholding. By default, this is set to
+     * `false`.
+     */
     public Builder subjectToBackupWithholding(Optional<Boolean> subjectToBackupWithholding) {
       Utils.checkNotNull(subjectToBackupWithholding, "subjectToBackupWithholding");
       this.subjectToBackupWithholding = subjectToBackupWithholding;

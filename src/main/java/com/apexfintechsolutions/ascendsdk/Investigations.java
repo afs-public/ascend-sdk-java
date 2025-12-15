@@ -5,12 +5,20 @@ package com.apexfintechsolutions.ascendsdk;
 
 import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOperation;
 
+import com.apexfintechsolutions.ascendsdk.models.components.IdentityLookupCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.InvestigationUpdate;
 import com.apexfintechsolutions.ascendsdk.models.components.LinkDocumentsRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.VerifyIdentityLookupRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.operations.CustomerIdentificationResultServiceGetCustomerIdentificationQueryParamView;
 import com.apexfintechsolutions.ascendsdk.models.operations.CustomerIdentificationResultServiceGetCustomerIdentificationRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.CustomerIdentificationResultServiceGetCustomerIdentificationRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.CustomerIdentificationResultServiceGetCustomerIdentificationResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.IdentityLookupServiceCreateIdentityLookupRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.IdentityLookupServiceCreateIdentityLookupRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.IdentityLookupServiceCreateIdentityLookupResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.IdentityLookupServiceVerifyIdentityLookupRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.IdentityLookupServiceVerifyIdentityLookupRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.IdentityLookupServiceVerifyIdentityLookupResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.InvestigationServiceGetInvestigationRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.InvestigationServiceGetInvestigationRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.InvestigationServiceGetInvestigationResponse;
@@ -27,6 +35,8 @@ import com.apexfintechsolutions.ascendsdk.models.operations.WatchlistServiceGetW
 import com.apexfintechsolutions.ascendsdk.models.operations.WatchlistServiceGetWatchlistItemRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.WatchlistServiceGetWatchlistItemResponse;
 import com.apexfintechsolutions.ascendsdk.operations.CustomerIdentificationResultServiceGetCustomerIdentification;
+import com.apexfintechsolutions.ascendsdk.operations.IdentityLookupServiceCreateIdentityLookup;
+import com.apexfintechsolutions.ascendsdk.operations.IdentityLookupServiceVerifyIdentityLookup;
 import com.apexfintechsolutions.ascendsdk.operations.InvestigationServiceGetInvestigation;
 import com.apexfintechsolutions.ascendsdk.operations.InvestigationServiceLinkDocuments;
 import com.apexfintechsolutions.ascendsdk.operations.InvestigationServiceListInvestigations;
@@ -390,6 +400,120 @@ public class Investigations {
         operation =
             new CustomerIdentificationResultServiceGetCustomerIdentification.Sync(
                 sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Create Identity Lookup
+   *
+   * <p>Creates a new identity lookup and initiates verification process
+   *
+   * @return The call builder
+   */
+  public IdentityLookupServiceCreateIdentityLookupRequestBuilder createIdentityLookup() {
+    return new IdentityLookupServiceCreateIdentityLookupRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * Create Identity Lookup
+   *
+   * <p>Creates a new identity lookup and initiates verification process
+   *
+   * @param correspondentId The correspondent id.
+   * @param identityLookupCreate Represents an identity lookup resource
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public IdentityLookupServiceCreateIdentityLookupResponse createIdentityLookup(
+      String correspondentId, IdentityLookupCreate identityLookupCreate) throws Exception {
+    return createIdentityLookup(correspondentId, identityLookupCreate, Optional.empty());
+  }
+
+  /**
+   * Create Identity Lookup
+   *
+   * <p>Creates a new identity lookup and initiates verification process
+   *
+   * @param correspondentId The correspondent id.
+   * @param identityLookupCreate Represents an identity lookup resource
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public IdentityLookupServiceCreateIdentityLookupResponse createIdentityLookup(
+      String correspondentId, IdentityLookupCreate identityLookupCreate, Optional<Options> options)
+      throws Exception {
+    IdentityLookupServiceCreateIdentityLookupRequest request =
+        IdentityLookupServiceCreateIdentityLookupRequest.builder()
+            .correspondentId(correspondentId)
+            .identityLookupCreate(identityLookupCreate)
+            .build();
+    RequestOperation<
+            IdentityLookupServiceCreateIdentityLookupRequest,
+            IdentityLookupServiceCreateIdentityLookupResponse>
+        operation = new IdentityLookupServiceCreateIdentityLookup.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Verify Identity Lookup
+   *
+   * <p>Verifies an identity lookup with the provided verification code
+   *
+   * @return The call builder
+   */
+  public IdentityLookupServiceVerifyIdentityLookupRequestBuilder verifyIdentityLookup() {
+    return new IdentityLookupServiceVerifyIdentityLookupRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * Verify Identity Lookup
+   *
+   * <p>Verifies an identity lookup with the provided verification code
+   *
+   * @param correspondentId The correspondent id.
+   * @param identityLookupId The identityLookup id.
+   * @param verifyIdentityLookupRequestCreate Request message for VerifyIdentityLookup method
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public IdentityLookupServiceVerifyIdentityLookupResponse verifyIdentityLookup(
+      String correspondentId,
+      String identityLookupId,
+      VerifyIdentityLookupRequestCreate verifyIdentityLookupRequestCreate)
+      throws Exception {
+    return verifyIdentityLookup(
+        correspondentId, identityLookupId, verifyIdentityLookupRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Verify Identity Lookup
+   *
+   * <p>Verifies an identity lookup with the provided verification code
+   *
+   * @param correspondentId The correspondent id.
+   * @param identityLookupId The identityLookup id.
+   * @param verifyIdentityLookupRequestCreate Request message for VerifyIdentityLookup method
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public IdentityLookupServiceVerifyIdentityLookupResponse verifyIdentityLookup(
+      String correspondentId,
+      String identityLookupId,
+      VerifyIdentityLookupRequestCreate verifyIdentityLookupRequestCreate,
+      Optional<Options> options)
+      throws Exception {
+    IdentityLookupServiceVerifyIdentityLookupRequest request =
+        IdentityLookupServiceVerifyIdentityLookupRequest.builder()
+            .correspondentId(correspondentId)
+            .identityLookupId(identityLookupId)
+            .verifyIdentityLookupRequestCreate(verifyIdentityLookupRequestCreate)
+            .build();
+    RequestOperation<
+            IdentityLookupServiceVerifyIdentityLookupRequest,
+            IdentityLookupServiceVerifyIdentityLookupResponse>
+        operation = new IdentityLookupServiceVerifyIdentityLookup.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

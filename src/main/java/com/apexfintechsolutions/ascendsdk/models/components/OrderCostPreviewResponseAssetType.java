@@ -56,6 +56,8 @@ public class OrderCostPreviewResponseAssetType {
       new OrderCostPreviewResponseAssetType("MUTUAL_FUND");
   public static final OrderCostPreviewResponseAssetType OPTION =
       new OrderCostPreviewResponseAssetType("OPTION");
+  public static final OrderCostPreviewResponseAssetType EVENT_CONTRACT =
+      new OrderCostPreviewResponseAssetType("EVENT_CONTRACT");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -129,6 +131,7 @@ public class OrderCostPreviewResponseAssetType {
     map.put("FIXED_INCOME", FIXED_INCOME);
     map.put("MUTUAL_FUND", MUTUAL_FUND);
     map.put("OPTION", OPTION);
+    map.put("EVENT_CONTRACT", EVENT_CONTRACT);
     return map;
   }
 
@@ -139,6 +142,7 @@ public class OrderCostPreviewResponseAssetType {
     map.put("FIXED_INCOME", OrderCostPreviewResponseAssetTypeEnum.FIXED_INCOME);
     map.put("MUTUAL_FUND", OrderCostPreviewResponseAssetTypeEnum.MUTUAL_FUND);
     map.put("OPTION", OrderCostPreviewResponseAssetTypeEnum.OPTION);
+    map.put("EVENT_CONTRACT", OrderCostPreviewResponseAssetTypeEnum.EVENT_CONTRACT);
     return map;
   }
 
@@ -180,6 +184,7 @@ public class OrderCostPreviewResponseAssetType {
     FIXED_INCOME("FIXED_INCOME"),
     MUTUAL_FUND("MUTUAL_FUND"),
     OPTION("OPTION"),
+    EVENT_CONTRACT("EVENT_CONTRACT"),
     ;
 
     private final String value;

@@ -19,12 +19,12 @@ import java.util.Optional;
  * Identification Program (CIP) may be run on legal natural persons.
  */
 public class LegalNaturalPersonCreate {
-  /** Indicates whether the person is an accredited investor */
+  /** Indicates whether the person is an accredited investor. By default, this is set to `false`. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("accredited_investor")
   private Optional<Boolean> accreditedInvestor;
 
-  /** Indicates whether the person is an adviser */
+  /** Indicates whether the person is an adviser. By default, this is set to `false`. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("adviser")
   private Optional<Boolean> adviser;
@@ -63,7 +63,7 @@ public class LegalNaturalPersonCreate {
 
   /**
    * Indicates the related owner record is an employee of the clearing broker's correspondent
-   * customer.
+   * customer. By default, this is set to `false`.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("correspondent_employee")
@@ -142,7 +142,9 @@ public class LegalNaturalPersonCreate {
   @JsonProperty("identity_verification_result")
   private Optional<? extends IdentityVerificationResultCreate> identityVerificationResult;
 
-  /** Indicates whether the person is an institutional customer */
+  /**
+   * Indicates whether the person is an institutional customer. By default, this is set to `false`.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("institutional_customer")
   private Optional<Boolean> institutionalCustomer;
@@ -225,7 +227,10 @@ public class LegalNaturalPersonCreate {
   @JsonProperty("politically_exposed_organization")
   private Optional<String> politicallyExposedOrganization;
 
-  /** Boolean indicator whether the LNP is subject to backup withholding */
+  /**
+   * Boolean indicator whether the LNP is subject to backup withholding. By default, this is set to
+   * `false`.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("subject_to_backup_withholding")
   private Optional<Boolean> subjectToBackupWithholding;
@@ -392,13 +397,13 @@ public class LegalNaturalPersonCreate {
         taxProfile);
   }
 
-  /** Indicates whether the person is an accredited investor */
+  /** Indicates whether the person is an accredited investor. By default, this is set to `false`. */
   @JsonIgnore
   public Optional<Boolean> accreditedInvestor() {
     return accreditedInvestor;
   }
 
-  /** Indicates whether the person is an adviser */
+  /** Indicates whether the person is an adviser. By default, this is set to `false`. */
   @JsonIgnore
   public Optional<Boolean> adviser() {
     return adviser;
@@ -443,7 +448,7 @@ public class LegalNaturalPersonCreate {
 
   /**
    * Indicates the related owner record is an employee of the clearing broker's correspondent
-   * customer.
+   * customer. By default, this is set to `false`.
    */
   @JsonIgnore
   public Optional<Boolean> correspondentEmployee() {
@@ -541,7 +546,9 @@ public class LegalNaturalPersonCreate {
     return (Optional<IdentityVerificationResultCreate>) identityVerificationResult;
   }
 
-  /** Indicates whether the person is an institutional customer */
+  /**
+   * Indicates whether the person is an institutional customer. By default, this is set to `false`.
+   */
   @JsonIgnore
   public Optional<Boolean> institutionalCustomer() {
     return institutionalCustomer;
@@ -641,7 +648,10 @@ public class LegalNaturalPersonCreate {
     return politicallyExposedOrganization;
   }
 
-  /** Boolean indicator whether the LNP is subject to backup withholding */
+  /**
+   * Boolean indicator whether the LNP is subject to backup withholding. By default, this is set to
+   * `false`.
+   */
   @JsonIgnore
   public Optional<Boolean> subjectToBackupWithholding() {
     return subjectToBackupWithholding;
@@ -675,28 +685,28 @@ public class LegalNaturalPersonCreate {
     return new Builder();
   }
 
-  /** Indicates whether the person is an accredited investor */
+  /** Indicates whether the person is an accredited investor. By default, this is set to `false`. */
   public LegalNaturalPersonCreate withAccreditedInvestor(boolean accreditedInvestor) {
     Utils.checkNotNull(accreditedInvestor, "accreditedInvestor");
     this.accreditedInvestor = Optional.ofNullable(accreditedInvestor);
     return this;
   }
 
-  /** Indicates whether the person is an accredited investor */
+  /** Indicates whether the person is an accredited investor. By default, this is set to `false`. */
   public LegalNaturalPersonCreate withAccreditedInvestor(Optional<Boolean> accreditedInvestor) {
     Utils.checkNotNull(accreditedInvestor, "accreditedInvestor");
     this.accreditedInvestor = accreditedInvestor;
     return this;
   }
 
-  /** Indicates whether the person is an adviser */
+  /** Indicates whether the person is an adviser. By default, this is set to `false`. */
   public LegalNaturalPersonCreate withAdviser(boolean adviser) {
     Utils.checkNotNull(adviser, "adviser");
     this.adviser = Optional.ofNullable(adviser);
     return this;
   }
 
-  /** Indicates whether the person is an adviser */
+  /** Indicates whether the person is an adviser. By default, this is set to `false`. */
   public LegalNaturalPersonCreate withAdviser(Optional<Boolean> adviser) {
     Utils.checkNotNull(adviser, "adviser");
     this.adviser = adviser;
@@ -759,7 +769,7 @@ public class LegalNaturalPersonCreate {
 
   /**
    * Indicates the related owner record is an employee of the clearing broker's correspondent
-   * customer.
+   * customer. By default, this is set to `false`.
    */
   public LegalNaturalPersonCreate withCorrespondentEmployee(boolean correspondentEmployee) {
     Utils.checkNotNull(correspondentEmployee, "correspondentEmployee");
@@ -769,7 +779,7 @@ public class LegalNaturalPersonCreate {
 
   /**
    * Indicates the related owner record is an employee of the clearing broker's correspondent
-   * customer.
+   * customer. By default, this is set to `false`.
    */
   public LegalNaturalPersonCreate withCorrespondentEmployee(
       Optional<Boolean> correspondentEmployee) {
@@ -942,14 +952,18 @@ public class LegalNaturalPersonCreate {
     return this;
   }
 
-  /** Indicates whether the person is an institutional customer */
+  /**
+   * Indicates whether the person is an institutional customer. By default, this is set to `false`.
+   */
   public LegalNaturalPersonCreate withInstitutionalCustomer(boolean institutionalCustomer) {
     Utils.checkNotNull(institutionalCustomer, "institutionalCustomer");
     this.institutionalCustomer = Optional.ofNullable(institutionalCustomer);
     return this;
   }
 
-  /** Indicates whether the person is an institutional customer */
+  /**
+   * Indicates whether the person is an institutional customer. By default, this is set to `false`.
+   */
   public LegalNaturalPersonCreate withInstitutionalCustomer(
       Optional<Boolean> institutionalCustomer) {
     Utils.checkNotNull(institutionalCustomer, "institutionalCustomer");
@@ -1142,7 +1156,10 @@ public class LegalNaturalPersonCreate {
     return this;
   }
 
-  /** Boolean indicator whether the LNP is subject to backup withholding */
+  /**
+   * Boolean indicator whether the LNP is subject to backup withholding. By default, this is set to
+   * `false`.
+   */
   public LegalNaturalPersonCreate withSubjectToBackupWithholding(
       boolean subjectToBackupWithholding) {
     Utils.checkNotNull(subjectToBackupWithholding, "subjectToBackupWithholding");
@@ -1150,7 +1167,10 @@ public class LegalNaturalPersonCreate {
     return this;
   }
 
-  /** Boolean indicator whether the LNP is subject to backup withholding */
+  /**
+   * Boolean indicator whether the LNP is subject to backup withholding. By default, this is set to
+   * `false`.
+   */
   public LegalNaturalPersonCreate withSubjectToBackupWithholding(
       Optional<Boolean> subjectToBackupWithholding) {
     Utils.checkNotNull(subjectToBackupWithholding, "subjectToBackupWithholding");
@@ -1421,28 +1441,32 @@ public class LegalNaturalPersonCreate {
       // force use of static builder() method
     }
 
-    /** Indicates whether the person is an accredited investor */
+    /**
+     * Indicates whether the person is an accredited investor. By default, this is set to `false`.
+     */
     public Builder accreditedInvestor(boolean accreditedInvestor) {
       Utils.checkNotNull(accreditedInvestor, "accreditedInvestor");
       this.accreditedInvestor = Optional.ofNullable(accreditedInvestor);
       return this;
     }
 
-    /** Indicates whether the person is an accredited investor */
+    /**
+     * Indicates whether the person is an accredited investor. By default, this is set to `false`.
+     */
     public Builder accreditedInvestor(Optional<Boolean> accreditedInvestor) {
       Utils.checkNotNull(accreditedInvestor, "accreditedInvestor");
       this.accreditedInvestor = accreditedInvestor;
       return this;
     }
 
-    /** Indicates whether the person is an adviser */
+    /** Indicates whether the person is an adviser. By default, this is set to `false`. */
     public Builder adviser(boolean adviser) {
       Utils.checkNotNull(adviser, "adviser");
       this.adviser = Optional.ofNullable(adviser);
       return this;
     }
 
-    /** Indicates whether the person is an adviser */
+    /** Indicates whether the person is an adviser. By default, this is set to `false`. */
     public Builder adviser(Optional<Boolean> adviser) {
       Utils.checkNotNull(adviser, "adviser");
       this.adviser = adviser;
@@ -1503,7 +1527,7 @@ public class LegalNaturalPersonCreate {
 
     /**
      * Indicates the related owner record is an employee of the clearing broker's correspondent
-     * customer.
+     * customer. By default, this is set to `false`.
      */
     public Builder correspondentEmployee(boolean correspondentEmployee) {
       Utils.checkNotNull(correspondentEmployee, "correspondentEmployee");
@@ -1513,7 +1537,7 @@ public class LegalNaturalPersonCreate {
 
     /**
      * Indicates the related owner record is an employee of the clearing broker's correspondent
-     * customer.
+     * customer. By default, this is set to `false`.
      */
     public Builder correspondentEmployee(Optional<Boolean> correspondentEmployee) {
       Utils.checkNotNull(correspondentEmployee, "correspondentEmployee");
@@ -1681,14 +1705,20 @@ public class LegalNaturalPersonCreate {
       return this;
     }
 
-    /** Indicates whether the person is an institutional customer */
+    /**
+     * Indicates whether the person is an institutional customer. By default, this is set to
+     * `false`.
+     */
     public Builder institutionalCustomer(boolean institutionalCustomer) {
       Utils.checkNotNull(institutionalCustomer, "institutionalCustomer");
       this.institutionalCustomer = Optional.ofNullable(institutionalCustomer);
       return this;
     }
 
-    /** Indicates whether the person is an institutional customer */
+    /**
+     * Indicates whether the person is an institutional customer. By default, this is set to
+     * `false`.
+     */
     public Builder institutionalCustomer(Optional<Boolean> institutionalCustomer) {
       Utils.checkNotNull(institutionalCustomer, "institutionalCustomer");
       this.institutionalCustomer = institutionalCustomer;
@@ -1876,14 +1906,20 @@ public class LegalNaturalPersonCreate {
       return this;
     }
 
-    /** Boolean indicator whether the LNP is subject to backup withholding */
+    /**
+     * Boolean indicator whether the LNP is subject to backup withholding. By default, this is set
+     * to `false`.
+     */
     public Builder subjectToBackupWithholding(boolean subjectToBackupWithholding) {
       Utils.checkNotNull(subjectToBackupWithholding, "subjectToBackupWithholding");
       this.subjectToBackupWithholding = Optional.ofNullable(subjectToBackupWithholding);
       return this;
     }
 
-    /** Boolean indicator whether the LNP is subject to backup withholding */
+    /**
+     * Boolean indicator whether the LNP is subject to backup withholding. By default, this is set
+     * to `false`.
+     */
     public Builder subjectToBackupWithholding(Optional<Boolean> subjectToBackupWithholding) {
       Utils.checkNotNull(subjectToBackupWithholding, "subjectToBackupWithholding");
       this.subjectToBackupWithholding = subjectToBackupWithholding;

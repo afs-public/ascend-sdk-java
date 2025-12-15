@@ -56,6 +56,8 @@ public class RetrieveQuoteResponseAssetType {
       new RetrieveQuoteResponseAssetType("MUTUAL_FUND");
   public static final RetrieveQuoteResponseAssetType OPTION =
       new RetrieveQuoteResponseAssetType("OPTION");
+  public static final RetrieveQuoteResponseAssetType EVENT_CONTRACT =
+      new RetrieveQuoteResponseAssetType("EVENT_CONTRACT");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -129,6 +131,7 @@ public class RetrieveQuoteResponseAssetType {
     map.put("FIXED_INCOME", FIXED_INCOME);
     map.put("MUTUAL_FUND", MUTUAL_FUND);
     map.put("OPTION", OPTION);
+    map.put("EVENT_CONTRACT", EVENT_CONTRACT);
     return map;
   }
 
@@ -139,6 +142,7 @@ public class RetrieveQuoteResponseAssetType {
     map.put("FIXED_INCOME", RetrieveQuoteResponseAssetTypeEnum.FIXED_INCOME);
     map.put("MUTUAL_FUND", RetrieveQuoteResponseAssetTypeEnum.MUTUAL_FUND);
     map.put("OPTION", RetrieveQuoteResponseAssetTypeEnum.OPTION);
+    map.put("EVENT_CONTRACT", RetrieveQuoteResponseAssetTypeEnum.EVENT_CONTRACT);
     return map;
   }
 
@@ -179,6 +183,7 @@ public class RetrieveQuoteResponseAssetType {
     FIXED_INCOME("FIXED_INCOME"),
     MUTUAL_FUND("MUTUAL_FUND"),
     OPTION("OPTION"),
+    EVENT_CONTRACT("EVENT_CONTRACT"),
     ;
 
     private final String value;

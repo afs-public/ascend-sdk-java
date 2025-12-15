@@ -71,8 +71,6 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
       new DeactivateEnrollmentRequestCreateEnrollmentType("REGISTRATION_ESTATE");
   public static final DeactivateEnrollmentRequestCreateEnrollmentType REGISTRATION_IRA_TRADITIONAL =
       new DeactivateEnrollmentRequestCreateEnrollmentType("REGISTRATION_IRA_TRADITIONAL");
-  public static final DeactivateEnrollmentRequestCreateEnrollmentType REGISTRATION_IRA_SIMPLE =
-      new DeactivateEnrollmentRequestCreateEnrollmentType("REGISTRATION_IRA_SIMPLE");
   public static final DeactivateEnrollmentRequestCreateEnrollmentType REGISTRATION_IRA_SEP =
       new DeactivateEnrollmentRequestCreateEnrollmentType("REGISTRATION_IRA_SEP");
   public static final DeactivateEnrollmentRequestCreateEnrollmentType REGISTRATION_IRA_ROTH =
@@ -189,7 +187,6 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
     map.put("REGISTRATION_JOINT_CP", REGISTRATION_JOINT_CP);
     map.put("REGISTRATION_ESTATE", REGISTRATION_ESTATE);
     map.put("REGISTRATION_IRA_TRADITIONAL", REGISTRATION_IRA_TRADITIONAL);
-    map.put("REGISTRATION_IRA_SIMPLE", REGISTRATION_IRA_SIMPLE);
     map.put("REGISTRATION_IRA_SEP", REGISTRATION_IRA_SEP);
     map.put("REGISTRATION_IRA_ROTH", REGISTRATION_IRA_ROTH);
     map.put("REGISTRATION_IRA_ROLLOVER", REGISTRATION_IRA_ROLLOVER);
@@ -240,9 +237,6 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
     map.put(
         "REGISTRATION_IRA_TRADITIONAL",
         DeactivateEnrollmentRequestCreateEnrollmentTypeEnum.REGISTRATION_IRA_TRADITIONAL);
-    map.put(
-        "REGISTRATION_IRA_SIMPLE",
-        DeactivateEnrollmentRequestCreateEnrollmentTypeEnum.REGISTRATION_IRA_SIMPLE);
     map.put(
         "REGISTRATION_IRA_SEP",
         DeactivateEnrollmentRequestCreateEnrollmentTypeEnum.REGISTRATION_IRA_SEP);
@@ -334,7 +328,6 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
     REGISTRATION_JOINT_CP("REGISTRATION_JOINT_CP"),
     REGISTRATION_ESTATE("REGISTRATION_ESTATE"),
     REGISTRATION_IRA_TRADITIONAL("REGISTRATION_IRA_TRADITIONAL"),
-    REGISTRATION_IRA_SIMPLE("REGISTRATION_IRA_SIMPLE"),
     REGISTRATION_IRA_SEP("REGISTRATION_IRA_SEP"),
     REGISTRATION_IRA_ROTH("REGISTRATION_IRA_ROTH"),
     REGISTRATION_IRA_ROLLOVER("REGISTRATION_IRA_ROLLOVER"),

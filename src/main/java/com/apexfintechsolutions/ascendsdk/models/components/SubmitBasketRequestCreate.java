@@ -20,7 +20,8 @@ import org.openapitools.jackson.nullable.JsonNullable;
 public class SubmitBasketRequestCreate {
   /**
    * Time the basket submission request was sent by the client. This is a required field for clients
-   * that we report on behalf of, and it will be validated accordingly.
+   * that we report on behalf of, and it will be validated accordingly. Timezone information will
+   * default to UTC if not provided.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("client_basket_submit_time")
@@ -47,7 +48,8 @@ public class SubmitBasketRequestCreate {
 
   /**
    * Time the basket submission request was sent by the client. This is a required field for clients
-   * that we report on behalf of, and it will be validated accordingly.
+   * that we report on behalf of, and it will be validated accordingly. Timezone information will
+   * default to UTC if not provided.
    */
   @JsonIgnore
   public JsonNullable<OffsetDateTime> clientBasketSubmitTime() {
@@ -66,7 +68,8 @@ public class SubmitBasketRequestCreate {
 
   /**
    * Time the basket submission request was sent by the client. This is a required field for clients
-   * that we report on behalf of, and it will be validated accordingly.
+   * that we report on behalf of, and it will be validated accordingly. Timezone information will
+   * default to UTC if not provided.
    */
   public SubmitBasketRequestCreate withClientBasketSubmitTime(
       OffsetDateTime clientBasketSubmitTime) {
@@ -77,7 +80,8 @@ public class SubmitBasketRequestCreate {
 
   /**
    * Time the basket submission request was sent by the client. This is a required field for clients
-   * that we report on behalf of, and it will be validated accordingly.
+   * that we report on behalf of, and it will be validated accordingly. Timezone information will
+   * default to UTC if not provided.
    */
   public SubmitBasketRequestCreate withClientBasketSubmitTime(
       JsonNullable<OffsetDateTime> clientBasketSubmitTime) {
@@ -134,7 +138,8 @@ public class SubmitBasketRequestCreate {
 
     /**
      * Time the basket submission request was sent by the client. This is a required field for
-     * clients that we report on behalf of, and it will be validated accordingly.
+     * clients that we report on behalf of, and it will be validated accordingly. Timezone
+     * information will default to UTC if not provided.
      */
     public Builder clientBasketSubmitTime(OffsetDateTime clientBasketSubmitTime) {
       Utils.checkNotNull(clientBasketSubmitTime, "clientBasketSubmitTime");
@@ -144,7 +149,8 @@ public class SubmitBasketRequestCreate {
 
     /**
      * Time the basket submission request was sent by the client. This is a required field for
-     * clients that we report on behalf of, and it will be validated accordingly.
+     * clients that we report on behalf of, and it will be validated accordingly. Timezone
+     * information will default to UTC if not provided.
      */
     public Builder clientBasketSubmitTime(JsonNullable<OffsetDateTime> clientBasketSubmitTime) {
       Utils.checkNotNull(clientBasketSubmitTime, "clientBasketSubmitTime");
