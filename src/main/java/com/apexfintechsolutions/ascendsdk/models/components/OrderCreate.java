@@ -96,7 +96,7 @@ public class OrderCreate {
    * supported
    */
   @JsonProperty("identifier_type")
-  private IdentifierType identifierType;
+  private OrderCreateIdentifierType identifierType;
 
   /**
    * Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a
@@ -236,7 +236,7 @@ public class OrderCreate {
       @JsonProperty("fees") Optional<? extends List<FeeCreate>> fees,
       @JsonProperty("identifier") String identifier,
       @JsonProperty("identifier_issuing_region_code") Optional<String> identifierIssuingRegionCode,
-      @JsonProperty("identifier_type") IdentifierType identifierType,
+      @JsonProperty("identifier_type") OrderCreateIdentifierType identifierType,
       @JsonProperty("letter_of_intent") Optional<? extends LetterOfIntentCreate> letterOfIntent,
       @JsonProperty("limit_price") Optional<? extends LimitPriceCreate> limitPrice,
       @JsonProperty("max_sell_quantity") Optional<? extends DecimalCreate> maxSellQuantity,
@@ -310,7 +310,7 @@ public class OrderCreate {
       AssetType assetType,
       String clientOrderId,
       String identifier,
-      IdentifierType identifierType,
+      OrderCreateIdentifierType identifierType,
       DateCreate orderDate,
       OrderType orderType,
       Side side,
@@ -435,7 +435,7 @@ public class OrderCreate {
    * supported
    */
   @JsonIgnore
-  public IdentifierType identifierType() {
+  public OrderCreateIdentifierType identifierType() {
     return identifierType;
   }
 
@@ -764,7 +764,7 @@ public class OrderCreate {
    * Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are
    * supported
    */
-  public OrderCreate withIdentifierType(IdentifierType identifierType) {
+  public OrderCreate withIdentifierType(OrderCreateIdentifierType identifierType) {
     Utils.checkNotNull(identifierType, "identifierType");
     this.identifierType = identifierType;
     return this;
@@ -1191,7 +1191,7 @@ public class OrderCreate {
 
     private Optional<String> identifierIssuingRegionCode = Optional.empty();
 
-    private IdentifierType identifierType;
+    private OrderCreateIdentifierType identifierType;
 
     private Optional<? extends LetterOfIntentCreate> letterOfIntent = Optional.empty();
 
@@ -1395,7 +1395,7 @@ public class OrderCreate {
      * Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are
      * supported
      */
-    public Builder identifierType(IdentifierType identifierType) {
+    public Builder identifierType(OrderCreateIdentifierType identifierType) {
       Utils.checkNotNull(identifierType, "identifierType");
       this.identifierType = identifierType;
       return this;

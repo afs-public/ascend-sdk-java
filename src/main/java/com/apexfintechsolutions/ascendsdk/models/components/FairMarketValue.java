@@ -14,8 +14,9 @@ import java.util.Optional;
 /**
  * FairMarketValue
  *
- * <p>Total value of the securities being transferred. Used for sponsored transfers activity to
- * ensure cost basis is accurately moved with the assets to the new account
+ * <p>**Field Dependencies:**
+ *
+ * <p>Required if `type` is `REWARD`.
  */
 public class FairMarketValue {
   /**

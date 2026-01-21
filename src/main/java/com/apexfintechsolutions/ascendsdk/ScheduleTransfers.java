@@ -11,7 +11,10 @@ import com.apexfintechsolutions.ascendsdk.models.components.AchWithdrawalSchedul
 import com.apexfintechsolutions.ascendsdk.models.components.AchWithdrawalScheduleUpdate;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelAchDepositScheduleRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelAchWithdrawalScheduleRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.CancelCheckWithdrawalScheduleRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelWireWithdrawalScheduleRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.CheckWithdrawalScheduleCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.CheckWithdrawalScheduleUpdate;
 import com.apexfintechsolutions.ascendsdk.models.components.WireWithdrawalScheduleCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.WireWithdrawalScheduleUpdate;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchDepositSchedulesCancelAchDepositScheduleRequest;
@@ -44,6 +47,21 @@ import com.apexfintechsolutions.ascendsdk.models.operations.AchWithdrawalSchedul
 import com.apexfintechsolutions.ascendsdk.models.operations.AchWithdrawalSchedulesUpdateAchWithdrawalScheduleRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchWithdrawalSchedulesUpdateAchWithdrawalScheduleRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchWithdrawalSchedulesUpdateAchWithdrawalScheduleResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckWithdrawalSchedulesCreateCheckWithdrawalScheduleRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckWithdrawalSchedulesCreateCheckWithdrawalScheduleRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckWithdrawalSchedulesCreateCheckWithdrawalScheduleResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckWithdrawalSchedulesGetCheckWithdrawalScheduleRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckWithdrawalSchedulesGetCheckWithdrawalScheduleRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckWithdrawalSchedulesGetCheckWithdrawalScheduleResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckWithdrawalSchedulesListCheckWithdrawalSchedulesRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckWithdrawalSchedulesListCheckWithdrawalSchedulesRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckWithdrawalSchedulesListCheckWithdrawalSchedulesResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.TransferScheduleSummariesListScheduleSummariesRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.TransferScheduleSummariesListScheduleSummariesRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.TransferScheduleSummariesListScheduleSummariesResponse;
@@ -72,6 +90,11 @@ import com.apexfintechsolutions.ascendsdk.operations.AchWithdrawalSchedulesCreat
 import com.apexfintechsolutions.ascendsdk.operations.AchWithdrawalSchedulesGetAchWithdrawalSchedule;
 import com.apexfintechsolutions.ascendsdk.operations.AchWithdrawalSchedulesListAchWithdrawalSchedules;
 import com.apexfintechsolutions.ascendsdk.operations.AchWithdrawalSchedulesUpdateAchWithdrawalSchedule;
+import com.apexfintechsolutions.ascendsdk.operations.CheckWithdrawalSchedulesCancelCheckWithdrawalSchedule;
+import com.apexfintechsolutions.ascendsdk.operations.CheckWithdrawalSchedulesCreateCheckWithdrawalSchedule;
+import com.apexfintechsolutions.ascendsdk.operations.CheckWithdrawalSchedulesGetCheckWithdrawalSchedule;
+import com.apexfintechsolutions.ascendsdk.operations.CheckWithdrawalSchedulesListCheckWithdrawalSchedules;
+import com.apexfintechsolutions.ascendsdk.operations.CheckWithdrawalSchedulesUpdateCheckWithdrawalSchedule;
 import com.apexfintechsolutions.ascendsdk.operations.TransferScheduleSummariesListScheduleSummaries;
 import com.apexfintechsolutions.ascendsdk.operations.WireWithdrawalSchedulesCancelWireWithdrawalSchedule;
 import com.apexfintechsolutions.ascendsdk.operations.WireWithdrawalSchedulesCreateWireWithdrawalSchedule;
@@ -764,6 +787,338 @@ public class ScheduleTransfers {
             AchWithdrawalSchedulesCancelAchWithdrawalScheduleResponse>
         operation =
             new AchWithdrawalSchedulesCancelAchWithdrawalSchedule.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Create Check Withdrawal Schedule
+   *
+   * <p>Creates a Check withdrawal transfer schedule
+   *
+   * @return The call builder
+   */
+  public CheckWithdrawalSchedulesCreateCheckWithdrawalScheduleRequestBuilder
+      createCheckWithdrawalSchedule() {
+    return new CheckWithdrawalSchedulesCreateCheckWithdrawalScheduleRequestBuilder(
+        sdkConfiguration);
+  }
+
+  /**
+   * Create Check Withdrawal Schedule
+   *
+   * <p>Creates a Check withdrawal transfer schedule
+   *
+   * @param accountId The account id.
+   * @param checkWithdrawalScheduleCreate A withdrawal transfer schedule using the Check mechanism
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CheckWithdrawalSchedulesCreateCheckWithdrawalScheduleResponse
+      createCheckWithdrawalSchedule(
+          String accountId, CheckWithdrawalScheduleCreate checkWithdrawalScheduleCreate)
+          throws Exception {
+    return createCheckWithdrawalSchedule(
+        accountId, checkWithdrawalScheduleCreate, Optional.empty());
+  }
+
+  /**
+   * Create Check Withdrawal Schedule
+   *
+   * <p>Creates a Check withdrawal transfer schedule
+   *
+   * @param accountId The account id.
+   * @param checkWithdrawalScheduleCreate A withdrawal transfer schedule using the Check mechanism
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CheckWithdrawalSchedulesCreateCheckWithdrawalScheduleResponse
+      createCheckWithdrawalSchedule(
+          String accountId,
+          CheckWithdrawalScheduleCreate checkWithdrawalScheduleCreate,
+          Optional<Options> options)
+          throws Exception {
+    CheckWithdrawalSchedulesCreateCheckWithdrawalScheduleRequest request =
+        CheckWithdrawalSchedulesCreateCheckWithdrawalScheduleRequest.builder()
+            .accountId(accountId)
+            .checkWithdrawalScheduleCreate(checkWithdrawalScheduleCreate)
+            .build();
+    RequestOperation<
+            CheckWithdrawalSchedulesCreateCheckWithdrawalScheduleRequest,
+            CheckWithdrawalSchedulesCreateCheckWithdrawalScheduleResponse>
+        operation =
+            new CheckWithdrawalSchedulesCreateCheckWithdrawalSchedule.Sync(
+                sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * List Check Withdrawal Schedules
+   *
+   * <p>Return a list of Check withdrawal schedules for the specified account and filter params
+   *
+   * @return The call builder
+   */
+  public CheckWithdrawalSchedulesListCheckWithdrawalSchedulesRequestBuilder
+      listCheckWithdrawalSchedules() {
+    return new CheckWithdrawalSchedulesListCheckWithdrawalSchedulesRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * List Check Withdrawal Schedules
+   *
+   * <p>Return a list of Check withdrawal schedules for the specified account and filter params
+   *
+   * @param accountId The account id.
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CheckWithdrawalSchedulesListCheckWithdrawalSchedulesResponse listCheckWithdrawalSchedules(
+      String accountId) throws Exception {
+    return listCheckWithdrawalSchedules(
+        accountId, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+  }
+
+  /**
+   * List Check Withdrawal Schedules
+   *
+   * <p>Return a list of Check withdrawal schedules for the specified account and filter params
+   *
+   * @param accountId The account id.
+   * @param filter A CEL string to filter results; See the [CEL
+   *     Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
+   *     Guides for more information; Filter options include: `state` `start_date` `end_date`
+   * @param pageSize The maximum number of schedules to return. The service may return fewer than
+   *     this value. If unspecified, at most 25 schedules will be returned. The maximum value is
+   *     1000; values above 1000 will be coerced to 1000.
+   * @param pageToken The page token to request
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CheckWithdrawalSchedulesListCheckWithdrawalSchedulesResponse listCheckWithdrawalSchedules(
+      String accountId,
+      Optional<String> filter,
+      Optional<Integer> pageSize,
+      Optional<String> pageToken,
+      Optional<Options> options)
+      throws Exception {
+    CheckWithdrawalSchedulesListCheckWithdrawalSchedulesRequest request =
+        CheckWithdrawalSchedulesListCheckWithdrawalSchedulesRequest.builder()
+            .accountId(accountId)
+            .filter(filter)
+            .pageSize(pageSize)
+            .pageToken(pageToken)
+            .build();
+    RequestOperation<
+            CheckWithdrawalSchedulesListCheckWithdrawalSchedulesRequest,
+            CheckWithdrawalSchedulesListCheckWithdrawalSchedulesResponse>
+        operation =
+            new CheckWithdrawalSchedulesListCheckWithdrawalSchedules.Sync(
+                sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Get Check Withdrawal Schedule
+   *
+   * <p>Gets a Check withdrawal transfer schedule
+   *
+   * @return The call builder
+   */
+  public CheckWithdrawalSchedulesGetCheckWithdrawalScheduleRequestBuilder
+      getCheckWithdrawalSchedule() {
+    return new CheckWithdrawalSchedulesGetCheckWithdrawalScheduleRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * Get Check Withdrawal Schedule
+   *
+   * <p>Gets a Check withdrawal transfer schedule
+   *
+   * @param accountId The account id.
+   * @param checkWithdrawalScheduleId The checkWithdrawalSchedule id.
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CheckWithdrawalSchedulesGetCheckWithdrawalScheduleResponse getCheckWithdrawalSchedule(
+      String accountId, String checkWithdrawalScheduleId) throws Exception {
+    return getCheckWithdrawalSchedule(accountId, checkWithdrawalScheduleId, Optional.empty());
+  }
+
+  /**
+   * Get Check Withdrawal Schedule
+   *
+   * <p>Gets a Check withdrawal transfer schedule
+   *
+   * @param accountId The account id.
+   * @param checkWithdrawalScheduleId The checkWithdrawalSchedule id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CheckWithdrawalSchedulesGetCheckWithdrawalScheduleResponse getCheckWithdrawalSchedule(
+      String accountId, String checkWithdrawalScheduleId, Optional<Options> options)
+      throws Exception {
+    CheckWithdrawalSchedulesGetCheckWithdrawalScheduleRequest request =
+        CheckWithdrawalSchedulesGetCheckWithdrawalScheduleRequest.builder()
+            .accountId(accountId)
+            .checkWithdrawalScheduleId(checkWithdrawalScheduleId)
+            .build();
+    RequestOperation<
+            CheckWithdrawalSchedulesGetCheckWithdrawalScheduleRequest,
+            CheckWithdrawalSchedulesGetCheckWithdrawalScheduleResponse>
+        operation =
+            new CheckWithdrawalSchedulesGetCheckWithdrawalSchedule.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Update Check Withdrawal Schedule
+   *
+   * <p>Updates the amount of a Check withdrawal transfer schedule
+   *
+   * @return The call builder
+   */
+  public CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleRequestBuilder
+      updateCheckWithdrawalSchedule() {
+    return new CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleRequestBuilder(
+        sdkConfiguration);
+  }
+
+  /**
+   * Update Check Withdrawal Schedule
+   *
+   * <p>Updates the amount of a Check withdrawal transfer schedule
+   *
+   * @param accountId The account id.
+   * @param checkWithdrawalScheduleId The checkWithdrawalSchedule id.
+   * @param checkWithdrawalScheduleUpdate A withdrawal transfer schedule using the Check mechanism
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleResponse
+      updateCheckWithdrawalSchedule(
+          String accountId,
+          String checkWithdrawalScheduleId,
+          CheckWithdrawalScheduleUpdate checkWithdrawalScheduleUpdate)
+          throws Exception {
+    return updateCheckWithdrawalSchedule(
+        accountId,
+        checkWithdrawalScheduleId,
+        Optional.empty(),
+        checkWithdrawalScheduleUpdate,
+        Optional.empty());
+  }
+
+  /**
+   * Update Check Withdrawal Schedule
+   *
+   * <p>Updates the amount of a Check withdrawal transfer schedule
+   *
+   * @param accountId The account id.
+   * @param checkWithdrawalScheduleId The checkWithdrawalSchedule id.
+   * @param updateMask A field mask representing the update. Note: only the
+   *     'schedule_details.amount' field of a schedule is currently updatable
+   * @param checkWithdrawalScheduleUpdate A withdrawal transfer schedule using the Check mechanism
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleResponse
+      updateCheckWithdrawalSchedule(
+          String accountId,
+          String checkWithdrawalScheduleId,
+          Optional<String> updateMask,
+          CheckWithdrawalScheduleUpdate checkWithdrawalScheduleUpdate,
+          Optional<Options> options)
+          throws Exception {
+    CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleRequest request =
+        CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleRequest.builder()
+            .accountId(accountId)
+            .checkWithdrawalScheduleId(checkWithdrawalScheduleId)
+            .updateMask(updateMask)
+            .checkWithdrawalScheduleUpdate(checkWithdrawalScheduleUpdate)
+            .build();
+    RequestOperation<
+            CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleRequest,
+            CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleResponse>
+        operation =
+            new CheckWithdrawalSchedulesUpdateCheckWithdrawalSchedule.Sync(
+                sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Cancel Check Withdrawal Schedule
+   *
+   * <p>Cancels a Check withdrawal transfer schedule
+   *
+   * @return The call builder
+   */
+  public CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleRequestBuilder
+      cancelCheckWithdrawalSchedule() {
+    return new CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleRequestBuilder(
+        sdkConfiguration);
+  }
+
+  /**
+   * Cancel Check Withdrawal Schedule
+   *
+   * <p>Cancels a Check withdrawal transfer schedule
+   *
+   * @param accountId The account id.
+   * @param checkWithdrawalScheduleId The checkWithdrawalSchedule id.
+   * @param cancelCheckWithdrawalScheduleRequestCreate Request to cancel a Check withdrawal transfer
+   *     schedule
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleResponse
+      cancelCheckWithdrawalSchedule(
+          String accountId,
+          String checkWithdrawalScheduleId,
+          CancelCheckWithdrawalScheduleRequestCreate cancelCheckWithdrawalScheduleRequestCreate)
+          throws Exception {
+    return cancelCheckWithdrawalSchedule(
+        accountId,
+        checkWithdrawalScheduleId,
+        cancelCheckWithdrawalScheduleRequestCreate,
+        Optional.empty());
+  }
+
+  /**
+   * Cancel Check Withdrawal Schedule
+   *
+   * <p>Cancels a Check withdrawal transfer schedule
+   *
+   * @param accountId The account id.
+   * @param checkWithdrawalScheduleId The checkWithdrawalSchedule id.
+   * @param cancelCheckWithdrawalScheduleRequestCreate Request to cancel a Check withdrawal transfer
+   *     schedule
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleResponse
+      cancelCheckWithdrawalSchedule(
+          String accountId,
+          String checkWithdrawalScheduleId,
+          CancelCheckWithdrawalScheduleRequestCreate cancelCheckWithdrawalScheduleRequestCreate,
+          Optional<Options> options)
+          throws Exception {
+    CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleRequest request =
+        CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleRequest.builder()
+            .accountId(accountId)
+            .checkWithdrawalScheduleId(checkWithdrawalScheduleId)
+            .cancelCheckWithdrawalScheduleRequestCreate(cancelCheckWithdrawalScheduleRequestCreate)
+            .build();
+    RequestOperation<
+            CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleRequest,
+            CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleResponse>
+        operation =
+            new CheckWithdrawalSchedulesCancelCheckWithdrawalSchedule.Sync(
+                sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 

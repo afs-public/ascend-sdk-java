@@ -40,17 +40,17 @@ import java.util.Optional;
 /**
  * IdentifierType
  *
- * <p>The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For
- * Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are
- * supported
+ * <p>Identifier type for the asset being moved
  */
 @JsonDeserialize(using = IdentifierType._Deserializer.class)
 @JsonSerialize(using = IdentifierType._Serializer.class)
 public class IdentifierType {
 
-  public static final IdentifierType SYMBOL = new IdentifierType("SYMBOL");
+  public static final IdentifierType IDENTIFIER_TYPE_UNSPECIFIED =
+      new IdentifierType("IDENTIFIER_TYPE_UNSPECIFIED");
   public static final IdentifierType CUSIP = new IdentifierType("CUSIP");
-  public static final IdentifierType ISIN = new IdentifierType("ISIN");
+  public static final IdentifierType SYMBOL = new IdentifierType("SYMBOL");
+  public static final IdentifierType ASSET_ID = new IdentifierType("ASSET_ID");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -118,17 +118,19 @@ public class IdentifierType {
 
   private static final Map<String, IdentifierType> createValuesMap() {
     Map<String, IdentifierType> map = new LinkedHashMap<>();
-    map.put("SYMBOL", SYMBOL);
+    map.put("IDENTIFIER_TYPE_UNSPECIFIED", IDENTIFIER_TYPE_UNSPECIFIED);
     map.put("CUSIP", CUSIP);
-    map.put("ISIN", ISIN);
+    map.put("SYMBOL", SYMBOL);
+    map.put("ASSET_ID", ASSET_ID);
     return map;
   }
 
   private static final Map<String, IdentifierTypeEnum> createEnumsMap() {
     Map<String, IdentifierTypeEnum> map = new HashMap<>();
-    map.put("SYMBOL", IdentifierTypeEnum.SYMBOL);
+    map.put("IDENTIFIER_TYPE_UNSPECIFIED", IdentifierTypeEnum.IDENTIFIER_TYPE_UNSPECIFIED);
     map.put("CUSIP", IdentifierTypeEnum.CUSIP);
-    map.put("ISIN", IdentifierTypeEnum.ISIN);
+    map.put("SYMBOL", IdentifierTypeEnum.SYMBOL);
+    map.put("ASSET_ID", IdentifierTypeEnum.ASSET_ID);
     return map;
   }
 
@@ -163,9 +165,10 @@ public class IdentifierType {
   }
 
   public enum IdentifierTypeEnum {
-    SYMBOL("SYMBOL"),
+    IDENTIFIER_TYPE_UNSPECIFIED("IDENTIFIER_TYPE_UNSPECIFIED"),
     CUSIP("CUSIP"),
-    ISIN("ISIN"),
+    SYMBOL("SYMBOL"),
+    ASSET_ID("ASSET_ID"),
     ;
 
     private final String value;

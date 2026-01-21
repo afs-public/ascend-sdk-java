@@ -37,7 +37,7 @@ public class CreateUploadLinkRequestCreate {
 
   /**
    * Media type for the document to be uploaded; Required for all documents; Must be one of:
-   * application/json, application/pdf, image/jpeg, image/png, text/csv, or text/plain
+   * application/json, application/pdf, image/jpeg, image/png, image/tiff, text/csv, or text/plain
    */
   @JsonProperty("mime_type")
   private String mimeType;
@@ -89,7 +89,7 @@ public class CreateUploadLinkRequestCreate {
 
   /**
    * Media type for the document to be uploaded; Required for all documents; Must be one of:
-   * application/json, application/pdf, image/jpeg, image/png, text/csv, or text/plain
+   * application/json, application/pdf, image/jpeg, image/png, image/tiff, text/csv, or text/plain
    */
   @JsonIgnore
   public String mimeType() {
@@ -144,7 +144,7 @@ public class CreateUploadLinkRequestCreate {
 
   /**
    * Media type for the document to be uploaded; Required for all documents; Must be one of:
-   * application/json, application/pdf, image/jpeg, image/png, text/csv, or text/plain
+   * application/json, application/pdf, image/jpeg, image/png, image/tiff, text/csv, or text/plain
    */
   public CreateUploadLinkRequestCreate withMimeType(String mimeType) {
     Utils.checkNotNull(mimeType, "mimeType");
@@ -248,7 +248,7 @@ public class CreateUploadLinkRequestCreate {
 
     /**
      * Media type for the document to be uploaded; Required for all documents; Must be one of:
-     * application/json, application/pdf, image/jpeg, image/png, text/csv, or text/plain
+     * application/json, application/pdf, image/jpeg, image/png, image/tiff, text/csv, or text/plain
      */
     public Builder mimeType(String mimeType) {
       Utils.checkNotNull(mimeType, "mimeType");

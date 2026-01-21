@@ -15,7 +15,8 @@ import java.util.Optional;
 /**
  * WireWithdrawalScheduleAddress
  *
- * <p>The address of the intermediary party
+ * <p>The address of the person or entity taking receipt of the wired funds. This will be populated
+ * automatically in the case of a valid first-party wire
  */
 public class WireWithdrawalScheduleAddress {
   /** Required: Describes the city in which the entity is located. */

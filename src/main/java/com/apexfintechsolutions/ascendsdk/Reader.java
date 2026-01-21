@@ -56,7 +56,7 @@ public class Reader {
    *     Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    *     Guides for more information; If left empty, all events the user has permission to view are
    *     returned; Filter options include: `name` `message_id` `event_type` `publish_time`
-   *     `partition_key` `client_id` `correspondent_id` `account_id`
+   *     `partition_key` `client_id` `correspondent_id` `account_group_id` `account_id`
    * @param pageSize The number of entries to return in a single page; Default = 100; Maximum = 1000
    * @param pageToken Page token used for pagination; Supplying a page token returns the next page
    *     of results

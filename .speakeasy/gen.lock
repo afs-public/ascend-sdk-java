@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 04604b59-b953-4711-ac65-9ad5897162b4
 management:
-  docChecksum: 69899f7f639329d02cfd747208568b07
-  docVersion: v1:20251212:uat:f648e4b8e037
+  docChecksum: 84c7e346129bb255bd3af8fb7e1464fe
+  docVersion: v1:20260112:uat:5e3b93765864
   speakeasyVersion: 1.608.0
   generationVersion: 2.691.6
-  releaseVersion: 1.6.1
-  configChecksum: 2a221356a26090a00877b6f9f3747b61
+  releaseVersion: 1.6.2
+  configChecksum: a808ab78825bac74fea10ec9b384392d
 features:
   java:
     additionalDependencies: 0.1.0
@@ -484,6 +484,7 @@ generatedFiles:
   - docs/models/components/CancelAchWithdrawalScheduleRequestCreate.md
   - docs/models/components/CancelBankRelationshipRequestCreate.md
   - docs/models/components/CancelCashJournalRequestCreate.md
+  - docs/models/components/CancelCheckWithdrawalScheduleRequestCreate.md
   - docs/models/components/CancelCreditRequestCreate.md
   - docs/models/components/CancelExecutionRequestCreate.md
   - docs/models/components/CancelExecutionResponse.md
@@ -504,6 +505,7 @@ generatedFiles:
   - docs/models/components/CancelInitiator.md
   - docs/models/components/CancelOrderRequestCreate.md
   - docs/models/components/CancelOrderRequestCreateCancelInitiator.md
+  - docs/models/components/CancelPositionJournalRequestCreate.md
   - docs/models/components/CancelRejectedReason.md
   - docs/models/components/CancelTradeAllocationRequestCreate.md
   - docs/models/components/CancelTradeAllocationResponse.md
@@ -579,6 +581,26 @@ generatedFiles:
   - docs/models/components/CheckPartyTypeResponse.md
   - docs/models/components/CheckPartyTypeResponsePartyType.md
   - docs/models/components/CheckTypes.md
+  - docs/models/components/CheckWithdrawalSchedule.md
+  - docs/models/components/CheckWithdrawalScheduleAmount.md
+  - docs/models/components/CheckWithdrawalScheduleBeneficiary.md
+  - docs/models/components/CheckWithdrawalScheduleCreate.md
+  - docs/models/components/CheckWithdrawalScheduleDeliveryMethod.md
+  - docs/models/components/CheckWithdrawalScheduleEndDate.md
+  - docs/models/components/CheckWithdrawalScheduleFederalTaxWithholding.md
+  - docs/models/components/CheckWithdrawalSchedulePercentage.md
+  - docs/models/components/CheckWithdrawalScheduleRetirementDistribution.md
+  - docs/models/components/CheckWithdrawalScheduleRetirementDistributionAmount.md
+  - docs/models/components/CheckWithdrawalScheduleRetirementDistributionFederalTaxWithholdingAmount.md
+  - docs/models/components/CheckWithdrawalScheduleRetirementDistributionPercentage.md
+  - docs/models/components/CheckWithdrawalScheduleScheduleDetails.md
+  - docs/models/components/CheckWithdrawalScheduleScheduleProperties.md
+  - docs/models/components/CheckWithdrawalScheduleStartDate.md
+  - docs/models/components/CheckWithdrawalScheduleState.md
+  - docs/models/components/CheckWithdrawalScheduleStateTaxWithholding.md
+  - docs/models/components/CheckWithdrawalScheduleTimeUnit.md
+  - docs/models/components/CheckWithdrawalScheduleType.md
+  - docs/models/components/CheckWithdrawalScheduleUpdate.md
   - docs/models/components/Classification.md
   - docs/models/components/CloseAccountRequestCreate.md
   - docs/models/components/Code.md
@@ -667,6 +689,7 @@ generatedFiles:
   - docs/models/components/DecimalUpdate.md
   - docs/models/components/Deliverer.md
   - docs/models/components/Delivery.md
+  - docs/models/components/DeliveryMethod.md
   - docs/models/components/Deposit.md
   - docs/models/components/DepositScheduleDetailsCreate.md
   - docs/models/components/DepositScheduleDetailsUpdate.md
@@ -851,6 +874,7 @@ generatedFiles:
   - docs/models/components/EntryExchangeType.md
   - docs/models/components/EntryFactorDenominator.md
   - docs/models/components/EntryFactorNumerator.md
+  - docs/models/components/EntryFairMarketValue.md
   - docs/models/components/EntryFee.md
   - docs/models/components/EntryFeeType.md
   - docs/models/components/EntryFlipBrokerCapacity.md
@@ -1028,8 +1052,10 @@ generatedFiles:
   - docs/models/components/ForceApproveAchDepositRequestCreate.md
   - docs/models/components/ForceApproveAchWithdrawalRequestCreate.md
   - docs/models/components/ForceApproveCashJournalRequestCreate.md
+  - docs/models/components/ForceApproveCheckDepositRequestCreate.md
   - docs/models/components/ForceApproveIctDepositRequestCreate.md
   - docs/models/components/ForceApproveIctWithdrawalRequestCreate.md
+  - docs/models/components/ForceApprovePositionJournalRequestCreate.md
   - docs/models/components/ForceApproveWireDepositRequestCreate.md
   - docs/models/components/ForceApproveWireWithdrawalRequestCreate.md
   - docs/models/components/ForceNocAchDepositRequestCreate.md
@@ -1039,6 +1065,7 @@ generatedFiles:
   - docs/models/components/ForceRejectCashJournalRequestCreate.md
   - docs/models/components/ForceRejectIctDepositRequestCreate.md
   - docs/models/components/ForceRejectIctWithdrawalRequestCreate.md
+  - docs/models/components/ForceRejectPositionJournalRequestCreate.md
   - docs/models/components/ForceRejectWireDepositRequestCreate.md
   - docs/models/components/ForceRejectWireWithdrawalRequestCreate.md
   - docs/models/components/ForceReturnAchDepositRequestCreate.md
@@ -1334,6 +1361,7 @@ generatedFiles:
   - docs/models/components/ListAvailableRestrictionsResponse.md
   - docs/models/components/ListBankRelationshipsResponse.md
   - docs/models/components/ListBasketOrdersResponse.md
+  - docs/models/components/ListCheckWithdrawalSchedulesResponse.md
   - docs/models/components/ListCompressedOrdersResponse.md
   - docs/models/components/ListContributionSummariesResponse.md
   - docs/models/components/ListCorrespondentOrdersResponse.md
@@ -1448,6 +1476,7 @@ generatedFiles:
   - docs/models/components/OrderCostPreviewResponseQuantity.md
   - docs/models/components/OrderCostPreviewResponseType.md
   - docs/models/components/OrderCreate.md
+  - docs/models/components/OrderCreateIdentifierType.md
   - docs/models/components/OrderDate.md
   - docs/models/components/OrderIdentifierType.md
   - docs/models/components/OrderLimitPriceType.md
@@ -1583,6 +1612,13 @@ generatedFiles:
   - docs/models/components/Position.md
   - docs/models/components/PositionCreate.md
   - docs/models/components/PositionFpsl.md
+  - docs/models/components/PositionJournal.md
+  - docs/models/components/PositionJournalCreate.md
+  - docs/models/components/PositionJournalCreateType.md
+  - docs/models/components/PositionJournalIdentifierType.md
+  - docs/models/components/PositionJournalState.md
+  - docs/models/components/PositionJournalStateState.md
+  - docs/models/components/PositionJournalType.md
   - docs/models/components/PositionLimit.md
   - docs/models/components/PositionMarketValueAmount.md
   - docs/models/components/PositionTrade.md
@@ -1908,6 +1944,7 @@ generatedFiles:
   - docs/models/components/TradingExecutedPrice.md
   - docs/models/components/TradingExecutedPriceType.md
   - docs/models/components/TradingExecutions.md
+  - docs/models/components/TradingExecutionsQuantity.md
   - docs/models/components/TradingFee.md
   - docs/models/components/TradingFeeAmount.md
   - docs/models/components/TradingFeeType.md
@@ -1934,6 +1971,7 @@ generatedFiles:
   - docs/models/components/TransferScheduleSummaryType.md
   - docs/models/components/TransferState.md
   - docs/models/components/TransferType.md
+  - docs/models/components/TransfersBeneficiaryCreate.md
   - docs/models/components/TransfersCredit.md
   - docs/models/components/TransfersCreditAmount.md
   - docs/models/components/TransfersCreditCreate.md
@@ -2018,6 +2056,7 @@ generatedFiles:
   - docs/models/components/WireWithdrawalScheduleCreate.md
   - docs/models/components/WireWithdrawalScheduleEndDate.md
   - docs/models/components/WireWithdrawalScheduleFederalTaxWithholding.md
+  - docs/models/components/WireWithdrawalScheduleIntermediaryAddress.md
   - docs/models/components/WireWithdrawalSchedulePercentage.md
   - docs/models/components/WireWithdrawalScheduleRecipientBankAddress.md
   - docs/models/components/WireWithdrawalScheduleRecipientBankType.md
@@ -2278,10 +2317,22 @@ generatedFiles:
   - docs/models/operations/CashJournalsForceRejectCashJournalResponse.md
   - docs/models/operations/CashJournalsGetCashJournalRequest.md
   - docs/models/operations/CashJournalsGetCashJournalResponse.md
+  - docs/models/operations/CheckDepositsForceApproveCheckDepositRequest.md
+  - docs/models/operations/CheckDepositsForceApproveCheckDepositResponse.md
   - docs/models/operations/CheckDepositsGetCheckDepositRequest.md
   - docs/models/operations/CheckDepositsGetCheckDepositResponse.md
   - docs/models/operations/CheckDepositsSimulateCreateCheckDepositRequest.md
   - docs/models/operations/CheckDepositsSimulateCreateCheckDepositResponse.md
+  - docs/models/operations/CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleRequest.md
+  - docs/models/operations/CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleResponse.md
+  - docs/models/operations/CheckWithdrawalSchedulesCreateCheckWithdrawalScheduleRequest.md
+  - docs/models/operations/CheckWithdrawalSchedulesCreateCheckWithdrawalScheduleResponse.md
+  - docs/models/operations/CheckWithdrawalSchedulesGetCheckWithdrawalScheduleRequest.md
+  - docs/models/operations/CheckWithdrawalSchedulesGetCheckWithdrawalScheduleResponse.md
+  - docs/models/operations/CheckWithdrawalSchedulesListCheckWithdrawalSchedulesRequest.md
+  - docs/models/operations/CheckWithdrawalSchedulesListCheckWithdrawalSchedulesResponse.md
+  - docs/models/operations/CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleRequest.md
+  - docs/models/operations/CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleResponse.md
   - docs/models/operations/CreditsCancelCreditRequest.md
   - docs/models/operations/CreditsCancelCreditResponse.md
   - docs/models/operations/CreditsCreateCreditRequest.md
@@ -2363,6 +2414,15 @@ generatedFiles:
   - docs/models/operations/OrderServiceListCorrespondentOrdersResponse.md
   - docs/models/operations/OrderServiceSetExtraReportingDataRequest.md
   - docs/models/operations/OrderServiceSetExtraReportingDataResponse.md
+  - docs/models/operations/PositionJournalsCancelPositionJournalRequest.md
+  - docs/models/operations/PositionJournalsCancelPositionJournalResponse.md
+  - docs/models/operations/PositionJournalsCreatePositionJournalResponse.md
+  - docs/models/operations/PositionJournalsForceApprovePositionJournalRequest.md
+  - docs/models/operations/PositionJournalsForceApprovePositionJournalResponse.md
+  - docs/models/operations/PositionJournalsForceRejectPositionJournalRequest.md
+  - docs/models/operations/PositionJournalsForceRejectPositionJournalResponse.md
+  - docs/models/operations/PositionJournalsGetPositionJournalRequest.md
+  - docs/models/operations/PositionJournalsGetPositionJournalResponse.md
   - docs/models/operations/ProgramDateFilterProgram.md
   - docs/models/operations/QueryParamView.md
   - docs/models/operations/ReaderGetEventMessageRequest.md
@@ -2450,6 +2510,7 @@ generatedFiles:
   - docs/sdks/margins/README.md
   - docs/sdks/orders/README.md
   - docs/sdks/personmanagement/README.md
+  - docs/sdks/positionjournals/README.md
   - docs/sdks/reader/README.md
   - docs/sdks/retirements/README.md
   - docs/sdks/scheduletransfers/README.md
@@ -2487,6 +2548,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/Margins.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/Orders.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/PersonManagement.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/PositionJournals.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/Reader.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/Retirements.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/SDK.java
@@ -2951,6 +3013,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelAchWithdrawalScheduleRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelBankRelationshipRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelCashJournalRequestCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelCheckWithdrawalScheduleRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelCreditRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelExecutionRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelExecutionResponse.java
@@ -2971,6 +3034,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelInitiator.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelOrderRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelOrderRequestCreateCancelInitiator.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelPositionJournalRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelRejectedReason.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelTradeAllocationRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelTradeAllocationResponse.java
@@ -3046,6 +3110,26 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckPartyTypeResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckPartyTypeResponsePartyType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckTypes.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckWithdrawalSchedule.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckWithdrawalScheduleAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckWithdrawalScheduleBeneficiary.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckWithdrawalScheduleCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckWithdrawalScheduleDeliveryMethod.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckWithdrawalScheduleEndDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckWithdrawalScheduleFederalTaxWithholding.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckWithdrawalSchedulePercentage.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckWithdrawalScheduleRetirementDistribution.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckWithdrawalScheduleRetirementDistributionAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckWithdrawalScheduleRetirementDistributionFederalTaxWithholdingAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckWithdrawalScheduleRetirementDistributionPercentage.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckWithdrawalScheduleScheduleDetails.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckWithdrawalScheduleScheduleProperties.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckWithdrawalScheduleStartDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckWithdrawalScheduleState.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckWithdrawalScheduleStateTaxWithholding.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckWithdrawalScheduleTimeUnit.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckWithdrawalScheduleType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckWithdrawalScheduleUpdate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Classification.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CloseAccountRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Code.java
@@ -3134,6 +3218,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DecimalUpdate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Deliverer.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Delivery.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DeliveryMethod.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Deposit.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DepositScheduleDetailsCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DepositScheduleDetailsUpdate.java
@@ -3318,6 +3403,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryExchangeType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryFactorDenominator.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryFactorNumerator.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryFairMarketValue.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryFee.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryFeeType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryFlipBrokerCapacity.java
@@ -3495,8 +3581,10 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ForceApproveAchDepositRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ForceApproveAchWithdrawalRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ForceApproveCashJournalRequestCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ForceApproveCheckDepositRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ForceApproveIctDepositRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ForceApproveIctWithdrawalRequestCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ForceApprovePositionJournalRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ForceApproveWireDepositRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ForceApproveWireWithdrawalRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ForceNocAchDepositRequestCreate.java
@@ -3506,6 +3594,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ForceRejectCashJournalRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ForceRejectIctDepositRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ForceRejectIctWithdrawalRequestCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ForceRejectPositionJournalRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ForceRejectWireDepositRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ForceRejectWireWithdrawalRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ForceReturnAchDepositRequestCreate.java
@@ -3801,6 +3890,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListAvailableRestrictionsResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListBankRelationshipsResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListBasketOrdersResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListCheckWithdrawalSchedulesResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListCompressedOrdersResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListContributionSummariesResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListCorrespondentOrdersResponse.java
@@ -3915,6 +4005,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OrderCostPreviewResponseQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OrderCostPreviewResponseType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OrderCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OrderCreateIdentifierType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OrderDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OrderIdentifierType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OrderLimitPriceType.java
@@ -4050,6 +4141,13 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Position.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PositionCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PositionFpsl.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PositionJournal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PositionJournalCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PositionJournalCreateType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PositionJournalIdentifierType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PositionJournalState.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PositionJournalStateState.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PositionJournalType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PositionLimit.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PositionMarketValueAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PositionTrade.java
@@ -4375,6 +4473,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradingExecutedPrice.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradingExecutedPriceType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradingExecutions.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradingExecutionsQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradingFee.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradingFeeAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradingFeeType.java
@@ -4401,6 +4500,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TransferScheduleSummaryType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TransferState.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TransferType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TransfersBeneficiaryCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TransfersCredit.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TransfersCreditAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TransfersCreditCreate.java
@@ -4485,6 +4585,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/WireWithdrawalScheduleCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/WireWithdrawalScheduleEndDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/WireWithdrawalScheduleFederalTaxWithholding.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/WireWithdrawalScheduleIntermediaryAddress.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/WireWithdrawalSchedulePercentage.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/WireWithdrawalScheduleRecipientBankAddress.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/WireWithdrawalScheduleRecipientBankType.java
@@ -4859,12 +4960,30 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashJournalsGetCashJournalRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashJournalsGetCashJournalRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashJournalsGetCashJournalResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckDepositsForceApproveCheckDepositRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckDepositsForceApproveCheckDepositRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckDepositsForceApproveCheckDepositResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckDepositsGetCheckDepositRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckDepositsGetCheckDepositRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckDepositsGetCheckDepositResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckDepositsSimulateCreateCheckDepositRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckDepositsSimulateCreateCheckDepositRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckDepositsSimulateCreateCheckDepositResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckWithdrawalSchedulesCreateCheckWithdrawalScheduleRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckWithdrawalSchedulesCreateCheckWithdrawalScheduleRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckWithdrawalSchedulesCreateCheckWithdrawalScheduleResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckWithdrawalSchedulesGetCheckWithdrawalScheduleRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckWithdrawalSchedulesGetCheckWithdrawalScheduleRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckWithdrawalSchedulesGetCheckWithdrawalScheduleResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckWithdrawalSchedulesListCheckWithdrawalSchedulesRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckWithdrawalSchedulesListCheckWithdrawalSchedulesRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckWithdrawalSchedulesListCheckWithdrawalSchedulesResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CreditsCancelCreditRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CreditsCancelCreditRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CreditsCancelCreditResponse.java
@@ -4986,6 +5105,20 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OrderServiceSetExtraReportingDataRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OrderServiceSetExtraReportingDataRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OrderServiceSetExtraReportingDataResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PositionJournalsCancelPositionJournalRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PositionJournalsCancelPositionJournalRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PositionJournalsCancelPositionJournalResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PositionJournalsCreatePositionJournalRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PositionJournalsCreatePositionJournalResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PositionJournalsForceApprovePositionJournalRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PositionJournalsForceApprovePositionJournalRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PositionJournalsForceApprovePositionJournalResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PositionJournalsForceRejectPositionJournalRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PositionJournalsForceRejectPositionJournalRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PositionJournalsForceRejectPositionJournalResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PositionJournalsGetPositionJournalRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PositionJournalsGetPositionJournalRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PositionJournalsGetPositionJournalResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/ProgramDateFilterProgram.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/QueryParamView.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/ReaderGetEventMessageRequest.java
@@ -5193,8 +5326,14 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CashJournalsForceApproveCashJournal.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CashJournalsForceRejectCashJournal.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CashJournalsGetCashJournal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CheckDepositsForceApproveCheckDeposit.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CheckDepositsGetCheckDeposit.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CheckDepositsSimulateCreateCheckDeposit.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CheckWithdrawalSchedulesCancelCheckWithdrawalSchedule.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CheckWithdrawalSchedulesCreateCheckWithdrawalSchedule.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CheckWithdrawalSchedulesGetCheckWithdrawalSchedule.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CheckWithdrawalSchedulesListCheckWithdrawalSchedules.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CheckWithdrawalSchedulesUpdateCheckWithdrawalSchedule.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CreditsCancelCredit.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CreditsCreateCredit.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CreditsGetCredit.java
@@ -5236,6 +5375,11 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OrderServiceGetOrder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OrderServiceListCorrespondentOrders.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OrderServiceSetExtraReportingData.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/PositionJournalsCancelPositionJournal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/PositionJournalsCreatePositionJournal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/PositionJournalsForceApprovePositionJournal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/PositionJournalsForceRejectPositionJournal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/PositionJournalsGetPositionJournal.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/ReaderGetEventMessage.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/ReaderListEventMessages.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/RetirementConstraintsListContributionSummaries.java
@@ -8004,6 +8148,155 @@ examples:
         "400":
           application/json: {}
         "500":
+          application/json: {}
+        default:
+          application/json: {}
+  CheckWithdrawalSchedules_CreateCheckWithdrawalSchedule:
+    speakeasy-default-check-withdrawal-schedules-create-check-withdrawal-schedule:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      requestBody:
+        application/json: {"delivery_method": "STANDARD", "schedule_details": {"client_schedule_id": "ABC-123", "schedule_properties": {"start_date": {}, "time_unit": "MONTH", "unit_multiplier": 1}}}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  CheckWithdrawalSchedules_ListCheckWithdrawalSchedules:
+    speakeasy-default-check-withdrawal-schedules-list-check-withdrawal-schedules:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  CheckWithdrawalSchedules_GetCheckWithdrawalSchedule:
+    speakeasy-default-check-withdrawal-schedules-get-check-withdrawal-schedule:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          checkWithdrawalSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  CheckWithdrawalSchedules_UpdateCheckWithdrawalSchedule:
+    speakeasy-default-check-withdrawal-schedules-update-check-withdrawal-schedule:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          checkWithdrawalSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  CheckWithdrawalSchedules_CancelCheckWithdrawalSchedule:
+    speakeasy-default-check-withdrawal-schedules-cancel-check-withdrawal-schedule:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          checkWithdrawalSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/checkWithdrawalSchedules/40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  CheckDeposits_ForceApproveCheckDeposit:
+    speakeasy-default-check-deposits-force-approve-check-deposit:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          checkDeposit_id: "20230817000319"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/checkDeposits/20230817000319"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  PositionJournals_ForceApprovePositionJournal:
+    speakeasy-default-position-journals-force-approve-position-journal:
+      parameters:
+        path:
+          positionJournal_id: "20230817000319"
+      requestBody:
+        application/json: {"name": "positionJournals/20230817000319"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  PositionJournals_ForceRejectPositionJournal:
+    speakeasy-default-position-journals-force-reject-position-journal:
+      parameters:
+        path:
+          positionJournal_id: "20230817000319"
+      requestBody:
+        application/json: {"name": "positionJournals/20230817000319"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  PositionJournals_CreatePositionJournal:
+    speakeasy-default-position-journals-create-position-journal:
+      requestBody:
+        application/json: {"client_transfer_id": "113bw03-49f8-4525-934c-560fb39dg2kd", "destination_account": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y", "identifier": "AAPL", "identifier_type": "SYMBOL", "quantity": {}, "source_account": "accounts/01H8FM6EXVH77SAW3TC8KAWMES", "type": "REWARD"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  PositionJournals_GetPositionJournal:
+    speakeasy-default-position-journals-get-position-journal:
+      parameters:
+        path:
+          positionJournal_id: "20230817000319"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  PositionJournals_CancelPositionJournal:
+    speakeasy-default-position-journals-cancel-position-journal:
+      parameters:
+        path:
+          positionJournal_id: "20240717000319"
+      requestBody:
+        application/json: {"name": "positionJournals/20240717000319"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
           application/json: {}
         default:
           application/json: {}

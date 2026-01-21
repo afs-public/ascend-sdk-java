@@ -31,13 +31,14 @@ public class Intermediary {
   /** The address of the intermediary party */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("address")
-  private JsonNullable<? extends WireWithdrawalScheduleAddress> address;
+  private JsonNullable<? extends WireWithdrawalScheduleIntermediaryAddress> address;
 
   @JsonCreator
   public Intermediary(
       @JsonProperty("account") Optional<String> account,
       @JsonProperty("account_title") Optional<String> accountTitle,
-      @JsonProperty("address") JsonNullable<? extends WireWithdrawalScheduleAddress> address) {
+      @JsonProperty("address")
+          JsonNullable<? extends WireWithdrawalScheduleIntermediaryAddress> address) {
     Utils.checkNotNull(account, "account");
     Utils.checkNotNull(accountTitle, "accountTitle");
     Utils.checkNotNull(address, "address");
@@ -65,8 +66,8 @@ public class Intermediary {
   /** The address of the intermediary party */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<WireWithdrawalScheduleAddress> address() {
-    return (JsonNullable<WireWithdrawalScheduleAddress>) address;
+  public JsonNullable<WireWithdrawalScheduleIntermediaryAddress> address() {
+    return (JsonNullable<WireWithdrawalScheduleIntermediaryAddress>) address;
   }
 
   public static Builder builder() {
@@ -102,14 +103,15 @@ public class Intermediary {
   }
 
   /** The address of the intermediary party */
-  public Intermediary withAddress(WireWithdrawalScheduleAddress address) {
+  public Intermediary withAddress(WireWithdrawalScheduleIntermediaryAddress address) {
     Utils.checkNotNull(address, "address");
     this.address = JsonNullable.of(address);
     return this;
   }
 
   /** The address of the intermediary party */
-  public Intermediary withAddress(JsonNullable<? extends WireWithdrawalScheduleAddress> address) {
+  public Intermediary withAddress(
+      JsonNullable<? extends WireWithdrawalScheduleIntermediaryAddress> address) {
     Utils.checkNotNull(address, "address");
     this.address = address;
     return this;
@@ -147,7 +149,7 @@ public class Intermediary {
 
     private Optional<String> accountTitle = Optional.empty();
 
-    private JsonNullable<? extends WireWithdrawalScheduleAddress> address =
+    private JsonNullable<? extends WireWithdrawalScheduleIntermediaryAddress> address =
         JsonNullable.undefined();
 
     private Builder() {
@@ -183,14 +185,15 @@ public class Intermediary {
     }
 
     /** The address of the intermediary party */
-    public Builder address(WireWithdrawalScheduleAddress address) {
+    public Builder address(WireWithdrawalScheduleIntermediaryAddress address) {
       Utils.checkNotNull(address, "address");
       this.address = JsonNullable.of(address);
       return this;
     }
 
     /** The address of the intermediary party */
-    public Builder address(JsonNullable<? extends WireWithdrawalScheduleAddress> address) {
+    public Builder address(
+        JsonNullable<? extends WireWithdrawalScheduleIntermediaryAddress> address) {
       Utils.checkNotNull(address, "address");
       this.address = address;
       return this;

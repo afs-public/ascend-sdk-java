@@ -4,11 +4,16 @@
 package com.apexfintechsolutions.ascendsdk;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
+import com.apexfintechsolutions.ascendsdk.models.components.CheckDepositStateState;
 import com.apexfintechsolutions.ascendsdk.models.components.DecimalCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveCheckDepositRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
 import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.components.SimulateCreateCheckDepositRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckDepositsForceApproveCheckDepositResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.CheckDepositsSimulateCreateCheckDepositResponse;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import org.junit.jupiter.api.Test;
@@ -49,6 +54,79 @@ public class TestSimulationTests {
                     .amount(DecimalCreate.builder().value("100").build())
                     .parent("01JHGTEPC6ZTAHCFRH2MD3VJJT")
                     .build())
+            .call();
+    assertEquals(200, res.statusCode());
+  }
+
+  @Test
+  public void testTestSimulation_CheckDepositsForceApproveCheckDeposit() throws Exception {
+
+    var testHttpClient = Utils.createTestHTTPClient("CheckDeposits_ForceApproveCheckDeposit");
+    String accountId = System.getenv().getOrDefault("ACCOUNT_ID", "01JHGTEPC6ZTAHCFRH2MD3VJJT");
+
+    SDK sdk =
+        SDK.builder()
+            .serverURL(Utils.environmentVariable("SERVICE_ACCOUNT_CREDS_URL", ""))
+            .security(
+                Security.builder()
+                    .apiKey(Utils.environmentVariable("API_KEY", ""))
+                    .serviceAccountCreds(
+                        ServiceAccountCreds.builder()
+                            .privateKey(
+                                System.getenv()
+                                    .getOrDefault("SERVICE_ACCOUNT_CREDS_PRIVATE_KEY", ""))
+                            .name(System.getenv().getOrDefault("SERVICE_ACCOUNT_CREDS_NAME", ""))
+                            .organization(
+                                System.getenv()
+                                    .getOrDefault("SERVICE_ACCOUNT_CREDS_ORGANIZATION", ""))
+                            .type(System.getenv().getOrDefault("SERVICE_ACCOUNT_CREDS_TYPE", ""))
+                            .build())
+                    .build())
+            .client(testHttpClient)
+            .build();
+
+    // First, create a check deposit
+    CheckDepositsSimulateCreateCheckDepositResponse createRes =
+        sdk.testSimulation()
+            .simulateCreateCheckDeposit()
+            .accountId(accountId)
+            .simulateCreateCheckDepositRequestCreate(
+                SimulateCreateCheckDepositRequestCreate.builder()
+                    .amount(DecimalCreate.builder().value("100").build())
+                    .parent(accountId)
+                    .build())
+            .call();
+    assertEquals(200, createRes.statusCode());
+    assertNotNull(createRes.checkDeposit());
+    assertNotNull(createRes.checkDeposit().get().name());
+
+    // Extract check deposit ID from the name
+    String name = createRes.checkDeposit().get().name().get();
+    String[] parts = name.split("/");
+    String checkDepositId = parts[parts.length - 1];
+
+    // Check if the deposit is in PENDING_REVIEW state before force approving
+    assumeTrue(
+        createRes.checkDeposit().get().state().isPresent()
+            && createRes.checkDeposit().get().state().get().state().isPresent()
+            && createRes
+                .checkDeposit()
+                .get()
+                .state()
+                .get()
+                .state()
+                .get()
+                .equals(CheckDepositStateState.PENDING_REVIEW),
+        "Check deposit is not pending review, skipping force approve test");
+
+    // Force approve the check deposit
+    CheckDepositsForceApproveCheckDepositResponse res =
+        sdk.testSimulation()
+            .forceApproveCheckDeposit()
+            .accountId(accountId)
+            .checkDepositId(checkDepositId)
+            .forceApproveCheckDepositRequestCreate(
+                ForceApproveCheckDepositRequestCreate.builder().name(name).build())
             .call();
     assertEquals(200, res.statusCode());
   }

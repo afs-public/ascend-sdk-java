@@ -15,8 +15,11 @@ import java.util.Optional;
 /**
  * Address
  *
- * <p>The address of the person or entity taking receipt of the wired funds. This will be populated
- * automatically in the case of a valid first-party wire
+ * <p>**Field Dependencies:**
+ *
+ * <p>Address is required for third party beneficiaries
+ *
+ * <p>Required if `third_party` is `true`.
  */
 public class Address {
   /** Required: Describes the city in which the entity is located. */

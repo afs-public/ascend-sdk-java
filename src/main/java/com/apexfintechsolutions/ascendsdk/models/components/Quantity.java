@@ -14,8 +14,8 @@ import java.util.Optional;
 /**
  * Quantity
  *
- * <p>The quantity of the order. For Equities: measured in shares. For Fixed Income assets: measured
- * in the face value of the currency of the order.
+ * <p>Numeric quantity of securities being transferred. For Equities: Represents the number of
+ * shares, must be greater than zero and may not exceed 5 decimal places.
  */
 public class Quantity {
   /**

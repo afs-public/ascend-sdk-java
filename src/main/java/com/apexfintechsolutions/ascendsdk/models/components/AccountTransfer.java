@@ -62,7 +62,7 @@ public class AccountTransfer {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("fair_market_value")
-  private JsonNullable<? extends FairMarketValue> fairMarketValue;
+  private JsonNullable<? extends EntryFairMarketValue> fairMarketValue;
 
   /** Date from which the asset was valued and used in the fair market value calculation */
   @JsonInclude(Include.NON_ABSENT)
@@ -97,7 +97,8 @@ public class AccountTransfer {
       @JsonProperty("additional_instructions") Optional<String> additionalInstructions,
       @JsonProperty("contra_party_account_number") Optional<String> contraPartyAccountNumber,
       @JsonProperty("contra_party_id") Optional<String> contraPartyId,
-      @JsonProperty("fair_market_value") JsonNullable<? extends FairMarketValue> fairMarketValue,
+      @JsonProperty("fair_market_value")
+          JsonNullable<? extends EntryFairMarketValue> fairMarketValue,
       @JsonProperty("fair_market_value_date")
           JsonNullable<? extends FairMarketValueDate> fairMarketValueDate,
       @JsonProperty("gift_transfer") Optional<Boolean> giftTransfer,
@@ -197,8 +198,8 @@ public class AccountTransfer {
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<FairMarketValue> fairMarketValue() {
-    return (JsonNullable<FairMarketValue>) fairMarketValue;
+  public JsonNullable<EntryFairMarketValue> fairMarketValue() {
+    return (JsonNullable<EntryFairMarketValue>) fairMarketValue;
   }
 
   /** Date from which the asset was valued and used in the fair market value calculation */
@@ -341,7 +342,7 @@ public class AccountTransfer {
    * Total value of the securities being transferred. Used for sponsored transfers activity to
    * ensure cost basis is accurately moved with the assets to the new account
    */
-  public AccountTransfer withFairMarketValue(FairMarketValue fairMarketValue) {
+  public AccountTransfer withFairMarketValue(EntryFairMarketValue fairMarketValue) {
     Utils.checkNotNull(fairMarketValue, "fairMarketValue");
     this.fairMarketValue = JsonNullable.of(fairMarketValue);
     return this;
@@ -352,7 +353,7 @@ public class AccountTransfer {
    * ensure cost basis is accurately moved with the assets to the new account
    */
   public AccountTransfer withFairMarketValue(
-      JsonNullable<? extends FairMarketValue> fairMarketValue) {
+      JsonNullable<? extends EntryFairMarketValue> fairMarketValue) {
     Utils.checkNotNull(fairMarketValue, "fairMarketValue");
     this.fairMarketValue = fairMarketValue;
     return this;
@@ -508,7 +509,7 @@ public class AccountTransfer {
 
     private Optional<String> contraPartyId = Optional.empty();
 
-    private JsonNullable<? extends FairMarketValue> fairMarketValue = JsonNullable.undefined();
+    private JsonNullable<? extends EntryFairMarketValue> fairMarketValue = JsonNullable.undefined();
 
     private JsonNullable<? extends FairMarketValueDate> fairMarketValueDate =
         JsonNullable.undefined();
@@ -632,7 +633,7 @@ public class AccountTransfer {
      * Total value of the securities being transferred. Used for sponsored transfers activity to
      * ensure cost basis is accurately moved with the assets to the new account
      */
-    public Builder fairMarketValue(FairMarketValue fairMarketValue) {
+    public Builder fairMarketValue(EntryFairMarketValue fairMarketValue) {
       Utils.checkNotNull(fairMarketValue, "fairMarketValue");
       this.fairMarketValue = JsonNullable.of(fairMarketValue);
       return this;
@@ -642,7 +643,7 @@ public class AccountTransfer {
      * Total value of the securities being transferred. Used for sponsored transfers activity to
      * ensure cost basis is accurately moved with the assets to the new account
      */
-    public Builder fairMarketValue(JsonNullable<? extends FairMarketValue> fairMarketValue) {
+    public Builder fairMarketValue(JsonNullable<? extends EntryFairMarketValue> fairMarketValue) {
       Utils.checkNotNull(fairMarketValue, "fairMarketValue");
       this.fairMarketValue = fairMarketValue;
       return this;

@@ -65,7 +65,7 @@ public class TradingExecutions {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("quantity")
-  private JsonNullable<? extends Quantity> quantity;
+  private JsonNullable<? extends TradingExecutionsQuantity> quantity;
 
   @JsonCreator
   public TradingExecutions(
@@ -78,7 +78,7 @@ public class TradingExecutions {
           JsonNullable<? extends GrossCreditAmount> grossCreditAmount,
       @JsonProperty("prevailing_market_price")
           JsonNullable<? extends PrevailingMarketPrice> prevailingMarketPrice,
-      @JsonProperty("quantity") JsonNullable<? extends Quantity> quantity) {
+      @JsonProperty("quantity") JsonNullable<? extends TradingExecutionsQuantity> quantity) {
     Utils.checkNotNull(accruedInterestAmount, "accruedInterestAmount");
     Utils.checkNotNull(executedPrices, "executedPrices");
     Utils.checkNotNull(executedTime, "executedTime");
@@ -157,8 +157,8 @@ public class TradingExecutions {
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<Quantity> quantity() {
-    return (JsonNullable<Quantity>) quantity;
+  public JsonNullable<TradingExecutionsQuantity> quantity() {
+    return (JsonNullable<TradingExecutionsQuantity>) quantity;
   }
 
   public static Builder builder() {
@@ -271,7 +271,7 @@ public class TradingExecutions {
    * The quantity of the order. For Equities: measured in shares. For Fixed Income assets: measured
    * in the face value of the currency of the order.
    */
-  public TradingExecutions withQuantity(Quantity quantity) {
+  public TradingExecutions withQuantity(TradingExecutionsQuantity quantity) {
     Utils.checkNotNull(quantity, "quantity");
     this.quantity = JsonNullable.of(quantity);
     return this;
@@ -281,7 +281,8 @@ public class TradingExecutions {
    * The quantity of the order. For Equities: measured in shares. For Fixed Income assets: measured
    * in the face value of the currency of the order.
    */
-  public TradingExecutions withQuantity(JsonNullable<? extends Quantity> quantity) {
+  public TradingExecutions withQuantity(
+      JsonNullable<? extends TradingExecutionsQuantity> quantity) {
     Utils.checkNotNull(quantity, "quantity");
     this.quantity = quantity;
     return this;
@@ -348,7 +349,7 @@ public class TradingExecutions {
     private JsonNullable<? extends PrevailingMarketPrice> prevailingMarketPrice =
         JsonNullable.undefined();
 
-    private JsonNullable<? extends Quantity> quantity = JsonNullable.undefined();
+    private JsonNullable<? extends TradingExecutionsQuantity> quantity = JsonNullable.undefined();
 
     private Builder() {
       // force use of static builder() method
@@ -458,7 +459,7 @@ public class TradingExecutions {
      * The quantity of the order. For Equities: measured in shares. For Fixed Income assets:
      * measured in the face value of the currency of the order.
      */
-    public Builder quantity(Quantity quantity) {
+    public Builder quantity(TradingExecutionsQuantity quantity) {
       Utils.checkNotNull(quantity, "quantity");
       this.quantity = JsonNullable.of(quantity);
       return this;
@@ -468,7 +469,7 @@ public class TradingExecutions {
      * The quantity of the order. For Equities: measured in shares. For Fixed Income assets:
      * measured in the face value of the currency of the order.
      */
-    public Builder quantity(JsonNullable<? extends Quantity> quantity) {
+    public Builder quantity(JsonNullable<? extends TradingExecutionsQuantity> quantity) {
       Utils.checkNotNull(quantity, "quantity");
       this.quantity = quantity;
       return this;

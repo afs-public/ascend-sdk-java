@@ -56,6 +56,7 @@ public class FixedIncomeType {
   public static final FixedIncomeType GOVERNMENT = new FixedIncomeType("GOVERNMENT");
   public static final FixedIncomeType FOREIGN_GOVERNMENT =
       new FixedIncomeType("FOREIGN_GOVERNMENT");
+  public static final FixedIncomeType EURO_BOND = new FixedIncomeType("EURO_BOND");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -131,6 +132,7 @@ public class FixedIncomeType {
     map.put("TREASURY", TREASURY);
     map.put("GOVERNMENT", GOVERNMENT);
     map.put("FOREIGN_GOVERNMENT", FOREIGN_GOVERNMENT);
+    map.put("EURO_BOND", EURO_BOND);
     return map;
   }
 
@@ -144,6 +146,7 @@ public class FixedIncomeType {
     map.put("TREASURY", FixedIncomeTypeEnum.TREASURY);
     map.put("GOVERNMENT", FixedIncomeTypeEnum.GOVERNMENT);
     map.put("FOREIGN_GOVERNMENT", FixedIncomeTypeEnum.FOREIGN_GOVERNMENT);
+    map.put("EURO_BOND", FixedIncomeTypeEnum.EURO_BOND);
     return map;
   }
 
@@ -186,6 +189,7 @@ public class FixedIncomeType {
     TREASURY("TREASURY"),
     GOVERNMENT("GOVERNMENT"),
     FOREIGN_GOVERNMENT("FOREIGN_GOVERNMENT"),
+    EURO_BOND("EURO_BOND"),
     ;
 
     private final String value;

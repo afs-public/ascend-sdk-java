@@ -53,7 +53,7 @@ public class OrderUtil {
             .orderType(OrderType.MARKET)
             .assetType(AssetType.EQUITY)
             .identifier("SBUX")
-            .identifierType(IdentifierType.SYMBOL)
+            .identifierType(OrderCreateIdentifierType.SYMBOL)
             .side(Side.BUY)
             .orderType(OrderType.MARKET)
             .timeInForce(TimeInForce.DAY)
@@ -100,7 +100,7 @@ public class OrderUtil {
                     .build())
             .assetType(AssetType.EQUITY)
             .identifier("SBUX")
-            .identifierType(IdentifierType.SYMBOL)
+            .identifierType(OrderCreateIdentifierType.SYMBOL)
             .side(Side.BUY)
             .timeInForce(TimeInForce.DAY)
             .build();

@@ -8,8 +8,10 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveAchDepositRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveAchWithdrawalRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveCashJournalRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveCheckDepositRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveIctDepositRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveIctWithdrawalRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.ForceApprovePositionJournalRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveWireDepositRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveWireWithdrawalRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceNocAchDepositRequestCreate;
@@ -19,6 +21,7 @@ import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectAchWithdr
 import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectCashJournalRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectIctDepositRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectIctWithdrawalRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectPositionJournalRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectWireDepositRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceRejectWireWithdrawalRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceReturnAchDepositRequestCreate;
@@ -58,6 +61,9 @@ import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalsForceApp
 import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalsForceRejectCashJournalRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalsForceRejectCashJournalRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalsForceRejectCashJournalResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckDepositsForceApproveCheckDepositRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckDepositsForceApproveCheckDepositRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckDepositsForceApproveCheckDepositResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.CheckDepositsSimulateCreateCheckDepositRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.CheckDepositsSimulateCreateCheckDepositRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.CheckDepositsSimulateCreateCheckDepositResponse;
@@ -73,6 +79,12 @@ import com.apexfintechsolutions.ascendsdk.models.operations.IctWithdrawalsForceA
 import com.apexfintechsolutions.ascendsdk.models.operations.IctWithdrawalsForceRejectIctWithdrawalRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.IctWithdrawalsForceRejectIctWithdrawalRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.IctWithdrawalsForceRejectIctWithdrawalResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.PositionJournalsForceApprovePositionJournalRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.PositionJournalsForceApprovePositionJournalRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.PositionJournalsForceApprovePositionJournalResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.PositionJournalsForceRejectPositionJournalRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.PositionJournalsForceRejectPositionJournalRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.PositionJournalsForceRejectPositionJournalResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.WireDepositsForceApproveWireDepositRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.WireDepositsForceApproveWireDepositRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.WireDepositsForceApproveWireDepositResponse;
@@ -99,11 +111,14 @@ import com.apexfintechsolutions.ascendsdk.operations.AchWithdrawalsForceReturnAc
 import com.apexfintechsolutions.ascendsdk.operations.BankRelationshipsGetMicroDepositAmounts;
 import com.apexfintechsolutions.ascendsdk.operations.CashJournalsForceApproveCashJournal;
 import com.apexfintechsolutions.ascendsdk.operations.CashJournalsForceRejectCashJournal;
+import com.apexfintechsolutions.ascendsdk.operations.CheckDepositsForceApproveCheckDeposit;
 import com.apexfintechsolutions.ascendsdk.operations.CheckDepositsSimulateCreateCheckDeposit;
 import com.apexfintechsolutions.ascendsdk.operations.IctDepositsForceApproveIctDeposit;
 import com.apexfintechsolutions.ascendsdk.operations.IctDepositsForceRejectIctDeposit;
 import com.apexfintechsolutions.ascendsdk.operations.IctWithdrawalsForceApproveIctWithdrawal;
 import com.apexfintechsolutions.ascendsdk.operations.IctWithdrawalsForceRejectIctWithdrawal;
+import com.apexfintechsolutions.ascendsdk.operations.PositionJournalsForceApprovePositionJournal;
+import com.apexfintechsolutions.ascendsdk.operations.PositionJournalsForceRejectPositionJournal;
 import com.apexfintechsolutions.ascendsdk.operations.WireDepositsForceApproveWireDeposit;
 import com.apexfintechsolutions.ascendsdk.operations.WireDepositsForceRejectWireDeposit;
 import com.apexfintechsolutions.ascendsdk.operations.WireDepositsSimulateWireDeposit;
@@ -175,6 +190,70 @@ public class TestSimulation {
             CheckDepositsSimulateCreateCheckDepositRequest,
             CheckDepositsSimulateCreateCheckDepositResponse>
         operation = new CheckDepositsSimulateCreateCheckDeposit.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Check Deposit Approval
+   *
+   * <p>Force approval of an existing check deposit that is pending review FOR TESTING ONLY!
+   *
+   * @return The call builder
+   */
+  public CheckDepositsForceApproveCheckDepositRequestBuilder forceApproveCheckDeposit() {
+    return new CheckDepositsForceApproveCheckDepositRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * Check Deposit Approval
+   *
+   * <p>Force approval of an existing check deposit that is pending review FOR TESTING ONLY!
+   *
+   * @param accountId The account id.
+   * @param checkDepositId The checkDeposit id.
+   * @param forceApproveCheckDepositRequestCreate Request to force approve an existing check deposit
+   *     that is pending review FOR TESTING ONLY!
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CheckDepositsForceApproveCheckDepositResponse forceApproveCheckDeposit(
+      String accountId,
+      String checkDepositId,
+      ForceApproveCheckDepositRequestCreate forceApproveCheckDepositRequestCreate)
+      throws Exception {
+    return forceApproveCheckDeposit(
+        accountId, checkDepositId, forceApproveCheckDepositRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Check Deposit Approval
+   *
+   * <p>Force approval of an existing check deposit that is pending review FOR TESTING ONLY!
+   *
+   * @param accountId The account id.
+   * @param checkDepositId The checkDeposit id.
+   * @param forceApproveCheckDepositRequestCreate Request to force approve an existing check deposit
+   *     that is pending review FOR TESTING ONLY!
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CheckDepositsForceApproveCheckDepositResponse forceApproveCheckDeposit(
+      String accountId,
+      String checkDepositId,
+      ForceApproveCheckDepositRequestCreate forceApproveCheckDepositRequestCreate,
+      Optional<Options> options)
+      throws Exception {
+    CheckDepositsForceApproveCheckDepositRequest request =
+        CheckDepositsForceApproveCheckDepositRequest.builder()
+            .accountId(accountId)
+            .checkDepositId(checkDepositId)
+            .forceApproveCheckDepositRequestCreate(forceApproveCheckDepositRequestCreate)
+            .build();
+    RequestOperation<
+            CheckDepositsForceApproveCheckDepositRequest,
+            CheckDepositsForceApproveCheckDepositResponse>
+        operation = new CheckDepositsForceApproveCheckDeposit.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 
@@ -1398,6 +1477,124 @@ public class TestSimulation {
     RequestOperation<
             CashJournalsForceRejectCashJournalRequest, CashJournalsForceRejectCashJournalResponse>
         operation = new CashJournalsForceRejectCashJournal.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Force Approve Position Journal
+   *
+   * <p>Forces approval of an existing position journal that is pending review FOR TESTING ONLY!
+   *
+   * @return The call builder
+   */
+  public PositionJournalsForceApprovePositionJournalRequestBuilder forceApprovePositionJournal() {
+    return new PositionJournalsForceApprovePositionJournalRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * Force Approve Position Journal
+   *
+   * <p>Forces approval of an existing position journal that is pending review FOR TESTING ONLY!
+   *
+   * @param positionJournalId The positionJournal id.
+   * @param forceApprovePositionJournalRequestCreate Request to force approve a pending position
+   *     journal
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public PositionJournalsForceApprovePositionJournalResponse forceApprovePositionJournal(
+      String positionJournalId,
+      ForceApprovePositionJournalRequestCreate forceApprovePositionJournalRequestCreate)
+      throws Exception {
+    return forceApprovePositionJournal(
+        positionJournalId, forceApprovePositionJournalRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Force Approve Position Journal
+   *
+   * <p>Forces approval of an existing position journal that is pending review FOR TESTING ONLY!
+   *
+   * @param positionJournalId The positionJournal id.
+   * @param forceApprovePositionJournalRequestCreate Request to force approve a pending position
+   *     journal
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public PositionJournalsForceApprovePositionJournalResponse forceApprovePositionJournal(
+      String positionJournalId,
+      ForceApprovePositionJournalRequestCreate forceApprovePositionJournalRequestCreate,
+      Optional<Options> options)
+      throws Exception {
+    PositionJournalsForceApprovePositionJournalRequest request =
+        PositionJournalsForceApprovePositionJournalRequest.builder()
+            .positionJournalId(positionJournalId)
+            .forceApprovePositionJournalRequestCreate(forceApprovePositionJournalRequestCreate)
+            .build();
+    RequestOperation<
+            PositionJournalsForceApprovePositionJournalRequest,
+            PositionJournalsForceApprovePositionJournalResponse>
+        operation = new PositionJournalsForceApprovePositionJournal.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Force Reject Position Journal
+   *
+   * <p>Forces rejection of an existing position journal that is pending review FOR TESTING ONLY!
+   *
+   * @return The call builder
+   */
+  public PositionJournalsForceRejectPositionJournalRequestBuilder forceRejectPositionJournal() {
+    return new PositionJournalsForceRejectPositionJournalRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * Force Reject Position Journal
+   *
+   * <p>Forces rejection of an existing position journal that is pending review FOR TESTING ONLY!
+   *
+   * @param positionJournalId The positionJournal id.
+   * @param forceRejectPositionJournalRequestCreate Request to force reject a pending position
+   *     journal
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public PositionJournalsForceRejectPositionJournalResponse forceRejectPositionJournal(
+      String positionJournalId,
+      ForceRejectPositionJournalRequestCreate forceRejectPositionJournalRequestCreate)
+      throws Exception {
+    return forceRejectPositionJournal(
+        positionJournalId, forceRejectPositionJournalRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Force Reject Position Journal
+   *
+   * <p>Forces rejection of an existing position journal that is pending review FOR TESTING ONLY!
+   *
+   * @param positionJournalId The positionJournal id.
+   * @param forceRejectPositionJournalRequestCreate Request to force reject a pending position
+   *     journal
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public PositionJournalsForceRejectPositionJournalResponse forceRejectPositionJournal(
+      String positionJournalId,
+      ForceRejectPositionJournalRequestCreate forceRejectPositionJournalRequestCreate,
+      Optional<Options> options)
+      throws Exception {
+    PositionJournalsForceRejectPositionJournalRequest request =
+        PositionJournalsForceRejectPositionJournalRequest.builder()
+            .positionJournalId(positionJournalId)
+            .forceRejectPositionJournalRequestCreate(forceRejectPositionJournalRequestCreate)
+            .build();
+    RequestOperation<
+            PositionJournalsForceRejectPositionJournalRequest,
+            PositionJournalsForceRejectPositionJournalResponse>
+        operation = new PositionJournalsForceRejectPositionJournal.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

@@ -82,6 +82,8 @@ public class DocumentInvestorDocumentDocumentType {
       new DocumentInvestorDocumentDocumentType("FPSL_NEGATIVE_CONSENT_FORM");
   public static final DocumentInvestorDocumentDocumentType CRS_FORM =
       new DocumentInvestorDocumentDocumentType("CRS_FORM");
+  public static final DocumentInvestorDocumentDocumentType FPSL_CONFIRMATION =
+      new DocumentInvestorDocumentDocumentType("FPSL_CONFIRMATION");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -169,6 +171,7 @@ public class DocumentInvestorDocumentDocumentType {
     map.put("FORM_5498_ESA", FORM5498_ESA);
     map.put("FPSL_NEGATIVE_CONSENT_FORM", FPSL_NEGATIVE_CONSENT_FORM);
     map.put("CRS_FORM", CRS_FORM);
+    map.put("FPSL_CONFIRMATION", FPSL_CONFIRMATION);
     return map;
   }
 
@@ -197,6 +200,7 @@ public class DocumentInvestorDocumentDocumentType {
         "FPSL_NEGATIVE_CONSENT_FORM",
         DocumentInvestorDocumentDocumentTypeEnum.FPSL_NEGATIVE_CONSENT_FORM);
     map.put("CRS_FORM", DocumentInvestorDocumentDocumentTypeEnum.CRS_FORM);
+    map.put("FPSL_CONFIRMATION", DocumentInvestorDocumentDocumentTypeEnum.FPSL_CONFIRMATION);
     return map;
   }
 
@@ -252,6 +256,7 @@ public class DocumentInvestorDocumentDocumentType {
     FORM5498_ESA("FORM_5498_ESA"),
     FPSL_NEGATIVE_CONSENT_FORM("FPSL_NEGATIVE_CONSENT_FORM"),
     CRS_FORM("CRS_FORM"),
+    FPSL_CONFIRMATION("FPSL_CONFIRMATION"),
     ;
 
     private final String value;
