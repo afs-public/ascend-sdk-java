@@ -16,6 +16,11 @@
 * [getAchWithdrawalSchedule](#getachwithdrawalschedule) - Get ACH Withdrawal Schedule
 * [updateAchWithdrawalSchedule](#updateachwithdrawalschedule) - Update ACH Withdrawal Schedule
 * [cancelAchWithdrawalSchedule](#cancelachwithdrawalschedule) - Cancel ACH Withdrawal Schedule
+* [createCheckWithdrawalSchedule](#createcheckwithdrawalschedule) - Create Check Withdrawal Schedule
+* [listCheckWithdrawalSchedules](#listcheckwithdrawalschedules) - List Check Withdrawal Schedules
+* [getCheckWithdrawalSchedule](#getcheckwithdrawalschedule) - Get Check Withdrawal Schedule
+* [updateCheckWithdrawalSchedule](#updatecheckwithdrawalschedule) - Update Check Withdrawal Schedule
+* [cancelCheckWithdrawalSchedule](#cancelcheckwithdrawalschedule) - Cancel Check Withdrawal Schedule
 * [createWireWithdrawalSchedule](#createwirewithdrawalschedule) - Create Wire Withdrawal Schedule
 * [listWireWithdrawalSchedules](#listwirewithdrawalschedules) - List Wire Withdrawal Schedules
 * [getWireWithdrawalSchedule](#getwirewithdrawalschedule) - Get Wire Withdrawal Schedule
@@ -762,6 +767,341 @@ public class Application {
 | models/errors/Status   | 400, 403, 404          | application/json       |
 | models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
 
+## createCheckWithdrawalSchedule
+
+Creates a Check withdrawal transfer schedule
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="CheckWithdrawalSchedules_CreateCheckWithdrawalSchedule" method="post" path="/transfers/v1/accounts/{account_id}/checkWithdrawalSchedules" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckWithdrawalSchedulesCreateCheckWithdrawalScheduleResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        CheckWithdrawalSchedulesCreateCheckWithdrawalScheduleResponse res = sdk.scheduleTransfers().createCheckWithdrawalSchedule()
+                .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
+                .checkWithdrawalScheduleCreate(CheckWithdrawalScheduleCreate.builder()
+                    .deliveryMethod(DeliveryMethod.STANDARD)
+                    .scheduleDetails(WithdrawalScheduleDetailsCreate.builder()
+                        .clientScheduleId("ABC-123")
+                        .scheduleProperties(SchedulePropertiesCreate.builder()
+                            .startDate(DateCreate.builder()
+                                .build())
+                            .timeUnit(TimeUnit.MONTH)
+                            .unitMultiplier(1)
+                            .build())
+                        .build())
+                    .build())
+                .call();
+
+        if (res.checkWithdrawalSchedule().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               | Example                                                                                   |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `accountId`                                                                               | *String*                                                                                  | :heavy_check_mark:                                                                        | The account id.                                                                           | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                                |
+| `checkWithdrawalScheduleCreate`                                                           | [CheckWithdrawalScheduleCreate](../../models/components/CheckWithdrawalScheduleCreate.md) | :heavy_check_mark:                                                                        | N/A                                                                                       |                                                                                           |
+
+### Response
+
+**[CheckWithdrawalSchedulesCreateCheckWithdrawalScheduleResponse](../../models/operations/CheckWithdrawalSchedulesCreateCheckWithdrawalScheduleResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403, 409          | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## listCheckWithdrawalSchedules
+
+Return a list of Check withdrawal schedules for the specified account and filter params
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="CheckWithdrawalSchedules_ListCheckWithdrawalSchedules" method="get" path="/transfers/v1/accounts/{account_id}/checkWithdrawalSchedules" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckWithdrawalSchedulesListCheckWithdrawalSchedulesResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        CheckWithdrawalSchedulesListCheckWithdrawalSchedulesResponse res = sdk.scheduleTransfers().listCheckWithdrawalSchedules()
+                .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
+                .filter("state == 'ACTIVE' && start_date > '2024-04-05' && end_date < '2024-08-10'")
+                .pageSize(100)
+                .pageToken("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4")
+                .call();
+
+        if (res.listCheckWithdrawalSchedulesResponse().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                       | Type                                                                                                                                                                                                                            | Required                                                                                                                                                                                                                        | Description                                                                                                                                                                                                                     | Example                                                                                                                                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `accountId`                                                                                                                                                                                                                     | *String*                                                                                                                                                                                                                        | :heavy_check_mark:                                                                                                                                                                                                              | The account id.                                                                                                                                                                                                                 | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                                                                                                                                                                      |
+| `filter`                                                                                                                                                                                                                        | *Optional\<String>*                                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                              | A CEL string to filter results; See the [CEL Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in Guides for more information; Filter options include:<br/> `state`<br/> `start_date`<br/> `end_date` | state == 'ACTIVE' && start_date > '2024-04-05' && end_date < '2024-08-10'                                                                                                                                                       |
+| `pageSize`                                                                                                                                                                                                                      | *Optional\<Integer>*                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                              | The maximum number of schedules to return. The service may return fewer than this value. If unspecified, at most 25 schedules will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.           | 100                                                                                                                                                                                                                             |
+| `pageToken`                                                                                                                                                                                                                     | *Optional\<String>*                                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                              | The page token to request                                                                                                                                                                                                       | 4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4                                                                                                                                                                                     |
+
+### Response
+
+**[CheckWithdrawalSchedulesListCheckWithdrawalSchedulesResponse](../../models/operations/CheckWithdrawalSchedulesListCheckWithdrawalSchedulesResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403               | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## getCheckWithdrawalSchedule
+
+Gets a Check withdrawal transfer schedule
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="CheckWithdrawalSchedules_GetCheckWithdrawalSchedule" method="get" path="/transfers/v1/accounts/{account_id}/checkWithdrawalSchedules/{checkWithdrawalSchedule_id}" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckWithdrawalSchedulesGetCheckWithdrawalScheduleResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        CheckWithdrawalSchedulesGetCheckWithdrawalScheduleResponse res = sdk.scheduleTransfers().getCheckWithdrawalSchedule()
+                .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
+                .checkWithdrawalScheduleId("40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1")
+                .call();
+
+        if (res.checkWithdrawalSchedule().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                            | Type                                 | Required                             | Description                          | Example                              |
+| ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
+| `accountId`                          | *String*                             | :heavy_check_mark:                   | The account id.                      | 01H8FB90ZRRFWXB4XC2JPJ1D4Y           |
+| `checkWithdrawalScheduleId`          | *String*                             | :heavy_check_mark:                   | The checkWithdrawalSchedule id.      | 40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1 |
+
+### Response
+
+**[CheckWithdrawalSchedulesGetCheckWithdrawalScheduleResponse](../../models/operations/CheckWithdrawalSchedulesGetCheckWithdrawalScheduleResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403, 404          | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## updateCheckWithdrawalSchedule
+
+Updates the amount of a Check withdrawal transfer schedule
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="CheckWithdrawalSchedules_UpdateCheckWithdrawalSchedule" method="patch" path="/transfers/v1/accounts/{account_id}/checkWithdrawalSchedules/{checkWithdrawalSchedule_id}" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleResponse res = sdk.scheduleTransfers().updateCheckWithdrawalSchedule()
+                .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
+                .checkWithdrawalScheduleId("40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1")
+                .checkWithdrawalScheduleUpdate(CheckWithdrawalScheduleUpdate.builder()
+                    .build())
+                .call();
+
+        if (res.checkWithdrawalSchedule().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                 | Type                                                                                                                      | Required                                                                                                                  | Description                                                                                                               | Example                                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `accountId`                                                                                                               | *String*                                                                                                                  | :heavy_check_mark:                                                                                                        | The account id.                                                                                                           | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                                                                |
+| `checkWithdrawalScheduleId`                                                                                               | *String*                                                                                                                  | :heavy_check_mark:                                                                                                        | The checkWithdrawalSchedule id.                                                                                           | 40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1                                                                                      |
+| `updateMask`                                                                                                              | *Optional\<String>*                                                                                                       | :heavy_minus_sign:                                                                                                        | A field mask representing the update. Note: only the 'schedule_details.amount' field of a schedule is currently updatable |                                                                                                                           |
+| `checkWithdrawalScheduleUpdate`                                                                                           | [CheckWithdrawalScheduleUpdate](../../models/components/CheckWithdrawalScheduleUpdate.md)                                 | :heavy_check_mark:                                                                                                        | N/A                                                                                                                       |                                                                                                                           |
+
+### Response
+
+**[CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleResponse](../../models/operations/CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403, 404          | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## cancelCheckWithdrawalSchedule
+
+Cancels a Check withdrawal transfer schedule
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="CheckWithdrawalSchedules_CancelCheckWithdrawalSchedule" method="post" path="/transfers/v1/accounts/{account_id}/checkWithdrawalSchedules/{checkWithdrawalSchedule_id}:cancel" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleResponse res = sdk.scheduleTransfers().cancelCheckWithdrawalSchedule()
+                .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
+                .checkWithdrawalScheduleId("40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1")
+                .cancelCheckWithdrawalScheduleRequestCreate(CancelCheckWithdrawalScheduleRequestCreate.builder()
+                    .name("accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/checkWithdrawalSchedules/40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1")
+                    .build())
+                .call();
+
+        if (res.checkWithdrawalSchedule().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                           | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         | Example                                                                                                             |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `accountId`                                                                                                         | *String*                                                                                                            | :heavy_check_mark:                                                                                                  | The account id.                                                                                                     | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                                                          |
+| `checkWithdrawalScheduleId`                                                                                         | *String*                                                                                                            | :heavy_check_mark:                                                                                                  | The checkWithdrawalSchedule id.                                                                                     | 40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1                                                                                |
+| `cancelCheckWithdrawalScheduleRequestCreate`                                                                        | [CancelCheckWithdrawalScheduleRequestCreate](../../models/components/CancelCheckWithdrawalScheduleRequestCreate.md) | :heavy_check_mark:                                                                                                  | N/A                                                                                                                 |                                                                                                                     |
+
+### Response
+
+**[CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleResponse](../../models/operations/CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403, 404          | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
 ## createWireWithdrawalSchedule
 
 Creates a Wire withdrawal transfer schedule
@@ -1008,6 +1348,7 @@ public class Application {
         WireWithdrawalSchedulesUpdateWireWithdrawalScheduleResponse res = sdk.scheduleTransfers().updateWireWithdrawalSchedule()
                 .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
                 .wireWithdrawalScheduleId("40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1")
+                .updateMask("[object Object]")
                 .wireWithdrawalScheduleUpdate(WireWithdrawalScheduleUpdate.builder()
                     .build())
                 .call();
@@ -1025,7 +1366,7 @@ public class Application {
 | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | `accountId`                                                                                                               | *String*                                                                                                                  | :heavy_check_mark:                                                                                                        | The account id.                                                                                                           | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                                                                |
 | `wireWithdrawalScheduleId`                                                                                                | *String*                                                                                                                  | :heavy_check_mark:                                                                                                        | The wireWithdrawalSchedule id.                                                                                            | 40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1                                                                                      |
-| `updateMask`                                                                                                              | *Optional\<String>*                                                                                                       | :heavy_minus_sign:                                                                                                        | A field mask representing the update. Note: only the 'schedule_details.amount' field of a schedule is currently updatable |                                                                                                                           |
+| `updateMask`                                                                                                              | *Optional\<String>*                                                                                                       | :heavy_minus_sign:                                                                                                        | A field mask representing the update. Note: only the 'schedule_details.amount' field of a schedule is currently updatable | {<br/>"update_mask": "schedule_details.amount"<br/>}                                                                      |
 | `wireWithdrawalScheduleUpdate`                                                                                            | [WireWithdrawalScheduleUpdate](../../models/components/WireWithdrawalScheduleUpdate.md)                                   | :heavy_check_mark:                                                                                                        | N/A                                                                                                                       |                                                                                                                           |
 
 ### Response

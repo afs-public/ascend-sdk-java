@@ -6,6 +6,7 @@
 ### Available Operations
 
 * [simulateCreateCheckDeposit](#simulatecreatecheckdeposit) - Simulate Check Deposit Creation
+* [forceApproveCheckDeposit](#forceapprovecheckdeposit) - Check Deposit Approval
 * [forceApproveAchDeposit](#forceapproveachdeposit) - ACH Deposit Approval
 * [forceNocAchDeposit](#forcenocachdeposit) - NOC for a Deposit
 * [forceRejectAchDeposit](#forcerejectachdeposit) - ACH Deposit Rejection
@@ -26,6 +27,8 @@
 * [forceRejectWireDeposit](#forcerejectwiredeposit) - Force Reject Wire Deposit
 * [forceApproveCashJournal](#forceapprovecashjournal) - Force Approve Cash Journal
 * [forceRejectCashJournal](#forcerejectcashjournal) - Force Reject Cash Journal
+* [forceApprovePositionJournal](#forceapprovepositionjournal) - Force Approve Position Journal
+* [forceRejectPositionJournal](#forcerejectpositionjournal) - Force Reject Position Journal
 
 ## simulateCreateCheckDeposit
 
@@ -91,6 +94,72 @@ public class Application {
 | Error Type             | Status Code            | Content Type           |
 | ---------------------- | ---------------------- | ---------------------- |
 | models/errors/Status   | 400, 403               | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## forceApproveCheckDeposit
+
+Force approval of an existing check deposit that is pending review FOR TESTING ONLY!
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="CheckDeposits_ForceApproveCheckDeposit" method="post" path="/transfers/v1/accounts/{account_id}/checkDeposits/{checkDeposit_id}:forceApprove" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckDepositsForceApproveCheckDepositResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        CheckDepositsForceApproveCheckDepositResponse res = sdk.testSimulation().forceApproveCheckDeposit()
+                .accountId("01H8FB90ZRRFWXB4XC2JPJ1D4Y")
+                .checkDepositId("20230817000319")
+                .forceApproveCheckDepositRequestCreate(ForceApproveCheckDepositRequestCreate.builder()
+                    .name("accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/checkDeposits/20230817000319")
+                    .build())
+                .call();
+
+        if (res.checkDeposit().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               | Example                                                                                                   |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `accountId`                                                                                               | *String*                                                                                                  | :heavy_check_mark:                                                                                        | The account id.                                                                                           | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                                                |
+| `checkDepositId`                                                                                          | *String*                                                                                                  | :heavy_check_mark:                                                                                        | The checkDeposit id.                                                                                      | 20230817000319                                                                                            |
+| `forceApproveCheckDepositRequestCreate`                                                                   | [ForceApproveCheckDepositRequestCreate](../../models/components/ForceApproveCheckDepositRequestCreate.md) | :heavy_check_mark:                                                                                        | N/A                                                                                                       |                                                                                                           |
+
+### Response
+
+**[CheckDepositsForceApproveCheckDepositResponse](../../models/operations/CheckDepositsForceApproveCheckDepositResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403, 404          | application/json       |
 | models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
 
 ## forceApproveAchDeposit
@@ -1416,4 +1485,132 @@ public class Application {
 | Error Type             | Status Code            | Content Type           |
 | ---------------------- | ---------------------- | ---------------------- |
 | models/errors/Status   | 400, 403               | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## forceApprovePositionJournal
+
+Forces approval of an existing position journal that is pending review FOR TESTING ONLY!
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="PositionJournals_ForceApprovePositionJournal" method="post" path="/transfers/v1/positionJournals/{positionJournal_id}:forceApprove" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.PositionJournalsForceApprovePositionJournalResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        PositionJournalsForceApprovePositionJournalResponse res = sdk.testSimulation().forceApprovePositionJournal()
+                .positionJournalId("20230817000319")
+                .forceApprovePositionJournalRequestCreate(ForceApprovePositionJournalRequestCreate.builder()
+                    .name("positionJournals/20230817000319")
+                    .build())
+                .call();
+
+        if (res.positionJournal().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                       | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     | Example                                                                                                         |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `positionJournalId`                                                                                             | *String*                                                                                                        | :heavy_check_mark:                                                                                              | The positionJournal id.                                                                                         | 20230817000319                                                                                                  |
+| `forceApprovePositionJournalRequestCreate`                                                                      | [ForceApprovePositionJournalRequestCreate](../../models/components/ForceApprovePositionJournalRequestCreate.md) | :heavy_check_mark:                                                                                              | N/A                                                                                                             |                                                                                                                 |
+
+### Response
+
+**[PositionJournalsForceApprovePositionJournalResponse](../../models/operations/PositionJournalsForceApprovePositionJournalResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403, 404          | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## forceRejectPositionJournal
+
+Forces rejection of an existing position journal that is pending review FOR TESTING ONLY!
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="PositionJournals_ForceRejectPositionJournal" method="post" path="/transfers/v1/positionJournals/{positionJournal_id}:forceReject" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.PositionJournalsForceRejectPositionJournalResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        PositionJournalsForceRejectPositionJournalResponse res = sdk.testSimulation().forceRejectPositionJournal()
+                .positionJournalId("20230817000319")
+                .forceRejectPositionJournalRequestCreate(ForceRejectPositionJournalRequestCreate.builder()
+                    .name("positionJournals/20230817000319")
+                    .build())
+                .call();
+
+        if (res.positionJournal().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   | Example                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `positionJournalId`                                                                                           | *String*                                                                                                      | :heavy_check_mark:                                                                                            | The positionJournal id.                                                                                       | 20230817000319                                                                                                |
+| `forceRejectPositionJournalRequestCreate`                                                                     | [ForceRejectPositionJournalRequestCreate](../../models/components/ForceRejectPositionJournalRequestCreate.md) | :heavy_check_mark:                                                                                            | N/A                                                                                                           |                                                                                                               |
+
+### Response
+
+**[PositionJournalsForceRejectPositionJournalResponse](../../models/operations/PositionJournalsForceRejectPositionJournalResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403, 404          | application/json       |
 | models/errors/SDKError | 4XX, 5XX               | \*/\*                  |

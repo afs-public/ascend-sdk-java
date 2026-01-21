@@ -20,6 +20,11 @@ import org.openapitools.jackson.nullable.JsonNullable;
  * <p>Represents an envelope and the data of an event
  */
 public class EventMessage {
+  /** The account group ID related to the event (if applicable) */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("account_group_id")
+  private Optional<String> accountGroupId;
+
   /** The account ID related to the event (if applicable) */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("account_id")
@@ -56,8 +61,8 @@ public class EventMessage {
   private Optional<String> name;
 
   /**
-   * A value, if present, is used to group related events together. Events with the same partition
-   * key are guaranteed to be sent to the consumer in the same order they were published.
+   * A value, if present, is used to group related events together; Events with the same partition
+   * key are guaranteed to be sent to the consumer in the same order they were published
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("partition_key")
@@ -70,6 +75,7 @@ public class EventMessage {
 
   @JsonCreator
   public EventMessage(
+      @JsonProperty("account_group_id") Optional<String> accountGroupId,
       @JsonProperty("account_id") Optional<String> accountId,
       @JsonProperty("client_id") Optional<String> clientId,
       @JsonProperty("correspondent_id") Optional<String> correspondentId,
@@ -79,6 +85,7 @@ public class EventMessage {
       @JsonProperty("name") Optional<String> name,
       @JsonProperty("partition_key") Optional<String> partitionKey,
       @JsonProperty("publish_time") JsonNullable<OffsetDateTime> publishTime) {
+    Utils.checkNotNull(accountGroupId, "accountGroupId");
     Utils.checkNotNull(accountId, "accountId");
     Utils.checkNotNull(clientId, "clientId");
     Utils.checkNotNull(correspondentId, "correspondentId");
@@ -88,6 +95,7 @@ public class EventMessage {
     Utils.checkNotNull(name, "name");
     Utils.checkNotNull(partitionKey, "partitionKey");
     Utils.checkNotNull(publishTime, "publishTime");
+    this.accountGroupId = accountGroupId;
     this.accountId = accountId;
     this.clientId = clientId;
     this.correspondentId = correspondentId;
@@ -104,12 +112,19 @@ public class EventMessage {
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
+        Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined());
+  }
+
+  /** The account group ID related to the event (if applicable) */
+  @JsonIgnore
+  public Optional<String> accountGroupId() {
+    return accountGroupId;
   }
 
   /** The account ID related to the event (if applicable) */
@@ -156,8 +171,8 @@ public class EventMessage {
   }
 
   /**
-   * A value, if present, is used to group related events together. Events with the same partition
-   * key are guaranteed to be sent to the consumer in the same order they were published.
+   * A value, if present, is used to group related events together; Events with the same partition
+   * key are guaranteed to be sent to the consumer in the same order they were published
    */
   @JsonIgnore
   public Optional<String> partitionKey() {
@@ -172,6 +187,20 @@ public class EventMessage {
 
   public static Builder builder() {
     return new Builder();
+  }
+
+  /** The account group ID related to the event (if applicable) */
+  public EventMessage withAccountGroupId(String accountGroupId) {
+    Utils.checkNotNull(accountGroupId, "accountGroupId");
+    this.accountGroupId = Optional.ofNullable(accountGroupId);
+    return this;
+  }
+
+  /** The account group ID related to the event (if applicable) */
+  public EventMessage withAccountGroupId(Optional<String> accountGroupId) {
+    Utils.checkNotNull(accountGroupId, "accountGroupId");
+    this.accountGroupId = accountGroupId;
+    return this;
   }
 
   /** The account ID related to the event (if applicable) */
@@ -273,8 +302,8 @@ public class EventMessage {
   }
 
   /**
-   * A value, if present, is used to group related events together. Events with the same partition
-   * key are guaranteed to be sent to the consumer in the same order they were published.
+   * A value, if present, is used to group related events together; Events with the same partition
+   * key are guaranteed to be sent to the consumer in the same order they were published
    */
   public EventMessage withPartitionKey(String partitionKey) {
     Utils.checkNotNull(partitionKey, "partitionKey");
@@ -283,8 +312,8 @@ public class EventMessage {
   }
 
   /**
-   * A value, if present, is used to group related events together. Events with the same partition
-   * key are guaranteed to be sent to the consumer in the same order they were published.
+   * A value, if present, is used to group related events together; Events with the same partition
+   * key are guaranteed to be sent to the consumer in the same order they were published
    */
   public EventMessage withPartitionKey(Optional<String> partitionKey) {
     Utils.checkNotNull(partitionKey, "partitionKey");
@@ -315,7 +344,8 @@ public class EventMessage {
       return false;
     }
     EventMessage other = (EventMessage) o;
-    return Utils.enhancedDeepEquals(this.accountId, other.accountId)
+    return Utils.enhancedDeepEquals(this.accountGroupId, other.accountGroupId)
+        && Utils.enhancedDeepEquals(this.accountId, other.accountId)
         && Utils.enhancedDeepEquals(this.clientId, other.clientId)
         && Utils.enhancedDeepEquals(this.correspondentId, other.correspondentId)
         && Utils.enhancedDeepEquals(this.data, other.data)
@@ -329,6 +359,7 @@ public class EventMessage {
   @Override
   public int hashCode() {
     return Utils.enhancedHash(
+        accountGroupId,
         accountId,
         clientId,
         correspondentId,
@@ -344,6 +375,8 @@ public class EventMessage {
   public String toString() {
     return Utils.toString(
         EventMessage.class,
+        "accountGroupId",
+        accountGroupId,
         "accountId",
         accountId,
         "clientId",
@@ -367,6 +400,8 @@ public class EventMessage {
   @SuppressWarnings("UnusedReturnValue")
   public static final class Builder {
 
+    private Optional<String> accountGroupId = Optional.empty();
+
     private Optional<String> accountId = Optional.empty();
 
     private Optional<String> clientId = Optional.empty();
@@ -387,6 +422,20 @@ public class EventMessage {
 
     private Builder() {
       // force use of static builder() method
+    }
+
+    /** The account group ID related to the event (if applicable) */
+    public Builder accountGroupId(String accountGroupId) {
+      Utils.checkNotNull(accountGroupId, "accountGroupId");
+      this.accountGroupId = Optional.ofNullable(accountGroupId);
+      return this;
+    }
+
+    /** The account group ID related to the event (if applicable) */
+    public Builder accountGroupId(Optional<String> accountGroupId) {
+      Utils.checkNotNull(accountGroupId, "accountGroupId");
+      this.accountGroupId = accountGroupId;
+      return this;
     }
 
     /** The account ID related to the event (if applicable) */
@@ -488,8 +537,8 @@ public class EventMessage {
     }
 
     /**
-     * A value, if present, is used to group related events together. Events with the same partition
-     * key are guaranteed to be sent to the consumer in the same order they were published.
+     * A value, if present, is used to group related events together; Events with the same partition
+     * key are guaranteed to be sent to the consumer in the same order they were published
      */
     public Builder partitionKey(String partitionKey) {
       Utils.checkNotNull(partitionKey, "partitionKey");
@@ -498,8 +547,8 @@ public class EventMessage {
     }
 
     /**
-     * A value, if present, is used to group related events together. Events with the same partition
-     * key are guaranteed to be sent to the consumer in the same order they were published.
+     * A value, if present, is used to group related events together; Events with the same partition
+     * key are guaranteed to be sent to the consumer in the same order they were published
      */
     public Builder partitionKey(Optional<String> partitionKey) {
       Utils.checkNotNull(partitionKey, "partitionKey");
@@ -524,6 +573,7 @@ public class EventMessage {
     public EventMessage build() {
 
       return new EventMessage(
+          accountGroupId,
           accountId,
           clientId,
           correspondentId,

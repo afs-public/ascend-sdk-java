@@ -41,7 +41,7 @@ public class WireWithdrawalScheduleBeneficiary {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("address")
-  private JsonNullable<? extends Address> address;
+  private JsonNullable<? extends WireWithdrawalScheduleAddress> address;
 
   /**
    * Indicates if this beneficiary is a third party beneficiary. A wire transfer is considered third
@@ -57,7 +57,7 @@ public class WireWithdrawalScheduleBeneficiary {
   public WireWithdrawalScheduleBeneficiary(
       @JsonProperty("account") Optional<String> account,
       @JsonProperty("account_title") Optional<String> accountTitle,
-      @JsonProperty("address") JsonNullable<? extends Address> address,
+      @JsonProperty("address") JsonNullable<? extends WireWithdrawalScheduleAddress> address,
       @JsonProperty("third_party") Optional<Boolean> thirdParty) {
     Utils.checkNotNull(account, "account");
     Utils.checkNotNull(accountTitle, "accountTitle");
@@ -98,8 +98,8 @@ public class WireWithdrawalScheduleBeneficiary {
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<Address> address() {
-    return (JsonNullable<Address>) address;
+  public JsonNullable<WireWithdrawalScheduleAddress> address() {
+    return (JsonNullable<WireWithdrawalScheduleAddress>) address;
   }
 
   /**
@@ -163,7 +163,7 @@ public class WireWithdrawalScheduleBeneficiary {
    * The address of the person or entity taking receipt of the wired funds. This will be populated
    * automatically in the case of a valid first-party wire
    */
-  public WireWithdrawalScheduleBeneficiary withAddress(Address address) {
+  public WireWithdrawalScheduleBeneficiary withAddress(WireWithdrawalScheduleAddress address) {
     Utils.checkNotNull(address, "address");
     this.address = JsonNullable.of(address);
     return this;
@@ -173,7 +173,8 @@ public class WireWithdrawalScheduleBeneficiary {
    * The address of the person or entity taking receipt of the wired funds. This will be populated
    * automatically in the case of a valid first-party wire
    */
-  public WireWithdrawalScheduleBeneficiary withAddress(JsonNullable<? extends Address> address) {
+  public WireWithdrawalScheduleBeneficiary withAddress(
+      JsonNullable<? extends WireWithdrawalScheduleAddress> address) {
     Utils.checkNotNull(address, "address");
     this.address = address;
     return this;
@@ -244,7 +245,8 @@ public class WireWithdrawalScheduleBeneficiary {
 
     private Optional<String> accountTitle = Optional.empty();
 
-    private JsonNullable<? extends Address> address = JsonNullable.undefined();
+    private JsonNullable<? extends WireWithdrawalScheduleAddress> address =
+        JsonNullable.undefined();
 
     private Optional<Boolean> thirdParty = Optional.empty();
 
@@ -298,7 +300,7 @@ public class WireWithdrawalScheduleBeneficiary {
      * The address of the person or entity taking receipt of the wired funds. This will be populated
      * automatically in the case of a valid first-party wire
      */
-    public Builder address(Address address) {
+    public Builder address(WireWithdrawalScheduleAddress address) {
       Utils.checkNotNull(address, "address");
       this.address = JsonNullable.of(address);
       return this;
@@ -308,7 +310,7 @@ public class WireWithdrawalScheduleBeneficiary {
      * The address of the person or entity taking receipt of the wired funds. This will be populated
      * automatically in the case of a valid first-party wire
      */
-    public Builder address(JsonNullable<? extends Address> address) {
+    public Builder address(JsonNullable<? extends WireWithdrawalScheduleAddress> address) {
       Utils.checkNotNull(address, "address");
       this.address = address;
       return this;

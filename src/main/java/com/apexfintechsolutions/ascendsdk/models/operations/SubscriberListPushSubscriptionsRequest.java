@@ -15,7 +15,8 @@ public class SubscriberListPushSubscriptionsRequest {
    * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    * Guides for more information; If empty, all subscriptions the user has permission to view will
    * be returned; Filter options include: `name` `subscription_id` `client_id` `correspondent_id`
-   * `display_name` `event_types` `state` `http_callback.url` `http_callback.timeout_seconds`
+   * `account_group_id` `display_name` `event_types` `state` `owner` `http_callback.url`
+   * `http_callback.timeout_seconds`
    */
   @SpeakeasyMetadata("queryParam:style=form,explode=true,name=filter")
   private Optional<String> filter;
@@ -48,7 +49,8 @@ public class SubscriberListPushSubscriptionsRequest {
    * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    * Guides for more information; If empty, all subscriptions the user has permission to view will
    * be returned; Filter options include: `name` `subscription_id` `client_id` `correspondent_id`
-   * `display_name` `event_types` `state` `http_callback.url` `http_callback.timeout_seconds`
+   * `account_group_id` `display_name` `event_types` `state` `owner` `http_callback.url`
+   * `http_callback.timeout_seconds`
    */
   @JsonIgnore
   public Optional<String> filter() {
@@ -76,7 +78,8 @@ public class SubscriberListPushSubscriptionsRequest {
    * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    * Guides for more information; If empty, all subscriptions the user has permission to view will
    * be returned; Filter options include: `name` `subscription_id` `client_id` `correspondent_id`
-   * `display_name` `event_types` `state` `http_callback.url` `http_callback.timeout_seconds`
+   * `account_group_id` `display_name` `event_types` `state` `owner` `http_callback.url`
+   * `http_callback.timeout_seconds`
    */
   public SubscriberListPushSubscriptionsRequest withFilter(String filter) {
     Utils.checkNotNull(filter, "filter");
@@ -89,7 +92,8 @@ public class SubscriberListPushSubscriptionsRequest {
    * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    * Guides for more information; If empty, all subscriptions the user has permission to view will
    * be returned; Filter options include: `name` `subscription_id` `client_id` `correspondent_id`
-   * `display_name` `event_types` `state` `http_callback.url` `http_callback.timeout_seconds`
+   * `account_group_id` `display_name` `event_types` `state` `owner` `http_callback.url`
+   * `http_callback.timeout_seconds`
    */
   public SubscriberListPushSubscriptionsRequest withFilter(Optional<String> filter) {
     Utils.checkNotNull(filter, "filter");
@@ -174,7 +178,8 @@ public class SubscriberListPushSubscriptionsRequest {
      * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
      * Guides for more information; If empty, all subscriptions the user has permission to view will
      * be returned; Filter options include: `name` `subscription_id` `client_id` `correspondent_id`
-     * `display_name` `event_types` `state` `http_callback.url` `http_callback.timeout_seconds`
+     * `account_group_id` `display_name` `event_types` `state` `owner` `http_callback.url`
+     * `http_callback.timeout_seconds`
      */
     public Builder filter(String filter) {
       Utils.checkNotNull(filter, "filter");
@@ -187,7 +192,8 @@ public class SubscriberListPushSubscriptionsRequest {
      * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
      * Guides for more information; If empty, all subscriptions the user has permission to view will
      * be returned; Filter options include: `name` `subscription_id` `client_id` `correspondent_id`
-     * `display_name` `event_types` `state` `http_callback.url` `http_callback.timeout_seconds`
+     * `account_group_id` `display_name` `event_types` `state` `owner` `http_callback.url`
+     * `http_callback.timeout_seconds`
      */
     public Builder filter(Optional<String> filter) {
       Utils.checkNotNull(filter, "filter");

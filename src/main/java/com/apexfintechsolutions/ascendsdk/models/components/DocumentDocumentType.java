@@ -252,6 +252,8 @@ public class DocumentDocumentType {
       new DocumentDocumentType("OPTIONS_AGREEMENT");
   public static final DocumentDocumentType STATE_WAIVER_FORM =
       new DocumentDocumentType("STATE_WAIVER_FORM");
+  public static final DocumentDocumentType ALTS_SUBSCRIPTION_AGREEMENT =
+      new DocumentDocumentType("ALTS_SUBSCRIPTION_AGREEMENT");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -435,6 +437,7 @@ public class DocumentDocumentType {
     map.put("CHANGE_OF_ADDRESS_REQUEST", CHANGE_OF_ADDRESS_REQUEST);
     map.put("OPTIONS_AGREEMENT", OPTIONS_AGREEMENT);
     map.put("STATE_WAIVER_FORM", STATE_WAIVER_FORM);
+    map.put("ALTS_SUBSCRIPTION_AGREEMENT", ALTS_SUBSCRIPTION_AGREEMENT);
     return map;
   }
 
@@ -595,6 +598,7 @@ public class DocumentDocumentType {
     map.put("CHANGE_OF_ADDRESS_REQUEST", DocumentDocumentTypeEnum.CHANGE_OF_ADDRESS_REQUEST);
     map.put("OPTIONS_AGREEMENT", DocumentDocumentTypeEnum.OPTIONS_AGREEMENT);
     map.put("STATE_WAIVER_FORM", DocumentDocumentTypeEnum.STATE_WAIVER_FORM);
+    map.put("ALTS_SUBSCRIPTION_AGREEMENT", DocumentDocumentTypeEnum.ALTS_SUBSCRIPTION_AGREEMENT);
     return map;
   }
 
@@ -741,6 +745,7 @@ public class DocumentDocumentType {
     CHANGE_OF_ADDRESS_REQUEST("CHANGE_OF_ADDRESS_REQUEST"),
     OPTIONS_AGREEMENT("OPTIONS_AGREEMENT"),
     STATE_WAIVER_FORM("STATE_WAIVER_FORM"),
+    ALTS_SUBSCRIPTION_AGREEMENT("ALTS_SUBSCRIPTION_AGREEMENT"),
     ;
 
     private final String value;

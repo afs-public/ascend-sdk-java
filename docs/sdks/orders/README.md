@@ -53,7 +53,7 @@ public class Application {
                     .assetType(AssetType.EQUITY)
                     .clientOrderId("a6d5258b-6b23-478a-8145-98e79d60427a")
                     .identifier("SBUX")
-                    .identifierType(IdentifierType.SYMBOL)
+                    .identifierType(OrderCreateIdentifierType.SYMBOL)
                     .orderDate(DateCreate.builder()
                         .build())
                     .orderType(OrderType.MARKET)

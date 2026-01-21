@@ -27,7 +27,7 @@ public class HttpPushCallbackUpdate {
 
   /**
    * The maximum amount of time, in seconds, the service will wait for an acknowledgement of a
-   * delivery. If a value of 0 or no value is specified, the timeout will default to 10 seconds.
+   * delivery; If a value of 0 or no value is specified, the timeout will default to 10 seconds
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("timeout_seconds")
@@ -69,7 +69,7 @@ public class HttpPushCallbackUpdate {
 
   /**
    * The maximum amount of time, in seconds, the service will wait for an acknowledgement of a
-   * delivery. If a value of 0 or no value is specified, the timeout will default to 10 seconds.
+   * delivery; If a value of 0 or no value is specified, the timeout will default to 10 seconds
    */
   @JsonIgnore
   public Optional<Integer> timeoutSeconds() {
@@ -111,7 +111,7 @@ public class HttpPushCallbackUpdate {
 
   /**
    * The maximum amount of time, in seconds, the service will wait for an acknowledgement of a
-   * delivery. If a value of 0 or no value is specified, the timeout will default to 10 seconds.
+   * delivery; If a value of 0 or no value is specified, the timeout will default to 10 seconds
    */
   public HttpPushCallbackUpdate withTimeoutSeconds(int timeoutSeconds) {
     Utils.checkNotNull(timeoutSeconds, "timeoutSeconds");
@@ -121,7 +121,7 @@ public class HttpPushCallbackUpdate {
 
   /**
    * The maximum amount of time, in seconds, the service will wait for an acknowledgement of a
-   * delivery. If a value of 0 or no value is specified, the timeout will default to 10 seconds.
+   * delivery; If a value of 0 or no value is specified, the timeout will default to 10 seconds
    */
   public HttpPushCallbackUpdate withTimeoutSeconds(Optional<Integer> timeoutSeconds) {
     Utils.checkNotNull(timeoutSeconds, "timeoutSeconds");
@@ -215,7 +215,7 @@ public class HttpPushCallbackUpdate {
 
     /**
      * The maximum amount of time, in seconds, the service will wait for an acknowledgement of a
-     * delivery. If a value of 0 or no value is specified, the timeout will default to 10 seconds.
+     * delivery; If a value of 0 or no value is specified, the timeout will default to 10 seconds
      */
     public Builder timeoutSeconds(int timeoutSeconds) {
       Utils.checkNotNull(timeoutSeconds, "timeoutSeconds");
@@ -225,7 +225,7 @@ public class HttpPushCallbackUpdate {
 
     /**
      * The maximum amount of time, in seconds, the service will wait for an acknowledgement of a
-     * delivery. If a value of 0 or no value is specified, the timeout will default to 10 seconds.
+     * delivery; If a value of 0 or no value is specified, the timeout will default to 10 seconds
      */
     public Builder timeoutSeconds(Optional<Integer> timeoutSeconds) {
       Utils.checkNotNull(timeoutSeconds, "timeoutSeconds");

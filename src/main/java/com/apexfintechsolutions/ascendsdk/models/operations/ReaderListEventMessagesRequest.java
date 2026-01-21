@@ -15,7 +15,7 @@ public class ReaderListEventMessagesRequest {
    * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    * Guides for more information; If left empty, all events the user has permission to view are
    * returned; Filter options include: `name` `message_id` `event_type` `publish_time`
-   * `partition_key` `client_id` `correspondent_id` `account_id`
+   * `partition_key` `client_id` `correspondent_id` `account_group_id` `account_id`
    */
   @SpeakeasyMetadata("queryParam:style=form,explode=true,name=filter")
   private Optional<String> filter;
@@ -48,7 +48,7 @@ public class ReaderListEventMessagesRequest {
    * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    * Guides for more information; If left empty, all events the user has permission to view are
    * returned; Filter options include: `name` `message_id` `event_type` `publish_time`
-   * `partition_key` `client_id` `correspondent_id` `account_id`
+   * `partition_key` `client_id` `correspondent_id` `account_group_id` `account_id`
    */
   @JsonIgnore
   public Optional<String> filter() {
@@ -76,7 +76,7 @@ public class ReaderListEventMessagesRequest {
    * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    * Guides for more information; If left empty, all events the user has permission to view are
    * returned; Filter options include: `name` `message_id` `event_type` `publish_time`
-   * `partition_key` `client_id` `correspondent_id` `account_id`
+   * `partition_key` `client_id` `correspondent_id` `account_group_id` `account_id`
    */
   public ReaderListEventMessagesRequest withFilter(String filter) {
     Utils.checkNotNull(filter, "filter");
@@ -89,7 +89,7 @@ public class ReaderListEventMessagesRequest {
    * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
    * Guides for more information; If left empty, all events the user has permission to view are
    * returned; Filter options include: `name` `message_id` `event_type` `publish_time`
-   * `partition_key` `client_id` `correspondent_id` `account_id`
+   * `partition_key` `client_id` `correspondent_id` `account_group_id` `account_id`
    */
   public ReaderListEventMessagesRequest withFilter(Optional<String> filter) {
     Utils.checkNotNull(filter, "filter");
@@ -174,7 +174,7 @@ public class ReaderListEventMessagesRequest {
      * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
      * Guides for more information; If left empty, all events the user has permission to view are
      * returned; Filter options include: `name` `message_id` `event_type` `publish_time`
-     * `partition_key` `client_id` `correspondent_id` `account_id`
+     * `partition_key` `client_id` `correspondent_id` `account_group_id` `account_id`
      */
     public Builder filter(String filter) {
       Utils.checkNotNull(filter, "filter");
@@ -187,7 +187,7 @@ public class ReaderListEventMessagesRequest {
      * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
      * Guides for more information; If left empty, all events the user has permission to view are
      * returned; Filter options include: `name` `message_id` `event_type` `publish_time`
-     * `partition_key` `client_id` `correspondent_id` `account_id`
+     * `partition_key` `client_id` `correspondent_id` `account_group_id` `account_id`
      */
     public Builder filter(Optional<String> filter) {
       Utils.checkNotNull(filter, "filter");

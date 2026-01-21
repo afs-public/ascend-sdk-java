@@ -93,6 +93,8 @@ public class SDK {
 
   private final Wires wires;
 
+  private final PositionJournals positionJournals;
+
   private final CashBalances cashBalances;
 
   private final FeesAndCredits feesAndCredits;
@@ -187,6 +189,10 @@ public class SDK {
 
   public Wires wires() {
     return wires;
+  }
+
+  public PositionJournals positionJournals() {
+    return positionJournals;
   }
 
   public CashBalances cashBalances() {
@@ -411,6 +417,7 @@ public class SDK {
     this.checks = new Checks(sdkConfiguration);
     this.testSimulation = new TestSimulation(sdkConfiguration);
     this.wires = new Wires(sdkConfiguration);
+    this.positionJournals = new PositionJournals(sdkConfiguration);
     this.cashBalances = new CashBalances(sdkConfiguration);
     this.feesAndCredits = new FeesAndCredits(sdkConfiguration);
     this.accountTransfers = new AccountTransfers(sdkConfiguration);

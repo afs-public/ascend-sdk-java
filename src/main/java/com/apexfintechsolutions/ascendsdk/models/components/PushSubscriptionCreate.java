@@ -19,18 +19,27 @@ import java.util.Optional;
  */
 public class PushSubscriptionCreate {
   /**
-   * The client that owns the subscription. A client subscription will receive events for it and all
-   * of its correspondents. This can only be set at creation time and is mutually exclusive with
-   * correspondent_id.
+   * The id of the account group to receive events for; The subscription will receive events related
+   * to any of the accounts in the specified account group; This can only be set at creation time
+   * and is mutually exclusive with client_id and correspondent_id
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("account_group_id")
+  private Optional<String> accountGroupId;
+
+  /**
+   * The id of the client to receive events for; The subscription will receive events related to the
+   * specified client, and any of its correspondents and accounts; This can only be set at creation
+   * time and is mutually exclusive with correspondent_id and account_group_id
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("client_id")
   private Optional<String> clientId;
 
   /**
-   * The correspondent that owns the subscription. A correspondent subscription will receive events
-   * only for itself. This can only be set at creation time and is mutually exclusive with
-   * client_id.
+   * The id of the correspondent to receive events for; The subscription will receive events related
+   * to the specified correspondent and any of its accounts; This can only be set at creation time
+   * and is mutually exclusive with client_id and account_group_id
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("correspondent_id")
@@ -52,33 +61,65 @@ public class PushSubscriptionCreate {
   @JsonProperty("http_callback")
   private Optional<? extends HttpPushCallbackCreate> httpCallback;
 
+  /**
+   * The organization that owns the subscription; Format: {org_type}/{org_id} This field can only be
+   * set at creation time and if it is not specified, then it will default to the target
+   * organization, unless the target is an account group, in which case this field is required
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("owner")
+  private Optional<String> owner;
+
   @JsonCreator
   public PushSubscriptionCreate(
+      @JsonProperty("account_group_id") Optional<String> accountGroupId,
       @JsonProperty("client_id") Optional<String> clientId,
       @JsonProperty("correspondent_id") Optional<String> correspondentId,
       @JsonProperty("display_name") String displayName,
       @JsonProperty("event_types") List<String> eventTypes,
-      @JsonProperty("http_callback") Optional<? extends HttpPushCallbackCreate> httpCallback) {
+      @JsonProperty("http_callback") Optional<? extends HttpPushCallbackCreate> httpCallback,
+      @JsonProperty("owner") Optional<String> owner) {
+    Utils.checkNotNull(accountGroupId, "accountGroupId");
     Utils.checkNotNull(clientId, "clientId");
     Utils.checkNotNull(correspondentId, "correspondentId");
     Utils.checkNotNull(displayName, "displayName");
     Utils.checkNotNull(eventTypes, "eventTypes");
     Utils.checkNotNull(httpCallback, "httpCallback");
+    Utils.checkNotNull(owner, "owner");
+    this.accountGroupId = accountGroupId;
     this.clientId = clientId;
     this.correspondentId = correspondentId;
     this.displayName = displayName;
     this.eventTypes = eventTypes;
     this.httpCallback = httpCallback;
+    this.owner = owner;
   }
 
   public PushSubscriptionCreate(String displayName, List<String> eventTypes) {
-    this(Optional.empty(), Optional.empty(), displayName, eventTypes, Optional.empty());
+    this(
+        Optional.empty(),
+        Optional.empty(),
+        Optional.empty(),
+        displayName,
+        eventTypes,
+        Optional.empty(),
+        Optional.empty());
   }
 
   /**
-   * The client that owns the subscription. A client subscription will receive events for it and all
-   * of its correspondents. This can only be set at creation time and is mutually exclusive with
-   * correspondent_id.
+   * The id of the account group to receive events for; The subscription will receive events related
+   * to any of the accounts in the specified account group; This can only be set at creation time
+   * and is mutually exclusive with client_id and correspondent_id
+   */
+  @JsonIgnore
+  public Optional<String> accountGroupId() {
+    return accountGroupId;
+  }
+
+  /**
+   * The id of the client to receive events for; The subscription will receive events related to the
+   * specified client, and any of its correspondents and accounts; This can only be set at creation
+   * time and is mutually exclusive with correspondent_id and account_group_id
    */
   @JsonIgnore
   public Optional<String> clientId() {
@@ -86,9 +127,9 @@ public class PushSubscriptionCreate {
   }
 
   /**
-   * The correspondent that owns the subscription. A correspondent subscription will receive events
-   * only for itself. This can only be set at creation time and is mutually exclusive with
-   * client_id.
+   * The id of the correspondent to receive events for; The subscription will receive events related
+   * to the specified correspondent and any of its accounts; This can only be set at creation time
+   * and is mutually exclusive with client_id and account_group_id
    */
   @JsonIgnore
   public Optional<String> correspondentId() {
@@ -117,14 +158,46 @@ public class PushSubscriptionCreate {
     return (Optional<HttpPushCallbackCreate>) httpCallback;
   }
 
+  /**
+   * The organization that owns the subscription; Format: {org_type}/{org_id} This field can only be
+   * set at creation time and if it is not specified, then it will default to the target
+   * organization, unless the target is an account group, in which case this field is required
+   */
+  @JsonIgnore
+  public Optional<String> owner() {
+    return owner;
+  }
+
   public static Builder builder() {
     return new Builder();
   }
 
   /**
-   * The client that owns the subscription. A client subscription will receive events for it and all
-   * of its correspondents. This can only be set at creation time and is mutually exclusive with
-   * correspondent_id.
+   * The id of the account group to receive events for; The subscription will receive events related
+   * to any of the accounts in the specified account group; This can only be set at creation time
+   * and is mutually exclusive with client_id and correspondent_id
+   */
+  public PushSubscriptionCreate withAccountGroupId(String accountGroupId) {
+    Utils.checkNotNull(accountGroupId, "accountGroupId");
+    this.accountGroupId = Optional.ofNullable(accountGroupId);
+    return this;
+  }
+
+  /**
+   * The id of the account group to receive events for; The subscription will receive events related
+   * to any of the accounts in the specified account group; This can only be set at creation time
+   * and is mutually exclusive with client_id and correspondent_id
+   */
+  public PushSubscriptionCreate withAccountGroupId(Optional<String> accountGroupId) {
+    Utils.checkNotNull(accountGroupId, "accountGroupId");
+    this.accountGroupId = accountGroupId;
+    return this;
+  }
+
+  /**
+   * The id of the client to receive events for; The subscription will receive events related to the
+   * specified client, and any of its correspondents and accounts; This can only be set at creation
+   * time and is mutually exclusive with correspondent_id and account_group_id
    */
   public PushSubscriptionCreate withClientId(String clientId) {
     Utils.checkNotNull(clientId, "clientId");
@@ -133,9 +206,9 @@ public class PushSubscriptionCreate {
   }
 
   /**
-   * The client that owns the subscription. A client subscription will receive events for it and all
-   * of its correspondents. This can only be set at creation time and is mutually exclusive with
-   * correspondent_id.
+   * The id of the client to receive events for; The subscription will receive events related to the
+   * specified client, and any of its correspondents and accounts; This can only be set at creation
+   * time and is mutually exclusive with correspondent_id and account_group_id
    */
   public PushSubscriptionCreate withClientId(Optional<String> clientId) {
     Utils.checkNotNull(clientId, "clientId");
@@ -144,9 +217,9 @@ public class PushSubscriptionCreate {
   }
 
   /**
-   * The correspondent that owns the subscription. A correspondent subscription will receive events
-   * only for itself. This can only be set at creation time and is mutually exclusive with
-   * client_id.
+   * The id of the correspondent to receive events for; The subscription will receive events related
+   * to the specified correspondent and any of its accounts; This can only be set at creation time
+   * and is mutually exclusive with client_id and account_group_id
    */
   public PushSubscriptionCreate withCorrespondentId(String correspondentId) {
     Utils.checkNotNull(correspondentId, "correspondentId");
@@ -155,9 +228,9 @@ public class PushSubscriptionCreate {
   }
 
   /**
-   * The correspondent that owns the subscription. A correspondent subscription will receive events
-   * only for itself. This can only be set at creation time and is mutually exclusive with
-   * client_id.
+   * The id of the correspondent to receive events for; The subscription will receive events related
+   * to the specified correspondent and any of its accounts; This can only be set at creation time
+   * and is mutually exclusive with client_id and account_group_id
    */
   public PushSubscriptionCreate withCorrespondentId(Optional<String> correspondentId) {
     Utils.checkNotNull(correspondentId, "correspondentId");
@@ -197,6 +270,28 @@ public class PushSubscriptionCreate {
     return this;
   }
 
+  /**
+   * The organization that owns the subscription; Format: {org_type}/{org_id} This field can only be
+   * set at creation time and if it is not specified, then it will default to the target
+   * organization, unless the target is an account group, in which case this field is required
+   */
+  public PushSubscriptionCreate withOwner(String owner) {
+    Utils.checkNotNull(owner, "owner");
+    this.owner = Optional.ofNullable(owner);
+    return this;
+  }
+
+  /**
+   * The organization that owns the subscription; Format: {org_type}/{org_id} This field can only be
+   * set at creation time and if it is not specified, then it will default to the target
+   * organization, unless the target is an account group, in which case this field is required
+   */
+  public PushSubscriptionCreate withOwner(Optional<String> owner) {
+    Utils.checkNotNull(owner, "owner");
+    this.owner = owner;
+    return this;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -206,22 +301,27 @@ public class PushSubscriptionCreate {
       return false;
     }
     PushSubscriptionCreate other = (PushSubscriptionCreate) o;
-    return Utils.enhancedDeepEquals(this.clientId, other.clientId)
+    return Utils.enhancedDeepEquals(this.accountGroupId, other.accountGroupId)
+        && Utils.enhancedDeepEquals(this.clientId, other.clientId)
         && Utils.enhancedDeepEquals(this.correspondentId, other.correspondentId)
         && Utils.enhancedDeepEquals(this.displayName, other.displayName)
         && Utils.enhancedDeepEquals(this.eventTypes, other.eventTypes)
-        && Utils.enhancedDeepEquals(this.httpCallback, other.httpCallback);
+        && Utils.enhancedDeepEquals(this.httpCallback, other.httpCallback)
+        && Utils.enhancedDeepEquals(this.owner, other.owner);
   }
 
   @Override
   public int hashCode() {
-    return Utils.enhancedHash(clientId, correspondentId, displayName, eventTypes, httpCallback);
+    return Utils.enhancedHash(
+        accountGroupId, clientId, correspondentId, displayName, eventTypes, httpCallback, owner);
   }
 
   @Override
   public String toString() {
     return Utils.toString(
         PushSubscriptionCreate.class,
+        "accountGroupId",
+        accountGroupId,
         "clientId",
         clientId,
         "correspondentId",
@@ -231,11 +331,15 @@ public class PushSubscriptionCreate {
         "eventTypes",
         eventTypes,
         "httpCallback",
-        httpCallback);
+        httpCallback,
+        "owner",
+        owner);
   }
 
   @SuppressWarnings("UnusedReturnValue")
   public static final class Builder {
+
+    private Optional<String> accountGroupId = Optional.empty();
 
     private Optional<String> clientId = Optional.empty();
 
@@ -247,14 +351,38 @@ public class PushSubscriptionCreate {
 
     private Optional<? extends HttpPushCallbackCreate> httpCallback = Optional.empty();
 
+    private Optional<String> owner = Optional.empty();
+
     private Builder() {
       // force use of static builder() method
     }
 
     /**
-     * The client that owns the subscription. A client subscription will receive events for it and
-     * all of its correspondents. This can only be set at creation time and is mutually exclusive
-     * with correspondent_id.
+     * The id of the account group to receive events for; The subscription will receive events
+     * related to any of the accounts in the specified account group; This can only be set at
+     * creation time and is mutually exclusive with client_id and correspondent_id
+     */
+    public Builder accountGroupId(String accountGroupId) {
+      Utils.checkNotNull(accountGroupId, "accountGroupId");
+      this.accountGroupId = Optional.ofNullable(accountGroupId);
+      return this;
+    }
+
+    /**
+     * The id of the account group to receive events for; The subscription will receive events
+     * related to any of the accounts in the specified account group; This can only be set at
+     * creation time and is mutually exclusive with client_id and correspondent_id
+     */
+    public Builder accountGroupId(Optional<String> accountGroupId) {
+      Utils.checkNotNull(accountGroupId, "accountGroupId");
+      this.accountGroupId = accountGroupId;
+      return this;
+    }
+
+    /**
+     * The id of the client to receive events for; The subscription will receive events related to
+     * the specified client, and any of its correspondents and accounts; This can only be set at
+     * creation time and is mutually exclusive with correspondent_id and account_group_id
      */
     public Builder clientId(String clientId) {
       Utils.checkNotNull(clientId, "clientId");
@@ -263,9 +391,9 @@ public class PushSubscriptionCreate {
     }
 
     /**
-     * The client that owns the subscription. A client subscription will receive events for it and
-     * all of its correspondents. This can only be set at creation time and is mutually exclusive
-     * with correspondent_id.
+     * The id of the client to receive events for; The subscription will receive events related to
+     * the specified client, and any of its correspondents and accounts; This can only be set at
+     * creation time and is mutually exclusive with correspondent_id and account_group_id
      */
     public Builder clientId(Optional<String> clientId) {
       Utils.checkNotNull(clientId, "clientId");
@@ -274,9 +402,9 @@ public class PushSubscriptionCreate {
     }
 
     /**
-     * The correspondent that owns the subscription. A correspondent subscription will receive
-     * events only for itself. This can only be set at creation time and is mutually exclusive with
-     * client_id.
+     * The id of the correspondent to receive events for; The subscription will receive events
+     * related to the specified correspondent and any of its accounts; This can only be set at
+     * creation time and is mutually exclusive with client_id and account_group_id
      */
     public Builder correspondentId(String correspondentId) {
       Utils.checkNotNull(correspondentId, "correspondentId");
@@ -285,9 +413,9 @@ public class PushSubscriptionCreate {
     }
 
     /**
-     * The correspondent that owns the subscription. A correspondent subscription will receive
-     * events only for itself. This can only be set at creation time and is mutually exclusive with
-     * client_id.
+     * The id of the correspondent to receive events for; The subscription will receive events
+     * related to the specified correspondent and any of its accounts; This can only be set at
+     * creation time and is mutually exclusive with client_id and account_group_id
      */
     public Builder correspondentId(Optional<String> correspondentId) {
       Utils.checkNotNull(correspondentId, "correspondentId");
@@ -326,10 +454,32 @@ public class PushSubscriptionCreate {
       return this;
     }
 
+    /**
+     * The organization that owns the subscription; Format: {org_type}/{org_id} This field can only
+     * be set at creation time and if it is not specified, then it will default to the target
+     * organization, unless the target is an account group, in which case this field is required
+     */
+    public Builder owner(String owner) {
+      Utils.checkNotNull(owner, "owner");
+      this.owner = Optional.ofNullable(owner);
+      return this;
+    }
+
+    /**
+     * The organization that owns the subscription; Format: {org_type}/{org_id} This field can only
+     * be set at creation time and if it is not specified, then it will default to the target
+     * organization, unless the target is an account group, in which case this field is required
+     */
+    public Builder owner(Optional<String> owner) {
+      Utils.checkNotNull(owner, "owner");
+      this.owner = owner;
+      return this;
+    }
+
     public PushSubscriptionCreate build() {
 
       return new PushSubscriptionCreate(
-          clientId, correspondentId, displayName, eventTypes, httpCallback);
+          accountGroupId, clientId, correspondentId, displayName, eventTypes, httpCallback, owner);
     }
   }
 }
