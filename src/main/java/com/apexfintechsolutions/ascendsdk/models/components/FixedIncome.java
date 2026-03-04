@@ -52,7 +52,7 @@ public class FixedIncome {
   private Optional<? extends CouponType> couponType;
 
   /**
-   * Weighted average time until a bond’s cash flows are received in years
+   * Weighted average time until a bond's cash flows are received in years
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as
    *     soon as possible.
@@ -311,7 +311,7 @@ public class FixedIncome {
   }
 
   /**
-   * Weighted average time until a bond’s cash flows are received in years
+   * Weighted average time until a bond's cash flows are received in years
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as
    *     soon as possible.
@@ -546,7 +546,7 @@ public class FixedIncome {
   }
 
   /**
-   * Weighted average time until a bond’s cash flows are received in years
+   * Weighted average time until a bond's cash flows are received in years
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as
    *     soon as possible.
@@ -559,7 +559,7 @@ public class FixedIncome {
   }
 
   /**
-   * Weighted average time until a bond’s cash flows are received in years
+   * Weighted average time until a bond's cash flows are received in years
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as
    *     soon as possible.
@@ -1107,7 +1107,7 @@ public class FixedIncome {
     }
 
     /**
-     * Weighted average time until a bond’s cash flows are received in years
+     * Weighted average time until a bond's cash flows are received in years
      *
      * @deprecated field: This will be removed in a future release, please migrate away from it as
      *     soon as possible.
@@ -1120,7 +1120,7 @@ public class FixedIncome {
     }
 
     /**
-     * Weighted average time until a bond’s cash flows are received in years
+     * Weighted average time until a bond's cash flows are received in years
      *
      * @deprecated field: This will be removed in a future release, please migrate away from it as
      *     soon as possible.

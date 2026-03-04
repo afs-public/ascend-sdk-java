@@ -103,11 +103,29 @@ public class SDK {
 
   private final Orders orders;
 
+  private final OptionOrders optionOrders;
+
   private final FixedIncomePricing fixedIncomePricing;
 
   private final BasketOrders basketOrders;
 
   private final AssetTradingConfig assetTradingConfig;
+
+  private final AlternativeAccountAccreditation alternativeAccountAccreditation;
+
+  private final AlternativeOrders alternativeOrders;
+
+  private final AlternativeInvestments alternativeInvestments;
+
+  private final AlternativeInvestmentDocuments alternativeInvestmentDocuments;
+
+  private final PreIPOCompanies preIPOCompanies;
+
+  private final PreIPONewsEvents preIPONewsEvents;
+
+  private final PreIPOResearchDocuments preIPOResearchDocuments;
+
+  private final PreIPOFundingRounds preIPOFundingRounds;
 
   private final TradeBooking tradeBooking;
 
@@ -117,11 +135,13 @@ public class SDK {
 
   private final Ledger ledger;
 
-  private final Margins margins;
+  private final BuyingPower buyingPower;
 
   private final InvestorDocs investorDocs;
 
   private final DataRetrieval dataRetrieval;
+
+  private final OptionInstructions optionInstructions;
 
   public Authentication authentication() {
     return authentication;
@@ -211,6 +231,10 @@ public class SDK {
     return orders;
   }
 
+  public OptionOrders optionOrders() {
+    return optionOrders;
+  }
+
   public FixedIncomePricing fixedIncomePricing() {
     return fixedIncomePricing;
   }
@@ -221,6 +245,38 @@ public class SDK {
 
   public AssetTradingConfig assetTradingConfig() {
     return assetTradingConfig;
+  }
+
+  public AlternativeAccountAccreditation alternativeAccountAccreditation() {
+    return alternativeAccountAccreditation;
+  }
+
+  public AlternativeOrders alternativeOrders() {
+    return alternativeOrders;
+  }
+
+  public AlternativeInvestments alternativeInvestments() {
+    return alternativeInvestments;
+  }
+
+  public AlternativeInvestmentDocuments alternativeInvestmentDocuments() {
+    return alternativeInvestmentDocuments;
+  }
+
+  public PreIPOCompanies preIPOCompanies() {
+    return preIPOCompanies;
+  }
+
+  public PreIPONewsEvents preIPONewsEvents() {
+    return preIPONewsEvents;
+  }
+
+  public PreIPOResearchDocuments preIPOResearchDocuments() {
+    return preIPOResearchDocuments;
+  }
+
+  public PreIPOFundingRounds preIPOFundingRounds() {
+    return preIPOFundingRounds;
   }
 
   public TradeBooking tradeBooking() {
@@ -239,8 +295,8 @@ public class SDK {
     return ledger;
   }
 
-  public Margins margins() {
-    return margins;
+  public BuyingPower buyingPower() {
+    return buyingPower;
   }
 
   public InvestorDocs investorDocs() {
@@ -249,6 +305,10 @@ public class SDK {
 
   public DataRetrieval dataRetrieval() {
     return dataRetrieval;
+  }
+
+  public OptionInstructions optionInstructions() {
+    return optionInstructions;
   }
 
   private final SDKConfiguration sdkConfiguration;
@@ -422,16 +482,26 @@ public class SDK {
     this.feesAndCredits = new FeesAndCredits(sdkConfiguration);
     this.accountTransfers = new AccountTransfers(sdkConfiguration);
     this.orders = new Orders(sdkConfiguration);
+    this.optionOrders = new OptionOrders(sdkConfiguration);
     this.fixedIncomePricing = new FixedIncomePricing(sdkConfiguration);
     this.basketOrders = new BasketOrders(sdkConfiguration);
     this.assetTradingConfig = new AssetTradingConfig(sdkConfiguration);
+    this.alternativeAccountAccreditation = new AlternativeAccountAccreditation(sdkConfiguration);
+    this.alternativeOrders = new AlternativeOrders(sdkConfiguration);
+    this.alternativeInvestments = new AlternativeInvestments(sdkConfiguration);
+    this.alternativeInvestmentDocuments = new AlternativeInvestmentDocuments(sdkConfiguration);
+    this.preIPOCompanies = new PreIPOCompanies(sdkConfiguration);
+    this.preIPONewsEvents = new PreIPONewsEvents(sdkConfiguration);
+    this.preIPOResearchDocuments = new PreIPOResearchDocuments(sdkConfiguration);
+    this.preIPOFundingRounds = new PreIPOFundingRounds(sdkConfiguration);
     this.tradeBooking = new TradeBooking(sdkConfiguration);
     this.tradeAllocation = new TradeAllocation(sdkConfiguration);
     this.assets = new Assets(sdkConfiguration);
     this.ledger = new Ledger(sdkConfiguration);
-    this.margins = new Margins(sdkConfiguration);
+    this.buyingPower = new BuyingPower(sdkConfiguration);
     this.investorDocs = new InvestorDocs(sdkConfiguration);
     this.dataRetrieval = new DataRetrieval(sdkConfiguration);
+    this.optionInstructions = new OptionInstructions(sdkConfiguration);
     SdkInitData data =
         this.sdkConfiguration
             .hooks()

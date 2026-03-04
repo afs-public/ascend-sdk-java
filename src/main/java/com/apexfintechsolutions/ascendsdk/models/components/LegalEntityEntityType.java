@@ -51,7 +51,6 @@ public class LegalEntityEntityType {
   public static final LegalEntityEntityType CORPORATION = new LegalEntityEntityType("CORPORATION");
   public static final LegalEntityEntityType LIMITED_LIABILITY_COMPANY =
       new LegalEntityEntityType("LIMITED_LIABILITY_COMPANY");
-  public static final LegalEntityEntityType PARTNERSHIP = new LegalEntityEntityType("PARTNERSHIP");
   public static final LegalEntityEntityType TRUST = new LegalEntityEntityType("TRUST");
   public static final LegalEntityEntityType ESTATE = new LegalEntityEntityType("ESTATE");
 
@@ -124,7 +123,6 @@ public class LegalEntityEntityType {
     map.put("ENTITY_TYPE_UNSPECIFIED", ENTITY_TYPE_UNSPECIFIED);
     map.put("CORPORATION", CORPORATION);
     map.put("LIMITED_LIABILITY_COMPANY", LIMITED_LIABILITY_COMPANY);
-    map.put("PARTNERSHIP", PARTNERSHIP);
     map.put("TRUST", TRUST);
     map.put("ESTATE", ESTATE);
     return map;
@@ -135,7 +133,6 @@ public class LegalEntityEntityType {
     map.put("ENTITY_TYPE_UNSPECIFIED", LegalEntityEntityTypeEnum.ENTITY_TYPE_UNSPECIFIED);
     map.put("CORPORATION", LegalEntityEntityTypeEnum.CORPORATION);
     map.put("LIMITED_LIABILITY_COMPANY", LegalEntityEntityTypeEnum.LIMITED_LIABILITY_COMPANY);
-    map.put("PARTNERSHIP", LegalEntityEntityTypeEnum.PARTNERSHIP);
     map.put("TRUST", LegalEntityEntityTypeEnum.TRUST);
     map.put("ESTATE", LegalEntityEntityTypeEnum.ESTATE);
     return map;
@@ -175,7 +172,6 @@ public class LegalEntityEntityType {
     ENTITY_TYPE_UNSPECIFIED("ENTITY_TYPE_UNSPECIFIED"),
     CORPORATION("CORPORATION"),
     LIMITED_LIABILITY_COMPANY("LIMITED_LIABILITY_COMPANY"),
-    PARTNERSHIP("PARTNERSHIP"),
     TRUST("TRUST"),
     ESTATE("ESTATE"),
     ;

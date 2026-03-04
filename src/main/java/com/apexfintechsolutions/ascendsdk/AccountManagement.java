@@ -174,7 +174,10 @@ public class AccountManagement {
    *     `investment_profile.customer_profile.annual_income_range_usd`
    *     `investment_profile.customer_profile.liquid_net_worth_range_usd`
    *     `investment_profile.customer_profile.total_net_worth_range_usd`
-   *     `investment_profile.customer_profile.federal_tax_bracket` `wrap_fee_billed` `managed`
+   *     `investment_profile.customer_profile.federal_tax_bracket`
+   *     `investment_profile.customer_profile.investment_experience` `wrap_fee_billed` `managed`
+   *     `originating_account_id` `client_account_id` `cat_reporter_information`
+   *     `tax_profile.cost_basis_lot_disposal_method` `tax_profile.section_475_election`
    * @param accountRequestUpdate A single record representing an owner or manager of an Account.
    * @param options additional options
    * @return The response from the API call

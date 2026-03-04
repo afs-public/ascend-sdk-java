@@ -53,8 +53,6 @@ public class PartyLegalNaturalPersonFederalTaxClassification {
   public static final PartyLegalNaturalPersonFederalTaxClassification
       INDIV_SOLEPROP_OR_SINGLEMEMBERLLC =
           new PartyLegalNaturalPersonFederalTaxClassification("INDIV_SOLEPROP_OR_SINGLEMEMBERLLC");
-  public static final PartyLegalNaturalPersonFederalTaxClassification PARTNERSHIP =
-      new PartyLegalNaturalPersonFederalTaxClassification("PARTNERSHIP");
   public static final PartyLegalNaturalPersonFederalTaxClassification C_CORPORATION =
       new PartyLegalNaturalPersonFederalTaxClassification("C_CORPORATION");
   public static final PartyLegalNaturalPersonFederalTaxClassification S_CORPORATION =
@@ -144,7 +142,6 @@ public class PartyLegalNaturalPersonFederalTaxClassification {
     Map<String, PartyLegalNaturalPersonFederalTaxClassification> map = new LinkedHashMap<>();
     map.put("FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED", FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED);
     map.put("INDIV_SOLEPROP_OR_SINGLEMEMBERLLC", INDIV_SOLEPROP_OR_SINGLEMEMBERLLC);
-    map.put("PARTNERSHIP", PARTNERSHIP);
     map.put("C_CORPORATION", C_CORPORATION);
     map.put("S_CORPORATION", S_CORPORATION);
     map.put("TRUST_ESTATE", TRUST_ESTATE);
@@ -164,7 +161,6 @@ public class PartyLegalNaturalPersonFederalTaxClassification {
     map.put(
         "INDIV_SOLEPROP_OR_SINGLEMEMBERLLC",
         PartyLegalNaturalPersonFederalTaxClassificationEnum.INDIV_SOLEPROP_OR_SINGLEMEMBERLLC);
-    map.put("PARTNERSHIP", PartyLegalNaturalPersonFederalTaxClassificationEnum.PARTNERSHIP);
     map.put("C_CORPORATION", PartyLegalNaturalPersonFederalTaxClassificationEnum.C_CORPORATION);
     map.put("S_CORPORATION", PartyLegalNaturalPersonFederalTaxClassificationEnum.S_CORPORATION);
     map.put("TRUST_ESTATE", PartyLegalNaturalPersonFederalTaxClassificationEnum.TRUST_ESTATE);
@@ -219,7 +215,6 @@ public class PartyLegalNaturalPersonFederalTaxClassification {
   public enum PartyLegalNaturalPersonFederalTaxClassificationEnum {
     FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED("FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED"),
     INDIV_SOLEPROP_OR_SINGLEMEMBERLLC("INDIV_SOLEPROP_OR_SINGLEMEMBERLLC"),
-    PARTNERSHIP("PARTNERSHIP"),
     C_CORPORATION("C_CORPORATION"),
     S_CORPORATION("S_CORPORATION"),
     TRUST_ESTATE("TRUST_ESTATE"),

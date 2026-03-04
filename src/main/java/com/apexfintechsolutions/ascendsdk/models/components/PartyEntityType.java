@@ -51,7 +51,6 @@ public class PartyEntityType {
   public static final PartyEntityType CORPORATION = new PartyEntityType("CORPORATION");
   public static final PartyEntityType LIMITED_LIABILITY_COMPANY =
       new PartyEntityType("LIMITED_LIABILITY_COMPANY");
-  public static final PartyEntityType PARTNERSHIP = new PartyEntityType("PARTNERSHIP");
   public static final PartyEntityType TRUST = new PartyEntityType("TRUST");
   public static final PartyEntityType ESTATE = new PartyEntityType("ESTATE");
 
@@ -124,7 +123,6 @@ public class PartyEntityType {
     map.put("ENTITY_TYPE_UNSPECIFIED", ENTITY_TYPE_UNSPECIFIED);
     map.put("CORPORATION", CORPORATION);
     map.put("LIMITED_LIABILITY_COMPANY", LIMITED_LIABILITY_COMPANY);
-    map.put("PARTNERSHIP", PARTNERSHIP);
     map.put("TRUST", TRUST);
     map.put("ESTATE", ESTATE);
     return map;
@@ -135,7 +133,6 @@ public class PartyEntityType {
     map.put("ENTITY_TYPE_UNSPECIFIED", PartyEntityTypeEnum.ENTITY_TYPE_UNSPECIFIED);
     map.put("CORPORATION", PartyEntityTypeEnum.CORPORATION);
     map.put("LIMITED_LIABILITY_COMPANY", PartyEntityTypeEnum.LIMITED_LIABILITY_COMPANY);
-    map.put("PARTNERSHIP", PartyEntityTypeEnum.PARTNERSHIP);
     map.put("TRUST", PartyEntityTypeEnum.TRUST);
     map.put("ESTATE", PartyEntityTypeEnum.ESTATE);
     return map;
@@ -175,7 +172,6 @@ public class PartyEntityType {
     ENTITY_TYPE_UNSPECIFIED("ENTITY_TYPE_UNSPECIFIED"),
     CORPORATION("CORPORATION"),
     LIMITED_LIABILITY_COMPANY("LIMITED_LIABILITY_COMPANY"),
-    PARTNERSHIP("PARTNERSHIP"),
     TRUST("TRUST"),
     ESTATE("ESTATE"),
     ;

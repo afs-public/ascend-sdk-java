@@ -11,8 +11,11 @@ import com.apexfintechsolutions.ascendsdk.models.components.AchWithdrawalSchedul
 import com.apexfintechsolutions.ascendsdk.models.components.AchWithdrawalScheduleUpdate;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelAchDepositScheduleRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelAchWithdrawalScheduleRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.CancelCashJournalScheduleRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelCheckWithdrawalScheduleRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.CancelWireWithdrawalScheduleRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.CashJournalScheduleCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.CashJournalScheduleUpdate;
 import com.apexfintechsolutions.ascendsdk.models.components.CheckWithdrawalScheduleCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.CheckWithdrawalScheduleUpdate;
 import com.apexfintechsolutions.ascendsdk.models.components.WireWithdrawalScheduleCreate;
@@ -47,6 +50,20 @@ import com.apexfintechsolutions.ascendsdk.models.operations.AchWithdrawalSchedul
 import com.apexfintechsolutions.ascendsdk.models.operations.AchWithdrawalSchedulesUpdateAchWithdrawalScheduleRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchWithdrawalSchedulesUpdateAchWithdrawalScheduleRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.AchWithdrawalSchedulesUpdateAchWithdrawalScheduleResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalSchedulesCancelCashJournalScheduleRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalSchedulesCancelCashJournalScheduleRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalSchedulesCancelCashJournalScheduleResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalSchedulesCreateCashJournalScheduleRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalSchedulesCreateCashJournalScheduleResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalSchedulesGetCashJournalScheduleRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalSchedulesGetCashJournalScheduleRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalSchedulesGetCashJournalScheduleResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalSchedulesSearchCashJournalSchedulesRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalSchedulesSearchCashJournalSchedulesRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalSchedulesSearchCashJournalSchedulesResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalSchedulesUpdateCashJournalScheduleRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalSchedulesUpdateCashJournalScheduleRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalSchedulesUpdateCashJournalScheduleResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleResponse;
@@ -90,6 +107,11 @@ import com.apexfintechsolutions.ascendsdk.operations.AchWithdrawalSchedulesCreat
 import com.apexfintechsolutions.ascendsdk.operations.AchWithdrawalSchedulesGetAchWithdrawalSchedule;
 import com.apexfintechsolutions.ascendsdk.operations.AchWithdrawalSchedulesListAchWithdrawalSchedules;
 import com.apexfintechsolutions.ascendsdk.operations.AchWithdrawalSchedulesUpdateAchWithdrawalSchedule;
+import com.apexfintechsolutions.ascendsdk.operations.CashJournalSchedulesCancelCashJournalSchedule;
+import com.apexfintechsolutions.ascendsdk.operations.CashJournalSchedulesCreateCashJournalSchedule;
+import com.apexfintechsolutions.ascendsdk.operations.CashJournalSchedulesGetCashJournalSchedule;
+import com.apexfintechsolutions.ascendsdk.operations.CashJournalSchedulesSearchCashJournalSchedules;
+import com.apexfintechsolutions.ascendsdk.operations.CashJournalSchedulesUpdateCashJournalSchedule;
 import com.apexfintechsolutions.ascendsdk.operations.CheckWithdrawalSchedulesCancelCheckWithdrawalSchedule;
 import com.apexfintechsolutions.ascendsdk.operations.CheckWithdrawalSchedulesCreateCheckWithdrawalSchedule;
 import com.apexfintechsolutions.ascendsdk.operations.CheckWithdrawalSchedulesGetCheckWithdrawalSchedule;
@@ -787,6 +809,268 @@ public class ScheduleTransfers {
             AchWithdrawalSchedulesCancelAchWithdrawalScheduleResponse>
         operation =
             new AchWithdrawalSchedulesCancelAchWithdrawalSchedule.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Create Cash Journal Schedule
+   *
+   * <p>Creates a Cash Journal transfer schedule
+   *
+   * @return The call builder
+   */
+  public CashJournalSchedulesCreateCashJournalScheduleRequestBuilder createCashJournalSchedule() {
+    return new CashJournalSchedulesCreateCashJournalScheduleRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * Create Cash Journal Schedule
+   *
+   * <p>Creates a Cash Journal transfer schedule
+   *
+   * @param request The request object containing all the parameters for the API call.
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CashJournalSchedulesCreateCashJournalScheduleResponse createCashJournalSchedule(
+      CashJournalScheduleCreate request) throws Exception {
+    return createCashJournalSchedule(request, Optional.empty());
+  }
+
+  /**
+   * Create Cash Journal Schedule
+   *
+   * <p>Creates a Cash Journal transfer schedule
+   *
+   * @param request The request object containing all the parameters for the API call.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CashJournalSchedulesCreateCashJournalScheduleResponse createCashJournalSchedule(
+      CashJournalScheduleCreate request, Optional<Options> options) throws Exception {
+    RequestOperation<
+            CashJournalScheduleCreate, CashJournalSchedulesCreateCashJournalScheduleResponse>
+        operation =
+            new CashJournalSchedulesCreateCashJournalSchedule.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Get Cash Journal Schedule
+   *
+   * <p>Gets a Cash Journal transfer schedule
+   *
+   * @return The call builder
+   */
+  public CashJournalSchedulesGetCashJournalScheduleRequestBuilder getCashJournalSchedule() {
+    return new CashJournalSchedulesGetCashJournalScheduleRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * Get Cash Journal Schedule
+   *
+   * <p>Gets a Cash Journal transfer schedule
+   *
+   * @param cashJournalScheduleId The cashJournalSchedule id.
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CashJournalSchedulesGetCashJournalScheduleResponse getCashJournalSchedule(
+      String cashJournalScheduleId) throws Exception {
+    return getCashJournalSchedule(cashJournalScheduleId, Optional.empty());
+  }
+
+  /**
+   * Get Cash Journal Schedule
+   *
+   * <p>Gets a Cash Journal transfer schedule
+   *
+   * @param cashJournalScheduleId The cashJournalSchedule id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CashJournalSchedulesGetCashJournalScheduleResponse getCashJournalSchedule(
+      String cashJournalScheduleId, Optional<Options> options) throws Exception {
+    CashJournalSchedulesGetCashJournalScheduleRequest request =
+        CashJournalSchedulesGetCashJournalScheduleRequest.builder()
+            .cashJournalScheduleId(cashJournalScheduleId)
+            .build();
+    RequestOperation<
+            CashJournalSchedulesGetCashJournalScheduleRequest,
+            CashJournalSchedulesGetCashJournalScheduleResponse>
+        operation = new CashJournalSchedulesGetCashJournalSchedule.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Update Cash Journal Schedule
+   *
+   * <p>Updates the amount of a Cash Journal transfer schedule
+   *
+   * @return The call builder
+   */
+  public CashJournalSchedulesUpdateCashJournalScheduleRequestBuilder updateCashJournalSchedule() {
+    return new CashJournalSchedulesUpdateCashJournalScheduleRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * Update Cash Journal Schedule
+   *
+   * <p>Updates the amount of a Cash Journal transfer schedule
+   *
+   * @param cashJournalScheduleId The cashJournalSchedule id.
+   * @param cashJournalScheduleUpdate A Cash Journal transfer schedule
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CashJournalSchedulesUpdateCashJournalScheduleResponse updateCashJournalSchedule(
+      String cashJournalScheduleId, CashJournalScheduleUpdate cashJournalScheduleUpdate)
+      throws Exception {
+    return updateCashJournalSchedule(
+        cashJournalScheduleId, Optional.empty(), cashJournalScheduleUpdate, Optional.empty());
+  }
+
+  /**
+   * Update Cash Journal Schedule
+   *
+   * <p>Updates the amount of a Cash Journal transfer schedule
+   *
+   * @param cashJournalScheduleId The cashJournalSchedule id.
+   * @param updateMask A field mask representing the update. Note: only the
+   *     'schedule_details.amount' field of a schedule is currently updatable
+   * @param cashJournalScheduleUpdate A Cash Journal transfer schedule
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CashJournalSchedulesUpdateCashJournalScheduleResponse updateCashJournalSchedule(
+      String cashJournalScheduleId,
+      Optional<String> updateMask,
+      CashJournalScheduleUpdate cashJournalScheduleUpdate,
+      Optional<Options> options)
+      throws Exception {
+    CashJournalSchedulesUpdateCashJournalScheduleRequest request =
+        CashJournalSchedulesUpdateCashJournalScheduleRequest.builder()
+            .cashJournalScheduleId(cashJournalScheduleId)
+            .updateMask(updateMask)
+            .cashJournalScheduleUpdate(cashJournalScheduleUpdate)
+            .build();
+    RequestOperation<
+            CashJournalSchedulesUpdateCashJournalScheduleRequest,
+            CashJournalSchedulesUpdateCashJournalScheduleResponse>
+        operation =
+            new CashJournalSchedulesUpdateCashJournalSchedule.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Cancel Cash Journal Schedule
+   *
+   * <p>Cancels a Cash Journal transfer schedule
+   *
+   * @return The call builder
+   */
+  public CashJournalSchedulesCancelCashJournalScheduleRequestBuilder cancelCashJournalSchedule() {
+    return new CashJournalSchedulesCancelCashJournalScheduleRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * Cancel Cash Journal Schedule
+   *
+   * <p>Cancels a Cash Journal transfer schedule
+   *
+   * @param cashJournalScheduleId The cashJournalSchedule id.
+   * @param cancelCashJournalScheduleRequestCreate Request to cancel a Cash Journal transfer
+   *     schedule
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CashJournalSchedulesCancelCashJournalScheduleResponse cancelCashJournalSchedule(
+      String cashJournalScheduleId,
+      CancelCashJournalScheduleRequestCreate cancelCashJournalScheduleRequestCreate)
+      throws Exception {
+    return cancelCashJournalSchedule(
+        cashJournalScheduleId, cancelCashJournalScheduleRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Cancel Cash Journal Schedule
+   *
+   * <p>Cancels a Cash Journal transfer schedule
+   *
+   * @param cashJournalScheduleId The cashJournalSchedule id.
+   * @param cancelCashJournalScheduleRequestCreate Request to cancel a Cash Journal transfer
+   *     schedule
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CashJournalSchedulesCancelCashJournalScheduleResponse cancelCashJournalSchedule(
+      String cashJournalScheduleId,
+      CancelCashJournalScheduleRequestCreate cancelCashJournalScheduleRequestCreate,
+      Optional<Options> options)
+      throws Exception {
+    CashJournalSchedulesCancelCashJournalScheduleRequest request =
+        CashJournalSchedulesCancelCashJournalScheduleRequest.builder()
+            .cashJournalScheduleId(cashJournalScheduleId)
+            .cancelCashJournalScheduleRequestCreate(cancelCashJournalScheduleRequestCreate)
+            .build();
+    RequestOperation<
+            CashJournalSchedulesCancelCashJournalScheduleRequest,
+            CashJournalSchedulesCancelCashJournalScheduleResponse>
+        operation =
+            new CashJournalSchedulesCancelCashJournalSchedule.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Search Cash Journal Schedules
+   *
+   * <p>Search Cash Journal Schedules visible to the calling service account using the specified
+   * search parameters
+   *
+   * @return The call builder
+   */
+  public CashJournalSchedulesSearchCashJournalSchedulesRequestBuilder searchCashJournalSchedules() {
+    return new CashJournalSchedulesSearchCashJournalSchedulesRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * Search Cash Journal Schedules
+   *
+   * <p>Search Cash Journal Schedules visible to the calling service account using the specified
+   * search parameters
+   *
+   * @param request The request object containing all the parameters for the API call.
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CashJournalSchedulesSearchCashJournalSchedulesResponse searchCashJournalSchedules(
+      CashJournalSchedulesSearchCashJournalSchedulesRequest request) throws Exception {
+    return searchCashJournalSchedules(request, Optional.empty());
+  }
+
+  /**
+   * Search Cash Journal Schedules
+   *
+   * <p>Search Cash Journal Schedules visible to the calling service account using the specified
+   * search parameters
+   *
+   * @param request The request object containing all the parameters for the API call.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CashJournalSchedulesSearchCashJournalSchedulesResponse searchCashJournalSchedules(
+      CashJournalSchedulesSearchCashJournalSchedulesRequest request, Optional<Options> options)
+      throws Exception {
+    RequestOperation<
+            CashJournalSchedulesSearchCashJournalSchedulesRequest,
+            CashJournalSchedulesSearchCashJournalSchedulesResponse>
+        operation =
+            new CashJournalSchedulesSearchCashJournalSchedules.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 

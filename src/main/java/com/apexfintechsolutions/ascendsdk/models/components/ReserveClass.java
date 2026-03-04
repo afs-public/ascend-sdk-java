@@ -53,6 +53,7 @@ public class ReserveClass {
   public static final ReserveClass FIRM = new ReserveClass("FIRM");
   public static final ReserveClass STREET = new ReserveClass("STREET");
   public static final ReserveClass GL = new ReserveClass("G_L");
+  public static final ReserveClass FUTURES_CUSTOMER = new ReserveClass("FUTURES_CUSTOMER");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -126,6 +127,7 @@ public class ReserveClass {
     map.put("FIRM", FIRM);
     map.put("STREET", STREET);
     map.put("G_L", GL);
+    map.put("FUTURES_CUSTOMER", FUTURES_CUSTOMER);
     return map;
   }
 
@@ -137,6 +139,7 @@ public class ReserveClass {
     map.put("FIRM", ReserveClassEnum.FIRM);
     map.put("STREET", ReserveClassEnum.STREET);
     map.put("G_L", ReserveClassEnum.GL);
+    map.put("FUTURES_CUSTOMER", ReserveClassEnum.FUTURES_CUSTOMER);
     return map;
   }
 
@@ -177,6 +180,7 @@ public class ReserveClass {
     FIRM("FIRM"),
     STREET("STREET"),
     GL("G_L"),
+    FUTURES_CUSTOMER("FUTURES_CUSTOMER"),
     ;
 
     private final String value;

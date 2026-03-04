@@ -16,7 +16,8 @@ import org.openapitools.jackson.nullable.JsonNullable;
  * OrderCommission
  *
  * <p>A custom commission to be applied to this order. When specifying an AMOUNT type, the value
- * represents a notional amount measured in the currency of the order.
+ * represents a notional amount measured in the currency of the order. Only available for Equity,
+ * Mutual Fund, and Fixed Income orders.
  */
 public class OrderCommission {
   /** The type of commission value being specified. Only the type of "AMOUNT" is supported. */

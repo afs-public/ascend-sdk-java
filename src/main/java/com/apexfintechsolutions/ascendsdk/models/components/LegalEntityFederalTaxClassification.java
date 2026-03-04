@@ -50,8 +50,6 @@ public class LegalEntityFederalTaxClassification {
       new LegalEntityFederalTaxClassification("FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED");
   public static final LegalEntityFederalTaxClassification INDIV_SOLEPROP_OR_SINGLEMEMBERLLC =
       new LegalEntityFederalTaxClassification("INDIV_SOLEPROP_OR_SINGLEMEMBERLLC");
-  public static final LegalEntityFederalTaxClassification PARTNERSHIP =
-      new LegalEntityFederalTaxClassification("PARTNERSHIP");
   public static final LegalEntityFederalTaxClassification C_CORPORATION =
       new LegalEntityFederalTaxClassification("C_CORPORATION");
   public static final LegalEntityFederalTaxClassification S_CORPORATION =
@@ -137,7 +135,6 @@ public class LegalEntityFederalTaxClassification {
     Map<String, LegalEntityFederalTaxClassification> map = new LinkedHashMap<>();
     map.put("FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED", FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED);
     map.put("INDIV_SOLEPROP_OR_SINGLEMEMBERLLC", INDIV_SOLEPROP_OR_SINGLEMEMBERLLC);
-    map.put("PARTNERSHIP", PARTNERSHIP);
     map.put("C_CORPORATION", C_CORPORATION);
     map.put("S_CORPORATION", S_CORPORATION);
     map.put("TRUST_ESTATE", TRUST_ESTATE);
@@ -156,7 +153,6 @@ public class LegalEntityFederalTaxClassification {
     map.put(
         "INDIV_SOLEPROP_OR_SINGLEMEMBERLLC",
         LegalEntityFederalTaxClassificationEnum.INDIV_SOLEPROP_OR_SINGLEMEMBERLLC);
-    map.put("PARTNERSHIP", LegalEntityFederalTaxClassificationEnum.PARTNERSHIP);
     map.put("C_CORPORATION", LegalEntityFederalTaxClassificationEnum.C_CORPORATION);
     map.put("S_CORPORATION", LegalEntityFederalTaxClassificationEnum.S_CORPORATION);
     map.put("TRUST_ESTATE", LegalEntityFederalTaxClassificationEnum.TRUST_ESTATE);
@@ -204,7 +200,6 @@ public class LegalEntityFederalTaxClassification {
   public enum LegalEntityFederalTaxClassificationEnum {
     FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED("FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED"),
     INDIV_SOLEPROP_OR_SINGLEMEMBERLLC("INDIV_SOLEPROP_OR_SINGLEMEMBERLLC"),
-    PARTNERSHIP("PARTNERSHIP"),
     C_CORPORATION("C_CORPORATION"),
     S_CORPORATION("S_CORPORATION"),
     TRUST_ESTATE("TRUST_ESTATE"),

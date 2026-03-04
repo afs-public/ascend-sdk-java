@@ -108,7 +108,7 @@ public class Application {
 
         AssetTradingConfigServiceListAssetTradingConfigsRequest req = AssetTradingConfigServiceListAssetTradingConfigsRequest.builder()
                 .correspondentId("01HBRQ5BW6ZAY4BNWP4GWRD80X")
-                .assetId("")
+                .assetId("-")
                 .pageSize(100)
                 .pageToken("Mv-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAD_-CAfzrRtzkAQQ1MDA3AA==")
                 .filter("symbol == 'SBUX' && asset_type == 'EQUITY'")

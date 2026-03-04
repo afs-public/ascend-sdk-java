@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 04604b59-b953-4711-ac65-9ad5897162b4
 management:
-  docChecksum: 84c7e346129bb255bd3af8fb7e1464fe
-  docVersion: v1:20260112:uat:5e3b93765864
+  docChecksum: 2d2301af648574e02452022e6e5cae4c
+  docVersion: v1:20260227:uat:06c84009201f
   speakeasyVersion: 1.608.0
   generationVersion: 2.691.6
-  releaseVersion: 1.6.2
-  configChecksum: a808ab78825bac74fea10ec9b384392d
+  releaseVersion: 1.6.3
+  configChecksum: beff72816efbb3ad053febfecef80a43
 features:
   java:
     additionalDependencies: 0.1.0
@@ -52,11 +52,14 @@ generatedFiles:
   - docs/models/components/AcceptTransferResponseTransferExternalAccount.md
   - docs/models/components/AcceptTransferResponseTransferType.md
   - docs/models/components/Account.md
+  - docs/models/components/AccountAccreditation.md
   - docs/models/components/AccountAnnualIncomeRangeUsd.md
+  - docs/models/components/AccountAssetBuyingPower.md
   - docs/models/components/AccountCatAccountHolderType.md
   - docs/models/components/AccountCostBasisLotDisposalMethod.md
   - docs/models/components/AccountDocument.md
   - docs/models/components/AccountDocumentUploadRequestCreate.md
+  - docs/models/components/AccountEquity.md
   - docs/models/components/AccountEquityAmount.md
   - docs/models/components/AccountGoals.md
   - docs/models/components/AccountGoalsCreate.md
@@ -83,6 +86,7 @@ generatedFiles:
   - docs/models/components/AccountTotalNetWorthRangeUsd.md
   - docs/models/components/AccountTransfer.md
   - docs/models/components/AccountTransferType.md
+  - docs/models/components/AccreditationType.md
   - docs/models/components/AccruedInterest.md
   - docs/models/components/AccruedInterestAmount.md
   - docs/models/components/AccruedInterestAmount1.md
@@ -351,6 +355,27 @@ generatedFiles:
   - docs/models/components/AgreementState.md
   - docs/models/components/Allocation.md
   - docs/models/components/AllocationPercentage.md
+  - docs/models/components/AltInvestment.md
+  - docs/models/components/AlternativeInvestment.md
+  - docs/models/components/AlternativeInvestmentDocument.md
+  - docs/models/components/AlternativeInvestmentDocumentType.md
+  - docs/models/components/AlternativeInvestmentIssuerType.md
+  - docs/models/components/AlternativeInvestmentMailingAddress.md
+  - docs/models/components/AlternativeInvestmentRegistrationType.md
+  - docs/models/components/AlternativeInvestmentState.md
+  - docs/models/components/AlternativeInvestmentType.md
+  - docs/models/components/AlternativeOrder.md
+  - docs/models/components/AlternativeOrderCreate.md
+  - docs/models/components/AlternativeOrderCreateIdentifierType.md
+  - docs/models/components/AlternativeOrderCreateSide.md
+  - docs/models/components/AlternativeOrderCumulativeNotionalValue.md
+  - docs/models/components/AlternativeOrderDistributionType.md
+  - docs/models/components/AlternativeOrderFilledQuantity.md
+  - docs/models/components/AlternativeOrderIdentifierType.md
+  - docs/models/components/AlternativeOrderNotionalValue.md
+  - docs/models/components/AlternativeOrderOrderStatus.md
+  - docs/models/components/AlternativeOrderQuantity.md
+  - docs/models/components/AlternativeOrderSide.md
   - docs/models/components/Amount.md
   - docs/models/components/Amount1.md
   - docs/models/components/Amount2.md
@@ -359,12 +384,27 @@ generatedFiles:
   - docs/models/components/AskMinimumQuantity.md
   - docs/models/components/AskQuantity.md
   - docs/models/components/Asset.md
+  - docs/models/components/AssetBuyingPower.md
+  - docs/models/components/AssetBuyingPowerAccountEquityAmount.md
+  - docs/models/components/AssetBuyingPowerAssetBuyingPowerMaxAmount.md
+  - docs/models/components/AssetBuyingPowerBuyingPowerAmount.md
+  - docs/models/components/AssetBuyingPowerDayTradeBuyingPowerAmount.md
+  - docs/models/components/AssetBuyingPowerMaxAmount.md
+  - docs/models/components/AssetBuyingPowerMaxPurchaseQuantity.md
+  - docs/models/components/AssetBuyingPowerPercentageRequirements.md
+  - docs/models/components/AssetBuyingPowerPositionMarketValueAmount.md
+  - docs/models/components/AssetBuyingPowerRequirements.md
+  - docs/models/components/AssetBuyingPowerSmaAmount.md
+  - docs/models/components/AssetBuyingPowerTotalExcessAmount.md
+  - docs/models/components/AssetBuyingPowerTotalRequirementsAmount.md
   - docs/models/components/AssetCategory.md
   - docs/models/components/AssetCreate.md
   - docs/models/components/AssetCreateType.md
   - docs/models/components/AssetEquityType.md
   - docs/models/components/AssetExpirationDate.md
   - docs/models/components/AssetIssueDate.md
+  - docs/models/components/AssetSpecific.md
+  - docs/models/components/AssetTaxReportingStructure.md
   - docs/models/components/AssetTradability.md
   - docs/models/components/AssetTradingConfig.md
   - docs/models/components/AssetTradingConfigAssetType.md
@@ -377,6 +417,7 @@ generatedFiles:
   - docs/models/components/AvailableEnrollment.md
   - docs/models/components/AvailableLiquidityAmount.md
   - docs/models/components/AvailableRestriction.md
+  - docs/models/components/AveragePrice.md
   - docs/models/components/BankAccount.md
   - docs/models/components/BankAccountCreate.md
   - docs/models/components/BankAccountCreateType.md
@@ -432,7 +473,9 @@ generatedFiles:
   - docs/models/components/BeneficiaryEnrollmentMetadata.md
   - docs/models/components/BeneficiaryEnrollmentMetadataCreate.md
   - docs/models/components/BeneficiaryEntityType.md
+  - docs/models/components/BeneficiaryPhoneNumber.md
   - docs/models/components/BeneficiaryRelationType.md
+  - docs/models/components/BeneficiaryShortCode.md
   - docs/models/components/BeneficiaryTaxIdType.md
   - docs/models/components/BidAskPrice.md
   - docs/models/components/BidAskPricePrice.md
@@ -460,6 +503,7 @@ generatedFiles:
   - docs/models/components/BookingTradeBrokerCapacity.md
   - docs/models/components/BookingTradeIdentifierType.md
   - docs/models/components/BookingTradeRouteType.md
+  - docs/models/components/BookingTradeSettlementDate.md
   - docs/models/components/BookingTradeSide.md
   - docs/models/components/BookingTradeSideModifier.md
   - docs/models/components/BookingTradeSpecialInstructions.md
@@ -484,6 +528,7 @@ generatedFiles:
   - docs/models/components/CancelAchWithdrawalScheduleRequestCreate.md
   - docs/models/components/CancelBankRelationshipRequestCreate.md
   - docs/models/components/CancelCashJournalRequestCreate.md
+  - docs/models/components/CancelCashJournalScheduleRequestCreate.md
   - docs/models/components/CancelCheckWithdrawalScheduleRequestCreate.md
   - docs/models/components/CancelCreditRequestCreate.md
   - docs/models/components/CancelExecutionRequestCreate.md
@@ -503,6 +548,8 @@ generatedFiles:
   - docs/models/components/CancelIctDepositRequestCreate.md
   - docs/models/components/CancelIctWithdrawalRequestCreate.md
   - docs/models/components/CancelInitiator.md
+  - docs/models/components/CancelOptionInstructionRequestCreate.md
+  - docs/models/components/CancelOptionOrderRequestCreate.md
   - docs/models/components/CancelOrderRequestCreate.md
   - docs/models/components/CancelOrderRequestCreateCancelInitiator.md
   - docs/models/components/CancelPositionJournalRequestCreate.md
@@ -562,6 +609,26 @@ generatedFiles:
   - docs/models/components/CashJournalRetirementDistributionPercentage.md
   - docs/models/components/CashJournalRetirementDistributionStateTaxWithholdingAmount.md
   - docs/models/components/CashJournalRetirementDistributionType.md
+  - docs/models/components/CashJournalSchedule.md
+  - docs/models/components/CashJournalScheduleAmount.md
+  - docs/models/components/CashJournalScheduleCreate.md
+  - docs/models/components/CashJournalScheduleEndDate.md
+  - docs/models/components/CashJournalScheduleFederalTaxWithholding.md
+  - docs/models/components/CashJournalSchedulePercentage.md
+  - docs/models/components/CashJournalScheduleRetirementContribution.md
+  - docs/models/components/CashJournalScheduleRetirementDistribution.md
+  - docs/models/components/CashJournalScheduleRetirementDistributionAmount.md
+  - docs/models/components/CashJournalScheduleRetirementDistributionFederalTaxWithholdingAmount.md
+  - docs/models/components/CashJournalScheduleRetirementDistributionPercentage.md
+  - docs/models/components/CashJournalScheduleRetirementDistributionType.md
+  - docs/models/components/CashJournalScheduleScheduleDetails.md
+  - docs/models/components/CashJournalScheduleScheduleProperties.md
+  - docs/models/components/CashJournalScheduleStartDate.md
+  - docs/models/components/CashJournalScheduleState.md
+  - docs/models/components/CashJournalScheduleStateTaxWithholding.md
+  - docs/models/components/CashJournalScheduleTimeUnit.md
+  - docs/models/components/CashJournalScheduleType.md
+  - docs/models/components/CashJournalScheduleUpdate.md
   - docs/models/components/CashJournalState.md
   - docs/models/components/CashJournalStateState.md
   - docs/models/components/CashJournalStateTaxWithholding.md
@@ -569,6 +636,9 @@ generatedFiles:
   - docs/models/components/CashRate.md
   - docs/models/components/CashType.md
   - docs/models/components/CatAccountHolderType.md
+  - docs/models/components/CatReporterInformation.md
+  - docs/models/components/CatReporterInformationCreate.md
+  - docs/models/components/CatReporterInformationUpdate.md
   - docs/models/components/CftcDocumentDeliveryPreference.md
   - docs/models/components/CftcOwnerType.md
   - docs/models/components/CheckDeposit.md
@@ -658,8 +728,10 @@ generatedFiles:
   - docs/models/components/Credit.md
   - docs/models/components/CreditType.md
   - docs/models/components/CumulativeNotionalValue.md
+  - docs/models/components/CumulativeNotionalValueDirection.md
   - docs/models/components/Currency.md
   - docs/models/components/CurrencyType.md
+  - docs/models/components/CurrentPrice.md
   - docs/models/components/CustodialEnrollmentMetadata.md
   - docs/models/components/CustodialEnrollmentMetadataCreate.md
   - docs/models/components/CustodialEnrollmentMetadataCreateDividendReinvestmentPlan.md
@@ -681,6 +753,7 @@ generatedFiles:
   - docs/models/components/Date.md
   - docs/models/components/DateCreate.md
   - docs/models/components/DateUpdate.md
+  - docs/models/components/DayTrade.md
   - docs/models/components/DayTradeBuyingPowerAmount.md
   - docs/models/components/DeactivateEnrollmentRequestCreate.md
   - docs/models/components/DeactivateEnrollmentRequestCreateEnrollmentType.md
@@ -725,6 +798,7 @@ generatedFiles:
   - docs/models/components/Domicile.md
   - docs/models/components/DowJonesDate.md
   - docs/models/components/DowJonesDetails.md
+  - docs/models/components/DownloadAlternativeInvestmentDocumentResponse.md
   - docs/models/components/Drip.md
   - docs/models/components/Duration.md
   - docs/models/components/EddAccountEnrollmentMetadata.md
@@ -811,7 +885,6 @@ generatedFiles:
   - docs/models/components/EnrollmentLlcEnrollmentMetadataInitialDepositAmount.md
   - docs/models/components/EnrollmentLlcEnrollmentMetadataLowPricedSecurities.md
   - docs/models/components/EnrollmentLlcEnrollmentMetadataLowPricedSecuritiesPercentage.md
-  - docs/models/components/EnrollmentLlcEnrollmentMetadataMoneyMarketFundSweep.md
   - docs/models/components/EnrollmentLlcEnrollmentMetadataOtherAccounts.md
   - docs/models/components/EnrollmentLlcEnrollmentMetadataPlannedActivity.md
   - docs/models/components/EnrollmentLlcEnrollmentMetadataPrimaryAccountActivityType.md
@@ -868,6 +941,7 @@ generatedFiles:
   - docs/models/components/EntryCorporateActionGeneralInformation.md
   - docs/models/components/EntryDeliveryCorporateActionGeneralInformation.md
   - docs/models/components/EntryDepositType.md
+  - docs/models/components/EntryDistributionType.md
   - docs/models/components/EntryEffectiveDate.md
   - docs/models/components/EntryExchangeCashRate.md
   - docs/models/components/EntryExchangeCorporateActionGeneralInformation.md
@@ -1000,11 +1074,11 @@ generatedFiles:
   - docs/models/components/EstateEnrollmentMetadata.md
   - docs/models/components/EstateEnrollmentMetadataCreate.md
   - docs/models/components/EstateEnrollmentMetadataCreateDividendReinvestmentPlan.md
-  - docs/models/components/EstateEnrollmentMetadataCreateMoneyMarketFundSweep.md
   - docs/models/components/EstimatedAccruedInterest.md
   - docs/models/components/EstimatedGrossAmount.md
   - docs/models/components/EstimatedGrossCreditAmount.md
   - docs/models/components/EstimatedNetAmount.md
+  - docs/models/components/EstimatedValueDescriptor.md
   - docs/models/components/EventMessage.md
   - docs/models/components/Exchange.md
   - docs/models/components/Execution.md
@@ -1259,7 +1333,9 @@ generatedFiles:
   - docs/models/components/IraTraditionalEnrollmentMetadata.md
   - docs/models/components/IrsFormType.md
   - docs/models/components/IssueDate.md
+  - docs/models/components/IssuePrice.md
   - docs/models/components/IssueSize.md
+  - docs/models/components/Issuer.md
   - docs/models/components/JointCommunityPropertyEnrollmentMetadata.md
   - docs/models/components/JointCommunityPropertyEnrollmentMetadataCreate.md
   - docs/models/components/JointCommunityPropertyEnrollmentMetadataCreateDividendReinvestmentPlan.md
@@ -1288,6 +1364,7 @@ generatedFiles:
   - docs/models/components/LastAdjustedDate.md
   - docs/models/components/LastChangedDate.md
   - docs/models/components/LastCouponDate.md
+  - docs/models/components/LastValuation.md
   - docs/models/components/LatLngCreate.md
   - docs/models/components/LegalAddress.md
   - docs/models/components/LegalAddressVerified.md
@@ -1355,6 +1432,9 @@ generatedFiles:
   - docs/models/components/ListAchWithdrawalSchedulesResponse.md
   - docs/models/components/ListActivitiesResponse.md
   - docs/models/components/ListAgreementsResponse.md
+  - docs/models/components/ListAlternativeInvestmentDocumentsResponse.md
+  - docs/models/components/ListAlternativeInvestmentsResponse.md
+  - docs/models/components/ListAlternativeOrdersResponse.md
   - docs/models/components/ListAssetTradingConfigsResponse.md
   - docs/models/components/ListAssetsResponse.md
   - docs/models/components/ListAvailableEnrollmentsResponse.md
@@ -1374,7 +1454,12 @@ generatedFiles:
   - docs/models/components/ListInvestigationsResponse.md
   - docs/models/components/ListLegalEntitiesResponse.md
   - docs/models/components/ListLegalNaturalPersonsResponse.md
+  - docs/models/components/ListOptionInstructionsResponse.md
   - docs/models/components/ListPositionsResponse.md
+  - docs/models/components/ListPreIpoCompaniesResponse.md
+  - docs/models/components/ListPreIpoCompanyFundingRoundsResponse.md
+  - docs/models/components/ListPreIpoCompanyNewsEventsResponse.md
+  - docs/models/components/ListPreIpoCompanyResearchDocumentsResponse.md
   - docs/models/components/ListPushSubscriptionDeliveriesResponse.md
   - docs/models/components/ListPushSubscriptionsResponse.md
   - docs/models/components/ListScheduleSummariesResponse.md
@@ -1407,13 +1492,16 @@ generatedFiles:
   - docs/models/components/MatchTypes.md
   - docs/models/components/Maturity.md
   - docs/models/components/MaturityDate.md
+  - docs/models/components/MaxPurchaseQuantity.md
   - docs/models/components/MaxSellQuantity.md
   - docs/models/components/Mechanism.md
   - docs/models/components/Merger.md
   - docs/models/components/Method.md
   - docs/models/components/MicroDepositAmounts.md
   - docs/models/components/MicroDepositAmountsCreate.md
+  - docs/models/components/MinimumInitialSubscriptionAmount.md
   - docs/models/components/MinimumQuantity.md
+  - docs/models/components/MinimumSubsequentSubscriptionAmount.md
   - docs/models/components/Money.md
   - docs/models/components/MoneyMarketFundSweep.md
   - docs/models/components/MutualFund.md
@@ -1441,6 +1529,7 @@ generatedFiles:
   - docs/models/components/NonCitizenResidencyCreate.md
   - docs/models/components/NonCitizenResidencyUpdate.md
   - docs/models/components/NonCitizenResidencyUpdateResidencyStatus.md
+  - docs/models/components/NonDayTrade.md
   - docs/models/components/None.md
   - docs/models/components/NotionalValue.md
   - docs/models/components/NsccStatus.md
@@ -1453,6 +1542,45 @@ generatedFiles:
   - docs/models/components/Option.md
   - docs/models/components/OptionDeliverable.md
   - docs/models/components/OptionDeliverableQuantity.md
+  - docs/models/components/OptionInstruction.md
+  - docs/models/components/OptionInstructionCreate.md
+  - docs/models/components/OptionInstructionCreateIdentifierType.md
+  - docs/models/components/OptionInstructionCreateType.md
+  - docs/models/components/OptionInstructionIdentifierType.md
+  - docs/models/components/OptionInstructionQuantity.md
+  - docs/models/components/OptionInstructionState.md
+  - docs/models/components/OptionInstructionType.md
+  - docs/models/components/OptionOrder.md
+  - docs/models/components/OptionOrderBrokerCapacity.md
+  - docs/models/components/OptionOrderCancelRejectedReason.md
+  - docs/models/components/OptionOrderCreate.md
+  - docs/models/components/OptionOrderCreateBrokerCapacity.md
+  - docs/models/components/OptionOrderCreateOrderType.md
+  - docs/models/components/OptionOrderCreateSpecialReportingInstructions.md
+  - docs/models/components/OptionOrderCreateTimeInForce.md
+  - docs/models/components/OptionOrderCumulativeNotionalValue.md
+  - docs/models/components/OptionOrderLeg.md
+  - docs/models/components/OptionOrderLegAssetType.md
+  - docs/models/components/OptionOrderLegCreate.md
+  - docs/models/components/OptionOrderLegCreateAssetType.md
+  - docs/models/components/OptionOrderLegCreateIdentifierType.md
+  - docs/models/components/OptionOrderLegCreateSide.md
+  - docs/models/components/OptionOrderLegDirection.md
+  - docs/models/components/OptionOrderLegExecution.md
+  - docs/models/components/OptionOrderLegExecutionPrice.md
+  - docs/models/components/OptionOrderLegExecutionQuantity.md
+  - docs/models/components/OptionOrderLegIdentifierType.md
+  - docs/models/components/OptionOrderLegSide.md
+  - docs/models/components/OptionOrderLegSideModifier.md
+  - docs/models/components/OptionOrderLimitPrice.md
+  - docs/models/components/OptionOrderOrderDate.md
+  - docs/models/components/OptionOrderOrderRejectedReason.md
+  - docs/models/components/OptionOrderOrderStatus.md
+  - docs/models/components/OptionOrderOrderType.md
+  - docs/models/components/OptionOrderPriceDirection.md
+  - docs/models/components/OptionOrderQuantity.md
+  - docs/models/components/OptionOrderSpecialReportingInstructions.md
+  - docs/models/components/OptionOrderTimeInForce.md
   - docs/models/components/OptionRoot.md
   - docs/models/components/OptionRootTradability.md
   - docs/models/components/OptionType.md
@@ -1486,6 +1614,7 @@ generatedFiles:
   - docs/models/components/OrderQuantity.md
   - docs/models/components/OrderRejectedReason.md
   - docs/models/components/OrderRightsOfAccumulationAmount.md
+  - docs/models/components/OrderSettlementTarget.md
   - docs/models/components/OrderSide.md
   - docs/models/components/OrderSpecialReportingInstructions.md
   - docs/models/components/OrderStatus.md
@@ -1505,6 +1634,7 @@ generatedFiles:
   - docs/models/components/OtherSourcesOfWealth.md
   - docs/models/components/OtherSourcesOfWealthCreate.md
   - docs/models/components/OtherSourcesOfWealthUpdate.md
+  - docs/models/components/OwnershipStructure.md
   - docs/models/components/OwnershipType.md
   - docs/models/components/ParValue.md
   - docs/models/components/Party.md
@@ -1591,11 +1721,14 @@ generatedFiles:
   - docs/models/components/PendingDebitDividendsAmount.md
   - docs/models/components/PendingDebitInterestAmount.md
   - docs/models/components/PendingDrip.md
+  - docs/models/components/PendingInvestorAction.md
   - docs/models/components/PendingOutgoingAcat.md
   - docs/models/components/PendingWithdrawal.md
   - docs/models/components/PennyPilotIndicator.md
+  - docs/models/components/PerShareFeeAmount.md
   - docs/models/components/Percent.md
   - docs/models/components/Percentage.md
+  - docs/models/components/PercentageRequirements.md
   - docs/models/components/PeriodStartDate.md
   - docs/models/components/Person.md
   - docs/models/components/PersonIdentification.md
@@ -1607,6 +1740,7 @@ generatedFiles:
   - docs/models/components/PhoneNumberShortCodeUpdate.md
   - docs/models/components/PhoneNumberUpdate.md
   - docs/models/components/PhoneNumberVerified.md
+  - docs/models/components/PhysicalAddress.md
   - docs/models/components/PlannedActivity.md
   - docs/models/components/PlannedActivityCreate.md
   - docs/models/components/Position.md
@@ -1625,6 +1759,14 @@ generatedFiles:
   - docs/models/components/PostalAddress.md
   - docs/models/components/PostalAddressCreate.md
   - docs/models/components/PostalAddressUpdate.md
+  - docs/models/components/PreIpoCompany.md
+  - docs/models/components/PreIpoCompanyFundingRound.md
+  - docs/models/components/PreIpoCompanyFundingRoundClosing.md
+  - docs/models/components/PreIpoCompanyNewsEvent.md
+  - docs/models/components/PreIpoCompanyNewsEventArticle.md
+  - docs/models/components/PreIpoCompanyResearchDocument.md
+  - docs/models/components/PreIpoCompanyResearchDocumentType.md
+  - docs/models/components/PreIpoCompanyType.md
   - docs/models/components/PrevailingMarketPrice.md
   - docs/models/components/PreviousProcessDate.md
   - docs/models/components/PreviousYearDeadline.md
@@ -1635,7 +1777,9 @@ generatedFiles:
   - docs/models/components/PriceAdjustmentPercent.md
   - docs/models/components/PriceAdjustmentRecord.md
   - docs/models/components/PriceAdjustmentType.md
+  - docs/models/components/PriceAmount.md
   - docs/models/components/PriceAtIssuance.md
+  - docs/models/components/PriceDirection.md
   - docs/models/components/PrimaryAccountActivityType.md
   - docs/models/components/PriorYearEndAccountBalance.md
   - docs/models/components/ProcessDate.md
@@ -1643,6 +1787,7 @@ generatedFiles:
   - docs/models/components/ProspectusDeliveryPreference.md
   - docs/models/components/ProvidedIdentityVerification.md
   - docs/models/components/ProxyDeliveryPreference.md
+  - docs/models/components/PublishDate.md
   - docs/models/components/PushSubscription.md
   - docs/models/components/PushSubscriptionCreate.md
   - docs/models/components/PushSubscriptionDelivery.md
@@ -1732,6 +1877,8 @@ generatedFiles:
   - docs/models/components/RecipientBankBankIdCreateType.md
   - docs/models/components/RecipientInstitution.md
   - docs/models/components/RecordDate.md
+  - docs/models/components/RecordState.md
+  - docs/models/components/RedemptionFrequency.md
   - docs/models/components/RedemptionFull.md
   - docs/models/components/RedemptionPartial.md
   - docs/models/components/RegistrationType.md
@@ -1755,6 +1902,7 @@ generatedFiles:
   - docs/models/components/RelatedPepDetails.md
   - docs/models/components/RelatedPepDetailsCreate.md
   - docs/models/components/RelatedProfile.md
+  - docs/models/components/Relation.md
   - docs/models/components/RelationType.md
   - docs/models/components/RemainingContributionAllowed.md
   - docs/models/components/RemainingDistributionRequired.md
@@ -1791,6 +1939,7 @@ generatedFiles:
   - docs/models/components/RetrieveFixedIncomeMarksResponseAssetMark.md
   - docs/models/components/RetrieveFixedIncomeMarksResponseAssetMarkAccruedInterestAmount.md
   - docs/models/components/RetrieveFixedIncomeMarksResponseAssetMarkIdentifierType.md
+  - docs/models/components/RetrievePendingInvestorActionsResponse.md
   - docs/models/components/RetrieveQuoteRequestCreate.md
   - docs/models/components/RetrieveQuoteRequestCreateAssetType.md
   - docs/models/components/RetrieveQuoteRequestCreateBrokerCapacity.md
@@ -1819,10 +1968,13 @@ generatedFiles:
   - docs/models/components/SchedulePropertiesCreate.md
   - docs/models/components/ScheduledRetirementContributionCreate.md
   - docs/models/components/ScheduledRetirementContributionCreateType.md
+  - docs/models/components/SearchCashJournalSchedulesResponse.md
   - docs/models/components/Security.md
   - docs/models/components/SelfieVerified.md
   - docs/models/components/SeriesDate.md
   - docs/models/components/ServiceAccountCreds.md
+  - docs/models/components/SetAccountAccreditationTypeRequestCreate.md
+  - docs/models/components/SetAccountAccreditationTypeRequestCreateAccreditationType.md
   - docs/models/components/SetExtraReportingDataRequestCreate.md
   - docs/models/components/SetExtraReportingDataResponse.md
   - docs/models/components/SetExtraReportingDataResponseAssetType.md
@@ -1841,6 +1993,7 @@ generatedFiles:
   - docs/models/components/SetExtraReportingDataResponseSide.md
   - docs/models/components/SetExtraReportingDataResponseSpecialReportingInstructions.md
   - docs/models/components/SetExtraReportingDataResponseTimeInForce.md
+  - docs/models/components/SettleAlternativeOrderRequestCreate.md
   - docs/models/components/SettleDate.md
   - docs/models/components/Settled.md
   - docs/models/components/SettledCashAvailableToWithdraw.md
@@ -1874,10 +2027,13 @@ generatedFiles:
   - docs/models/components/StopPrice.md
   - docs/models/components/StopPriceCreate.md
   - docs/models/components/StopPriceCreateType.md
+  - docs/models/components/Strategy.md
   - docs/models/components/StrikeMultiplier.md
   - docs/models/components/StrikePrice.md
   - docs/models/components/StrikePriceMultiplier.md
   - docs/models/components/SubmitBasketRequestCreate.md
+  - docs/models/components/SubscriptionFrequency.md
+  - docs/models/components/SubscriptionOrderProcess.md
   - docs/models/components/Subtype.md
   - docs/models/components/Sweep.md
   - docs/models/components/TaxAuthority.md
@@ -1890,6 +2046,7 @@ generatedFiles:
   - docs/models/components/TaxProfileUpdateFederalTaxClassification.md
   - docs/models/components/TaxProfileUpdateIrsFormType.md
   - docs/models/components/TaxProfileUpdateUsTinStatus.md
+  - docs/models/components/TaxReportingStructure.md
   - docs/models/components/TaxWithholdingMetadata.md
   - docs/models/components/TaxWithholdingMetadataCreate.md
   - docs/models/components/TaxpayerCertificationState.md
@@ -1903,6 +2060,7 @@ generatedFiles:
   - docs/models/components/ToSide.md
   - docs/models/components/Token.md
   - docs/models/components/TotalExcessAmount.md
+  - docs/models/components/TotalFunding.md
   - docs/models/components/TotalNetWorthRangeUsd.md
   - docs/models/components/TotalRequirementsAmount.md
   - docs/models/components/Trade.md
@@ -1939,6 +2097,7 @@ generatedFiles:
   - docs/models/components/TradeCreateBrokerCapacity.md
   - docs/models/components/TradeCreateIdentifierType.md
   - docs/models/components/TradeCreateSide.md
+  - docs/models/components/TradeCreateSideModifier.md
   - docs/models/components/TradeDate.md
   - docs/models/components/TradeValueMultiplier.md
   - docs/models/components/TradingExecutedPrice.md
@@ -2000,14 +2159,19 @@ generatedFiles:
   - docs/models/components/TrustedContactPhoneNumber.md
   - docs/models/components/TrustedContactShortCode.md
   - docs/models/components/TrustedContactUpdate.md
+  - docs/models/components/TwelveMonthTrailingRevenue.md
   - docs/models/components/Type.md
   - docs/models/components/UnadjustedAvailableCashToWithdrawAmount.md
   - docs/models/components/UnitSplit.md
+  - docs/models/components/UniversalFootnote.md
   - docs/models/components/Unrestricted.md
   - docs/models/components/UpdatedBankAccountType.md
   - docs/models/components/UploadLink.md
   - docs/models/components/UploadedDate.md
   - docs/models/components/UsTinStatus.md
+  - docs/models/components/ValuationFrequency.md
+  - docs/models/components/ValuationMethod.md
+  - docs/models/components/ValuationSource.md
   - docs/models/components/Value.md
   - docs/models/components/Venue.md
   - docs/models/components/VerificationMethod.md
@@ -2097,6 +2261,10 @@ generatedFiles:
   - docs/models/components/YieldRecordYieldType.md
   - docs/models/components/YieldType.md
   - docs/models/errors/Status.md
+  - docs/models/operations/AccountAccreditationServiceGetAccountAccreditationRequest.md
+  - docs/models/operations/AccountAccreditationServiceGetAccountAccreditationResponse.md
+  - docs/models/operations/AccountAccreditationServiceSetAccountAccreditationTypeRequest.md
+  - docs/models/operations/AccountAccreditationServiceSetAccountAccreditationTypeResponse.md
   - docs/models/operations/AccountTransfersAcceptTransferRequest.md
   - docs/models/operations/AccountTransfersAcceptTransferResponse.md
   - docs/models/operations/AccountTransfersCreateTransferRequest.md
@@ -2228,6 +2396,26 @@ generatedFiles:
   - docs/models/operations/AchWithdrawalsForceReturnAchWithdrawalResponse.md
   - docs/models/operations/AchWithdrawalsGetAchWithdrawalRequest.md
   - docs/models/operations/AchWithdrawalsGetAchWithdrawalResponse.md
+  - docs/models/operations/AlternativeInvestmentDocumentsDownloadAlternativeInvestmentDocumentRequest.md
+  - docs/models/operations/AlternativeInvestmentDocumentsDownloadAlternativeInvestmentDocumentResponse.md
+  - docs/models/operations/AlternativeInvestmentDocumentsGetAlternativeInvestmentDocumentRequest.md
+  - docs/models/operations/AlternativeInvestmentDocumentsGetAlternativeInvestmentDocumentResponse.md
+  - docs/models/operations/AlternativeInvestmentDocumentsListAlternativeInvestmentDocumentsRequest.md
+  - docs/models/operations/AlternativeInvestmentDocumentsListAlternativeInvestmentDocumentsResponse.md
+  - docs/models/operations/AlternativeInvestmentsGetAlternativeInvestmentRequest.md
+  - docs/models/operations/AlternativeInvestmentsGetAlternativeInvestmentResponse.md
+  - docs/models/operations/AlternativeInvestmentsListAlternativeInvestmentsRequest.md
+  - docs/models/operations/AlternativeInvestmentsListAlternativeInvestmentsResponse.md
+  - docs/models/operations/AlternativeOrdersCreateAlternativeOrderRequest.md
+  - docs/models/operations/AlternativeOrdersCreateAlternativeOrderResponse.md
+  - docs/models/operations/AlternativeOrdersGetAlternativeOrderRequest.md
+  - docs/models/operations/AlternativeOrdersGetAlternativeOrderResponse.md
+  - docs/models/operations/AlternativeOrdersListAlternativeOrdersRequest.md
+  - docs/models/operations/AlternativeOrdersListAlternativeOrdersResponse.md
+  - docs/models/operations/AlternativeOrdersRetrievePendingInvestorActionsRequest.md
+  - docs/models/operations/AlternativeOrdersRetrievePendingInvestorActionsResponse.md
+  - docs/models/operations/AlternativeOrdersSettleAlternativeOrderRequest.md
+  - docs/models/operations/AlternativeOrdersSettleAlternativeOrderResponse.md
   - docs/models/operations/AssetTradingConfigServiceGetAssetTradingConfigRequest.md
   - docs/models/operations/AssetTradingConfigServiceGetAssetTradingConfigResponse.md
   - docs/models/operations/AssetTradingConfigServiceListAssetTradingConfigsRequest.md
@@ -2307,6 +2495,15 @@ generatedFiles:
   - docs/models/operations/BookingRebookTradeResponse.md
   - docs/models/operations/CashBalancesCalculateCashBalanceRequest.md
   - docs/models/operations/CashBalancesCalculateCashBalanceResponse.md
+  - docs/models/operations/CashJournalSchedulesCancelCashJournalScheduleRequest.md
+  - docs/models/operations/CashJournalSchedulesCancelCashJournalScheduleResponse.md
+  - docs/models/operations/CashJournalSchedulesCreateCashJournalScheduleResponse.md
+  - docs/models/operations/CashJournalSchedulesGetCashJournalScheduleRequest.md
+  - docs/models/operations/CashJournalSchedulesGetCashJournalScheduleResponse.md
+  - docs/models/operations/CashJournalSchedulesSearchCashJournalSchedulesRequest.md
+  - docs/models/operations/CashJournalSchedulesSearchCashJournalSchedulesResponse.md
+  - docs/models/operations/CashJournalSchedulesUpdateCashJournalScheduleRequest.md
+  - docs/models/operations/CashJournalSchedulesUpdateCashJournalScheduleResponse.md
   - docs/models/operations/CashJournalsCancelCashJournalRequest.md
   - docs/models/operations/CashJournalsCancelCashJournalResponse.md
   - docs/models/operations/CashJournalsCheckPartyTypeResponse.md
@@ -2342,6 +2539,14 @@ generatedFiles:
   - docs/models/operations/CustomerIdentificationResultServiceGetCustomerIdentificationQueryParamView.md
   - docs/models/operations/CustomerIdentificationResultServiceGetCustomerIdentificationRequest.md
   - docs/models/operations/CustomerIdentificationResultServiceGetCustomerIdentificationResponse.md
+  - docs/models/operations/ExerciseServiceCancelOptionInstructionRequest.md
+  - docs/models/operations/ExerciseServiceCancelOptionInstructionResponse.md
+  - docs/models/operations/ExerciseServiceCreateOptionInstructionRequest.md
+  - docs/models/operations/ExerciseServiceCreateOptionInstructionResponse.md
+  - docs/models/operations/ExerciseServiceGetOptionInstructionRequest.md
+  - docs/models/operations/ExerciseServiceGetOptionInstructionResponse.md
+  - docs/models/operations/ExerciseServiceListOptionInstructionsRequest.md
+  - docs/models/operations/ExerciseServiceListOptionInstructionsResponse.md
   - docs/models/operations/FeesCancelFeeRequest.md
   - docs/models/operations/FeesCancelFeeResponse.md
   - docs/models/operations/FeesCreateFeeRequest.md
@@ -2395,9 +2600,17 @@ generatedFiles:
   - docs/models/operations/LedgerListEntriesResponse.md
   - docs/models/operations/LedgerListPositionsRequest.md
   - docs/models/operations/LedgerListPositionsResponse.md
+  - docs/models/operations/MarginsRealTimeGetAssetBuyingPowerRequest.md
+  - docs/models/operations/MarginsRealTimeGetAssetBuyingPowerResponse.md
   - docs/models/operations/MarginsRealTimeGetBuyingPowerRequest.md
   - docs/models/operations/MarginsRealTimeGetBuyingPowerResponse.md
   - docs/models/operations/Mechanism.md
+  - docs/models/operations/OptionOrderServiceCancelOptionOrderRequest.md
+  - docs/models/operations/OptionOrderServiceCancelOptionOrderResponse.md
+  - docs/models/operations/OptionOrderServiceCreateOptionOrderRequest.md
+  - docs/models/operations/OptionOrderServiceCreateOptionOrderResponse.md
+  - docs/models/operations/OptionOrderServiceGetOptionOrderRequest.md
+  - docs/models/operations/OptionOrderServiceGetOptionOrderResponse.md
   - docs/models/operations/OrderPriceServicePreviewOrderCostRequest.md
   - docs/models/operations/OrderPriceServicePreviewOrderCostResponse.md
   - docs/models/operations/OrderPriceServiceRetrieveFixedIncomeMarksRequest.md
@@ -2423,6 +2636,18 @@ generatedFiles:
   - docs/models/operations/PositionJournalsForceRejectPositionJournalResponse.md
   - docs/models/operations/PositionJournalsGetPositionJournalRequest.md
   - docs/models/operations/PositionJournalsGetPositionJournalResponse.md
+  - docs/models/operations/PreIpoCompaniesGetPreIpoCompanyRequest.md
+  - docs/models/operations/PreIpoCompaniesGetPreIpoCompanyResponse.md
+  - docs/models/operations/PreIpoCompaniesListPreIpoCompaniesRequest.md
+  - docs/models/operations/PreIpoCompaniesListPreIpoCompaniesResponse.md
+  - docs/models/operations/PreIpoCompanyFundingRoundsGetPreIpoCompanyFundingRoundRequest.md
+  - docs/models/operations/PreIpoCompanyFundingRoundsGetPreIpoCompanyFundingRoundResponse.md
+  - docs/models/operations/PreIpoCompanyFundingRoundsListPreIpoCompanyFundingRoundsRequest.md
+  - docs/models/operations/PreIpoCompanyFundingRoundsListPreIpoCompanyFundingRoundsResponse.md
+  - docs/models/operations/PreIpoCompanyNewsEventsListPreIpoCompanyNewsEventsRequest.md
+  - docs/models/operations/PreIpoCompanyNewsEventsListPreIpoCompanyNewsEventsResponse.md
+  - docs/models/operations/PreIpoCompanyResearchDocumentsListPreIpoCompanyResearchDocumentsRequest.md
+  - docs/models/operations/PreIpoCompanyResearchDocumentsListPreIpoCompanyResearchDocumentsResponse.md
   - docs/models/operations/ProgramDateFilterProgram.md
   - docs/models/operations/QueryParamView.md
   - docs/models/operations/ReaderGetEventMessageRequest.md
@@ -2491,11 +2716,16 @@ generatedFiles:
   - docs/sdks/accountmanagement/README.md
   - docs/sdks/accounttransfers/README.md
   - docs/sdks/achtransfers/README.md
+  - docs/sdks/alternativeaccountaccreditation/README.md
+  - docs/sdks/alternativeinvestmentdocuments/README.md
+  - docs/sdks/alternativeinvestments/README.md
+  - docs/sdks/alternativeorders/README.md
   - docs/sdks/assets/README.md
   - docs/sdks/assettradingconfig/README.md
   - docs/sdks/authentication/README.md
   - docs/sdks/bankrelationships/README.md
   - docs/sdks/basketorders/README.md
+  - docs/sdks/buyingpower/README.md
   - docs/sdks/cashbalances/README.md
   - docs/sdks/checks/README.md
   - docs/sdks/dataretrieval/README.md
@@ -2507,10 +2737,15 @@ generatedFiles:
   - docs/sdks/investordocs/README.md
   - docs/sdks/journals/README.md
   - docs/sdks/ledger/README.md
-  - docs/sdks/margins/README.md
+  - docs/sdks/optioninstructions/README.md
+  - docs/sdks/optionorders/README.md
   - docs/sdks/orders/README.md
   - docs/sdks/personmanagement/README.md
   - docs/sdks/positionjournals/README.md
+  - docs/sdks/preipocompanies/README.md
+  - docs/sdks/preipofundingrounds/README.md
+  - docs/sdks/preiponewsevents/README.md
+  - docs/sdks/preiporesearchdocuments/README.md
   - docs/sdks/reader/README.md
   - docs/sdks/retirements/README.md
   - docs/sdks/scheduletransfers/README.md
@@ -2529,11 +2764,16 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/AccountCreation.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/AccountManagement.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/AccountTransfers.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/AlternativeAccountAccreditation.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/AlternativeInvestmentDocuments.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/AlternativeInvestments.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/AlternativeOrders.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/AssetTradingConfig.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/Assets.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/Authentication.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/BankRelationships.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/BasketOrders.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/BuyingPower.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/CashBalances.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/Checks.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/DataRetrieval.java
@@ -2545,10 +2785,15 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/InvestorDocs.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/Journals.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/Ledger.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/Margins.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/OptionInstructions.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/OptionOrders.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/Orders.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/PersonManagement.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/PositionJournals.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/PreIPOCompanies.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/PreIPOFundingRounds.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/PreIPONewsEvents.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/PreIPOResearchDocuments.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/Reader.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/Retirements.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/SDK.java
@@ -2581,11 +2826,14 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcceptTransferResponseTransferExternalAccount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcceptTransferResponseTransferType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Account.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AccountAccreditation.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AccountAnnualIncomeRangeUsd.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AccountAssetBuyingPower.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AccountCatAccountHolderType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AccountCostBasisLotDisposalMethod.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AccountDocument.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AccountDocumentUploadRequestCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AccountEquity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AccountEquityAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AccountGoals.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AccountGoalsCreate.java
@@ -2612,6 +2860,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AccountTotalNetWorthRangeUsd.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AccountTransfer.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AccountTransferType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AccreditationType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AccruedInterest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AccruedInterestAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AccruedInterestAmount1.java
@@ -2880,6 +3129,27 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AgreementState.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Allocation.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AllocationPercentage.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AltInvestment.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AlternativeInvestment.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AlternativeInvestmentDocument.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AlternativeInvestmentDocumentType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AlternativeInvestmentIssuerType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AlternativeInvestmentMailingAddress.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AlternativeInvestmentRegistrationType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AlternativeInvestmentState.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AlternativeInvestmentType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AlternativeOrder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AlternativeOrderCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AlternativeOrderCreateIdentifierType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AlternativeOrderCreateSide.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AlternativeOrderCumulativeNotionalValue.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AlternativeOrderDistributionType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AlternativeOrderFilledQuantity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AlternativeOrderIdentifierType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AlternativeOrderNotionalValue.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AlternativeOrderOrderStatus.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AlternativeOrderQuantity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AlternativeOrderSide.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Amount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Amount1.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Amount2.java
@@ -2888,12 +3158,27 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AskMinimumQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AskQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Asset.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetBuyingPower.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetBuyingPowerAccountEquityAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetBuyingPowerAssetBuyingPowerMaxAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetBuyingPowerBuyingPowerAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetBuyingPowerDayTradeBuyingPowerAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetBuyingPowerMaxAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetBuyingPowerMaxPurchaseQuantity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetBuyingPowerPercentageRequirements.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetBuyingPowerPositionMarketValueAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetBuyingPowerRequirements.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetBuyingPowerSmaAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetBuyingPowerTotalExcessAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetBuyingPowerTotalRequirementsAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetCategory.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetCreateType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetEquityType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetExpirationDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetIssueDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetSpecific.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetTaxReportingStructure.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetTradability.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetTradingConfig.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetTradingConfigAssetType.java
@@ -2906,6 +3191,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AvailableEnrollment.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AvailableLiquidityAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AvailableRestriction.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AveragePrice.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BankAccount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BankAccountCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BankAccountCreateType.java
@@ -2961,7 +3247,9 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BeneficiaryEnrollmentMetadata.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BeneficiaryEnrollmentMetadataCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BeneficiaryEntityType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BeneficiaryPhoneNumber.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BeneficiaryRelationType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BeneficiaryShortCode.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BeneficiaryTaxIdType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BidAskPrice.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BidAskPricePrice.java
@@ -2989,6 +3277,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingTradeBrokerCapacity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingTradeIdentifierType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingTradeRouteType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingTradeSettlementDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingTradeSide.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingTradeSideModifier.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BookingTradeSpecialInstructions.java
@@ -3013,6 +3302,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelAchWithdrawalScheduleRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelBankRelationshipRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelCashJournalRequestCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelCashJournalScheduleRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelCheckWithdrawalScheduleRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelCreditRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelExecutionRequestCreate.java
@@ -3032,6 +3322,8 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelIctDepositRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelIctWithdrawalRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelInitiator.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelOptionInstructionRequestCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelOptionOrderRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelOrderRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelOrderRequestCreateCancelInitiator.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelPositionJournalRequestCreate.java
@@ -3091,6 +3383,26 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalRetirementDistributionPercentage.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalRetirementDistributionStateTaxWithholdingAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalRetirementDistributionType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalSchedule.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalScheduleAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalScheduleCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalScheduleEndDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalScheduleFederalTaxWithholding.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalSchedulePercentage.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalScheduleRetirementContribution.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalScheduleRetirementDistribution.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalScheduleRetirementDistributionAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalScheduleRetirementDistributionFederalTaxWithholdingAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalScheduleRetirementDistributionPercentage.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalScheduleRetirementDistributionType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalScheduleScheduleDetails.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalScheduleScheduleProperties.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalScheduleStartDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalScheduleState.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalScheduleStateTaxWithholding.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalScheduleTimeUnit.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalScheduleType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalScheduleUpdate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalState.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalStateState.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashJournalStateTaxWithholding.java
@@ -3098,6 +3410,9 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashRate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CatAccountHolderType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CatReporterInformation.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CatReporterInformationCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CatReporterInformationUpdate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CftcDocumentDeliveryPreference.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CftcOwnerType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckDeposit.java
@@ -3187,8 +3502,10 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Credit.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CreditType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CumulativeNotionalValue.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CumulativeNotionalValueDirection.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Currency.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CurrencyType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CurrentPrice.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CustodialEnrollmentMetadata.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CustodialEnrollmentMetadataCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CustodialEnrollmentMetadataCreateDividendReinvestmentPlan.java
@@ -3210,6 +3527,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Date.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DateCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DateUpdate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DayTrade.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DayTradeBuyingPowerAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DeactivateEnrollmentRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DeactivateEnrollmentRequestCreateEnrollmentType.java
@@ -3254,6 +3572,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Domicile.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DowJonesDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DowJonesDetails.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DownloadAlternativeInvestmentDocumentResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Drip.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Duration.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EddAccountEnrollmentMetadata.java
@@ -3340,7 +3659,6 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentLlcEnrollmentMetadataInitialDepositAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentLlcEnrollmentMetadataLowPricedSecurities.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentLlcEnrollmentMetadataLowPricedSecuritiesPercentage.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentLlcEnrollmentMetadataMoneyMarketFundSweep.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentLlcEnrollmentMetadataOtherAccounts.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentLlcEnrollmentMetadataPlannedActivity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentLlcEnrollmentMetadataPrimaryAccountActivityType.java
@@ -3397,6 +3715,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryCorporateActionGeneralInformation.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryDeliveryCorporateActionGeneralInformation.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryDepositType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryDistributionType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryEffectiveDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryExchangeCashRate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryExchangeCorporateActionGeneralInformation.java
@@ -3529,11 +3848,11 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EstateEnrollmentMetadata.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EstateEnrollmentMetadataCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EstateEnrollmentMetadataCreateDividendReinvestmentPlan.java
-  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EstateEnrollmentMetadataCreateMoneyMarketFundSweep.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EstimatedAccruedInterest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EstimatedGrossAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EstimatedGrossCreditAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EstimatedNetAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EstimatedValueDescriptor.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EventMessage.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Exchange.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Execution.java
@@ -3788,7 +4107,9 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/IraTraditionalEnrollmentMetadata.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/IrsFormType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/IssueDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/IssuePrice.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/IssueSize.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Issuer.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/JointCommunityPropertyEnrollmentMetadata.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/JointCommunityPropertyEnrollmentMetadataCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/JointCommunityPropertyEnrollmentMetadataCreateDividendReinvestmentPlan.java
@@ -3817,6 +4138,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LastAdjustedDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LastChangedDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LastCouponDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LastValuation.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LatLngCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LegalAddress.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LegalAddressVerified.java
@@ -3884,6 +4206,9 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListAchWithdrawalSchedulesResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListActivitiesResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListAgreementsResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListAlternativeInvestmentDocumentsResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListAlternativeInvestmentsResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListAlternativeOrdersResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListAssetTradingConfigsResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListAssetsResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListAvailableEnrollmentsResponse.java
@@ -3903,7 +4228,12 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListInvestigationsResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListLegalEntitiesResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListLegalNaturalPersonsResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListOptionInstructionsResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListPositionsResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListPreIpoCompaniesResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListPreIpoCompanyFundingRoundsResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListPreIpoCompanyNewsEventsResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListPreIpoCompanyResearchDocumentsResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListPushSubscriptionDeliveriesResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListPushSubscriptionsResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListScheduleSummariesResponse.java
@@ -3936,13 +4266,16 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MatchTypes.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Maturity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MaturityDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MaxPurchaseQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MaxSellQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Mechanism.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Merger.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Method.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MicroDepositAmounts.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MicroDepositAmountsCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MinimumInitialSubscriptionAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MinimumQuantity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MinimumSubsequentSubscriptionAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Money.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MoneyMarketFundSweep.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MutualFund.java
@@ -3970,6 +4303,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/NonCitizenResidencyCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/NonCitizenResidencyUpdate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/NonCitizenResidencyUpdateResidencyStatus.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/NonDayTrade.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/None.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/NotionalValue.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/NsccStatus.java
@@ -3982,6 +4316,45 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Option.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionDeliverable.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionDeliverableQuantity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionInstruction.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionInstructionCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionInstructionCreateIdentifierType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionInstructionCreateType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionInstructionIdentifierType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionInstructionQuantity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionInstructionState.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionInstructionType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderBrokerCapacity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderCancelRejectedReason.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderCreateBrokerCapacity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderCreateOrderType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderCreateSpecialReportingInstructions.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderCreateTimeInForce.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderCumulativeNotionalValue.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderLeg.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderLegAssetType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderLegCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderLegCreateAssetType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderLegCreateIdentifierType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderLegCreateSide.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderLegDirection.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderLegExecution.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderLegExecutionPrice.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderLegExecutionQuantity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderLegIdentifierType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderLegSide.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderLegSideModifier.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderLimitPrice.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderOrderDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderOrderRejectedReason.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderOrderStatus.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderOrderType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderPriceDirection.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderQuantity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderSpecialReportingInstructions.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderTimeInForce.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionRoot.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionRootTradability.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionType.java
@@ -4015,6 +4388,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OrderQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OrderRejectedReason.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OrderRightsOfAccumulationAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OrderSettlementTarget.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OrderSide.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OrderSpecialReportingInstructions.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OrderStatus.java
@@ -4034,6 +4408,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OtherSourcesOfWealth.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OtherSourcesOfWealthCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OtherSourcesOfWealthUpdate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OwnershipStructure.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OwnershipType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ParValue.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Party.java
@@ -4120,11 +4495,14 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PendingDebitDividendsAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PendingDebitInterestAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PendingDrip.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PendingInvestorAction.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PendingOutgoingAcat.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PendingWithdrawal.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PennyPilotIndicator.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PerShareFeeAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Percent.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Percentage.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PercentageRequirements.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PeriodStartDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Person.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PersonIdentification.java
@@ -4136,6 +4514,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PhoneNumberShortCodeUpdate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PhoneNumberUpdate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PhoneNumberVerified.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PhysicalAddress.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PlannedActivity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PlannedActivityCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Position.java
@@ -4154,6 +4533,14 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PostalAddress.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PostalAddressCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PostalAddressUpdate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PreIpoCompany.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PreIpoCompanyFundingRound.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PreIpoCompanyFundingRoundClosing.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PreIpoCompanyNewsEvent.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PreIpoCompanyNewsEventArticle.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PreIpoCompanyResearchDocument.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PreIpoCompanyResearchDocumentType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PreIpoCompanyType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PrevailingMarketPrice.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PreviousProcessDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PreviousYearDeadline.java
@@ -4164,7 +4551,9 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PriceAdjustmentPercent.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PriceAdjustmentRecord.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PriceAdjustmentType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PriceAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PriceAtIssuance.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PriceDirection.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PrimaryAccountActivityType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PriorYearEndAccountBalance.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ProcessDate.java
@@ -4172,6 +4561,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ProspectusDeliveryPreference.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ProvidedIdentityVerification.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ProxyDeliveryPreference.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PublishDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PushSubscription.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PushSubscriptionCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PushSubscriptionDelivery.java
@@ -4261,6 +4651,8 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RecipientBankBankIdCreateType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RecipientInstitution.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RecordDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RecordState.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RedemptionFrequency.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RedemptionFull.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RedemptionPartial.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RegistrationType.java
@@ -4284,6 +4676,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RelatedPepDetails.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RelatedPepDetailsCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RelatedProfile.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Relation.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RelationType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RemainingContributionAllowed.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RemainingDistributionRequired.java
@@ -4320,6 +4713,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RetrieveFixedIncomeMarksResponseAssetMark.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RetrieveFixedIncomeMarksResponseAssetMarkAccruedInterestAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RetrieveFixedIncomeMarksResponseAssetMarkIdentifierType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RetrievePendingInvestorActionsResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RetrieveQuoteRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RetrieveQuoteRequestCreateAssetType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RetrieveQuoteRequestCreateBrokerCapacity.java
@@ -4348,10 +4742,13 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SchedulePropertiesCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ScheduledRetirementContributionCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ScheduledRetirementContributionCreateType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SearchCashJournalSchedulesResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Security.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SelfieVerified.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SeriesDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ServiceAccountCreds.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SetAccountAccreditationTypeRequestCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SetAccountAccreditationTypeRequestCreateAccreditationType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SetExtraReportingDataRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SetExtraReportingDataResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SetExtraReportingDataResponseAssetType.java
@@ -4370,6 +4767,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SetExtraReportingDataResponseSide.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SetExtraReportingDataResponseSpecialReportingInstructions.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SetExtraReportingDataResponseTimeInForce.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SettleAlternativeOrderRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SettleDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Settled.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SettledCashAvailableToWithdraw.java
@@ -4403,10 +4801,13 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/StopPrice.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/StopPriceCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/StopPriceCreateType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Strategy.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/StrikeMultiplier.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/StrikePrice.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/StrikePriceMultiplier.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SubmitBasketRequestCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SubscriptionFrequency.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SubscriptionOrderProcess.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Subtype.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Sweep.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TaxAuthority.java
@@ -4419,6 +4820,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TaxProfileUpdateFederalTaxClassification.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TaxProfileUpdateIrsFormType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TaxProfileUpdateUsTinStatus.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TaxReportingStructure.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TaxWithholdingMetadata.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TaxWithholdingMetadataCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TaxpayerCertificationState.java
@@ -4432,6 +4834,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ToSide.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Token.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TotalExcessAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TotalFunding.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TotalNetWorthRangeUsd.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TotalRequirementsAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Trade.java
@@ -4468,6 +4871,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeCreateBrokerCapacity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeCreateIdentifierType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeCreateSide.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeCreateSideModifier.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradeValueMultiplier.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TradingExecutedPrice.java
@@ -4529,14 +4933,19 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TrustedContactPhoneNumber.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TrustedContactShortCode.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TrustedContactUpdate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TwelveMonthTrailingRevenue.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Type.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/UnadjustedAvailableCashToWithdrawAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/UnitSplit.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/UniversalFootnote.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Unrestricted.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/UpdatedBankAccountType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/UploadLink.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/UploadedDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/UsTinStatus.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ValuationFrequency.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ValuationMethod.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ValuationSource.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Value.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Venue.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/VerificationMethod.java
@@ -4628,6 +5037,12 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/errors/AuthException.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/errors/SDKError.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/errors/Status.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountAccreditationServiceGetAccountAccreditationRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountAccreditationServiceGetAccountAccreditationRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountAccreditationServiceGetAccountAccreditationResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountAccreditationServiceSetAccountAccreditationTypeRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountAccreditationServiceSetAccountAccreditationTypeRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountAccreditationServiceSetAccountAccreditationTypeResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountTransfersAcceptTransferRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountTransfersAcceptTransferRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountTransfersAcceptTransferResponse.java
@@ -4826,6 +5241,36 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AchWithdrawalsGetAchWithdrawalRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AchWithdrawalsGetAchWithdrawalRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AchWithdrawalsGetAchWithdrawalResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeInvestmentDocumentsDownloadAlternativeInvestmentDocumentRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeInvestmentDocumentsDownloadAlternativeInvestmentDocumentRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeInvestmentDocumentsDownloadAlternativeInvestmentDocumentResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeInvestmentDocumentsGetAlternativeInvestmentDocumentRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeInvestmentDocumentsGetAlternativeInvestmentDocumentRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeInvestmentDocumentsGetAlternativeInvestmentDocumentResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeInvestmentDocumentsListAlternativeInvestmentDocumentsRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeInvestmentDocumentsListAlternativeInvestmentDocumentsRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeInvestmentDocumentsListAlternativeInvestmentDocumentsResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeInvestmentsGetAlternativeInvestmentRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeInvestmentsGetAlternativeInvestmentRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeInvestmentsGetAlternativeInvestmentResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeInvestmentsListAlternativeInvestmentsRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeInvestmentsListAlternativeInvestmentsRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeInvestmentsListAlternativeInvestmentsResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeOrdersCreateAlternativeOrderRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeOrdersCreateAlternativeOrderRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeOrdersCreateAlternativeOrderResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeOrdersGetAlternativeOrderRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeOrdersGetAlternativeOrderRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeOrdersGetAlternativeOrderResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeOrdersListAlternativeOrdersRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeOrdersListAlternativeOrdersRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeOrdersListAlternativeOrdersResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeOrdersRetrievePendingInvestorActionsRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeOrdersRetrievePendingInvestorActionsRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeOrdersRetrievePendingInvestorActionsResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeOrdersSettleAlternativeOrderRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeOrdersSettleAlternativeOrderRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AlternativeOrdersSettleAlternativeOrderResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AssetTradingConfigServiceGetAssetTradingConfigRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AssetTradingConfigServiceGetAssetTradingConfigRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AssetTradingConfigServiceGetAssetTradingConfigResponse.java
@@ -4944,6 +5389,20 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashBalancesCalculateCashBalanceRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashBalancesCalculateCashBalanceRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashBalancesCalculateCashBalanceResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashJournalSchedulesCancelCashJournalScheduleRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashJournalSchedulesCancelCashJournalScheduleRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashJournalSchedulesCancelCashJournalScheduleResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashJournalSchedulesCreateCashJournalScheduleRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashJournalSchedulesCreateCashJournalScheduleResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashJournalSchedulesGetCashJournalScheduleRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashJournalSchedulesGetCashJournalScheduleRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashJournalSchedulesGetCashJournalScheduleResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashJournalSchedulesSearchCashJournalSchedulesRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashJournalSchedulesSearchCashJournalSchedulesRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashJournalSchedulesSearchCashJournalSchedulesResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashJournalSchedulesUpdateCashJournalScheduleRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashJournalSchedulesUpdateCashJournalScheduleRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashJournalSchedulesUpdateCashJournalScheduleResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashJournalsCancelCashJournalRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashJournalsCancelCashJournalRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CashJournalsCancelCashJournalResponse.java
@@ -4997,6 +5456,18 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CustomerIdentificationResultServiceGetCustomerIdentificationRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CustomerIdentificationResultServiceGetCustomerIdentificationRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CustomerIdentificationResultServiceGetCustomerIdentificationResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/ExerciseServiceCancelOptionInstructionRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/ExerciseServiceCancelOptionInstructionRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/ExerciseServiceCancelOptionInstructionResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/ExerciseServiceCreateOptionInstructionRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/ExerciseServiceCreateOptionInstructionRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/ExerciseServiceCreateOptionInstructionResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/ExerciseServiceGetOptionInstructionRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/ExerciseServiceGetOptionInstructionRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/ExerciseServiceGetOptionInstructionResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/ExerciseServiceListOptionInstructionsRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/ExerciseServiceListOptionInstructionsRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/ExerciseServiceListOptionInstructionsResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/FeesCancelFeeRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/FeesCancelFeeRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/FeesCancelFeeResponse.java
@@ -5077,10 +5548,22 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/LedgerListPositionsRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/LedgerListPositionsRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/LedgerListPositionsResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/MarginsRealTimeGetAssetBuyingPowerRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/MarginsRealTimeGetAssetBuyingPowerRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/MarginsRealTimeGetAssetBuyingPowerResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/MarginsRealTimeGetBuyingPowerRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/MarginsRealTimeGetBuyingPowerRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/MarginsRealTimeGetBuyingPowerResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/Mechanism.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OptionOrderServiceCancelOptionOrderRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OptionOrderServiceCancelOptionOrderRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OptionOrderServiceCancelOptionOrderResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OptionOrderServiceCreateOptionOrderRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OptionOrderServiceCreateOptionOrderRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OptionOrderServiceCreateOptionOrderResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OptionOrderServiceGetOptionOrderRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OptionOrderServiceGetOptionOrderRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OptionOrderServiceGetOptionOrderResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OrderPriceServicePreviewOrderCostRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OrderPriceServicePreviewOrderCostRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OrderPriceServicePreviewOrderCostResponse.java
@@ -5119,6 +5602,24 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PositionJournalsGetPositionJournalRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PositionJournalsGetPositionJournalRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PositionJournalsGetPositionJournalResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PreIpoCompaniesGetPreIpoCompanyRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PreIpoCompaniesGetPreIpoCompanyRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PreIpoCompaniesGetPreIpoCompanyResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PreIpoCompaniesListPreIpoCompaniesRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PreIpoCompaniesListPreIpoCompaniesRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PreIpoCompaniesListPreIpoCompaniesResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PreIpoCompanyFundingRoundsGetPreIpoCompanyFundingRoundRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PreIpoCompanyFundingRoundsGetPreIpoCompanyFundingRoundRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PreIpoCompanyFundingRoundsGetPreIpoCompanyFundingRoundResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PreIpoCompanyFundingRoundsListPreIpoCompanyFundingRoundsRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PreIpoCompanyFundingRoundsListPreIpoCompanyFundingRoundsRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PreIpoCompanyFundingRoundsListPreIpoCompanyFundingRoundsResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PreIpoCompanyNewsEventsListPreIpoCompanyNewsEventsRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PreIpoCompanyNewsEventsListPreIpoCompanyNewsEventsRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PreIpoCompanyNewsEventsListPreIpoCompanyNewsEventsResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PreIpoCompanyResearchDocumentsListPreIpoCompanyResearchDocumentsRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PreIpoCompanyResearchDocumentsListPreIpoCompanyResearchDocumentsRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/PreIpoCompanyResearchDocumentsListPreIpoCompanyResearchDocumentsResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/ProgramDateFilterProgram.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/QueryParamView.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/ReaderGetEventMessageRequest.java
@@ -5214,6 +5715,8 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/WireWithdrawalsGetWireWithdrawalRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/WireWithdrawalsGetWireWithdrawalRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/WireWithdrawalsGetWireWithdrawalResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountAccreditationServiceGetAccountAccreditation.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountAccreditationServiceSetAccountAccreditationType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountTransfersAcceptTransfer.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountTransfersCreateTransfer.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountTransfersGetTransfer.java
@@ -5281,6 +5784,16 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchWithdrawalsForceRejectAchWithdrawal.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchWithdrawalsForceReturnAchWithdrawal.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AchWithdrawalsGetAchWithdrawal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AlternativeInvestmentDocumentsDownloadAlternativeInvestmentDocument.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AlternativeInvestmentDocumentsGetAlternativeInvestmentDocument.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AlternativeInvestmentDocumentsListAlternativeInvestmentDocuments.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AlternativeInvestmentsGetAlternativeInvestment.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AlternativeInvestmentsListAlternativeInvestments.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AlternativeOrdersCreateAlternativeOrder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AlternativeOrdersGetAlternativeOrder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AlternativeOrdersListAlternativeOrders.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AlternativeOrdersRetrievePendingInvestorActions.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AlternativeOrdersSettleAlternativeOrder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AssetTradingConfigServiceGetAssetTradingConfig.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AssetTradingConfigServiceListAssetTradingConfigs.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AssetsGetAsset.java
@@ -5320,6 +5833,11 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BookingRebookTrade.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/BookingRebookTradeAllocation.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CashBalancesCalculateCashBalance.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CashJournalSchedulesCancelCashJournalSchedule.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CashJournalSchedulesCreateCashJournalSchedule.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CashJournalSchedulesGetCashJournalSchedule.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CashJournalSchedulesSearchCashJournalSchedules.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CashJournalSchedulesUpdateCashJournalSchedule.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CashJournalsCancelCashJournal.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CashJournalsCheckPartyType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CashJournalsCreateCashJournal.java
@@ -5338,6 +5856,10 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CreditsCreateCredit.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CreditsGetCredit.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CustomerIdentificationResultServiceGetCustomerIdentification.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/ExerciseServiceCancelOptionInstruction.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/ExerciseServiceCreateOptionInstruction.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/ExerciseServiceGetOptionInstruction.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/ExerciseServiceListOptionInstructions.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/FeesCancelFee.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/FeesCreateFee.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/FeesGetFee.java
@@ -5365,8 +5887,12 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/LedgerListActivities.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/LedgerListEntries.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/LedgerListPositions.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/MarginsRealTimeGetAssetBuyingPower.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/MarginsRealTimeGetBuyingPower.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/Operations.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OptionOrderServiceCancelOptionOrder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OptionOrderServiceCreateOptionOrder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OptionOrderServiceGetOptionOrder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OrderPriceServicePreviewOrderCost.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OrderPriceServiceRetrieveFixedIncomeMarks.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OrderPriceServiceRetrieveQuote.java
@@ -5380,6 +5906,12 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/PositionJournalsForceApprovePositionJournal.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/PositionJournalsForceRejectPositionJournal.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/PositionJournalsGetPositionJournal.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/PreIpoCompaniesGetPreIpoCompany.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/PreIpoCompaniesListPreIpoCompanies.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/PreIpoCompanyFundingRoundsGetPreIpoCompanyFundingRound.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/PreIpoCompanyFundingRoundsListPreIpoCompanyFundingRounds.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/PreIpoCompanyNewsEventsListPreIpoCompanyNewsEvents.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/PreIpoCompanyResearchDocumentsListPreIpoCompanyResearchDocuments.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/ReaderGetEventMessage.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/ReaderListEventMessages.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/RetirementConstraintsListContributionSummaries.java
@@ -5470,6 +6002,10 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/pagination/ProgressTrackerStrategy.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/pagination/ResultsPageTracker.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/utils/reactive/ReactiveUtils.java
+  - src/test/java/com/apexfintechsolutions/ascendsdk/AlternativeAccountAccreditationTests.java
+  - src/test/java/com/apexfintechsolutions/ascendsdk/AlternativeInvestmentDocumentsTests.java
+  - src/test/java/com/apexfintechsolutions/ascendsdk/AlternativeInvestmentsTests.java
+  - src/test/java/com/apexfintechsolutions/ascendsdk/AlternativeOrdersTests.java
   - src/test/java/com/apexfintechsolutions/ascendsdk/AssetTradingConfigTests.java
   - src/test/java/com/apexfintechsolutions/ascendsdk/AssetsTests.java
   - src/test/java/com/apexfintechsolutions/ascendsdk/ChecksTests.java
@@ -5478,6 +6014,10 @@ generatedFiles:
   - src/test/java/com/apexfintechsolutions/ascendsdk/MarginsTests.java
   - src/test/java/com/apexfintechsolutions/ascendsdk/OrderTests.java
   - src/test/java/com/apexfintechsolutions/ascendsdk/PersonManagementTests.java
+  - src/test/java/com/apexfintechsolutions/ascendsdk/PreIpoCompaniesTests.java
+  - src/test/java/com/apexfintechsolutions/ascendsdk/PreIpoFundingRoundsTests.java
+  - src/test/java/com/apexfintechsolutions/ascendsdk/PreIpoNewsEventsTests.java
+  - src/test/java/com/apexfintechsolutions/ascendsdk/PreIpoResearchDocumentsTests.java
   - src/test/java/com/apexfintechsolutions/ascendsdk/SubscriberTests.java
   - src/test/java/com/apexfintechsolutions/ascendsdk/TestSimulationTests.java
 examples:
@@ -7451,7 +7991,7 @@ examples:
         path:
           account_id: "<id>"
       requestBody:
-        application/json: {"asset_type": "FIXED_INCOME", "identifier": "37833100", "identifier_type": "CUSIP", "limit_price": {"price": {}, "type": "PRICE_PER_UNIT"}, "parent": "<value>", "quantity": {}}
+        application/json: {"asset_type": "FIXED_INCOME", "identifier": "037833100", "identifier_type": "CUSIP", "limit_price": {"price": {}, "type": "PRICE_PER_UNIT"}, "parent": "<value>", "quantity": {}}
       responses:
         "200":
           application/json: {}
@@ -7467,7 +8007,7 @@ examples:
         path:
           account_id: "<id>"
       requestBody:
-        application/json: {"asset_type": "FIXED_INCOME", "identifier": "37833100", "identifier_type": "CUSIP", "parent": "<value>"}
+        application/json: {"asset_type": "FIXED_INCOME", "identifier": "037833100", "identifier_type": "CUSIP", "parent": "<value>"}
       responses:
         "200":
           application/json: {}
@@ -8033,7 +8573,7 @@ examples:
       parameters:
         path:
           correspondent_id: "01HBRQ5BW6ZAY4BNWP4GWRD80X"
-          asset_id: "[null]"
+          asset_id: "-"
       responses:
         "200":
           application/json: {}
@@ -8300,6 +8840,440 @@ examples:
           application/json: {}
         default:
           application/json: {}
+  CashJournalSchedules_CreateCashJournalSchedule:
+    speakeasy-default-cash-journal-schedules-create-cash-journal-schedule:
+      requestBody:
+        application/json: {"destination_account": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D5Z", "schedule_details": {"client_schedule_id": "ABC-123", "schedule_properties": {"start_date": {}, "time_unit": "MONTH", "unit_multiplier": 1}}, "source_account": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  CashJournalSchedules_GetCashJournalSchedule:
+    speakeasy-default-cash-journal-schedules-get-cash-journal-schedule:
+      parameters:
+        path:
+          cashJournalSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  CashJournalSchedules_UpdateCashJournalSchedule:
+    speakeasy-default-cash-journal-schedules-update-cash-journal-schedule:
+      parameters:
+        path:
+          cashJournalSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  CashJournalSchedules_CancelCashJournalSchedule:
+    speakeasy-default-cash-journal-schedules-cancel-cash-journal-schedule:
+      parameters:
+        path:
+          cashJournalSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
+      requestBody:
+        application/json: {"name": "cashJournalSchedules/40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  CashJournalSchedules_SearchCashJournalSchedules:
+    speakeasy-default-cash-journal-schedules-search-cash-journal-schedules:
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  OptionOrderService_CreateOptionOrder:
+    speakeasy-default-option-order-service-create-option-order:
+      parameters:
+        path:
+          account_id: "01HBRQ5BW6ZAY4BNWP4GWRD80X"
+      requestBody:
+        application/json: {"broker_capacity": "AGENCY", "client_order_id": "a6d5258b-6b23-478a-8145-98e79d60427a", "currency_code": "USD", "legs": [], "limit_price": {}, "order_date": {}, "order_type": "LIMIT", "price_direction": "CREDIT", "quantity": {}, "time_in_force": "DAY"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  OptionOrderService_GetOptionOrder:
+    speakeasy-default-option-order-service-get-option-order:
+      parameters:
+        path:
+          account_id: "01HBRQ5BW6ZAY4BNWP4GWRD80X"
+          optionOrder_id: "ebb0c9b5-2c74-45c9-a4ab-40596b778706"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  OptionOrderService_CancelOptionOrder:
+    speakeasy-default-option-order-service-cancel-option-order:
+      parameters:
+        path:
+          account_id: "01HBRQ5BW6ZAY4BNWP4GWRD80X"
+          optionOrder_id: "ebb0c9b5-2c74-45c9-a4ab-40596b778706"
+      requestBody:
+        application/json: {"name": "accounts/01HBRQ5BW6ZAY4BNWP4GWRD80X/optionOrders/ebb0c9b5-2c74-45c9-a4ab-40596b778706"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  AccountAccreditationService_GetAccountAccreditation:
+    speakeasy-default-account-accreditation-service-get-account-accreditation:
+      parameters:
+        path:
+          account_id: "01JR8YQT40WAQT8S95ZQGS1QN0"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  AccountAccreditationService_SetAccountAccreditationType:
+    speakeasy-default-account-accreditation-service-set-account-accreditation-type:
+      parameters:
+        path:
+          account_id: "01JR8YQT40WAQT8S95ZQGS1QN0"
+      requestBody:
+        application/json: {"accreditation_type": "NET_WORTH_GT_1M", "name": "accounts/01JR8YQT40WAQT8S95ZQGS1QN0/accreditation"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  AlternativeOrders_CreateAlternativeOrder:
+    speakeasy-default-alternative-orders-create-alternative-order:
+      parameters:
+        path:
+          account_id: "01JR8YQT40WAQT8S95ZQGS1QN0"
+      requestBody:
+        application/json: {"client_order_id": "f5074670-1b25-439f-9b5c-702027660800", "identifier": "8395", "identifier_type": "ASSET_ID", "side": "BUY"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  AlternativeOrders_ListAlternativeOrders:
+    speakeasy-default-alternative-orders-list-alternative-orders:
+      parameters:
+        path:
+          account_id: "01JR8YQT40WAQT8S95ZQGS1QN0"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  AlternativeOrders_GetAlternativeOrder:
+    speakeasy-default-alternative-orders-get-alternative-order:
+      parameters:
+        path:
+          account_id: "01JR8YQT40WAQT8S95ZQGS1QN0"
+          alternativeOrder_id: "01H5TSDAD9MQ98B8KF36J3Q8P9"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  AlternativeOrders_RetrievePendingInvestorActions:
+    speakeasy-default-alternative-orders-retrieve-pending-investor-actions:
+      parameters:
+        path:
+          account_id: "01JR8YQT40WAQT8S95ZQGS1QN0"
+          alternativeOrder_id: "01H5TSDAD9MQ98B8KF36J3Q8P9"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  AlternativeOrders_SettleAlternativeOrder:
+    speakeasy-default-alternative-orders-settle-alternative-order:
+      parameters:
+        path:
+          account_id: "01JR8YQT40WAQT8S95ZQGS1QN0"
+          alternativeOrder_id: "01H5TSDAD9MQ98B8KF36J3Q8P9"
+      requestBody:
+        application/json: {"name": "accounts/01JR8YQT40WAQT8S95ZQGS1QN0/alternativeOrders/01H5TSDAD9MQ98B8KF36J3Q8P9"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  AlternativeInvestments_ListAlternativeInvestments:
+    speakeasy-default-alternative-investments-list-alternative-investments:
+      parameters:
+        path:
+          asset_id: "-"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  AlternativeInvestments_GetAlternativeInvestment:
+    speakeasy-default-alternative-investments-get-alternative-investment:
+      parameters:
+        path:
+          asset_id: "123"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  AlternativeInvestmentDocuments_ListAlternativeInvestmentDocuments:
+    speakeasy-default-alternative-investment-documents-list-alternative-investment-documents:
+      parameters:
+        path:
+          asset_id: "123"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  AlternativeInvestmentDocuments_GetAlternativeInvestmentDocument:
+    speakeasy-default-alternative-investment-documents-get-alternative-investment-document:
+      parameters:
+        path:
+          asset_id: "123"
+          alternativeInvestmentDocument_id: "01H7YH8QKZJ8V4Q2X8F4G6JQ2B"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  AlternativeInvestmentDocuments_DownloadAlternativeInvestmentDocument:
+    speakeasy-default-alternative-investment-documents-download-alternative-investment-document:
+      parameters:
+        path:
+          asset_id: "123"
+          alternativeInvestmentDocument_id: "01H7YH8QKZJ8V4Q2X8F4G6JQ2B"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  PreIpoCompanies_ListPreIpoCompanies:
+    speakeasy-default-pre-ipo-companies-list-pre-ipo-companies:
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  PreIpoCompanies_GetPreIpoCompany:
+    speakeasy-default-pre-ipo-companies-get-pre-ipo-company:
+      parameters:
+        path:
+          preIpoCompany_id: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  PreIpoCompanyNewsEvents_ListPreIpoCompanyNewsEvents:
+    speakeasy-default-pre-ipo-company-news-events-list-pre-ipo-company-news-events:
+      parameters:
+        path:
+          preIpoCompany_id: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  PreIpoCompanyResearchDocuments_ListPreIpoCompanyResearchDocuments:
+    speakeasy-default-pre-ipo-company-research-documents-list-pre-ipo-company-research-documents:
+      parameters:
+        path:
+          preIpoCompany_id: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  PreIpoCompanyFundingRounds_ListPreIpoCompanyFundingRounds:
+    speakeasy-default-pre-ipo-company-funding-rounds-list-pre-ipo-company-funding-rounds:
+      parameters:
+        path:
+          preIpoCompany_id: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  PreIpoCompanyFundingRounds_GetPreIpoCompanyFundingRound:
+    speakeasy-default-pre-ipo-company-funding-rounds-get-pre-ipo-company-funding-round:
+      parameters:
+        path:
+          preIpoCompany_id: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+          fundingRound_id: "5f29def7-445a-46e1-b0af-e475c5481820"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  MarginsRealTime_GetAssetBuyingPower:
+    speakeasy-default-margins-real-time-get-asset-buying-power:
+      parameters:
+        path:
+          account_id: "01HMS9S15AKBHBD8GPW33P2PMH"
+          asset_id: "67587"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  ExerciseService_CreateOptionInstruction:
+    speakeasy-default-exercise-service-create-option-instruction:
+      parameters:
+        path:
+          account_id: "ACC123456"
+          asset_id: "12345"
+      requestBody:
+        application/json: {"account_id": "01JTNGZM8PWRR6MHBCC6TEG9HE", "identifier": "AAPL250620P00090000", "identifier_type": "OSI", "quantity": {}, "type": "DO_NOT_EXERCISE"}
+      responses:
+        "200":
+          application/json: {}
+        default:
+          application/json: {}
+  ExerciseService_ListOptionInstructions:
+    speakeasy-default-exercise-service-list-option-instructions:
+      parameters:
+        path:
+          account_id: "ACC123456"
+          asset_id: "12345"
+      responses:
+        "200":
+          application/json: {}
+        default:
+          application/json: {}
+  ExerciseService_GetOptionInstruction:
+    speakeasy-default-exercise-service-get-option-instruction:
+      parameters:
+        path:
+          account_id: "ACC123456"
+          asset_id: "12345"
+          instruction_id: "abc12345"
+      responses:
+        "200":
+          application/json: {}
+        default:
+          application/json: {}
+  ExerciseService_CancelOptionInstruction:
+    speakeasy-default-exercise-service-cancel-option-instruction:
+      parameters:
+        path:
+          account_id: "ACC123456"
+          asset_id: "12345"
+          instruction_id: "abc12345"
+      requestBody:
+        application/json: {"name": "accounts/ACC123456/assets/12345/instructions/abc12345"}
+      responses:
+        "200":
+          application/json: {}
+        default:
+          application/json: {}
 examplesVersion: 1.0.2
 generatedTests:
   Accounts_ListLegalNaturalPersons: "2025-08-22T19:32:39Z"
@@ -8319,3 +9293,21 @@ generatedTests:
   AssetTradingConfigService_GetAssetTradingConfig: "2025-10-06T21:33:08Z"
   AssetTradingConfigService_ListAssetTradingConfigs: "2025-10-06T21:33:08Z"
   OrderService_ListCorrespondentOrders: "2025-10-09T21:29:17Z"
+  AccountAccreditationService_GetAccountAccreditation: "2026-02-27T12:14:36Z"
+  AccountAccreditationService_SetAccountAccreditationType: "2026-02-27T12:14:36Z"
+  AlternativeOrders_CreateAlternativeOrder: "2026-02-27T12:14:36Z"
+  AlternativeOrders_ListAlternativeOrders: "2026-02-27T12:14:36Z"
+  AlternativeOrders_GetAlternativeOrder: "2026-02-27T12:14:36Z"
+  AlternativeOrders_RetrievePendingInvestorActions: "2026-02-27T12:14:36Z"
+  AlternativeInvestments_ListAlternativeInvestments: "2026-02-27T12:14:36Z"
+  AlternativeInvestments_GetAlternativeInvestment: "2026-02-27T12:14:36Z"
+  AlternativeInvestmentDocuments_ListAlternativeInvestmentDocuments: "2026-02-27T12:14:36Z"
+  AlternativeInvestmentDocuments_GetAlternativeInvestmentDocument: "2026-02-27T12:14:36Z"
+  AlternativeInvestmentDocuments_DownloadAlternativeInvestmentDocument: "2026-02-27T12:14:36Z"
+  AlternativeOrders_SettleAlternativeOrder: "2026-02-27T12:14:36Z"
+  PreIpoCompanies_ListPreIpoCompanies: "2026-02-27T12:14:36Z"
+  PreIpoCompanies_GetPreIpoCompany: "2026-02-27T12:14:36Z"
+  PreIpoCompanyNewsEvents_ListPreIpoCompanyNewsEvents: "2026-02-27T12:14:36Z"
+  PreIpoCompanyResearchDocuments_ListPreIpoCompanyResearchDocuments: "2026-02-27T12:14:36Z"
+  PreIpoCompanyFundingRounds_ListPreIpoCompanyFundingRounds: "2026-02-27T12:14:36Z"
+  PreIpoCompanyFundingRounds_GetPreIpoCompanyFundingRound: "2026-02-27T12:14:36Z"

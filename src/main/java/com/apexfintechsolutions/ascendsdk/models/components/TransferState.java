@@ -17,7 +17,7 @@ import org.openapitools.jackson.nullable.JsonNullable;
 /**
  * TransferState
  *
- * <p>Deprecated, use state instead
+ * <p>Deprecated: use state instead
  *
  * @deprecated class: This will be removed in a future release, please migrate away from it as soon
  *     as possible.

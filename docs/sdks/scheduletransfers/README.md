@@ -16,6 +16,11 @@
 * [getAchWithdrawalSchedule](#getachwithdrawalschedule) - Get ACH Withdrawal Schedule
 * [updateAchWithdrawalSchedule](#updateachwithdrawalschedule) - Update ACH Withdrawal Schedule
 * [cancelAchWithdrawalSchedule](#cancelachwithdrawalschedule) - Cancel ACH Withdrawal Schedule
+* [createCashJournalSchedule](#createcashjournalschedule) - Create Cash Journal Schedule
+* [getCashJournalSchedule](#getcashjournalschedule) - Get Cash Journal Schedule
+* [updateCashJournalSchedule](#updatecashjournalschedule) - Update Cash Journal Schedule
+* [cancelCashJournalSchedule](#cancelcashjournalschedule) - Cancel Cash Journal Schedule
+* [searchCashJournalSchedules](#searchcashjournalschedules) - Search Cash Journal Schedules
 * [createCheckWithdrawalSchedule](#createcheckwithdrawalschedule) - Create Check Withdrawal Schedule
 * [listCheckWithdrawalSchedules](#listcheckwithdrawalschedules) - List Check Withdrawal Schedules
 * [getCheckWithdrawalSchedule](#getcheckwithdrawalschedule) - Get Check Withdrawal Schedule
@@ -765,6 +770,340 @@ public class Application {
 | Error Type             | Status Code            | Content Type           |
 | ---------------------- | ---------------------- | ---------------------- |
 | models/errors/Status   | 400, 403, 404          | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## createCashJournalSchedule
+
+Creates a Cash Journal transfer schedule
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="CashJournalSchedules_CreateCashJournalSchedule" method="post" path="/transfers/v1/cashJournalSchedules" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalSchedulesCreateCashJournalScheduleResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        CashJournalScheduleCreate req = CashJournalScheduleCreate.builder()
+                .destinationAccount("accounts/01H8FB90ZRRFWXB4XC2JPJ1D5Z")
+                .scheduleDetails(WithdrawalScheduleDetailsCreate.builder()
+                    .clientScheduleId("ABC-123")
+                    .scheduleProperties(SchedulePropertiesCreate.builder()
+                        .startDate(DateCreate.builder()
+                            .build())
+                        .timeUnit(TimeUnit.MONTH)
+                        .unitMultiplier(1)
+                        .build())
+                    .build())
+                .sourceAccount("accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y")
+                .build();
+
+        CashJournalSchedulesCreateCashJournalScheduleResponse res = sdk.scheduleTransfers().createCashJournalSchedule()
+                .request(req)
+                .call();
+
+        if (res.cashJournalSchedule().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `request`                                                                     | [CashJournalScheduleCreate](../../models/shared/CashJournalScheduleCreate.md) | :heavy_check_mark:                                                            | The request object to use for the request.                                    |
+
+### Response
+
+**[CashJournalSchedulesCreateCashJournalScheduleResponse](../../models/operations/CashJournalSchedulesCreateCashJournalScheduleResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403, 409          | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## getCashJournalSchedule
+
+Gets a Cash Journal transfer schedule
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="CashJournalSchedules_GetCashJournalSchedule" method="get" path="/transfers/v1/cashJournalSchedules/{cashJournalSchedule_id}" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalSchedulesGetCashJournalScheduleResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        CashJournalSchedulesGetCashJournalScheduleResponse res = sdk.scheduleTransfers().getCashJournalSchedule()
+                .cashJournalScheduleId("40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1")
+                .call();
+
+        if (res.cashJournalSchedule().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                            | Type                                 | Required                             | Description                          | Example                              |
+| ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
+| `cashJournalScheduleId`              | *String*                             | :heavy_check_mark:                   | The cashJournalSchedule id.          | 40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1 |
+
+### Response
+
+**[CashJournalSchedulesGetCashJournalScheduleResponse](../../models/operations/CashJournalSchedulesGetCashJournalScheduleResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403, 404          | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## updateCashJournalSchedule
+
+Updates the amount of a Cash Journal transfer schedule
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="CashJournalSchedules_UpdateCashJournalSchedule" method="patch" path="/transfers/v1/cashJournalSchedules/{cashJournalSchedule_id}" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalSchedulesUpdateCashJournalScheduleResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        CashJournalSchedulesUpdateCashJournalScheduleResponse res = sdk.scheduleTransfers().updateCashJournalSchedule()
+                .cashJournalScheduleId("40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1")
+                .updateMask("[object Object]")
+                .cashJournalScheduleUpdate(CashJournalScheduleUpdate.builder()
+                    .build())
+                .call();
+
+        if (res.cashJournalSchedule().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                 | Type                                                                                                                      | Required                                                                                                                  | Description                                                                                                               | Example                                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `cashJournalScheduleId`                                                                                                   | *String*                                                                                                                  | :heavy_check_mark:                                                                                                        | The cashJournalSchedule id.                                                                                               | 40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1                                                                                      |
+| `updateMask`                                                                                                              | *Optional\<String>*                                                                                                       | :heavy_minus_sign:                                                                                                        | A field mask representing the update. Note: only the 'schedule_details.amount' field of a schedule is currently updatable | {<br/>"update_mask": "schedule_details.amount"<br/>}                                                                      |
+| `cashJournalScheduleUpdate`                                                                                               | [CashJournalScheduleUpdate](../../models/components/CashJournalScheduleUpdate.md)                                         | :heavy_check_mark:                                                                                                        | N/A                                                                                                                       |                                                                                                                           |
+
+### Response
+
+**[CashJournalSchedulesUpdateCashJournalScheduleResponse](../../models/operations/CashJournalSchedulesUpdateCashJournalScheduleResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403, 404          | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## cancelCashJournalSchedule
+
+Cancels a Cash Journal transfer schedule
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="CashJournalSchedules_CancelCashJournalSchedule" method="post" path="/transfers/v1/cashJournalSchedules/{cashJournalSchedule_id}:cancel" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalSchedulesCancelCashJournalScheduleResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        CashJournalSchedulesCancelCashJournalScheduleResponse res = sdk.scheduleTransfers().cancelCashJournalSchedule()
+                .cashJournalScheduleId("40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1")
+                .cancelCashJournalScheduleRequestCreate(CancelCashJournalScheduleRequestCreate.builder()
+                    .name("cashJournalSchedules/40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1")
+                    .build())
+                .call();
+
+        if (res.cashJournalSchedule().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 | Example                                                                                                     |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `cashJournalScheduleId`                                                                                     | *String*                                                                                                    | :heavy_check_mark:                                                                                          | The cashJournalSchedule id.                                                                                 | 40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1                                                                        |
+| `cancelCashJournalScheduleRequestCreate`                                                                    | [CancelCashJournalScheduleRequestCreate](../../models/components/CancelCashJournalScheduleRequestCreate.md) | :heavy_check_mark:                                                                                          | N/A                                                                                                         |                                                                                                             |
+
+### Response
+
+**[CashJournalSchedulesCancelCashJournalScheduleResponse](../../models/operations/CashJournalSchedulesCancelCashJournalScheduleResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403, 404          | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## searchCashJournalSchedules
+
+Search Cash Journal Schedules visible to the calling service account using the specified search parameters
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="CashJournalSchedules_SearchCashJournalSchedules" method="get" path="/transfers/v1/cashJournalSchedules:search" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.Security;
+import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalSchedulesSearchCashJournalSchedulesRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.CashJournalSchedulesSearchCashJournalSchedulesResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        CashJournalSchedulesSearchCashJournalSchedulesRequest req = CashJournalSchedulesSearchCashJournalSchedulesRequest.builder()
+                .sourceAccount("accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y")
+                .destinationAccount("accounts/01H8FB90ZRRFWXB4XC2JPJ1D5Z")
+                .filter("state == 'ACTIVE' && start_date > '2024-04-05' && end_date < '2024-08-10'")
+                .pageSize(100)
+                .pageToken("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4")
+                .build();
+
+        CashJournalSchedulesSearchCashJournalSchedulesResponse res = sdk.scheduleTransfers().searchCashJournalSchedules()
+                .request(req)
+                .call();
+
+        if (res.searchCashJournalSchedulesResponse().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                 | [CashJournalSchedulesSearchCashJournalSchedulesRequest](../../models/operations/CashJournalSchedulesSearchCashJournalSchedulesRequest.md) | :heavy_check_mark:                                                                                                                        | The request object to use for the request.                                                                                                |
+
+### Response
+
+**[CashJournalSchedulesSearchCashJournalSchedulesResponse](../../models/operations/CashJournalSchedulesSearchCashJournalSchedulesResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403               | application/json       |
 | models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
 
 ## createCheckWithdrawalSchedule

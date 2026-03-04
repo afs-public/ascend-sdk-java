@@ -102,6 +102,8 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
           new DeactivateEnrollmentRequestCreateEnrollmentType("REGISTRATION_INDIVIDUAL_FOREIGN");
   public static final DeactivateEnrollmentRequestCreateEnrollmentType REGISTRATION_CUSTODIAL =
       new DeactivateEnrollmentRequestCreateEnrollmentType("REGISTRATION_CUSTODIAL");
+  public static final DeactivateEnrollmentRequestCreateEnrollmentType REG_T_MARGIN =
+      new DeactivateEnrollmentRequestCreateEnrollmentType("REG_T_MARGIN");
   public static final DeactivateEnrollmentRequestCreateEnrollmentType VIRTUAL_ACCOUNT_NUMBER =
       new DeactivateEnrollmentRequestCreateEnrollmentType("VIRTUAL_ACCOUNT_NUMBER");
 
@@ -200,6 +202,7 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
     map.put("REGISTRATION_IRA_BENEFICIARY_ROTH", REGISTRATION_IRA_BENEFICIARY_ROTH);
     map.put("REGISTRATION_INDIVIDUAL_FOREIGN", REGISTRATION_INDIVIDUAL_FOREIGN);
     map.put("REGISTRATION_CUSTODIAL", REGISTRATION_CUSTODIAL);
+    map.put("REG_T_MARGIN", REG_T_MARGIN);
     map.put("VIRTUAL_ACCOUNT_NUMBER", VIRTUAL_ACCOUNT_NUMBER);
     return map;
   }
@@ -276,6 +279,7 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
     map.put(
         "REGISTRATION_CUSTODIAL",
         DeactivateEnrollmentRequestCreateEnrollmentTypeEnum.REGISTRATION_CUSTODIAL);
+    map.put("REG_T_MARGIN", DeactivateEnrollmentRequestCreateEnrollmentTypeEnum.REG_T_MARGIN);
     map.put(
         "VIRTUAL_ACCOUNT_NUMBER",
         DeactivateEnrollmentRequestCreateEnrollmentTypeEnum.VIRTUAL_ACCOUNT_NUMBER);
@@ -341,6 +345,7 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
     REGISTRATION_IRA_BENEFICIARY_ROTH("REGISTRATION_IRA_BENEFICIARY_ROTH"),
     REGISTRATION_INDIVIDUAL_FOREIGN("REGISTRATION_INDIVIDUAL_FOREIGN"),
     REGISTRATION_CUSTODIAL("REGISTRATION_CUSTODIAL"),
+    REG_T_MARGIN("REG_T_MARGIN"),
     VIRTUAL_ACCOUNT_NUMBER("VIRTUAL_ACCOUNT_NUMBER"),
     ;
 

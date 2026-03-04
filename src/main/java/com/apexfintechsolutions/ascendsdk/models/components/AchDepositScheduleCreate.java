@@ -22,7 +22,7 @@ public class AchDepositScheduleCreate {
   private String bankRelationship;
 
   /**
-   * The ira contribution info for an IRA account. Deprecated, see retirement_contribution_details
+   * Deprecated: see retirement_contribution_details The ira contribution info for an IRA account.
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as
    *     soon as possible.
@@ -70,7 +70,7 @@ public class AchDepositScheduleCreate {
   }
 
   /**
-   * The ira contribution info for an IRA account. Deprecated, see retirement_contribution_details
+   * Deprecated: see retirement_contribution_details The ira contribution info for an IRA account.
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as
    *     soon as possible.
@@ -107,7 +107,7 @@ public class AchDepositScheduleCreate {
   }
 
   /**
-   * The ira contribution info for an IRA account. Deprecated, see retirement_contribution_details
+   * Deprecated: see retirement_contribution_details The ira contribution info for an IRA account.
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as
    *     soon as possible.
@@ -120,7 +120,7 @@ public class AchDepositScheduleCreate {
   }
 
   /**
-   * The ira contribution info for an IRA account. Deprecated, see retirement_contribution_details
+   * Deprecated: see retirement_contribution_details The ira contribution info for an IRA account.
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as
    *     soon as possible.
@@ -216,7 +216,7 @@ public class AchDepositScheduleCreate {
     }
 
     /**
-     * The ira contribution info for an IRA account. Deprecated, see retirement_contribution_details
+     * Deprecated: see retirement_contribution_details The ira contribution info for an IRA account.
      *
      * @deprecated field: This will be removed in a future release, please migrate away from it as
      *     soon as possible.
@@ -229,7 +229,7 @@ public class AchDepositScheduleCreate {
     }
 
     /**
-     * The ira contribution info for an IRA account. Deprecated, see retirement_contribution_details
+     * Deprecated: see retirement_contribution_details The ira contribution info for an IRA account.
      *
      * @deprecated field: This will be removed in a future release, please migrate away from it as
      *     soon as possible.

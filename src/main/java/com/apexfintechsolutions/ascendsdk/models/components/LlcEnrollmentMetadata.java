@@ -40,8 +40,7 @@ public class LlcEnrollmentMetadata {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("money_market_fund_sweep")
-  private Optional<? extends EnrollmentLlcEnrollmentMetadataMoneyMarketFundSweep>
-      moneyMarketFundSweep;
+  private Optional<? extends EnrollmentMoneyMarketFundSweep> moneyMarketFundSweep;
 
   @JsonCreator
   public LlcEnrollmentMetadata(
@@ -54,8 +53,7 @@ public class LlcEnrollmentMetadata {
       @JsonProperty("fdic_cash_sweep")
           Optional<? extends EnrollmentLlcEnrollmentMetadataFdicCashSweep> fdicCashSweep,
       @JsonProperty("money_market_fund_sweep")
-          Optional<? extends EnrollmentLlcEnrollmentMetadataMoneyMarketFundSweep>
-              moneyMarketFundSweep) {
+          Optional<? extends EnrollmentMoneyMarketFundSweep> moneyMarketFundSweep) {
     Utils.checkNotNull(dividendReinvestmentPlan, "dividendReinvestmentPlan");
     Utils.checkNotNull(eddAccountEnrollmentMetadata, "eddAccountEnrollmentMetadata");
     Utils.checkNotNull(fdicCashSweep, "fdicCashSweep");
@@ -98,8 +96,8 @@ public class LlcEnrollmentMetadata {
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<EnrollmentLlcEnrollmentMetadataMoneyMarketFundSweep> moneyMarketFundSweep() {
-    return (Optional<EnrollmentLlcEnrollmentMetadataMoneyMarketFundSweep>) moneyMarketFundSweep;
+  public Optional<EnrollmentMoneyMarketFundSweep> moneyMarketFundSweep() {
+    return (Optional<EnrollmentMoneyMarketFundSweep>) moneyMarketFundSweep;
   }
 
   public static Builder builder() {
@@ -159,7 +157,7 @@ public class LlcEnrollmentMetadata {
    * Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
    */
   public LlcEnrollmentMetadata withMoneyMarketFundSweep(
-      EnrollmentLlcEnrollmentMetadataMoneyMarketFundSweep moneyMarketFundSweep) {
+      EnrollmentMoneyMarketFundSweep moneyMarketFundSweep) {
     Utils.checkNotNull(moneyMarketFundSweep, "moneyMarketFundSweep");
     this.moneyMarketFundSweep = Optional.ofNullable(moneyMarketFundSweep);
     return this;
@@ -169,8 +167,7 @@ public class LlcEnrollmentMetadata {
    * Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
    */
   public LlcEnrollmentMetadata withMoneyMarketFundSweep(
-      Optional<? extends EnrollmentLlcEnrollmentMetadataMoneyMarketFundSweep>
-          moneyMarketFundSweep) {
+      Optional<? extends EnrollmentMoneyMarketFundSweep> moneyMarketFundSweep) {
     Utils.checkNotNull(moneyMarketFundSweep, "moneyMarketFundSweep");
     this.moneyMarketFundSweep = moneyMarketFundSweep;
     return this;
@@ -227,8 +224,8 @@ public class LlcEnrollmentMetadata {
     private Optional<? extends EnrollmentLlcEnrollmentMetadataFdicCashSweep> fdicCashSweep =
         Optional.empty();
 
-    private Optional<? extends EnrollmentLlcEnrollmentMetadataMoneyMarketFundSweep>
-        moneyMarketFundSweep = Optional.empty();
+    private Optional<? extends EnrollmentMoneyMarketFundSweep> moneyMarketFundSweep =
+        Optional.empty();
 
     private Builder() {
       // force use of static builder() method
@@ -286,8 +283,7 @@ public class LlcEnrollmentMetadata {
     /**
      * Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
      */
-    public Builder moneyMarketFundSweep(
-        EnrollmentLlcEnrollmentMetadataMoneyMarketFundSweep moneyMarketFundSweep) {
+    public Builder moneyMarketFundSweep(EnrollmentMoneyMarketFundSweep moneyMarketFundSweep) {
       Utils.checkNotNull(moneyMarketFundSweep, "moneyMarketFundSweep");
       this.moneyMarketFundSweep = Optional.ofNullable(moneyMarketFundSweep);
       return this;
@@ -297,8 +293,7 @@ public class LlcEnrollmentMetadata {
      * Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
      */
     public Builder moneyMarketFundSweep(
-        Optional<? extends EnrollmentLlcEnrollmentMetadataMoneyMarketFundSweep>
-            moneyMarketFundSweep) {
+        Optional<? extends EnrollmentMoneyMarketFundSweep> moneyMarketFundSweep) {
       Utils.checkNotNull(moneyMarketFundSweep, "moneyMarketFundSweep");
       this.moneyMarketFundSweep = moneyMarketFundSweep;
       return this;

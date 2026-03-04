@@ -39,7 +39,7 @@ public class MarginsTests {
             .build();
 
     MarginsRealTimeGetBuyingPowerResponse res =
-        sdk.margins().getBuyingPower().accountId("01JHGTEPC6ZTAHCFRH2MD3VJJT").call();
+        sdk.buyingPower().getBuyingPower().accountId("01JHGTEPC6ZTAHCFRH2MD3VJJT").call();
     assertEquals(200, res.statusCode());
   }
 }

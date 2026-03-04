@@ -263,13 +263,12 @@ public class PersonManagement {
    *     `personal_address.administrative_area` `personal_address.region_code`
    *     `personal_address.postal_code` `control_person_company_symbols` `finra_associated_entity`
    *     `politically_exposed_organization` `politically_exposed_immediate_family_names`
-   *     `is_correspondent_employee` `employment.employer` `employment.occupation`
+   *     `correspondent_employee` `employment.employer` `employment.occupation`
    *     `employment.start_year` `employment.employment_status`
    *     `employment.employer_address.address_lines` `employment.employer_address.locality`
    *     `employment.employer_address.administrative_area` `employment.employer_address.region_code`
    *     `employment.employer_address.postal_code` `given_name` `middle_names` `family_name`
-   *     `tax_id` `birth_date.year` `birth_date.month` `birth_date.day` `death_date.day`
-   *     `death_date.month` `death_date.year`
+   *     `name_suffix` `tax_id` `tax_id_type` `birth_date.year` `birth_date.month` `birth_date.day`
    *     `identity_verification_result.raw_vendor_data_document_id`
    *     `identity_verification_result.identity_verification_document_ids` `accredited_investor`
    *     `adviser` `institutional_customer` `foreign_identification.ftin`
@@ -278,19 +277,18 @@ public class PersonManagement {
    *     `foreign_identification.issue_date.month` `foreign_identification.issue_date.day`
    *     `foreign_identification.expiration_date.year`
    *     `foreign_identification.expiration_date.month` `foreign_identification.expiration_date.day`
-   *     `tax_profile.withholding_state` `tax_profile.legal_tax_region_code`
-   *     `natural_person_fdd.customer_referral_source.name`
+   *     `tax_profile.withholding_state` `natural_person_fdd.customer_referral_source.name`
    *     `natural_person_fdd.customer_referral_source.relationship_to_applicant`
    *     `natural_person_fdd.customer_referral_source.relationship_years_with_applicant`
    *     `natural_person_fdd.customer_referral_source.relationship_years_with_broker`
    *     `natural_person_fdd.customer_non_referral_source`
    *     `natural_person_fdd.employment_and_employer_description`
-   *     `natural_person_fdd.negative_news.owner_has_negative_news_against_related_parties`
+   *     `natural_person_fdd.negative_news.negative_news_against_related_parties`
    *     `natural_person_fdd.negative_news.negative_news_against_related_parties_description`
    *     `natural_person_fdd.other_sources_of_wealth.applicant_has_other_sources_of_wealth`
    *     `natural_person_fdd.other_sources_of_wealth.other_sources_of_wealth`
-   *     `natural_person_fdd.other_sources_of_wealth.other_source_of_wealth_verification`
-   *     `doing_business_as`
+   *     `natural_person_fdd.other_sources_of_wealth.other_sources_of_wealth_verification`
+   *     `doing_business_as` `non_citizen_residency.residency_status`
    * @param legalNaturalPersonUpdate A legal natural person. This represents the full set of data
    *     for an individual. A Customer Identification Program (CIP) may be run on legal natural
    *     persons.
@@ -620,7 +618,10 @@ public class PersonManagement {
    *     `exempt_verifying_beneficial_owners` `exempt_customer_reason`
    *     `foreign_financial_institution` `accredited_investor` `adviser`
    *     `regulated_investment_company` `lei_code` `entity_name` `tax_id` `tax_id_type`
-   *     `institutional_customer` `operating_regions` `doing_business_as`
+   *     `institutional_customer` `operating_regions` `doing_business_as` `related_document_ids`
+   *     `business_industrial_classification`
+   *     `entity_due_diligence.negative_news.negative_news_against_related_parties`
+   *     `entity_due_diligence.negative_news.negative_news_against_related_parties_description`
    * @param legalEntityUpdate A legal entity. Legal entities are organizations, such as companies,
    *     that participate in financial transactions
    * @param options additional options

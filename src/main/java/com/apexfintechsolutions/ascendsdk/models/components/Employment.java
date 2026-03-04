@@ -56,9 +56,7 @@ public class Employment {
   /**
    * **Field Dependencies:**
    *
-   * <p>Required if `employment_status` is one of: - `EMPLOYED` - `SELF_EMPLOYED`
-   *
-   * <p>Otherwise, must be empty.
+   * <p>Must be empty if `employment_status` is ___not___ one of: - `EMPLOYED` - `SELF_EMPLOYED`
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("start_year")
@@ -141,9 +139,7 @@ public class Employment {
   /**
    * **Field Dependencies:**
    *
-   * <p>Required if `employment_status` is one of: - `EMPLOYED` - `SELF_EMPLOYED`
-   *
-   * <p>Otherwise, must be empty.
+   * <p>Must be empty if `employment_status` is ___not___ one of: - `EMPLOYED` - `SELF_EMPLOYED`
    */
   @JsonIgnore
   public Optional<Integer> startYear() {
@@ -246,9 +242,7 @@ public class Employment {
   /**
    * **Field Dependencies:**
    *
-   * <p>Required if `employment_status` is one of: - `EMPLOYED` - `SELF_EMPLOYED`
-   *
-   * <p>Otherwise, must be empty.
+   * <p>Must be empty if `employment_status` is ___not___ one of: - `EMPLOYED` - `SELF_EMPLOYED`
    */
   public Employment withStartYear(int startYear) {
     Utils.checkNotNull(startYear, "startYear");
@@ -259,9 +253,7 @@ public class Employment {
   /**
    * **Field Dependencies:**
    *
-   * <p>Required if `employment_status` is one of: - `EMPLOYED` - `SELF_EMPLOYED`
-   *
-   * <p>Otherwise, must be empty.
+   * <p>Must be empty if `employment_status` is ___not___ one of: - `EMPLOYED` - `SELF_EMPLOYED`
    */
   public Employment withStartYear(Optional<Integer> startYear) {
     Utils.checkNotNull(startYear, "startYear");
@@ -422,9 +414,7 @@ public class Employment {
     /**
      * **Field Dependencies:**
      *
-     * <p>Required if `employment_status` is one of: - `EMPLOYED` - `SELF_EMPLOYED`
-     *
-     * <p>Otherwise, must be empty.
+     * <p>Must be empty if `employment_status` is ___not___ one of: - `EMPLOYED` - `SELF_EMPLOYED`
      */
     public Builder startYear(int startYear) {
       Utils.checkNotNull(startYear, "startYear");
@@ -435,9 +425,7 @@ public class Employment {
     /**
      * **Field Dependencies:**
      *
-     * <p>Required if `employment_status` is one of: - `EMPLOYED` - `SELF_EMPLOYED`
-     *
-     * <p>Otherwise, must be empty.
+     * <p>Must be empty if `employment_status` is ___not___ one of: - `EMPLOYED` - `SELF_EMPLOYED`
      */
     public Builder startYear(Optional<Integer> startYear) {
       Utils.checkNotNull(startYear, "startYear");
