@@ -186,6 +186,7 @@ public class OrderCreate {
 
   /**
    * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+   * Only available for Equity, Mutual Fund, and Fixed Income orders.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("special_reporting_instructions")
@@ -197,8 +198,8 @@ public class OrderCreate {
   private Optional<? extends StopPriceCreate> stopPrice;
 
   /**
-   * Regulatory requirements dictate that the system capture the intended time_in_force, which is
-   * why this a mandatory field.
+   * For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is
+   * allowed. For Fixed Income: Only "DAY" is allowed.
    */
   @JsonProperty("time_in_force")
   private TimeInForce timeInForce;
@@ -545,6 +546,7 @@ public class OrderCreate {
 
   /**
    * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+   * Only available for Equity, Mutual Fund, and Fixed Income orders.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -560,8 +562,8 @@ public class OrderCreate {
   }
 
   /**
-   * Regulatory requirements dictate that the system capture the intended time_in_force, which is
-   * why this a mandatory field.
+   * For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is
+   * allowed. For Fixed Income: Only "DAY" is allowed.
    */
   @JsonIgnore
   public TimeInForce timeInForce() {
@@ -951,6 +953,7 @@ public class OrderCreate {
 
   /**
    * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+   * Only available for Equity, Mutual Fund, and Fixed Income orders.
    */
   public OrderCreate withSpecialReportingInstructions(
       List<SpecialReportingInstructions> specialReportingInstructions) {
@@ -961,6 +964,7 @@ public class OrderCreate {
 
   /**
    * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+   * Only available for Equity, Mutual Fund, and Fixed Income orders.
    */
   public OrderCreate withSpecialReportingInstructions(
       Optional<? extends List<SpecialReportingInstructions>> specialReportingInstructions) {
@@ -984,8 +988,8 @@ public class OrderCreate {
   }
 
   /**
-   * Regulatory requirements dictate that the system capture the intended time_in_force, which is
-   * why this a mandatory field.
+   * For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is
+   * allowed. For Fixed Income: Only "DAY" is allowed.
    */
   public OrderCreate withTimeInForce(TimeInForce timeInForce) {
     Utils.checkNotNull(timeInForce, "timeInForce");
@@ -1588,7 +1592,7 @@ public class OrderCreate {
 
     /**
      * Special Reporting Instructions to be applied to this order. Can include multiple
-     * Instructions.
+     * Instructions. Only available for Equity, Mutual Fund, and Fixed Income orders.
      */
     public Builder specialReportingInstructions(
         List<SpecialReportingInstructions> specialReportingInstructions) {
@@ -1599,7 +1603,7 @@ public class OrderCreate {
 
     /**
      * Special Reporting Instructions to be applied to this order. Can include multiple
-     * Instructions.
+     * Instructions. Only available for Equity, Mutual Fund, and Fixed Income orders.
      */
     public Builder specialReportingInstructions(
         Optional<? extends List<SpecialReportingInstructions>> specialReportingInstructions) {
@@ -1623,8 +1627,8 @@ public class OrderCreate {
     }
 
     /**
-     * Regulatory requirements dictate that the system capture the intended time_in_force, which is
-     * why this a mandatory field.
+     * For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is
+     * allowed. For Fixed Income: Only "DAY" is allowed.
      */
     public Builder timeInForce(TimeInForce timeInForce) {
       Utils.checkNotNull(timeInForce, "timeInForce");

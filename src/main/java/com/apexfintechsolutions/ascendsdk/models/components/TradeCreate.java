@@ -158,7 +158,7 @@ public class TradeCreate {
   /** Side modifier for the trade. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("side_modifier")
-  private Optional<? extends SideModifier> sideModifier;
+  private Optional<? extends TradeCreateSideModifier> sideModifier;
 
   /** The source of the submission. */
   @JsonProperty("source_application")
@@ -206,7 +206,7 @@ public class TradeCreate {
       @JsonProperty("route_type") RouteType routeType,
       @JsonProperty("settlement_date") Optional<? extends DateCreate> settlementDate,
       @JsonProperty("side") TradeCreateSide side,
-      @JsonProperty("side_modifier") Optional<? extends SideModifier> sideModifier,
+      @JsonProperty("side_modifier") Optional<? extends TradeCreateSideModifier> sideModifier,
       @JsonProperty("source_application") String sourceApplication,
       @JsonProperty("special_instructions")
           Optional<? extends List<SpecialInstructions>> specialInstructions,
@@ -475,8 +475,8 @@ public class TradeCreate {
   /** Side modifier for the trade. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<SideModifier> sideModifier() {
-    return (Optional<SideModifier>) sideModifier;
+  public Optional<TradeCreateSideModifier> sideModifier() {
+    return (Optional<TradeCreateSideModifier>) sideModifier;
   }
 
   /** The source of the submission. */
@@ -817,14 +817,14 @@ public class TradeCreate {
   }
 
   /** Side modifier for the trade. */
-  public TradeCreate withSideModifier(SideModifier sideModifier) {
+  public TradeCreate withSideModifier(TradeCreateSideModifier sideModifier) {
     Utils.checkNotNull(sideModifier, "sideModifier");
     this.sideModifier = Optional.ofNullable(sideModifier);
     return this;
   }
 
   /** Side modifier for the trade. */
-  public TradeCreate withSideModifier(Optional<? extends SideModifier> sideModifier) {
+  public TradeCreate withSideModifier(Optional<? extends TradeCreateSideModifier> sideModifier) {
     Utils.checkNotNull(sideModifier, "sideModifier");
     this.sideModifier = sideModifier;
     return this;
@@ -1053,7 +1053,7 @@ public class TradeCreate {
 
     private TradeCreateSide side;
 
-    private Optional<? extends SideModifier> sideModifier = Optional.empty();
+    private Optional<? extends TradeCreateSideModifier> sideModifier = Optional.empty();
 
     private String sourceApplication;
 
@@ -1370,14 +1370,14 @@ public class TradeCreate {
     }
 
     /** Side modifier for the trade. */
-    public Builder sideModifier(SideModifier sideModifier) {
+    public Builder sideModifier(TradeCreateSideModifier sideModifier) {
       Utils.checkNotNull(sideModifier, "sideModifier");
       this.sideModifier = Optional.ofNullable(sideModifier);
       return this;
     }
 
     /** Side modifier for the trade. */
-    public Builder sideModifier(Optional<? extends SideModifier> sideModifier) {
+    public Builder sideModifier(Optional<? extends TradeCreateSideModifier> sideModifier) {
       Utils.checkNotNull(sideModifier, "sideModifier");
       this.sideModifier = sideModifier;
       return this;

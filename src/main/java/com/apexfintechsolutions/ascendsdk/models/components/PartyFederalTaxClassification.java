@@ -50,8 +50,6 @@ public class PartyFederalTaxClassification {
       new PartyFederalTaxClassification("FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED");
   public static final PartyFederalTaxClassification INDIV_SOLEPROP_OR_SINGLEMEMBERLLC =
       new PartyFederalTaxClassification("INDIV_SOLEPROP_OR_SINGLEMEMBERLLC");
-  public static final PartyFederalTaxClassification PARTNERSHIP =
-      new PartyFederalTaxClassification("PARTNERSHIP");
   public static final PartyFederalTaxClassification C_CORPORATION =
       new PartyFederalTaxClassification("C_CORPORATION");
   public static final PartyFederalTaxClassification S_CORPORATION =
@@ -136,7 +134,6 @@ public class PartyFederalTaxClassification {
     Map<String, PartyFederalTaxClassification> map = new LinkedHashMap<>();
     map.put("FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED", FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED);
     map.put("INDIV_SOLEPROP_OR_SINGLEMEMBERLLC", INDIV_SOLEPROP_OR_SINGLEMEMBERLLC);
-    map.put("PARTNERSHIP", PARTNERSHIP);
     map.put("C_CORPORATION", C_CORPORATION);
     map.put("S_CORPORATION", S_CORPORATION);
     map.put("TRUST_ESTATE", TRUST_ESTATE);
@@ -155,7 +152,6 @@ public class PartyFederalTaxClassification {
     map.put(
         "INDIV_SOLEPROP_OR_SINGLEMEMBERLLC",
         PartyFederalTaxClassificationEnum.INDIV_SOLEPROP_OR_SINGLEMEMBERLLC);
-    map.put("PARTNERSHIP", PartyFederalTaxClassificationEnum.PARTNERSHIP);
     map.put("C_CORPORATION", PartyFederalTaxClassificationEnum.C_CORPORATION);
     map.put("S_CORPORATION", PartyFederalTaxClassificationEnum.S_CORPORATION);
     map.put("TRUST_ESTATE", PartyFederalTaxClassificationEnum.TRUST_ESTATE);
@@ -200,7 +196,6 @@ public class PartyFederalTaxClassification {
   public enum PartyFederalTaxClassificationEnum {
     FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED("FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED"),
     INDIV_SOLEPROP_OR_SINGLEMEMBERLLC("INDIV_SOLEPROP_OR_SINGLEMEMBERLLC"),
-    PARTNERSHIP("PARTNERSHIP"),
     C_CORPORATION("C_CORPORATION"),
     S_CORPORATION("S_CORPORATION"),
     TRUST_ESTATE("TRUST_ESTATE"),

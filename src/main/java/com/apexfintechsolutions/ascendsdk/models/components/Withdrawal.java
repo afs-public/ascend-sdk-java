@@ -44,7 +44,7 @@ public class Withdrawal {
   /** Provides information on the reason for the distribution from a retirement account */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("distribution_type")
-  private Optional<? extends DistributionType> distributionType;
+  private Optional<? extends EntryDistributionType> distributionType;
 
   /** tax year associated with the distribution */
   @JsonInclude(Include.NON_ABSENT)
@@ -89,7 +89,7 @@ public class Withdrawal {
       @JsonProperty("closing_account") Optional<Boolean> closingAccount,
       @JsonProperty("destination_account_number") Optional<String> destinationAccountNumber,
       @JsonProperty("destination_institution") Optional<String> destinationInstitution,
-      @JsonProperty("distribution_type") Optional<? extends DistributionType> distributionType,
+      @JsonProperty("distribution_type") Optional<? extends EntryDistributionType> distributionType,
       @JsonProperty("distribution_year") Optional<Integer> distributionYear,
       @JsonProperty("fed_reference_number") Optional<String> fedReferenceNumber,
       @JsonProperty("originating_institution") Optional<String> originatingInstitution,
@@ -169,8 +169,8 @@ public class Withdrawal {
   /** Provides information on the reason for the distribution from a retirement account */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public Optional<DistributionType> distributionType() {
-    return (Optional<DistributionType>) distributionType;
+  public Optional<EntryDistributionType> distributionType() {
+    return (Optional<EntryDistributionType>) distributionType;
   }
 
   /** tax year associated with the distribution */
@@ -286,14 +286,15 @@ public class Withdrawal {
   }
 
   /** Provides information on the reason for the distribution from a retirement account */
-  public Withdrawal withDistributionType(DistributionType distributionType) {
+  public Withdrawal withDistributionType(EntryDistributionType distributionType) {
     Utils.checkNotNull(distributionType, "distributionType");
     this.distributionType = Optional.ofNullable(distributionType);
     return this;
   }
 
   /** Provides information on the reason for the distribution from a retirement account */
-  public Withdrawal withDistributionType(Optional<? extends DistributionType> distributionType) {
+  public Withdrawal withDistributionType(
+      Optional<? extends EntryDistributionType> distributionType) {
     Utils.checkNotNull(distributionType, "distributionType");
     this.distributionType = distributionType;
     return this;
@@ -482,7 +483,7 @@ public class Withdrawal {
 
     private Optional<String> destinationInstitution = Optional.empty();
 
-    private Optional<? extends DistributionType> distributionType = Optional.empty();
+    private Optional<? extends EntryDistributionType> distributionType = Optional.empty();
 
     private Optional<Integer> distributionYear = Optional.empty();
 
@@ -565,14 +566,14 @@ public class Withdrawal {
     }
 
     /** Provides information on the reason for the distribution from a retirement account */
-    public Builder distributionType(DistributionType distributionType) {
+    public Builder distributionType(EntryDistributionType distributionType) {
       Utils.checkNotNull(distributionType, "distributionType");
       this.distributionType = Optional.ofNullable(distributionType);
       return this;
     }
 
     /** Provides information on the reason for the distribution from a retirement account */
-    public Builder distributionType(Optional<? extends DistributionType> distributionType) {
+    public Builder distributionType(Optional<? extends EntryDistributionType> distributionType) {
       Utils.checkNotNull(distributionType, "distributionType");
       this.distributionType = distributionType;
       return this;

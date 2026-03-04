@@ -83,6 +83,11 @@ public class Account {
   @JsonProperty("cat_account_holder_type")
   private Optional<? extends AccountCatAccountHolderType> catAccountHolderType;
 
+  /** The CAT reporter information for the account */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("cat_reporter_information")
+  private JsonNullable<? extends CatReporterInformation> catReporterInformation;
+
   /**
    * Indicates the CFTC (Commodity Futures Trading Commission) owner type of the account. This enum
    * only applies to accounts regulated by the CFTC
@@ -90,6 +95,14 @@ public class Account {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("cftc_owner_type")
   private Optional<? extends CftcOwnerType> cftcOwnerType;
+
+  /**
+   * An external identifier for the account. This identifier does not have internal uniqueness
+   * constraints.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_account_id")
+  private Optional<String> clientAccountId;
 
   /** The time the account was closed; If the account is not closed, this is null */
   @JsonInclude(Include.NON_ABSENT)
@@ -144,9 +157,15 @@ public class Account {
   @JsonProperty("funding_type")
   private Optional<? extends FundingType> fundingType;
 
-  /** A list of identifiers associated with the account */
+  /**
+   * A list of identifiers associated with the account
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("identifiers")
+  @Deprecated
   private Optional<? extends List<Identifier>> identifiers;
 
   /**
@@ -190,6 +209,11 @@ public class Account {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("open_time")
   private JsonNullable<OffsetDateTime> openTime;
+
+  /** The previous account ID associated with the account; Must be unique */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("originating_account_id")
+  private Optional<String> originatingAccountId;
 
   /**
    * A roll-up account classification based on the `registration_type`; Indicates what owns the
@@ -272,7 +296,10 @@ public class Account {
       @JsonProperty("agreements") Optional<? extends List<Agreement>> agreements,
       @JsonProperty("cat_account_holder_type")
           Optional<? extends AccountCatAccountHolderType> catAccountHolderType,
+      @JsonProperty("cat_reporter_information")
+          JsonNullable<? extends CatReporterInformation> catReporterInformation,
       @JsonProperty("cftc_owner_type") Optional<? extends CftcOwnerType> cftcOwnerType,
+      @JsonProperty("client_account_id") Optional<String> clientAccountId,
       @JsonProperty("close_time") JsonNullable<OffsetDateTime> closeTime,
       @JsonProperty("correspondent_id") Optional<String> correspondentId,
       @JsonProperty("create_time") JsonNullable<OffsetDateTime> createTime,
@@ -290,6 +317,7 @@ public class Account {
       @JsonProperty("margin_group_id") Optional<String> marginGroupId,
       @JsonProperty("name") Optional<String> name,
       @JsonProperty("open_time") JsonNullable<OffsetDateTime> openTime,
+      @JsonProperty("originating_account_id") Optional<String> originatingAccountId,
       @JsonProperty("ownership_type") Optional<? extends OwnershipType> ownershipType,
       @JsonProperty("parties") Optional<? extends List<Party>> parties,
       @JsonProperty("pattern_day_trader") Optional<Boolean> patternDayTrader,
@@ -309,7 +337,9 @@ public class Account {
     Utils.checkNotNull(advised, "advised");
     Utils.checkNotNull(agreements, "agreements");
     Utils.checkNotNull(catAccountHolderType, "catAccountHolderType");
+    Utils.checkNotNull(catReporterInformation, "catReporterInformation");
     Utils.checkNotNull(cftcOwnerType, "cftcOwnerType");
+    Utils.checkNotNull(clientAccountId, "clientAccountId");
     Utils.checkNotNull(closeTime, "closeTime");
     Utils.checkNotNull(correspondentId, "correspondentId");
     Utils.checkNotNull(createTime, "createTime");
@@ -325,6 +355,7 @@ public class Account {
     Utils.checkNotNull(marginGroupId, "marginGroupId");
     Utils.checkNotNull(name, "name");
     Utils.checkNotNull(openTime, "openTime");
+    Utils.checkNotNull(originatingAccountId, "originatingAccountId");
     Utils.checkNotNull(ownershipType, "ownershipType");
     Utils.checkNotNull(parties, "parties");
     Utils.checkNotNull(patternDayTrader, "patternDayTrader");
@@ -344,7 +375,9 @@ public class Account {
     this.advised = advised;
     this.agreements = agreements;
     this.catAccountHolderType = catAccountHolderType;
+    this.catReporterInformation = catReporterInformation;
     this.cftcOwnerType = cftcOwnerType;
+    this.clientAccountId = clientAccountId;
     this.closeTime = closeTime;
     this.correspondentId = correspondentId;
     this.createTime = createTime;
@@ -360,6 +393,7 @@ public class Account {
     this.marginGroupId = marginGroupId;
     this.name = name;
     this.openTime = openTime;
+    this.originatingAccountId = originatingAccountId;
     this.ownershipType = ownershipType;
     this.parties = parties;
     this.patternDayTrader = patternDayTrader;
@@ -383,6 +417,8 @@ public class Account {
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
+        JsonNullable.undefined(),
+        Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty(),
@@ -399,6 +435,7 @@ public class Account {
         Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined(),
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
@@ -486,6 +523,13 @@ public class Account {
     return (Optional<AccountCatAccountHolderType>) catAccountHolderType;
   }
 
+  /** The CAT reporter information for the account */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<CatReporterInformation> catReporterInformation() {
+    return (JsonNullable<CatReporterInformation>) catReporterInformation;
+  }
+
   /**
    * Indicates the CFTC (Commodity Futures Trading Commission) owner type of the account. This enum
    * only applies to accounts regulated by the CFTC
@@ -494,6 +538,15 @@ public class Account {
   @JsonIgnore
   public Optional<CftcOwnerType> cftcOwnerType() {
     return (Optional<CftcOwnerType>) cftcOwnerType;
+  }
+
+  /**
+   * An external identifier for the account. This identifier does not have internal uniqueness
+   * constraints.
+   */
+  @JsonIgnore
+  public Optional<String> clientAccountId() {
+    return clientAccountId;
   }
 
   /** The time the account was closed; If the account is not closed, this is null */
@@ -561,7 +614,13 @@ public class Account {
     return (Optional<FundingType>) fundingType;
   }
 
-  /** A list of identifiers associated with the account */
+  /**
+   * A list of identifiers associated with the account
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
+  @Deprecated
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<List<Identifier>> identifiers() {
@@ -616,6 +675,12 @@ public class Account {
   @JsonIgnore
   public JsonNullable<OffsetDateTime> openTime() {
     return openTime;
+  }
+
+  /** The previous account ID associated with the account; Must be unique */
+  @JsonIgnore
+  public Optional<String> originatingAccountId() {
+    return originatingAccountId;
   }
 
   /**
@@ -869,6 +934,21 @@ public class Account {
     return this;
   }
 
+  /** The CAT reporter information for the account */
+  public Account withCatReporterInformation(CatReporterInformation catReporterInformation) {
+    Utils.checkNotNull(catReporterInformation, "catReporterInformation");
+    this.catReporterInformation = JsonNullable.of(catReporterInformation);
+    return this;
+  }
+
+  /** The CAT reporter information for the account */
+  public Account withCatReporterInformation(
+      JsonNullable<? extends CatReporterInformation> catReporterInformation) {
+    Utils.checkNotNull(catReporterInformation, "catReporterInformation");
+    this.catReporterInformation = catReporterInformation;
+    return this;
+  }
+
   /**
    * Indicates the CFTC (Commodity Futures Trading Commission) owner type of the account. This enum
    * only applies to accounts regulated by the CFTC
@@ -886,6 +966,26 @@ public class Account {
   public Account withCftcOwnerType(Optional<? extends CftcOwnerType> cftcOwnerType) {
     Utils.checkNotNull(cftcOwnerType, "cftcOwnerType");
     this.cftcOwnerType = cftcOwnerType;
+    return this;
+  }
+
+  /**
+   * An external identifier for the account. This identifier does not have internal uniqueness
+   * constraints.
+   */
+  public Account withClientAccountId(String clientAccountId) {
+    Utils.checkNotNull(clientAccountId, "clientAccountId");
+    this.clientAccountId = Optional.ofNullable(clientAccountId);
+    return this;
+  }
+
+  /**
+   * An external identifier for the account. This identifier does not have internal uniqueness
+   * constraints.
+   */
+  public Account withClientAccountId(Optional<String> clientAccountId) {
+    Utils.checkNotNull(clientAccountId, "clientAccountId");
+    this.clientAccountId = clientAccountId;
     return this;
   }
 
@@ -1027,14 +1127,26 @@ public class Account {
     return this;
   }
 
-  /** A list of identifiers associated with the account */
+  /**
+   * A list of identifiers associated with the account
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
+  @Deprecated
   public Account withIdentifiers(List<Identifier> identifiers) {
     Utils.checkNotNull(identifiers, "identifiers");
     this.identifiers = Optional.ofNullable(identifiers);
     return this;
   }
 
-  /** A list of identifiers associated with the account */
+  /**
+   * A list of identifiers associated with the account
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
+  @Deprecated
   public Account withIdentifiers(Optional<? extends List<Identifier>> identifiers) {
     Utils.checkNotNull(identifiers, "identifiers");
     this.identifiers = identifiers;
@@ -1148,6 +1260,20 @@ public class Account {
   public Account withOpenTime(JsonNullable<OffsetDateTime> openTime) {
     Utils.checkNotNull(openTime, "openTime");
     this.openTime = openTime;
+    return this;
+  }
+
+  /** The previous account ID associated with the account; Must be unique */
+  public Account withOriginatingAccountId(String originatingAccountId) {
+    Utils.checkNotNull(originatingAccountId, "originatingAccountId");
+    this.originatingAccountId = Optional.ofNullable(originatingAccountId);
+    return this;
+  }
+
+  /** The previous account ID associated with the account; Must be unique */
+  public Account withOriginatingAccountId(Optional<String> originatingAccountId) {
+    Utils.checkNotNull(originatingAccountId, "originatingAccountId");
+    this.originatingAccountId = originatingAccountId;
     return this;
   }
 
@@ -1351,7 +1477,9 @@ public class Account {
         && Utils.enhancedDeepEquals(this.advised, other.advised)
         && Utils.enhancedDeepEquals(this.agreements, other.agreements)
         && Utils.enhancedDeepEquals(this.catAccountHolderType, other.catAccountHolderType)
+        && Utils.enhancedDeepEquals(this.catReporterInformation, other.catReporterInformation)
         && Utils.enhancedDeepEquals(this.cftcOwnerType, other.cftcOwnerType)
+        && Utils.enhancedDeepEquals(this.clientAccountId, other.clientAccountId)
         && Utils.enhancedDeepEquals(this.closeTime, other.closeTime)
         && Utils.enhancedDeepEquals(this.correspondentId, other.correspondentId)
         && Utils.enhancedDeepEquals(this.createTime, other.createTime)
@@ -1367,6 +1495,7 @@ public class Account {
         && Utils.enhancedDeepEquals(this.marginGroupId, other.marginGroupId)
         && Utils.enhancedDeepEquals(this.name, other.name)
         && Utils.enhancedDeepEquals(this.openTime, other.openTime)
+        && Utils.enhancedDeepEquals(this.originatingAccountId, other.originatingAccountId)
         && Utils.enhancedDeepEquals(this.ownershipType, other.ownershipType)
         && Utils.enhancedDeepEquals(this.parties, other.parties)
         && Utils.enhancedDeepEquals(this.patternDayTrader, other.patternDayTrader)
@@ -1391,7 +1520,9 @@ public class Account {
         advised,
         agreements,
         catAccountHolderType,
+        catReporterInformation,
         cftcOwnerType,
+        clientAccountId,
         closeTime,
         correspondentId,
         createTime,
@@ -1407,6 +1538,7 @@ public class Account {
         marginGroupId,
         name,
         openTime,
+        originatingAccountId,
         ownershipType,
         parties,
         patternDayTrader,
@@ -1440,8 +1572,12 @@ public class Account {
         agreements,
         "catAccountHolderType",
         catAccountHolderType,
+        "catReporterInformation",
+        catReporterInformation,
         "cftcOwnerType",
         cftcOwnerType,
+        "clientAccountId",
+        clientAccountId,
         "closeTime",
         closeTime,
         "correspondentId",
@@ -1472,6 +1608,8 @@ public class Account {
         name,
         "openTime",
         openTime,
+        "originatingAccountId",
+        originatingAccountId,
         "ownershipType",
         ownershipType,
         "parties",
@@ -1515,7 +1653,12 @@ public class Account {
 
     private Optional<? extends AccountCatAccountHolderType> catAccountHolderType = Optional.empty();
 
+    private JsonNullable<? extends CatReporterInformation> catReporterInformation =
+        JsonNullable.undefined();
+
     private Optional<? extends CftcOwnerType> cftcOwnerType = Optional.empty();
+
+    private Optional<String> clientAccountId = Optional.empty();
 
     private JsonNullable<OffsetDateTime> closeTime = JsonNullable.undefined();
 
@@ -1533,7 +1676,7 @@ public class Account {
 
     private Optional<? extends FundingType> fundingType = Optional.empty();
 
-    private Optional<? extends List<Identifier>> identifiers = Optional.empty();
+    @Deprecated private Optional<? extends List<Identifier>> identifiers = Optional.empty();
 
     private Optional<? extends List<InterestedParty>> interestedParties = Optional.empty();
 
@@ -1546,6 +1689,8 @@ public class Account {
     private Optional<String> name = Optional.empty();
 
     private JsonNullable<OffsetDateTime> openTime = JsonNullable.undefined();
+
+    private Optional<String> originatingAccountId = Optional.empty();
 
     private Optional<? extends OwnershipType> ownershipType = Optional.empty();
 
@@ -1733,6 +1878,21 @@ public class Account {
       return this;
     }
 
+    /** The CAT reporter information for the account */
+    public Builder catReporterInformation(CatReporterInformation catReporterInformation) {
+      Utils.checkNotNull(catReporterInformation, "catReporterInformation");
+      this.catReporterInformation = JsonNullable.of(catReporterInformation);
+      return this;
+    }
+
+    /** The CAT reporter information for the account */
+    public Builder catReporterInformation(
+        JsonNullable<? extends CatReporterInformation> catReporterInformation) {
+      Utils.checkNotNull(catReporterInformation, "catReporterInformation");
+      this.catReporterInformation = catReporterInformation;
+      return this;
+    }
+
     /**
      * Indicates the CFTC (Commodity Futures Trading Commission) owner type of the account. This
      * enum only applies to accounts regulated by the CFTC
@@ -1750,6 +1910,26 @@ public class Account {
     public Builder cftcOwnerType(Optional<? extends CftcOwnerType> cftcOwnerType) {
       Utils.checkNotNull(cftcOwnerType, "cftcOwnerType");
       this.cftcOwnerType = cftcOwnerType;
+      return this;
+    }
+
+    /**
+     * An external identifier for the account. This identifier does not have internal uniqueness
+     * constraints.
+     */
+    public Builder clientAccountId(String clientAccountId) {
+      Utils.checkNotNull(clientAccountId, "clientAccountId");
+      this.clientAccountId = Optional.ofNullable(clientAccountId);
+      return this;
+    }
+
+    /**
+     * An external identifier for the account. This identifier does not have internal uniqueness
+     * constraints.
+     */
+    public Builder clientAccountId(Optional<String> clientAccountId) {
+      Utils.checkNotNull(clientAccountId, "clientAccountId");
+      this.clientAccountId = clientAccountId;
       return this;
     }
 
@@ -1891,14 +2071,26 @@ public class Account {
       return this;
     }
 
-    /** A list of identifiers associated with the account */
+    /**
+     * A list of identifiers associated with the account
+     *
+     * @deprecated field: This will be removed in a future release, please migrate away from it as
+     *     soon as possible.
+     */
+    @Deprecated
     public Builder identifiers(List<Identifier> identifiers) {
       Utils.checkNotNull(identifiers, "identifiers");
       this.identifiers = Optional.ofNullable(identifiers);
       return this;
     }
 
-    /** A list of identifiers associated with the account */
+    /**
+     * A list of identifiers associated with the account
+     *
+     * @deprecated field: This will be removed in a future release, please migrate away from it as
+     *     soon as possible.
+     */
+    @Deprecated
     public Builder identifiers(Optional<? extends List<Identifier>> identifiers) {
       Utils.checkNotNull(identifiers, "identifiers");
       this.identifiers = identifiers;
@@ -2010,6 +2202,20 @@ public class Account {
     public Builder openTime(JsonNullable<OffsetDateTime> openTime) {
       Utils.checkNotNull(openTime, "openTime");
       this.openTime = openTime;
+      return this;
+    }
+
+    /** The previous account ID associated with the account; Must be unique */
+    public Builder originatingAccountId(String originatingAccountId) {
+      Utils.checkNotNull(originatingAccountId, "originatingAccountId");
+      this.originatingAccountId = Optional.ofNullable(originatingAccountId);
+      return this;
+    }
+
+    /** The previous account ID associated with the account; Must be unique */
+    public Builder originatingAccountId(Optional<String> originatingAccountId) {
+      Utils.checkNotNull(originatingAccountId, "originatingAccountId");
+      this.originatingAccountId = originatingAccountId;
       return this;
     }
 
@@ -2206,7 +2412,9 @@ public class Account {
           advised,
           agreements,
           catAccountHolderType,
+          catReporterInformation,
           cftcOwnerType,
+          clientAccountId,
           closeTime,
           correspondentId,
           createTime,
@@ -2222,6 +2430,7 @@ public class Account {
           marginGroupId,
           name,
           openTime,
+          originatingAccountId,
           ownershipType,
           parties,
           patternDayTrader,

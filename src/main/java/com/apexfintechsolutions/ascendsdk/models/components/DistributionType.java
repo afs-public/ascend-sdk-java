@@ -40,7 +40,11 @@ import java.util.Optional;
 /**
  * DistributionType
  *
- * <p>Provides information on the reason for the distribution from a retirement account
+ * <p>Identifies the distribution type for buy side orders (that is, when `side` value = `BUY`). -
+ * Orders will be rejected if the alternative investment asset does not allow the requested
+ * distribution type. - Not relevant for sell orders (that is, when `side` value = `SELL`). -
+ * Confirm the asset’s `cash_distribution_allowed` and `reinvestment_distribution_allowed`
+ * properties to know what it allows.
  */
 @JsonDeserialize(using = DistributionType._Deserializer.class)
 @JsonSerialize(using = DistributionType._Serializer.class)
@@ -48,36 +52,8 @@ public class DistributionType {
 
   public static final DistributionType DISTRIBUTION_TYPE_UNSPECIFIED =
       new DistributionType("DISTRIBUTION_TYPE_UNSPECIFIED");
-  public static final DistributionType PREMATURE = new DistributionType("PREMATURE");
-  public static final DistributionType DISABILITY = new DistributionType("DISABILITY");
-  public static final DistributionType DEATH = new DistributionType("DEATH");
-  public static final DistributionType NORMAL = new DistributionType("NORMAL");
-  public static final DistributionType SOSEPP = new DistributionType("SOSEPP");
-  public static final DistributionType ROLLOVER_TO_QUALIFIED_PLAN =
-      new DistributionType("ROLLOVER_TO_QUALIFIED_PLAN");
-  public static final DistributionType ROLLOVER_TO_IRA = new DistributionType("ROLLOVER_TO_IRA");
-  public static final DistributionType DIST_TRANSFER = new DistributionType("DIST_TRANSFER");
-  public static final DistributionType EXCESS_CONTRIBUTION_REMOVAL_BEFORE_TAX_DEADLINE =
-      new DistributionType("EXCESS_CONTRIBUTION_REMOVAL_BEFORE_TAX_DEADLINE");
-  public static final DistributionType EXCESS_CONTRIBUTION_REMOVAL_AFTER_TAX_DEADLINE =
-      new DistributionType("EXCESS_CONTRIBUTION_REMOVAL_AFTER_TAX_DEADLINE");
-  public static final DistributionType RECHARACTERIZATION_PRIOR_YEAR =
-      new DistributionType("RECHARACTERIZATION_PRIOR_YEAR");
-  public static final DistributionType RECHARACTERIZATION_CURRENT_YEAR =
-      new DistributionType("RECHARACTERIZATION_CURRENT_YEAR");
-  public static final DistributionType DIST_CONVERSION = new DistributionType("DIST_CONVERSION");
-  public static final DistributionType MANAGEMENT_FEE = new DistributionType("MANAGEMENT_FEE");
-  public static final DistributionType PREMATURE_SIMPLE_IRA_LESS_THAN2_YEARS =
-      new DistributionType("PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS");
-  public static final DistributionType NORMAL_ROTH_IRA_GREATER_THAN5_YEARS =
-      new DistributionType("NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS");
-  public static final DistributionType PLAN_LOAN401_K = new DistributionType("PLAN_LOAN_401K");
-  public static final DistributionType NET_INCOME_ATTRIBUTABLE =
-      new DistributionType("NET_INCOME_ATTRIBUTABLE");
-  public static final DistributionType REVOCATION = new DistributionType("REVOCATION");
-  public static final DistributionType NON_REPORTABLE = new DistributionType("NON_REPORTABLE");
-  public static final DistributionType QUALIFIED_CHARITABLE_DISTRIBUTION =
-      new DistributionType("QUALIFIED_CHARITABLE_DISTRIBUTION");
+  public static final DistributionType CASH = new DistributionType("CASH");
+  public static final DistributionType REINVESTMENT = new DistributionType("REINVESTMENT");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -146,69 +122,16 @@ public class DistributionType {
   private static final Map<String, DistributionType> createValuesMap() {
     Map<String, DistributionType> map = new LinkedHashMap<>();
     map.put("DISTRIBUTION_TYPE_UNSPECIFIED", DISTRIBUTION_TYPE_UNSPECIFIED);
-    map.put("PREMATURE", PREMATURE);
-    map.put("DISABILITY", DISABILITY);
-    map.put("DEATH", DEATH);
-    map.put("NORMAL", NORMAL);
-    map.put("SOSEPP", SOSEPP);
-    map.put("ROLLOVER_TO_QUALIFIED_PLAN", ROLLOVER_TO_QUALIFIED_PLAN);
-    map.put("ROLLOVER_TO_IRA", ROLLOVER_TO_IRA);
-    map.put("DIST_TRANSFER", DIST_TRANSFER);
-    map.put(
-        "EXCESS_CONTRIBUTION_REMOVAL_BEFORE_TAX_DEADLINE",
-        EXCESS_CONTRIBUTION_REMOVAL_BEFORE_TAX_DEADLINE);
-    map.put(
-        "EXCESS_CONTRIBUTION_REMOVAL_AFTER_TAX_DEADLINE",
-        EXCESS_CONTRIBUTION_REMOVAL_AFTER_TAX_DEADLINE);
-    map.put("RECHARACTERIZATION_PRIOR_YEAR", RECHARACTERIZATION_PRIOR_YEAR);
-    map.put("RECHARACTERIZATION_CURRENT_YEAR", RECHARACTERIZATION_CURRENT_YEAR);
-    map.put("DIST_CONVERSION", DIST_CONVERSION);
-    map.put("MANAGEMENT_FEE", MANAGEMENT_FEE);
-    map.put("PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS", PREMATURE_SIMPLE_IRA_LESS_THAN2_YEARS);
-    map.put("NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS", NORMAL_ROTH_IRA_GREATER_THAN5_YEARS);
-    map.put("PLAN_LOAN_401K", PLAN_LOAN401_K);
-    map.put("NET_INCOME_ATTRIBUTABLE", NET_INCOME_ATTRIBUTABLE);
-    map.put("REVOCATION", REVOCATION);
-    map.put("NON_REPORTABLE", NON_REPORTABLE);
-    map.put("QUALIFIED_CHARITABLE_DISTRIBUTION", QUALIFIED_CHARITABLE_DISTRIBUTION);
+    map.put("CASH", CASH);
+    map.put("REINVESTMENT", REINVESTMENT);
     return map;
   }
 
   private static final Map<String, DistributionTypeEnum> createEnumsMap() {
     Map<String, DistributionTypeEnum> map = new HashMap<>();
     map.put("DISTRIBUTION_TYPE_UNSPECIFIED", DistributionTypeEnum.DISTRIBUTION_TYPE_UNSPECIFIED);
-    map.put("PREMATURE", DistributionTypeEnum.PREMATURE);
-    map.put("DISABILITY", DistributionTypeEnum.DISABILITY);
-    map.put("DEATH", DistributionTypeEnum.DEATH);
-    map.put("NORMAL", DistributionTypeEnum.NORMAL);
-    map.put("SOSEPP", DistributionTypeEnum.SOSEPP);
-    map.put("ROLLOVER_TO_QUALIFIED_PLAN", DistributionTypeEnum.ROLLOVER_TO_QUALIFIED_PLAN);
-    map.put("ROLLOVER_TO_IRA", DistributionTypeEnum.ROLLOVER_TO_IRA);
-    map.put("DIST_TRANSFER", DistributionTypeEnum.DIST_TRANSFER);
-    map.put(
-        "EXCESS_CONTRIBUTION_REMOVAL_BEFORE_TAX_DEADLINE",
-        DistributionTypeEnum.EXCESS_CONTRIBUTION_REMOVAL_BEFORE_TAX_DEADLINE);
-    map.put(
-        "EXCESS_CONTRIBUTION_REMOVAL_AFTER_TAX_DEADLINE",
-        DistributionTypeEnum.EXCESS_CONTRIBUTION_REMOVAL_AFTER_TAX_DEADLINE);
-    map.put("RECHARACTERIZATION_PRIOR_YEAR", DistributionTypeEnum.RECHARACTERIZATION_PRIOR_YEAR);
-    map.put(
-        "RECHARACTERIZATION_CURRENT_YEAR", DistributionTypeEnum.RECHARACTERIZATION_CURRENT_YEAR);
-    map.put("DIST_CONVERSION", DistributionTypeEnum.DIST_CONVERSION);
-    map.put("MANAGEMENT_FEE", DistributionTypeEnum.MANAGEMENT_FEE);
-    map.put(
-        "PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS",
-        DistributionTypeEnum.PREMATURE_SIMPLE_IRA_LESS_THAN2_YEARS);
-    map.put(
-        "NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS",
-        DistributionTypeEnum.NORMAL_ROTH_IRA_GREATER_THAN5_YEARS);
-    map.put("PLAN_LOAN_401K", DistributionTypeEnum.PLAN_LOAN401_K);
-    map.put("NET_INCOME_ATTRIBUTABLE", DistributionTypeEnum.NET_INCOME_ATTRIBUTABLE);
-    map.put("REVOCATION", DistributionTypeEnum.REVOCATION);
-    map.put("NON_REPORTABLE", DistributionTypeEnum.NON_REPORTABLE);
-    map.put(
-        "QUALIFIED_CHARITABLE_DISTRIBUTION",
-        DistributionTypeEnum.QUALIFIED_CHARITABLE_DISTRIBUTION);
+    map.put("CASH", DistributionTypeEnum.CASH);
+    map.put("REINVESTMENT", DistributionTypeEnum.REINVESTMENT);
     return map;
   }
 
@@ -244,29 +167,8 @@ public class DistributionType {
 
   public enum DistributionTypeEnum {
     DISTRIBUTION_TYPE_UNSPECIFIED("DISTRIBUTION_TYPE_UNSPECIFIED"),
-    PREMATURE("PREMATURE"),
-    DISABILITY("DISABILITY"),
-    DEATH("DEATH"),
-    NORMAL("NORMAL"),
-    SOSEPP("SOSEPP"),
-    ROLLOVER_TO_QUALIFIED_PLAN("ROLLOVER_TO_QUALIFIED_PLAN"),
-    ROLLOVER_TO_IRA("ROLLOVER_TO_IRA"),
-    DIST_TRANSFER("DIST_TRANSFER"),
-    EXCESS_CONTRIBUTION_REMOVAL_BEFORE_TAX_DEADLINE(
-        "EXCESS_CONTRIBUTION_REMOVAL_BEFORE_TAX_DEADLINE"),
-    EXCESS_CONTRIBUTION_REMOVAL_AFTER_TAX_DEADLINE(
-        "EXCESS_CONTRIBUTION_REMOVAL_AFTER_TAX_DEADLINE"),
-    RECHARACTERIZATION_PRIOR_YEAR("RECHARACTERIZATION_PRIOR_YEAR"),
-    RECHARACTERIZATION_CURRENT_YEAR("RECHARACTERIZATION_CURRENT_YEAR"),
-    DIST_CONVERSION("DIST_CONVERSION"),
-    MANAGEMENT_FEE("MANAGEMENT_FEE"),
-    PREMATURE_SIMPLE_IRA_LESS_THAN2_YEARS("PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS"),
-    NORMAL_ROTH_IRA_GREATER_THAN5_YEARS("NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS"),
-    PLAN_LOAN401_K("PLAN_LOAN_401K"),
-    NET_INCOME_ATTRIBUTABLE("NET_INCOME_ATTRIBUTABLE"),
-    REVOCATION("REVOCATION"),
-    NON_REPORTABLE("NON_REPORTABLE"),
-    QUALIFIED_CHARITABLE_DISTRIBUTION("QUALIFIED_CHARITABLE_DISTRIBUTION"),
+    CASH("CASH"),
+    REINVESTMENT("REINVESTMENT"),
     ;
 
     private final String value;

@@ -51,6 +51,19 @@ public class AccountRequestCreate {
   @JsonProperty("cat_account_holder_type")
   private Optional<? extends CatAccountHolderType> catAccountHolderType;
 
+  /** A single record representing the originating_fdid and originating_cat_reporter_crd */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("cat_reporter_information")
+  private Optional<? extends CatReporterInformationCreate> catReporterInformation;
+
+  /**
+   * An external identifier for the account. This identifier does not have internal uniqueness
+   * constraints.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_account_id")
+  private Optional<String> clientAccountId;
+
   /**
    * A unique identifier referencing a Correspondent; A Client may have several operating
    * Correspondents within its purview.
@@ -58,9 +71,15 @@ public class AccountRequestCreate {
   @JsonProperty("correspondent_id")
   private String correspondentId;
 
-  /** A list of identifiers associated with the account */
+  /**
+   * A list of identifiers associated with the account
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("identifiers")
+  @Deprecated
   private Optional<? extends List<IdentifierCreate>> identifiers;
 
   /**
@@ -80,6 +99,11 @@ public class AccountRequestCreate {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("managed")
   private Optional<Boolean> managed;
+
+  /** The previous account ID associated with the account; Must be unique */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("originating_account_id")
+  private Optional<String> originatingAccountId;
 
   /** Parties associated with the account (e.g. custodian). */
   @JsonProperty("parties")
@@ -113,6 +137,9 @@ public class AccountRequestCreate {
       @JsonProperty("advised") Optional<Boolean> advised,
       @JsonProperty("cat_account_holder_type")
           Optional<? extends CatAccountHolderType> catAccountHolderType,
+      @JsonProperty("cat_reporter_information")
+          Optional<? extends CatReporterInformationCreate> catReporterInformation,
+      @JsonProperty("client_account_id") Optional<String> clientAccountId,
       @JsonProperty("correspondent_id") String correspondentId,
       @JsonProperty("identifiers") Optional<? extends List<IdentifierCreate>> identifiers,
       @JsonProperty("interested_parties")
@@ -120,6 +147,7 @@ public class AccountRequestCreate {
       @JsonProperty("investment_profile")
           Optional<? extends InvestmentProfileCreate> investmentProfile,
       @JsonProperty("managed") Optional<Boolean> managed,
+      @JsonProperty("originating_account_id") Optional<String> originatingAccountId,
       @JsonProperty("parties") List<PartyRequestCreate> parties,
       @JsonProperty("primary_registered_rep_id") Optional<String> primaryRegisteredRepId,
       @JsonProperty("tax_profile") Optional<? extends AccountTaxProfileCreate> taxProfile,
@@ -130,11 +158,14 @@ public class AccountRequestCreate {
     Utils.checkNotNull(accountGroupId, "accountGroupId");
     Utils.checkNotNull(advised, "advised");
     Utils.checkNotNull(catAccountHolderType, "catAccountHolderType");
+    Utils.checkNotNull(catReporterInformation, "catReporterInformation");
+    Utils.checkNotNull(clientAccountId, "clientAccountId");
     Utils.checkNotNull(correspondentId, "correspondentId");
     Utils.checkNotNull(identifiers, "identifiers");
     Utils.checkNotNull(interestedParties, "interestedParties");
     Utils.checkNotNull(investmentProfile, "investmentProfile");
     Utils.checkNotNull(managed, "managed");
+    Utils.checkNotNull(originatingAccountId, "originatingAccountId");
     Utils.checkNotNull(parties, "parties");
     Utils.checkNotNull(primaryRegisteredRepId, "primaryRegisteredRepId");
     Utils.checkNotNull(taxProfile, "taxProfile");
@@ -144,11 +175,14 @@ public class AccountRequestCreate {
     this.accountGroupId = accountGroupId;
     this.advised = advised;
     this.catAccountHolderType = catAccountHolderType;
+    this.catReporterInformation = catReporterInformation;
+    this.clientAccountId = clientAccountId;
     this.correspondentId = correspondentId;
     this.identifiers = identifiers;
     this.interestedParties = interestedParties;
     this.investmentProfile = investmentProfile;
     this.managed = managed;
+    this.originatingAccountId = originatingAccountId;
     this.parties = parties;
     this.primaryRegisteredRepId = primaryRegisteredRepId;
     this.taxProfile = taxProfile;
@@ -163,7 +197,10 @@ public class AccountRequestCreate {
         accountGroupId,
         Optional.empty(),
         Optional.empty(),
+        Optional.empty(),
+        Optional.empty(),
         correspondentId,
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
@@ -214,6 +251,22 @@ public class AccountRequestCreate {
     return (Optional<CatAccountHolderType>) catAccountHolderType;
   }
 
+  /** A single record representing the originating_fdid and originating_cat_reporter_crd */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<CatReporterInformationCreate> catReporterInformation() {
+    return (Optional<CatReporterInformationCreate>) catReporterInformation;
+  }
+
+  /**
+   * An external identifier for the account. This identifier does not have internal uniqueness
+   * constraints.
+   */
+  @JsonIgnore
+  public Optional<String> clientAccountId() {
+    return clientAccountId;
+  }
+
   /**
    * A unique identifier referencing a Correspondent; A Client may have several operating
    * Correspondents within its purview.
@@ -223,7 +276,13 @@ public class AccountRequestCreate {
     return correspondentId;
   }
 
-  /** A list of identifiers associated with the account */
+  /**
+   * A list of identifiers associated with the account
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
+  @Deprecated
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<List<IdentifierCreate>> identifiers() {
@@ -251,6 +310,12 @@ public class AccountRequestCreate {
   @JsonIgnore
   public Optional<Boolean> managed() {
     return managed;
+  }
+
+  /** The previous account ID associated with the account; Must be unique */
+  @JsonIgnore
+  public Optional<String> originatingAccountId() {
+    return originatingAccountId;
   }
 
   /** Parties associated with the account (e.g. custodian). */
@@ -363,6 +428,42 @@ public class AccountRequestCreate {
     return this;
   }
 
+  /** A single record representing the originating_fdid and originating_cat_reporter_crd */
+  public AccountRequestCreate withCatReporterInformation(
+      CatReporterInformationCreate catReporterInformation) {
+    Utils.checkNotNull(catReporterInformation, "catReporterInformation");
+    this.catReporterInformation = Optional.ofNullable(catReporterInformation);
+    return this;
+  }
+
+  /** A single record representing the originating_fdid and originating_cat_reporter_crd */
+  public AccountRequestCreate withCatReporterInformation(
+      Optional<? extends CatReporterInformationCreate> catReporterInformation) {
+    Utils.checkNotNull(catReporterInformation, "catReporterInformation");
+    this.catReporterInformation = catReporterInformation;
+    return this;
+  }
+
+  /**
+   * An external identifier for the account. This identifier does not have internal uniqueness
+   * constraints.
+   */
+  public AccountRequestCreate withClientAccountId(String clientAccountId) {
+    Utils.checkNotNull(clientAccountId, "clientAccountId");
+    this.clientAccountId = Optional.ofNullable(clientAccountId);
+    return this;
+  }
+
+  /**
+   * An external identifier for the account. This identifier does not have internal uniqueness
+   * constraints.
+   */
+  public AccountRequestCreate withClientAccountId(Optional<String> clientAccountId) {
+    Utils.checkNotNull(clientAccountId, "clientAccountId");
+    this.clientAccountId = clientAccountId;
+    return this;
+  }
+
   /**
    * A unique identifier referencing a Correspondent; A Client may have several operating
    * Correspondents within its purview.
@@ -373,14 +474,26 @@ public class AccountRequestCreate {
     return this;
   }
 
-  /** A list of identifiers associated with the account */
+  /**
+   * A list of identifiers associated with the account
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
+  @Deprecated
   public AccountRequestCreate withIdentifiers(List<IdentifierCreate> identifiers) {
     Utils.checkNotNull(identifiers, "identifiers");
     this.identifiers = Optional.ofNullable(identifiers);
     return this;
   }
 
-  /** A list of identifiers associated with the account */
+  /**
+   * A list of identifiers associated with the account
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
+  @Deprecated
   public AccountRequestCreate withIdentifiers(
       Optional<? extends List<IdentifierCreate>> identifiers) {
     Utils.checkNotNull(identifiers, "identifiers");
@@ -435,6 +548,20 @@ public class AccountRequestCreate {
   public AccountRequestCreate withManaged(Optional<Boolean> managed) {
     Utils.checkNotNull(managed, "managed");
     this.managed = managed;
+    return this;
+  }
+
+  /** The previous account ID associated with the account; Must be unique */
+  public AccountRequestCreate withOriginatingAccountId(String originatingAccountId) {
+    Utils.checkNotNull(originatingAccountId, "originatingAccountId");
+    this.originatingAccountId = Optional.ofNullable(originatingAccountId);
+    return this;
+  }
+
+  /** The previous account ID associated with the account; Must be unique */
+  public AccountRequestCreate withOriginatingAccountId(Optional<String> originatingAccountId) {
+    Utils.checkNotNull(originatingAccountId, "originatingAccountId");
+    this.originatingAccountId = originatingAccountId;
     return this;
   }
 
@@ -517,11 +644,14 @@ public class AccountRequestCreate {
         && Utils.enhancedDeepEquals(this.accountGroupId, other.accountGroupId)
         && Utils.enhancedDeepEquals(this.advised, other.advised)
         && Utils.enhancedDeepEquals(this.catAccountHolderType, other.catAccountHolderType)
+        && Utils.enhancedDeepEquals(this.catReporterInformation, other.catReporterInformation)
+        && Utils.enhancedDeepEquals(this.clientAccountId, other.clientAccountId)
         && Utils.enhancedDeepEquals(this.correspondentId, other.correspondentId)
         && Utils.enhancedDeepEquals(this.identifiers, other.identifiers)
         && Utils.enhancedDeepEquals(this.interestedParties, other.interestedParties)
         && Utils.enhancedDeepEquals(this.investmentProfile, other.investmentProfile)
         && Utils.enhancedDeepEquals(this.managed, other.managed)
+        && Utils.enhancedDeepEquals(this.originatingAccountId, other.originatingAccountId)
         && Utils.enhancedDeepEquals(this.parties, other.parties)
         && Utils.enhancedDeepEquals(this.primaryRegisteredRepId, other.primaryRegisteredRepId)
         && Utils.enhancedDeepEquals(this.taxProfile, other.taxProfile)
@@ -536,11 +666,14 @@ public class AccountRequestCreate {
         accountGroupId,
         advised,
         catAccountHolderType,
+        catReporterInformation,
+        clientAccountId,
         correspondentId,
         identifiers,
         interestedParties,
         investmentProfile,
         managed,
+        originatingAccountId,
         parties,
         primaryRegisteredRepId,
         taxProfile,
@@ -560,6 +693,10 @@ public class AccountRequestCreate {
         advised,
         "catAccountHolderType",
         catAccountHolderType,
+        "catReporterInformation",
+        catReporterInformation,
+        "clientAccountId",
+        clientAccountId,
         "correspondentId",
         correspondentId,
         "identifiers",
@@ -570,6 +707,8 @@ public class AccountRequestCreate {
         investmentProfile,
         "managed",
         managed,
+        "originatingAccountId",
+        originatingAccountId,
         "parties",
         parties,
         "primaryRegisteredRepId",
@@ -593,15 +732,22 @@ public class AccountRequestCreate {
 
     private Optional<? extends CatAccountHolderType> catAccountHolderType = Optional.empty();
 
+    private Optional<? extends CatReporterInformationCreate> catReporterInformation =
+        Optional.empty();
+
+    private Optional<String> clientAccountId = Optional.empty();
+
     private String correspondentId;
 
-    private Optional<? extends List<IdentifierCreate>> identifiers = Optional.empty();
+    @Deprecated private Optional<? extends List<IdentifierCreate>> identifiers = Optional.empty();
 
     private Optional<? extends List<InterestedPartyCreate>> interestedParties = Optional.empty();
 
     private Optional<? extends InvestmentProfileCreate> investmentProfile = Optional.empty();
 
     private Optional<Boolean> managed = Optional.empty();
+
+    private Optional<String> originatingAccountId = Optional.empty();
 
     private List<PartyRequestCreate> parties;
 
@@ -690,6 +836,41 @@ public class AccountRequestCreate {
       return this;
     }
 
+    /** A single record representing the originating_fdid and originating_cat_reporter_crd */
+    public Builder catReporterInformation(CatReporterInformationCreate catReporterInformation) {
+      Utils.checkNotNull(catReporterInformation, "catReporterInformation");
+      this.catReporterInformation = Optional.ofNullable(catReporterInformation);
+      return this;
+    }
+
+    /** A single record representing the originating_fdid and originating_cat_reporter_crd */
+    public Builder catReporterInformation(
+        Optional<? extends CatReporterInformationCreate> catReporterInformation) {
+      Utils.checkNotNull(catReporterInformation, "catReporterInformation");
+      this.catReporterInformation = catReporterInformation;
+      return this;
+    }
+
+    /**
+     * An external identifier for the account. This identifier does not have internal uniqueness
+     * constraints.
+     */
+    public Builder clientAccountId(String clientAccountId) {
+      Utils.checkNotNull(clientAccountId, "clientAccountId");
+      this.clientAccountId = Optional.ofNullable(clientAccountId);
+      return this;
+    }
+
+    /**
+     * An external identifier for the account. This identifier does not have internal uniqueness
+     * constraints.
+     */
+    public Builder clientAccountId(Optional<String> clientAccountId) {
+      Utils.checkNotNull(clientAccountId, "clientAccountId");
+      this.clientAccountId = clientAccountId;
+      return this;
+    }
+
     /**
      * A unique identifier referencing a Correspondent; A Client may have several operating
      * Correspondents within its purview.
@@ -700,14 +881,26 @@ public class AccountRequestCreate {
       return this;
     }
 
-    /** A list of identifiers associated with the account */
+    /**
+     * A list of identifiers associated with the account
+     *
+     * @deprecated field: This will be removed in a future release, please migrate away from it as
+     *     soon as possible.
+     */
+    @Deprecated
     public Builder identifiers(List<IdentifierCreate> identifiers) {
       Utils.checkNotNull(identifiers, "identifiers");
       this.identifiers = Optional.ofNullable(identifiers);
       return this;
     }
 
-    /** A list of identifiers associated with the account */
+    /**
+     * A list of identifiers associated with the account
+     *
+     * @deprecated field: This will be removed in a future release, please migrate away from it as
+     *     soon as possible.
+     */
+    @Deprecated
     public Builder identifiers(Optional<? extends List<IdentifierCreate>> identifiers) {
       Utils.checkNotNull(identifiers, "identifiers");
       this.identifiers = identifiers;
@@ -761,6 +954,20 @@ public class AccountRequestCreate {
     public Builder managed(Optional<Boolean> managed) {
       Utils.checkNotNull(managed, "managed");
       this.managed = managed;
+      return this;
+    }
+
+    /** The previous account ID associated with the account; Must be unique */
+    public Builder originatingAccountId(String originatingAccountId) {
+      Utils.checkNotNull(originatingAccountId, "originatingAccountId");
+      this.originatingAccountId = Optional.ofNullable(originatingAccountId);
+      return this;
+    }
+
+    /** The previous account ID associated with the account; Must be unique */
+    public Builder originatingAccountId(Optional<String> originatingAccountId) {
+      Utils.checkNotNull(originatingAccountId, "originatingAccountId");
+      this.originatingAccountId = originatingAccountId;
       return this;
     }
 
@@ -834,11 +1041,14 @@ public class AccountRequestCreate {
           accountGroupId,
           advised,
           catAccountHolderType,
+          catReporterInformation,
+          clientAccountId,
           correspondentId,
           identifiers,
           interestedParties,
           investmentProfile,
           managed,
+          originatingAccountId,
           parties,
           primaryRegisteredRepId,
           taxProfile,

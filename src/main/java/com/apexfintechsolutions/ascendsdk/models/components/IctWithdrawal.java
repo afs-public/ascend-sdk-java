@@ -56,7 +56,7 @@ public class IctWithdrawal {
   private JsonNullable<? extends IctWithdrawalState> state;
 
   /**
-   * Deprecated, use state instead
+   * Deprecated: use state instead
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as
    *     soon as possible.
@@ -160,7 +160,7 @@ public class IctWithdrawal {
   }
 
   /**
-   * Deprecated, use state instead
+   * Deprecated: use state instead
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as
    *     soon as possible.
@@ -282,7 +282,7 @@ public class IctWithdrawal {
   }
 
   /**
-   * Deprecated, use state instead
+   * Deprecated: use state instead
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as
    *     soon as possible.
@@ -295,7 +295,7 @@ public class IctWithdrawal {
   }
 
   /**
-   * Deprecated, use state instead
+   * Deprecated: use state instead
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as
    *     soon as possible.
@@ -501,7 +501,7 @@ public class IctWithdrawal {
     }
 
     /**
-     * Deprecated, use state instead
+     * Deprecated: use state instead
      *
      * @deprecated field: This will be removed in a future release, please migrate away from it as
      *     soon as possible.
@@ -514,7 +514,7 @@ public class IctWithdrawal {
     }
 
     /**
-     * Deprecated, use state instead
+     * Deprecated: use state instead
      *
      * @deprecated field: This will be removed in a future release, please migrate away from it as
      *     soon as possible.

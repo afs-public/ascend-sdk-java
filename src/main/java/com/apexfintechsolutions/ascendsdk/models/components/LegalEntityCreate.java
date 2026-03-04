@@ -38,6 +38,14 @@ public class LegalEntityCreate {
   @JsonProperty("business_industrial_classification")
   private Optional<? extends BusinessIndustrialClassification> businessIndustrialClassification;
 
+  /**
+   * An external identifier for the legal entity. This identifier does not have internal uniqueness
+   * constraints.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_entity_id")
+  private Optional<String> clientEntityId;
+
   /** Corporate structure of the entity. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("corporate_structure")
@@ -230,6 +238,7 @@ public class LegalEntityCreate {
       @JsonProperty("broker_dealer") Optional<Boolean> brokerDealer,
       @JsonProperty("business_industrial_classification")
           Optional<? extends BusinessIndustrialClassification> businessIndustrialClassification,
+      @JsonProperty("client_entity_id") Optional<String> clientEntityId,
       @JsonProperty("corporate_structure")
           Optional<? extends CorporateStructure> corporateStructure,
       @JsonProperty("correspondent_id") String correspondentId,
@@ -262,6 +271,7 @@ public class LegalEntityCreate {
     Utils.checkNotNull(adviser, "adviser");
     Utils.checkNotNull(brokerDealer, "brokerDealer");
     Utils.checkNotNull(businessIndustrialClassification, "businessIndustrialClassification");
+    Utils.checkNotNull(clientEntityId, "clientEntityId");
     Utils.checkNotNull(corporateStructure, "corporateStructure");
     Utils.checkNotNull(correspondentId, "correspondentId");
     Utils.checkNotNull(doingBusinessAs, "doingBusinessAs");
@@ -290,6 +300,7 @@ public class LegalEntityCreate {
     this.adviser = adviser;
     this.brokerDealer = brokerDealer;
     this.businessIndustrialClassification = businessIndustrialClassification;
+    this.clientEntityId = clientEntityId;
     this.corporateStructure = corporateStructure;
     this.correspondentId = correspondentId;
     this.doingBusinessAs = doingBusinessAs;
@@ -327,6 +338,7 @@ public class LegalEntityCreate {
       LegalEntityCreateTaxIdType taxIdType,
       TaxProfileCreate taxProfile) {
     this(
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
@@ -379,6 +391,15 @@ public class LegalEntityCreate {
   @JsonIgnore
   public Optional<BusinessIndustrialClassification> businessIndustrialClassification() {
     return (Optional<BusinessIndustrialClassification>) businessIndustrialClassification;
+  }
+
+  /**
+   * An external identifier for the legal entity. This identifier does not have internal uniqueness
+   * constraints.
+   */
+  @JsonIgnore
+  public Optional<String> clientEntityId() {
+    return clientEntityId;
   }
 
   /** Corporate structure of the entity. */
@@ -663,6 +684,26 @@ public class LegalEntityCreate {
       Optional<? extends BusinessIndustrialClassification> businessIndustrialClassification) {
     Utils.checkNotNull(businessIndustrialClassification, "businessIndustrialClassification");
     this.businessIndustrialClassification = businessIndustrialClassification;
+    return this;
+  }
+
+  /**
+   * An external identifier for the legal entity. This identifier does not have internal uniqueness
+   * constraints.
+   */
+  public LegalEntityCreate withClientEntityId(String clientEntityId) {
+    Utils.checkNotNull(clientEntityId, "clientEntityId");
+    this.clientEntityId = Optional.ofNullable(clientEntityId);
+    return this;
+  }
+
+  /**
+   * An external identifier for the legal entity. This identifier does not have internal uniqueness
+   * constraints.
+   */
+  public LegalEntityCreate withClientEntityId(Optional<String> clientEntityId) {
+    Utils.checkNotNull(clientEntityId, "clientEntityId");
+    this.clientEntityId = clientEntityId;
     return this;
   }
 
@@ -1082,6 +1123,7 @@ public class LegalEntityCreate {
         && Utils.enhancedDeepEquals(this.brokerDealer, other.brokerDealer)
         && Utils.enhancedDeepEquals(
             this.businessIndustrialClassification, other.businessIndustrialClassification)
+        && Utils.enhancedDeepEquals(this.clientEntityId, other.clientEntityId)
         && Utils.enhancedDeepEquals(this.corporateStructure, other.corporateStructure)
         && Utils.enhancedDeepEquals(this.correspondentId, other.correspondentId)
         && Utils.enhancedDeepEquals(this.doingBusinessAs, other.doingBusinessAs)
@@ -1119,6 +1161,7 @@ public class LegalEntityCreate {
         adviser,
         brokerDealer,
         businessIndustrialClassification,
+        clientEntityId,
         corporateStructure,
         correspondentId,
         doingBusinessAs,
@@ -1157,6 +1200,8 @@ public class LegalEntityCreate {
         brokerDealer,
         "businessIndustrialClassification",
         businessIndustrialClassification,
+        "clientEntityId",
+        clientEntityId,
         "corporateStructure",
         corporateStructure,
         "correspondentId",
@@ -1218,6 +1263,8 @@ public class LegalEntityCreate {
 
     private Optional<? extends BusinessIndustrialClassification> businessIndustrialClassification =
         Optional.empty();
+
+    private Optional<String> clientEntityId = Optional.empty();
 
     private Optional<? extends CorporateStructure> corporateStructure = Optional.empty();
 
@@ -1328,6 +1375,26 @@ public class LegalEntityCreate {
         Optional<? extends BusinessIndustrialClassification> businessIndustrialClassification) {
       Utils.checkNotNull(businessIndustrialClassification, "businessIndustrialClassification");
       this.businessIndustrialClassification = businessIndustrialClassification;
+      return this;
+    }
+
+    /**
+     * An external identifier for the legal entity. This identifier does not have internal
+     * uniqueness constraints.
+     */
+    public Builder clientEntityId(String clientEntityId) {
+      Utils.checkNotNull(clientEntityId, "clientEntityId");
+      this.clientEntityId = Optional.ofNullable(clientEntityId);
+      return this;
+    }
+
+    /**
+     * An external identifier for the legal entity. This identifier does not have internal
+     * uniqueness constraints.
+     */
+    public Builder clientEntityId(Optional<String> clientEntityId) {
+      Utils.checkNotNull(clientEntityId, "clientEntityId");
+      this.clientEntityId = clientEntityId;
       return this;
     }
 
@@ -1736,6 +1803,7 @@ public class LegalEntityCreate {
           adviser,
           brokerDealer,
           businessIndustrialClassification,
+          clientEntityId,
           corporateStructure,
           correspondentId,
           doingBusinessAs,

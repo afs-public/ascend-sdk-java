@@ -1,0 +1,9 @@
+# AlternativeOrdersCreateAlternativeOrderRequest
+
+
+## Fields
+
+| Field                                                                       | Type                                                                        | Required                                                                    | Description                                                                 | Example                                                                     |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `accountId`                                                                 | *String*                                                                    | :heavy_check_mark:                                                          | The account id.                                                             | 01JR8YQT40WAQT8S95ZQGS1QN0                                                  |
+| `alternativeOrderCreate`                                                    | [AlternativeOrderCreate](../../models/components/AlternativeOrderCreate.md) | :heavy_check_mark:                                                          | N/A                                                                         |                                                                             |

@@ -24,7 +24,10 @@ public class AccountsUpdateAccountRequest {
    * `investment_profile.customer_profile.annual_income_range_usd`
    * `investment_profile.customer_profile.liquid_net_worth_range_usd`
    * `investment_profile.customer_profile.total_net_worth_range_usd`
-   * `investment_profile.customer_profile.federal_tax_bracket` `wrap_fee_billed` `managed`
+   * `investment_profile.customer_profile.federal_tax_bracket`
+   * `investment_profile.customer_profile.investment_experience` `wrap_fee_billed` `managed`
+   * `originating_account_id` `client_account_id` `cat_reporter_information`
+   * `tax_profile.cost_basis_lot_disposal_method` `tax_profile.section_475_election`
    */
   @SpeakeasyMetadata("queryParam:style=form,explode=true,name=update_mask")
   private Optional<String> updateMask;
@@ -62,7 +65,10 @@ public class AccountsUpdateAccountRequest {
    * `investment_profile.customer_profile.annual_income_range_usd`
    * `investment_profile.customer_profile.liquid_net_worth_range_usd`
    * `investment_profile.customer_profile.total_net_worth_range_usd`
-   * `investment_profile.customer_profile.federal_tax_bracket` `wrap_fee_billed` `managed`
+   * `investment_profile.customer_profile.federal_tax_bracket`
+   * `investment_profile.customer_profile.investment_experience` `wrap_fee_billed` `managed`
+   * `originating_account_id` `client_account_id` `cat_reporter_information`
+   * `tax_profile.cost_basis_lot_disposal_method` `tax_profile.section_475_election`
    */
   @JsonIgnore
   public Optional<String> updateMask() {
@@ -94,7 +100,10 @@ public class AccountsUpdateAccountRequest {
    * `investment_profile.customer_profile.annual_income_range_usd`
    * `investment_profile.customer_profile.liquid_net_worth_range_usd`
    * `investment_profile.customer_profile.total_net_worth_range_usd`
-   * `investment_profile.customer_profile.federal_tax_bracket` `wrap_fee_billed` `managed`
+   * `investment_profile.customer_profile.federal_tax_bracket`
+   * `investment_profile.customer_profile.investment_experience` `wrap_fee_billed` `managed`
+   * `originating_account_id` `client_account_id` `cat_reporter_information`
+   * `tax_profile.cost_basis_lot_disposal_method` `tax_profile.section_475_election`
    */
   public AccountsUpdateAccountRequest withUpdateMask(String updateMask) {
     Utils.checkNotNull(updateMask, "updateMask");
@@ -111,7 +120,10 @@ public class AccountsUpdateAccountRequest {
    * `investment_profile.customer_profile.annual_income_range_usd`
    * `investment_profile.customer_profile.liquid_net_worth_range_usd`
    * `investment_profile.customer_profile.total_net_worth_range_usd`
-   * `investment_profile.customer_profile.federal_tax_bracket` `wrap_fee_billed` `managed`
+   * `investment_profile.customer_profile.federal_tax_bracket`
+   * `investment_profile.customer_profile.investment_experience` `wrap_fee_billed` `managed`
+   * `originating_account_id` `client_account_id` `cat_reporter_information`
+   * `tax_profile.cost_basis_lot_disposal_method` `tax_profile.section_475_election`
    */
   public AccountsUpdateAccountRequest withUpdateMask(Optional<String> updateMask) {
     Utils.checkNotNull(updateMask, "updateMask");
@@ -186,7 +198,10 @@ public class AccountsUpdateAccountRequest {
      * `investment_profile.customer_profile.annual_income_range_usd`
      * `investment_profile.customer_profile.liquid_net_worth_range_usd`
      * `investment_profile.customer_profile.total_net_worth_range_usd`
-     * `investment_profile.customer_profile.federal_tax_bracket` `wrap_fee_billed` `managed`
+     * `investment_profile.customer_profile.federal_tax_bracket`
+     * `investment_profile.customer_profile.investment_experience` `wrap_fee_billed` `managed`
+     * `originating_account_id` `client_account_id` `cat_reporter_information`
+     * `tax_profile.cost_basis_lot_disposal_method` `tax_profile.section_475_election`
      */
     public Builder updateMask(String updateMask) {
       Utils.checkNotNull(updateMask, "updateMask");
@@ -203,7 +218,10 @@ public class AccountsUpdateAccountRequest {
      * `investment_profile.customer_profile.annual_income_range_usd`
      * `investment_profile.customer_profile.liquid_net_worth_range_usd`
      * `investment_profile.customer_profile.total_net_worth_range_usd`
-     * `investment_profile.customer_profile.federal_tax_bracket` `wrap_fee_billed` `managed`
+     * `investment_profile.customer_profile.federal_tax_bracket`
+     * `investment_profile.customer_profile.investment_experience` `wrap_fee_billed` `managed`
+     * `originating_account_id` `client_account_id` `cat_reporter_information`
+     * `tax_profile.cost_basis_lot_disposal_method` `tax_profile.section_475_election`
      */
     public Builder updateMask(Optional<String> updateMask) {
       Utils.checkNotNull(updateMask, "updateMask");

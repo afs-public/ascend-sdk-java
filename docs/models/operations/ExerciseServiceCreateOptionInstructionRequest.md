@@ -1,0 +1,10 @@
+# ExerciseServiceCreateOptionInstructionRequest
+
+
+## Fields
+
+| Field                                                                         | Type                                                                          | Required                                                                      | Description                                                                   | Example                                                                       |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `accountId`                                                                   | *String*                                                                      | :heavy_check_mark:                                                            | The account id.                                                               | ACC123456                                                                     |
+| `assetId`                                                                     | *String*                                                                      | :heavy_check_mark:                                                            | The asset id.                                                                 | 12345                                                                         |
+| `optionInstructionCreate`                                                     | [OptionInstructionCreate](../../models/components/OptionInstructionCreate.md) | :heavy_check_mark:                                                            | N/A                                                                           |                                                                               |

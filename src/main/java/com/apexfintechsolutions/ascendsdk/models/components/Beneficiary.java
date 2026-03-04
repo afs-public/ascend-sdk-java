@@ -90,7 +90,7 @@ public class Beneficiary {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("phone_number")
-  private JsonNullable<? extends PhoneNumber> phoneNumber;
+  private JsonNullable<? extends BeneficiaryPhoneNumber> phoneNumber;
 
   /** The relationship of the beneficiary to the account owner */
   @JsonInclude(Include.NON_ABSENT)
@@ -123,7 +123,7 @@ public class Beneficiary {
       @JsonProperty("given_name") Optional<String> givenName,
       @JsonProperty("mailing_address") JsonNullable<? extends MailingAddress> mailingAddress,
       @JsonProperty("middle_names") Optional<String> middleNames,
-      @JsonProperty("phone_number") JsonNullable<? extends PhoneNumber> phoneNumber,
+      @JsonProperty("phone_number") JsonNullable<? extends BeneficiaryPhoneNumber> phoneNumber,
       @JsonProperty("relation_type") Optional<? extends BeneficiaryRelationType> relationType,
       @JsonProperty("tax_id") Optional<String> taxId,
       @JsonProperty("tax_id_type") Optional<? extends BeneficiaryTaxIdType> taxIdType) {
@@ -256,8 +256,8 @@ public class Beneficiary {
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<PhoneNumber> phoneNumber() {
-    return (JsonNullable<PhoneNumber>) phoneNumber;
+  public JsonNullable<BeneficiaryPhoneNumber> phoneNumber() {
+    return (JsonNullable<BeneficiaryPhoneNumber>) phoneNumber;
   }
 
   /** The relationship of the beneficiary to the account owner */
@@ -461,7 +461,7 @@ public class Beneficiary {
    * The phone number for a party; Lives on the party record in the context of the account and does
    * not commute to other accounts held by/for the person
    */
-  public Beneficiary withPhoneNumber(PhoneNumber phoneNumber) {
+  public Beneficiary withPhoneNumber(BeneficiaryPhoneNumber phoneNumber) {
     Utils.checkNotNull(phoneNumber, "phoneNumber");
     this.phoneNumber = JsonNullable.of(phoneNumber);
     return this;
@@ -471,7 +471,7 @@ public class Beneficiary {
    * The phone number for a party; Lives on the party record in the context of the account and does
    * not commute to other accounts held by/for the person
    */
-  public Beneficiary withPhoneNumber(JsonNullable<? extends PhoneNumber> phoneNumber) {
+  public Beneficiary withPhoneNumber(JsonNullable<? extends BeneficiaryPhoneNumber> phoneNumber) {
     Utils.checkNotNull(phoneNumber, "phoneNumber");
     this.phoneNumber = phoneNumber;
     return this;
@@ -624,7 +624,7 @@ public class Beneficiary {
 
     private Optional<String> middleNames = Optional.empty();
 
-    private JsonNullable<? extends PhoneNumber> phoneNumber = JsonNullable.undefined();
+    private JsonNullable<? extends BeneficiaryPhoneNumber> phoneNumber = JsonNullable.undefined();
 
     private Optional<? extends BeneficiaryRelationType> relationType = Optional.empty();
 
@@ -808,7 +808,7 @@ public class Beneficiary {
      * The phone number for a party; Lives on the party record in the context of the account and
      * does not commute to other accounts held by/for the person
      */
-    public Builder phoneNumber(PhoneNumber phoneNumber) {
+    public Builder phoneNumber(BeneficiaryPhoneNumber phoneNumber) {
       Utils.checkNotNull(phoneNumber, "phoneNumber");
       this.phoneNumber = JsonNullable.of(phoneNumber);
       return this;
@@ -818,7 +818,7 @@ public class Beneficiary {
      * The phone number for a party; Lives on the party record in the context of the account and
      * does not commute to other accounts held by/for the person
      */
-    public Builder phoneNumber(JsonNullable<? extends PhoneNumber> phoneNumber) {
+    public Builder phoneNumber(JsonNullable<? extends BeneficiaryPhoneNumber> phoneNumber) {
       Utils.checkNotNull(phoneNumber, "phoneNumber");
       this.phoneNumber = phoneNumber;
       return this;

@@ -18,6 +18,11 @@ import org.openapitools.jackson.nullable.JsonNullable;
  * <p>Asset is the Apex representation of a security
  */
 public class Asset {
+  /** AltInvestment specific asset details */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("alt_investment")
+  private JsonNullable<? extends AltInvestment> altInvestment;
+
   /** Apex internal identifier assigned upon entry to every security. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("asset_id")
@@ -109,6 +114,7 @@ public class Asset {
 
   @JsonCreator
   public Asset(
+      @JsonProperty("alt_investment") JsonNullable<? extends AltInvestment> altInvestment,
       @JsonProperty("asset_id") Optional<String> assetId,
       @JsonProperty("currency") JsonNullable<? extends Currency> currency,
       @JsonProperty("cusip") Optional<String> cusip,
@@ -125,6 +131,7 @@ public class Asset {
       @JsonProperty("symbol") Optional<String> symbol,
       @JsonProperty("type") Optional<? extends AssetType1> type,
       @JsonProperty("usable") Optional<Boolean> usable) {
+    Utils.checkNotNull(altInvestment, "altInvestment");
     Utils.checkNotNull(assetId, "assetId");
     Utils.checkNotNull(currency, "currency");
     Utils.checkNotNull(cusip, "cusip");
@@ -141,6 +148,7 @@ public class Asset {
     Utils.checkNotNull(symbol, "symbol");
     Utils.checkNotNull(type, "type");
     Utils.checkNotNull(usable, "usable");
+    this.altInvestment = altInvestment;
     this.assetId = assetId;
     this.currency = currency;
     this.cusip = cusip;
@@ -161,6 +169,7 @@ public class Asset {
 
   public Asset() {
     this(
+        JsonNullable.undefined(),
         Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty(),
@@ -177,6 +186,13 @@ public class Asset {
         Optional.empty(),
         Optional.empty(),
         Optional.empty());
+  }
+
+  /** AltInvestment specific asset details */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<AltInvestment> altInvestment() {
+    return (JsonNullable<AltInvestment>) altInvestment;
   }
 
   /** Apex internal identifier assigned upon entry to every security. */
@@ -293,6 +309,20 @@ public class Asset {
 
   public static Builder builder() {
     return new Builder();
+  }
+
+  /** AltInvestment specific asset details */
+  public Asset withAltInvestment(AltInvestment altInvestment) {
+    Utils.checkNotNull(altInvestment, "altInvestment");
+    this.altInvestment = JsonNullable.of(altInvestment);
+    return this;
+  }
+
+  /** AltInvestment specific asset details */
+  public Asset withAltInvestment(JsonNullable<? extends AltInvestment> altInvestment) {
+    Utils.checkNotNull(altInvestment, "altInvestment");
+    this.altInvestment = altInvestment;
+    return this;
   }
 
   /** Apex internal identifier assigned upon entry to every security. */
@@ -546,7 +576,8 @@ public class Asset {
       return false;
     }
     Asset other = (Asset) o;
-    return Utils.enhancedDeepEquals(this.assetId, other.assetId)
+    return Utils.enhancedDeepEquals(this.altInvestment, other.altInvestment)
+        && Utils.enhancedDeepEquals(this.assetId, other.assetId)
         && Utils.enhancedDeepEquals(this.currency, other.currency)
         && Utils.enhancedDeepEquals(this.cusip, other.cusip)
         && Utils.enhancedDeepEquals(this.description, other.description)
@@ -567,6 +598,7 @@ public class Asset {
   @Override
   public int hashCode() {
     return Utils.enhancedHash(
+        altInvestment,
         assetId,
         currency,
         cusip,
@@ -589,6 +621,8 @@ public class Asset {
   public String toString() {
     return Utils.toString(
         Asset.class,
+        "altInvestment",
+        altInvestment,
         "assetId",
         assetId,
         "currency",
@@ -626,6 +660,8 @@ public class Asset {
   @SuppressWarnings("UnusedReturnValue")
   public static final class Builder {
 
+    private JsonNullable<? extends AltInvestment> altInvestment = JsonNullable.undefined();
+
     private Optional<String> assetId = Optional.empty();
 
     private JsonNullable<? extends Currency> currency = JsonNullable.undefined();
@@ -660,6 +696,20 @@ public class Asset {
 
     private Builder() {
       // force use of static builder() method
+    }
+
+    /** AltInvestment specific asset details */
+    public Builder altInvestment(AltInvestment altInvestment) {
+      Utils.checkNotNull(altInvestment, "altInvestment");
+      this.altInvestment = JsonNullable.of(altInvestment);
+      return this;
+    }
+
+    /** AltInvestment specific asset details */
+    public Builder altInvestment(JsonNullable<? extends AltInvestment> altInvestment) {
+      Utils.checkNotNull(altInvestment, "altInvestment");
+      this.altInvestment = altInvestment;
+      return this;
     }
 
     /** Apex internal identifier assigned upon entry to every security. */
@@ -907,6 +957,7 @@ public class Asset {
     public Asset build() {
 
       return new Asset(
+          altInvestment,
           assetId,
           currency,
           cusip,

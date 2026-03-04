@@ -54,6 +54,14 @@ public class LegalNaturalPersonUpdate {
   private Optional<? extends List<String>> citizenshipCountries;
 
   /**
+   * An external identifier for the legal natural person. This identifier does not have internal
+   * uniqueness constraints.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_person_id")
+  private Optional<String> clientPersonId;
+
+  /**
    * A list of ticker symbols in which the underlying person is a control person; control persons
    * are defined as having significant influence over a company’s management and operations,
    * typically through ownership of a large percentage of the company’s voting stock or through
@@ -268,6 +276,7 @@ public class LegalNaturalPersonUpdate {
       @JsonProperty("adviser") Optional<Boolean> adviser,
       @JsonProperty("birth_date") Optional<? extends DateUpdate> birthDate,
       @JsonProperty("citizenship_countries") Optional<? extends List<String>> citizenshipCountries,
+      @JsonProperty("client_person_id") Optional<String> clientPersonId,
       @JsonProperty("control_person_company_symbols") Optional<String> controlPersonCompanySymbols,
       @JsonProperty("correspondent_employee") Optional<Boolean> correspondentEmployee,
       @JsonProperty("correspondent_id") Optional<String> correspondentId,
@@ -306,6 +315,7 @@ public class LegalNaturalPersonUpdate {
     Utils.checkNotNull(adviser, "adviser");
     Utils.checkNotNull(birthDate, "birthDate");
     Utils.checkNotNull(citizenshipCountries, "citizenshipCountries");
+    Utils.checkNotNull(clientPersonId, "clientPersonId");
     Utils.checkNotNull(controlPersonCompanySymbols, "controlPersonCompanySymbols");
     Utils.checkNotNull(correspondentEmployee, "correspondentEmployee");
     Utils.checkNotNull(correspondentId, "correspondentId");
@@ -337,6 +347,7 @@ public class LegalNaturalPersonUpdate {
     this.adviser = adviser;
     this.birthDate = birthDate;
     this.citizenshipCountries = citizenshipCountries;
+    this.clientPersonId = clientPersonId;
     this.controlPersonCompanySymbols = controlPersonCompanySymbols;
     this.correspondentEmployee = correspondentEmployee;
     this.correspondentId = correspondentId;
@@ -367,6 +378,7 @@ public class LegalNaturalPersonUpdate {
 
   public LegalNaturalPersonUpdate() {
     this(
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
@@ -437,6 +449,15 @@ public class LegalNaturalPersonUpdate {
   @JsonIgnore
   public Optional<List<String>> citizenshipCountries() {
     return (Optional<List<String>>) citizenshipCountries;
+  }
+
+  /**
+   * An external identifier for the legal natural person. This identifier does not have internal
+   * uniqueness constraints.
+   */
+  @JsonIgnore
+  public Optional<String> clientPersonId() {
+    return clientPersonId;
   }
 
   /**
@@ -774,6 +795,26 @@ public class LegalNaturalPersonUpdate {
       Optional<? extends List<String>> citizenshipCountries) {
     Utils.checkNotNull(citizenshipCountries, "citizenshipCountries");
     this.citizenshipCountries = citizenshipCountries;
+    return this;
+  }
+
+  /**
+   * An external identifier for the legal natural person. This identifier does not have internal
+   * uniqueness constraints.
+   */
+  public LegalNaturalPersonUpdate withClientPersonId(String clientPersonId) {
+    Utils.checkNotNull(clientPersonId, "clientPersonId");
+    this.clientPersonId = Optional.ofNullable(clientPersonId);
+    return this;
+  }
+
+  /**
+   * An external identifier for the legal natural person. This identifier does not have internal
+   * uniqueness constraints.
+   */
+  public LegalNaturalPersonUpdate withClientPersonId(Optional<String> clientPersonId) {
+    Utils.checkNotNull(clientPersonId, "clientPersonId");
+    this.clientPersonId = clientPersonId;
     return this;
   }
 
@@ -1341,6 +1382,7 @@ public class LegalNaturalPersonUpdate {
         && Utils.enhancedDeepEquals(this.adviser, other.adviser)
         && Utils.enhancedDeepEquals(this.birthDate, other.birthDate)
         && Utils.enhancedDeepEquals(this.citizenshipCountries, other.citizenshipCountries)
+        && Utils.enhancedDeepEquals(this.clientPersonId, other.clientPersonId)
         && Utils.enhancedDeepEquals(
             this.controlPersonCompanySymbols, other.controlPersonCompanySymbols)
         && Utils.enhancedDeepEquals(this.correspondentEmployee, other.correspondentEmployee)
@@ -1382,6 +1424,7 @@ public class LegalNaturalPersonUpdate {
         adviser,
         birthDate,
         citizenshipCountries,
+        clientPersonId,
         controlPersonCompanySymbols,
         correspondentEmployee,
         correspondentId,
@@ -1422,6 +1465,8 @@ public class LegalNaturalPersonUpdate {
         birthDate,
         "citizenshipCountries",
         citizenshipCountries,
+        "clientPersonId",
+        clientPersonId,
         "controlPersonCompanySymbols",
         controlPersonCompanySymbols,
         "correspondentEmployee",
@@ -1486,6 +1531,8 @@ public class LegalNaturalPersonUpdate {
     private Optional<? extends DateUpdate> birthDate = Optional.empty();
 
     private Optional<? extends List<String>> citizenshipCountries = Optional.empty();
+
+    private Optional<String> clientPersonId = Optional.empty();
 
     private Optional<String> controlPersonCompanySymbols = Optional.empty();
 
@@ -1632,6 +1679,26 @@ public class LegalNaturalPersonUpdate {
     public Builder citizenshipCountries(Optional<? extends List<String>> citizenshipCountries) {
       Utils.checkNotNull(citizenshipCountries, "citizenshipCountries");
       this.citizenshipCountries = citizenshipCountries;
+      return this;
+    }
+
+    /**
+     * An external identifier for the legal natural person. This identifier does not have internal
+     * uniqueness constraints.
+     */
+    public Builder clientPersonId(String clientPersonId) {
+      Utils.checkNotNull(clientPersonId, "clientPersonId");
+      this.clientPersonId = Optional.ofNullable(clientPersonId);
+      return this;
+    }
+
+    /**
+     * An external identifier for the legal natural person. This identifier does not have internal
+     * uniqueness constraints.
+     */
+    public Builder clientPersonId(Optional<String> clientPersonId) {
+      Utils.checkNotNull(clientPersonId, "clientPersonId");
+      this.clientPersonId = clientPersonId;
       return this;
     }
 
@@ -2178,6 +2245,7 @@ public class LegalNaturalPersonUpdate {
           adviser,
           birthDate,
           citizenshipCountries,
+          clientPersonId,
           controlPersonCompanySymbols,
           correspondentEmployee,
           correspondentId,

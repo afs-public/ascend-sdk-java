@@ -14,7 +14,7 @@ import java.util.Optional;
 /**
  * Duration
  *
- * <p>Weighted average time until a bond’s cash flows are received in years
+ * <p>Weighted average time until a bond's cash flows are received in years
  *
  * @deprecated class: This will be removed in a future release, please migrate away from it as soon
  *     as possible.

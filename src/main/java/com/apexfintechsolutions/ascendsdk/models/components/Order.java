@@ -26,10 +26,10 @@ public class Order {
   private Optional<String> accountId;
 
   /**
-   * Apex Asset ID for this asset. This will not be returned in the initial CreateOrder response and
-   * will be available after an order completes validation. If the provided identifier does not
-   * match any Apex asset available for trading, an OrderRejectReason of "UNKNOWN_SECURITY" will be
-   * returned and the asset_id will not be set.
+   * Apex Asset ID for this asset. When the identifier_type is not ASSET_ID, this field will not be
+   * returned in the initial CreateOrder response and will be available after an order completes
+   * validation. If the provided identifier does not match any Apex asset available for trading, an
+   * OrderRejectReason of "UNKNOWN_SECURITY" will be returned and the asset_id will not be set.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("asset_id")
@@ -128,7 +128,8 @@ public class Order {
 
   /**
    * A custom commission to be applied to this order. When specifying an AMOUNT type, the value
-   * represents a notional amount measured in the currency of the order.
+   * represents a notional amount measured in the currency of the order. Only available for Equity,
+   * Mutual Fund, and Fixed Income orders.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("commission")
@@ -223,11 +224,11 @@ public class Order {
   private JsonNullable<? extends LimitPrice> limitPrice;
 
   /**
-   * The maximum number of shares to be sold if this is a notional SELL order of an Equity asset
-   * type. (Prohibited for other side or asset_type inputs.)
-   *
-   * <p>This will only be recognized for clients configured not to use OMS checks. When specified,
-   * must be greater than 0 and can't exceed 5 decimal places.
+   * The maximum number of shares to be sold for a notional SELL order of an Equity asset type. This
+   * field restricts the quantity to sell, even if the notional amount requires more shares to
+   * fulfill. REQUIRED if your account is not subject to Apex position checks, and PROHIBITED if
+   * your account is subject to Apex position checks. Refer to Position Check for details. When
+   * specified, must be greater than 0 and can't exceed 5 decimal places.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("max_sell_quantity")
@@ -261,10 +262,9 @@ public class Order {
   /**
    * The date on which the order will go to the market: must either be "today" or the next valid
    * trading day. If the current day is not a valid trading day, then the next valid market day must
-   * be specified. If the current time is within 5 minutes prior to market close, the next valid
-   * market day may be specified. If the current time is after market close, and before midnight
-   * Eastern, then the next valid market day must be specified. In all other cases, the current day,
-   * Eastern must be specified.
+   * be specified. If the current time is after market close, and before midnight Eastern, then the
+   * next valid market day must be specified. In all other cases, the current day, Eastern must be
+   * specified.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("order_date")
@@ -332,6 +332,7 @@ public class Order {
 
   /**
    * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+   * Only available for Equity, Mutual Fund, and Fixed Income orders.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("special_reporting_instructions")
@@ -343,8 +344,8 @@ public class Order {
   private JsonNullable<? extends StopPrice> stopPrice;
 
   /**
-   * Regulatory requirements dictate that the system capture the intended time_in_force, which is
-   * why this a mandatory field.
+   * For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is
+   * allowed. For Fixed Income: Only "DAY" is allowed.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("time_in_force")
@@ -567,10 +568,10 @@ public class Order {
   }
 
   /**
-   * Apex Asset ID for this asset. This will not be returned in the initial CreateOrder response and
-   * will be available after an order completes validation. If the provided identifier does not
-   * match any Apex asset available for trading, an OrderRejectReason of "UNKNOWN_SECURITY" will be
-   * returned and the asset_id will not be set.
+   * Apex Asset ID for this asset. When the identifier_type is not ASSET_ID, this field will not be
+   * returned in the initial CreateOrder response and will be available after an order completes
+   * validation. If the provided identifier does not match any Apex asset available for trading, an
+   * OrderRejectReason of "UNKNOWN_SECURITY" will be returned and the asset_id will not be set.
    */
   @JsonIgnore
   public Optional<String> assetId() {
@@ -686,7 +687,8 @@ public class Order {
 
   /**
    * A custom commission to be applied to this order. When specifying an AMOUNT type, the value
-   * represents a notional amount measured in the currency of the order.
+   * represents a notional amount measured in the currency of the order. Only available for Equity,
+   * Mutual Fund, and Fixed Income orders.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -804,11 +806,11 @@ public class Order {
   }
 
   /**
-   * The maximum number of shares to be sold if this is a notional SELL order of an Equity asset
-   * type. (Prohibited for other side or asset_type inputs.)
-   *
-   * <p>This will only be recognized for clients configured not to use OMS checks. When specified,
-   * must be greater than 0 and can't exceed 5 decimal places.
+   * The maximum number of shares to be sold for a notional SELL order of an Equity asset type. This
+   * field restricts the quantity to sell, even if the notional amount requires more shares to
+   * fulfill. REQUIRED if your account is not subject to Apex position checks, and PROHIBITED if
+   * your account is subject to Apex position checks. Refer to Position Check for details. When
+   * specified, must be greater than 0 and can't exceed 5 decimal places.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -848,10 +850,9 @@ public class Order {
   /**
    * The date on which the order will go to the market: must either be "today" or the next valid
    * trading day. If the current day is not a valid trading day, then the next valid market day must
-   * be specified. If the current time is within 5 minutes prior to market close, the next valid
-   * market day may be specified. If the current time is after market close, and before midnight
-   * Eastern, then the next valid market day must be specified. In all other cases, the current day,
-   * Eastern must be specified.
+   * be specified. If the current time is after market close, and before midnight Eastern, then the
+   * next valid market day must be specified. In all other cases, the current day, Eastern must be
+   * specified.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -936,6 +937,7 @@ public class Order {
 
   /**
    * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+   * Only available for Equity, Mutual Fund, and Fixed Income orders.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -951,8 +953,8 @@ public class Order {
   }
 
   /**
-   * Regulatory requirements dictate that the system capture the intended time_in_force, which is
-   * why this a mandatory field.
+   * For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is
+   * allowed. For Fixed Income: Only "DAY" is allowed.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -996,10 +998,10 @@ public class Order {
   }
 
   /**
-   * Apex Asset ID for this asset. This will not be returned in the initial CreateOrder response and
-   * will be available after an order completes validation. If the provided identifier does not
-   * match any Apex asset available for trading, an OrderRejectReason of "UNKNOWN_SECURITY" will be
-   * returned and the asset_id will not be set.
+   * Apex Asset ID for this asset. When the identifier_type is not ASSET_ID, this field will not be
+   * returned in the initial CreateOrder response and will be available after an order completes
+   * validation. If the provided identifier does not match any Apex asset available for trading, an
+   * OrderRejectReason of "UNKNOWN_SECURITY" will be returned and the asset_id will not be set.
    */
   public Order withAssetId(String assetId) {
     Utils.checkNotNull(assetId, "assetId");
@@ -1008,10 +1010,10 @@ public class Order {
   }
 
   /**
-   * Apex Asset ID for this asset. This will not be returned in the initial CreateOrder response and
-   * will be available after an order completes validation. If the provided identifier does not
-   * match any Apex asset available for trading, an OrderRejectReason of "UNKNOWN_SECURITY" will be
-   * returned and the asset_id will not be set.
+   * Apex Asset ID for this asset. When the identifier_type is not ASSET_ID, this field will not be
+   * returned in the initial CreateOrder response and will be available after an order completes
+   * validation. If the provided identifier does not match any Apex asset available for trading, an
+   * OrderRejectReason of "UNKNOWN_SECURITY" will be returned and the asset_id will not be set.
    */
   public Order withAssetId(Optional<String> assetId) {
     Utils.checkNotNull(assetId, "assetId");
@@ -1248,7 +1250,8 @@ public class Order {
 
   /**
    * A custom commission to be applied to this order. When specifying an AMOUNT type, the value
-   * represents a notional amount measured in the currency of the order.
+   * represents a notional amount measured in the currency of the order. Only available for Equity,
+   * Mutual Fund, and Fixed Income orders.
    */
   public Order withCommission(OrderCommission commission) {
     Utils.checkNotNull(commission, "commission");
@@ -1258,7 +1261,8 @@ public class Order {
 
   /**
    * A custom commission to be applied to this order. When specifying an AMOUNT type, the value
-   * represents a notional amount measured in the currency of the order.
+   * represents a notional amount measured in the currency of the order. Only available for Equity,
+   * Mutual Fund, and Fixed Income orders.
    */
   public Order withCommission(JsonNullable<? extends OrderCommission> commission) {
     Utils.checkNotNull(commission, "commission");
@@ -1497,11 +1501,11 @@ public class Order {
   }
 
   /**
-   * The maximum number of shares to be sold if this is a notional SELL order of an Equity asset
-   * type. (Prohibited for other side or asset_type inputs.)
-   *
-   * <p>This will only be recognized for clients configured not to use OMS checks. When specified,
-   * must be greater than 0 and can't exceed 5 decimal places.
+   * The maximum number of shares to be sold for a notional SELL order of an Equity asset type. This
+   * field restricts the quantity to sell, even if the notional amount requires more shares to
+   * fulfill. REQUIRED if your account is not subject to Apex position checks, and PROHIBITED if
+   * your account is subject to Apex position checks. Refer to Position Check for details. When
+   * specified, must be greater than 0 and can't exceed 5 decimal places.
    */
   public Order withMaxSellQuantity(MaxSellQuantity maxSellQuantity) {
     Utils.checkNotNull(maxSellQuantity, "maxSellQuantity");
@@ -1510,11 +1514,11 @@ public class Order {
   }
 
   /**
-   * The maximum number of shares to be sold if this is a notional SELL order of an Equity asset
-   * type. (Prohibited for other side or asset_type inputs.)
-   *
-   * <p>This will only be recognized for clients configured not to use OMS checks. When specified,
-   * must be greater than 0 and can't exceed 5 decimal places.
+   * The maximum number of shares to be sold for a notional SELL order of an Equity asset type. This
+   * field restricts the quantity to sell, even if the notional amount requires more shares to
+   * fulfill. REQUIRED if your account is not subject to Apex position checks, and PROHIBITED if
+   * your account is subject to Apex position checks. Refer to Position Check for details. When
+   * specified, must be greater than 0 and can't exceed 5 decimal places.
    */
   public Order withMaxSellQuantity(JsonNullable<? extends MaxSellQuantity> maxSellQuantity) {
     Utils.checkNotNull(maxSellQuantity, "maxSellQuantity");
@@ -1587,10 +1591,9 @@ public class Order {
   /**
    * The date on which the order will go to the market: must either be "today" or the next valid
    * trading day. If the current day is not a valid trading day, then the next valid market day must
-   * be specified. If the current time is within 5 minutes prior to market close, the next valid
-   * market day may be specified. If the current time is after market close, and before midnight
-   * Eastern, then the next valid market day must be specified. In all other cases, the current day,
-   * Eastern must be specified.
+   * be specified. If the current time is after market close, and before midnight Eastern, then the
+   * next valid market day must be specified. In all other cases, the current day, Eastern must be
+   * specified.
    */
   public Order withOrderDate(OrderDate orderDate) {
     Utils.checkNotNull(orderDate, "orderDate");
@@ -1601,10 +1604,9 @@ public class Order {
   /**
    * The date on which the order will go to the market: must either be "today" or the next valid
    * trading day. If the current day is not a valid trading day, then the next valid market day must
-   * be specified. If the current time is within 5 minutes prior to market close, the next valid
-   * market day may be specified. If the current time is after market close, and before midnight
-   * Eastern, then the next valid market day must be specified. In all other cases, the current day,
-   * Eastern must be specified.
+   * be specified. If the current time is after market close, and before midnight Eastern, then the
+   * next valid market day must be specified. In all other cases, the current day, Eastern must be
+   * specified.
    */
   public Order withOrderDate(JsonNullable<? extends OrderDate> orderDate) {
     Utils.checkNotNull(orderDate, "orderDate");
@@ -1769,6 +1771,7 @@ public class Order {
 
   /**
    * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+   * Only available for Equity, Mutual Fund, and Fixed Income orders.
    */
   public Order withSpecialReportingInstructions(
       List<OrderSpecialReportingInstructions> specialReportingInstructions) {
@@ -1779,6 +1782,7 @@ public class Order {
 
   /**
    * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+   * Only available for Equity, Mutual Fund, and Fixed Income orders.
    */
   public Order withSpecialReportingInstructions(
       Optional<? extends List<OrderSpecialReportingInstructions>> specialReportingInstructions) {
@@ -1802,8 +1806,8 @@ public class Order {
   }
 
   /**
-   * Regulatory requirements dictate that the system capture the intended time_in_force, which is
-   * why this a mandatory field.
+   * For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is
+   * allowed. For Fixed Income: Only "DAY" is allowed.
    */
   public Order withTimeInForce(OrderTimeInForce timeInForce) {
     Utils.checkNotNull(timeInForce, "timeInForce");
@@ -1812,8 +1816,8 @@ public class Order {
   }
 
   /**
-   * Regulatory requirements dictate that the system capture the intended time_in_force, which is
-   * why this a mandatory field.
+   * For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is
+   * allowed. For Fixed Income: Only "DAY" is allowed.
    */
   public Order withTimeInForce(Optional<? extends OrderTimeInForce> timeInForce) {
     Utils.checkNotNull(timeInForce, "timeInForce");
@@ -2178,10 +2182,11 @@ public class Order {
     }
 
     /**
-     * Apex Asset ID for this asset. This will not be returned in the initial CreateOrder response
-     * and will be available after an order completes validation. If the provided identifier does
-     * not match any Apex asset available for trading, an OrderRejectReason of "UNKNOWN_SECURITY"
-     * will be returned and the asset_id will not be set.
+     * Apex Asset ID for this asset. When the identifier_type is not ASSET_ID, this field will not
+     * be returned in the initial CreateOrder response and will be available after an order
+     * completes validation. If the provided identifier does not match any Apex asset available for
+     * trading, an OrderRejectReason of "UNKNOWN_SECURITY" will be returned and the asset_id will
+     * not be set.
      */
     public Builder assetId(String assetId) {
       Utils.checkNotNull(assetId, "assetId");
@@ -2190,10 +2195,11 @@ public class Order {
     }
 
     /**
-     * Apex Asset ID for this asset. This will not be returned in the initial CreateOrder response
-     * and will be available after an order completes validation. If the provided identifier does
-     * not match any Apex asset available for trading, an OrderRejectReason of "UNKNOWN_SECURITY"
-     * will be returned and the asset_id will not be set.
+     * Apex Asset ID for this asset. When the identifier_type is not ASSET_ID, this field will not
+     * be returned in the initial CreateOrder response and will be available after an order
+     * completes validation. If the provided identifier does not match any Apex asset available for
+     * trading, an OrderRejectReason of "UNKNOWN_SECURITY" will be returned and the asset_id will
+     * not be set.
      */
     public Builder assetId(Optional<String> assetId) {
       Utils.checkNotNull(assetId, "assetId");
@@ -2432,7 +2438,8 @@ public class Order {
 
     /**
      * A custom commission to be applied to this order. When specifying an AMOUNT type, the value
-     * represents a notional amount measured in the currency of the order.
+     * represents a notional amount measured in the currency of the order. Only available for
+     * Equity, Mutual Fund, and Fixed Income orders.
      */
     public Builder commission(OrderCommission commission) {
       Utils.checkNotNull(commission, "commission");
@@ -2442,7 +2449,8 @@ public class Order {
 
     /**
      * A custom commission to be applied to this order. When specifying an AMOUNT type, the value
-     * represents a notional amount measured in the currency of the order.
+     * represents a notional amount measured in the currency of the order. Only available for
+     * Equity, Mutual Fund, and Fixed Income orders.
      */
     public Builder commission(JsonNullable<? extends OrderCommission> commission) {
       Utils.checkNotNull(commission, "commission");
@@ -2681,11 +2689,11 @@ public class Order {
     }
 
     /**
-     * The maximum number of shares to be sold if this is a notional SELL order of an Equity asset
-     * type. (Prohibited for other side or asset_type inputs.)
-     *
-     * <p>This will only be recognized for clients configured not to use OMS checks. When specified,
-     * must be greater than 0 and can't exceed 5 decimal places.
+     * The maximum number of shares to be sold for a notional SELL order of an Equity asset type.
+     * This field restricts the quantity to sell, even if the notional amount requires more shares
+     * to fulfill. REQUIRED if your account is not subject to Apex position checks, and PROHIBITED
+     * if your account is subject to Apex position checks. Refer to Position Check for details. When
+     * specified, must be greater than 0 and can't exceed 5 decimal places.
      */
     public Builder maxSellQuantity(MaxSellQuantity maxSellQuantity) {
       Utils.checkNotNull(maxSellQuantity, "maxSellQuantity");
@@ -2694,11 +2702,11 @@ public class Order {
     }
 
     /**
-     * The maximum number of shares to be sold if this is a notional SELL order of an Equity asset
-     * type. (Prohibited for other side or asset_type inputs.)
-     *
-     * <p>This will only be recognized for clients configured not to use OMS checks. When specified,
-     * must be greater than 0 and can't exceed 5 decimal places.
+     * The maximum number of shares to be sold for a notional SELL order of an Equity asset type.
+     * This field restricts the quantity to sell, even if the notional amount requires more shares
+     * to fulfill. REQUIRED if your account is not subject to Apex position checks, and PROHIBITED
+     * if your account is subject to Apex position checks. Refer to Position Check for details. When
+     * specified, must be greater than 0 and can't exceed 5 decimal places.
      */
     public Builder maxSellQuantity(JsonNullable<? extends MaxSellQuantity> maxSellQuantity) {
       Utils.checkNotNull(maxSellQuantity, "maxSellQuantity");
@@ -2771,10 +2779,9 @@ public class Order {
     /**
      * The date on which the order will go to the market: must either be "today" or the next valid
      * trading day. If the current day is not a valid trading day, then the next valid market day
-     * must be specified. If the current time is within 5 minutes prior to market close, the next
-     * valid market day may be specified. If the current time is after market close, and before
-     * midnight Eastern, then the next valid market day must be specified. In all other cases, the
-     * current day, Eastern must be specified.
+     * must be specified. If the current time is after market close, and before midnight Eastern,
+     * then the next valid market day must be specified. In all other cases, the current day,
+     * Eastern must be specified.
      */
     public Builder orderDate(OrderDate orderDate) {
       Utils.checkNotNull(orderDate, "orderDate");
@@ -2785,10 +2792,9 @@ public class Order {
     /**
      * The date on which the order will go to the market: must either be "today" or the next valid
      * trading day. If the current day is not a valid trading day, then the next valid market day
-     * must be specified. If the current time is within 5 minutes prior to market close, the next
-     * valid market day may be specified. If the current time is after market close, and before
-     * midnight Eastern, then the next valid market day must be specified. In all other cases, the
-     * current day, Eastern must be specified.
+     * must be specified. If the current time is after market close, and before midnight Eastern,
+     * then the next valid market day must be specified. In all other cases, the current day,
+     * Eastern must be specified.
      */
     public Builder orderDate(JsonNullable<? extends OrderDate> orderDate) {
       Utils.checkNotNull(orderDate, "orderDate");
@@ -2955,7 +2961,7 @@ public class Order {
 
     /**
      * Special Reporting Instructions to be applied to this order. Can include multiple
-     * Instructions.
+     * Instructions. Only available for Equity, Mutual Fund, and Fixed Income orders.
      */
     public Builder specialReportingInstructions(
         List<OrderSpecialReportingInstructions> specialReportingInstructions) {
@@ -2966,7 +2972,7 @@ public class Order {
 
     /**
      * Special Reporting Instructions to be applied to this order. Can include multiple
-     * Instructions.
+     * Instructions. Only available for Equity, Mutual Fund, and Fixed Income orders.
      */
     public Builder specialReportingInstructions(
         Optional<? extends List<OrderSpecialReportingInstructions>> specialReportingInstructions) {
@@ -2990,8 +2996,8 @@ public class Order {
     }
 
     /**
-     * Regulatory requirements dictate that the system capture the intended time_in_force, which is
-     * why this a mandatory field.
+     * For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is
+     * allowed. For Fixed Income: Only "DAY" is allowed.
      */
     public Builder timeInForce(OrderTimeInForce timeInForce) {
       Utils.checkNotNull(timeInForce, "timeInForce");
@@ -3000,8 +3006,8 @@ public class Order {
     }
 
     /**
-     * Regulatory requirements dictate that the system capture the intended time_in_force, which is
-     * why this a mandatory field.
+     * For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is
+     * allowed. For Fixed Income: Only "DAY" is allowed.
      */
     public Builder timeInForce(Optional<? extends OrderTimeInForce> timeInForce) {
       Utils.checkNotNull(timeInForce, "timeInForce");

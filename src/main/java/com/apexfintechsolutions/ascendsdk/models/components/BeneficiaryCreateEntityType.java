@@ -52,8 +52,6 @@ public class BeneficiaryCreateEntityType {
       new BeneficiaryCreateEntityType("CORPORATION");
   public static final BeneficiaryCreateEntityType LIMITED_LIABILITY_COMPANY =
       new BeneficiaryCreateEntityType("LIMITED_LIABILITY_COMPANY");
-  public static final BeneficiaryCreateEntityType PARTNERSHIP =
-      new BeneficiaryCreateEntityType("PARTNERSHIP");
   public static final BeneficiaryCreateEntityType TRUST = new BeneficiaryCreateEntityType("TRUST");
   public static final BeneficiaryCreateEntityType ESTATE =
       new BeneficiaryCreateEntityType("ESTATE");
@@ -128,7 +126,6 @@ public class BeneficiaryCreateEntityType {
     map.put("ENTITY_TYPE_UNSPECIFIED", ENTITY_TYPE_UNSPECIFIED);
     map.put("CORPORATION", CORPORATION);
     map.put("LIMITED_LIABILITY_COMPANY", LIMITED_LIABILITY_COMPANY);
-    map.put("PARTNERSHIP", PARTNERSHIP);
     map.put("TRUST", TRUST);
     map.put("ESTATE", ESTATE);
     return map;
@@ -139,7 +136,6 @@ public class BeneficiaryCreateEntityType {
     map.put("ENTITY_TYPE_UNSPECIFIED", BeneficiaryCreateEntityTypeEnum.ENTITY_TYPE_UNSPECIFIED);
     map.put("CORPORATION", BeneficiaryCreateEntityTypeEnum.CORPORATION);
     map.put("LIMITED_LIABILITY_COMPANY", BeneficiaryCreateEntityTypeEnum.LIMITED_LIABILITY_COMPANY);
-    map.put("PARTNERSHIP", BeneficiaryCreateEntityTypeEnum.PARTNERSHIP);
     map.put("TRUST", BeneficiaryCreateEntityTypeEnum.TRUST);
     map.put("ESTATE", BeneficiaryCreateEntityTypeEnum.ESTATE);
     return map;
@@ -180,7 +176,6 @@ public class BeneficiaryCreateEntityType {
     ENTITY_TYPE_UNSPECIFIED("ENTITY_TYPE_UNSPECIFIED"),
     CORPORATION("CORPORATION"),
     LIMITED_LIABILITY_COMPANY("LIMITED_LIABILITY_COMPANY"),
-    PARTNERSHIP("PARTNERSHIP"),
     TRUST("TRUST"),
     ESTATE("ESTATE"),
     ;

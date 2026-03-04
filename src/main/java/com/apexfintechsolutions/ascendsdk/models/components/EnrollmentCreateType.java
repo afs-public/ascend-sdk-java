@@ -92,6 +92,7 @@ public class EnrollmentCreateType {
       new EnrollmentCreateType("REGISTRATION_INDIVIDUAL_FOREIGN");
   public static final EnrollmentCreateType REGISTRATION_CUSTODIAL =
       new EnrollmentCreateType("REGISTRATION_CUSTODIAL");
+  public static final EnrollmentCreateType REG_T_MARGIN = new EnrollmentCreateType("REG_T_MARGIN");
   public static final EnrollmentCreateType VIRTUAL_ACCOUNT_NUMBER =
       new EnrollmentCreateType("VIRTUAL_ACCOUNT_NUMBER");
 
@@ -184,6 +185,7 @@ public class EnrollmentCreateType {
     map.put("REGISTRATION_IRA_BENEFICIARY_ROTH", REGISTRATION_IRA_BENEFICIARY_ROTH);
     map.put("REGISTRATION_INDIVIDUAL_FOREIGN", REGISTRATION_INDIVIDUAL_FOREIGN);
     map.put("REGISTRATION_CUSTODIAL", REGISTRATION_CUSTODIAL);
+    map.put("REG_T_MARGIN", REG_T_MARGIN);
     map.put("VIRTUAL_ACCOUNT_NUMBER", VIRTUAL_ACCOUNT_NUMBER);
     return map;
   }
@@ -222,6 +224,7 @@ public class EnrollmentCreateType {
         "REGISTRATION_INDIVIDUAL_FOREIGN",
         EnrollmentCreateTypeEnum.REGISTRATION_INDIVIDUAL_FOREIGN);
     map.put("REGISTRATION_CUSTODIAL", EnrollmentCreateTypeEnum.REGISTRATION_CUSTODIAL);
+    map.put("REG_T_MARGIN", EnrollmentCreateTypeEnum.REG_T_MARGIN);
     map.put("VIRTUAL_ACCOUNT_NUMBER", EnrollmentCreateTypeEnum.VIRTUAL_ACCOUNT_NUMBER);
     return map;
   }
@@ -280,6 +283,7 @@ public class EnrollmentCreateType {
     REGISTRATION_IRA_BENEFICIARY_ROTH("REGISTRATION_IRA_BENEFICIARY_ROTH"),
     REGISTRATION_INDIVIDUAL_FOREIGN("REGISTRATION_INDIVIDUAL_FOREIGN"),
     REGISTRATION_CUSTODIAL("REGISTRATION_CUSTODIAL"),
+    REG_T_MARGIN("REG_T_MARGIN"),
     VIRTUAL_ACCOUNT_NUMBER("VIRTUAL_ACCOUNT_NUMBER"),
     ;
 

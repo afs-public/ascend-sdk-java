@@ -22,7 +22,9 @@ public class AccountsUpdateLegalEntityRequest {
    * `legal_address.postal_code` `exempt_verifying_beneficial_owners` `exempt_customer_reason`
    * `foreign_financial_institution` `accredited_investor` `adviser` `regulated_investment_company`
    * `lei_code` `entity_name` `tax_id` `tax_id_type` `institutional_customer` `operating_regions`
-   * `doing_business_as`
+   * `doing_business_as` `related_document_ids` `business_industrial_classification`
+   * `entity_due_diligence.negative_news.negative_news_against_related_parties`
+   * `entity_due_diligence.negative_news.negative_news_against_related_parties_description`
    */
   @SpeakeasyMetadata("queryParam:style=form,explode=true,name=update_mask")
   private Optional<String> updateMask;
@@ -59,7 +61,9 @@ public class AccountsUpdateLegalEntityRequest {
    * `legal_address.postal_code` `exempt_verifying_beneficial_owners` `exempt_customer_reason`
    * `foreign_financial_institution` `accredited_investor` `adviser` `regulated_investment_company`
    * `lei_code` `entity_name` `tax_id` `tax_id_type` `institutional_customer` `operating_regions`
-   * `doing_business_as`
+   * `doing_business_as` `related_document_ids` `business_industrial_classification`
+   * `entity_due_diligence.negative_news.negative_news_against_related_parties`
+   * `entity_due_diligence.negative_news.negative_news_against_related_parties_description`
    */
   @JsonIgnore
   public Optional<String> updateMask() {
@@ -89,7 +93,9 @@ public class AccountsUpdateLegalEntityRequest {
    * `legal_address.postal_code` `exempt_verifying_beneficial_owners` `exempt_customer_reason`
    * `foreign_financial_institution` `accredited_investor` `adviser` `regulated_investment_company`
    * `lei_code` `entity_name` `tax_id` `tax_id_type` `institutional_customer` `operating_regions`
-   * `doing_business_as`
+   * `doing_business_as` `related_document_ids` `business_industrial_classification`
+   * `entity_due_diligence.negative_news.negative_news_against_related_parties`
+   * `entity_due_diligence.negative_news.negative_news_against_related_parties_description`
    */
   public AccountsUpdateLegalEntityRequest withUpdateMask(String updateMask) {
     Utils.checkNotNull(updateMask, "updateMask");
@@ -104,7 +110,9 @@ public class AccountsUpdateLegalEntityRequest {
    * `legal_address.postal_code` `exempt_verifying_beneficial_owners` `exempt_customer_reason`
    * `foreign_financial_institution` `accredited_investor` `adviser` `regulated_investment_company`
    * `lei_code` `entity_name` `tax_id` `tax_id_type` `institutional_customer` `operating_regions`
-   * `doing_business_as`
+   * `doing_business_as` `related_document_ids` `business_industrial_classification`
+   * `entity_due_diligence.negative_news.negative_news_against_related_parties`
+   * `entity_due_diligence.negative_news.negative_news_against_related_parties_description`
    */
   public AccountsUpdateLegalEntityRequest withUpdateMask(Optional<String> updateMask) {
     Utils.checkNotNull(updateMask, "updateMask");
@@ -177,7 +185,10 @@ public class AccountsUpdateLegalEntityRequest {
      * `legal_address.region_code` `legal_address.postal_code` `exempt_verifying_beneficial_owners`
      * `exempt_customer_reason` `foreign_financial_institution` `accredited_investor` `adviser`
      * `regulated_investment_company` `lei_code` `entity_name` `tax_id` `tax_id_type`
-     * `institutional_customer` `operating_regions` `doing_business_as`
+     * `institutional_customer` `operating_regions` `doing_business_as` `related_document_ids`
+     * `business_industrial_classification`
+     * `entity_due_diligence.negative_news.negative_news_against_related_parties`
+     * `entity_due_diligence.negative_news.negative_news_against_related_parties_description`
      */
     public Builder updateMask(String updateMask) {
       Utils.checkNotNull(updateMask, "updateMask");
@@ -192,7 +203,10 @@ public class AccountsUpdateLegalEntityRequest {
      * `legal_address.region_code` `legal_address.postal_code` `exempt_verifying_beneficial_owners`
      * `exempt_customer_reason` `foreign_financial_institution` `accredited_investor` `adviser`
      * `regulated_investment_company` `lei_code` `entity_name` `tax_id` `tax_id_type`
-     * `institutional_customer` `operating_regions` `doing_business_as`
+     * `institutional_customer` `operating_regions` `doing_business_as` `related_document_ids`
+     * `business_industrial_classification`
+     * `entity_due_diligence.negative_news.negative_news_against_related_parties`
+     * `entity_due_diligence.negative_news.negative_news_against_related_parties_description`
      */
     public Builder updateMask(Optional<String> updateMask) {
       Utils.checkNotNull(updateMask, "updateMask");

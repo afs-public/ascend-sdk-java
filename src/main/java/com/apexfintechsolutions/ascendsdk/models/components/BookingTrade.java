@@ -149,7 +149,7 @@ public class BookingTrade {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("settlement_date")
-  private JsonNullable<? extends SettlementDate> settlementDate;
+  private JsonNullable<? extends BookingTradeSettlementDate> settlementDate;
 
   /** Denotes if the trade is a SELL or a BUY. */
   @JsonInclude(Include.NON_ABSENT)
@@ -216,7 +216,8 @@ public class BookingTrade {
       @JsonProperty("open") Optional<Boolean> open,
       @JsonProperty("order_id") Optional<String> orderId,
       @JsonProperty("route_type") Optional<? extends BookingTradeRouteType> routeType,
-      @JsonProperty("settlement_date") JsonNullable<? extends SettlementDate> settlementDate,
+      @JsonProperty("settlement_date")
+          JsonNullable<? extends BookingTradeSettlementDate> settlementDate,
       @JsonProperty("side") Optional<? extends BookingTradeSide> side,
       @JsonProperty("side_modifier") Optional<? extends BookingTradeSideModifier> sideModifier,
       @JsonProperty("source_application") Optional<String> sourceApplication,
@@ -472,8 +473,8 @@ public class BookingTrade {
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
-  public JsonNullable<SettlementDate> settlementDate() {
-    return (JsonNullable<SettlementDate>) settlementDate;
+  public JsonNullable<BookingTradeSettlementDate> settlementDate() {
+    return (JsonNullable<BookingTradeSettlementDate>) settlementDate;
   }
 
   /** Denotes if the trade is a SELL or a BUY. */
@@ -865,7 +866,7 @@ public class BookingTrade {
    * Defaults to T+1 for equities if this is not provided. Calculated by the execution's
    * execution_time field in Eastern Time.
    */
-  public BookingTrade withSettlementDate(SettlementDate settlementDate) {
+  public BookingTrade withSettlementDate(BookingTradeSettlementDate settlementDate) {
     Utils.checkNotNull(settlementDate, "settlementDate");
     this.settlementDate = JsonNullable.of(settlementDate);
     return this;
@@ -875,7 +876,8 @@ public class BookingTrade {
    * Defaults to T+1 for equities if this is not provided. Calculated by the execution's
    * execution_time field in Eastern Time.
    */
-  public BookingTrade withSettlementDate(JsonNullable<? extends SettlementDate> settlementDate) {
+  public BookingTrade withSettlementDate(
+      JsonNullable<? extends BookingTradeSettlementDate> settlementDate) {
     Utils.checkNotNull(settlementDate, "settlementDate");
     this.settlementDate = settlementDate;
     return this;
@@ -1167,7 +1169,8 @@ public class BookingTrade {
 
     private Optional<? extends BookingTradeRouteType> routeType = Optional.empty();
 
-    private JsonNullable<? extends SettlementDate> settlementDate = JsonNullable.undefined();
+    private JsonNullable<? extends BookingTradeSettlementDate> settlementDate =
+        JsonNullable.undefined();
 
     private Optional<? extends BookingTradeSide> side = Optional.empty();
 
@@ -1520,7 +1523,7 @@ public class BookingTrade {
      * Defaults to T+1 for equities if this is not provided. Calculated by the execution's
      * execution_time field in Eastern Time.
      */
-    public Builder settlementDate(SettlementDate settlementDate) {
+    public Builder settlementDate(BookingTradeSettlementDate settlementDate) {
       Utils.checkNotNull(settlementDate, "settlementDate");
       this.settlementDate = JsonNullable.of(settlementDate);
       return this;
@@ -1530,7 +1533,8 @@ public class BookingTrade {
      * Defaults to T+1 for equities if this is not provided. Calculated by the execution's
      * execution_time field in Eastern Time.
      */
-    public Builder settlementDate(JsonNullable<? extends SettlementDate> settlementDate) {
+    public Builder settlementDate(
+        JsonNullable<? extends BookingTradeSettlementDate> settlementDate) {
       Utils.checkNotNull(settlementDate, "settlementDate");
       this.settlementDate = settlementDate;
       return this;

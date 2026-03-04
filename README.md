@@ -16,7 +16,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'com.apexfintechsolutions:ascendsdk:1.6.2'
+implementation 'com.apexfintechsolutions:ascendsdk:1.6.3'
 ```
 
 Maven:
@@ -24,7 +24,7 @@ Maven:
 <dependency>
     <groupId>com.apexfintechsolutions</groupId>
     <artifactId>ascendsdk</artifactId>
-    <version>1.6.2</version>
+    <version>1.6.3</version>
 </dependency>
 ```
 
@@ -443,6 +443,30 @@ public class Application {
 * [getAchWithdrawal](docs/sdks/achtransfers/README.md#getachwithdrawal) - Get ACH Withdrawal
 * [cancelAchWithdrawal](docs/sdks/achtransfers/README.md#cancelachwithdrawal) - Cancel ACH Withdrawal
 
+### [alternativeAccountAccreditation()](docs/sdks/alternativeaccountaccreditation/README.md)
+
+* [getAccountAccreditation](docs/sdks/alternativeaccountaccreditation/README.md#getaccountaccreditation) - Get Account Accreditation
+* [setAccountAccreditationType](docs/sdks/alternativeaccountaccreditation/README.md#setaccountaccreditationtype) - Set Account Accreditation
+
+### [alternativeInvestmentDocuments()](docs/sdks/alternativeinvestmentdocuments/README.md)
+
+* [listAlternativeInvestmentDocuments](docs/sdks/alternativeinvestmentdocuments/README.md#listalternativeinvestmentdocuments) - List Alternative Investment Documents
+* [getAlternativeInvestmentDocument](docs/sdks/alternativeinvestmentdocuments/README.md#getalternativeinvestmentdocument) - Get Alternative Investment Document
+* [downloadAlternativeInvestmentDocument](docs/sdks/alternativeinvestmentdocuments/README.md#downloadalternativeinvestmentdocument) - Download Alternative Investment Documents
+
+### [alternativeInvestments()](docs/sdks/alternativeinvestments/README.md)
+
+* [listAlternativeInvestments](docs/sdks/alternativeinvestments/README.md#listalternativeinvestments) - List Alternative Investment Assets
+* [getAlternativeInvestment](docs/sdks/alternativeinvestments/README.md#getalternativeinvestment) - Get Alternative Investment Asset
+
+### [alternativeOrders()](docs/sdks/alternativeorders/README.md)
+
+* [createAlternativeOrder](docs/sdks/alternativeorders/README.md#createalternativeorder) - Create Alternative Order
+* [listAlternativeOrders](docs/sdks/alternativeorders/README.md#listalternativeorders) - List Alternative Orders
+* [getAlternativeOrder](docs/sdks/alternativeorders/README.md#getalternativeorder) - Get Alternative Order
+* [retrievePendingInvestorActions](docs/sdks/alternativeorders/README.md#retrievependinginvestoractions) - Get Pending Investor Actions
+* [settleAlternativeOrder](docs/sdks/alternativeorders/README.md#settlealternativeorder) - Simulate Alternative Order Booking
+
 ### [assets()](docs/sdks/assets/README.md)
 
 * [listAssets](docs/sdks/assets/README.md#listassets) - List Assets
@@ -481,6 +505,11 @@ public class Application {
 * [listCompressedOrders](docs/sdks/basketorders/README.md#listcompressedorders) - List Compressed Orders
 * [removeOrders](docs/sdks/basketorders/README.md#removeorders) - Remove Basket Orders
 * [setExtraReportingData](docs/sdks/basketorders/README.md#setextrareportingdata) - Set Extra Reporting Data
+
+### [buyingPower()](docs/sdks/buyingpower/README.md)
+
+* [getBuyingPower](docs/sdks/buyingpower/README.md#getbuyingpower) - Get Buying Power
+* [getAssetBuyingPower](docs/sdks/buyingpower/README.md#getassetbuyingpower) - Get Asset Buying Power
 
 ### [cashBalances()](docs/sdks/cashbalances/README.md)
 
@@ -562,9 +591,18 @@ public class Application {
 * [getActivity](docs/sdks/ledger/README.md#getactivity) - Get Activity
 * [getEntry](docs/sdks/ledger/README.md#getentry) - Get Entry
 
-### [margins()](docs/sdks/margins/README.md)
+### [optionInstructions()](docs/sdks/optioninstructions/README.md)
 
-* [getBuyingPower](docs/sdks/margins/README.md#getbuyingpower) - Get Buying Power
+* [createOptionInstruction](docs/sdks/optioninstructions/README.md#createoptioninstruction) - Create Option Instruction
+* [listOptionInstructions](docs/sdks/optioninstructions/README.md#listoptioninstructions) - List Option Instructions
+* [getOptionInstruction](docs/sdks/optioninstructions/README.md#getoptioninstruction) - Get Option Instruction
+* [cancelOptionInstruction](docs/sdks/optioninstructions/README.md#canceloptioninstruction) - Cancel Option Instruction
+
+### [optionOrders()](docs/sdks/optionorders/README.md)
+
+* [createOptionOrder](docs/sdks/optionorders/README.md#createoptionorder) - Create Option Order
+* [getOptionOrder](docs/sdks/optionorders/README.md#getoptionorder) - Get Option Order
+* [cancelOptionOrder](docs/sdks/optionorders/README.md#canceloptionorder) - Cancel Option Order
 
 ### [orders()](docs/sdks/orders/README.md)
 
@@ -595,6 +633,24 @@ public class Application {
 * [getPositionJournal](docs/sdks/positionjournals/README.md#getpositionjournal) - Get Position Journal
 * [cancelPositionJournal](docs/sdks/positionjournals/README.md#cancelpositionjournal) - Cancel Position Journal
 
+### [preIPOCompanies()](docs/sdks/preipocompanies/README.md)
+
+* [listPreIpoCompanies](docs/sdks/preipocompanies/README.md#listpreipocompanies) - List Pre IPO Company
+* [getPreIpoCompany](docs/sdks/preipocompanies/README.md#getpreipocompany) - Get Pre IPO Company
+
+### [preIPOFundingRounds()](docs/sdks/preipofundingrounds/README.md)
+
+* [listPreIpoCompanyFundingRounds](docs/sdks/preipofundingrounds/README.md#listpreipocompanyfundingrounds) - List Pre IPO Company Funding Rounds
+* [getPreIpoCompanyFundingRound](docs/sdks/preipofundingrounds/README.md#getpreipocompanyfundinground) - Get Pre IPO Company Funding Round
+
+### [preIPONewsEvents()](docs/sdks/preiponewsevents/README.md)
+
+* [listPreIpoCompanyNewsEvents](docs/sdks/preiponewsevents/README.md#listpreipocompanynewsevents) - List Pre IPO Company News Events
+
+### [preIPOResearchDocuments()](docs/sdks/preiporesearchdocuments/README.md)
+
+* [listPreIpoCompanyResearchDocuments](docs/sdks/preiporesearchdocuments/README.md#listpreipocompanyresearchdocuments) - List Pre IPO Company Research Documents
+
 ### [reader()](docs/sdks/reader/README.md)
 
 * [listEventMessages](docs/sdks/reader/README.md#listeventmessages) - List Event Messages
@@ -620,6 +676,11 @@ public class Application {
 * [getAchWithdrawalSchedule](docs/sdks/scheduletransfers/README.md#getachwithdrawalschedule) - Get ACH Withdrawal Schedule
 * [updateAchWithdrawalSchedule](docs/sdks/scheduletransfers/README.md#updateachwithdrawalschedule) - Update ACH Withdrawal Schedule
 * [cancelAchWithdrawalSchedule](docs/sdks/scheduletransfers/README.md#cancelachwithdrawalschedule) - Cancel ACH Withdrawal Schedule
+* [createCashJournalSchedule](docs/sdks/scheduletransfers/README.md#createcashjournalschedule) - Create Cash Journal Schedule
+* [getCashJournalSchedule](docs/sdks/scheduletransfers/README.md#getcashjournalschedule) - Get Cash Journal Schedule
+* [updateCashJournalSchedule](docs/sdks/scheduletransfers/README.md#updatecashjournalschedule) - Update Cash Journal Schedule
+* [cancelCashJournalSchedule](docs/sdks/scheduletransfers/README.md#cancelcashjournalschedule) - Cancel Cash Journal Schedule
+* [searchCashJournalSchedules](docs/sdks/scheduletransfers/README.md#searchcashjournalschedules) - Search Cash Journal Schedules
 * [createCheckWithdrawalSchedule](docs/sdks/scheduletransfers/README.md#createcheckwithdrawalschedule) - Create Check Withdrawal Schedule
 * [listCheckWithdrawalSchedules](docs/sdks/scheduletransfers/README.md#listcheckwithdrawalschedules) - List Check Withdrawal Schedules
 * [getCheckWithdrawalSchedule](docs/sdks/scheduletransfers/README.md#getcheckwithdrawalschedule) - Get Check Withdrawal Schedule

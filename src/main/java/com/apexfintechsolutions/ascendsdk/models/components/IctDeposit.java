@@ -53,7 +53,7 @@ public class IctDeposit {
   private JsonNullable<? extends IctDepositState> state;
 
   /**
-   * Deprecated, use state instead
+   * Deprecated: use state instead
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as
    *     soon as possible.
@@ -153,7 +153,7 @@ public class IctDeposit {
   }
 
   /**
-   * Deprecated, use state instead
+   * Deprecated: use state instead
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as
    *     soon as possible.
@@ -269,7 +269,7 @@ public class IctDeposit {
   }
 
   /**
-   * Deprecated, use state instead
+   * Deprecated: use state instead
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as
    *     soon as possible.
@@ -282,7 +282,7 @@ public class IctDeposit {
   }
 
   /**
-   * Deprecated, use state instead
+   * Deprecated: use state instead
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as
    *     soon as possible.
@@ -479,7 +479,7 @@ public class IctDeposit {
     }
 
     /**
-     * Deprecated, use state instead
+     * Deprecated: use state instead
      *
      * @deprecated field: This will be removed in a future release, please migrate away from it as
      *     soon as possible.
@@ -492,7 +492,7 @@ public class IctDeposit {
     }
 
     /**
-     * Deprecated, use state instead
+     * Deprecated: use state instead
      *
      * @deprecated field: This will be removed in a future release, please migrate away from it as
      *     soon as possible.

@@ -14,8 +14,8 @@ import java.util.Optional;
 /**
  * SettlementDate
  *
- * <p>Defaults to T+1 for equities if this is not provided. Calculated by the execution's
- * execution_time field in Eastern Time.
+ * <p>The date the order will be/was settled. Value will be `null` until the issuer sets a
+ * settlement date.
  */
 public class SettlementDate {
   /**

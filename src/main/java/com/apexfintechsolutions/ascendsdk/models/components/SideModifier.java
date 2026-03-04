@@ -40,7 +40,8 @@ import java.util.Optional;
 /**
  * SideModifier
  *
- * <p>Side modifier for the trade.
+ * <p>The open/close modification of the side, signaling whether this option order leg intends to
+ * OPEN a new position, or to CLOSE an existing one.
  */
 @JsonDeserialize(using = SideModifier._Deserializer.class)
 @JsonSerialize(using = SideModifier._Serializer.class)
@@ -48,9 +49,6 @@ public class SideModifier {
 
   public static final SideModifier SIDE_MODIFIER_UNSPECIFIED =
       new SideModifier("SIDE_MODIFIER_UNSPECIFIED");
-  public static final SideModifier SHORT = new SideModifier("SHORT");
-  public static final SideModifier SHORT_EXEMPT = new SideModifier("SHORT_EXEMPT");
-  public static final SideModifier SHORT_COVER = new SideModifier("SHORT_COVER");
   public static final SideModifier OPEN = new SideModifier("OPEN");
   public static final SideModifier CLOSE = new SideModifier("CLOSE");
 
@@ -121,9 +119,6 @@ public class SideModifier {
   private static final Map<String, SideModifier> createValuesMap() {
     Map<String, SideModifier> map = new LinkedHashMap<>();
     map.put("SIDE_MODIFIER_UNSPECIFIED", SIDE_MODIFIER_UNSPECIFIED);
-    map.put("SHORT", SHORT);
-    map.put("SHORT_EXEMPT", SHORT_EXEMPT);
-    map.put("SHORT_COVER", SHORT_COVER);
     map.put("OPEN", OPEN);
     map.put("CLOSE", CLOSE);
     return map;
@@ -132,9 +127,6 @@ public class SideModifier {
   private static final Map<String, SideModifierEnum> createEnumsMap() {
     Map<String, SideModifierEnum> map = new HashMap<>();
     map.put("SIDE_MODIFIER_UNSPECIFIED", SideModifierEnum.SIDE_MODIFIER_UNSPECIFIED);
-    map.put("SHORT", SideModifierEnum.SHORT);
-    map.put("SHORT_EXEMPT", SideModifierEnum.SHORT_EXEMPT);
-    map.put("SHORT_COVER", SideModifierEnum.SHORT_COVER);
     map.put("OPEN", SideModifierEnum.OPEN);
     map.put("CLOSE", SideModifierEnum.CLOSE);
     return map;
@@ -172,9 +164,6 @@ public class SideModifier {
 
   public enum SideModifierEnum {
     SIDE_MODIFIER_UNSPECIFIED("SIDE_MODIFIER_UNSPECIFIED"),
-    SHORT("SHORT"),
-    SHORT_EXEMPT("SHORT_EXEMPT"),
-    SHORT_COVER("SHORT_COVER"),
     OPEN("OPEN"),
     CLOSE("CLOSE"),
     ;
