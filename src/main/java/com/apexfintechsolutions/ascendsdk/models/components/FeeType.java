@@ -95,6 +95,10 @@ public class FeeType {
   public static final FeeType VOIDED_CHECK = new FeeType("VOIDED_CHECK");
   public static final FeeType STOP_PAYMENT_AFTER180_DAYS =
       new FeeType("STOP_PAYMENT_AFTER_180_DAYS");
+  public static final FeeType CONFIRM = new FeeType("CONFIRM");
+  public static final FeeType CLEARING = new FeeType("CLEARING");
+  public static final FeeType PROMOTIONAL_CREDIT_CLAWBACK =
+      new FeeType("PROMOTIONAL_CREDIT_CLAWBACK");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -205,6 +209,9 @@ public class FeeType {
     map.put("PRINT_CHECK_AT_FIRM", PRINT_CHECK_AT_FIRM);
     map.put("VOIDED_CHECK", VOIDED_CHECK);
     map.put("STOP_PAYMENT_AFTER_180_DAYS", STOP_PAYMENT_AFTER180_DAYS);
+    map.put("CONFIRM", CONFIRM);
+    map.put("CLEARING", CLEARING);
+    map.put("PROMOTIONAL_CREDIT_CLAWBACK", PROMOTIONAL_CREDIT_CLAWBACK);
     return map;
   }
 
@@ -256,6 +263,9 @@ public class FeeType {
     map.put("PRINT_CHECK_AT_FIRM", FeeTypeEnum.PRINT_CHECK_AT_FIRM);
     map.put("VOIDED_CHECK", FeeTypeEnum.VOIDED_CHECK);
     map.put("STOP_PAYMENT_AFTER_180_DAYS", FeeTypeEnum.STOP_PAYMENT_AFTER180_DAYS);
+    map.put("CONFIRM", FeeTypeEnum.CONFIRM);
+    map.put("CLEARING", FeeTypeEnum.CLEARING);
+    map.put("PROMOTIONAL_CREDIT_CLAWBACK", FeeTypeEnum.PROMOTIONAL_CREDIT_CLAWBACK);
     return map;
   }
 
@@ -333,6 +343,9 @@ public class FeeType {
     PRINT_CHECK_AT_FIRM("PRINT_CHECK_AT_FIRM"),
     VOIDED_CHECK("VOIDED_CHECK"),
     STOP_PAYMENT_AFTER180_DAYS("STOP_PAYMENT_AFTER_180_DAYS"),
+    CONFIRM("CONFIRM"),
+    CLEARING("CLEARING"),
+    PROMOTIONAL_CREDIT_CLAWBACK("PROMOTIONAL_CREDIT_CLAWBACK"),
     ;
 
     private final String value;

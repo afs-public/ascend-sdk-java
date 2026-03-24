@@ -46,7 +46,9 @@ public class PersonIdentification {
    * The identification type for a person, one of: - `ID_TYPE_UNSPECIFIED` - Default/Null value. -
    * `SSN` - SSN tax type. - `ITIN` - ITIN tax type. - `FTIN` - FTIN (foreign tax id) type. -
    * `NATIONAL_ID` - National id type. - `PASSPORT` - Passport id type. - `DRIVING_LICENSE` -
-   * Drivers license id type.
+   * Drivers license id type. - `STATE_ID_CARD` - State ID card. - `NATIONAL_ID_CARD` - National ID
+   * card. - `PERMANENT_RESIDENT_VISA` - Permanent resident visa. - `MILITARY_ID_CARD` - Military ID
+   * card.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("type")
@@ -112,7 +114,9 @@ public class PersonIdentification {
    * The identification type for a person, one of: - `ID_TYPE_UNSPECIFIED` - Default/Null value. -
    * `SSN` - SSN tax type. - `ITIN` - ITIN tax type. - `FTIN` - FTIN (foreign tax id) type. -
    * `NATIONAL_ID` - National id type. - `PASSPORT` - Passport id type. - `DRIVING_LICENSE` -
-   * Drivers license id type.
+   * Drivers license id type. - `STATE_ID_CARD` - State ID card. - `NATIONAL_ID_CARD` - National ID
+   * card. - `PERMANENT_RESIDENT_VISA` - Permanent resident visa. - `MILITARY_ID_CARD` - Military ID
+   * card.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -195,7 +199,9 @@ public class PersonIdentification {
    * The identification type for a person, one of: - `ID_TYPE_UNSPECIFIED` - Default/Null value. -
    * `SSN` - SSN tax type. - `ITIN` - ITIN tax type. - `FTIN` - FTIN (foreign tax id) type. -
    * `NATIONAL_ID` - National id type. - `PASSPORT` - Passport id type. - `DRIVING_LICENSE` -
-   * Drivers license id type.
+   * Drivers license id type. - `STATE_ID_CARD` - State ID card. - `NATIONAL_ID_CARD` - National ID
+   * card. - `PERMANENT_RESIDENT_VISA` - Permanent resident visa. - `MILITARY_ID_CARD` - Military ID
+   * card.
    */
   public PersonIdentification withType(PersonIdentificationType type) {
     Utils.checkNotNull(type, "type");
@@ -207,7 +213,9 @@ public class PersonIdentification {
    * The identification type for a person, one of: - `ID_TYPE_UNSPECIFIED` - Default/Null value. -
    * `SSN` - SSN tax type. - `ITIN` - ITIN tax type. - `FTIN` - FTIN (foreign tax id) type. -
    * `NATIONAL_ID` - National id type. - `PASSPORT` - Passport id type. - `DRIVING_LICENSE` -
-   * Drivers license id type.
+   * Drivers license id type. - `STATE_ID_CARD` - State ID card. - `NATIONAL_ID_CARD` - National ID
+   * card. - `PERMANENT_RESIDENT_VISA` - Permanent resident visa. - `MILITARY_ID_CARD` - Military ID
+   * card.
    */
   public PersonIdentification withType(Optional<? extends PersonIdentificationType> type) {
     Utils.checkNotNull(type, "type");
@@ -347,7 +355,9 @@ public class PersonIdentification {
      * The identification type for a person, one of: - `ID_TYPE_UNSPECIFIED` - Default/Null value. -
      * `SSN` - SSN tax type. - `ITIN` - ITIN tax type. - `FTIN` - FTIN (foreign tax id) type. -
      * `NATIONAL_ID` - National id type. - `PASSPORT` - Passport id type. - `DRIVING_LICENSE` -
-     * Drivers license id type.
+     * Drivers license id type. - `STATE_ID_CARD` - State ID card. - `NATIONAL_ID_CARD` - National
+     * ID card. - `PERMANENT_RESIDENT_VISA` - Permanent resident visa. - `MILITARY_ID_CARD` -
+     * Military ID card.
      */
     public Builder type(PersonIdentificationType type) {
       Utils.checkNotNull(type, "type");
@@ -359,7 +369,9 @@ public class PersonIdentification {
      * The identification type for a person, one of: - `ID_TYPE_UNSPECIFIED` - Default/Null value. -
      * `SSN` - SSN tax type. - `ITIN` - ITIN tax type. - `FTIN` - FTIN (foreign tax id) type. -
      * `NATIONAL_ID` - National id type. - `PASSPORT` - Passport id type. - `DRIVING_LICENSE` -
-     * Drivers license id type.
+     * Drivers license id type. - `STATE_ID_CARD` - State ID card. - `NATIONAL_ID_CARD` - National
+     * ID card. - `PERMANENT_RESIDENT_VISA` - Permanent resident visa. - `MILITARY_ID_CARD` -
+     * Military ID card.
      */
     public Builder type(Optional<? extends PersonIdentificationType> type) {
       Utils.checkNotNull(type, "type");

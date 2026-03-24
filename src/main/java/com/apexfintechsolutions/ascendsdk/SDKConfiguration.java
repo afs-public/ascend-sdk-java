@@ -14,8 +14,8 @@ import java.util.Optional;
 public class SDKConfiguration {
 
   private static final String LANGUAGE = "java";
-  public static final String OPENAPI_DOC_VERSION = "v1:20260227:uat:06c84009201f";
-  public static final String SDK_VERSION = "1.6.3";
+  public static final String OPENAPI_DOC_VERSION = "v1:20260323:uat:35c1f0c6e7e6";
+  public static final String SDK_VERSION = "1.6.4";
   public static final String GEN_VERSION = "2.691.6";
   private static final String BASE_PACKAGE = "com.apexfintechsolutions.ascendsdk";
   public static final String USER_AGENT =

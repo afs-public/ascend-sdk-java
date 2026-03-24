@@ -50,6 +50,7 @@ public class AssetType {
   public static final AssetType EQUITY = new AssetType("EQUITY");
   public static final AssetType FIXED_INCOME = new AssetType("FIXED_INCOME");
   public static final AssetType MUTUAL_FUND = new AssetType("MUTUAL_FUND");
+  public static final AssetType EVENT_CONTRACT = new AssetType("EVENT_CONTRACT");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -120,6 +121,7 @@ public class AssetType {
     map.put("EQUITY", EQUITY);
     map.put("FIXED_INCOME", FIXED_INCOME);
     map.put("MUTUAL_FUND", MUTUAL_FUND);
+    map.put("EVENT_CONTRACT", EVENT_CONTRACT);
     return map;
   }
 
@@ -128,6 +130,7 @@ public class AssetType {
     map.put("EQUITY", AssetTypeEnum.EQUITY);
     map.put("FIXED_INCOME", AssetTypeEnum.FIXED_INCOME);
     map.put("MUTUAL_FUND", AssetTypeEnum.MUTUAL_FUND);
+    map.put("EVENT_CONTRACT", AssetTypeEnum.EVENT_CONTRACT);
     return map;
   }
 
@@ -165,6 +168,7 @@ public class AssetType {
     EQUITY("EQUITY"),
     FIXED_INCOME("FIXED_INCOME"),
     MUTUAL_FUND("MUTUAL_FUND"),
+    EVENT_CONTRACT("EVENT_CONTRACT"),
     ;
 
     private final String value;

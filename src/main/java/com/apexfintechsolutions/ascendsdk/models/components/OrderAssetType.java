@@ -50,6 +50,7 @@ public class OrderAssetType {
   public static final OrderAssetType EQUITY = new OrderAssetType("EQUITY");
   public static final OrderAssetType FIXED_INCOME = new OrderAssetType("FIXED_INCOME");
   public static final OrderAssetType MUTUAL_FUND = new OrderAssetType("MUTUAL_FUND");
+  public static final OrderAssetType EVENT_CONTRACT = new OrderAssetType("EVENT_CONTRACT");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -120,6 +121,7 @@ public class OrderAssetType {
     map.put("EQUITY", EQUITY);
     map.put("FIXED_INCOME", FIXED_INCOME);
     map.put("MUTUAL_FUND", MUTUAL_FUND);
+    map.put("EVENT_CONTRACT", EVENT_CONTRACT);
     return map;
   }
 
@@ -128,6 +130,7 @@ public class OrderAssetType {
     map.put("EQUITY", OrderAssetTypeEnum.EQUITY);
     map.put("FIXED_INCOME", OrderAssetTypeEnum.FIXED_INCOME);
     map.put("MUTUAL_FUND", OrderAssetTypeEnum.MUTUAL_FUND);
+    map.put("EVENT_CONTRACT", OrderAssetTypeEnum.EVENT_CONTRACT);
     return map;
   }
 
@@ -165,6 +168,7 @@ public class OrderAssetType {
     EQUITY("EQUITY"),
     FIXED_INCOME("FIXED_INCOME"),
     MUTUAL_FUND("MUTUAL_FUND"),
+    EVENT_CONTRACT("EVENT_CONTRACT"),
     ;
 
     private final String value;

@@ -1,0 +1,10 @@
+{
+  "mode": "testops",
+  "fallback": "report",
+  "testops": {
+    "api": { "token": "", "host": "qase.io" },
+    "project": "CDX",
+    "run": { "title": "Ascend SDK Java Tests", "complete": true },
+    "batch": { "size": 200 }
+  }
+}

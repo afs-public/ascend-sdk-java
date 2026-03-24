@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
 import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
+import com.apexfintechsolutions.ascendsdk.models.operations.MarginsRealTimeGetAssetBuyingPowerResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.MarginsRealTimeGetBuyingPowerResponse;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import org.junit.jupiter.api.Test;
@@ -40,6 +41,40 @@ public class MarginsTests {
 
     MarginsRealTimeGetBuyingPowerResponse res =
         sdk.buyingPower().getBuyingPower().accountId("01JHGTEPC6ZTAHCFRH2MD3VJJT").call();
+    assertEquals(200, res.statusCode());
+  }
+
+  @Test
+  public void testMargins_MarginsRealTimeGetAssetBuyingPower() throws Exception {
+
+    var testHttpClient = Utils.createTestHTTPClient("MarginsRealTime_GetAssetBuyingPower");
+    SDK sdk =
+        SDK.builder()
+            .serverURL(Utils.environmentVariable("SERVICE_ACCOUNT_CREDS_URL", ""))
+            .security(
+                Security.builder()
+                    .apiKey(Utils.environmentVariable("API_KEY", ""))
+                    .serviceAccountCreds(
+                        ServiceAccountCreds.builder()
+                            .privateKey(
+                                System.getenv()
+                                    .getOrDefault("SERVICE_ACCOUNT_CREDS_PRIVATE_KEY", ""))
+                            .name(System.getenv().getOrDefault("SERVICE_ACCOUNT_CREDS_NAME", ""))
+                            .organization(
+                                System.getenv()
+                                    .getOrDefault("SERVICE_ACCOUNT_CREDS_ORGANIZATION", ""))
+                            .type(System.getenv().getOrDefault("SERVICE_ACCOUNT_CREDS_TYPE", ""))
+                            .build())
+                    .build())
+            .client(testHttpClient)
+            .build();
+
+    MarginsRealTimeGetAssetBuyingPowerResponse res =
+        sdk.buyingPower()
+            .getAssetBuyingPower()
+            .accountId("01JHGTEPC6ZTAHCFRH2MD3VJJT")
+            .assetId("8395")
+            .call();
     assertEquals(200, res.statusCode());
   }
 }

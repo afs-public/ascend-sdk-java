@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * ActivityTransfer
@@ -31,6 +32,19 @@ public class ActivityTransfer {
   @JsonProperty("client_brokerage")
   private Optional<String> clientBrokerage;
 
+  /**
+   * Total value of the securities being transferred. Used for sponsored transfers activity to
+   * ensure cost basis is accurately moved with the assets to the new account
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("fair_market_value")
+  private JsonNullable<? extends ActivityTransferFairMarketValue> fairMarketValue;
+
+  /** Date from which the asset was valued and used in the fair market value calculation */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("fair_market_value_date")
+  private JsonNullable<? extends ActivityTransferFairMarketValueDate> fairMarketValueDate;
+
   /** Provides more granular detail on the purpose of transfer */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("transfer_type")
@@ -40,17 +54,30 @@ public class ActivityTransfer {
   public ActivityTransfer(
       @JsonProperty("additional_instructions") Optional<String> additionalInstructions,
       @JsonProperty("client_brokerage") Optional<String> clientBrokerage,
+      @JsonProperty("fair_market_value")
+          JsonNullable<? extends ActivityTransferFairMarketValue> fairMarketValue,
+      @JsonProperty("fair_market_value_date")
+          JsonNullable<? extends ActivityTransferFairMarketValueDate> fairMarketValueDate,
       @JsonProperty("transfer_type") Optional<? extends ActivityTransferType> transferType) {
     Utils.checkNotNull(additionalInstructions, "additionalInstructions");
     Utils.checkNotNull(clientBrokerage, "clientBrokerage");
+    Utils.checkNotNull(fairMarketValue, "fairMarketValue");
+    Utils.checkNotNull(fairMarketValueDate, "fairMarketValueDate");
     Utils.checkNotNull(transferType, "transferType");
     this.additionalInstructions = additionalInstructions;
     this.clientBrokerage = clientBrokerage;
+    this.fairMarketValue = fairMarketValue;
+    this.fairMarketValueDate = fairMarketValueDate;
     this.transferType = transferType;
   }
 
   public ActivityTransfer() {
-    this(Optional.empty(), Optional.empty(), Optional.empty());
+    this(
+        Optional.empty(),
+        Optional.empty(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        Optional.empty());
   }
 
   /** Free form text for additional sweep messages or instructions */
@@ -66,6 +93,23 @@ public class ActivityTransfer {
   @JsonIgnore
   public Optional<String> clientBrokerage() {
     return clientBrokerage;
+  }
+
+  /**
+   * Total value of the securities being transferred. Used for sponsored transfers activity to
+   * ensure cost basis is accurately moved with the assets to the new account
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<ActivityTransferFairMarketValue> fairMarketValue() {
+    return (JsonNullable<ActivityTransferFairMarketValue>) fairMarketValue;
+  }
+
+  /** Date from which the asset was valued and used in the fair market value calculation */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<ActivityTransferFairMarketValueDate> fairMarketValueDate() {
+    return (JsonNullable<ActivityTransferFairMarketValueDate>) fairMarketValueDate;
   }
 
   /** Provides more granular detail on the purpose of transfer */
@@ -113,6 +157,43 @@ public class ActivityTransfer {
     return this;
   }
 
+  /**
+   * Total value of the securities being transferred. Used for sponsored transfers activity to
+   * ensure cost basis is accurately moved with the assets to the new account
+   */
+  public ActivityTransfer withFairMarketValue(ActivityTransferFairMarketValue fairMarketValue) {
+    Utils.checkNotNull(fairMarketValue, "fairMarketValue");
+    this.fairMarketValue = JsonNullable.of(fairMarketValue);
+    return this;
+  }
+
+  /**
+   * Total value of the securities being transferred. Used for sponsored transfers activity to
+   * ensure cost basis is accurately moved with the assets to the new account
+   */
+  public ActivityTransfer withFairMarketValue(
+      JsonNullable<? extends ActivityTransferFairMarketValue> fairMarketValue) {
+    Utils.checkNotNull(fairMarketValue, "fairMarketValue");
+    this.fairMarketValue = fairMarketValue;
+    return this;
+  }
+
+  /** Date from which the asset was valued and used in the fair market value calculation */
+  public ActivityTransfer withFairMarketValueDate(
+      ActivityTransferFairMarketValueDate fairMarketValueDate) {
+    Utils.checkNotNull(fairMarketValueDate, "fairMarketValueDate");
+    this.fairMarketValueDate = JsonNullable.of(fairMarketValueDate);
+    return this;
+  }
+
+  /** Date from which the asset was valued and used in the fair market value calculation */
+  public ActivityTransfer withFairMarketValueDate(
+      JsonNullable<? extends ActivityTransferFairMarketValueDate> fairMarketValueDate) {
+    Utils.checkNotNull(fairMarketValueDate, "fairMarketValueDate");
+    this.fairMarketValueDate = fairMarketValueDate;
+    return this;
+  }
+
   /** Provides more granular detail on the purpose of transfer */
   public ActivityTransfer withTransferType(ActivityTransferType transferType) {
     Utils.checkNotNull(transferType, "transferType");
@@ -138,12 +219,19 @@ public class ActivityTransfer {
     ActivityTransfer other = (ActivityTransfer) o;
     return Utils.enhancedDeepEquals(this.additionalInstructions, other.additionalInstructions)
         && Utils.enhancedDeepEquals(this.clientBrokerage, other.clientBrokerage)
+        && Utils.enhancedDeepEquals(this.fairMarketValue, other.fairMarketValue)
+        && Utils.enhancedDeepEquals(this.fairMarketValueDate, other.fairMarketValueDate)
         && Utils.enhancedDeepEquals(this.transferType, other.transferType);
   }
 
   @Override
   public int hashCode() {
-    return Utils.enhancedHash(additionalInstructions, clientBrokerage, transferType);
+    return Utils.enhancedHash(
+        additionalInstructions,
+        clientBrokerage,
+        fairMarketValue,
+        fairMarketValueDate,
+        transferType);
   }
 
   @Override
@@ -154,6 +242,10 @@ public class ActivityTransfer {
         additionalInstructions,
         "clientBrokerage",
         clientBrokerage,
+        "fairMarketValue",
+        fairMarketValue,
+        "fairMarketValueDate",
+        fairMarketValueDate,
         "transferType",
         transferType);
   }
@@ -164,6 +256,12 @@ public class ActivityTransfer {
     private Optional<String> additionalInstructions = Optional.empty();
 
     private Optional<String> clientBrokerage = Optional.empty();
+
+    private JsonNullable<? extends ActivityTransferFairMarketValue> fairMarketValue =
+        JsonNullable.undefined();
+
+    private JsonNullable<? extends ActivityTransferFairMarketValueDate> fairMarketValueDate =
+        JsonNullable.undefined();
 
     private Optional<? extends ActivityTransferType> transferType = Optional.empty();
 
@@ -205,6 +303,42 @@ public class ActivityTransfer {
       return this;
     }
 
+    /**
+     * Total value of the securities being transferred. Used for sponsored transfers activity to
+     * ensure cost basis is accurately moved with the assets to the new account
+     */
+    public Builder fairMarketValue(ActivityTransferFairMarketValue fairMarketValue) {
+      Utils.checkNotNull(fairMarketValue, "fairMarketValue");
+      this.fairMarketValue = JsonNullable.of(fairMarketValue);
+      return this;
+    }
+
+    /**
+     * Total value of the securities being transferred. Used for sponsored transfers activity to
+     * ensure cost basis is accurately moved with the assets to the new account
+     */
+    public Builder fairMarketValue(
+        JsonNullable<? extends ActivityTransferFairMarketValue> fairMarketValue) {
+      Utils.checkNotNull(fairMarketValue, "fairMarketValue");
+      this.fairMarketValue = fairMarketValue;
+      return this;
+    }
+
+    /** Date from which the asset was valued and used in the fair market value calculation */
+    public Builder fairMarketValueDate(ActivityTransferFairMarketValueDate fairMarketValueDate) {
+      Utils.checkNotNull(fairMarketValueDate, "fairMarketValueDate");
+      this.fairMarketValueDate = JsonNullable.of(fairMarketValueDate);
+      return this;
+    }
+
+    /** Date from which the asset was valued and used in the fair market value calculation */
+    public Builder fairMarketValueDate(
+        JsonNullable<? extends ActivityTransferFairMarketValueDate> fairMarketValueDate) {
+      Utils.checkNotNull(fairMarketValueDate, "fairMarketValueDate");
+      this.fairMarketValueDate = fairMarketValueDate;
+      return this;
+    }
+
     /** Provides more granular detail on the purpose of transfer */
     public Builder transferType(ActivityTransferType transferType) {
       Utils.checkNotNull(transferType, "transferType");
@@ -221,7 +355,12 @@ public class ActivityTransfer {
 
     public ActivityTransfer build() {
 
-      return new ActivityTransfer(additionalInstructions, clientBrokerage, transferType);
+      return new ActivityTransfer(
+          additionalInstructions,
+          clientBrokerage,
+          fairMarketValue,
+          fairMarketValueDate,
+          transferType);
     }
   }
 }

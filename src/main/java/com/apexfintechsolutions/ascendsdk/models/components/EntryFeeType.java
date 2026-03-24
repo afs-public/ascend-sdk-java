@@ -101,6 +101,10 @@ public class EntryFeeType {
   public static final EntryFeeType VOIDED_CHECK = new EntryFeeType("VOIDED_CHECK");
   public static final EntryFeeType STOP_PAYMENT_AFTER180_DAYS =
       new EntryFeeType("STOP_PAYMENT_AFTER_180_DAYS");
+  public static final EntryFeeType CONFIRM = new EntryFeeType("CONFIRM");
+  public static final EntryFeeType CLEARING = new EntryFeeType("CLEARING");
+  public static final EntryFeeType PROMOTIONAL_CREDIT_CLAWBACK =
+      new EntryFeeType("PROMOTIONAL_CREDIT_CLAWBACK");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -211,6 +215,9 @@ public class EntryFeeType {
     map.put("PRINT_CHECK_AT_FIRM", PRINT_CHECK_AT_FIRM);
     map.put("VOIDED_CHECK", VOIDED_CHECK);
     map.put("STOP_PAYMENT_AFTER_180_DAYS", STOP_PAYMENT_AFTER180_DAYS);
+    map.put("CONFIRM", CONFIRM);
+    map.put("CLEARING", CLEARING);
+    map.put("PROMOTIONAL_CREDIT_CLAWBACK", PROMOTIONAL_CREDIT_CLAWBACK);
     return map;
   }
 
@@ -264,6 +271,9 @@ public class EntryFeeType {
     map.put("PRINT_CHECK_AT_FIRM", EntryFeeTypeEnum.PRINT_CHECK_AT_FIRM);
     map.put("VOIDED_CHECK", EntryFeeTypeEnum.VOIDED_CHECK);
     map.put("STOP_PAYMENT_AFTER_180_DAYS", EntryFeeTypeEnum.STOP_PAYMENT_AFTER180_DAYS);
+    map.put("CONFIRM", EntryFeeTypeEnum.CONFIRM);
+    map.put("CLEARING", EntryFeeTypeEnum.CLEARING);
+    map.put("PROMOTIONAL_CREDIT_CLAWBACK", EntryFeeTypeEnum.PROMOTIONAL_CREDIT_CLAWBACK);
     return map;
   }
 
@@ -341,6 +351,9 @@ public class EntryFeeType {
     PRINT_CHECK_AT_FIRM("PRINT_CHECK_AT_FIRM"),
     VOIDED_CHECK("VOIDED_CHECK"),
     STOP_PAYMENT_AFTER180_DAYS("STOP_PAYMENT_AFTER_180_DAYS"),
+    CONFIRM("CONFIRM"),
+    CLEARING("CLEARING"),
+    PROMOTIONAL_CREDIT_CLAWBACK("PROMOTIONAL_CREDIT_CLAWBACK"),
     ;
 
     private final String value;

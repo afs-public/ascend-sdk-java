@@ -41,7 +41,8 @@ import java.util.Optional;
  * TimeInForce
  *
  * <p>For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is
- * allowed. For Fixed Income: Only "DAY" is allowed.
+ * allowed. For Fixed Income: Only "DAY" is allowed. For Event Contracts: Either "DAY",
+ * "GOOD_TILL_DATE", "GOOD_TILL_CANCELED", "IMMEDIATE_OR_CANCEL", or "FILL_OR_KILL" are allowed.
  */
 @JsonDeserialize(using = TimeInForce._Deserializer.class)
 @JsonSerialize(using = TimeInForce._Serializer.class)
@@ -49,6 +50,9 @@ public class TimeInForce {
 
   public static final TimeInForce DAY = new TimeInForce("DAY");
   public static final TimeInForce GOOD_TILL_DATE = new TimeInForce("GOOD_TILL_DATE");
+  public static final TimeInForce GOOD_TILL_CANCELED = new TimeInForce("GOOD_TILL_CANCELED");
+  public static final TimeInForce IMMEDIATE_OR_CANCEL = new TimeInForce("IMMEDIATE_OR_CANCEL");
+  public static final TimeInForce FILL_OR_KILL = new TimeInForce("FILL_OR_KILL");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -118,6 +122,9 @@ public class TimeInForce {
     Map<String, TimeInForce> map = new LinkedHashMap<>();
     map.put("DAY", DAY);
     map.put("GOOD_TILL_DATE", GOOD_TILL_DATE);
+    map.put("GOOD_TILL_CANCELED", GOOD_TILL_CANCELED);
+    map.put("IMMEDIATE_OR_CANCEL", IMMEDIATE_OR_CANCEL);
+    map.put("FILL_OR_KILL", FILL_OR_KILL);
     return map;
   }
 
@@ -125,6 +132,9 @@ public class TimeInForce {
     Map<String, TimeInForceEnum> map = new HashMap<>();
     map.put("DAY", TimeInForceEnum.DAY);
     map.put("GOOD_TILL_DATE", TimeInForceEnum.GOOD_TILL_DATE);
+    map.put("GOOD_TILL_CANCELED", TimeInForceEnum.GOOD_TILL_CANCELED);
+    map.put("IMMEDIATE_OR_CANCEL", TimeInForceEnum.IMMEDIATE_OR_CANCEL);
+    map.put("FILL_OR_KILL", TimeInForceEnum.FILL_OR_KILL);
     return map;
   }
 
@@ -161,6 +171,9 @@ public class TimeInForce {
   public enum TimeInForceEnum {
     DAY("DAY"),
     GOOD_TILL_DATE("GOOD_TILL_DATE"),
+    GOOD_TILL_CANCELED("GOOD_TILL_CANCELED"),
+    IMMEDIATE_OR_CANCEL("IMMEDIATE_OR_CANCEL"),
+    FILL_OR_KILL("FILL_OR_KILL"),
     ;
 
     private final String value;

@@ -91,6 +91,17 @@ public class CustomerIdentificationResult {
   @JsonProperty("identification_number_verified")
   private Optional<? extends IdentificationNumberVerified> identificationNumberVerified;
 
+  /**
+   * Whether or not the identity has been reported as deceased This is determined by parsing the
+   * vendor response for deceased indicators from the SSA Death Master File Equifax-specific
+   * indicators: reason codes "90" (SSN Death Indicator) or "SQ" (SSN reported as deceased)
+   * null/unset = not checked or unable to determine, false = checked and not deceased, true =
+   * deceased
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("identity_reported_deceased")
+  private Optional<? extends IdentityReportedDeceased> identityReportedDeceased;
+
   /** Describes the type(s) of Identity Verification that was performed */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("identity_verification_types")
@@ -141,6 +152,8 @@ public class CustomerIdentificationResult {
       @JsonProperty("external_vendor_id") Optional<String> externalVendorId,
       @JsonProperty("identification_number_verified")
           Optional<? extends IdentificationNumberVerified> identificationNumberVerified,
+      @JsonProperty("identity_reported_deceased")
+          Optional<? extends IdentityReportedDeceased> identityReportedDeceased,
       @JsonProperty("identity_verification_types")
           Optional<? extends List<IdentityVerificationTypes>> identityVerificationTypes,
       @JsonProperty("legal_address_verified")
@@ -161,6 +174,7 @@ public class CustomerIdentificationResult {
     Utils.checkNotNull(externalVendor, "externalVendor");
     Utils.checkNotNull(externalVendorId, "externalVendorId");
     Utils.checkNotNull(identificationNumberVerified, "identificationNumberVerified");
+    Utils.checkNotNull(identityReportedDeceased, "identityReportedDeceased");
     Utils.checkNotNull(identityVerificationTypes, "identityVerificationTypes");
     Utils.checkNotNull(legalAddressVerified, "legalAddressVerified");
     Utils.checkNotNull(nameVerified, "nameVerified");
@@ -178,6 +192,7 @@ public class CustomerIdentificationResult {
     this.externalVendor = externalVendor;
     this.externalVendorId = externalVendorId;
     this.identificationNumberVerified = identificationNumberVerified;
+    this.identityReportedDeceased = identityReportedDeceased;
     this.identityVerificationTypes = identityVerificationTypes;
     this.legalAddressVerified = legalAddressVerified;
     this.nameVerified = nameVerified;
@@ -188,6 +203,7 @@ public class CustomerIdentificationResult {
 
   public CustomerIdentificationResult() {
     this(
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
@@ -295,6 +311,19 @@ public class CustomerIdentificationResult {
   @JsonIgnore
   public Optional<IdentificationNumberVerified> identificationNumberVerified() {
     return (Optional<IdentificationNumberVerified>) identificationNumberVerified;
+  }
+
+  /**
+   * Whether or not the identity has been reported as deceased This is determined by parsing the
+   * vendor response for deceased indicators from the SSA Death Master File Equifax-specific
+   * indicators: reason codes "90" (SSN Death Indicator) or "SQ" (SSN reported as deceased)
+   * null/unset = not checked or unable to determine, false = checked and not deceased, true =
+   * deceased
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<IdentityReportedDeceased> identityReportedDeceased() {
+    return (Optional<IdentityReportedDeceased>) identityReportedDeceased;
   }
 
   /** Describes the type(s) of Identity Verification that was performed */
@@ -546,6 +575,34 @@ public class CustomerIdentificationResult {
     return this;
   }
 
+  /**
+   * Whether or not the identity has been reported as deceased This is determined by parsing the
+   * vendor response for deceased indicators from the SSA Death Master File Equifax-specific
+   * indicators: reason codes "90" (SSN Death Indicator) or "SQ" (SSN reported as deceased)
+   * null/unset = not checked or unable to determine, false = checked and not deceased, true =
+   * deceased
+   */
+  public CustomerIdentificationResult withIdentityReportedDeceased(
+      IdentityReportedDeceased identityReportedDeceased) {
+    Utils.checkNotNull(identityReportedDeceased, "identityReportedDeceased");
+    this.identityReportedDeceased = Optional.ofNullable(identityReportedDeceased);
+    return this;
+  }
+
+  /**
+   * Whether or not the identity has been reported as deceased This is determined by parsing the
+   * vendor response for deceased indicators from the SSA Death Master File Equifax-specific
+   * indicators: reason codes "90" (SSN Death Indicator) or "SQ" (SSN reported as deceased)
+   * null/unset = not checked or unable to determine, false = checked and not deceased, true =
+   * deceased
+   */
+  public CustomerIdentificationResult withIdentityReportedDeceased(
+      Optional<? extends IdentityReportedDeceased> identityReportedDeceased) {
+    Utils.checkNotNull(identityReportedDeceased, "identityReportedDeceased");
+    this.identityReportedDeceased = identityReportedDeceased;
+    return this;
+  }
+
   /** Describes the type(s) of Identity Verification that was performed */
   public CustomerIdentificationResult withIdentityVerificationTypes(
       List<IdentityVerificationTypes> identityVerificationTypes) {
@@ -666,6 +723,7 @@ public class CustomerIdentificationResult {
         && Utils.enhancedDeepEquals(this.externalVendorId, other.externalVendorId)
         && Utils.enhancedDeepEquals(
             this.identificationNumberVerified, other.identificationNumberVerified)
+        && Utils.enhancedDeepEquals(this.identityReportedDeceased, other.identityReportedDeceased)
         && Utils.enhancedDeepEquals(this.identityVerificationTypes, other.identityVerificationTypes)
         && Utils.enhancedDeepEquals(this.legalAddressVerified, other.legalAddressVerified)
         && Utils.enhancedDeepEquals(this.nameVerified, other.nameVerified)
@@ -688,6 +746,7 @@ public class CustomerIdentificationResult {
         externalVendor,
         externalVendorId,
         identificationNumberVerified,
+        identityReportedDeceased,
         identityVerificationTypes,
         legalAddressVerified,
         nameVerified,
@@ -722,6 +781,8 @@ public class CustomerIdentificationResult {
         externalVendorId,
         "identificationNumberVerified",
         identificationNumberVerified,
+        "identityReportedDeceased",
+        identityReportedDeceased,
         "identityVerificationTypes",
         identityVerificationTypes,
         "legalAddressVerified",
@@ -761,6 +822,9 @@ public class CustomerIdentificationResult {
     private Optional<String> externalVendorId = Optional.empty();
 
     private Optional<? extends IdentificationNumberVerified> identificationNumberVerified =
+        Optional.empty();
+
+    private Optional<? extends IdentityReportedDeceased> identityReportedDeceased =
         Optional.empty();
 
     private Optional<? extends List<IdentityVerificationTypes>> identityVerificationTypes =
@@ -978,6 +1042,33 @@ public class CustomerIdentificationResult {
       return this;
     }
 
+    /**
+     * Whether or not the identity has been reported as deceased This is determined by parsing the
+     * vendor response for deceased indicators from the SSA Death Master File Equifax-specific
+     * indicators: reason codes "90" (SSN Death Indicator) or "SQ" (SSN reported as deceased)
+     * null/unset = not checked or unable to determine, false = checked and not deceased, true =
+     * deceased
+     */
+    public Builder identityReportedDeceased(IdentityReportedDeceased identityReportedDeceased) {
+      Utils.checkNotNull(identityReportedDeceased, "identityReportedDeceased");
+      this.identityReportedDeceased = Optional.ofNullable(identityReportedDeceased);
+      return this;
+    }
+
+    /**
+     * Whether or not the identity has been reported as deceased This is determined by parsing the
+     * vendor response for deceased indicators from the SSA Death Master File Equifax-specific
+     * indicators: reason codes "90" (SSN Death Indicator) or "SQ" (SSN reported as deceased)
+     * null/unset = not checked or unable to determine, false = checked and not deceased, true =
+     * deceased
+     */
+    public Builder identityReportedDeceased(
+        Optional<? extends IdentityReportedDeceased> identityReportedDeceased) {
+      Utils.checkNotNull(identityReportedDeceased, "identityReportedDeceased");
+      this.identityReportedDeceased = identityReportedDeceased;
+      return this;
+    }
+
     /** Describes the type(s) of Identity Verification that was performed */
     public Builder identityVerificationTypes(
         List<IdentityVerificationTypes> identityVerificationTypes) {
@@ -1086,6 +1177,7 @@ public class CustomerIdentificationResult {
           externalVendor,
           externalVendorId,
           identificationNumberVerified,
+          identityReportedDeceased,
           identityVerificationTypes,
           legalAddressVerified,
           nameVerified,

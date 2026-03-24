@@ -30,7 +30,15 @@ public class ProvidedIdentityVerification {
   @JsonProperty("birth_date_verified")
   private Optional<Boolean> birthDateVerified;
 
-  /** The date identity verification was performed. Must be formatted as an ISO-8601 YYYY-MM-DD */
+  /**
+   * Indicates that the client directly verified the ID documents rather than using a third-party
+   * vendor (self-inspected)
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_directly_verified_id_docs")
+  private Optional<Boolean> clientDirectlyVerifiedIdDocs;
+
+  /** The date identity verification was performed. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("execution_date")
   private JsonNullable<? extends InvestigationExecutionDate> executionDate;
@@ -81,6 +89,8 @@ public class ProvidedIdentityVerification {
   public ProvidedIdentityVerification(
       @JsonProperty("address_verified") Optional<Boolean> addressVerified,
       @JsonProperty("birth_date_verified") Optional<Boolean> birthDateVerified,
+      @JsonProperty("client_directly_verified_id_docs")
+          Optional<Boolean> clientDirectlyVerifiedIdDocs,
       @JsonProperty("execution_date")
           JsonNullable<? extends InvestigationExecutionDate> executionDate,
       @JsonProperty("external_case_id") Optional<String> externalCaseId,
@@ -94,6 +104,7 @@ public class ProvidedIdentityVerification {
       @JsonProperty("vendor") Optional<String> vendor) {
     Utils.checkNotNull(addressVerified, "addressVerified");
     Utils.checkNotNull(birthDateVerified, "birthDateVerified");
+    Utils.checkNotNull(clientDirectlyVerifiedIdDocs, "clientDirectlyVerifiedIdDocs");
     Utils.checkNotNull(executionDate, "executionDate");
     Utils.checkNotNull(externalCaseId, "externalCaseId");
     Utils.checkNotNull(identityVerificationDocumentIds, "identityVerificationDocumentIds");
@@ -104,6 +115,7 @@ public class ProvidedIdentityVerification {
     Utils.checkNotNull(vendor, "vendor");
     this.addressVerified = addressVerified;
     this.birthDateVerified = birthDateVerified;
+    this.clientDirectlyVerifiedIdDocs = clientDirectlyVerifiedIdDocs;
     this.executionDate = executionDate;
     this.externalCaseId = externalCaseId;
     this.identityVerificationDocumentIds = identityVerificationDocumentIds;
@@ -116,6 +128,7 @@ public class ProvidedIdentityVerification {
 
   public ProvidedIdentityVerification() {
     this(
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined(),
@@ -140,7 +153,16 @@ public class ProvidedIdentityVerification {
     return birthDateVerified;
   }
 
-  /** The date identity verification was performed. Must be formatted as an ISO-8601 YYYY-MM-DD */
+  /**
+   * Indicates that the client directly verified the ID documents rather than using a third-party
+   * vendor (self-inspected)
+   */
+  @JsonIgnore
+  public Optional<Boolean> clientDirectlyVerifiedIdDocs() {
+    return clientDirectlyVerifiedIdDocs;
+  }
+
+  /** The date identity verification was performed. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public JsonNullable<InvestigationExecutionDate> executionDate() {
@@ -229,14 +251,36 @@ public class ProvidedIdentityVerification {
     return this;
   }
 
-  /** The date identity verification was performed. Must be formatted as an ISO-8601 YYYY-MM-DD */
+  /**
+   * Indicates that the client directly verified the ID documents rather than using a third-party
+   * vendor (self-inspected)
+   */
+  public ProvidedIdentityVerification withClientDirectlyVerifiedIdDocs(
+      boolean clientDirectlyVerifiedIdDocs) {
+    Utils.checkNotNull(clientDirectlyVerifiedIdDocs, "clientDirectlyVerifiedIdDocs");
+    this.clientDirectlyVerifiedIdDocs = Optional.ofNullable(clientDirectlyVerifiedIdDocs);
+    return this;
+  }
+
+  /**
+   * Indicates that the client directly verified the ID documents rather than using a third-party
+   * vendor (self-inspected)
+   */
+  public ProvidedIdentityVerification withClientDirectlyVerifiedIdDocs(
+      Optional<Boolean> clientDirectlyVerifiedIdDocs) {
+    Utils.checkNotNull(clientDirectlyVerifiedIdDocs, "clientDirectlyVerifiedIdDocs");
+    this.clientDirectlyVerifiedIdDocs = clientDirectlyVerifiedIdDocs;
+    return this;
+  }
+
+  /** The date identity verification was performed. */
   public ProvidedIdentityVerification withExecutionDate(InvestigationExecutionDate executionDate) {
     Utils.checkNotNull(executionDate, "executionDate");
     this.executionDate = JsonNullable.of(executionDate);
     return this;
   }
 
-  /** The date identity verification was performed. Must be formatted as an ISO-8601 YYYY-MM-DD */
+  /** The date identity verification was performed. */
   public ProvidedIdentityVerification withExecutionDate(
       JsonNullable<? extends InvestigationExecutionDate> executionDate) {
     Utils.checkNotNull(executionDate, "executionDate");
@@ -372,6 +416,8 @@ public class ProvidedIdentityVerification {
     ProvidedIdentityVerification other = (ProvidedIdentityVerification) o;
     return Utils.enhancedDeepEquals(this.addressVerified, other.addressVerified)
         && Utils.enhancedDeepEquals(this.birthDateVerified, other.birthDateVerified)
+        && Utils.enhancedDeepEquals(
+            this.clientDirectlyVerifiedIdDocs, other.clientDirectlyVerifiedIdDocs)
         && Utils.enhancedDeepEquals(this.executionDate, other.executionDate)
         && Utils.enhancedDeepEquals(this.externalCaseId, other.externalCaseId)
         && Utils.enhancedDeepEquals(
@@ -389,6 +435,7 @@ public class ProvidedIdentityVerification {
     return Utils.enhancedHash(
         addressVerified,
         birthDateVerified,
+        clientDirectlyVerifiedIdDocs,
         executionDate,
         externalCaseId,
         identityVerificationDocumentIds,
@@ -407,6 +454,8 @@ public class ProvidedIdentityVerification {
         addressVerified,
         "birthDateVerified",
         birthDateVerified,
+        "clientDirectlyVerifiedIdDocs",
+        clientDirectlyVerifiedIdDocs,
         "executionDate",
         executionDate,
         "externalCaseId",
@@ -431,6 +480,8 @@ public class ProvidedIdentityVerification {
     private Optional<Boolean> addressVerified = Optional.empty();
 
     private Optional<Boolean> birthDateVerified = Optional.empty();
+
+    private Optional<Boolean> clientDirectlyVerifiedIdDocs = Optional.empty();
 
     private JsonNullable<? extends InvestigationExecutionDate> executionDate =
         JsonNullable.undefined();
@@ -481,14 +532,34 @@ public class ProvidedIdentityVerification {
       return this;
     }
 
-    /** The date identity verification was performed. Must be formatted as an ISO-8601 YYYY-MM-DD */
+    /**
+     * Indicates that the client directly verified the ID documents rather than using a third-party
+     * vendor (self-inspected)
+     */
+    public Builder clientDirectlyVerifiedIdDocs(boolean clientDirectlyVerifiedIdDocs) {
+      Utils.checkNotNull(clientDirectlyVerifiedIdDocs, "clientDirectlyVerifiedIdDocs");
+      this.clientDirectlyVerifiedIdDocs = Optional.ofNullable(clientDirectlyVerifiedIdDocs);
+      return this;
+    }
+
+    /**
+     * Indicates that the client directly verified the ID documents rather than using a third-party
+     * vendor (self-inspected)
+     */
+    public Builder clientDirectlyVerifiedIdDocs(Optional<Boolean> clientDirectlyVerifiedIdDocs) {
+      Utils.checkNotNull(clientDirectlyVerifiedIdDocs, "clientDirectlyVerifiedIdDocs");
+      this.clientDirectlyVerifiedIdDocs = clientDirectlyVerifiedIdDocs;
+      return this;
+    }
+
+    /** The date identity verification was performed. */
     public Builder executionDate(InvestigationExecutionDate executionDate) {
       Utils.checkNotNull(executionDate, "executionDate");
       this.executionDate = JsonNullable.of(executionDate);
       return this;
     }
 
-    /** The date identity verification was performed. Must be formatted as an ISO-8601 YYYY-MM-DD */
+    /** The date identity verification was performed. */
     public Builder executionDate(JsonNullable<? extends InvestigationExecutionDate> executionDate) {
       Utils.checkNotNull(executionDate, "executionDate");
       this.executionDate = executionDate;
@@ -613,6 +684,7 @@ public class ProvidedIdentityVerification {
       return new ProvidedIdentityVerification(
           addressVerified,
           birthDateVerified,
+          clientDirectlyVerifiedIdDocs,
           executionDate,
           externalCaseId,
           identityVerificationDocumentIds,

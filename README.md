@@ -16,7 +16,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'com.apexfintechsolutions:ascendsdk:1.6.3'
+implementation 'com.apexfintechsolutions:ascendsdk:1.6.4'
 ```
 
 Maven:
@@ -24,7 +24,7 @@ Maven:
 <dependency>
     <groupId>com.apexfintechsolutions</groupId>
     <artifactId>ascendsdk</artifactId>
-    <version>1.6.3</version>
+    <version>1.6.4</version>
 </dependency>
 ```
 
@@ -607,6 +607,7 @@ public class Application {
 ### [orders()](docs/sdks/orders/README.md)
 
 * [createOrder](docs/sdks/orders/README.md#createorder) - Create Order
+* [listAccountOrders](docs/sdks/orders/README.md#listaccountorders) - List Account Orders
 * [getOrder](docs/sdks/orders/README.md#getorder) - Get Order
 * [cancelOrder](docs/sdks/orders/README.md#cancelorder) - Cancel Order
 * [setExtraReportingData](docs/sdks/orders/README.md#setextrareportingdata) - Set Extra Reporting Data
@@ -789,5 +790,29 @@ __NOTE__: This is a convenience method that calls `HTTPClient.enableDebugLogging
 
 Another option is to set the System property `-Djdk.httpclient.HttpClient.log=all`. However, this second option does not log bodies.
 <!-- End Debugging [debug] -->
+
+## Qase TestOps Integration
+
+Test results can be automatically reported to [Qase TestOps](https://app.qase.io/project/CDX) for centralized visibility.
+
+### Environment Variables
+
+| Variable | Description |
+| --- | --- |
+| `QASE_MODE` | Set to `testops` to enable reporting (default: off) |
+| `QASE_TESTOPS_API_TOKEN` | Qase API token for authentication |
+| `QASE_TESTOPS_PROJECT` | Qase project code (default: `CDX`) |
+
+### Running Tests with Qase Reporting
+
+```bash
+# Without Qase (default)
+./gradlew test
+
+# With Qase reporting enabled
+QASE_MODE=testops QASE_TESTOPS_API_TOKEN=<token> ./gradlew test
+```
+
+The qase-junit5-reporter auto-detects via JUnit Platform's extension autodetection (`junit-platform.properties`). Configuration is in `qase.config.json`.
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->

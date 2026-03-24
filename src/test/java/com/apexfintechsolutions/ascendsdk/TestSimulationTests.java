@@ -6,14 +6,54 @@ package com.apexfintechsolutions.ascendsdk;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.apexfintechsolutions.ascendsdk.models.components.DecimalCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveCheckDepositRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
 import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.components.SimulateCreateCheckDepositRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.operations.CheckDepositsForceApproveCheckDepositResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.CheckDepositsSimulateCreateCheckDepositResponse;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import org.junit.jupiter.api.Test;
 
 public class TestSimulationTests {
+
+  @Test
+  public void testTestSimulation_CheckDepositsForceApproveCheckDeposit() throws Exception {
+
+    var testHttpClient = Utils.createTestHTTPClient("CheckDeposits_ForceApproveCheckDeposit");
+    SDK sdk =
+        SDK.builder()
+            .serverURL(Utils.environmentVariable("SERVICE_ACCOUNT_CREDS_URL", ""))
+            .security(
+                Security.builder()
+                    .apiKey(Utils.environmentVariable("API_KEY", ""))
+                    .serviceAccountCreds(
+                        ServiceAccountCreds.builder()
+                            .privateKey(
+                                System.getenv()
+                                    .getOrDefault("SERVICE_ACCOUNT_CREDS_PRIVATE_KEY", ""))
+                            .name(System.getenv().getOrDefault("SERVICE_ACCOUNT_CREDS_NAME", ""))
+                            .organization(
+                                System.getenv()
+                                    .getOrDefault("SERVICE_ACCOUNT_CREDS_ORGANIZATION", ""))
+                            .type(System.getenv().getOrDefault("SERVICE_ACCOUNT_CREDS_TYPE", ""))
+                            .build())
+                    .build())
+            .client(testHttpClient)
+            .build();
+
+    CheckDepositsForceApproveCheckDepositResponse res =
+        sdk.testSimulation()
+            .forceApproveCheckDeposit()
+            .accountId("01JHGTEPC6ZTAHCFRH2MD3VJJT")
+            .checkDepositId("20250811022796")
+            .forceApproveCheckDepositRequestCreate(
+                ForceApproveCheckDepositRequestCreate.builder()
+                    .name("accounts/01JHGTEPC6ZTAHCFRH2MD3VJJT/checkDeposits/20250811022796")
+                    .build())
+            .call();
+    assertEquals(200, res.statusCode());
+  }
 
   @Test
   public void testTestSimulation_CheckDepositsSimulateCreateCheckDeposit() throws Exception {

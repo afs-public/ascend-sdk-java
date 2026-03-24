@@ -18,7 +18,7 @@ import java.util.Optional;
  * Equities: This represents the maximum amount to be spent. The final order may may have a smaller
  * notional amount. For Mutual Funds: Only supported for BUY orders. The order will be transacted at
  * the full notional amount specified. For Fixed Income: Not supported, you must specify a
- * `quantity` value.
+ * `quantity` value. For Event Contracts: Not supported, you must specify a `quantity` value.
  */
 public class NotionalValue {
   /**

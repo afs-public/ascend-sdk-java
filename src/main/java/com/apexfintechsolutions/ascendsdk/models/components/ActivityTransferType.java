@@ -56,6 +56,12 @@ public class ActivityTransferType {
       new ActivityTransferType("MANUAL_ADJUSTMENT");
   public static final ActivityTransferType INTERNAL_CONVERSION =
       new ActivityTransferType("INTERNAL_CONVERSION");
+  public static final ActivityTransferType FREE_RECEIVE = new ActivityTransferType("FREE_RECEIVE");
+  public static final ActivityTransferType FREE_DELIVER = new ActivityTransferType("FREE_DELIVER");
+  public static final ActivityTransferType STOCK_REWARD = new ActivityTransferType("STOCK_REWARD");
+  public static final ActivityTransferType TOKENIZATION_TRANSFER =
+      new ActivityTransferType("TOKENIZATION_TRANSFER");
+  public static final ActivityTransferType ESCHEATMENT = new ActivityTransferType("ESCHEATMENT");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -129,6 +135,11 @@ public class ActivityTransferType {
     map.put("MIGRATION", MIGRATION);
     map.put("MANUAL_ADJUSTMENT", MANUAL_ADJUSTMENT);
     map.put("INTERNAL_CONVERSION", INTERNAL_CONVERSION);
+    map.put("FREE_RECEIVE", FREE_RECEIVE);
+    map.put("FREE_DELIVER", FREE_DELIVER);
+    map.put("STOCK_REWARD", STOCK_REWARD);
+    map.put("TOKENIZATION_TRANSFER", TOKENIZATION_TRANSFER);
+    map.put("ESCHEATMENT", ESCHEATMENT);
     return map;
   }
 
@@ -140,6 +151,11 @@ public class ActivityTransferType {
     map.put("MIGRATION", ActivityTransferTypeEnum.MIGRATION);
     map.put("MANUAL_ADJUSTMENT", ActivityTransferTypeEnum.MANUAL_ADJUSTMENT);
     map.put("INTERNAL_CONVERSION", ActivityTransferTypeEnum.INTERNAL_CONVERSION);
+    map.put("FREE_RECEIVE", ActivityTransferTypeEnum.FREE_RECEIVE);
+    map.put("FREE_DELIVER", ActivityTransferTypeEnum.FREE_DELIVER);
+    map.put("STOCK_REWARD", ActivityTransferTypeEnum.STOCK_REWARD);
+    map.put("TOKENIZATION_TRANSFER", ActivityTransferTypeEnum.TOKENIZATION_TRANSFER);
+    map.put("ESCHEATMENT", ActivityTransferTypeEnum.ESCHEATMENT);
     return map;
   }
 
@@ -180,6 +196,11 @@ public class ActivityTransferType {
     MIGRATION("MIGRATION"),
     MANUAL_ADJUSTMENT("MANUAL_ADJUSTMENT"),
     INTERNAL_CONVERSION("INTERNAL_CONVERSION"),
+    FREE_RECEIVE("FREE_RECEIVE"),
+    FREE_DELIVER("FREE_DELIVER"),
+    STOCK_REWARD("STOCK_REWARD"),
+    TOKENIZATION_TRANSFER("TOKENIZATION_TRANSFER"),
+    ESCHEATMENT("ESCHEATMENT"),
     ;
 
     private final String value;

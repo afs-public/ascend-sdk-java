@@ -64,6 +64,8 @@ public class AccountTransferType {
       new AccountTransferType("POSITION_TRANSFER_FUND");
   public static final AccountTransferType SPONSORED_TRANSFER =
       new AccountTransferType("SPONSORED_TRANSFER");
+  public static final AccountTransferType DRS_TRANSFER = new AccountTransferType("DRS_TRANSFER");
+  public static final AccountTransferType DWAC_TRANSFER = new AccountTransferType("DWAC_TRANSFER");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -141,6 +143,8 @@ public class AccountTransferType {
     map.put("RECLAIM", RECLAIM);
     map.put("POSITION_TRANSFER_FUND", POSITION_TRANSFER_FUND);
     map.put("SPONSORED_TRANSFER", SPONSORED_TRANSFER);
+    map.put("DRS_TRANSFER", DRS_TRANSFER);
+    map.put("DWAC_TRANSFER", DWAC_TRANSFER);
     return map;
   }
 
@@ -158,6 +162,8 @@ public class AccountTransferType {
     map.put("RECLAIM", AccountTransferTypeEnum.RECLAIM);
     map.put("POSITION_TRANSFER_FUND", AccountTransferTypeEnum.POSITION_TRANSFER_FUND);
     map.put("SPONSORED_TRANSFER", AccountTransferTypeEnum.SPONSORED_TRANSFER);
+    map.put("DRS_TRANSFER", AccountTransferTypeEnum.DRS_TRANSFER);
+    map.put("DWAC_TRANSFER", AccountTransferTypeEnum.DWAC_TRANSFER);
     return map;
   }
 
@@ -202,6 +208,8 @@ public class AccountTransferType {
     RECLAIM("RECLAIM"),
     POSITION_TRANSFER_FUND("POSITION_TRANSFER_FUND"),
     SPONSORED_TRANSFER("SPONSORED_TRANSFER"),
+    DRS_TRANSFER("DRS_TRANSFER"),
+    DWAC_TRANSFER("DWAC_TRANSFER"),
     ;
 
     private final String value;

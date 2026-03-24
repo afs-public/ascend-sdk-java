@@ -52,16 +52,20 @@ public class Order {
    * a maximum of two for larger USD amounts.
    *
    * <p>When asset_type = FIXED_INCOME, there may be more than one value present which would have a
-   * type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 4 decimal
-   * places of precision, and price values measured in yields will support up to 5 decimal places.
+   * type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 8 decimal
+   * places of precision, and price values measured in yields will support up to 7 decimal places.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("average_prices")
   private Optional<? extends List<TradingExecutedPrice>> averagePrices;
 
   /**
-   * Defaults to "AGENCY" if not specified. For Equities: Only "AGENCY" is allowed. For Mutual
-   * Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.
+   * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
+   * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
+   * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
+   * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
+   * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
+   * allowed.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("broker_capacity")
@@ -198,7 +202,7 @@ public class Order {
   /**
    * The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For
    * Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are
-   * supported
+   * supported For Event Contracts: only SYMBOL and ASSET_ID are supported
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("identifier_type")
@@ -244,7 +248,8 @@ public class Order {
    * Equities: This represents the maximum amount to be spent. The final order may may have a
    * smaller notional amount. For Mutual Funds: Only supported for BUY orders. The order will be
    * transacted at the full notional amount specified. For Fixed Income: Not supported, you must
-   * specify a `quantity` value.
+   * specify a `quantity` value. For Event Contracts: Not supported, you must specify a `quantity`
+   * value.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("notional_value")
@@ -291,7 +296,7 @@ public class Order {
   /**
    * The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are
    * supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is
-   * supported.
+   * supported. For Event Contracts: only MARKET and LIMIT are supported.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("order_type")
@@ -299,7 +304,8 @@ public class Order {
 
   /**
    * The prevailing market price, calculated as a weighted average of the fills in this order, up to
-   * a maximum of 5 decimal places. Will be absent if an order has no executions.
+   * a maximum of 5 decimal places. Can be up to 8 decimal places when asset_type = FIXED_INCOME.
+   * Will be absent if an order has no executions.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("prevailing_market_price")
@@ -310,7 +316,9 @@ public class Order {
    * than zero and may not exceed 5 decimal places. For Mutual Funds: Only supported for SELL
    * orders. Represents the number of shares, up to a maximum of 3 decimal places. For Fixed Income:
    * Represents the par (face-value) amount being ordered, and may not exceed two decimal places for
-   * USD-based currencies. Either a quantity or notional_value MUST be specified (but not both).
+   * USD-based currencies. For Event Contracts: Represents the number of contracts being ordered,
+   * and must be whole numbers for BUY orders or up to a maximum of 2 decimal places for SELL
+   * orders. Either a quantity or notional_value MUST be specified (but not both).
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("quantity")
@@ -345,7 +353,8 @@ public class Order {
 
   /**
    * For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is
-   * allowed. For Fixed Income: Only "DAY" is allowed.
+   * allowed. For Fixed Income: Only "DAY" is allowed. For Event Contracts: Either "DAY",
+   * "GOOD_TILL_DATE", "GOOD_TILL_CANCELED", "IMMEDIATE_OR_CANCEL", or "FILL_OR_KILL" are allowed.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("time_in_force")
@@ -597,8 +606,8 @@ public class Order {
    * a maximum of two for larger USD amounts.
    *
    * <p>When asset_type = FIXED_INCOME, there may be more than one value present which would have a
-   * type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 4 decimal
-   * places of precision, and price values measured in yields will support up to 5 decimal places.
+   * type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 8 decimal
+   * places of precision, and price values measured in yields will support up to 7 decimal places.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -607,8 +616,12 @@ public class Order {
   }
 
   /**
-   * Defaults to "AGENCY" if not specified. For Equities: Only "AGENCY" is allowed. For Mutual
-   * Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.
+   * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
+   * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
+   * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
+   * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
+   * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
+   * allowed.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -773,7 +786,7 @@ public class Order {
   /**
    * The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For
    * Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are
-   * supported
+   * supported For Event Contracts: only SYMBOL and ASSET_ID are supported
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -829,7 +842,8 @@ public class Order {
    * Equities: This represents the maximum amount to be spent. The final order may may have a
    * smaller notional amount. For Mutual Funds: Only supported for BUY orders. The order will be
    * transacted at the full notional amount specified. For Fixed Income: Not supported, you must
-   * specify a `quantity` value.
+   * specify a `quantity` value. For Event Contracts: Not supported, you must specify a `quantity`
+   * value.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -886,7 +900,7 @@ public class Order {
   /**
    * The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are
    * supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is
-   * supported.
+   * supported. For Event Contracts: only MARKET and LIMIT are supported.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -896,7 +910,8 @@ public class Order {
 
   /**
    * The prevailing market price, calculated as a weighted average of the fills in this order, up to
-   * a maximum of 5 decimal places. Will be absent if an order has no executions.
+   * a maximum of 5 decimal places. Can be up to 8 decimal places when asset_type = FIXED_INCOME.
+   * Will be absent if an order has no executions.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -909,7 +924,9 @@ public class Order {
    * than zero and may not exceed 5 decimal places. For Mutual Funds: Only supported for SELL
    * orders. Represents the number of shares, up to a maximum of 3 decimal places. For Fixed Income:
    * Represents the par (face-value) amount being ordered, and may not exceed two decimal places for
-   * USD-based currencies. Either a quantity or notional_value MUST be specified (but not both).
+   * USD-based currencies. For Event Contracts: Represents the number of contracts being ordered,
+   * and must be whole numbers for BUY orders or up to a maximum of 2 decimal places for SELL
+   * orders. Either a quantity or notional_value MUST be specified (but not both).
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -954,7 +971,8 @@ public class Order {
 
   /**
    * For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is
-   * allowed. For Fixed Income: Only "DAY" is allowed.
+   * allowed. For Fixed Income: Only "DAY" is allowed. For Event Contracts: Either "DAY",
+   * "GOOD_TILL_DATE", "GOOD_TILL_CANCELED", "IMMEDIATE_OR_CANCEL", or "FILL_OR_KILL" are allowed.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -1050,8 +1068,8 @@ public class Order {
    * a maximum of two for larger USD amounts.
    *
    * <p>When asset_type = FIXED_INCOME, there may be more than one value present which would have a
-   * type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 4 decimal
-   * places of precision, and price values measured in yields will support up to 5 decimal places.
+   * type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 8 decimal
+   * places of precision, and price values measured in yields will support up to 7 decimal places.
    */
   public Order withAveragePrices(List<TradingExecutedPrice> averagePrices) {
     Utils.checkNotNull(averagePrices, "averagePrices");
@@ -1068,8 +1086,8 @@ public class Order {
    * a maximum of two for larger USD amounts.
    *
    * <p>When asset_type = FIXED_INCOME, there may be more than one value present which would have a
-   * type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 4 decimal
-   * places of precision, and price values measured in yields will support up to 5 decimal places.
+   * type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 8 decimal
+   * places of precision, and price values measured in yields will support up to 7 decimal places.
    */
   public Order withAveragePrices(Optional<? extends List<TradingExecutedPrice>> averagePrices) {
     Utils.checkNotNull(averagePrices, "averagePrices");
@@ -1078,8 +1096,12 @@ public class Order {
   }
 
   /**
-   * Defaults to "AGENCY" if not specified. For Equities: Only "AGENCY" is allowed. For Mutual
-   * Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.
+   * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
+   * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
+   * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
+   * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
+   * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
+   * allowed.
    */
   public Order withBrokerCapacity(OrderBrokerCapacity brokerCapacity) {
     Utils.checkNotNull(brokerCapacity, "brokerCapacity");
@@ -1088,8 +1110,12 @@ public class Order {
   }
 
   /**
-   * Defaults to "AGENCY" if not specified. For Equities: Only "AGENCY" is allowed. For Mutual
-   * Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.
+   * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
+   * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
+   * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
+   * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
+   * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
+   * allowed.
    */
   public Order withBrokerCapacity(Optional<? extends OrderBrokerCapacity> brokerCapacity) {
     Utils.checkNotNull(brokerCapacity, "brokerCapacity");
@@ -1431,7 +1457,7 @@ public class Order {
   /**
    * The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For
    * Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are
-   * supported
+   * supported For Event Contracts: only SYMBOL and ASSET_ID are supported
    */
   public Order withIdentifierType(OrderIdentifierType identifierType) {
     Utils.checkNotNull(identifierType, "identifierType");
@@ -1442,7 +1468,7 @@ public class Order {
   /**
    * The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For
    * Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are
-   * supported
+   * supported For Event Contracts: only SYMBOL and ASSET_ID are supported
    */
   public Order withIdentifierType(Optional<? extends OrderIdentifierType> identifierType) {
     Utils.checkNotNull(identifierType, "identifierType");
@@ -1545,7 +1571,8 @@ public class Order {
    * Equities: This represents the maximum amount to be spent. The final order may may have a
    * smaller notional amount. For Mutual Funds: Only supported for BUY orders. The order will be
    * transacted at the full notional amount specified. For Fixed Income: Not supported, you must
-   * specify a `quantity` value.
+   * specify a `quantity` value. For Event Contracts: Not supported, you must specify a `quantity`
+   * value.
    */
   public Order withNotionalValue(NotionalValue notionalValue) {
     Utils.checkNotNull(notionalValue, "notionalValue");
@@ -1558,7 +1585,8 @@ public class Order {
    * Equities: This represents the maximum amount to be spent. The final order may may have a
    * smaller notional amount. For Mutual Funds: Only supported for BUY orders. The order will be
    * transacted at the full notional amount specified. For Fixed Income: Not supported, you must
-   * specify a `quantity` value.
+   * specify a `quantity` value. For Event Contracts: Not supported, you must specify a `quantity`
+   * value.
    */
   public Order withNotionalValue(JsonNullable<? extends NotionalValue> notionalValue) {
     Utils.checkNotNull(notionalValue, "notionalValue");
@@ -1666,7 +1694,7 @@ public class Order {
   /**
    * The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are
    * supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is
-   * supported.
+   * supported. For Event Contracts: only MARKET and LIMIT are supported.
    */
   public Order withOrderType(OrderOrderType orderType) {
     Utils.checkNotNull(orderType, "orderType");
@@ -1677,7 +1705,7 @@ public class Order {
   /**
    * The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are
    * supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is
-   * supported.
+   * supported. For Event Contracts: only MARKET and LIMIT are supported.
    */
   public Order withOrderType(Optional<? extends OrderOrderType> orderType) {
     Utils.checkNotNull(orderType, "orderType");
@@ -1687,7 +1715,8 @@ public class Order {
 
   /**
    * The prevailing market price, calculated as a weighted average of the fills in this order, up to
-   * a maximum of 5 decimal places. Will be absent if an order has no executions.
+   * a maximum of 5 decimal places. Can be up to 8 decimal places when asset_type = FIXED_INCOME.
+   * Will be absent if an order has no executions.
    */
   public Order withPrevailingMarketPrice(OrderPrevailingMarketPrice prevailingMarketPrice) {
     Utils.checkNotNull(prevailingMarketPrice, "prevailingMarketPrice");
@@ -1697,7 +1726,8 @@ public class Order {
 
   /**
    * The prevailing market price, calculated as a weighted average of the fills in this order, up to
-   * a maximum of 5 decimal places. Will be absent if an order has no executions.
+   * a maximum of 5 decimal places. Can be up to 8 decimal places when asset_type = FIXED_INCOME.
+   * Will be absent if an order has no executions.
    */
   public Order withPrevailingMarketPrice(
       JsonNullable<? extends OrderPrevailingMarketPrice> prevailingMarketPrice) {
@@ -1711,7 +1741,9 @@ public class Order {
    * than zero and may not exceed 5 decimal places. For Mutual Funds: Only supported for SELL
    * orders. Represents the number of shares, up to a maximum of 3 decimal places. For Fixed Income:
    * Represents the par (face-value) amount being ordered, and may not exceed two decimal places for
-   * USD-based currencies. Either a quantity or notional_value MUST be specified (but not both).
+   * USD-based currencies. For Event Contracts: Represents the number of contracts being ordered,
+   * and must be whole numbers for BUY orders or up to a maximum of 2 decimal places for SELL
+   * orders. Either a quantity or notional_value MUST be specified (but not both).
    */
   public Order withQuantity(OrderQuantity quantity) {
     Utils.checkNotNull(quantity, "quantity");
@@ -1724,7 +1756,9 @@ public class Order {
    * than zero and may not exceed 5 decimal places. For Mutual Funds: Only supported for SELL
    * orders. Represents the number of shares, up to a maximum of 3 decimal places. For Fixed Income:
    * Represents the par (face-value) amount being ordered, and may not exceed two decimal places for
-   * USD-based currencies. Either a quantity or notional_value MUST be specified (but not both).
+   * USD-based currencies. For Event Contracts: Represents the number of contracts being ordered,
+   * and must be whole numbers for BUY orders or up to a maximum of 2 decimal places for SELL
+   * orders. Either a quantity or notional_value MUST be specified (but not both).
    */
   public Order withQuantity(JsonNullable<? extends OrderQuantity> quantity) {
     Utils.checkNotNull(quantity, "quantity");
@@ -1807,7 +1841,8 @@ public class Order {
 
   /**
    * For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is
-   * allowed. For Fixed Income: Only "DAY" is allowed.
+   * allowed. For Fixed Income: Only "DAY" is allowed. For Event Contracts: Either "DAY",
+   * "GOOD_TILL_DATE", "GOOD_TILL_CANCELED", "IMMEDIATE_OR_CANCEL", or "FILL_OR_KILL" are allowed.
    */
   public Order withTimeInForce(OrderTimeInForce timeInForce) {
     Utils.checkNotNull(timeInForce, "timeInForce");
@@ -1817,7 +1852,8 @@ public class Order {
 
   /**
    * For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is
-   * allowed. For Fixed Income: Only "DAY" is allowed.
+   * allowed. For Fixed Income: Only "DAY" is allowed. For Event Contracts: Either "DAY",
+   * "GOOD_TILL_DATE", "GOOD_TILL_CANCELED", "IMMEDIATE_OR_CANCEL", or "FILL_OR_KILL" are allowed.
    */
   public Order withTimeInForce(Optional<? extends OrderTimeInForce> timeInForce) {
     Utils.checkNotNull(timeInForce, "timeInForce");
@@ -2236,8 +2272,8 @@ public class Order {
      * and a maximum of two for larger USD amounts.
      *
      * <p>When asset_type = FIXED_INCOME, there may be more than one value present which would have
-     * a type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 4 decimal
-     * places of precision, and price values measured in yields will support up to 5 decimal places.
+     * a type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 8 decimal
+     * places of precision, and price values measured in yields will support up to 7 decimal places.
      */
     public Builder averagePrices(List<TradingExecutedPrice> averagePrices) {
       Utils.checkNotNull(averagePrices, "averagePrices");
@@ -2254,8 +2290,8 @@ public class Order {
      * and a maximum of two for larger USD amounts.
      *
      * <p>When asset_type = FIXED_INCOME, there may be more than one value present which would have
-     * a type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 4 decimal
-     * places of precision, and price values measured in yields will support up to 5 decimal places.
+     * a type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 8 decimal
+     * places of precision, and price values measured in yields will support up to 7 decimal places.
      */
     public Builder averagePrices(Optional<? extends List<TradingExecutedPrice>> averagePrices) {
       Utils.checkNotNull(averagePrices, "averagePrices");
@@ -2264,8 +2300,11 @@ public class Order {
     }
 
     /**
-     * Defaults to "AGENCY" if not specified. For Equities: Only "AGENCY" is allowed. For Mutual
-     * Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
+     * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
+     * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
+     * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
+     * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
+     * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
      * allowed.
      */
     public Builder brokerCapacity(OrderBrokerCapacity brokerCapacity) {
@@ -2275,8 +2314,11 @@ public class Order {
     }
 
     /**
-     * Defaults to "AGENCY" if not specified. For Equities: Only "AGENCY" is allowed. For Mutual
-     * Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
+     * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
+     * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
+     * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
+     * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
+     * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
      * allowed.
      */
     public Builder brokerCapacity(Optional<? extends OrderBrokerCapacity> brokerCapacity) {
@@ -2619,7 +2661,7 @@ public class Order {
     /**
      * The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For
      * Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are
-     * supported
+     * supported For Event Contracts: only SYMBOL and ASSET_ID are supported
      */
     public Builder identifierType(OrderIdentifierType identifierType) {
       Utils.checkNotNull(identifierType, "identifierType");
@@ -2630,7 +2672,7 @@ public class Order {
     /**
      * The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For
      * Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are
-     * supported
+     * supported For Event Contracts: only SYMBOL and ASSET_ID are supported
      */
     public Builder identifierType(Optional<? extends OrderIdentifierType> identifierType) {
       Utils.checkNotNull(identifierType, "identifierType");
@@ -2733,7 +2775,8 @@ public class Order {
      * Equities: This represents the maximum amount to be spent. The final order may may have a
      * smaller notional amount. For Mutual Funds: Only supported for BUY orders. The order will be
      * transacted at the full notional amount specified. For Fixed Income: Not supported, you must
-     * specify a `quantity` value.
+     * specify a `quantity` value. For Event Contracts: Not supported, you must specify a `quantity`
+     * value.
      */
     public Builder notionalValue(NotionalValue notionalValue) {
       Utils.checkNotNull(notionalValue, "notionalValue");
@@ -2746,7 +2789,8 @@ public class Order {
      * Equities: This represents the maximum amount to be spent. The final order may may have a
      * smaller notional amount. For Mutual Funds: Only supported for BUY orders. The order will be
      * transacted at the full notional amount specified. For Fixed Income: Not supported, you must
-     * specify a `quantity` value.
+     * specify a `quantity` value. For Event Contracts: Not supported, you must specify a `quantity`
+     * value.
      */
     public Builder notionalValue(JsonNullable<? extends NotionalValue> notionalValue) {
       Utils.checkNotNull(notionalValue, "notionalValue");
@@ -2854,7 +2898,7 @@ public class Order {
     /**
      * The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are
      * supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is
-     * supported.
+     * supported. For Event Contracts: only MARKET and LIMIT are supported.
      */
     public Builder orderType(OrderOrderType orderType) {
       Utils.checkNotNull(orderType, "orderType");
@@ -2865,7 +2909,7 @@ public class Order {
     /**
      * The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are
      * supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is
-     * supported.
+     * supported. For Event Contracts: only MARKET and LIMIT are supported.
      */
     public Builder orderType(Optional<? extends OrderOrderType> orderType) {
       Utils.checkNotNull(orderType, "orderType");
@@ -2875,7 +2919,8 @@ public class Order {
 
     /**
      * The prevailing market price, calculated as a weighted average of the fills in this order, up
-     * to a maximum of 5 decimal places. Will be absent if an order has no executions.
+     * to a maximum of 5 decimal places. Can be up to 8 decimal places when asset_type =
+     * FIXED_INCOME. Will be absent if an order has no executions.
      */
     public Builder prevailingMarketPrice(OrderPrevailingMarketPrice prevailingMarketPrice) {
       Utils.checkNotNull(prevailingMarketPrice, "prevailingMarketPrice");
@@ -2885,7 +2930,8 @@ public class Order {
 
     /**
      * The prevailing market price, calculated as a weighted average of the fills in this order, up
-     * to a maximum of 5 decimal places. Will be absent if an order has no executions.
+     * to a maximum of 5 decimal places. Can be up to 8 decimal places when asset_type =
+     * FIXED_INCOME. Will be absent if an order has no executions.
      */
     public Builder prevailingMarketPrice(
         JsonNullable<? extends OrderPrevailingMarketPrice> prevailingMarketPrice) {
@@ -2899,8 +2945,9 @@ public class Order {
      * than zero and may not exceed 5 decimal places. For Mutual Funds: Only supported for SELL
      * orders. Represents the number of shares, up to a maximum of 3 decimal places. For Fixed
      * Income: Represents the par (face-value) amount being ordered, and may not exceed two decimal
-     * places for USD-based currencies. Either a quantity or notional_value MUST be specified (but
-     * not both).
+     * places for USD-based currencies. For Event Contracts: Represents the number of contracts
+     * being ordered, and must be whole numbers for BUY orders or up to a maximum of 2 decimal
+     * places for SELL orders. Either a quantity or notional_value MUST be specified (but not both).
      */
     public Builder quantity(OrderQuantity quantity) {
       Utils.checkNotNull(quantity, "quantity");
@@ -2913,8 +2960,9 @@ public class Order {
      * than zero and may not exceed 5 decimal places. For Mutual Funds: Only supported for SELL
      * orders. Represents the number of shares, up to a maximum of 3 decimal places. For Fixed
      * Income: Represents the par (face-value) amount being ordered, and may not exceed two decimal
-     * places for USD-based currencies. Either a quantity or notional_value MUST be specified (but
-     * not both).
+     * places for USD-based currencies. For Event Contracts: Represents the number of contracts
+     * being ordered, and must be whole numbers for BUY orders or up to a maximum of 2 decimal
+     * places for SELL orders. Either a quantity or notional_value MUST be specified (but not both).
      */
     public Builder quantity(JsonNullable<? extends OrderQuantity> quantity) {
       Utils.checkNotNull(quantity, "quantity");
@@ -2997,7 +3045,8 @@ public class Order {
 
     /**
      * For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is
-     * allowed. For Fixed Income: Only "DAY" is allowed.
+     * allowed. For Fixed Income: Only "DAY" is allowed. For Event Contracts: Either "DAY",
+     * "GOOD_TILL_DATE", "GOOD_TILL_CANCELED", "IMMEDIATE_OR_CANCEL", or "FILL_OR_KILL" are allowed.
      */
     public Builder timeInForce(OrderTimeInForce timeInForce) {
       Utils.checkNotNull(timeInForce, "timeInForce");
@@ -3007,7 +3056,8 @@ public class Order {
 
     /**
      * For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is
-     * allowed. For Fixed Income: Only "DAY" is allowed.
+     * allowed. For Fixed Income: Only "DAY" is allowed. For Event Contracts: Either "DAY",
+     * "GOOD_TILL_DATE", "GOOD_TILL_CANCELED", "IMMEDIATE_OR_CANCEL", or "FILL_OR_KILL" are allowed.
      */
     public Builder timeInForce(Optional<? extends OrderTimeInForce> timeInForce) {
       Utils.checkNotNull(timeInForce, "timeInForce");

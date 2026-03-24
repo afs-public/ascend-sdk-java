@@ -60,6 +60,8 @@ public class IdentityIdentificationType {
   public static final IdentityIdentificationType DRIVERS_LICENSE =
       new IdentityIdentificationType("DRIVERS_LICENSE");
   public static final IdentityIdentificationType ITIN = new IdentityIdentificationType("ITIN");
+  public static final IdentityIdentificationType ID_CARD =
+      new IdentityIdentificationType("ID_CARD");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -133,6 +135,7 @@ public class IdentityIdentificationType {
     map.put("PASSPORT", PASSPORT);
     map.put("DRIVERS_LICENSE", DRIVERS_LICENSE);
     map.put("ITIN", ITIN);
+    map.put("ID_CARD", ID_CARD);
     return map;
   }
 
@@ -143,6 +146,7 @@ public class IdentityIdentificationType {
     map.put("PASSPORT", IdentityIdentificationTypeEnum.PASSPORT);
     map.put("DRIVERS_LICENSE", IdentityIdentificationTypeEnum.DRIVERS_LICENSE);
     map.put("ITIN", IdentityIdentificationTypeEnum.ITIN);
+    map.put("ID_CARD", IdentityIdentificationTypeEnum.ID_CARD);
     return map;
   }
 
@@ -183,6 +187,7 @@ public class IdentityIdentificationType {
     PASSPORT("PASSPORT"),
     DRIVERS_LICENSE("DRIVERS_LICENSE"),
     ITIN("ITIN"),
+    ID_CARD("ID_CARD"),
     ;
 
     private final String value;
