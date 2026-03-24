@@ -49,6 +49,7 @@ public class IdentityLookupType {
   public static final IdentityLookupType TYPE_UNSPECIFIED =
       new IdentityLookupType("TYPE_UNSPECIFIED");
   public static final IdentityLookupType SSN = new IdentityLookupType("SSN");
+  public static final IdentityLookupType CPF = new IdentityLookupType("CPF");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -118,6 +119,7 @@ public class IdentityLookupType {
     Map<String, IdentityLookupType> map = new LinkedHashMap<>();
     map.put("TYPE_UNSPECIFIED", TYPE_UNSPECIFIED);
     map.put("SSN", SSN);
+    map.put("CPF", CPF);
     return map;
   }
 
@@ -125,6 +127,7 @@ public class IdentityLookupType {
     Map<String, IdentityLookupTypeEnum> map = new HashMap<>();
     map.put("TYPE_UNSPECIFIED", IdentityLookupTypeEnum.TYPE_UNSPECIFIED);
     map.put("SSN", IdentityLookupTypeEnum.SSN);
+    map.put("CPF", IdentityLookupTypeEnum.CPF);
     return map;
   }
 
@@ -161,6 +164,7 @@ public class IdentityLookupType {
   public enum IdentityLookupTypeEnum {
     TYPE_UNSPECIFIED("TYPE_UNSPECIFIED"),
     SSN("SSN"),
+    CPF("CPF"),
     ;
 
     private final String value;

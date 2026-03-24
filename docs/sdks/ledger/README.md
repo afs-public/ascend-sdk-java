@@ -316,8 +316,8 @@ public class Application {
             .build();
 
         LedgerGetEntryResponse res = sdk.ledger().getEntry()
-                .accountId("[object Object]")
-                .entryId("[object Object]")
+                .accountId("{account_id}")
+                .entryId("{entry_id}")
                 .call();
 
         if (res.entry().isPresent()) {
@@ -329,10 +329,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter            | Type                 | Required             | Description          | Example              |
-| -------------------- | -------------------- | -------------------- | -------------------- | -------------------- |
-| `accountId`          | *String*             | :heavy_check_mark:   | The account id.      | {<br/>"account_id": ""<br/>} |
-| `entryId`            | *String*             | :heavy_check_mark:   | The entry id.        | {<br/>"entry_id": ""<br/>} |
+| Parameter          | Type               | Required           | Description        | Example            |
+| ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
+| `accountId`        | *String*           | :heavy_check_mark: | The account id.    | {account_id}       |
+| `entryId`          | *String*           | :heavy_check_mark: | The entry id.      | {entry_id}         |
 
 ### Response
 

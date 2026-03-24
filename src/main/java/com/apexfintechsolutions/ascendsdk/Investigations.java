@@ -289,7 +289,11 @@ public class Investigations {
   /**
    * Get Watchlist Item
    *
-   * <p>Gets the details of an investigation by watchlist type and valid watchlist id
+   * <p>Gets the details of the watchlist profile by the watchlist_id and watchlist_item_id,
+   * returned as part of an investigation's watchlist screening process. The response returns the
+   * details of the specific watchlist profile that matched the screened identity. Clients can refer
+   * to these properties when adjudicating potential watchlist matches. Watchlist_id must equal
+   * DOWJONES or DNDB
    *
    * @return The call builder
    */
@@ -300,7 +304,11 @@ public class Investigations {
   /**
    * Get Watchlist Item
    *
-   * <p>Gets the details of an investigation by watchlist type and valid watchlist id
+   * <p>Gets the details of the watchlist profile by the watchlist_id and watchlist_item_id,
+   * returned as part of an investigation's watchlist screening process. The response returns the
+   * details of the specific watchlist profile that matched the screened identity. Clients can refer
+   * to these properties when adjudicating potential watchlist matches. Watchlist_id must equal
+   * DOWJONES or DNDB
    *
    * @param watchlistId The watchlist id.
    * @param itemId The item id.
@@ -315,7 +323,11 @@ public class Investigations {
   /**
    * Get Watchlist Item
    *
-   * <p>Gets the details of an investigation by watchlist type and valid watchlist id
+   * <p>Gets the details of the watchlist profile by the watchlist_id and watchlist_item_id,
+   * returned as part of an investigation's watchlist screening process. The response returns the
+   * details of the specific watchlist profile that matched the screened identity. Clients can refer
+   * to these properties when adjudicating potential watchlist matches. Watchlist_id must equal
+   * DOWJONES or DNDB
    *
    * @param watchlistId The watchlist id.
    * @param itemId The item id.

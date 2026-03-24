@@ -190,6 +190,11 @@ public class Entry {
   @JsonProperty("entry_id")
   private Optional<String> entryId;
 
+  /** Used to record the settlement/payout of event contracts based on real-world event outcomes */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("event_contract_settlement")
+  private JsonNullable<? extends EventContractSettlement> eventContractSettlement;
+
   /**
    * Used to record the exchange of certificates for a new security or cash and details related to
    * the exchange
@@ -295,6 +300,16 @@ public class Entry {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("original_process_date")
   private JsonNullable<? extends OriginalProcessDate> originalProcessDate;
+
+  /**
+   * The resource name of the API resource that originated this ledger entry or activity. This field
+   * enables clients to link ledger activities back to their source transactions for reconciliation
+   * purposes. This field will only be populated when the client has direct access to the referenced
+   * resource via the Ascend API's.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("originating_resource_name")
+  private Optional<String> originatingResourceName;
 
   /**
    * Used to record payments on interest-bearing securities where the payment is made in additional
@@ -567,6 +582,8 @@ public class Entry {
       @JsonProperty("description") Optional<String> description,
       @JsonProperty("drip") JsonNullable<? extends Drip> drip,
       @JsonProperty("entry_id") Optional<String> entryId,
+      @JsonProperty("event_contract_settlement")
+          JsonNullable<? extends EventContractSettlement> eventContractSettlement,
       @JsonProperty("exchange") JsonNullable<? extends Exchange> exchange,
       @JsonProperty("fee") JsonNullable<? extends EntryFee> fee,
       @JsonProperty("flip") JsonNullable<? extends Flip> flip,
@@ -582,6 +599,7 @@ public class Entry {
       @JsonProperty("original_id") Optional<String> originalId,
       @JsonProperty("original_process_date")
           JsonNullable<? extends OriginalProcessDate> originalProcessDate,
+      @JsonProperty("originating_resource_name") Optional<String> originatingResourceName,
       @JsonProperty("payment_in_kind") JsonNullable<? extends PaymentInKind> paymentInKind,
       @JsonProperty("price") JsonNullable<? extends EntryPrice> price,
       @JsonProperty("process_date") JsonNullable<? extends EntryProcessDate> processDate,
@@ -645,6 +663,7 @@ public class Entry {
     Utils.checkNotNull(description, "description");
     Utils.checkNotNull(drip, "drip");
     Utils.checkNotNull(entryId, "entryId");
+    Utils.checkNotNull(eventContractSettlement, "eventContractSettlement");
     Utils.checkNotNull(exchange, "exchange");
     Utils.checkNotNull(fee, "fee");
     Utils.checkNotNull(flip, "flip");
@@ -659,6 +678,7 @@ public class Entry {
     Utils.checkNotNull(nameChange, "nameChange");
     Utils.checkNotNull(originalId, "originalId");
     Utils.checkNotNull(originalProcessDate, "originalProcessDate");
+    Utils.checkNotNull(originatingResourceName, "originatingResourceName");
     Utils.checkNotNull(paymentInKind, "paymentInKind");
     Utils.checkNotNull(price, "price");
     Utils.checkNotNull(processDate, "processDate");
@@ -716,6 +736,7 @@ public class Entry {
     this.description = description;
     this.drip = drip;
     this.entryId = entryId;
+    this.eventContractSettlement = eventContractSettlement;
     this.exchange = exchange;
     this.fee = fee;
     this.flip = flip;
@@ -730,6 +751,7 @@ public class Entry {
     this.nameChange = nameChange;
     this.originalId = originalId;
     this.originalProcessDate = originalProcessDate;
+    this.originatingResourceName = originatingResourceName;
     this.paymentInKind = paymentInKind;
     this.price = price;
     this.processDate = processDate;
@@ -801,10 +823,12 @@ public class Entry {
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
-        Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty(),
         JsonNullable.undefined(),
+        Optional.empty(),
+        JsonNullable.undefined(),
+        Optional.empty(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
@@ -1052,6 +1076,13 @@ public class Entry {
     return entryId;
   }
 
+  /** Used to record the settlement/payout of event contracts based on real-world event outcomes */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<EventContractSettlement> eventContractSettlement() {
+    return (JsonNullable<EventContractSettlement>) eventContractSettlement;
+  }
+
   /**
    * Used to record the exchange of certificates for a new security or cash and details related to
    * the exchange
@@ -1182,6 +1213,17 @@ public class Entry {
   @JsonIgnore
   public JsonNullable<OriginalProcessDate> originalProcessDate() {
     return (JsonNullable<OriginalProcessDate>) originalProcessDate;
+  }
+
+  /**
+   * The resource name of the API resource that originated this ledger entry or activity. This field
+   * enables clients to link ledger activities back to their source transactions for reconciliation
+   * purposes. This field will only be populated when the client has direct access to the referenced
+   * resource via the Ascend API's.
+   */
+  @JsonIgnore
+  public Optional<String> originatingResourceName() {
+    return originatingResourceName;
   }
 
   /**
@@ -1934,6 +1976,21 @@ public class Entry {
     return this;
   }
 
+  /** Used to record the settlement/payout of event contracts based on real-world event outcomes */
+  public Entry withEventContractSettlement(EventContractSettlement eventContractSettlement) {
+    Utils.checkNotNull(eventContractSettlement, "eventContractSettlement");
+    this.eventContractSettlement = JsonNullable.of(eventContractSettlement);
+    return this;
+  }
+
+  /** Used to record the settlement/payout of event contracts based on real-world event outcomes */
+  public Entry withEventContractSettlement(
+      JsonNullable<? extends EventContractSettlement> eventContractSettlement) {
+    Utils.checkNotNull(eventContractSettlement, "eventContractSettlement");
+    this.eventContractSettlement = eventContractSettlement;
+    return this;
+  }
+
   /**
    * Used to record the exchange of certificates for a new security or cash and details related to
    * the exchange
@@ -2200,6 +2257,30 @@ public class Entry {
       JsonNullable<? extends OriginalProcessDate> originalProcessDate) {
     Utils.checkNotNull(originalProcessDate, "originalProcessDate");
     this.originalProcessDate = originalProcessDate;
+    return this;
+  }
+
+  /**
+   * The resource name of the API resource that originated this ledger entry or activity. This field
+   * enables clients to link ledger activities back to their source transactions for reconciliation
+   * purposes. This field will only be populated when the client has direct access to the referenced
+   * resource via the Ascend API's.
+   */
+  public Entry withOriginatingResourceName(String originatingResourceName) {
+    Utils.checkNotNull(originatingResourceName, "originatingResourceName");
+    this.originatingResourceName = Optional.ofNullable(originatingResourceName);
+    return this;
+  }
+
+  /**
+   * The resource name of the API resource that originated this ledger entry or activity. This field
+   * enables clients to link ledger activities back to their source transactions for reconciliation
+   * purposes. This field will only be populated when the client has direct access to the referenced
+   * resource via the Ascend API's.
+   */
+  public Entry withOriginatingResourceName(Optional<String> originatingResourceName) {
+    Utils.checkNotNull(originatingResourceName, "originatingResourceName");
+    this.originatingResourceName = originatingResourceName;
     return this;
   }
 
@@ -2854,6 +2935,7 @@ public class Entry {
         && Utils.enhancedDeepEquals(this.description, other.description)
         && Utils.enhancedDeepEquals(this.drip, other.drip)
         && Utils.enhancedDeepEquals(this.entryId, other.entryId)
+        && Utils.enhancedDeepEquals(this.eventContractSettlement, other.eventContractSettlement)
         && Utils.enhancedDeepEquals(this.exchange, other.exchange)
         && Utils.enhancedDeepEquals(this.fee, other.fee)
         && Utils.enhancedDeepEquals(this.flip, other.flip)
@@ -2868,6 +2950,7 @@ public class Entry {
         && Utils.enhancedDeepEquals(this.nameChange, other.nameChange)
         && Utils.enhancedDeepEquals(this.originalId, other.originalId)
         && Utils.enhancedDeepEquals(this.originalProcessDate, other.originalProcessDate)
+        && Utils.enhancedDeepEquals(this.originatingResourceName, other.originatingResourceName)
         && Utils.enhancedDeepEquals(this.paymentInKind, other.paymentInKind)
         && Utils.enhancedDeepEquals(this.price, other.price)
         && Utils.enhancedDeepEquals(this.processDate, other.processDate)
@@ -2930,6 +3013,7 @@ public class Entry {
         description,
         drip,
         entryId,
+        eventContractSettlement,
         exchange,
         fee,
         flip,
@@ -2944,6 +3028,7 @@ public class Entry {
         nameChange,
         originalId,
         originalProcessDate,
+        originatingResourceName,
         paymentInKind,
         price,
         processDate,
@@ -3032,6 +3117,8 @@ public class Entry {
         drip,
         "entryId",
         entryId,
+        "eventContractSettlement",
+        eventContractSettlement,
         "exchange",
         exchange,
         "fee",
@@ -3060,6 +3147,8 @@ public class Entry {
         originalId,
         "originalProcessDate",
         originalProcessDate,
+        "originatingResourceName",
+        originatingResourceName,
         "paymentInKind",
         paymentInKind,
         "price",
@@ -3180,6 +3269,9 @@ public class Entry {
 
     private Optional<String> entryId = Optional.empty();
 
+    private JsonNullable<? extends EventContractSettlement> eventContractSettlement =
+        JsonNullable.undefined();
+
     private JsonNullable<? extends Exchange> exchange = JsonNullable.undefined();
 
     private JsonNullable<? extends EntryFee> fee = JsonNullable.undefined();
@@ -3208,6 +3300,8 @@ public class Entry {
 
     private JsonNullable<? extends OriginalProcessDate> originalProcessDate =
         JsonNullable.undefined();
+
+    private Optional<String> originatingResourceName = Optional.empty();
 
     private JsonNullable<? extends PaymentInKind> paymentInKind = JsonNullable.undefined();
 
@@ -3734,6 +3828,25 @@ public class Entry {
     }
 
     /**
+     * Used to record the settlement/payout of event contracts based on real-world event outcomes
+     */
+    public Builder eventContractSettlement(EventContractSettlement eventContractSettlement) {
+      Utils.checkNotNull(eventContractSettlement, "eventContractSettlement");
+      this.eventContractSettlement = JsonNullable.of(eventContractSettlement);
+      return this;
+    }
+
+    /**
+     * Used to record the settlement/payout of event contracts based on real-world event outcomes
+     */
+    public Builder eventContractSettlement(
+        JsonNullable<? extends EventContractSettlement> eventContractSettlement) {
+      Utils.checkNotNull(eventContractSettlement, "eventContractSettlement");
+      this.eventContractSettlement = eventContractSettlement;
+      return this;
+    }
+
+    /**
      * Used to record the exchange of certificates for a new security or cash and details related to
      * the exchange
      */
@@ -3999,6 +4112,30 @@ public class Entry {
         JsonNullable<? extends OriginalProcessDate> originalProcessDate) {
       Utils.checkNotNull(originalProcessDate, "originalProcessDate");
       this.originalProcessDate = originalProcessDate;
+      return this;
+    }
+
+    /**
+     * The resource name of the API resource that originated this ledger entry or activity. This
+     * field enables clients to link ledger activities back to their source transactions for
+     * reconciliation purposes. This field will only be populated when the client has direct access
+     * to the referenced resource via the Ascend API's.
+     */
+    public Builder originatingResourceName(String originatingResourceName) {
+      Utils.checkNotNull(originatingResourceName, "originatingResourceName");
+      this.originatingResourceName = Optional.ofNullable(originatingResourceName);
+      return this;
+    }
+
+    /**
+     * The resource name of the API resource that originated this ledger entry or activity. This
+     * field enables clients to link ledger activities back to their source transactions for
+     * reconciliation purposes. This field will only be populated when the client has direct access
+     * to the referenced resource via the Ascend API's.
+     */
+    public Builder originatingResourceName(Optional<String> originatingResourceName) {
+      Utils.checkNotNull(originatingResourceName, "originatingResourceName");
+      this.originatingResourceName = originatingResourceName;
       return this;
     }
 
@@ -4648,6 +4785,7 @@ public class Entry {
           description,
           drip,
           entryId,
+          eventContractSettlement,
           exchange,
           fee,
           flip,
@@ -4662,6 +4800,7 @@ public class Entry {
           nameChange,
           originalId,
           originalProcessDate,
+          originatingResourceName,
           paymentInKind,
           price,
           processDate,

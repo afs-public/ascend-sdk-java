@@ -28,8 +28,12 @@ public class OrderCreate {
   private AssetType assetType;
 
   /**
-   * Defaults to "AGENCY" if not specified. For Equities: Only "AGENCY" is allowed. For Mutual
-   * Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.
+   * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
+   * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
+   * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
+   * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
+   * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
+   * allowed.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("broker_capacity")
@@ -93,7 +97,7 @@ public class OrderCreate {
   /**
    * The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For
    * Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are
-   * supported
+   * supported For Event Contracts: only SYMBOL and ASSET_ID are supported
    */
   @JsonProperty("identifier_type")
   private OrderCreateIdentifierType identifierType;
@@ -154,7 +158,7 @@ public class OrderCreate {
   /**
    * The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are
    * supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is
-   * supported.
+   * supported. For Event Contracts: only MARKET and LIMIT are supported.
    */
   @JsonProperty("order_type")
   private OrderType orderType;
@@ -199,7 +203,8 @@ public class OrderCreate {
 
   /**
    * For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is
-   * allowed. For Fixed Income: Only "DAY" is allowed.
+   * allowed. For Fixed Income: Only "DAY" is allowed. For Event Contracts: Either "DAY",
+   * "GOOD_TILL_DATE", "GOOD_TILL_CANCELED", "IMMEDIATE_OR_CANCEL", or "FILL_OR_KILL" are allowed.
    */
   @JsonProperty("time_in_force")
   private TimeInForce timeInForce;
@@ -354,8 +359,12 @@ public class OrderCreate {
   }
 
   /**
-   * Defaults to "AGENCY" if not specified. For Equities: Only "AGENCY" is allowed. For Mutual
-   * Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.
+   * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
+   * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
+   * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
+   * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
+   * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
+   * allowed.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -433,7 +442,7 @@ public class OrderCreate {
   /**
    * The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For
    * Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are
-   * supported
+   * supported For Event Contracts: only SYMBOL and ASSET_ID are supported
    */
   @JsonIgnore
   public OrderCreateIdentifierType identifierType() {
@@ -506,7 +515,7 @@ public class OrderCreate {
   /**
    * The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are
    * supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is
-   * supported.
+   * supported. For Event Contracts: only MARKET and LIMIT are supported.
    */
   @JsonIgnore
   public OrderType orderType() {
@@ -563,7 +572,8 @@ public class OrderCreate {
 
   /**
    * For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is
-   * allowed. For Fixed Income: Only "DAY" is allowed.
+   * allowed. For Fixed Income: Only "DAY" is allowed. For Event Contracts: Either "DAY",
+   * "GOOD_TILL_DATE", "GOOD_TILL_CANCELED", "IMMEDIATE_OR_CANCEL", or "FILL_OR_KILL" are allowed.
    */
   @JsonIgnore
   public TimeInForce timeInForce() {
@@ -610,8 +620,12 @@ public class OrderCreate {
   }
 
   /**
-   * Defaults to "AGENCY" if not specified. For Equities: Only "AGENCY" is allowed. For Mutual
-   * Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.
+   * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
+   * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
+   * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
+   * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
+   * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
+   * allowed.
    */
   public OrderCreate withBrokerCapacity(BrokerCapacity brokerCapacity) {
     Utils.checkNotNull(brokerCapacity, "brokerCapacity");
@@ -620,8 +634,12 @@ public class OrderCreate {
   }
 
   /**
-   * Defaults to "AGENCY" if not specified. For Equities: Only "AGENCY" is allowed. For Mutual
-   * Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.
+   * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
+   * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
+   * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
+   * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
+   * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
+   * allowed.
    */
   public OrderCreate withBrokerCapacity(Optional<? extends BrokerCapacity> brokerCapacity) {
     Utils.checkNotNull(brokerCapacity, "brokerCapacity");
@@ -764,7 +782,7 @@ public class OrderCreate {
   /**
    * The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For
    * Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are
-   * supported
+   * supported For Event Contracts: only SYMBOL and ASSET_ID are supported
    */
   public OrderCreate withIdentifierType(OrderCreateIdentifierType identifierType) {
     Utils.checkNotNull(identifierType, "identifierType");
@@ -885,7 +903,7 @@ public class OrderCreate {
   /**
    * The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are
    * supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is
-   * supported.
+   * supported. For Event Contracts: only MARKET and LIMIT are supported.
    */
   public OrderCreate withOrderType(OrderType orderType) {
     Utils.checkNotNull(orderType, "orderType");
@@ -989,7 +1007,8 @@ public class OrderCreate {
 
   /**
    * For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is
-   * allowed. For Fixed Income: Only "DAY" is allowed.
+   * allowed. For Fixed Income: Only "DAY" is allowed. For Event Contracts: Either "DAY",
+   * "GOOD_TILL_DATE", "GOOD_TILL_CANCELED", "IMMEDIATE_OR_CANCEL", or "FILL_OR_KILL" are allowed.
    */
   public OrderCreate withTimeInForce(TimeInForce timeInForce) {
     Utils.checkNotNull(timeInForce, "timeInForce");
@@ -1241,8 +1260,11 @@ public class OrderCreate {
     }
 
     /**
-     * Defaults to "AGENCY" if not specified. For Equities: Only "AGENCY" is allowed. For Mutual
-     * Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
+     * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
+     * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
+     * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
+     * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
+     * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
      * allowed.
      */
     public Builder brokerCapacity(BrokerCapacity brokerCapacity) {
@@ -1252,8 +1274,11 @@ public class OrderCreate {
     }
 
     /**
-     * Defaults to "AGENCY" if not specified. For Equities: Only "AGENCY" is allowed. For Mutual
-     * Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
+     * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
+     * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
+     * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
+     * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
+     * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
      * allowed.
      */
     public Builder brokerCapacity(Optional<? extends BrokerCapacity> brokerCapacity) {
@@ -1397,7 +1422,7 @@ public class OrderCreate {
     /**
      * The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For
      * Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are
-     * supported
+     * supported For Event Contracts: only SYMBOL and ASSET_ID are supported
      */
     public Builder identifierType(OrderCreateIdentifierType identifierType) {
       Utils.checkNotNull(identifierType, "identifierType");
@@ -1522,7 +1547,7 @@ public class OrderCreate {
     /**
      * The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are
      * supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is
-     * supported.
+     * supported. For Event Contracts: only MARKET and LIMIT are supported.
      */
     public Builder orderType(OrderType orderType) {
       Utils.checkNotNull(orderType, "orderType");
@@ -1628,7 +1653,8 @@ public class OrderCreate {
 
     /**
      * For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is
-     * allowed. For Fixed Income: Only "DAY" is allowed.
+     * allowed. For Fixed Income: Only "DAY" is allowed. For Event Contracts: Either "DAY",
+     * "GOOD_TILL_DATE", "GOOD_TILL_CANCELED", "IMMEDIATE_OR_CANCEL", or "FILL_OR_KILL" are allowed.
      */
     public Builder timeInForce(TimeInForce timeInForce) {
       Utils.checkNotNull(timeInForce, "timeInForce");

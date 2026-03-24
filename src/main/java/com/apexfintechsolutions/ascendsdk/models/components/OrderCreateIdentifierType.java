@@ -42,12 +42,14 @@ import java.util.Optional;
  *
  * <p>The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For
  * Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are
- * supported
+ * supported For Event Contracts: only SYMBOL and ASSET_ID are supported
  */
 @JsonDeserialize(using = OrderCreateIdentifierType._Deserializer.class)
 @JsonSerialize(using = OrderCreateIdentifierType._Serializer.class)
 public class OrderCreateIdentifierType {
 
+  public static final OrderCreateIdentifierType ASSET_ID =
+      new OrderCreateIdentifierType("ASSET_ID");
   public static final OrderCreateIdentifierType SYMBOL = new OrderCreateIdentifierType("SYMBOL");
   public static final OrderCreateIdentifierType CUSIP = new OrderCreateIdentifierType("CUSIP");
   public static final OrderCreateIdentifierType ISIN = new OrderCreateIdentifierType("ISIN");
@@ -119,6 +121,7 @@ public class OrderCreateIdentifierType {
 
   private static final Map<String, OrderCreateIdentifierType> createValuesMap() {
     Map<String, OrderCreateIdentifierType> map = new LinkedHashMap<>();
+    map.put("ASSET_ID", ASSET_ID);
     map.put("SYMBOL", SYMBOL);
     map.put("CUSIP", CUSIP);
     map.put("ISIN", ISIN);
@@ -127,6 +130,7 @@ public class OrderCreateIdentifierType {
 
   private static final Map<String, OrderCreateIdentifierTypeEnum> createEnumsMap() {
     Map<String, OrderCreateIdentifierTypeEnum> map = new HashMap<>();
+    map.put("ASSET_ID", OrderCreateIdentifierTypeEnum.ASSET_ID);
     map.put("SYMBOL", OrderCreateIdentifierTypeEnum.SYMBOL);
     map.put("CUSIP", OrderCreateIdentifierTypeEnum.CUSIP);
     map.put("ISIN", OrderCreateIdentifierTypeEnum.ISIN);
@@ -165,6 +169,7 @@ public class OrderCreateIdentifierType {
   }
 
   public enum OrderCreateIdentifierTypeEnum {
+    ASSET_ID("ASSET_ID"),
     SYMBOL("SYMBOL"),
     CUSIP("CUSIP"),
     ISIN("ISIN"),

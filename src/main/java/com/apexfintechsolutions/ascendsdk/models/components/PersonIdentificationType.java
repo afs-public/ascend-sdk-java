@@ -43,7 +43,8 @@ import java.util.Optional;
  * <p>The identification type for a person, one of: - `ID_TYPE_UNSPECIFIED` - Default/Null value. -
  * `SSN` - SSN tax type. - `ITIN` - ITIN tax type. - `FTIN` - FTIN (foreign tax id) type. -
  * `NATIONAL_ID` - National id type. - `PASSPORT` - Passport id type. - `DRIVING_LICENSE` - Drivers
- * license id type.
+ * license id type. - `STATE_ID_CARD` - State ID card. - `NATIONAL_ID_CARD` - National ID card. -
+ * `PERMANENT_RESIDENT_VISA` - Permanent resident visa. - `MILITARY_ID_CARD` - Military ID card.
  */
 @JsonDeserialize(using = PersonIdentificationType._Deserializer.class)
 @JsonSerialize(using = PersonIdentificationType._Serializer.class)
@@ -59,6 +60,14 @@ public class PersonIdentificationType {
   public static final PersonIdentificationType PASSPORT = new PersonIdentificationType("PASSPORT");
   public static final PersonIdentificationType DRIVING_LICENSE =
       new PersonIdentificationType("DRIVING_LICENSE");
+  public static final PersonIdentificationType STATE_ID_CARD =
+      new PersonIdentificationType("STATE_ID_CARD");
+  public static final PersonIdentificationType NATIONAL_ID_CARD =
+      new PersonIdentificationType("NATIONAL_ID_CARD");
+  public static final PersonIdentificationType PERMANENT_RESIDENT_VISA =
+      new PersonIdentificationType("PERMANENT_RESIDENT_VISA");
+  public static final PersonIdentificationType MILITARY_ID_CARD =
+      new PersonIdentificationType("MILITARY_ID_CARD");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -134,6 +143,10 @@ public class PersonIdentificationType {
     map.put("NATIONAL_ID", NATIONAL_ID);
     map.put("PASSPORT", PASSPORT);
     map.put("DRIVING_LICENSE", DRIVING_LICENSE);
+    map.put("STATE_ID_CARD", STATE_ID_CARD);
+    map.put("NATIONAL_ID_CARD", NATIONAL_ID_CARD);
+    map.put("PERMANENT_RESIDENT_VISA", PERMANENT_RESIDENT_VISA);
+    map.put("MILITARY_ID_CARD", MILITARY_ID_CARD);
     return map;
   }
 
@@ -146,6 +159,10 @@ public class PersonIdentificationType {
     map.put("NATIONAL_ID", PersonIdentificationTypeEnum.NATIONAL_ID);
     map.put("PASSPORT", PersonIdentificationTypeEnum.PASSPORT);
     map.put("DRIVING_LICENSE", PersonIdentificationTypeEnum.DRIVING_LICENSE);
+    map.put("STATE_ID_CARD", PersonIdentificationTypeEnum.STATE_ID_CARD);
+    map.put("NATIONAL_ID_CARD", PersonIdentificationTypeEnum.NATIONAL_ID_CARD);
+    map.put("PERMANENT_RESIDENT_VISA", PersonIdentificationTypeEnum.PERMANENT_RESIDENT_VISA);
+    map.put("MILITARY_ID_CARD", PersonIdentificationTypeEnum.MILITARY_ID_CARD);
     return map;
   }
 
@@ -188,6 +205,10 @@ public class PersonIdentificationType {
     NATIONAL_ID("NATIONAL_ID"),
     PASSPORT("PASSPORT"),
     DRIVING_LICENSE("DRIVING_LICENSE"),
+    STATE_ID_CARD("STATE_ID_CARD"),
+    NATIONAL_ID_CARD("NATIONAL_ID_CARD"),
+    PERMANENT_RESIDENT_VISA("PERMANENT_RESIDENT_VISA"),
+    MILITARY_ID_CARD("MILITARY_ID_CARD"),
     ;
 
     private final String value;

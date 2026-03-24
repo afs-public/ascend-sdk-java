@@ -56,6 +56,12 @@ public class EntryTransferType {
       new EntryTransferType("MANUAL_ADJUSTMENT");
   public static final EntryTransferType INTERNAL_CONVERSION =
       new EntryTransferType("INTERNAL_CONVERSION");
+  public static final EntryTransferType FREE_RECEIVE = new EntryTransferType("FREE_RECEIVE");
+  public static final EntryTransferType FREE_DELIVER = new EntryTransferType("FREE_DELIVER");
+  public static final EntryTransferType STOCK_REWARD = new EntryTransferType("STOCK_REWARD");
+  public static final EntryTransferType TOKENIZATION_TRANSFER =
+      new EntryTransferType("TOKENIZATION_TRANSFER");
+  public static final EntryTransferType ESCHEATMENT = new EntryTransferType("ESCHEATMENT");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -129,6 +135,11 @@ public class EntryTransferType {
     map.put("MIGRATION", MIGRATION);
     map.put("MANUAL_ADJUSTMENT", MANUAL_ADJUSTMENT);
     map.put("INTERNAL_CONVERSION", INTERNAL_CONVERSION);
+    map.put("FREE_RECEIVE", FREE_RECEIVE);
+    map.put("FREE_DELIVER", FREE_DELIVER);
+    map.put("STOCK_REWARD", STOCK_REWARD);
+    map.put("TOKENIZATION_TRANSFER", TOKENIZATION_TRANSFER);
+    map.put("ESCHEATMENT", ESCHEATMENT);
     return map;
   }
 
@@ -140,6 +151,11 @@ public class EntryTransferType {
     map.put("MIGRATION", EntryTransferTypeEnum.MIGRATION);
     map.put("MANUAL_ADJUSTMENT", EntryTransferTypeEnum.MANUAL_ADJUSTMENT);
     map.put("INTERNAL_CONVERSION", EntryTransferTypeEnum.INTERNAL_CONVERSION);
+    map.put("FREE_RECEIVE", EntryTransferTypeEnum.FREE_RECEIVE);
+    map.put("FREE_DELIVER", EntryTransferTypeEnum.FREE_DELIVER);
+    map.put("STOCK_REWARD", EntryTransferTypeEnum.STOCK_REWARD);
+    map.put("TOKENIZATION_TRANSFER", EntryTransferTypeEnum.TOKENIZATION_TRANSFER);
+    map.put("ESCHEATMENT", EntryTransferTypeEnum.ESCHEATMENT);
     return map;
   }
 
@@ -180,6 +196,11 @@ public class EntryTransferType {
     MIGRATION("MIGRATION"),
     MANUAL_ADJUSTMENT("MANUAL_ADJUSTMENT"),
     INTERNAL_CONVERSION("INTERNAL_CONVERSION"),
+    FREE_RECEIVE("FREE_RECEIVE"),
+    FREE_DELIVER("FREE_DELIVER"),
+    STOCK_REWARD("STOCK_REWARD"),
+    TOKENIZATION_TRANSFER("TOKENIZATION_TRANSFER"),
+    ESCHEATMENT("ESCHEATMENT"),
     ;
 
     private final String value;

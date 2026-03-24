@@ -14,7 +14,7 @@ import java.util.Optional;
 /**
  * InvestigationExecutionDate
  *
- * <p>The date identity verification was performed. Must be formatted as an ISO-8601 YYYY-MM-DD
+ * <p>The date identity verification was performed.
  */
 public class InvestigationExecutionDate {
   /**

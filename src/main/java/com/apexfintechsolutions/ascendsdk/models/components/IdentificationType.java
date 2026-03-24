@@ -49,6 +49,7 @@ public class IdentificationType {
   public static final IdentificationType TYPE_UNSPECIFIED =
       new IdentificationType("TYPE_UNSPECIFIED");
   public static final IdentificationType SSN = new IdentificationType("SSN");
+  public static final IdentificationType CPF = new IdentificationType("CPF");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -118,6 +119,7 @@ public class IdentificationType {
     Map<String, IdentificationType> map = new LinkedHashMap<>();
     map.put("TYPE_UNSPECIFIED", TYPE_UNSPECIFIED);
     map.put("SSN", SSN);
+    map.put("CPF", CPF);
     return map;
   }
 
@@ -125,6 +127,7 @@ public class IdentificationType {
     Map<String, IdentificationTypeEnum> map = new HashMap<>();
     map.put("TYPE_UNSPECIFIED", IdentificationTypeEnum.TYPE_UNSPECIFIED);
     map.put("SSN", IdentificationTypeEnum.SSN);
+    map.put("CPF", IdentificationTypeEnum.CPF);
     return map;
   }
 
@@ -161,6 +164,7 @@ public class IdentificationType {
   public enum IdentificationTypeEnum {
     TYPE_UNSPECIFIED("TYPE_UNSPECIFIED"),
     SSN("SSN"),
+    CPF("CPF"),
     ;
 
     private final String value;

@@ -41,7 +41,8 @@ import java.util.Optional;
  * OrderTimeInForce
  *
  * <p>For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is
- * allowed. For Fixed Income: Only "DAY" is allowed.
+ * allowed. For Fixed Income: Only "DAY" is allowed. For Event Contracts: Either "DAY",
+ * "GOOD_TILL_DATE", "GOOD_TILL_CANCELED", "IMMEDIATE_OR_CANCEL", or "FILL_OR_KILL" are allowed.
  */
 @JsonDeserialize(using = OrderTimeInForce._Deserializer.class)
 @JsonSerialize(using = OrderTimeInForce._Serializer.class)
@@ -49,6 +50,11 @@ public class OrderTimeInForce {
 
   public static final OrderTimeInForce DAY = new OrderTimeInForce("DAY");
   public static final OrderTimeInForce GOOD_TILL_DATE = new OrderTimeInForce("GOOD_TILL_DATE");
+  public static final OrderTimeInForce GOOD_TILL_CANCELED =
+      new OrderTimeInForce("GOOD_TILL_CANCELED");
+  public static final OrderTimeInForce IMMEDIATE_OR_CANCEL =
+      new OrderTimeInForce("IMMEDIATE_OR_CANCEL");
+  public static final OrderTimeInForce FILL_OR_KILL = new OrderTimeInForce("FILL_OR_KILL");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -118,6 +124,9 @@ public class OrderTimeInForce {
     Map<String, OrderTimeInForce> map = new LinkedHashMap<>();
     map.put("DAY", DAY);
     map.put("GOOD_TILL_DATE", GOOD_TILL_DATE);
+    map.put("GOOD_TILL_CANCELED", GOOD_TILL_CANCELED);
+    map.put("IMMEDIATE_OR_CANCEL", IMMEDIATE_OR_CANCEL);
+    map.put("FILL_OR_KILL", FILL_OR_KILL);
     return map;
   }
 
@@ -125,6 +134,9 @@ public class OrderTimeInForce {
     Map<String, OrderTimeInForceEnum> map = new HashMap<>();
     map.put("DAY", OrderTimeInForceEnum.DAY);
     map.put("GOOD_TILL_DATE", OrderTimeInForceEnum.GOOD_TILL_DATE);
+    map.put("GOOD_TILL_CANCELED", OrderTimeInForceEnum.GOOD_TILL_CANCELED);
+    map.put("IMMEDIATE_OR_CANCEL", OrderTimeInForceEnum.IMMEDIATE_OR_CANCEL);
+    map.put("FILL_OR_KILL", OrderTimeInForceEnum.FILL_OR_KILL);
     return map;
   }
 
@@ -161,6 +173,9 @@ public class OrderTimeInForce {
   public enum OrderTimeInForceEnum {
     DAY("DAY"),
     GOOD_TILL_DATE("GOOD_TILL_DATE"),
+    GOOD_TILL_CANCELED("GOOD_TILL_CANCELED"),
+    IMMEDIATE_OR_CANCEL("IMMEDIATE_OR_CANCEL"),
+    FILL_OR_KILL("FILL_OR_KILL"),
     ;
 
     private final String value;
