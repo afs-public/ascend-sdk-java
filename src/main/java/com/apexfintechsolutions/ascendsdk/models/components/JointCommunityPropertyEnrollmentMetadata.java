@@ -14,7 +14,7 @@ import java.util.Optional;
 /**
  * JointCommunityPropertyEnrollmentMetadata
  *
- * <p>Metadata for the JOINT_COMMUNITY_PROPERTY_REGISTRATION enrollment type
+ * <p>Metadata for the REGISTRATION_JOINT_CP enrollment type
  */
 public class JointCommunityPropertyEnrollmentMetadata {
   /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */

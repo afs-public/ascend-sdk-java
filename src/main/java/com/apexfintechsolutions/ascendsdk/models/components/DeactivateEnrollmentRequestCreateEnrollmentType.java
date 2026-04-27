@@ -83,6 +83,8 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
       new DeactivateEnrollmentRequestCreateEnrollmentType("REGISTRATION_CORPORATION");
   public static final DeactivateEnrollmentRequestCreateEnrollmentType REGISTRATION_LLC =
       new DeactivateEnrollmentRequestCreateEnrollmentType("REGISTRATION_LLC");
+  public static final DeactivateEnrollmentRequestCreateEnrollmentType REGISTRATION_PARTNERSHIP =
+      new DeactivateEnrollmentRequestCreateEnrollmentType("REGISTRATION_PARTNERSHIP");
   public static final DeactivateEnrollmentRequestCreateEnrollmentType CASH_FDIC_CASH_SWEEP =
       new DeactivateEnrollmentRequestCreateEnrollmentType("CASH_FDIC_CASH_SWEEP");
   public static final DeactivateEnrollmentRequestCreateEnrollmentType
@@ -106,6 +108,10 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
       new DeactivateEnrollmentRequestCreateEnrollmentType("REG_T_MARGIN");
   public static final DeactivateEnrollmentRequestCreateEnrollmentType VIRTUAL_ACCOUNT_NUMBER =
       new DeactivateEnrollmentRequestCreateEnrollmentType("VIRTUAL_ACCOUNT_NUMBER");
+  public static final DeactivateEnrollmentRequestCreateEnrollmentType REGISTRATION_FUTURES =
+      new DeactivateEnrollmentRequestCreateEnrollmentType("REGISTRATION_FUTURES");
+  public static final DeactivateEnrollmentRequestCreateEnrollmentType EVENT_CONTRACTS_KALSHI =
+      new DeactivateEnrollmentRequestCreateEnrollmentType("EVENT_CONTRACTS_KALSHI");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -195,6 +201,7 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
     map.put("REGISTRATION_TRUST", REGISTRATION_TRUST);
     map.put("REGISTRATION_CORPORATION", REGISTRATION_CORPORATION);
     map.put("REGISTRATION_LLC", REGISTRATION_LLC);
+    map.put("REGISTRATION_PARTNERSHIP", REGISTRATION_PARTNERSHIP);
     map.put("CASH_FDIC_CASH_SWEEP", CASH_FDIC_CASH_SWEEP);
     map.put("RETIREMENT_BENEFICIARY_DESIGNATION", RETIREMENT_BENEFICIARY_DESIGNATION);
     map.put("DIVIDEND_REINVESTMENT_PLAN", DIVIDEND_REINVESTMENT_PLAN);
@@ -204,6 +211,8 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
     map.put("REGISTRATION_CUSTODIAL", REGISTRATION_CUSTODIAL);
     map.put("REG_T_MARGIN", REG_T_MARGIN);
     map.put("VIRTUAL_ACCOUNT_NUMBER", VIRTUAL_ACCOUNT_NUMBER);
+    map.put("REGISTRATION_FUTURES", REGISTRATION_FUTURES);
+    map.put("EVENT_CONTRACTS_KALSHI", EVENT_CONTRACTS_KALSHI);
     return map;
   }
 
@@ -258,6 +267,9 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
     map.put(
         "REGISTRATION_LLC", DeactivateEnrollmentRequestCreateEnrollmentTypeEnum.REGISTRATION_LLC);
     map.put(
+        "REGISTRATION_PARTNERSHIP",
+        DeactivateEnrollmentRequestCreateEnrollmentTypeEnum.REGISTRATION_PARTNERSHIP);
+    map.put(
         "CASH_FDIC_CASH_SWEEP",
         DeactivateEnrollmentRequestCreateEnrollmentTypeEnum.CASH_FDIC_CASH_SWEEP);
     map.put(
@@ -283,6 +295,12 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
     map.put(
         "VIRTUAL_ACCOUNT_NUMBER",
         DeactivateEnrollmentRequestCreateEnrollmentTypeEnum.VIRTUAL_ACCOUNT_NUMBER);
+    map.put(
+        "REGISTRATION_FUTURES",
+        DeactivateEnrollmentRequestCreateEnrollmentTypeEnum.REGISTRATION_FUTURES);
+    map.put(
+        "EVENT_CONTRACTS_KALSHI",
+        DeactivateEnrollmentRequestCreateEnrollmentTypeEnum.EVENT_CONTRACTS_KALSHI);
     return map;
   }
 
@@ -338,6 +356,7 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
     REGISTRATION_TRUST("REGISTRATION_TRUST"),
     REGISTRATION_CORPORATION("REGISTRATION_CORPORATION"),
     REGISTRATION_LLC("REGISTRATION_LLC"),
+    REGISTRATION_PARTNERSHIP("REGISTRATION_PARTNERSHIP"),
     CASH_FDIC_CASH_SWEEP("CASH_FDIC_CASH_SWEEP"),
     RETIREMENT_BENEFICIARY_DESIGNATION("RETIREMENT_BENEFICIARY_DESIGNATION"),
     DIVIDEND_REINVESTMENT_PLAN("DIVIDEND_REINVESTMENT_PLAN"),
@@ -347,6 +366,8 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
     REGISTRATION_CUSTODIAL("REGISTRATION_CUSTODIAL"),
     REG_T_MARGIN("REG_T_MARGIN"),
     VIRTUAL_ACCOUNT_NUMBER("VIRTUAL_ACCOUNT_NUMBER"),
+    REGISTRATION_FUTURES("REGISTRATION_FUTURES"),
+    EVENT_CONTRACTS_KALSHI("EVENT_CONTRACTS_KALSHI"),
     ;
 
     private final String value;

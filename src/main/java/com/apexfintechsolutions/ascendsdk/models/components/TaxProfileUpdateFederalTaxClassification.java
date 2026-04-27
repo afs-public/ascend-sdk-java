@@ -51,6 +51,8 @@ public class TaxProfileUpdateFederalTaxClassification {
           new TaxProfileUpdateFederalTaxClassification("FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED");
   public static final TaxProfileUpdateFederalTaxClassification INDIV_SOLEPROP_OR_SINGLEMEMBERLLC =
       new TaxProfileUpdateFederalTaxClassification("INDIV_SOLEPROP_OR_SINGLEMEMBERLLC");
+  public static final TaxProfileUpdateFederalTaxClassification PARTNERSHIP =
+      new TaxProfileUpdateFederalTaxClassification("PARTNERSHIP");
   public static final TaxProfileUpdateFederalTaxClassification C_CORPORATION =
       new TaxProfileUpdateFederalTaxClassification("C_CORPORATION");
   public static final TaxProfileUpdateFederalTaxClassification S_CORPORATION =
@@ -137,6 +139,7 @@ public class TaxProfileUpdateFederalTaxClassification {
     Map<String, TaxProfileUpdateFederalTaxClassification> map = new LinkedHashMap<>();
     map.put("FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED", FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED);
     map.put("INDIV_SOLEPROP_OR_SINGLEMEMBERLLC", INDIV_SOLEPROP_OR_SINGLEMEMBERLLC);
+    map.put("PARTNERSHIP", PARTNERSHIP);
     map.put("C_CORPORATION", C_CORPORATION);
     map.put("S_CORPORATION", S_CORPORATION);
     map.put("TRUST_ESTATE", TRUST_ESTATE);
@@ -155,6 +158,7 @@ public class TaxProfileUpdateFederalTaxClassification {
     map.put(
         "INDIV_SOLEPROP_OR_SINGLEMEMBERLLC",
         TaxProfileUpdateFederalTaxClassificationEnum.INDIV_SOLEPROP_OR_SINGLEMEMBERLLC);
+    map.put("PARTNERSHIP", TaxProfileUpdateFederalTaxClassificationEnum.PARTNERSHIP);
     map.put("C_CORPORATION", TaxProfileUpdateFederalTaxClassificationEnum.C_CORPORATION);
     map.put("S_CORPORATION", TaxProfileUpdateFederalTaxClassificationEnum.S_CORPORATION);
     map.put("TRUST_ESTATE", TaxProfileUpdateFederalTaxClassificationEnum.TRUST_ESTATE);
@@ -207,6 +211,7 @@ public class TaxProfileUpdateFederalTaxClassification {
   public enum TaxProfileUpdateFederalTaxClassificationEnum {
     FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED("FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED"),
     INDIV_SOLEPROP_OR_SINGLEMEMBERLLC("INDIV_SOLEPROP_OR_SINGLEMEMBERLLC"),
+    PARTNERSHIP("PARTNERSHIP"),
     C_CORPORATION("C_CORPORATION"),
     S_CORPORATION("S_CORPORATION"),
     TRUST_ESTATE("TRUST_ESTATE"),

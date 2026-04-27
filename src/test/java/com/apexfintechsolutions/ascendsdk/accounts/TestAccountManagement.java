@@ -16,6 +16,7 @@ public class TestAccountManagement {
   private String trustedContactId = null;
   private String interestedPartyId = null;
   private String restrictionCode = null;
+  private String noteId = null;
 
   @BeforeAll
   public void setup() throws Exception {
@@ -32,6 +33,15 @@ public class TestAccountManagement {
     trustedContactId = AccountUtil.getTrustedContactId(sdk, account.accountId().get());
     interestedPartyId = AccountUtil.getInterestedPartyId(sdk, account.accountId().get());
     restrictionCode = AccountUtil.getRestrictionCode(sdk, account.accountId().get());
+    noteId = createNoteId(sdk, account.accountId().get());
+  }
+
+  private String createNoteId(SDK sdk, String accountId) throws Exception {
+    var noteCreate =
+        NoteCreate.builder().content("Test note content for account management").build();
+    var res =
+        sdk.accountManagement().createNote().accountId(accountId).noteCreate(noteCreate).call();
+    return res.note().get().noteId().get();
   }
 
   @Test
@@ -176,6 +186,35 @@ public class TestAccountManagement {
             .call();
     Assertions.assertNotNull(res);
     Assertions.assertEquals(res.statusCode(), 200);
+  }
+
+  @Test
+  public void test_account_management_accounts_create_note_create_note1() throws Exception {
+    Assertions.assertNotNull(noteId);
+  }
+
+  @Test
+  public void test_account_management_accounts_get_note_get_note1() throws Exception {
+    var res =
+        sdk.accountManagement()
+            .getNote()
+            .accountId(account.accountId().get())
+            .noteId(noteId)
+            .call();
+    Assertions.assertNotNull(res);
+    Assertions.assertEquals(res.statusCode(), 200);
+    Assertions.assertTrue(res.note().isPresent());
+    Assertions.assertEquals(noteId, res.note().get().noteId().get());
+  }
+
+  @Test
+  public void test_account_management_accounts_list_notes_list_notes1() throws Exception {
+    var res = sdk.accountManagement().listNotes().accountId(account.accountId().get()).call();
+    Assertions.assertNotNull(res);
+    Assertions.assertEquals(res.statusCode(), 200);
+    Assertions.assertTrue(res.listNotesResponse().isPresent());
+    Assertions.assertTrue(res.listNotesResponse().get().notes().isPresent());
+    Assertions.assertFalse(res.listNotesResponse().get().notes().get().isEmpty());
   }
 
   @Test

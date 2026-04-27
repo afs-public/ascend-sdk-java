@@ -37,9 +37,15 @@ public class FuturesEnrollmentMetadata {
   @JsonProperty("funds_owned_by_account_owner")
   private Optional<Boolean> fundsOwnedByAccountOwner;
 
-  /** Indicates whether the account owner has prior experience trading futures */
+  /**
+   * Indicates whether the account owner has prior experience trading futures
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("futures_experience")
+  @Deprecated
   private Optional<Boolean> futuresExperience;
 
   /** The primary investment objective for the futures account */
@@ -47,16 +53,26 @@ public class FuturesEnrollmentMetadata {
   @JsonProperty("futures_investment_objective")
   private Optional<? extends EnrollmentFuturesInvestmentObjective> futuresInvestmentObjective;
 
-  /** Indicates whether the account will trade investment retired funds */
+  /**
+   * Indicates whether the account will trade investment retired funds
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("investment_retired_funds")
+  @Deprecated
   private Optional<Boolean> investmentRetiredFunds;
 
   /**
    * Indicates whether the account owner has experience with various trading options and strategies
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("options_experience")
+  @Deprecated
   private Optional<Boolean> optionsExperience;
 
   /** Indicates whether the account owner understands the risks associated with trading futures */
@@ -64,9 +80,15 @@ public class FuturesEnrollmentMetadata {
   @JsonProperty("understand_futures_risks")
   private Optional<Boolean> understandFuturesRisks;
 
-  /** Indicates whether the account owner understands that losses can exceed deposited funds */
+  /**
+   * Indicates whether the account owner understands that losses can exceed deposited funds
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("understand_loss_beyond_funds")
+  @Deprecated
   private Optional<Boolean> understandLossBeyondFunds;
 
   @JsonCreator
@@ -142,7 +164,13 @@ public class FuturesEnrollmentMetadata {
     return fundsOwnedByAccountOwner;
   }
 
-  /** Indicates whether the account owner has prior experience trading futures */
+  /**
+   * Indicates whether the account owner has prior experience trading futures
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
+  @Deprecated
   @JsonIgnore
   public Optional<Boolean> futuresExperience() {
     return futuresExperience;
@@ -155,7 +183,13 @@ public class FuturesEnrollmentMetadata {
     return (Optional<EnrollmentFuturesInvestmentObjective>) futuresInvestmentObjective;
   }
 
-  /** Indicates whether the account will trade investment retired funds */
+  /**
+   * Indicates whether the account will trade investment retired funds
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
+  @Deprecated
   @JsonIgnore
   public Optional<Boolean> investmentRetiredFunds() {
     return investmentRetiredFunds;
@@ -163,7 +197,11 @@ public class FuturesEnrollmentMetadata {
 
   /**
    * Indicates whether the account owner has experience with various trading options and strategies
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
    */
+  @Deprecated
   @JsonIgnore
   public Optional<Boolean> optionsExperience() {
     return optionsExperience;
@@ -175,7 +213,13 @@ public class FuturesEnrollmentMetadata {
     return understandFuturesRisks;
   }
 
-  /** Indicates whether the account owner understands that losses can exceed deposited funds */
+  /**
+   * Indicates whether the account owner understands that losses can exceed deposited funds
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
+  @Deprecated
   @JsonIgnore
   public Optional<Boolean> understandLossBeyondFunds() {
     return understandLossBeyondFunds;
@@ -243,14 +287,26 @@ public class FuturesEnrollmentMetadata {
     return this;
   }
 
-  /** Indicates whether the account owner has prior experience trading futures */
+  /**
+   * Indicates whether the account owner has prior experience trading futures
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
+  @Deprecated
   public FuturesEnrollmentMetadata withFuturesExperience(boolean futuresExperience) {
     Utils.checkNotNull(futuresExperience, "futuresExperience");
     this.futuresExperience = Optional.ofNullable(futuresExperience);
     return this;
   }
 
-  /** Indicates whether the account owner has prior experience trading futures */
+  /**
+   * Indicates whether the account owner has prior experience trading futures
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
+  @Deprecated
   public FuturesEnrollmentMetadata withFuturesExperience(Optional<Boolean> futuresExperience) {
     Utils.checkNotNull(futuresExperience, "futuresExperience");
     this.futuresExperience = futuresExperience;
@@ -273,14 +329,26 @@ public class FuturesEnrollmentMetadata {
     return this;
   }
 
-  /** Indicates whether the account will trade investment retired funds */
+  /**
+   * Indicates whether the account will trade investment retired funds
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
+  @Deprecated
   public FuturesEnrollmentMetadata withInvestmentRetiredFunds(boolean investmentRetiredFunds) {
     Utils.checkNotNull(investmentRetiredFunds, "investmentRetiredFunds");
     this.investmentRetiredFunds = Optional.ofNullable(investmentRetiredFunds);
     return this;
   }
 
-  /** Indicates whether the account will trade investment retired funds */
+  /**
+   * Indicates whether the account will trade investment retired funds
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
+  @Deprecated
   public FuturesEnrollmentMetadata withInvestmentRetiredFunds(
       Optional<Boolean> investmentRetiredFunds) {
     Utils.checkNotNull(investmentRetiredFunds, "investmentRetiredFunds");
@@ -290,7 +358,11 @@ public class FuturesEnrollmentMetadata {
 
   /**
    * Indicates whether the account owner has experience with various trading options and strategies
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
    */
+  @Deprecated
   public FuturesEnrollmentMetadata withOptionsExperience(boolean optionsExperience) {
     Utils.checkNotNull(optionsExperience, "optionsExperience");
     this.optionsExperience = Optional.ofNullable(optionsExperience);
@@ -299,7 +371,11 @@ public class FuturesEnrollmentMetadata {
 
   /**
    * Indicates whether the account owner has experience with various trading options and strategies
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
    */
+  @Deprecated
   public FuturesEnrollmentMetadata withOptionsExperience(Optional<Boolean> optionsExperience) {
     Utils.checkNotNull(optionsExperience, "optionsExperience");
     this.optionsExperience = optionsExperience;
@@ -321,7 +397,13 @@ public class FuturesEnrollmentMetadata {
     return this;
   }
 
-  /** Indicates whether the account owner understands that losses can exceed deposited funds */
+  /**
+   * Indicates whether the account owner understands that losses can exceed deposited funds
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
+  @Deprecated
   public FuturesEnrollmentMetadata withUnderstandLossBeyondFunds(
       boolean understandLossBeyondFunds) {
     Utils.checkNotNull(understandLossBeyondFunds, "understandLossBeyondFunds");
@@ -329,7 +411,13 @@ public class FuturesEnrollmentMetadata {
     return this;
   }
 
-  /** Indicates whether the account owner understands that losses can exceed deposited funds */
+  /**
+   * Indicates whether the account owner understands that losses can exceed deposited funds
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
+   */
+  @Deprecated
   public FuturesEnrollmentMetadata withUnderstandLossBeyondFunds(
       Optional<Boolean> understandLossBeyondFunds) {
     Utils.checkNotNull(understandLossBeyondFunds, "understandLossBeyondFunds");
@@ -412,18 +500,18 @@ public class FuturesEnrollmentMetadata {
 
     private Optional<Boolean> fundsOwnedByAccountOwner = Optional.empty();
 
-    private Optional<Boolean> futuresExperience = Optional.empty();
+    @Deprecated private Optional<Boolean> futuresExperience = Optional.empty();
 
     private Optional<? extends EnrollmentFuturesInvestmentObjective> futuresInvestmentObjective =
         Optional.empty();
 
-    private Optional<Boolean> investmentRetiredFunds = Optional.empty();
+    @Deprecated private Optional<Boolean> investmentRetiredFunds = Optional.empty();
 
-    private Optional<Boolean> optionsExperience = Optional.empty();
+    @Deprecated private Optional<Boolean> optionsExperience = Optional.empty();
 
     private Optional<Boolean> understandFuturesRisks = Optional.empty();
 
-    private Optional<Boolean> understandLossBeyondFunds = Optional.empty();
+    @Deprecated private Optional<Boolean> understandLossBeyondFunds = Optional.empty();
 
     private Builder() {
       // force use of static builder() method
@@ -485,14 +573,26 @@ public class FuturesEnrollmentMetadata {
       return this;
     }
 
-    /** Indicates whether the account owner has prior experience trading futures */
+    /**
+     * Indicates whether the account owner has prior experience trading futures
+     *
+     * @deprecated field: This will be removed in a future release, please migrate away from it as
+     *     soon as possible.
+     */
+    @Deprecated
     public Builder futuresExperience(boolean futuresExperience) {
       Utils.checkNotNull(futuresExperience, "futuresExperience");
       this.futuresExperience = Optional.ofNullable(futuresExperience);
       return this;
     }
 
-    /** Indicates whether the account owner has prior experience trading futures */
+    /**
+     * Indicates whether the account owner has prior experience trading futures
+     *
+     * @deprecated field: This will be removed in a future release, please migrate away from it as
+     *     soon as possible.
+     */
+    @Deprecated
     public Builder futuresExperience(Optional<Boolean> futuresExperience) {
       Utils.checkNotNull(futuresExperience, "futuresExperience");
       this.futuresExperience = futuresExperience;
@@ -515,14 +615,26 @@ public class FuturesEnrollmentMetadata {
       return this;
     }
 
-    /** Indicates whether the account will trade investment retired funds */
+    /**
+     * Indicates whether the account will trade investment retired funds
+     *
+     * @deprecated field: This will be removed in a future release, please migrate away from it as
+     *     soon as possible.
+     */
+    @Deprecated
     public Builder investmentRetiredFunds(boolean investmentRetiredFunds) {
       Utils.checkNotNull(investmentRetiredFunds, "investmentRetiredFunds");
       this.investmentRetiredFunds = Optional.ofNullable(investmentRetiredFunds);
       return this;
     }
 
-    /** Indicates whether the account will trade investment retired funds */
+    /**
+     * Indicates whether the account will trade investment retired funds
+     *
+     * @deprecated field: This will be removed in a future release, please migrate away from it as
+     *     soon as possible.
+     */
+    @Deprecated
     public Builder investmentRetiredFunds(Optional<Boolean> investmentRetiredFunds) {
       Utils.checkNotNull(investmentRetiredFunds, "investmentRetiredFunds");
       this.investmentRetiredFunds = investmentRetiredFunds;
@@ -532,7 +644,11 @@ public class FuturesEnrollmentMetadata {
     /**
      * Indicates whether the account owner has experience with various trading options and
      * strategies
+     *
+     * @deprecated field: This will be removed in a future release, please migrate away from it as
+     *     soon as possible.
      */
+    @Deprecated
     public Builder optionsExperience(boolean optionsExperience) {
       Utils.checkNotNull(optionsExperience, "optionsExperience");
       this.optionsExperience = Optional.ofNullable(optionsExperience);
@@ -542,7 +658,11 @@ public class FuturesEnrollmentMetadata {
     /**
      * Indicates whether the account owner has experience with various trading options and
      * strategies
+     *
+     * @deprecated field: This will be removed in a future release, please migrate away from it as
+     *     soon as possible.
      */
+    @Deprecated
     public Builder optionsExperience(Optional<Boolean> optionsExperience) {
       Utils.checkNotNull(optionsExperience, "optionsExperience");
       this.optionsExperience = optionsExperience;
@@ -563,14 +683,26 @@ public class FuturesEnrollmentMetadata {
       return this;
     }
 
-    /** Indicates whether the account owner understands that losses can exceed deposited funds */
+    /**
+     * Indicates whether the account owner understands that losses can exceed deposited funds
+     *
+     * @deprecated field: This will be removed in a future release, please migrate away from it as
+     *     soon as possible.
+     */
+    @Deprecated
     public Builder understandLossBeyondFunds(boolean understandLossBeyondFunds) {
       Utils.checkNotNull(understandLossBeyondFunds, "understandLossBeyondFunds");
       this.understandLossBeyondFunds = Optional.ofNullable(understandLossBeyondFunds);
       return this;
     }
 
-    /** Indicates whether the account owner understands that losses can exceed deposited funds */
+    /**
+     * Indicates whether the account owner understands that losses can exceed deposited funds
+     *
+     * @deprecated field: This will be removed in a future release, please migrate away from it as
+     *     soon as possible.
+     */
+    @Deprecated
     public Builder understandLossBeyondFunds(Optional<Boolean> understandLossBeyondFunds) {
       Utils.checkNotNull(understandLossBeyondFunds, "understandLossBeyondFunds");
       this.understandLossBeyondFunds = understandLossBeyondFunds;

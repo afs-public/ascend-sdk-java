@@ -14,7 +14,7 @@ import java.util.Optional;
 /**
  * JointTenantsByEntiretyEnrollmentMetadata
  *
- * <p>Metadata for the JOINT_TENANTS_BY_ENTIRETY_REGISTRATION enrollment type
+ * <p>Metadata for the REGISTRATION_JOINT_TBE enrollment type
  */
 public class JointTenantsByEntiretyEnrollmentMetadata {
   /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */

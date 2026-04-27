@@ -50,6 +50,7 @@ public class AccountsListAccountsRequest {
    * `parties.legal_natural_person.foreign_identification.type` `enrollments.enrollment_id`
    * `enrollments.type` `enrollments.state` `identifiers.type` `identifiers.value` `create_time`
    * with format of timestamp("2025-08-13T18:31:40Z")
+   * `parties.legal_natural_person.investigation_id` `parties.legal_entity.investigation_id`
    */
   @SpeakeasyMetadata("queryParam:style=form,explode=true,name=filter")
   private Optional<String> filter;
@@ -127,6 +128,7 @@ public class AccountsListAccountsRequest {
    * `parties.legal_natural_person.foreign_identification.type` `enrollments.enrollment_id`
    * `enrollments.type` `enrollments.state` `identifiers.type` `identifiers.value` `create_time`
    * with format of timestamp("2025-08-13T18:31:40Z")
+   * `parties.legal_natural_person.investigation_id` `parties.legal_entity.investigation_id`
    */
   @JsonIgnore
   public Optional<String> filter() {
@@ -227,6 +229,7 @@ public class AccountsListAccountsRequest {
    * `parties.legal_natural_person.foreign_identification.type` `enrollments.enrollment_id`
    * `enrollments.type` `enrollments.state` `identifiers.type` `identifiers.value` `create_time`
    * with format of timestamp("2025-08-13T18:31:40Z")
+   * `parties.legal_natural_person.investigation_id` `parties.legal_entity.investigation_id`
    */
   public AccountsListAccountsRequest withFilter(String filter) {
     Utils.checkNotNull(filter, "filter");
@@ -249,6 +252,7 @@ public class AccountsListAccountsRequest {
    * `parties.legal_natural_person.foreign_identification.type` `enrollments.enrollment_id`
    * `enrollments.type` `enrollments.state` `identifiers.type` `identifiers.value` `create_time`
    * with format of timestamp("2025-08-13T18:31:40Z")
+   * `parties.legal_natural_person.investigation_id` `parties.legal_entity.investigation_id`
    */
   public AccountsListAccountsRequest withFilter(Optional<String> filter) {
     Utils.checkNotNull(filter, "filter");
@@ -408,6 +412,7 @@ public class AccountsListAccountsRequest {
      * `parties.legal_natural_person.foreign_identification.type` `enrollments.enrollment_id`
      * `enrollments.type` `enrollments.state` `identifiers.type` `identifiers.value` `create_time`
      * with format of timestamp("2025-08-13T18:31:40Z")
+     * `parties.legal_natural_person.investigation_id` `parties.legal_entity.investigation_id`
      */
     public Builder filter(String filter) {
       Utils.checkNotNull(filter, "filter");
@@ -431,6 +436,7 @@ public class AccountsListAccountsRequest {
      * `parties.legal_natural_person.foreign_identification.type` `enrollments.enrollment_id`
      * `enrollments.type` `enrollments.state` `identifiers.type` `identifiers.value` `create_time`
      * with format of timestamp("2025-08-13T18:31:40Z")
+     * `parties.legal_natural_person.investigation_id` `parties.legal_entity.investigation_id`
      */
     public Builder filter(Optional<String> filter) {
       Utils.checkNotNull(filter, "filter");
