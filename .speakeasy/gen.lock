@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 04604b59-b953-4711-ac65-9ad5897162b4
 management:
-  docChecksum: f79ffaf404005bb4e882718017d914d6
-  docVersion: v1:20260323:uat:35c1f0c6e7e6
+  docChecksum: e8a6f4314ced25bda45f2bbedee2716d
+  docVersion: v1:20260427:uat:27fe65c26858
   speakeasyVersion: 1.608.0
   generationVersion: 2.691.6
-  releaseVersion: 1.6.4
-  configChecksum: 1f2c524a778fb94810ee099e84f47325
+  releaseVersion: 1.6.5
+  configChecksum: 5327c80b3f218e0e4c7cc69e935e2aa0
 features:
   java:
     additionalDependencies: 0.1.0
@@ -901,9 +901,28 @@ generatedFiles:
   - docs/models/components/EnrollmentOperatingPurpose.md
   - docs/models/components/EnrollmentOptionsLevel.md
   - docs/models/components/EnrollmentOtherAccounts.md
+  - docs/models/components/EnrollmentPartnershipEnrollmentMetadataDepositedFunds.md
+  - docs/models/components/EnrollmentPartnershipEnrollmentMetadataDeterminedAccountRiskRating.md
+  - docs/models/components/EnrollmentPartnershipEnrollmentMetadataDividendReinvestmentPlan.md
+  - docs/models/components/EnrollmentPartnershipEnrollmentMetadataEddAccountEnrollmentMetadata.md
+  - docs/models/components/EnrollmentPartnershipEnrollmentMetadataFdicCashSweep.md
+  - docs/models/components/EnrollmentPartnershipEnrollmentMetadataFinancialProfile.md
+  - docs/models/components/EnrollmentPartnershipEnrollmentMetadataForeignBondTradingDetails.md
+  - docs/models/components/EnrollmentPartnershipEnrollmentMetadataInitialDepositAmount.md
+  - docs/models/components/EnrollmentPartnershipEnrollmentMetadataLowPricedSecurities.md
+  - docs/models/components/EnrollmentPartnershipEnrollmentMetadataLowPricedSecuritiesPercentage.md
+  - docs/models/components/EnrollmentPartnershipEnrollmentMetadataMoneyMarketFundSweep.md
+  - docs/models/components/EnrollmentPartnershipEnrollmentMetadataOtherAccounts.md
+  - docs/models/components/EnrollmentPartnershipEnrollmentMetadataPlannedActivity.md
+  - docs/models/components/EnrollmentPartnershipEnrollmentMetadataPrimaryAccountActivityType.md
+  - docs/models/components/EnrollmentPartnershipEnrollmentMetadataRelatedPepDetails.md
+  - docs/models/components/EnrollmentPartnershipEnrollmentMetadataWithdrawalFrequency.md
   - docs/models/components/EnrollmentPlannedActivity.md
   - docs/models/components/EnrollmentPrimaryAccountActivityType.md
   - docs/models/components/EnrollmentRelatedPepDetails.md
+  - docs/models/components/EnrollmentSoleProprietorshipEnrollmentMetadataDividendReinvestmentPlan.md
+  - docs/models/components/EnrollmentSoleProprietorshipEnrollmentMetadataFdicCashSweep.md
+  - docs/models/components/EnrollmentSoleProprietorshipEnrollmentMetadataMoneyMarketFundSweep.md
   - docs/models/components/EnrollmentState.md
   - docs/models/components/EnrollmentTaxAuthority.md
   - docs/models/components/EnrollmentTrustEnrollmentMetadataDividendReinvestmentPlan.md
@@ -1463,6 +1482,7 @@ generatedFiles:
   - docs/models/components/ListInvestigationsResponse.md
   - docs/models/components/ListLegalEntitiesResponse.md
   - docs/models/components/ListLegalNaturalPersonsResponse.md
+  - docs/models/components/ListNotesResponse.md
   - docs/models/components/ListOptionInstructionsResponse.md
   - docs/models/components/ListPositionsResponse.md
   - docs/models/components/ListPreIpoCompaniesResponse.md
@@ -1540,6 +1560,8 @@ generatedFiles:
   - docs/models/components/NonCitizenResidencyUpdateResidencyStatus.md
   - docs/models/components/NonDayTrade.md
   - docs/models/components/None.md
+  - docs/models/components/Note.md
+  - docs/models/components/NoteCreate.md
   - docs/models/components/NotionalValue.md
   - docs/models/components/NsccStatus.md
   - docs/models/components/OpenBalanceAmount.md
@@ -1647,6 +1669,11 @@ generatedFiles:
   - docs/models/components/OwnershipStructure.md
   - docs/models/components/OwnershipType.md
   - docs/models/components/ParValue.md
+  - docs/models/components/PartnershipEnrollmentMetadata.md
+  - docs/models/components/PartnershipEnrollmentMetadataCreate.md
+  - docs/models/components/PartnershipEnrollmentMetadataCreateDividendReinvestmentPlan.md
+  - docs/models/components/PartnershipEnrollmentMetadataCreateFdicCashSweep.md
+  - docs/models/components/PartnershipEnrollmentMetadataCreateMoneyMarketFundSweep.md
   - docs/models/components/Party.md
   - docs/models/components/PartyBirthDate.md
   - docs/models/components/PartyBusinessIndustrialClassification.md
@@ -2021,6 +2048,11 @@ generatedFiles:
   - docs/models/components/SmaAmount.md
   - docs/models/components/Snapshot.md
   - docs/models/components/SnapshotProcessDate.md
+  - docs/models/components/SoleProprietorshipEnrollmentMetadata.md
+  - docs/models/components/SoleProprietorshipEnrollmentMetadataCreate.md
+  - docs/models/components/SoleProprietorshipEnrollmentMetadataCreateDividendReinvestmentPlan.md
+  - docs/models/components/SoleProprietorshipEnrollmentMetadataCreateFdicCashSweep.md
+  - docs/models/components/SoleProprietorshipEnrollmentMetadataCreateMoneyMarketFundSweep.md
   - docs/models/components/SpRating.md
   - docs/models/components/SpRatingDate.md
   - docs/models/components/SpecialInstructions.md
@@ -2300,6 +2332,8 @@ generatedFiles:
   - docs/models/operations/AccountsCreateInterestedPartyResponse.md
   - docs/models/operations/AccountsCreateLegalEntityResponse.md
   - docs/models/operations/AccountsCreateLegalNaturalPersonResponse.md
+  - docs/models/operations/AccountsCreateNoteRequest.md
+  - docs/models/operations/AccountsCreateNoteResponse.md
   - docs/models/operations/AccountsCreateRestrictionRequest.md
   - docs/models/operations/AccountsCreateRestrictionResponse.md
   - docs/models/operations/AccountsCreateTrustedContactRequest.md
@@ -2324,6 +2358,8 @@ generatedFiles:
   - docs/models/operations/AccountsGetLegalEntityResponse.md
   - docs/models/operations/AccountsGetLegalNaturalPersonRequest.md
   - docs/models/operations/AccountsGetLegalNaturalPersonResponse.md
+  - docs/models/operations/AccountsGetNoteRequest.md
+  - docs/models/operations/AccountsGetNoteResponse.md
   - docs/models/operations/AccountsListAccountsRequest.md
   - docs/models/operations/AccountsListAccountsResponse.md
   - docs/models/operations/AccountsListAgreementsRequest.md
@@ -2342,6 +2378,8 @@ generatedFiles:
   - docs/models/operations/AccountsListLegalEntitiesResponse.md
   - docs/models/operations/AccountsListLegalNaturalPersonsRequest.md
   - docs/models/operations/AccountsListLegalNaturalPersonsResponse.md
+  - docs/models/operations/AccountsListNotesRequest.md
+  - docs/models/operations/AccountsListNotesResponse.md
   - docs/models/operations/AccountsRemovePartyRequest.md
   - docs/models/operations/AccountsRemovePartyResponse.md
   - docs/models/operations/AccountsReplacePartyRequest.md
@@ -3687,9 +3725,28 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentOperatingPurpose.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentOptionsLevel.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentOtherAccounts.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentPartnershipEnrollmentMetadataDepositedFunds.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentPartnershipEnrollmentMetadataDeterminedAccountRiskRating.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentPartnershipEnrollmentMetadataDividendReinvestmentPlan.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentPartnershipEnrollmentMetadataEddAccountEnrollmentMetadata.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentPartnershipEnrollmentMetadataFdicCashSweep.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentPartnershipEnrollmentMetadataFinancialProfile.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentPartnershipEnrollmentMetadataForeignBondTradingDetails.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentPartnershipEnrollmentMetadataInitialDepositAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentPartnershipEnrollmentMetadataLowPricedSecurities.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentPartnershipEnrollmentMetadataLowPricedSecuritiesPercentage.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentPartnershipEnrollmentMetadataMoneyMarketFundSweep.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentPartnershipEnrollmentMetadataOtherAccounts.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentPartnershipEnrollmentMetadataPlannedActivity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentPartnershipEnrollmentMetadataPrimaryAccountActivityType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentPartnershipEnrollmentMetadataRelatedPepDetails.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentPartnershipEnrollmentMetadataWithdrawalFrequency.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentPlannedActivity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentPrimaryAccountActivityType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentRelatedPepDetails.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentSoleProprietorshipEnrollmentMetadataDividendReinvestmentPlan.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentSoleProprietorshipEnrollmentMetadataFdicCashSweep.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentSoleProprietorshipEnrollmentMetadataMoneyMarketFundSweep.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentState.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentTaxAuthority.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EnrollmentTrustEnrollmentMetadataDividendReinvestmentPlan.java
@@ -4249,6 +4306,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListInvestigationsResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListLegalEntitiesResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListLegalNaturalPersonsResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListNotesResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListOptionInstructionsResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListPositionsResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ListPreIpoCompaniesResponse.java
@@ -4326,6 +4384,8 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/NonCitizenResidencyUpdateResidencyStatus.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/NonDayTrade.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/None.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Note.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/NoteCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/NotionalValue.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/NsccStatus.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenBalanceAmount.java
@@ -4433,6 +4493,11 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OwnershipStructure.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OwnershipType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ParValue.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PartnershipEnrollmentMetadata.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PartnershipEnrollmentMetadataCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PartnershipEnrollmentMetadataCreateDividendReinvestmentPlan.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PartnershipEnrollmentMetadataCreateFdicCashSweep.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PartnershipEnrollmentMetadataCreateMoneyMarketFundSweep.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Party.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PartyBirthDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/PartyBusinessIndustrialClassification.java
@@ -4807,6 +4872,11 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SmaAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Snapshot.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SnapshotProcessDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SoleProprietorshipEnrollmentMetadata.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SoleProprietorshipEnrollmentMetadataCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SoleProprietorshipEnrollmentMetadataCreateDividendReinvestmentPlan.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SoleProprietorshipEnrollmentMetadataCreateFdicCashSweep.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SoleProprietorshipEnrollmentMetadataCreateMoneyMarketFundSweep.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SpRating.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SpRatingDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SpecialInstructions.java
@@ -5104,6 +5174,9 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsCreateLegalEntityResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsCreateLegalNaturalPersonRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsCreateLegalNaturalPersonResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsCreateNoteRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsCreateNoteRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsCreateNoteResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsCreateRestrictionRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsCreateRestrictionRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsCreateRestrictionResponse.java
@@ -5140,6 +5213,9 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsGetLegalNaturalPersonRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsGetLegalNaturalPersonRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsGetLegalNaturalPersonResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsGetNoteRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsGetNoteRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsGetNoteResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsListAccountsRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsListAccountsRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsListAccountsResponse.java
@@ -5167,6 +5243,9 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsListLegalNaturalPersonsRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsListLegalNaturalPersonsRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsListLegalNaturalPersonsResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsListNotesRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsListNotesRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsListNotesResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsRemovePartyRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsRemovePartyRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/AccountsRemovePartyResponse.java
@@ -5756,6 +5835,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsCreateInterestedParty.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsCreateLegalEntity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsCreateLegalNaturalPerson.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsCreateNote.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsCreateRestriction.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsCreateTrustedContact.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsDeactivateEnrollment.java
@@ -5768,6 +5848,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsGetAccount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsGetLegalEntity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsGetLegalNaturalPerson.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsGetNote.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsListAccounts.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsListAgreements.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsListAvailableEnrollments.java
@@ -5777,6 +5858,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsListEntitlements.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsListLegalEntities.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsListLegalNaturalPersons.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsListNotes.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsRemoveParty.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsReplaceParty.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/AccountsUpdateAccount.java
@@ -9305,6 +9387,51 @@ examples:
       parameters:
         path:
           account_id: "01HBRQ5BW6ZAY4BNWP4GWRD80X"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  Accounts_CreateNote:
+    speakeasy-default-accounts-create-note:
+      parameters:
+        path:
+          account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
+      requestBody:
+        application/json: {"content": "Customer requested account review"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  Accounts_ListNotes:
+    speakeasy-default-accounts-list-notes:
+      parameters:
+        path:
+          account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  Accounts_GetNote:
+    speakeasy-default-accounts-get-note:
+      parameters:
+        path:
+          account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
+          note_id: "8096110d-fb55-4f9d-b883-b84f0b70d3ea"
       responses:
         "200":
           application/json: {}

@@ -11,6 +11,7 @@ import com.apexfintechsolutions.ascendsdk.models.components.CloseAccountRequestC
 import com.apexfintechsolutions.ascendsdk.models.components.EndRestrictionRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.InterestedPartyCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.InterestedPartyUpdate;
+import com.apexfintechsolutions.ascendsdk.models.components.NoteCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.PartyRequestUpdate;
 import com.apexfintechsolutions.ascendsdk.models.components.RemovePartyRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ReplacePartyRequestCreate;
@@ -26,6 +27,9 @@ import com.apexfintechsolutions.ascendsdk.models.operations.AccountsCloseAccount
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsCreateInterestedPartyRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsCreateInterestedPartyRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsCreateInterestedPartyResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountsCreateNoteRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountsCreateNoteRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountsCreateNoteResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsCreateRestrictionRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsCreateRestrictionRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsCreateRestrictionResponse;
@@ -41,12 +45,18 @@ import com.apexfintechsolutions.ascendsdk.models.operations.AccountsDeleteTruste
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsEndRestrictionRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsEndRestrictionRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsEndRestrictionResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountsGetNoteRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountsGetNoteRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountsGetNoteResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsListAccountsRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsListAccountsRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsListAccountsResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsListAvailableRestrictionsRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsListAvailableRestrictionsRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsListAvailableRestrictionsResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountsListNotesRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountsListNotesRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountsListNotesResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsRemovePartyRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsRemovePartyRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsRemovePartyResponse;
@@ -68,13 +78,16 @@ import com.apexfintechsolutions.ascendsdk.models.operations.AccountsUpdateTruste
 import com.apexfintechsolutions.ascendsdk.operations.AccountsAddParty;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsCloseAccount;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsCreateInterestedParty;
+import com.apexfintechsolutions.ascendsdk.operations.AccountsCreateNote;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsCreateRestriction;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsCreateTrustedContact;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsDeleteInterestedParty;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsDeleteTrustedContact;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsEndRestriction;
+import com.apexfintechsolutions.ascendsdk.operations.AccountsGetNote;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsListAccounts;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsListAvailableRestrictions;
+import com.apexfintechsolutions.ascendsdk.operations.AccountsListNotes;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsRemoveParty;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsReplaceParty;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsUpdateAccount;
@@ -178,6 +191,7 @@ public class AccountManagement {
    *     `investment_profile.customer_profile.investment_experience` `wrap_fee_billed` `managed`
    *     `originating_account_id` `client_account_id` `cat_reporter_information`
    *     `tax_profile.cost_basis_lot_disposal_method` `tax_profile.section_475_election`
+   *     `accepts_issuer_direct_communication`
    * @param accountRequestUpdate A single record representing an owner or manager of an Account.
    * @param options additional options
    * @return The response from the API call
@@ -971,6 +985,155 @@ public class AccountManagement {
             .build();
     RequestOperation<AccountsEndRestrictionRequest, AccountsEndRestrictionResponse> operation =
         new AccountsEndRestriction.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Create Note (Account)
+   *
+   * <p>Creates a Note on an account.
+   *
+   * @return The call builder
+   */
+  public AccountsCreateNoteRequestBuilder createNote() {
+    return new AccountsCreateNoteRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * Create Note (Account)
+   *
+   * <p>Creates a Note on an account.
+   *
+   * @param accountId The account id.
+   * @param noteCreate A note attached to an account.
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsCreateNoteResponse createNote(String accountId, NoteCreate noteCreate)
+      throws Exception {
+    return createNote(accountId, noteCreate, Optional.empty());
+  }
+
+  /**
+   * Create Note (Account)
+   *
+   * <p>Creates a Note on an account.
+   *
+   * @param accountId The account id.
+   * @param noteCreate A note attached to an account.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsCreateNoteResponse createNote(
+      String accountId, NoteCreate noteCreate, Optional<Options> options) throws Exception {
+    AccountsCreateNoteRequest request =
+        AccountsCreateNoteRequest.builder().accountId(accountId).noteCreate(noteCreate).build();
+    RequestOperation<AccountsCreateNoteRequest, AccountsCreateNoteResponse> operation =
+        new AccountsCreateNote.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * List Notes (Account)
+   *
+   * <p>Lists Notes for an account.
+   *
+   * @return The call builder
+   */
+  public AccountsListNotesRequestBuilder listNotes() {
+    return new AccountsListNotesRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * List Notes (Account)
+   *
+   * <p>Lists Notes for an account.
+   *
+   * @param accountId The account id.
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsListNotesResponse listNotes(String accountId) throws Exception {
+    return listNotes(
+        accountId, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+  }
+
+  /**
+   * List Notes (Account)
+   *
+   * <p>Lists Notes for an account.
+   *
+   * @param accountId The account id.
+   * @param pageSize The maximum number of notes to return. The service may return fewer than this
+   *     value.
+   * @param pageToken A page token, received from a previous `ListNotes` call.
+   * @param orderBy The order in which notes are listed. Supported fields: `create_time`.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsListNotesResponse listNotes(
+      String accountId,
+      Optional<Integer> pageSize,
+      Optional<String> pageToken,
+      Optional<String> orderBy,
+      Optional<Options> options)
+      throws Exception {
+    AccountsListNotesRequest request =
+        AccountsListNotesRequest.builder()
+            .accountId(accountId)
+            .pageSize(pageSize)
+            .pageToken(pageToken)
+            .orderBy(orderBy)
+            .build();
+    RequestOperation<AccountsListNotesRequest, AccountsListNotesResponse> operation =
+        new AccountsListNotes.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Get Note (Account)
+   *
+   * <p>Gets a Note by its resource name.
+   *
+   * @return The call builder
+   */
+  public AccountsGetNoteRequestBuilder getNote() {
+    return new AccountsGetNoteRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * Get Note (Account)
+   *
+   * <p>Gets a Note by its resource name.
+   *
+   * @param accountId The account id.
+   * @param noteId The note id.
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsGetNoteResponse getNote(String accountId, String noteId) throws Exception {
+    return getNote(accountId, noteId, Optional.empty());
+  }
+
+  /**
+   * Get Note (Account)
+   *
+   * <p>Gets a Note by its resource name.
+   *
+   * @param accountId The account id.
+   * @param noteId The note id.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsGetNoteResponse getNote(String accountId, String noteId, Optional<Options> options)
+      throws Exception {
+    AccountsGetNoteRequest request =
+        AccountsGetNoteRequest.builder().accountId(accountId).noteId(noteId).build();
+    RequestOperation<AccountsGetNoteRequest, AccountsGetNoteResponse> operation =
+        new AccountsGetNote.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

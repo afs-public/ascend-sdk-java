@@ -81,7 +81,7 @@ public class Enrollment {
   @JsonProperty("futures_enrollment_metadata")
   private JsonNullable<? extends FuturesEnrollmentMetadata> futuresEnrollmentMetadata;
 
-  /** Metadata for the INDIVIDUAL enrollment type */
+  /** Metadata for the REGISTRATION_INDIVIDUAL enrollment type */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("individual_enrollment_metadata")
   private JsonNullable<? extends IndividualEnrollmentMetadata> individualEnrollmentMetadata;
@@ -94,50 +94,50 @@ public class Enrollment {
   @JsonProperty("ira_beneficiary_enrollment_metadata")
   private JsonNullable<? extends IraBeneficiaryEnrollmentMetadata> iraBeneficiaryEnrollmentMetadata;
 
-  /** Metadata for the ROLLOVER_IRA_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_IRA_ROLLOVER enrollment type */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("ira_rollover_enrollment_metadata")
   private JsonNullable<? extends IraRolloverEnrollmentMetadata> iraRolloverEnrollmentMetadata;
 
-  /** Metadata for the ROTH_IRA_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_IRA_ROTH enrollment type */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("ira_roth_enrollment_metadata")
   private JsonNullable<? extends IraRothEnrollmentMetadata> iraRothEnrollmentMetadata;
 
-  /** Metadata for the SEP_IRA_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_IRA_SEP enrollment type */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("ira_sep_enrollment_metadata")
   private JsonNullable<? extends IraSepEnrollmentMetadata> iraSepEnrollmentMetadata;
 
-  /** Metadata for the SIMPLE_IRA_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_IRA_SIMPLE enrollment type */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("ira_simple_enrollment_metadata")
   private JsonNullable<? extends IraSimpleEnrollmentMetadata> iraSimpleEnrollmentMetadata;
 
-  /** Metadata for the TRADITIONAL_IRA_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_IRA_TRADITIONAL enrollment type */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("ira_traditional_enrollment_metadata")
   private JsonNullable<? extends IraTraditionalEnrollmentMetadata> iraTraditionalEnrollmentMetadata;
 
-  /** Metadata for the JOINT_COMMUNITY_PROPERTY_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_JOINT_CP enrollment type */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("joint_community_property_enrollment_metadata")
   private JsonNullable<? extends JointCommunityPropertyEnrollmentMetadata>
       jointCommunityPropertyEnrollmentMetadata;
 
-  /** Metadata for the JOINT_TENANTS_BY_ENTIRETY_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_JOINT_TBE enrollment type */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("joint_tenants_by_entirety_enrollment_metadata")
   private JsonNullable<? extends JointTenantsByEntiretyEnrollmentMetadata>
       jointTenantsByEntiretyEnrollmentMetadata;
 
-  /** Metadata for the JOINT_TENANTS_IN_COMMON_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_JOINT_TIC enrollment type */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("joint_tenants_in_common_enrollment_metadata")
   private JsonNullable<? extends JointTenantsInCommonEnrollmentMetadata>
       jointTenantsInCommonEnrollmentMetadata;
 
-  /** Metadata for the JOINT_WITH_RIGHTS_OF_SURVIVORSHIP_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_JOINT_WROS enrollment type */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("joint_with_rights_of_survivorship_enrollment_metadata")
   private JsonNullable<? extends JointWithRightsOfSurvivorshipEnrollmentMetadata>
@@ -164,6 +164,11 @@ public class Enrollment {
   private JsonNullable<? extends OrdersOptionsTradingEnrollmentMetadata>
       ordersOptionsTradingEnrollmentMetadata;
 
+  /** Metadata for the REGISTRATION_PARTNERSHIP enrollment type */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("partnership_enrollment_metadata")
+  private JsonNullable<? extends PartnershipEnrollmentMetadata> partnershipEnrollmentMetadata;
+
   /**
    * The ULID is associated with the approver of a given enrollment. The approver you create will
    * contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID
@@ -172,6 +177,12 @@ public class Enrollment {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("principal_approver_id")
   private Optional<String> principalApproverId;
+
+  /** Metadata for the REGISTRATION_SOLE_PROPRIETORSHIP enrollment type */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("sole_proprietorship_enrollment_metadata")
+  private JsonNullable<? extends SoleProprietorshipEnrollmentMetadata>
+      soleProprietorshipEnrollmentMetadata;
 
   /**
    * Indicates where in the enrollment is in the process; May be `PENDING_AGREEMENT`, `ACTIVE`,
@@ -261,7 +272,12 @@ public class Enrollment {
       @JsonProperty("orders_options_trading_enrollment_metadata")
           JsonNullable<? extends OrdersOptionsTradingEnrollmentMetadata>
               ordersOptionsTradingEnrollmentMetadata,
+      @JsonProperty("partnership_enrollment_metadata")
+          JsonNullable<? extends PartnershipEnrollmentMetadata> partnershipEnrollmentMetadata,
       @JsonProperty("principal_approver_id") Optional<String> principalApproverId,
+      @JsonProperty("sole_proprietorship_enrollment_metadata")
+          JsonNullable<? extends SoleProprietorshipEnrollmentMetadata>
+              soleProprietorshipEnrollmentMetadata,
       @JsonProperty("state") Optional<? extends EnrollmentState> state,
       @JsonProperty("trust_enrollment_metadata")
           JsonNullable<? extends TrustEnrollmentMetadata> trustEnrollmentMetadata,
@@ -304,7 +320,10 @@ public class Enrollment {
     Utils.checkNotNull(operatingEnrollmentMetadata, "operatingEnrollmentMetadata");
     Utils.checkNotNull(
         ordersOptionsTradingEnrollmentMetadata, "ordersOptionsTradingEnrollmentMetadata");
+    Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
     Utils.checkNotNull(principalApproverId, "principalApproverId");
+    Utils.checkNotNull(
+        soleProprietorshipEnrollmentMetadata, "soleProprietorshipEnrollmentMetadata");
     Utils.checkNotNull(state, "state");
     Utils.checkNotNull(trustEnrollmentMetadata, "trustEnrollmentMetadata");
     Utils.checkNotNull(type, "type");
@@ -338,7 +357,9 @@ public class Enrollment {
     this.name = name;
     this.operatingEnrollmentMetadata = operatingEnrollmentMetadata;
     this.ordersOptionsTradingEnrollmentMetadata = ordersOptionsTradingEnrollmentMetadata;
+    this.partnershipEnrollmentMetadata = partnershipEnrollmentMetadata;
     this.principalApproverId = principalApproverId;
+    this.soleProprietorshipEnrollmentMetadata = soleProprietorshipEnrollmentMetadata;
     this.state = state;
     this.trustEnrollmentMetadata = trustEnrollmentMetadata;
     this.type = type;
@@ -374,7 +395,9 @@ public class Enrollment {
         Optional.empty(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
+        JsonNullable.undefined(),
         Optional.empty(),
+        JsonNullable.undefined(),
         Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty(),
@@ -466,7 +489,7 @@ public class Enrollment {
     return (JsonNullable<FuturesEnrollmentMetadata>) futuresEnrollmentMetadata;
   }
 
-  /** Metadata for the INDIVIDUAL enrollment type */
+  /** Metadata for the REGISTRATION_INDIVIDUAL enrollment type */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public JsonNullable<IndividualEnrollmentMetadata> individualEnrollmentMetadata() {
@@ -483,42 +506,42 @@ public class Enrollment {
     return (JsonNullable<IraBeneficiaryEnrollmentMetadata>) iraBeneficiaryEnrollmentMetadata;
   }
 
-  /** Metadata for the ROLLOVER_IRA_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_IRA_ROLLOVER enrollment type */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public JsonNullable<IraRolloverEnrollmentMetadata> iraRolloverEnrollmentMetadata() {
     return (JsonNullable<IraRolloverEnrollmentMetadata>) iraRolloverEnrollmentMetadata;
   }
 
-  /** Metadata for the ROTH_IRA_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_IRA_ROTH enrollment type */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public JsonNullable<IraRothEnrollmentMetadata> iraRothEnrollmentMetadata() {
     return (JsonNullable<IraRothEnrollmentMetadata>) iraRothEnrollmentMetadata;
   }
 
-  /** Metadata for the SEP_IRA_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_IRA_SEP enrollment type */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public JsonNullable<IraSepEnrollmentMetadata> iraSepEnrollmentMetadata() {
     return (JsonNullable<IraSepEnrollmentMetadata>) iraSepEnrollmentMetadata;
   }
 
-  /** Metadata for the SIMPLE_IRA_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_IRA_SIMPLE enrollment type */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public JsonNullable<IraSimpleEnrollmentMetadata> iraSimpleEnrollmentMetadata() {
     return (JsonNullable<IraSimpleEnrollmentMetadata>) iraSimpleEnrollmentMetadata;
   }
 
-  /** Metadata for the TRADITIONAL_IRA_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_IRA_TRADITIONAL enrollment type */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public JsonNullable<IraTraditionalEnrollmentMetadata> iraTraditionalEnrollmentMetadata() {
     return (JsonNullable<IraTraditionalEnrollmentMetadata>) iraTraditionalEnrollmentMetadata;
   }
 
-  /** Metadata for the JOINT_COMMUNITY_PROPERTY_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_JOINT_CP enrollment type */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public JsonNullable<JointCommunityPropertyEnrollmentMetadata>
@@ -527,7 +550,7 @@ public class Enrollment {
         jointCommunityPropertyEnrollmentMetadata;
   }
 
-  /** Metadata for the JOINT_TENANTS_BY_ENTIRETY_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_JOINT_TBE enrollment type */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public JsonNullable<JointTenantsByEntiretyEnrollmentMetadata>
@@ -536,7 +559,7 @@ public class Enrollment {
         jointTenantsByEntiretyEnrollmentMetadata;
   }
 
-  /** Metadata for the JOINT_TENANTS_IN_COMMON_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_JOINT_TIC enrollment type */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public JsonNullable<JointTenantsInCommonEnrollmentMetadata>
@@ -545,7 +568,7 @@ public class Enrollment {
         jointTenantsInCommonEnrollmentMetadata;
   }
 
-  /** Metadata for the JOINT_WITH_RIGHTS_OF_SURVIVORSHIP_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_JOINT_WROS enrollment type */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public JsonNullable<JointWithRightsOfSurvivorshipEnrollmentMetadata>
@@ -583,6 +606,13 @@ public class Enrollment {
         ordersOptionsTradingEnrollmentMetadata;
   }
 
+  /** Metadata for the REGISTRATION_PARTNERSHIP enrollment type */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<PartnershipEnrollmentMetadata> partnershipEnrollmentMetadata() {
+    return (JsonNullable<PartnershipEnrollmentMetadata>) partnershipEnrollmentMetadata;
+  }
+
   /**
    * The ULID is associated with the approver of a given enrollment. The approver you create will
    * contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID
@@ -591,6 +621,14 @@ public class Enrollment {
   @JsonIgnore
   public Optional<String> principalApproverId() {
     return principalApproverId;
+  }
+
+  /** Metadata for the REGISTRATION_SOLE_PROPRIETORSHIP enrollment type */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<SoleProprietorshipEnrollmentMetadata> soleProprietorshipEnrollmentMetadata() {
+    return (JsonNullable<SoleProprietorshipEnrollmentMetadata>)
+        soleProprietorshipEnrollmentMetadata;
   }
 
   /**
@@ -825,7 +863,7 @@ public class Enrollment {
     return this;
   }
 
-  /** Metadata for the INDIVIDUAL enrollment type */
+  /** Metadata for the REGISTRATION_INDIVIDUAL enrollment type */
   public Enrollment withIndividualEnrollmentMetadata(
       IndividualEnrollmentMetadata individualEnrollmentMetadata) {
     Utils.checkNotNull(individualEnrollmentMetadata, "individualEnrollmentMetadata");
@@ -833,7 +871,7 @@ public class Enrollment {
     return this;
   }
 
-  /** Metadata for the INDIVIDUAL enrollment type */
+  /** Metadata for the REGISTRATION_INDIVIDUAL enrollment type */
   public Enrollment withIndividualEnrollmentMetadata(
       JsonNullable<? extends IndividualEnrollmentMetadata> individualEnrollmentMetadata) {
     Utils.checkNotNull(individualEnrollmentMetadata, "individualEnrollmentMetadata");
@@ -863,7 +901,7 @@ public class Enrollment {
     return this;
   }
 
-  /** Metadata for the ROLLOVER_IRA_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_IRA_ROLLOVER enrollment type */
   public Enrollment withIraRolloverEnrollmentMetadata(
       IraRolloverEnrollmentMetadata iraRolloverEnrollmentMetadata) {
     Utils.checkNotNull(iraRolloverEnrollmentMetadata, "iraRolloverEnrollmentMetadata");
@@ -871,7 +909,7 @@ public class Enrollment {
     return this;
   }
 
-  /** Metadata for the ROLLOVER_IRA_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_IRA_ROLLOVER enrollment type */
   public Enrollment withIraRolloverEnrollmentMetadata(
       JsonNullable<? extends IraRolloverEnrollmentMetadata> iraRolloverEnrollmentMetadata) {
     Utils.checkNotNull(iraRolloverEnrollmentMetadata, "iraRolloverEnrollmentMetadata");
@@ -879,7 +917,7 @@ public class Enrollment {
     return this;
   }
 
-  /** Metadata for the ROTH_IRA_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_IRA_ROTH enrollment type */
   public Enrollment withIraRothEnrollmentMetadata(
       IraRothEnrollmentMetadata iraRothEnrollmentMetadata) {
     Utils.checkNotNull(iraRothEnrollmentMetadata, "iraRothEnrollmentMetadata");
@@ -887,7 +925,7 @@ public class Enrollment {
     return this;
   }
 
-  /** Metadata for the ROTH_IRA_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_IRA_ROTH enrollment type */
   public Enrollment withIraRothEnrollmentMetadata(
       JsonNullable<? extends IraRothEnrollmentMetadata> iraRothEnrollmentMetadata) {
     Utils.checkNotNull(iraRothEnrollmentMetadata, "iraRothEnrollmentMetadata");
@@ -895,7 +933,7 @@ public class Enrollment {
     return this;
   }
 
-  /** Metadata for the SEP_IRA_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_IRA_SEP enrollment type */
   public Enrollment withIraSepEnrollmentMetadata(
       IraSepEnrollmentMetadata iraSepEnrollmentMetadata) {
     Utils.checkNotNull(iraSepEnrollmentMetadata, "iraSepEnrollmentMetadata");
@@ -903,7 +941,7 @@ public class Enrollment {
     return this;
   }
 
-  /** Metadata for the SEP_IRA_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_IRA_SEP enrollment type */
   public Enrollment withIraSepEnrollmentMetadata(
       JsonNullable<? extends IraSepEnrollmentMetadata> iraSepEnrollmentMetadata) {
     Utils.checkNotNull(iraSepEnrollmentMetadata, "iraSepEnrollmentMetadata");
@@ -911,7 +949,7 @@ public class Enrollment {
     return this;
   }
 
-  /** Metadata for the SIMPLE_IRA_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_IRA_SIMPLE enrollment type */
   public Enrollment withIraSimpleEnrollmentMetadata(
       IraSimpleEnrollmentMetadata iraSimpleEnrollmentMetadata) {
     Utils.checkNotNull(iraSimpleEnrollmentMetadata, "iraSimpleEnrollmentMetadata");
@@ -919,7 +957,7 @@ public class Enrollment {
     return this;
   }
 
-  /** Metadata for the SIMPLE_IRA_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_IRA_SIMPLE enrollment type */
   public Enrollment withIraSimpleEnrollmentMetadata(
       JsonNullable<? extends IraSimpleEnrollmentMetadata> iraSimpleEnrollmentMetadata) {
     Utils.checkNotNull(iraSimpleEnrollmentMetadata, "iraSimpleEnrollmentMetadata");
@@ -927,7 +965,7 @@ public class Enrollment {
     return this;
   }
 
-  /** Metadata for the TRADITIONAL_IRA_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_IRA_TRADITIONAL enrollment type */
   public Enrollment withIraTraditionalEnrollmentMetadata(
       IraTraditionalEnrollmentMetadata iraTraditionalEnrollmentMetadata) {
     Utils.checkNotNull(iraTraditionalEnrollmentMetadata, "iraTraditionalEnrollmentMetadata");
@@ -935,7 +973,7 @@ public class Enrollment {
     return this;
   }
 
-  /** Metadata for the TRADITIONAL_IRA_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_IRA_TRADITIONAL enrollment type */
   public Enrollment withIraTraditionalEnrollmentMetadata(
       JsonNullable<? extends IraTraditionalEnrollmentMetadata> iraTraditionalEnrollmentMetadata) {
     Utils.checkNotNull(iraTraditionalEnrollmentMetadata, "iraTraditionalEnrollmentMetadata");
@@ -943,7 +981,7 @@ public class Enrollment {
     return this;
   }
 
-  /** Metadata for the JOINT_COMMUNITY_PROPERTY_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_JOINT_CP enrollment type */
   public Enrollment withJointCommunityPropertyEnrollmentMetadata(
       JointCommunityPropertyEnrollmentMetadata jointCommunityPropertyEnrollmentMetadata) {
     Utils.checkNotNull(
@@ -953,7 +991,7 @@ public class Enrollment {
     return this;
   }
 
-  /** Metadata for the JOINT_COMMUNITY_PROPERTY_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_JOINT_CP enrollment type */
   public Enrollment withJointCommunityPropertyEnrollmentMetadata(
       JsonNullable<? extends JointCommunityPropertyEnrollmentMetadata>
           jointCommunityPropertyEnrollmentMetadata) {
@@ -963,7 +1001,7 @@ public class Enrollment {
     return this;
   }
 
-  /** Metadata for the JOINT_TENANTS_BY_ENTIRETY_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_JOINT_TBE enrollment type */
   public Enrollment withJointTenantsByEntiretyEnrollmentMetadata(
       JointTenantsByEntiretyEnrollmentMetadata jointTenantsByEntiretyEnrollmentMetadata) {
     Utils.checkNotNull(
@@ -973,7 +1011,7 @@ public class Enrollment {
     return this;
   }
 
-  /** Metadata for the JOINT_TENANTS_BY_ENTIRETY_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_JOINT_TBE enrollment type */
   public Enrollment withJointTenantsByEntiretyEnrollmentMetadata(
       JsonNullable<? extends JointTenantsByEntiretyEnrollmentMetadata>
           jointTenantsByEntiretyEnrollmentMetadata) {
@@ -983,7 +1021,7 @@ public class Enrollment {
     return this;
   }
 
-  /** Metadata for the JOINT_TENANTS_IN_COMMON_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_JOINT_TIC enrollment type */
   public Enrollment withJointTenantsInCommonEnrollmentMetadata(
       JointTenantsInCommonEnrollmentMetadata jointTenantsInCommonEnrollmentMetadata) {
     Utils.checkNotNull(
@@ -993,7 +1031,7 @@ public class Enrollment {
     return this;
   }
 
-  /** Metadata for the JOINT_TENANTS_IN_COMMON_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_JOINT_TIC enrollment type */
   public Enrollment withJointTenantsInCommonEnrollmentMetadata(
       JsonNullable<? extends JointTenantsInCommonEnrollmentMetadata>
           jointTenantsInCommonEnrollmentMetadata) {
@@ -1003,7 +1041,7 @@ public class Enrollment {
     return this;
   }
 
-  /** Metadata for the JOINT_WITH_RIGHTS_OF_SURVIVORSHIP_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_JOINT_WROS enrollment type */
   public Enrollment withJointWithRightsOfSurvivorshipEnrollmentMetadata(
       JointWithRightsOfSurvivorshipEnrollmentMetadata
           jointWithRightsOfSurvivorshipEnrollmentMetadata) {
@@ -1015,7 +1053,7 @@ public class Enrollment {
     return this;
   }
 
-  /** Metadata for the JOINT_WITH_RIGHTS_OF_SURVIVORSHIP_REGISTRATION enrollment type */
+  /** Metadata for the REGISTRATION_JOINT_WROS enrollment type */
   public Enrollment withJointWithRightsOfSurvivorshipEnrollmentMetadata(
       JsonNullable<? extends JointWithRightsOfSurvivorshipEnrollmentMetadata>
           jointWithRightsOfSurvivorshipEnrollmentMetadata) {
@@ -1092,6 +1130,22 @@ public class Enrollment {
     return this;
   }
 
+  /** Metadata for the REGISTRATION_PARTNERSHIP enrollment type */
+  public Enrollment withPartnershipEnrollmentMetadata(
+      PartnershipEnrollmentMetadata partnershipEnrollmentMetadata) {
+    Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
+    this.partnershipEnrollmentMetadata = JsonNullable.of(partnershipEnrollmentMetadata);
+    return this;
+  }
+
+  /** Metadata for the REGISTRATION_PARTNERSHIP enrollment type */
+  public Enrollment withPartnershipEnrollmentMetadata(
+      JsonNullable<? extends PartnershipEnrollmentMetadata> partnershipEnrollmentMetadata) {
+    Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
+    this.partnershipEnrollmentMetadata = partnershipEnrollmentMetadata;
+    return this;
+  }
+
   /**
    * The ULID is associated with the approver of a given enrollment. The approver you create will
    * contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID
@@ -1111,6 +1165,26 @@ public class Enrollment {
   public Enrollment withPrincipalApproverId(Optional<String> principalApproverId) {
     Utils.checkNotNull(principalApproverId, "principalApproverId");
     this.principalApproverId = principalApproverId;
+    return this;
+  }
+
+  /** Metadata for the REGISTRATION_SOLE_PROPRIETORSHIP enrollment type */
+  public Enrollment withSoleProprietorshipEnrollmentMetadata(
+      SoleProprietorshipEnrollmentMetadata soleProprietorshipEnrollmentMetadata) {
+    Utils.checkNotNull(
+        soleProprietorshipEnrollmentMetadata, "soleProprietorshipEnrollmentMetadata");
+    this.soleProprietorshipEnrollmentMetadata =
+        JsonNullable.of(soleProprietorshipEnrollmentMetadata);
+    return this;
+  }
+
+  /** Metadata for the REGISTRATION_SOLE_PROPRIETORSHIP enrollment type */
+  public Enrollment withSoleProprietorshipEnrollmentMetadata(
+      JsonNullable<? extends SoleProprietorshipEnrollmentMetadata>
+          soleProprietorshipEnrollmentMetadata) {
+    Utils.checkNotNull(
+        soleProprietorshipEnrollmentMetadata, "soleProprietorshipEnrollmentMetadata");
+    this.soleProprietorshipEnrollmentMetadata = soleProprietorshipEnrollmentMetadata;
     return this;
   }
 
@@ -1258,7 +1332,11 @@ public class Enrollment {
         && Utils.enhancedDeepEquals(
             this.ordersOptionsTradingEnrollmentMetadata,
             other.ordersOptionsTradingEnrollmentMetadata)
+        && Utils.enhancedDeepEquals(
+            this.partnershipEnrollmentMetadata, other.partnershipEnrollmentMetadata)
         && Utils.enhancedDeepEquals(this.principalApproverId, other.principalApproverId)
+        && Utils.enhancedDeepEquals(
+            this.soleProprietorshipEnrollmentMetadata, other.soleProprietorshipEnrollmentMetadata)
         && Utils.enhancedDeepEquals(this.state, other.state)
         && Utils.enhancedDeepEquals(this.trustEnrollmentMetadata, other.trustEnrollmentMetadata)
         && Utils.enhancedDeepEquals(this.type, other.type)
@@ -1297,7 +1375,9 @@ public class Enrollment {
         name,
         operatingEnrollmentMetadata,
         ordersOptionsTradingEnrollmentMetadata,
+        partnershipEnrollmentMetadata,
         principalApproverId,
+        soleProprietorshipEnrollmentMetadata,
         state,
         trustEnrollmentMetadata,
         type,
@@ -1361,8 +1441,12 @@ public class Enrollment {
         operatingEnrollmentMetadata,
         "ordersOptionsTradingEnrollmentMetadata",
         ordersOptionsTradingEnrollmentMetadata,
+        "partnershipEnrollmentMetadata",
+        partnershipEnrollmentMetadata,
         "principalApproverId",
         principalApproverId,
+        "soleProprietorshipEnrollmentMetadata",
+        soleProprietorshipEnrollmentMetadata,
         "state",
         state,
         "trustEnrollmentMetadata",
@@ -1452,7 +1536,13 @@ public class Enrollment {
     private JsonNullable<? extends OrdersOptionsTradingEnrollmentMetadata>
         ordersOptionsTradingEnrollmentMetadata = JsonNullable.undefined();
 
+    private JsonNullable<? extends PartnershipEnrollmentMetadata> partnershipEnrollmentMetadata =
+        JsonNullable.undefined();
+
     private Optional<String> principalApproverId = Optional.empty();
+
+    private JsonNullable<? extends SoleProprietorshipEnrollmentMetadata>
+        soleProprietorshipEnrollmentMetadata = JsonNullable.undefined();
 
     private Optional<? extends EnrollmentState> state = Optional.empty();
 
@@ -1657,7 +1747,7 @@ public class Enrollment {
       return this;
     }
 
-    /** Metadata for the INDIVIDUAL enrollment type */
+    /** Metadata for the REGISTRATION_INDIVIDUAL enrollment type */
     public Builder individualEnrollmentMetadata(
         IndividualEnrollmentMetadata individualEnrollmentMetadata) {
       Utils.checkNotNull(individualEnrollmentMetadata, "individualEnrollmentMetadata");
@@ -1665,7 +1755,7 @@ public class Enrollment {
       return this;
     }
 
-    /** Metadata for the INDIVIDUAL enrollment type */
+    /** Metadata for the REGISTRATION_INDIVIDUAL enrollment type */
     public Builder individualEnrollmentMetadata(
         JsonNullable<? extends IndividualEnrollmentMetadata> individualEnrollmentMetadata) {
       Utils.checkNotNull(individualEnrollmentMetadata, "individualEnrollmentMetadata");
@@ -1695,7 +1785,7 @@ public class Enrollment {
       return this;
     }
 
-    /** Metadata for the ROLLOVER_IRA_REGISTRATION enrollment type */
+    /** Metadata for the REGISTRATION_IRA_ROLLOVER enrollment type */
     public Builder iraRolloverEnrollmentMetadata(
         IraRolloverEnrollmentMetadata iraRolloverEnrollmentMetadata) {
       Utils.checkNotNull(iraRolloverEnrollmentMetadata, "iraRolloverEnrollmentMetadata");
@@ -1703,7 +1793,7 @@ public class Enrollment {
       return this;
     }
 
-    /** Metadata for the ROLLOVER_IRA_REGISTRATION enrollment type */
+    /** Metadata for the REGISTRATION_IRA_ROLLOVER enrollment type */
     public Builder iraRolloverEnrollmentMetadata(
         JsonNullable<? extends IraRolloverEnrollmentMetadata> iraRolloverEnrollmentMetadata) {
       Utils.checkNotNull(iraRolloverEnrollmentMetadata, "iraRolloverEnrollmentMetadata");
@@ -1711,14 +1801,14 @@ public class Enrollment {
       return this;
     }
 
-    /** Metadata for the ROTH_IRA_REGISTRATION enrollment type */
+    /** Metadata for the REGISTRATION_IRA_ROTH enrollment type */
     public Builder iraRothEnrollmentMetadata(IraRothEnrollmentMetadata iraRothEnrollmentMetadata) {
       Utils.checkNotNull(iraRothEnrollmentMetadata, "iraRothEnrollmentMetadata");
       this.iraRothEnrollmentMetadata = JsonNullable.of(iraRothEnrollmentMetadata);
       return this;
     }
 
-    /** Metadata for the ROTH_IRA_REGISTRATION enrollment type */
+    /** Metadata for the REGISTRATION_IRA_ROTH enrollment type */
     public Builder iraRothEnrollmentMetadata(
         JsonNullable<? extends IraRothEnrollmentMetadata> iraRothEnrollmentMetadata) {
       Utils.checkNotNull(iraRothEnrollmentMetadata, "iraRothEnrollmentMetadata");
@@ -1726,14 +1816,14 @@ public class Enrollment {
       return this;
     }
 
-    /** Metadata for the SEP_IRA_REGISTRATION enrollment type */
+    /** Metadata for the REGISTRATION_IRA_SEP enrollment type */
     public Builder iraSepEnrollmentMetadata(IraSepEnrollmentMetadata iraSepEnrollmentMetadata) {
       Utils.checkNotNull(iraSepEnrollmentMetadata, "iraSepEnrollmentMetadata");
       this.iraSepEnrollmentMetadata = JsonNullable.of(iraSepEnrollmentMetadata);
       return this;
     }
 
-    /** Metadata for the SEP_IRA_REGISTRATION enrollment type */
+    /** Metadata for the REGISTRATION_IRA_SEP enrollment type */
     public Builder iraSepEnrollmentMetadata(
         JsonNullable<? extends IraSepEnrollmentMetadata> iraSepEnrollmentMetadata) {
       Utils.checkNotNull(iraSepEnrollmentMetadata, "iraSepEnrollmentMetadata");
@@ -1741,7 +1831,7 @@ public class Enrollment {
       return this;
     }
 
-    /** Metadata for the SIMPLE_IRA_REGISTRATION enrollment type */
+    /** Metadata for the REGISTRATION_IRA_SIMPLE enrollment type */
     public Builder iraSimpleEnrollmentMetadata(
         IraSimpleEnrollmentMetadata iraSimpleEnrollmentMetadata) {
       Utils.checkNotNull(iraSimpleEnrollmentMetadata, "iraSimpleEnrollmentMetadata");
@@ -1749,7 +1839,7 @@ public class Enrollment {
       return this;
     }
 
-    /** Metadata for the SIMPLE_IRA_REGISTRATION enrollment type */
+    /** Metadata for the REGISTRATION_IRA_SIMPLE enrollment type */
     public Builder iraSimpleEnrollmentMetadata(
         JsonNullable<? extends IraSimpleEnrollmentMetadata> iraSimpleEnrollmentMetadata) {
       Utils.checkNotNull(iraSimpleEnrollmentMetadata, "iraSimpleEnrollmentMetadata");
@@ -1757,7 +1847,7 @@ public class Enrollment {
       return this;
     }
 
-    /** Metadata for the TRADITIONAL_IRA_REGISTRATION enrollment type */
+    /** Metadata for the REGISTRATION_IRA_TRADITIONAL enrollment type */
     public Builder iraTraditionalEnrollmentMetadata(
         IraTraditionalEnrollmentMetadata iraTraditionalEnrollmentMetadata) {
       Utils.checkNotNull(iraTraditionalEnrollmentMetadata, "iraTraditionalEnrollmentMetadata");
@@ -1765,7 +1855,7 @@ public class Enrollment {
       return this;
     }
 
-    /** Metadata for the TRADITIONAL_IRA_REGISTRATION enrollment type */
+    /** Metadata for the REGISTRATION_IRA_TRADITIONAL enrollment type */
     public Builder iraTraditionalEnrollmentMetadata(
         JsonNullable<? extends IraTraditionalEnrollmentMetadata> iraTraditionalEnrollmentMetadata) {
       Utils.checkNotNull(iraTraditionalEnrollmentMetadata, "iraTraditionalEnrollmentMetadata");
@@ -1773,7 +1863,7 @@ public class Enrollment {
       return this;
     }
 
-    /** Metadata for the JOINT_COMMUNITY_PROPERTY_REGISTRATION enrollment type */
+    /** Metadata for the REGISTRATION_JOINT_CP enrollment type */
     public Builder jointCommunityPropertyEnrollmentMetadata(
         JointCommunityPropertyEnrollmentMetadata jointCommunityPropertyEnrollmentMetadata) {
       Utils.checkNotNull(
@@ -1783,7 +1873,7 @@ public class Enrollment {
       return this;
     }
 
-    /** Metadata for the JOINT_COMMUNITY_PROPERTY_REGISTRATION enrollment type */
+    /** Metadata for the REGISTRATION_JOINT_CP enrollment type */
     public Builder jointCommunityPropertyEnrollmentMetadata(
         JsonNullable<? extends JointCommunityPropertyEnrollmentMetadata>
             jointCommunityPropertyEnrollmentMetadata) {
@@ -1793,7 +1883,7 @@ public class Enrollment {
       return this;
     }
 
-    /** Metadata for the JOINT_TENANTS_BY_ENTIRETY_REGISTRATION enrollment type */
+    /** Metadata for the REGISTRATION_JOINT_TBE enrollment type */
     public Builder jointTenantsByEntiretyEnrollmentMetadata(
         JointTenantsByEntiretyEnrollmentMetadata jointTenantsByEntiretyEnrollmentMetadata) {
       Utils.checkNotNull(
@@ -1803,7 +1893,7 @@ public class Enrollment {
       return this;
     }
 
-    /** Metadata for the JOINT_TENANTS_BY_ENTIRETY_REGISTRATION enrollment type */
+    /** Metadata for the REGISTRATION_JOINT_TBE enrollment type */
     public Builder jointTenantsByEntiretyEnrollmentMetadata(
         JsonNullable<? extends JointTenantsByEntiretyEnrollmentMetadata>
             jointTenantsByEntiretyEnrollmentMetadata) {
@@ -1813,7 +1903,7 @@ public class Enrollment {
       return this;
     }
 
-    /** Metadata for the JOINT_TENANTS_IN_COMMON_REGISTRATION enrollment type */
+    /** Metadata for the REGISTRATION_JOINT_TIC enrollment type */
     public Builder jointTenantsInCommonEnrollmentMetadata(
         JointTenantsInCommonEnrollmentMetadata jointTenantsInCommonEnrollmentMetadata) {
       Utils.checkNotNull(
@@ -1823,7 +1913,7 @@ public class Enrollment {
       return this;
     }
 
-    /** Metadata for the JOINT_TENANTS_IN_COMMON_REGISTRATION enrollment type */
+    /** Metadata for the REGISTRATION_JOINT_TIC enrollment type */
     public Builder jointTenantsInCommonEnrollmentMetadata(
         JsonNullable<? extends JointTenantsInCommonEnrollmentMetadata>
             jointTenantsInCommonEnrollmentMetadata) {
@@ -1833,7 +1923,7 @@ public class Enrollment {
       return this;
     }
 
-    /** Metadata for the JOINT_WITH_RIGHTS_OF_SURVIVORSHIP_REGISTRATION enrollment type */
+    /** Metadata for the REGISTRATION_JOINT_WROS enrollment type */
     public Builder jointWithRightsOfSurvivorshipEnrollmentMetadata(
         JointWithRightsOfSurvivorshipEnrollmentMetadata
             jointWithRightsOfSurvivorshipEnrollmentMetadata) {
@@ -1845,7 +1935,7 @@ public class Enrollment {
       return this;
     }
 
-    /** Metadata for the JOINT_WITH_RIGHTS_OF_SURVIVORSHIP_REGISTRATION enrollment type */
+    /** Metadata for the REGISTRATION_JOINT_WROS enrollment type */
     public Builder jointWithRightsOfSurvivorshipEnrollmentMetadata(
         JsonNullable<? extends JointWithRightsOfSurvivorshipEnrollmentMetadata>
             jointWithRightsOfSurvivorshipEnrollmentMetadata) {
@@ -1922,6 +2012,22 @@ public class Enrollment {
       return this;
     }
 
+    /** Metadata for the REGISTRATION_PARTNERSHIP enrollment type */
+    public Builder partnershipEnrollmentMetadata(
+        PartnershipEnrollmentMetadata partnershipEnrollmentMetadata) {
+      Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
+      this.partnershipEnrollmentMetadata = JsonNullable.of(partnershipEnrollmentMetadata);
+      return this;
+    }
+
+    /** Metadata for the REGISTRATION_PARTNERSHIP enrollment type */
+    public Builder partnershipEnrollmentMetadata(
+        JsonNullable<? extends PartnershipEnrollmentMetadata> partnershipEnrollmentMetadata) {
+      Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
+      this.partnershipEnrollmentMetadata = partnershipEnrollmentMetadata;
+      return this;
+    }
+
     /**
      * The ULID is associated with the approver of a given enrollment. The approver you create will
      * contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID
@@ -1941,6 +2047,26 @@ public class Enrollment {
     public Builder principalApproverId(Optional<String> principalApproverId) {
       Utils.checkNotNull(principalApproverId, "principalApproverId");
       this.principalApproverId = principalApproverId;
+      return this;
+    }
+
+    /** Metadata for the REGISTRATION_SOLE_PROPRIETORSHIP enrollment type */
+    public Builder soleProprietorshipEnrollmentMetadata(
+        SoleProprietorshipEnrollmentMetadata soleProprietorshipEnrollmentMetadata) {
+      Utils.checkNotNull(
+          soleProprietorshipEnrollmentMetadata, "soleProprietorshipEnrollmentMetadata");
+      this.soleProprietorshipEnrollmentMetadata =
+          JsonNullable.of(soleProprietorshipEnrollmentMetadata);
+      return this;
+    }
+
+    /** Metadata for the REGISTRATION_SOLE_PROPRIETORSHIP enrollment type */
+    public Builder soleProprietorshipEnrollmentMetadata(
+        JsonNullable<? extends SoleProprietorshipEnrollmentMetadata>
+            soleProprietorshipEnrollmentMetadata) {
+      Utils.checkNotNull(
+          soleProprietorshipEnrollmentMetadata, "soleProprietorshipEnrollmentMetadata");
+      this.soleProprietorshipEnrollmentMetadata = soleProprietorshipEnrollmentMetadata;
       return this;
     }
 
@@ -2060,7 +2186,9 @@ public class Enrollment {
           name,
           operatingEnrollmentMetadata,
           ordersOptionsTradingEnrollmentMetadata,
+          partnershipEnrollmentMetadata,
           principalApproverId,
+          soleProprietorshipEnrollmentMetadata,
           state,
           trustEnrollmentMetadata,
           type,

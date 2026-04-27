@@ -50,6 +50,8 @@ public class FederalTaxClassification {
       new FederalTaxClassification("FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED");
   public static final FederalTaxClassification INDIV_SOLEPROP_OR_SINGLEMEMBERLLC =
       new FederalTaxClassification("INDIV_SOLEPROP_OR_SINGLEMEMBERLLC");
+  public static final FederalTaxClassification PARTNERSHIP =
+      new FederalTaxClassification("PARTNERSHIP");
   public static final FederalTaxClassification C_CORPORATION =
       new FederalTaxClassification("C_CORPORATION");
   public static final FederalTaxClassification S_CORPORATION =
@@ -133,6 +135,7 @@ public class FederalTaxClassification {
     Map<String, FederalTaxClassification> map = new LinkedHashMap<>();
     map.put("FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED", FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED);
     map.put("INDIV_SOLEPROP_OR_SINGLEMEMBERLLC", INDIV_SOLEPROP_OR_SINGLEMEMBERLLC);
+    map.put("PARTNERSHIP", PARTNERSHIP);
     map.put("C_CORPORATION", C_CORPORATION);
     map.put("S_CORPORATION", S_CORPORATION);
     map.put("TRUST_ESTATE", TRUST_ESTATE);
@@ -151,6 +154,7 @@ public class FederalTaxClassification {
     map.put(
         "INDIV_SOLEPROP_OR_SINGLEMEMBERLLC",
         FederalTaxClassificationEnum.INDIV_SOLEPROP_OR_SINGLEMEMBERLLC);
+    map.put("PARTNERSHIP", FederalTaxClassificationEnum.PARTNERSHIP);
     map.put("C_CORPORATION", FederalTaxClassificationEnum.C_CORPORATION);
     map.put("S_CORPORATION", FederalTaxClassificationEnum.S_CORPORATION);
     map.put("TRUST_ESTATE", FederalTaxClassificationEnum.TRUST_ESTATE);
@@ -195,6 +199,7 @@ public class FederalTaxClassification {
   public enum FederalTaxClassificationEnum {
     FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED("FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED"),
     INDIV_SOLEPROP_OR_SINGLEMEMBERLLC("INDIV_SOLEPROP_OR_SINGLEMEMBERLLC"),
+    PARTNERSHIP("PARTNERSHIP"),
     C_CORPORATION("C_CORPORATION"),
     S_CORPORATION("S_CORPORATION"),
     TRUST_ESTATE("TRUST_ESTATE"),

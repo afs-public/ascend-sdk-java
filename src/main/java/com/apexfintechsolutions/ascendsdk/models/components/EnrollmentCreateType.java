@@ -78,6 +78,8 @@ public class EnrollmentCreateType {
       new EnrollmentCreateType("REGISTRATION_CORPORATION");
   public static final EnrollmentCreateType REGISTRATION_LLC =
       new EnrollmentCreateType("REGISTRATION_LLC");
+  public static final EnrollmentCreateType REGISTRATION_PARTNERSHIP =
+      new EnrollmentCreateType("REGISTRATION_PARTNERSHIP");
   public static final EnrollmentCreateType CASH_FDIC_CASH_SWEEP =
       new EnrollmentCreateType("CASH_FDIC_CASH_SWEEP");
   public static final EnrollmentCreateType RETIREMENT_BENEFICIARY_DESIGNATION =
@@ -95,6 +97,10 @@ public class EnrollmentCreateType {
   public static final EnrollmentCreateType REG_T_MARGIN = new EnrollmentCreateType("REG_T_MARGIN");
   public static final EnrollmentCreateType VIRTUAL_ACCOUNT_NUMBER =
       new EnrollmentCreateType("VIRTUAL_ACCOUNT_NUMBER");
+  public static final EnrollmentCreateType REGISTRATION_FUTURES =
+      new EnrollmentCreateType("REGISTRATION_FUTURES");
+  public static final EnrollmentCreateType EVENT_CONTRACTS_KALSHI =
+      new EnrollmentCreateType("EVENT_CONTRACTS_KALSHI");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -178,6 +184,7 @@ public class EnrollmentCreateType {
     map.put("REGISTRATION_TRUST", REGISTRATION_TRUST);
     map.put("REGISTRATION_CORPORATION", REGISTRATION_CORPORATION);
     map.put("REGISTRATION_LLC", REGISTRATION_LLC);
+    map.put("REGISTRATION_PARTNERSHIP", REGISTRATION_PARTNERSHIP);
     map.put("CASH_FDIC_CASH_SWEEP", CASH_FDIC_CASH_SWEEP);
     map.put("RETIREMENT_BENEFICIARY_DESIGNATION", RETIREMENT_BENEFICIARY_DESIGNATION);
     map.put("DIVIDEND_REINVESTMENT_PLAN", DIVIDEND_REINVESTMENT_PLAN);
@@ -187,6 +194,8 @@ public class EnrollmentCreateType {
     map.put("REGISTRATION_CUSTODIAL", REGISTRATION_CUSTODIAL);
     map.put("REG_T_MARGIN", REG_T_MARGIN);
     map.put("VIRTUAL_ACCOUNT_NUMBER", VIRTUAL_ACCOUNT_NUMBER);
+    map.put("REGISTRATION_FUTURES", REGISTRATION_FUTURES);
+    map.put("EVENT_CONTRACTS_KALSHI", EVENT_CONTRACTS_KALSHI);
     return map;
   }
 
@@ -209,6 +218,7 @@ public class EnrollmentCreateType {
     map.put("REGISTRATION_TRUST", EnrollmentCreateTypeEnum.REGISTRATION_TRUST);
     map.put("REGISTRATION_CORPORATION", EnrollmentCreateTypeEnum.REGISTRATION_CORPORATION);
     map.put("REGISTRATION_LLC", EnrollmentCreateTypeEnum.REGISTRATION_LLC);
+    map.put("REGISTRATION_PARTNERSHIP", EnrollmentCreateTypeEnum.REGISTRATION_PARTNERSHIP);
     map.put("CASH_FDIC_CASH_SWEEP", EnrollmentCreateTypeEnum.CASH_FDIC_CASH_SWEEP);
     map.put(
         "RETIREMENT_BENEFICIARY_DESIGNATION",
@@ -226,6 +236,8 @@ public class EnrollmentCreateType {
     map.put("REGISTRATION_CUSTODIAL", EnrollmentCreateTypeEnum.REGISTRATION_CUSTODIAL);
     map.put("REG_T_MARGIN", EnrollmentCreateTypeEnum.REG_T_MARGIN);
     map.put("VIRTUAL_ACCOUNT_NUMBER", EnrollmentCreateTypeEnum.VIRTUAL_ACCOUNT_NUMBER);
+    map.put("REGISTRATION_FUTURES", EnrollmentCreateTypeEnum.REGISTRATION_FUTURES);
+    map.put("EVENT_CONTRACTS_KALSHI", EnrollmentCreateTypeEnum.EVENT_CONTRACTS_KALSHI);
     return map;
   }
 
@@ -276,6 +288,7 @@ public class EnrollmentCreateType {
     REGISTRATION_TRUST("REGISTRATION_TRUST"),
     REGISTRATION_CORPORATION("REGISTRATION_CORPORATION"),
     REGISTRATION_LLC("REGISTRATION_LLC"),
+    REGISTRATION_PARTNERSHIP("REGISTRATION_PARTNERSHIP"),
     CASH_FDIC_CASH_SWEEP("CASH_FDIC_CASH_SWEEP"),
     RETIREMENT_BENEFICIARY_DESIGNATION("RETIREMENT_BENEFICIARY_DESIGNATION"),
     DIVIDEND_REINVESTMENT_PLAN("DIVIDEND_REINVESTMENT_PLAN"),
@@ -285,6 +298,8 @@ public class EnrollmentCreateType {
     REGISTRATION_CUSTODIAL("REGISTRATION_CUSTODIAL"),
     REG_T_MARGIN("REG_T_MARGIN"),
     VIRTUAL_ACCOUNT_NUMBER("VIRTUAL_ACCOUNT_NUMBER"),
+    REGISTRATION_FUTURES("REGISTRATION_FUTURES"),
+    EVENT_CONTRACTS_KALSHI("EVENT_CONTRACTS_KALSHI"),
     ;
 
     private final String value;

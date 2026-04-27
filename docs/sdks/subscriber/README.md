@@ -75,11 +75,11 @@ public class Application {
 
 ### Errors
 
-| Error Type             | Status Code            | Content Type           |
-| ---------------------- | ---------------------- | ---------------------- |
-| models/errors/Status   | 400, 401, 403, 409     | application/json       |
-| models/errors/Status   | 500                    | application/json       |
-| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+| Error Type              | Status Code             | Content Type            |
+| ----------------------- | ----------------------- | ----------------------- |
+| models/errors/Status    | 400, 401, 403, 409, 429 | application/json        |
+| models/errors/Status    | 500                     | application/json        |
+| models/errors/SDKError  | 4XX, 5XX                | \*/\*                   |
 
 ## listPushSubscriptions
 

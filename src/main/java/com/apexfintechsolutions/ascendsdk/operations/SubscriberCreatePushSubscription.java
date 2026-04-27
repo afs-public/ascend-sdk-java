@@ -156,7 +156,15 @@ public class SubscriberCreatePushSubscription {
                     try {
                       HttpResponse<InputStream> httpRes = client.send(r);
                       if (Utils.statusCodeMatches(
-                          httpRes.statusCode(), "400", "401", "403", "409", "4XX", "500", "5XX")) {
+                          httpRes.statusCode(),
+                          "400",
+                          "401",
+                          "403",
+                          "409",
+                          "429",
+                          "4XX",
+                          "500",
+                          "5XX")) {
                         return onError(httpRes, null);
                       }
                       return httpRes;
@@ -198,7 +206,7 @@ public class SubscriberCreatePushSubscription {
         }
       }
 
-      if (Utils.statusCodeMatches(response.statusCode(), "400", "401", "403", "409")) {
+      if (Utils.statusCodeMatches(response.statusCode(), "400", "401", "403", "409", "429")) {
         if (Utils.contentTypeMatches(contentType, "application/json")) {
           Status out = Utils.mapper().readValue(response.body(), new TypeReference<>() {});
           throw out;

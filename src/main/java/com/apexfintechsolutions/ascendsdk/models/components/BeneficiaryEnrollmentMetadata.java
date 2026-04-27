@@ -18,14 +18,13 @@ import java.util.Optional;
  * <p>Metadata for the BENEFICIARY_DESIGNATION enrollment type.
  */
 public class BeneficiaryEnrollmentMetadata {
-  /** Contingent Beneficiary list is optional, with a maximum of five contingent beneficiaries. */
+  /** Contingent Beneficiary list is optional, with a maximum of ten contingent beneficiaries. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("contingent_beneficiaries")
   private Optional<? extends List<Beneficiary>> contingentBeneficiaries;
 
   /**
-   * At least one primary beneficiary must be provided, with a maximum of five primary
-   * beneficiaries.
+   * At least one primary beneficiary must be provided, with a maximum of ten primary beneficiaries.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("primary_beneficiaries")
@@ -47,7 +46,7 @@ public class BeneficiaryEnrollmentMetadata {
     this(Optional.empty(), Optional.empty());
   }
 
-  /** Contingent Beneficiary list is optional, with a maximum of five contingent beneficiaries. */
+  /** Contingent Beneficiary list is optional, with a maximum of ten contingent beneficiaries. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<List<Beneficiary>> contingentBeneficiaries() {
@@ -55,8 +54,7 @@ public class BeneficiaryEnrollmentMetadata {
   }
 
   /**
-   * At least one primary beneficiary must be provided, with a maximum of five primary
-   * beneficiaries.
+   * At least one primary beneficiary must be provided, with a maximum of ten primary beneficiaries.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -68,7 +66,7 @@ public class BeneficiaryEnrollmentMetadata {
     return new Builder();
   }
 
-  /** Contingent Beneficiary list is optional, with a maximum of five contingent beneficiaries. */
+  /** Contingent Beneficiary list is optional, with a maximum of ten contingent beneficiaries. */
   public BeneficiaryEnrollmentMetadata withContingentBeneficiaries(
       List<Beneficiary> contingentBeneficiaries) {
     Utils.checkNotNull(contingentBeneficiaries, "contingentBeneficiaries");
@@ -76,7 +74,7 @@ public class BeneficiaryEnrollmentMetadata {
     return this;
   }
 
-  /** Contingent Beneficiary list is optional, with a maximum of five contingent beneficiaries. */
+  /** Contingent Beneficiary list is optional, with a maximum of ten contingent beneficiaries. */
   public BeneficiaryEnrollmentMetadata withContingentBeneficiaries(
       Optional<? extends List<Beneficiary>> contingentBeneficiaries) {
     Utils.checkNotNull(contingentBeneficiaries, "contingentBeneficiaries");
@@ -85,8 +83,7 @@ public class BeneficiaryEnrollmentMetadata {
   }
 
   /**
-   * At least one primary beneficiary must be provided, with a maximum of five primary
-   * beneficiaries.
+   * At least one primary beneficiary must be provided, with a maximum of ten primary beneficiaries.
    */
   public BeneficiaryEnrollmentMetadata withPrimaryBeneficiaries(
       List<Beneficiary> primaryBeneficiaries) {
@@ -96,8 +93,7 @@ public class BeneficiaryEnrollmentMetadata {
   }
 
   /**
-   * At least one primary beneficiary must be provided, with a maximum of five primary
-   * beneficiaries.
+   * At least one primary beneficiary must be provided, with a maximum of ten primary beneficiaries.
    */
   public BeneficiaryEnrollmentMetadata withPrimaryBeneficiaries(
       Optional<? extends List<Beneficiary>> primaryBeneficiaries) {
@@ -145,14 +141,14 @@ public class BeneficiaryEnrollmentMetadata {
       // force use of static builder() method
     }
 
-    /** Contingent Beneficiary list is optional, with a maximum of five contingent beneficiaries. */
+    /** Contingent Beneficiary list is optional, with a maximum of ten contingent beneficiaries. */
     public Builder contingentBeneficiaries(List<Beneficiary> contingentBeneficiaries) {
       Utils.checkNotNull(contingentBeneficiaries, "contingentBeneficiaries");
       this.contingentBeneficiaries = Optional.ofNullable(contingentBeneficiaries);
       return this;
     }
 
-    /** Contingent Beneficiary list is optional, with a maximum of five contingent beneficiaries. */
+    /** Contingent Beneficiary list is optional, with a maximum of ten contingent beneficiaries. */
     public Builder contingentBeneficiaries(
         Optional<? extends List<Beneficiary>> contingentBeneficiaries) {
       Utils.checkNotNull(contingentBeneficiaries, "contingentBeneficiaries");
@@ -161,7 +157,7 @@ public class BeneficiaryEnrollmentMetadata {
     }
 
     /**
-     * At least one primary beneficiary must be provided, with a maximum of five primary
+     * At least one primary beneficiary must be provided, with a maximum of ten primary
      * beneficiaries.
      */
     public Builder primaryBeneficiaries(List<Beneficiary> primaryBeneficiaries) {
@@ -171,7 +167,7 @@ public class BeneficiaryEnrollmentMetadata {
     }
 
     /**
-     * At least one primary beneficiary must be provided, with a maximum of five primary
+     * At least one primary beneficiary must be provided, with a maximum of ten primary
      * beneficiaries.
      */
     public Builder primaryBeneficiaries(

@@ -14,7 +14,7 @@ import java.util.Optional;
 /**
  * IraRothEnrollmentMetadata
  *
- * <p>Metadata for the ROTH_IRA_REGISTRATION enrollment type
+ * <p>Metadata for the REGISTRATION_IRA_ROTH enrollment type
  */
 public class IraRothEnrollmentMetadata {
   /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */

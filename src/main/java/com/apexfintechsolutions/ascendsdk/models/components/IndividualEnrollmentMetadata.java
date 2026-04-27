@@ -14,7 +14,7 @@ import java.util.Optional;
 /**
  * IndividualEnrollmentMetadata
  *
- * <p>Metadata for the INDIVIDUAL enrollment type
+ * <p>Metadata for the REGISTRATION_INDIVIDUAL enrollment type
  */
 public class IndividualEnrollmentMetadata {
   /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */

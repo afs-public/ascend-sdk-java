@@ -14,7 +14,7 @@ import java.util.Optional;
 /**
  * JointWithRightsOfSurvivorshipEnrollmentMetadata
  *
- * <p>Metadata for the JOINT_WITH_RIGHTS_OF_SURVIVORSHIP_REGISTRATION enrollment type
+ * <p>Metadata for the REGISTRATION_JOINT_WROS enrollment type
  */
 public class JointWithRightsOfSurvivorshipEnrollmentMetadata {
   /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */

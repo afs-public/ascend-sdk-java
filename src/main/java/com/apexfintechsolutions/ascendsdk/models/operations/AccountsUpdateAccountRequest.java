@@ -28,6 +28,7 @@ public class AccountsUpdateAccountRequest {
    * `investment_profile.customer_profile.investment_experience` `wrap_fee_billed` `managed`
    * `originating_account_id` `client_account_id` `cat_reporter_information`
    * `tax_profile.cost_basis_lot_disposal_method` `tax_profile.section_475_election`
+   * `accepts_issuer_direct_communication`
    */
   @SpeakeasyMetadata("queryParam:style=form,explode=true,name=update_mask")
   private Optional<String> updateMask;
@@ -69,6 +70,7 @@ public class AccountsUpdateAccountRequest {
    * `investment_profile.customer_profile.investment_experience` `wrap_fee_billed` `managed`
    * `originating_account_id` `client_account_id` `cat_reporter_information`
    * `tax_profile.cost_basis_lot_disposal_method` `tax_profile.section_475_election`
+   * `accepts_issuer_direct_communication`
    */
   @JsonIgnore
   public Optional<String> updateMask() {
@@ -104,6 +106,7 @@ public class AccountsUpdateAccountRequest {
    * `investment_profile.customer_profile.investment_experience` `wrap_fee_billed` `managed`
    * `originating_account_id` `client_account_id` `cat_reporter_information`
    * `tax_profile.cost_basis_lot_disposal_method` `tax_profile.section_475_election`
+   * `accepts_issuer_direct_communication`
    */
   public AccountsUpdateAccountRequest withUpdateMask(String updateMask) {
     Utils.checkNotNull(updateMask, "updateMask");
@@ -124,6 +127,7 @@ public class AccountsUpdateAccountRequest {
    * `investment_profile.customer_profile.investment_experience` `wrap_fee_billed` `managed`
    * `originating_account_id` `client_account_id` `cat_reporter_information`
    * `tax_profile.cost_basis_lot_disposal_method` `tax_profile.section_475_election`
+   * `accepts_issuer_direct_communication`
    */
   public AccountsUpdateAccountRequest withUpdateMask(Optional<String> updateMask) {
     Utils.checkNotNull(updateMask, "updateMask");
@@ -202,6 +206,7 @@ public class AccountsUpdateAccountRequest {
      * `investment_profile.customer_profile.investment_experience` `wrap_fee_billed` `managed`
      * `originating_account_id` `client_account_id` `cat_reporter_information`
      * `tax_profile.cost_basis_lot_disposal_method` `tax_profile.section_475_election`
+     * `accepts_issuer_direct_communication`
      */
     public Builder updateMask(String updateMask) {
       Utils.checkNotNull(updateMask, "updateMask");
@@ -222,6 +227,7 @@ public class AccountsUpdateAccountRequest {
      * `investment_profile.customer_profile.investment_experience` `wrap_fee_billed` `managed`
      * `originating_account_id` `client_account_id` `cat_reporter_information`
      * `tax_profile.cost_basis_lot_disposal_method` `tax_profile.section_475_election`
+     * `accepts_issuer_direct_communication`
      */
     public Builder updateMask(Optional<String> updateMask) {
       Utils.checkNotNull(updateMask, "updateMask");
