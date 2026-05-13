@@ -47,7 +47,7 @@ public class AccountsEndLargeTraderLegalNaturalPerson {
       this.baseUrl = this.sdkConfiguration.serverUrl();
       this.securitySource = this.sdkConfiguration.securitySource();
       options.ifPresent(o -> o.validate(List.of(Options.Option.RETRY_CONFIG)));
-      this.retryStatusCodes = List.of("4XX", "5XX");
+      this.retryStatusCodes = List.of("504", "429");
       this.retryConfig =
           options
               .flatMap(Options::retryConfig)
@@ -59,7 +59,7 @@ public class AccountsEndLargeTraderLegalNaturalPerson {
                               .initialInterval(500, TimeUnit.MILLISECONDS)
                               .maxInterval(5000, TimeUnit.MILLISECONDS)
                               .baseFactor((double) (1.5))
-                              .maxElapsedTime(15000, TimeUnit.MILLISECONDS)
+                              .maxElapsedTime(60000, TimeUnit.MILLISECONDS)
                               .retryConnectError(true)
                               .build())
                       .build());
