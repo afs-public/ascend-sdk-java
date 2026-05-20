@@ -56,6 +56,7 @@ public class AssetType1 {
   public static final AssetType1 MUTUAL_FUND = new AssetType1("MUTUAL_FUND");
   public static final AssetType1 ALT_INVESTMENT = new AssetType1("ALT_INVESTMENT");
   public static final AssetType1 INDEX = new AssetType1("INDEX");
+  public static final AssetType1 EVENT_CONTRACT = new AssetType1("EVENT_CONTRACT");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -133,6 +134,7 @@ public class AssetType1 {
     map.put("MUTUAL_FUND", MUTUAL_FUND);
     map.put("ALT_INVESTMENT", ALT_INVESTMENT);
     map.put("INDEX", INDEX);
+    map.put("EVENT_CONTRACT", EVENT_CONTRACT);
     return map;
   }
 
@@ -148,6 +150,7 @@ public class AssetType1 {
     map.put("MUTUAL_FUND", AssetType1Enum.MUTUAL_FUND);
     map.put("ALT_INVESTMENT", AssetType1Enum.ALT_INVESTMENT);
     map.put("INDEX", AssetType1Enum.INDEX);
+    map.put("EVENT_CONTRACT", AssetType1Enum.EVENT_CONTRACT);
     return map;
   }
 
@@ -192,6 +195,7 @@ public class AssetType1 {
     MUTUAL_FUND("MUTUAL_FUND"),
     ALT_INVESTMENT("ALT_INVESTMENT"),
     INDEX("INDEX"),
+    EVENT_CONTRACT("EVENT_CONTRACT"),
     ;
 
     private final String value;

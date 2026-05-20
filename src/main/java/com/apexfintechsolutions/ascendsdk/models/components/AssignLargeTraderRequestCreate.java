@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * <p>The request to assign a Large Trader ID to a Legal Natural Person/Legal Entity.
  */
 public class AssignLargeTraderRequestCreate {
-
+  /** The Large Trader ID to assign */
   @JsonProperty("large_trader_id")
   private String largeTraderId;
 
@@ -24,6 +24,7 @@ public class AssignLargeTraderRequestCreate {
     this.largeTraderId = largeTraderId;
   }
 
+  /** The Large Trader ID to assign */
   @JsonIgnore
   public String largeTraderId() {
     return largeTraderId;
@@ -33,6 +34,7 @@ public class AssignLargeTraderRequestCreate {
     return new Builder();
   }
 
+  /** The Large Trader ID to assign */
   public AssignLargeTraderRequestCreate withLargeTraderId(String largeTraderId) {
     Utils.checkNotNull(largeTraderId, "largeTraderId");
     this.largeTraderId = largeTraderId;
@@ -70,6 +72,7 @@ public class AssignLargeTraderRequestCreate {
       // force use of static builder() method
     }
 
+    /** The Large Trader ID to assign */
     public Builder largeTraderId(String largeTraderId) {
       Utils.checkNotNull(largeTraderId, "largeTraderId");
       this.largeTraderId = largeTraderId;

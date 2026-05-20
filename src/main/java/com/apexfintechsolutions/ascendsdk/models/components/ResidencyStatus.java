@@ -37,6 +37,11 @@ import java.util.Optional;
  * use of an instance in a switch expression but you can use the {@code asEnum()} method (after
  * dealing with the `Optional` appropriately).
  */
+/**
+ * ResidencyStatus
+ *
+ * <p>The residency status of the non-citizen resident.
+ */
 @JsonDeserialize(using = ResidencyStatus._Deserializer.class)
 @JsonSerialize(using = ResidencyStatus._Serializer.class)
 public class ResidencyStatus {

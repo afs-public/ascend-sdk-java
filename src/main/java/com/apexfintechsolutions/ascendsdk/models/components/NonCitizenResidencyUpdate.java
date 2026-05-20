@@ -18,7 +18,7 @@ import java.util.Optional;
  * accounts.
  */
 public class NonCitizenResidencyUpdate {
-
+  /** The residency status of the non-citizen resident. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("residency_status")
   private Optional<? extends NonCitizenResidencyUpdateResidencyStatus> residencyStatus;
@@ -35,6 +35,7 @@ public class NonCitizenResidencyUpdate {
     this(Optional.empty());
   }
 
+  /** The residency status of the non-citizen resident. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<NonCitizenResidencyUpdateResidencyStatus> residencyStatus() {
@@ -45,6 +46,7 @@ public class NonCitizenResidencyUpdate {
     return new Builder();
   }
 
+  /** The residency status of the non-citizen resident. */
   public NonCitizenResidencyUpdate withResidencyStatus(
       NonCitizenResidencyUpdateResidencyStatus residencyStatus) {
     Utils.checkNotNull(residencyStatus, "residencyStatus");
@@ -52,6 +54,7 @@ public class NonCitizenResidencyUpdate {
     return this;
   }
 
+  /** The residency status of the non-citizen resident. */
   public NonCitizenResidencyUpdate withResidencyStatus(
       Optional<? extends NonCitizenResidencyUpdateResidencyStatus> residencyStatus) {
     Utils.checkNotNull(residencyStatus, "residencyStatus");
@@ -91,12 +94,14 @@ public class NonCitizenResidencyUpdate {
       // force use of static builder() method
     }
 
+    /** The residency status of the non-citizen resident. */
     public Builder residencyStatus(NonCitizenResidencyUpdateResidencyStatus residencyStatus) {
       Utils.checkNotNull(residencyStatus, "residencyStatus");
       this.residencyStatus = Optional.ofNullable(residencyStatus);
       return this;
     }
 
+    /** The residency status of the non-citizen resident. */
     public Builder residencyStatus(
         Optional<? extends NonCitizenResidencyUpdateResidencyStatus> residencyStatus) {
       Utils.checkNotNull(residencyStatus, "residencyStatus");

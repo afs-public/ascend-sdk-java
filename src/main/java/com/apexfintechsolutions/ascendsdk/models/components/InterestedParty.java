@@ -19,8 +19,8 @@ import org.openapitools.jackson.nullable.JsonNullable;
  */
 public class InterestedParty {
   /**
-   * Delivery method instruction for CFTC documents for a given Interested Party record; Defaults to
-   * `DIGITAL` on futures account creation Only applies to CFTC regulated accounts
+   * Delivery method instruction for CFTC documents for a given Interested Party record; Not set for
+   * interested parties (no email collected); only applies to CFTC regulated accounts
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("cftc_document_delivery_preference")
@@ -119,8 +119,8 @@ public class InterestedParty {
   }
 
   /**
-   * Delivery method instruction for CFTC documents for a given Interested Party record; Defaults to
-   * `DIGITAL` on futures account creation Only applies to CFTC regulated accounts
+   * Delivery method instruction for CFTC documents for a given Interested Party record; Not set for
+   * interested parties (no email collected); only applies to CFTC regulated accounts
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -192,8 +192,8 @@ public class InterestedParty {
   }
 
   /**
-   * Delivery method instruction for CFTC documents for a given Interested Party record; Defaults to
-   * `DIGITAL` on futures account creation Only applies to CFTC regulated accounts
+   * Delivery method instruction for CFTC documents for a given Interested Party record; Not set for
+   * interested parties (no email collected); only applies to CFTC regulated accounts
    */
   public InterestedParty withCftcDocumentDeliveryPreference(
       CftcDocumentDeliveryPreference cftcDocumentDeliveryPreference) {
@@ -203,8 +203,8 @@ public class InterestedParty {
   }
 
   /**
-   * Delivery method instruction for CFTC documents for a given Interested Party record; Defaults to
-   * `DIGITAL` on futures account creation Only applies to CFTC regulated accounts
+   * Delivery method instruction for CFTC documents for a given Interested Party record; Not set for
+   * interested parties (no email collected); only applies to CFTC regulated accounts
    */
   public InterestedParty withCftcDocumentDeliveryPreference(
       Optional<? extends CftcDocumentDeliveryPreference> cftcDocumentDeliveryPreference) {
@@ -419,8 +419,8 @@ public class InterestedParty {
     }
 
     /**
-     * Delivery method instruction for CFTC documents for a given Interested Party record; Defaults
-     * to `DIGITAL` on futures account creation Only applies to CFTC regulated accounts
+     * Delivery method instruction for CFTC documents for a given Interested Party record; Not set
+     * for interested parties (no email collected); only applies to CFTC regulated accounts
      */
     public Builder cftcDocumentDeliveryPreference(
         CftcDocumentDeliveryPreference cftcDocumentDeliveryPreference) {
@@ -430,8 +430,8 @@ public class InterestedParty {
     }
 
     /**
-     * Delivery method instruction for CFTC documents for a given Interested Party record; Defaults
-     * to `DIGITAL` on futures account creation Only applies to CFTC regulated accounts
+     * Delivery method instruction for CFTC documents for a given Interested Party record; Not set
+     * for interested parties (no email collected); only applies to CFTC regulated accounts
      */
     public Builder cftcDocumentDeliveryPreference(
         Optional<? extends CftcDocumentDeliveryPreference> cftcDocumentDeliveryPreference) {

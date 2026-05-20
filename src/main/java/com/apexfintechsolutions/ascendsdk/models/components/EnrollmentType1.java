@@ -66,6 +66,8 @@ public class EnrollmentType1 {
       new EnrollmentType1("REGISTRATION_ESTATE");
   public static final EnrollmentType1 REGISTRATION_IRA_TRADITIONAL =
       new EnrollmentType1("REGISTRATION_IRA_TRADITIONAL");
+  public static final EnrollmentType1 REGISTRATION_IRA_SIMPLE =
+      new EnrollmentType1("REGISTRATION_IRA_SIMPLE");
   public static final EnrollmentType1 REGISTRATION_IRA_SEP =
       new EnrollmentType1("REGISTRATION_IRA_SEP");
   public static final EnrollmentType1 REGISTRATION_IRA_ROTH =
@@ -100,6 +102,8 @@ public class EnrollmentType1 {
       new EnrollmentType1("REGISTRATION_FUTURES");
   public static final EnrollmentType1 EVENT_CONTRACTS_KALSHI =
       new EnrollmentType1("EVENT_CONTRACTS_KALSHI");
+  public static final EnrollmentType1 REGISTRATION_CUSTODIAL_IRA_ROTH =
+      new EnrollmentType1("REGISTRATION_CUSTODIAL_IRA_ROTH");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -177,6 +181,7 @@ public class EnrollmentType1 {
     map.put("REGISTRATION_JOINT_CP", REGISTRATION_JOINT_CP);
     map.put("REGISTRATION_ESTATE", REGISTRATION_ESTATE);
     map.put("REGISTRATION_IRA_TRADITIONAL", REGISTRATION_IRA_TRADITIONAL);
+    map.put("REGISTRATION_IRA_SIMPLE", REGISTRATION_IRA_SIMPLE);
     map.put("REGISTRATION_IRA_SEP", REGISTRATION_IRA_SEP);
     map.put("REGISTRATION_IRA_ROTH", REGISTRATION_IRA_ROTH);
     map.put("REGISTRATION_IRA_ROLLOVER", REGISTRATION_IRA_ROLLOVER);
@@ -195,6 +200,7 @@ public class EnrollmentType1 {
     map.put("VIRTUAL_ACCOUNT_NUMBER", VIRTUAL_ACCOUNT_NUMBER);
     map.put("REGISTRATION_FUTURES", REGISTRATION_FUTURES);
     map.put("EVENT_CONTRACTS_KALSHI", EVENT_CONTRACTS_KALSHI);
+    map.put("REGISTRATION_CUSTODIAL_IRA_ROTH", REGISTRATION_CUSTODIAL_IRA_ROTH);
     return map;
   }
 
@@ -210,6 +216,7 @@ public class EnrollmentType1 {
     map.put("REGISTRATION_JOINT_CP", EnrollmentType1Enum.REGISTRATION_JOINT_CP);
     map.put("REGISTRATION_ESTATE", EnrollmentType1Enum.REGISTRATION_ESTATE);
     map.put("REGISTRATION_IRA_TRADITIONAL", EnrollmentType1Enum.REGISTRATION_IRA_TRADITIONAL);
+    map.put("REGISTRATION_IRA_SIMPLE", EnrollmentType1Enum.REGISTRATION_IRA_SIMPLE);
     map.put("REGISTRATION_IRA_SEP", EnrollmentType1Enum.REGISTRATION_IRA_SEP);
     map.put("REGISTRATION_IRA_ROTH", EnrollmentType1Enum.REGISTRATION_IRA_ROTH);
     map.put("REGISTRATION_IRA_ROLLOVER", EnrollmentType1Enum.REGISTRATION_IRA_ROLLOVER);
@@ -233,6 +240,7 @@ public class EnrollmentType1 {
     map.put("VIRTUAL_ACCOUNT_NUMBER", EnrollmentType1Enum.VIRTUAL_ACCOUNT_NUMBER);
     map.put("REGISTRATION_FUTURES", EnrollmentType1Enum.REGISTRATION_FUTURES);
     map.put("EVENT_CONTRACTS_KALSHI", EnrollmentType1Enum.EVENT_CONTRACTS_KALSHI);
+    map.put("REGISTRATION_CUSTODIAL_IRA_ROTH", EnrollmentType1Enum.REGISTRATION_CUSTODIAL_IRA_ROTH);
     return map;
   }
 
@@ -277,6 +285,7 @@ public class EnrollmentType1 {
     REGISTRATION_JOINT_CP("REGISTRATION_JOINT_CP"),
     REGISTRATION_ESTATE("REGISTRATION_ESTATE"),
     REGISTRATION_IRA_TRADITIONAL("REGISTRATION_IRA_TRADITIONAL"),
+    REGISTRATION_IRA_SIMPLE("REGISTRATION_IRA_SIMPLE"),
     REGISTRATION_IRA_SEP("REGISTRATION_IRA_SEP"),
     REGISTRATION_IRA_ROTH("REGISTRATION_IRA_ROTH"),
     REGISTRATION_IRA_ROLLOVER("REGISTRATION_IRA_ROLLOVER"),
@@ -295,6 +304,7 @@ public class EnrollmentType1 {
     VIRTUAL_ACCOUNT_NUMBER("VIRTUAL_ACCOUNT_NUMBER"),
     REGISTRATION_FUTURES("REGISTRATION_FUTURES"),
     EVENT_CONTRACTS_KALSHI("EVENT_CONTRACTS_KALSHI"),
+    REGISTRATION_CUSTODIAL_IRA_ROTH("REGISTRATION_CUSTODIAL_IRA_ROTH"),
     ;
 
     private final String value;

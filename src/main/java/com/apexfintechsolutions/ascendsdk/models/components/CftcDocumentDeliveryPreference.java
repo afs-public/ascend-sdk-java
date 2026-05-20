@@ -40,8 +40,8 @@ import java.util.Optional;
 /**
  * CftcDocumentDeliveryPreference
  *
- * <p>Delivery method instruction for CFTC documents for a given Interested Party record; Defaults
- * to `DIGITAL` on futures account creation Only applies to CFTC regulated accounts
+ * <p>Delivery method instruction for CFTC documents for a given Interested Party record; Not set
+ * for interested parties (no email collected); only applies to CFTC regulated accounts
  */
 @JsonDeserialize(using = CftcDocumentDeliveryPreference._Deserializer.class)
 @JsonSerialize(using = CftcDocumentDeliveryPreference._Serializer.class)

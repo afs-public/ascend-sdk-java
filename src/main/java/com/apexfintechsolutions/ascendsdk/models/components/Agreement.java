@@ -51,10 +51,7 @@ public class Agreement {
   @JsonProperty("agreement_source")
   private Optional<? extends AgreementSource> agreementSource;
 
-  /**
-   * The status of an agreement which blocks an enrollment; `REQUIRED` if not yet received, or
-   * `AFFIRMED` if acknowledgement has been received by AFS
-   */
+  /** The lifecycle state of an agreement associated with an enrollment. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("agreement_state")
   private Optional<? extends AgreementState> agreementState;
@@ -188,10 +185,7 @@ public class Agreement {
     return (Optional<AgreementSource>) agreementSource;
   }
 
-  /**
-   * The status of an agreement which blocks an enrollment; `REQUIRED` if not yet received, or
-   * `AFFIRMED` if acknowledgement has been received by AFS
-   */
+  /** The lifecycle state of an agreement associated with an enrollment. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<AgreementState> agreementState() {
@@ -328,20 +322,14 @@ public class Agreement {
     return this;
   }
 
-  /**
-   * The status of an agreement which blocks an enrollment; `REQUIRED` if not yet received, or
-   * `AFFIRMED` if acknowledgement has been received by AFS
-   */
+  /** The lifecycle state of an agreement associated with an enrollment. */
   public Agreement withAgreementState(AgreementState agreementState) {
     Utils.checkNotNull(agreementState, "agreementState");
     this.agreementState = Optional.ofNullable(agreementState);
     return this;
   }
 
-  /**
-   * The status of an agreement which blocks an enrollment; `REQUIRED` if not yet received, or
-   * `AFFIRMED` if acknowledgement has been received by AFS
-   */
+  /** The lifecycle state of an agreement associated with an enrollment. */
   public Agreement withAgreementState(Optional<? extends AgreementState> agreementState) {
     Utils.checkNotNull(agreementState, "agreementState");
     this.agreementState = agreementState;
@@ -627,20 +615,14 @@ public class Agreement {
       return this;
     }
 
-    /**
-     * The status of an agreement which blocks an enrollment; `REQUIRED` if not yet received, or
-     * `AFFIRMED` if acknowledgement has been received by AFS
-     */
+    /** The lifecycle state of an agreement associated with an enrollment. */
     public Builder agreementState(AgreementState agreementState) {
       Utils.checkNotNull(agreementState, "agreementState");
       this.agreementState = Optional.ofNullable(agreementState);
       return this;
     }
 
-    /**
-     * The status of an agreement which blocks an enrollment; `REQUIRED` if not yet received, or
-     * `AFFIRMED` if acknowledgement has been received by AFS
-     */
+    /** The lifecycle state of an agreement associated with an enrollment. */
     public Builder agreementState(Optional<? extends AgreementState> agreementState) {
       Utils.checkNotNull(agreementState, "agreementState");
       this.agreementState = agreementState;

@@ -248,6 +248,14 @@ public class LegalNaturalPerson {
   private Optional<String> politicallyExposedOrganization;
 
   /**
+   * Unique identifier for the tax form associated with this legal natural person. This identifier
+   * is assigned after successful consent to tax certification
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("tax_form_id")
+  private Optional<String> taxFormId;
+
+  /**
    * The full U.S. tax ID for a related person; Must be provided with `ITIN` or `SSN` tax ID type
    */
   @JsonInclude(Include.NON_ABSENT)
@@ -320,6 +328,7 @@ public class LegalNaturalPerson {
           Optional<? extends List<String>> politicallyExposedImmediateFamilyNames,
       @JsonProperty("politically_exposed_organization")
           Optional<String> politicallyExposedOrganization,
+      @JsonProperty("tax_form_id") Optional<String> taxFormId,
       @JsonProperty("tax_id") Optional<String> taxId,
       @JsonProperty("tax_id_last_four") Optional<String> taxIdLastFour,
       @JsonProperty("tax_id_type") Optional<? extends LegalNaturalPersonTaxIdType> taxIdType,
@@ -357,6 +366,7 @@ public class LegalNaturalPerson {
     Utils.checkNotNull(
         politicallyExposedImmediateFamilyNames, "politicallyExposedImmediateFamilyNames");
     Utils.checkNotNull(politicallyExposedOrganization, "politicallyExposedOrganization");
+    Utils.checkNotNull(taxFormId, "taxFormId");
     Utils.checkNotNull(taxId, "taxId");
     Utils.checkNotNull(taxIdLastFour, "taxIdLastFour");
     Utils.checkNotNull(taxIdType, "taxIdType");
@@ -393,6 +403,7 @@ public class LegalNaturalPerson {
     this.personalAddress = personalAddress;
     this.politicallyExposedImmediateFamilyNames = politicallyExposedImmediateFamilyNames;
     this.politicallyExposedOrganization = politicallyExposedOrganization;
+    this.taxFormId = taxFormId;
     this.taxId = taxId;
     this.taxIdLastFour = taxIdLastFour;
     this.taxIdType = taxIdType;
@@ -431,6 +442,7 @@ public class LegalNaturalPerson {
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
@@ -709,6 +721,15 @@ public class LegalNaturalPerson {
   @JsonIgnore
   public Optional<String> politicallyExposedOrganization() {
     return politicallyExposedOrganization;
+  }
+
+  /**
+   * Unique identifier for the tax form associated with this legal natural person. This identifier
+   * is assigned after successful consent to tax certification
+   */
+  @JsonIgnore
+  public Optional<String> taxFormId() {
+    return taxFormId;
   }
 
   /**
@@ -1353,6 +1374,26 @@ public class LegalNaturalPerson {
   }
 
   /**
+   * Unique identifier for the tax form associated with this legal natural person. This identifier
+   * is assigned after successful consent to tax certification
+   */
+  public LegalNaturalPerson withTaxFormId(String taxFormId) {
+    Utils.checkNotNull(taxFormId, "taxFormId");
+    this.taxFormId = Optional.ofNullable(taxFormId);
+    return this;
+  }
+
+  /**
+   * Unique identifier for the tax form associated with this legal natural person. This identifier
+   * is assigned after successful consent to tax certification
+   */
+  public LegalNaturalPerson withTaxFormId(Optional<String> taxFormId) {
+    Utils.checkNotNull(taxFormId, "taxFormId");
+    this.taxFormId = taxFormId;
+    return this;
+  }
+
+  /**
    * The full U.S. tax ID for a related person; Must be provided with `ITIN` or `SSN` tax ID type
    */
   public LegalNaturalPerson withTaxId(String taxId) {
@@ -1477,6 +1518,7 @@ public class LegalNaturalPerson {
             other.politicallyExposedImmediateFamilyNames)
         && Utils.enhancedDeepEquals(
             this.politicallyExposedOrganization, other.politicallyExposedOrganization)
+        && Utils.enhancedDeepEquals(this.taxFormId, other.taxFormId)
         && Utils.enhancedDeepEquals(this.taxId, other.taxId)
         && Utils.enhancedDeepEquals(this.taxIdLastFour, other.taxIdLastFour)
         && Utils.enhancedDeepEquals(this.taxIdType, other.taxIdType)
@@ -1518,6 +1560,7 @@ public class LegalNaturalPerson {
         personalAddress,
         politicallyExposedImmediateFamilyNames,
         politicallyExposedOrganization,
+        taxFormId,
         taxId,
         taxIdLastFour,
         taxIdType,
@@ -1592,6 +1635,8 @@ public class LegalNaturalPerson {
         politicallyExposedImmediateFamilyNames,
         "politicallyExposedOrganization",
         politicallyExposedOrganization,
+        "taxFormId",
+        taxFormId,
         "taxId",
         taxId,
         "taxIdLastFour",
@@ -1673,6 +1718,8 @@ public class LegalNaturalPerson {
         Optional.empty();
 
     private Optional<String> politicallyExposedOrganization = Optional.empty();
+
+    private Optional<String> taxFormId = Optional.empty();
 
     private Optional<String> taxId = Optional.empty();
 
@@ -2286,6 +2333,26 @@ public class LegalNaturalPerson {
     }
 
     /**
+     * Unique identifier for the tax form associated with this legal natural person. This identifier
+     * is assigned after successful consent to tax certification
+     */
+    public Builder taxFormId(String taxFormId) {
+      Utils.checkNotNull(taxFormId, "taxFormId");
+      this.taxFormId = Optional.ofNullable(taxFormId);
+      return this;
+    }
+
+    /**
+     * Unique identifier for the tax form associated with this legal natural person. This identifier
+     * is assigned after successful consent to tax certification
+     */
+    public Builder taxFormId(Optional<String> taxFormId) {
+      Utils.checkNotNull(taxFormId, "taxFormId");
+      this.taxFormId = taxFormId;
+      return this;
+    }
+
+    /**
      * The full U.S. tax ID for a related person; Must be provided with `ITIN` or `SSN` tax ID type
      */
     public Builder taxId(String taxId) {
@@ -2398,6 +2465,7 @@ public class LegalNaturalPerson {
           personalAddress,
           politicallyExposedImmediateFamilyNames,
           politicallyExposedOrganization,
+          taxFormId,
           taxId,
           taxIdLastFour,
           taxIdType,
