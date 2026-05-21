@@ -39,6 +39,12 @@ public class Enrollment {
   @JsonProperty("custodial_enrollment_metadata")
   private JsonNullable<? extends CustodialEnrollmentMetadata> custodialEnrollmentMetadata;
 
+  /** Metadata for the REGISTRATION_CUSTODIAL_IRA_ROTH enrollment type */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("custodial_ira_roth_enrollment_metadata")
+  private JsonNullable<? extends CustodialIraRothEnrollmentMetadata>
+      custodialIraRothEnrollmentMetadata;
+
   /**
    * A system-generated unique identifier referencing a single instance of an enrollment; Used to
    * access the record after creation
@@ -164,11 +170,6 @@ public class Enrollment {
   private JsonNullable<? extends OrdersOptionsTradingEnrollmentMetadata>
       ordersOptionsTradingEnrollmentMetadata;
 
-  /** Metadata for the REGISTRATION_PARTNERSHIP enrollment type */
-  @JsonInclude(Include.NON_ABSENT)
-  @JsonProperty("partnership_enrollment_metadata")
-  private JsonNullable<? extends PartnershipEnrollmentMetadata> partnershipEnrollmentMetadata;
-
   /**
    * The ULID is associated with the approver of a given enrollment. The approver you create will
    * contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID
@@ -224,6 +225,9 @@ public class Enrollment {
           JsonNullable<? extends CorporationEnrollmentMetadata> corporationEnrollmentMetadata,
       @JsonProperty("custodial_enrollment_metadata")
           JsonNullable<? extends CustodialEnrollmentMetadata> custodialEnrollmentMetadata,
+      @JsonProperty("custodial_ira_roth_enrollment_metadata")
+          JsonNullable<? extends CustodialIraRothEnrollmentMetadata>
+              custodialIraRothEnrollmentMetadata,
       @JsonProperty("enrollment_id") Optional<String> enrollmentId,
       @JsonProperty("enrollment_time") JsonNullable<OffsetDateTime> enrollmentTime,
       @JsonProperty("estate_enrollment_metadata")
@@ -272,8 +276,6 @@ public class Enrollment {
       @JsonProperty("orders_options_trading_enrollment_metadata")
           JsonNullable<? extends OrdersOptionsTradingEnrollmentMetadata>
               ordersOptionsTradingEnrollmentMetadata,
-      @JsonProperty("partnership_enrollment_metadata")
-          JsonNullable<? extends PartnershipEnrollmentMetadata> partnershipEnrollmentMetadata,
       @JsonProperty("principal_approver_id") Optional<String> principalApproverId,
       @JsonProperty("sole_proprietorship_enrollment_metadata")
           JsonNullable<? extends SoleProprietorshipEnrollmentMetadata>
@@ -290,6 +292,7 @@ public class Enrollment {
     Utils.checkNotNull(consentMethod, "consentMethod");
     Utils.checkNotNull(corporationEnrollmentMetadata, "corporationEnrollmentMetadata");
     Utils.checkNotNull(custodialEnrollmentMetadata, "custodialEnrollmentMetadata");
+    Utils.checkNotNull(custodialIraRothEnrollmentMetadata, "custodialIraRothEnrollmentMetadata");
     Utils.checkNotNull(enrollmentId, "enrollmentId");
     Utils.checkNotNull(enrollmentTime, "enrollmentTime");
     Utils.checkNotNull(estateEnrollmentMetadata, "estateEnrollmentMetadata");
@@ -320,7 +323,6 @@ public class Enrollment {
     Utils.checkNotNull(operatingEnrollmentMetadata, "operatingEnrollmentMetadata");
     Utils.checkNotNull(
         ordersOptionsTradingEnrollmentMetadata, "ordersOptionsTradingEnrollmentMetadata");
-    Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
     Utils.checkNotNull(principalApproverId, "principalApproverId");
     Utils.checkNotNull(
         soleProprietorshipEnrollmentMetadata, "soleProprietorshipEnrollmentMetadata");
@@ -334,6 +336,7 @@ public class Enrollment {
     this.consentMethod = consentMethod;
     this.corporationEnrollmentMetadata = corporationEnrollmentMetadata;
     this.custodialEnrollmentMetadata = custodialEnrollmentMetadata;
+    this.custodialIraRothEnrollmentMetadata = custodialIraRothEnrollmentMetadata;
     this.enrollmentId = enrollmentId;
     this.enrollmentTime = enrollmentTime;
     this.estateEnrollmentMetadata = estateEnrollmentMetadata;
@@ -357,7 +360,6 @@ public class Enrollment {
     this.name = name;
     this.operatingEnrollmentMetadata = operatingEnrollmentMetadata;
     this.ordersOptionsTradingEnrollmentMetadata = ordersOptionsTradingEnrollmentMetadata;
-    this.partnershipEnrollmentMetadata = partnershipEnrollmentMetadata;
     this.principalApproverId = principalApproverId;
     this.soleProprietorshipEnrollmentMetadata = soleProprietorshipEnrollmentMetadata;
     this.state = state;
@@ -373,27 +375,27 @@ public class Enrollment {
         Optional.empty(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
-        Optional.empty(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
         JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        Optional.empty(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
@@ -431,6 +433,13 @@ public class Enrollment {
   @JsonIgnore
   public JsonNullable<CustodialEnrollmentMetadata> custodialEnrollmentMetadata() {
     return (JsonNullable<CustodialEnrollmentMetadata>) custodialEnrollmentMetadata;
+  }
+
+  /** Metadata for the REGISTRATION_CUSTODIAL_IRA_ROTH enrollment type */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<CustodialIraRothEnrollmentMetadata> custodialIraRothEnrollmentMetadata() {
+    return (JsonNullable<CustodialIraRothEnrollmentMetadata>) custodialIraRothEnrollmentMetadata;
   }
 
   /**
@@ -606,13 +615,6 @@ public class Enrollment {
         ordersOptionsTradingEnrollmentMetadata;
   }
 
-  /** Metadata for the REGISTRATION_PARTNERSHIP enrollment type */
-  @SuppressWarnings("unchecked")
-  @JsonIgnore
-  public JsonNullable<PartnershipEnrollmentMetadata> partnershipEnrollmentMetadata() {
-    return (JsonNullable<PartnershipEnrollmentMetadata>) partnershipEnrollmentMetadata;
-  }
-
   /**
    * The ULID is associated with the approver of a given enrollment. The approver you create will
    * contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID
@@ -735,6 +737,23 @@ public class Enrollment {
       JsonNullable<? extends CustodialEnrollmentMetadata> custodialEnrollmentMetadata) {
     Utils.checkNotNull(custodialEnrollmentMetadata, "custodialEnrollmentMetadata");
     this.custodialEnrollmentMetadata = custodialEnrollmentMetadata;
+    return this;
+  }
+
+  /** Metadata for the REGISTRATION_CUSTODIAL_IRA_ROTH enrollment type */
+  public Enrollment withCustodialIraRothEnrollmentMetadata(
+      CustodialIraRothEnrollmentMetadata custodialIraRothEnrollmentMetadata) {
+    Utils.checkNotNull(custodialIraRothEnrollmentMetadata, "custodialIraRothEnrollmentMetadata");
+    this.custodialIraRothEnrollmentMetadata = JsonNullable.of(custodialIraRothEnrollmentMetadata);
+    return this;
+  }
+
+  /** Metadata for the REGISTRATION_CUSTODIAL_IRA_ROTH enrollment type */
+  public Enrollment withCustodialIraRothEnrollmentMetadata(
+      JsonNullable<? extends CustodialIraRothEnrollmentMetadata>
+          custodialIraRothEnrollmentMetadata) {
+    Utils.checkNotNull(custodialIraRothEnrollmentMetadata, "custodialIraRothEnrollmentMetadata");
+    this.custodialIraRothEnrollmentMetadata = custodialIraRothEnrollmentMetadata;
     return this;
   }
 
@@ -1130,22 +1149,6 @@ public class Enrollment {
     return this;
   }
 
-  /** Metadata for the REGISTRATION_PARTNERSHIP enrollment type */
-  public Enrollment withPartnershipEnrollmentMetadata(
-      PartnershipEnrollmentMetadata partnershipEnrollmentMetadata) {
-    Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
-    this.partnershipEnrollmentMetadata = JsonNullable.of(partnershipEnrollmentMetadata);
-    return this;
-  }
-
-  /** Metadata for the REGISTRATION_PARTNERSHIP enrollment type */
-  public Enrollment withPartnershipEnrollmentMetadata(
-      JsonNullable<? extends PartnershipEnrollmentMetadata> partnershipEnrollmentMetadata) {
-    Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
-    this.partnershipEnrollmentMetadata = partnershipEnrollmentMetadata;
-    return this;
-  }
-
   /**
    * The ULID is associated with the approver of a given enrollment. The approver you create will
    * contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID
@@ -1291,6 +1294,8 @@ public class Enrollment {
             this.corporationEnrollmentMetadata, other.corporationEnrollmentMetadata)
         && Utils.enhancedDeepEquals(
             this.custodialEnrollmentMetadata, other.custodialEnrollmentMetadata)
+        && Utils.enhancedDeepEquals(
+            this.custodialIraRothEnrollmentMetadata, other.custodialIraRothEnrollmentMetadata)
         && Utils.enhancedDeepEquals(this.enrollmentId, other.enrollmentId)
         && Utils.enhancedDeepEquals(this.enrollmentTime, other.enrollmentTime)
         && Utils.enhancedDeepEquals(this.estateEnrollmentMetadata, other.estateEnrollmentMetadata)
@@ -1332,8 +1337,6 @@ public class Enrollment {
         && Utils.enhancedDeepEquals(
             this.ordersOptionsTradingEnrollmentMetadata,
             other.ordersOptionsTradingEnrollmentMetadata)
-        && Utils.enhancedDeepEquals(
-            this.partnershipEnrollmentMetadata, other.partnershipEnrollmentMetadata)
         && Utils.enhancedDeepEquals(this.principalApproverId, other.principalApproverId)
         && Utils.enhancedDeepEquals(
             this.soleProprietorshipEnrollmentMetadata, other.soleProprietorshipEnrollmentMetadata)
@@ -1353,6 +1356,7 @@ public class Enrollment {
         consentMethod,
         corporationEnrollmentMetadata,
         custodialEnrollmentMetadata,
+        custodialIraRothEnrollmentMetadata,
         enrollmentId,
         enrollmentTime,
         estateEnrollmentMetadata,
@@ -1375,7 +1379,6 @@ public class Enrollment {
         name,
         operatingEnrollmentMetadata,
         ordersOptionsTradingEnrollmentMetadata,
-        partnershipEnrollmentMetadata,
         principalApproverId,
         soleProprietorshipEnrollmentMetadata,
         state,
@@ -1397,6 +1400,8 @@ public class Enrollment {
         corporationEnrollmentMetadata,
         "custodialEnrollmentMetadata",
         custodialEnrollmentMetadata,
+        "custodialIraRothEnrollmentMetadata",
+        custodialIraRothEnrollmentMetadata,
         "enrollmentId",
         enrollmentId,
         "enrollmentTime",
@@ -1441,8 +1446,6 @@ public class Enrollment {
         operatingEnrollmentMetadata,
         "ordersOptionsTradingEnrollmentMetadata",
         ordersOptionsTradingEnrollmentMetadata,
-        "partnershipEnrollmentMetadata",
-        partnershipEnrollmentMetadata,
         "principalApproverId",
         principalApproverId,
         "soleProprietorshipEnrollmentMetadata",
@@ -1472,6 +1475,9 @@ public class Enrollment {
 
     private JsonNullable<? extends CustodialEnrollmentMetadata> custodialEnrollmentMetadata =
         JsonNullable.undefined();
+
+    private JsonNullable<? extends CustodialIraRothEnrollmentMetadata>
+        custodialIraRothEnrollmentMetadata = JsonNullable.undefined();
 
     private Optional<String> enrollmentId = Optional.empty();
 
@@ -1535,9 +1541,6 @@ public class Enrollment {
 
     private JsonNullable<? extends OrdersOptionsTradingEnrollmentMetadata>
         ordersOptionsTradingEnrollmentMetadata = JsonNullable.undefined();
-
-    private JsonNullable<? extends PartnershipEnrollmentMetadata> partnershipEnrollmentMetadata =
-        JsonNullable.undefined();
 
     private Optional<String> principalApproverId = Optional.empty();
 
@@ -1619,6 +1622,23 @@ public class Enrollment {
         JsonNullable<? extends CustodialEnrollmentMetadata> custodialEnrollmentMetadata) {
       Utils.checkNotNull(custodialEnrollmentMetadata, "custodialEnrollmentMetadata");
       this.custodialEnrollmentMetadata = custodialEnrollmentMetadata;
+      return this;
+    }
+
+    /** Metadata for the REGISTRATION_CUSTODIAL_IRA_ROTH enrollment type */
+    public Builder custodialIraRothEnrollmentMetadata(
+        CustodialIraRothEnrollmentMetadata custodialIraRothEnrollmentMetadata) {
+      Utils.checkNotNull(custodialIraRothEnrollmentMetadata, "custodialIraRothEnrollmentMetadata");
+      this.custodialIraRothEnrollmentMetadata = JsonNullable.of(custodialIraRothEnrollmentMetadata);
+      return this;
+    }
+
+    /** Metadata for the REGISTRATION_CUSTODIAL_IRA_ROTH enrollment type */
+    public Builder custodialIraRothEnrollmentMetadata(
+        JsonNullable<? extends CustodialIraRothEnrollmentMetadata>
+            custodialIraRothEnrollmentMetadata) {
+      Utils.checkNotNull(custodialIraRothEnrollmentMetadata, "custodialIraRothEnrollmentMetadata");
+      this.custodialIraRothEnrollmentMetadata = custodialIraRothEnrollmentMetadata;
       return this;
     }
 
@@ -2012,22 +2032,6 @@ public class Enrollment {
       return this;
     }
 
-    /** Metadata for the REGISTRATION_PARTNERSHIP enrollment type */
-    public Builder partnershipEnrollmentMetadata(
-        PartnershipEnrollmentMetadata partnershipEnrollmentMetadata) {
-      Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
-      this.partnershipEnrollmentMetadata = JsonNullable.of(partnershipEnrollmentMetadata);
-      return this;
-    }
-
-    /** Metadata for the REGISTRATION_PARTNERSHIP enrollment type */
-    public Builder partnershipEnrollmentMetadata(
-        JsonNullable<? extends PartnershipEnrollmentMetadata> partnershipEnrollmentMetadata) {
-      Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
-      this.partnershipEnrollmentMetadata = partnershipEnrollmentMetadata;
-      return this;
-    }
-
     /**
      * The ULID is associated with the approver of a given enrollment. The approver you create will
      * contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID
@@ -2164,6 +2168,7 @@ public class Enrollment {
           consentMethod,
           corporationEnrollmentMetadata,
           custodialEnrollmentMetadata,
+          custodialIraRothEnrollmentMetadata,
           enrollmentId,
           enrollmentTime,
           estateEnrollmentMetadata,
@@ -2186,7 +2191,6 @@ public class Enrollment {
           name,
           operatingEnrollmentMetadata,
           ordersOptionsTradingEnrollmentMetadata,
-          partnershipEnrollmentMetadata,
           principalApproverId,
           soleProprietorshipEnrollmentMetadata,
           state,

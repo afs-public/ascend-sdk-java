@@ -34,6 +34,7 @@ public class LegalEntityCreate {
   @JsonProperty("broker_dealer")
   private Optional<Boolean> brokerDealer;
 
+  /** The Standard Industrial Classification (SIC) of the entity. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("business_industrial_classification")
   private Optional<? extends BusinessIndustrialClassification> businessIndustrialClassification;
@@ -387,6 +388,7 @@ public class LegalEntityCreate {
     return brokerDealer;
   }
 
+  /** The Standard Industrial Classification (SIC) of the entity. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<BusinessIndustrialClassification> businessIndustrialClassification() {
@@ -673,6 +675,7 @@ public class LegalEntityCreate {
     return this;
   }
 
+  /** The Standard Industrial Classification (SIC) of the entity. */
   public LegalEntityCreate withBusinessIndustrialClassification(
       BusinessIndustrialClassification businessIndustrialClassification) {
     Utils.checkNotNull(businessIndustrialClassification, "businessIndustrialClassification");
@@ -680,6 +683,7 @@ public class LegalEntityCreate {
     return this;
   }
 
+  /** The Standard Industrial Classification (SIC) of the entity. */
   public LegalEntityCreate withBusinessIndustrialClassification(
       Optional<? extends BusinessIndustrialClassification> businessIndustrialClassification) {
     Utils.checkNotNull(businessIndustrialClassification, "businessIndustrialClassification");
@@ -1364,6 +1368,7 @@ public class LegalEntityCreate {
       return this;
     }
 
+    /** The Standard Industrial Classification (SIC) of the entity. */
     public Builder businessIndustrialClassification(
         BusinessIndustrialClassification businessIndustrialClassification) {
       Utils.checkNotNull(businessIndustrialClassification, "businessIndustrialClassification");
@@ -1371,6 +1376,7 @@ public class LegalEntityCreate {
       return this;
     }
 
+    /** The Standard Industrial Classification (SIC) of the entity. */
     public Builder businessIndustrialClassification(
         Optional<? extends BusinessIndustrialClassification> businessIndustrialClassification) {
       Utils.checkNotNull(businessIndustrialClassification, "businessIndustrialClassification");
