@@ -18,6 +18,7 @@ import com.apexfintechsolutions.ascendsdk.models.components.ReplacePartyRequestC
 import com.apexfintechsolutions.ascendsdk.models.components.RestrictionCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.TrustedContactCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.TrustedContactUpdate;
+import com.apexfintechsolutions.ascendsdk.models.components.UpdateAccountGroupRequestUpdate;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsAddPartyRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsAddPartyRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsAddPartyResponse;
@@ -63,6 +64,9 @@ import com.apexfintechsolutions.ascendsdk.models.operations.AccountsRemovePartyR
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsReplacePartyRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsReplacePartyRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsReplacePartyResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountsUpdateAccountGroupRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountsUpdateAccountGroupRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountsUpdateAccountGroupResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsUpdateAccountRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsUpdateAccountRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountsUpdateAccountResponse;
@@ -91,6 +95,7 @@ import com.apexfintechsolutions.ascendsdk.operations.AccountsListNotes;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsRemoveParty;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsReplaceParty;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsUpdateAccount;
+import com.apexfintechsolutions.ascendsdk.operations.AccountsUpdateAccountGroup;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsUpdateInterestedParty;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsUpdateParty;
 import com.apexfintechsolutions.ascendsdk.operations.AccountsUpdateTrustedContact;
@@ -211,6 +216,59 @@ public class AccountManagement {
             .build();
     RequestOperation<AccountsUpdateAccountRequest, AccountsUpdateAccountResponse> operation =
         new AccountsUpdateAccount.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Update Account Group
+   *
+   * <p>Updates an Account Group for an Account
+   *
+   * @return The call builder
+   */
+  public AccountsUpdateAccountGroupRequestBuilder updateAccountGroup() {
+    return new AccountsUpdateAccountGroupRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * Update Account Group
+   *
+   * <p>Updates an Account Group for an Account
+   *
+   * @param accountId The account id.
+   * @param updateAccountGroupRequestUpdate The request for updating account group an Account.
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsUpdateAccountGroupResponse updateAccountGroup(
+      String accountId, UpdateAccountGroupRequestUpdate updateAccountGroupRequestUpdate)
+      throws Exception {
+    return updateAccountGroup(accountId, updateAccountGroupRequestUpdate, Optional.empty());
+  }
+
+  /**
+   * Update Account Group
+   *
+   * <p>Updates an Account Group for an Account
+   *
+   * @param accountId The account id.
+   * @param updateAccountGroupRequestUpdate The request for updating account group an Account.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountsUpdateAccountGroupResponse updateAccountGroup(
+      String accountId,
+      UpdateAccountGroupRequestUpdate updateAccountGroupRequestUpdate,
+      Optional<Options> options)
+      throws Exception {
+    AccountsUpdateAccountGroupRequest request =
+        AccountsUpdateAccountGroupRequest.builder()
+            .accountId(accountId)
+            .updateAccountGroupRequestUpdate(updateAccountGroupRequestUpdate)
+            .build();
+    RequestOperation<AccountsUpdateAccountGroupRequest, AccountsUpdateAccountGroupResponse>
+        operation = new AccountsUpdateAccountGroup.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 

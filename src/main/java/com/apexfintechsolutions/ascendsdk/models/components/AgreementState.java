@@ -40,8 +40,7 @@ import java.util.Optional;
 /**
  * AgreementState
  *
- * <p>The status of an agreement which blocks an enrollment; `REQUIRED` if not yet received, or
- * `AFFIRMED` if acknowledgement has been received by AFS
+ * <p>The lifecycle state of an agreement associated with an enrollment.
  */
 @JsonDeserialize(using = AgreementState._Deserializer.class)
 @JsonSerialize(using = AgreementState._Serializer.class)
@@ -52,6 +51,8 @@ public class AgreementState {
   public static final AgreementState REQUIRED = new AgreementState("REQUIRED");
   public static final AgreementState AFFIRMED = new AgreementState("AFFIRMED");
   public static final AgreementState VOIDED = new AgreementState("VOIDED");
+  public static final AgreementState AFFIRMATION_OPTIONAL =
+      new AgreementState("AFFIRMATION_OPTIONAL");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -123,6 +124,7 @@ public class AgreementState {
     map.put("REQUIRED", REQUIRED);
     map.put("AFFIRMED", AFFIRMED);
     map.put("VOIDED", VOIDED);
+    map.put("AFFIRMATION_OPTIONAL", AFFIRMATION_OPTIONAL);
     return map;
   }
 
@@ -132,6 +134,7 @@ public class AgreementState {
     map.put("REQUIRED", AgreementStateEnum.REQUIRED);
     map.put("AFFIRMED", AgreementStateEnum.AFFIRMED);
     map.put("VOIDED", AgreementStateEnum.VOIDED);
+    map.put("AFFIRMATION_OPTIONAL", AgreementStateEnum.AFFIRMATION_OPTIONAL);
     return map;
   }
 
@@ -170,6 +173,7 @@ public class AgreementState {
     REQUIRED("REQUIRED"),
     AFFIRMED("AFFIRMED"),
     VOIDED("VOIDED"),
+    AFFIRMATION_OPTIONAL("AFFIRMATION_OPTIONAL"),
     ;
 
     private final String value;

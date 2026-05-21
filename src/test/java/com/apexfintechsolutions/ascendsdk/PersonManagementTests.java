@@ -47,6 +47,7 @@ public class PersonManagementTests {
             .listLegalNaturalPersons()
             .pageSize(25)
             .pageToken("")
+            .orderBy("given_name desc")
             .filter("")
             .call();
     assertEquals(200, res.statusCode());

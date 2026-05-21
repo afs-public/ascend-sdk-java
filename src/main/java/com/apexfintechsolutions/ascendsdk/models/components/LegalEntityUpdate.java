@@ -34,6 +34,7 @@ public class LegalEntityUpdate {
   @JsonProperty("broker_dealer")
   private Optional<Boolean> brokerDealer;
 
+  /** The Standard Industrial Classification (SIC) of the entity. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("business_industrial_classification")
   private Optional<? extends LegalEntityUpdateBusinessIndustrialClassification>
@@ -389,6 +390,7 @@ public class LegalEntityUpdate {
     return brokerDealer;
   }
 
+  /** The Standard Industrial Classification (SIC) of the entity. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<LegalEntityUpdateBusinessIndustrialClassification>
@@ -682,6 +684,7 @@ public class LegalEntityUpdate {
     return this;
   }
 
+  /** The Standard Industrial Classification (SIC) of the entity. */
   public LegalEntityUpdate withBusinessIndustrialClassification(
       LegalEntityUpdateBusinessIndustrialClassification businessIndustrialClassification) {
     Utils.checkNotNull(businessIndustrialClassification, "businessIndustrialClassification");
@@ -689,6 +692,7 @@ public class LegalEntityUpdate {
     return this;
   }
 
+  /** The Standard Industrial Classification (SIC) of the entity. */
   public LegalEntityUpdate withBusinessIndustrialClassification(
       Optional<? extends LegalEntityUpdateBusinessIndustrialClassification>
           businessIndustrialClassification) {
@@ -1470,6 +1474,7 @@ public class LegalEntityUpdate {
       return this;
     }
 
+    /** The Standard Industrial Classification (SIC) of the entity. */
     public Builder businessIndustrialClassification(
         LegalEntityUpdateBusinessIndustrialClassification businessIndustrialClassification) {
       Utils.checkNotNull(businessIndustrialClassification, "businessIndustrialClassification");
@@ -1477,6 +1482,7 @@ public class LegalEntityUpdate {
       return this;
     }
 
+    /** The Standard Industrial Classification (SIC) of the entity. */
     public Builder businessIndustrialClassification(
         Optional<? extends LegalEntityUpdateBusinessIndustrialClassification>
             businessIndustrialClassification) {

@@ -27,6 +27,7 @@ public class EnrollmentCreate {
   @JsonProperty("consent_method")
   private Optional<? extends EnrollmentCreateConsentMethod> consentMethod;
 
+  /** Enrollment metadata for corporation accounts. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("corporation_enrollment_metadata")
   private Optional<? extends CorporationEnrollmentMetadataCreate> corporationEnrollmentMetadata;
@@ -36,11 +37,18 @@ public class EnrollmentCreate {
   @JsonProperty("custodial_enrollment_metadata")
   private Optional<? extends CustodialEnrollmentMetadataCreate> custodialEnrollmentMetadata;
 
+  /** Enrollment metadata for the REGISTRATION_CUSTODIAL_IRA_ROTH enrollment type */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("custodial_ira_roth_enrollment_metadata")
+  private Optional<? extends CustodialIRARothEnrollmentMetadataCreate>
+      custodialIraRothEnrollmentMetadata;
+
   /** Enrollment metadata for estate enrollments */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("estate_enrollment_metadata")
   private Optional<? extends EstateEnrollmentMetadataCreate> estateEnrollmentMetadata;
 
+  /** Enrollment metadata for foreign individual accounts. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("foreign_individual_account_enrollment_metadata")
   private Optional<? extends ForeignIndividualAccountEnrollmentMetadataCreate>
@@ -123,6 +131,7 @@ public class EnrollmentCreate {
   private Optional<? extends JointWithRightsOfSurvivorshipEnrollmentMetadataCreate>
       jointWithRightsOfSurvivorshipEnrollmentMetadata;
 
+  /** Enrollment metadata for LLC accounts. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("llc_enrollment_metadata")
   private Optional<? extends LLCEnrollmentMetadataCreate> llcEnrollmentMetadata;
@@ -138,11 +147,6 @@ public class EnrollmentCreate {
   private Optional<? extends OrdersOptionsTradingEnrollmentMetadataCreate>
       ordersOptionsTradingEnrollmentMetadata;
 
-  /** Enrollment metadata for the PARTNERSHIP enrollment type */
-  @JsonInclude(Include.NON_ABSENT)
-  @JsonProperty("partnership_enrollment_metadata")
-  private Optional<? extends PartnershipEnrollmentMetadataCreate> partnershipEnrollmentMetadata;
-
   /**
    * The ULID is associated with the approver of a given enrollment. The approver you create will
    * contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID
@@ -157,6 +161,7 @@ public class EnrollmentCreate {
   private Optional<? extends SoleProprietorshipEnrollmentMetadataCreate>
       soleProprietorshipEnrollmentMetadata;
 
+  /** Enrollment metadata for trust accounts. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("trust_enrollment_metadata")
   private Optional<? extends TrustEnrollmentMetadataCreate> trustEnrollmentMetadata;
@@ -181,6 +186,9 @@ public class EnrollmentCreate {
           Optional<? extends CorporationEnrollmentMetadataCreate> corporationEnrollmentMetadata,
       @JsonProperty("custodial_enrollment_metadata")
           Optional<? extends CustodialEnrollmentMetadataCreate> custodialEnrollmentMetadata,
+      @JsonProperty("custodial_ira_roth_enrollment_metadata")
+          Optional<? extends CustodialIRARothEnrollmentMetadataCreate>
+              custodialIraRothEnrollmentMetadata,
       @JsonProperty("estate_enrollment_metadata")
           Optional<? extends EstateEnrollmentMetadataCreate> estateEnrollmentMetadata,
       @JsonProperty("foreign_individual_account_enrollment_metadata")
@@ -228,8 +236,6 @@ public class EnrollmentCreate {
       @JsonProperty("orders_options_trading_enrollment_metadata")
           Optional<? extends OrdersOptionsTradingEnrollmentMetadataCreate>
               ordersOptionsTradingEnrollmentMetadata,
-      @JsonProperty("partnership_enrollment_metadata")
-          Optional<? extends PartnershipEnrollmentMetadataCreate> partnershipEnrollmentMetadata,
       @JsonProperty("principal_approver_id") String principalApproverId,
       @JsonProperty("sole_proprietorship_enrollment_metadata")
           Optional<? extends SoleProprietorshipEnrollmentMetadataCreate>
@@ -244,6 +250,7 @@ public class EnrollmentCreate {
     Utils.checkNotNull(consentMethod, "consentMethod");
     Utils.checkNotNull(corporationEnrollmentMetadata, "corporationEnrollmentMetadata");
     Utils.checkNotNull(custodialEnrollmentMetadata, "custodialEnrollmentMetadata");
+    Utils.checkNotNull(custodialIraRothEnrollmentMetadata, "custodialIraRothEnrollmentMetadata");
     Utils.checkNotNull(estateEnrollmentMetadata, "estateEnrollmentMetadata");
     Utils.checkNotNull(
         foreignIndividualAccountEnrollmentMetadata, "foreignIndividualAccountEnrollmentMetadata");
@@ -271,7 +278,6 @@ public class EnrollmentCreate {
     Utils.checkNotNull(operatingEnrollmentMetadata, "operatingEnrollmentMetadata");
     Utils.checkNotNull(
         ordersOptionsTradingEnrollmentMetadata, "ordersOptionsTradingEnrollmentMetadata");
-    Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
     Utils.checkNotNull(principalApproverId, "principalApproverId");
     Utils.checkNotNull(
         soleProprietorshipEnrollmentMetadata, "soleProprietorshipEnrollmentMetadata");
@@ -283,6 +289,7 @@ public class EnrollmentCreate {
     this.consentMethod = consentMethod;
     this.corporationEnrollmentMetadata = corporationEnrollmentMetadata;
     this.custodialEnrollmentMetadata = custodialEnrollmentMetadata;
+    this.custodialIraRothEnrollmentMetadata = custodialIraRothEnrollmentMetadata;
     this.estateEnrollmentMetadata = estateEnrollmentMetadata;
     this.foreignIndividualAccountEnrollmentMetadata = foreignIndividualAccountEnrollmentMetadata;
     this.foreignJointAccountEnrollmentMetadata = foreignJointAccountEnrollmentMetadata;
@@ -303,7 +310,6 @@ public class EnrollmentCreate {
     this.llcEnrollmentMetadata = llcEnrollmentMetadata;
     this.operatingEnrollmentMetadata = operatingEnrollmentMetadata;
     this.ordersOptionsTradingEnrollmentMetadata = ordersOptionsTradingEnrollmentMetadata;
-    this.partnershipEnrollmentMetadata = partnershipEnrollmentMetadata;
     this.principalApproverId = principalApproverId;
     this.soleProprietorshipEnrollmentMetadata = soleProprietorshipEnrollmentMetadata;
     this.trustEnrollmentMetadata = trustEnrollmentMetadata;
@@ -358,6 +364,7 @@ public class EnrollmentCreate {
     return (Optional<EnrollmentCreateConsentMethod>) consentMethod;
   }
 
+  /** Enrollment metadata for corporation accounts. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<CorporationEnrollmentMetadataCreate> corporationEnrollmentMetadata() {
@@ -371,6 +378,13 @@ public class EnrollmentCreate {
     return (Optional<CustodialEnrollmentMetadataCreate>) custodialEnrollmentMetadata;
   }
 
+  /** Enrollment metadata for the REGISTRATION_CUSTODIAL_IRA_ROTH enrollment type */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<CustodialIRARothEnrollmentMetadataCreate> custodialIraRothEnrollmentMetadata() {
+    return (Optional<CustodialIRARothEnrollmentMetadataCreate>) custodialIraRothEnrollmentMetadata;
+  }
+
   /** Enrollment metadata for estate enrollments */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -378,6 +392,7 @@ public class EnrollmentCreate {
     return (Optional<EstateEnrollmentMetadataCreate>) estateEnrollmentMetadata;
   }
 
+  /** Enrollment metadata for foreign individual accounts. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<ForeignIndividualAccountEnrollmentMetadataCreate>
@@ -494,6 +509,7 @@ public class EnrollmentCreate {
         jointWithRightsOfSurvivorshipEnrollmentMetadata;
   }
 
+  /** Enrollment metadata for LLC accounts. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<LLCEnrollmentMetadataCreate> llcEnrollmentMetadata() {
@@ -516,13 +532,6 @@ public class EnrollmentCreate {
         ordersOptionsTradingEnrollmentMetadata;
   }
 
-  /** Enrollment metadata for the PARTNERSHIP enrollment type */
-  @SuppressWarnings("unchecked")
-  @JsonIgnore
-  public Optional<PartnershipEnrollmentMetadataCreate> partnershipEnrollmentMetadata() {
-    return (Optional<PartnershipEnrollmentMetadataCreate>) partnershipEnrollmentMetadata;
-  }
-
   /**
    * The ULID is associated with the approver of a given enrollment. The approver you create will
    * contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID
@@ -542,6 +551,7 @@ public class EnrollmentCreate {
         soleProprietorshipEnrollmentMetadata;
   }
 
+  /** Enrollment metadata for trust accounts. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<TrustEnrollmentMetadataCreate> trustEnrollmentMetadata() {
@@ -598,6 +608,7 @@ public class EnrollmentCreate {
     return this;
   }
 
+  /** Enrollment metadata for corporation accounts. */
   public EnrollmentCreate withCorporationEnrollmentMetadata(
       CorporationEnrollmentMetadataCreate corporationEnrollmentMetadata) {
     Utils.checkNotNull(corporationEnrollmentMetadata, "corporationEnrollmentMetadata");
@@ -605,6 +616,7 @@ public class EnrollmentCreate {
     return this;
   }
 
+  /** Enrollment metadata for corporation accounts. */
   public EnrollmentCreate withCorporationEnrollmentMetadata(
       Optional<? extends CorporationEnrollmentMetadataCreate> corporationEnrollmentMetadata) {
     Utils.checkNotNull(corporationEnrollmentMetadata, "corporationEnrollmentMetadata");
@@ -628,6 +640,24 @@ public class EnrollmentCreate {
     return this;
   }
 
+  /** Enrollment metadata for the REGISTRATION_CUSTODIAL_IRA_ROTH enrollment type */
+  public EnrollmentCreate withCustodialIraRothEnrollmentMetadata(
+      CustodialIRARothEnrollmentMetadataCreate custodialIraRothEnrollmentMetadata) {
+    Utils.checkNotNull(custodialIraRothEnrollmentMetadata, "custodialIraRothEnrollmentMetadata");
+    this.custodialIraRothEnrollmentMetadata =
+        Optional.ofNullable(custodialIraRothEnrollmentMetadata);
+    return this;
+  }
+
+  /** Enrollment metadata for the REGISTRATION_CUSTODIAL_IRA_ROTH enrollment type */
+  public EnrollmentCreate withCustodialIraRothEnrollmentMetadata(
+      Optional<? extends CustodialIRARothEnrollmentMetadataCreate>
+          custodialIraRothEnrollmentMetadata) {
+    Utils.checkNotNull(custodialIraRothEnrollmentMetadata, "custodialIraRothEnrollmentMetadata");
+    this.custodialIraRothEnrollmentMetadata = custodialIraRothEnrollmentMetadata;
+    return this;
+  }
+
   /** Enrollment metadata for estate enrollments */
   public EnrollmentCreate withEstateEnrollmentMetadata(
       EstateEnrollmentMetadataCreate estateEnrollmentMetadata) {
@@ -644,6 +674,7 @@ public class EnrollmentCreate {
     return this;
   }
 
+  /** Enrollment metadata for foreign individual accounts. */
   public EnrollmentCreate withForeignIndividualAccountEnrollmentMetadata(
       ForeignIndividualAccountEnrollmentMetadataCreate foreignIndividualAccountEnrollmentMetadata) {
     Utils.checkNotNull(
@@ -653,6 +684,7 @@ public class EnrollmentCreate {
     return this;
   }
 
+  /** Enrollment metadata for foreign individual accounts. */
   public EnrollmentCreate withForeignIndividualAccountEnrollmentMetadata(
       Optional<? extends ForeignIndividualAccountEnrollmentMetadataCreate>
           foreignIndividualAccountEnrollmentMetadata) {
@@ -910,6 +942,7 @@ public class EnrollmentCreate {
     return this;
   }
 
+  /** Enrollment metadata for LLC accounts. */
   public EnrollmentCreate withLlcEnrollmentMetadata(
       LLCEnrollmentMetadataCreate llcEnrollmentMetadata) {
     Utils.checkNotNull(llcEnrollmentMetadata, "llcEnrollmentMetadata");
@@ -917,6 +950,7 @@ public class EnrollmentCreate {
     return this;
   }
 
+  /** Enrollment metadata for LLC accounts. */
   public EnrollmentCreate withLlcEnrollmentMetadata(
       Optional<? extends LLCEnrollmentMetadataCreate> llcEnrollmentMetadata) {
     Utils.checkNotNull(llcEnrollmentMetadata, "llcEnrollmentMetadata");
@@ -960,22 +994,6 @@ public class EnrollmentCreate {
     return this;
   }
 
-  /** Enrollment metadata for the PARTNERSHIP enrollment type */
-  public EnrollmentCreate withPartnershipEnrollmentMetadata(
-      PartnershipEnrollmentMetadataCreate partnershipEnrollmentMetadata) {
-    Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
-    this.partnershipEnrollmentMetadata = Optional.ofNullable(partnershipEnrollmentMetadata);
-    return this;
-  }
-
-  /** Enrollment metadata for the PARTNERSHIP enrollment type */
-  public EnrollmentCreate withPartnershipEnrollmentMetadata(
-      Optional<? extends PartnershipEnrollmentMetadataCreate> partnershipEnrollmentMetadata) {
-    Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
-    this.partnershipEnrollmentMetadata = partnershipEnrollmentMetadata;
-    return this;
-  }
-
   /**
    * The ULID is associated with the approver of a given enrollment. The approver you create will
    * contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID
@@ -1007,6 +1025,7 @@ public class EnrollmentCreate {
     return this;
   }
 
+  /** Enrollment metadata for trust accounts. */
   public EnrollmentCreate withTrustEnrollmentMetadata(
       TrustEnrollmentMetadataCreate trustEnrollmentMetadata) {
     Utils.checkNotNull(trustEnrollmentMetadata, "trustEnrollmentMetadata");
@@ -1014,6 +1033,7 @@ public class EnrollmentCreate {
     return this;
   }
 
+  /** Enrollment metadata for trust accounts. */
   public EnrollmentCreate withTrustEnrollmentMetadata(
       Optional<? extends TrustEnrollmentMetadataCreate> trustEnrollmentMetadata) {
     Utils.checkNotNull(trustEnrollmentMetadata, "trustEnrollmentMetadata");
@@ -1064,6 +1084,8 @@ public class EnrollmentCreate {
             this.corporationEnrollmentMetadata, other.corporationEnrollmentMetadata)
         && Utils.enhancedDeepEquals(
             this.custodialEnrollmentMetadata, other.custodialEnrollmentMetadata)
+        && Utils.enhancedDeepEquals(
+            this.custodialIraRothEnrollmentMetadata, other.custodialIraRothEnrollmentMetadata)
         && Utils.enhancedDeepEquals(this.estateEnrollmentMetadata, other.estateEnrollmentMetadata)
         && Utils.enhancedDeepEquals(
             this.foreignIndividualAccountEnrollmentMetadata,
@@ -1102,8 +1124,6 @@ public class EnrollmentCreate {
         && Utils.enhancedDeepEquals(
             this.ordersOptionsTradingEnrollmentMetadata,
             other.ordersOptionsTradingEnrollmentMetadata)
-        && Utils.enhancedDeepEquals(
-            this.partnershipEnrollmentMetadata, other.partnershipEnrollmentMetadata)
         && Utils.enhancedDeepEquals(this.principalApproverId, other.principalApproverId)
         && Utils.enhancedDeepEquals(
             this.soleProprietorshipEnrollmentMetadata, other.soleProprietorshipEnrollmentMetadata)
@@ -1121,6 +1141,7 @@ public class EnrollmentCreate {
         consentMethod,
         corporationEnrollmentMetadata,
         custodialEnrollmentMetadata,
+        custodialIraRothEnrollmentMetadata,
         estateEnrollmentMetadata,
         foreignIndividualAccountEnrollmentMetadata,
         foreignJointAccountEnrollmentMetadata,
@@ -1140,7 +1161,6 @@ public class EnrollmentCreate {
         llcEnrollmentMetadata,
         operatingEnrollmentMetadata,
         ordersOptionsTradingEnrollmentMetadata,
-        partnershipEnrollmentMetadata,
         principalApproverId,
         soleProprietorshipEnrollmentMetadata,
         trustEnrollmentMetadata,
@@ -1160,6 +1180,8 @@ public class EnrollmentCreate {
         corporationEnrollmentMetadata,
         "custodialEnrollmentMetadata",
         custodialEnrollmentMetadata,
+        "custodialIraRothEnrollmentMetadata",
+        custodialIraRothEnrollmentMetadata,
         "estateEnrollmentMetadata",
         estateEnrollmentMetadata,
         "foreignIndividualAccountEnrollmentMetadata",
@@ -1198,8 +1220,6 @@ public class EnrollmentCreate {
         operatingEnrollmentMetadata,
         "ordersOptionsTradingEnrollmentMetadata",
         ordersOptionsTradingEnrollmentMetadata,
-        "partnershipEnrollmentMetadata",
-        partnershipEnrollmentMetadata,
         "principalApproverId",
         principalApproverId,
         "soleProprietorshipEnrollmentMetadata",
@@ -1225,6 +1245,9 @@ public class EnrollmentCreate {
 
     private Optional<? extends CustodialEnrollmentMetadataCreate> custodialEnrollmentMetadata =
         Optional.empty();
+
+    private Optional<? extends CustodialIRARothEnrollmentMetadataCreate>
+        custodialIraRothEnrollmentMetadata = Optional.empty();
 
     private Optional<? extends EstateEnrollmentMetadataCreate> estateEnrollmentMetadata =
         Optional.empty();
@@ -1283,9 +1306,6 @@ public class EnrollmentCreate {
     private Optional<? extends OrdersOptionsTradingEnrollmentMetadataCreate>
         ordersOptionsTradingEnrollmentMetadata = Optional.empty();
 
-    private Optional<? extends PartnershipEnrollmentMetadataCreate> partnershipEnrollmentMetadata =
-        Optional.empty();
-
     private String principalApproverId;
 
     private Optional<? extends SoleProprietorshipEnrollmentMetadataCreate>
@@ -1333,6 +1353,7 @@ public class EnrollmentCreate {
       return this;
     }
 
+    /** Enrollment metadata for corporation accounts. */
     public Builder corporationEnrollmentMetadata(
         CorporationEnrollmentMetadataCreate corporationEnrollmentMetadata) {
       Utils.checkNotNull(corporationEnrollmentMetadata, "corporationEnrollmentMetadata");
@@ -1340,6 +1361,7 @@ public class EnrollmentCreate {
       return this;
     }
 
+    /** Enrollment metadata for corporation accounts. */
     public Builder corporationEnrollmentMetadata(
         Optional<? extends CorporationEnrollmentMetadataCreate> corporationEnrollmentMetadata) {
       Utils.checkNotNull(corporationEnrollmentMetadata, "corporationEnrollmentMetadata");
@@ -1363,6 +1385,24 @@ public class EnrollmentCreate {
       return this;
     }
 
+    /** Enrollment metadata for the REGISTRATION_CUSTODIAL_IRA_ROTH enrollment type */
+    public Builder custodialIraRothEnrollmentMetadata(
+        CustodialIRARothEnrollmentMetadataCreate custodialIraRothEnrollmentMetadata) {
+      Utils.checkNotNull(custodialIraRothEnrollmentMetadata, "custodialIraRothEnrollmentMetadata");
+      this.custodialIraRothEnrollmentMetadata =
+          Optional.ofNullable(custodialIraRothEnrollmentMetadata);
+      return this;
+    }
+
+    /** Enrollment metadata for the REGISTRATION_CUSTODIAL_IRA_ROTH enrollment type */
+    public Builder custodialIraRothEnrollmentMetadata(
+        Optional<? extends CustodialIRARothEnrollmentMetadataCreate>
+            custodialIraRothEnrollmentMetadata) {
+      Utils.checkNotNull(custodialIraRothEnrollmentMetadata, "custodialIraRothEnrollmentMetadata");
+      this.custodialIraRothEnrollmentMetadata = custodialIraRothEnrollmentMetadata;
+      return this;
+    }
+
     /** Enrollment metadata for estate enrollments */
     public Builder estateEnrollmentMetadata(
         EstateEnrollmentMetadataCreate estateEnrollmentMetadata) {
@@ -1379,6 +1419,7 @@ public class EnrollmentCreate {
       return this;
     }
 
+    /** Enrollment metadata for foreign individual accounts. */
     public Builder foreignIndividualAccountEnrollmentMetadata(
         ForeignIndividualAccountEnrollmentMetadataCreate
             foreignIndividualAccountEnrollmentMetadata) {
@@ -1389,6 +1430,7 @@ public class EnrollmentCreate {
       return this;
     }
 
+    /** Enrollment metadata for foreign individual accounts. */
     public Builder foreignIndividualAccountEnrollmentMetadata(
         Optional<? extends ForeignIndividualAccountEnrollmentMetadataCreate>
             foreignIndividualAccountEnrollmentMetadata) {
@@ -1647,12 +1689,14 @@ public class EnrollmentCreate {
       return this;
     }
 
+    /** Enrollment metadata for LLC accounts. */
     public Builder llcEnrollmentMetadata(LLCEnrollmentMetadataCreate llcEnrollmentMetadata) {
       Utils.checkNotNull(llcEnrollmentMetadata, "llcEnrollmentMetadata");
       this.llcEnrollmentMetadata = Optional.ofNullable(llcEnrollmentMetadata);
       return this;
     }
 
+    /** Enrollment metadata for LLC accounts. */
     public Builder llcEnrollmentMetadata(
         Optional<? extends LLCEnrollmentMetadataCreate> llcEnrollmentMetadata) {
       Utils.checkNotNull(llcEnrollmentMetadata, "llcEnrollmentMetadata");
@@ -1696,22 +1740,6 @@ public class EnrollmentCreate {
       return this;
     }
 
-    /** Enrollment metadata for the PARTNERSHIP enrollment type */
-    public Builder partnershipEnrollmentMetadata(
-        PartnershipEnrollmentMetadataCreate partnershipEnrollmentMetadata) {
-      Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
-      this.partnershipEnrollmentMetadata = Optional.ofNullable(partnershipEnrollmentMetadata);
-      return this;
-    }
-
-    /** Enrollment metadata for the PARTNERSHIP enrollment type */
-    public Builder partnershipEnrollmentMetadata(
-        Optional<? extends PartnershipEnrollmentMetadataCreate> partnershipEnrollmentMetadata) {
-      Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
-      this.partnershipEnrollmentMetadata = partnershipEnrollmentMetadata;
-      return this;
-    }
-
     /**
      * The ULID is associated with the approver of a given enrollment. The approver you create will
      * contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID
@@ -1743,12 +1771,14 @@ public class EnrollmentCreate {
       return this;
     }
 
+    /** Enrollment metadata for trust accounts. */
     public Builder trustEnrollmentMetadata(TrustEnrollmentMetadataCreate trustEnrollmentMetadata) {
       Utils.checkNotNull(trustEnrollmentMetadata, "trustEnrollmentMetadata");
       this.trustEnrollmentMetadata = Optional.ofNullable(trustEnrollmentMetadata);
       return this;
     }
 
+    /** Enrollment metadata for trust accounts. */
     public Builder trustEnrollmentMetadata(
         Optional<? extends TrustEnrollmentMetadataCreate> trustEnrollmentMetadata) {
       Utils.checkNotNull(trustEnrollmentMetadata, "trustEnrollmentMetadata");
@@ -1790,6 +1820,7 @@ public class EnrollmentCreate {
           consentMethod,
           corporationEnrollmentMetadata,
           custodialEnrollmentMetadata,
+          custodialIraRothEnrollmentMetadata,
           estateEnrollmentMetadata,
           foreignIndividualAccountEnrollmentMetadata,
           foreignJointAccountEnrollmentMetadata,
@@ -1809,7 +1840,6 @@ public class EnrollmentCreate {
           llcEnrollmentMetadata,
           operatingEnrollmentMetadata,
           ordersOptionsTradingEnrollmentMetadata,
-          partnershipEnrollmentMetadata,
           principalApproverId,
           soleProprietorshipEnrollmentMetadata,
           trustEnrollmentMetadata,

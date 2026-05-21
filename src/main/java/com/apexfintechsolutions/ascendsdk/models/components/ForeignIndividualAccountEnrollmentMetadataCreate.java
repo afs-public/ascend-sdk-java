@@ -11,6 +11,11 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Optional;
 
+/**
+ * ForeignIndividualAccountEnrollmentMetadataCreate
+ *
+ * <p>Enrollment metadata for foreign individual accounts.
+ */
 public class ForeignIndividualAccountEnrollmentMetadataCreate {
   /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */
   @JsonInclude(Include.NON_ABSENT)

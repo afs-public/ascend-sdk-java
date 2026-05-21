@@ -37,6 +37,11 @@ import java.util.Optional;
  * use of an instance in a switch expression but you can use the {@code asEnum()} method (after
  * dealing with the `Optional` appropriately).
  */
+/**
+ * BusinessIndustrialClassification
+ *
+ * <p>The Standard Industrial Classification (SIC) of the entity.
+ */
 @JsonDeserialize(using = BusinessIndustrialClassification._Deserializer.class)
 @JsonSerialize(using = BusinessIndustrialClassification._Serializer.class)
 public class BusinessIndustrialClassification {

@@ -67,6 +67,22 @@ public class TestAccountManagement {
   }
 
   @Test
+  public void test_account_management_accounts_update_account_group_update_account_group1()
+      throws Exception {
+    var update =
+        new UpdateAccountGroupRequestUpdate().withAccountGroupId(SdkUtil.getAccountGroupId());
+    var res =
+        sdk.accountManagement()
+            .updateAccountGroup()
+            .accountId(account.accountId().get())
+            .updateAccountGroupRequestUpdate(update)
+            .call();
+    Assertions.assertNotNull(res);
+    Assertions.assertEquals(res.statusCode(), 200);
+    Assertions.assertTrue(res.account().isPresent());
+  }
+
+  @Test
   @Order(1)
   public void test_account_management_accounts_add_party_add_party1() throws Exception {
     Assertions.assertNotNull(addPartyId);

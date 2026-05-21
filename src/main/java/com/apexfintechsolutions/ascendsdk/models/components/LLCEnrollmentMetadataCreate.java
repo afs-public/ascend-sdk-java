@@ -11,6 +11,11 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Optional;
 
+/**
+ * LLCEnrollmentMetadataCreate
+ *
+ * <p>Enrollment metadata for LLC accounts.
+ */
 public class LLCEnrollmentMetadataCreate {
   /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */
   @JsonInclude(Include.NON_ABSENT)

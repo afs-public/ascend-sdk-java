@@ -54,6 +54,8 @@ public class RegistrationType {
       new RegistrationType("ESTATE_REGISTRATION");
   public static final RegistrationType TRADITIONAL_IRA_REGISTRATION =
       new RegistrationType("TRADITIONAL_IRA_REGISTRATION");
+  public static final RegistrationType SIMPLE_IRA_REGISTRATION =
+      new RegistrationType("SIMPLE_IRA_REGISTRATION");
   public static final RegistrationType SEP_IRA_REGISTRATION =
       new RegistrationType("SEP_IRA_REGISTRATION");
   public static final RegistrationType ROTH_IRA_REGISTRATION =
@@ -87,6 +89,8 @@ public class RegistrationType {
       new RegistrationType("CUSTODIAL_REGISTRATION");
   public static final RegistrationType FUTURES_REGISTRATION =
       new RegistrationType("FUTURES_REGISTRATION");
+  public static final RegistrationType CUSTODIAL_ROTH_IRA_REGISTRATION =
+      new RegistrationType("CUSTODIAL_ROTH_IRA_REGISTRATION");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -158,6 +162,7 @@ public class RegistrationType {
     map.put("INDIVIDUAL_REGISTRATION", INDIVIDUAL_REGISTRATION);
     map.put("ESTATE_REGISTRATION", ESTATE_REGISTRATION);
     map.put("TRADITIONAL_IRA_REGISTRATION", TRADITIONAL_IRA_REGISTRATION);
+    map.put("SIMPLE_IRA_REGISTRATION", SIMPLE_IRA_REGISTRATION);
     map.put("SEP_IRA_REGISTRATION", SEP_IRA_REGISTRATION);
     map.put("ROTH_IRA_REGISTRATION", ROTH_IRA_REGISTRATION);
     map.put("ROLLOVER_IRA_REGISTRATION", ROLLOVER_IRA_REGISTRATION);
@@ -177,6 +182,7 @@ public class RegistrationType {
     map.put("FOREIGN_INDIVIDUAL_REGISTRATION", FOREIGN_INDIVIDUAL_REGISTRATION);
     map.put("CUSTODIAL_REGISTRATION", CUSTODIAL_REGISTRATION);
     map.put("FUTURES_REGISTRATION", FUTURES_REGISTRATION);
+    map.put("CUSTODIAL_ROTH_IRA_REGISTRATION", CUSTODIAL_ROTH_IRA_REGISTRATION);
     return map;
   }
 
@@ -186,6 +192,7 @@ public class RegistrationType {
     map.put("INDIVIDUAL_REGISTRATION", RegistrationTypeEnum.INDIVIDUAL_REGISTRATION);
     map.put("ESTATE_REGISTRATION", RegistrationTypeEnum.ESTATE_REGISTRATION);
     map.put("TRADITIONAL_IRA_REGISTRATION", RegistrationTypeEnum.TRADITIONAL_IRA_REGISTRATION);
+    map.put("SIMPLE_IRA_REGISTRATION", RegistrationTypeEnum.SIMPLE_IRA_REGISTRATION);
     map.put("SEP_IRA_REGISTRATION", RegistrationTypeEnum.SEP_IRA_REGISTRATION);
     map.put("ROTH_IRA_REGISTRATION", RegistrationTypeEnum.ROTH_IRA_REGISTRATION);
     map.put("ROLLOVER_IRA_REGISTRATION", RegistrationTypeEnum.ROLLOVER_IRA_REGISTRATION);
@@ -216,6 +223,8 @@ public class RegistrationType {
         "FOREIGN_INDIVIDUAL_REGISTRATION", RegistrationTypeEnum.FOREIGN_INDIVIDUAL_REGISTRATION);
     map.put("CUSTODIAL_REGISTRATION", RegistrationTypeEnum.CUSTODIAL_REGISTRATION);
     map.put("FUTURES_REGISTRATION", RegistrationTypeEnum.FUTURES_REGISTRATION);
+    map.put(
+        "CUSTODIAL_ROTH_IRA_REGISTRATION", RegistrationTypeEnum.CUSTODIAL_ROTH_IRA_REGISTRATION);
     return map;
   }
 
@@ -254,6 +263,7 @@ public class RegistrationType {
     INDIVIDUAL_REGISTRATION("INDIVIDUAL_REGISTRATION"),
     ESTATE_REGISTRATION("ESTATE_REGISTRATION"),
     TRADITIONAL_IRA_REGISTRATION("TRADITIONAL_IRA_REGISTRATION"),
+    SIMPLE_IRA_REGISTRATION("SIMPLE_IRA_REGISTRATION"),
     SEP_IRA_REGISTRATION("SEP_IRA_REGISTRATION"),
     ROTH_IRA_REGISTRATION("ROTH_IRA_REGISTRATION"),
     ROLLOVER_IRA_REGISTRATION("ROLLOVER_IRA_REGISTRATION"),
@@ -272,6 +282,7 @@ public class RegistrationType {
     FOREIGN_INDIVIDUAL_REGISTRATION("FOREIGN_INDIVIDUAL_REGISTRATION"),
     CUSTODIAL_REGISTRATION("CUSTODIAL_REGISTRATION"),
     FUTURES_REGISTRATION("FUTURES_REGISTRATION"),
+    CUSTODIAL_ROTH_IRA_REGISTRATION("CUSTODIAL_ROTH_IRA_REGISTRATION"),
     ;
 
     private final String value;

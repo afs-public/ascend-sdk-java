@@ -35,6 +35,7 @@ public class LegalEntity {
   @JsonProperty("broker_dealer")
   private Optional<Boolean> brokerDealer;
 
+  /** The Standard Industrial Classification (SIC) of the entity. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("business_industrial_classification")
   private Optional<? extends LegalEntityBusinessIndustrialClassification>
@@ -223,6 +224,14 @@ public class LegalEntity {
   @JsonProperty("revocable_trust")
   private Optional<Boolean> revocableTrust;
 
+  /**
+   * Unique identifier for the tax form associated with this legal entity. This identifier is
+   * assigned after successful consent to tax certification
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("tax_form_id")
+  private Optional<String> taxFormId;
+
   /** The full U.S. tax ID for a related entity; Must be provided with `EIN` tax ID type */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("tax_id")
@@ -287,6 +296,7 @@ public class LegalEntity {
       @JsonProperty("regulated_investment_company") Optional<Boolean> regulatedInvestmentCompany,
       @JsonProperty("related_document_ids") Optional<? extends List<String>> relatedDocumentIds,
       @JsonProperty("revocable_trust") Optional<Boolean> revocableTrust,
+      @JsonProperty("tax_form_id") Optional<String> taxFormId,
       @JsonProperty("tax_id") Optional<String> taxId,
       @JsonProperty("tax_id_last_four") Optional<String> taxIdLastFour,
       @JsonProperty("tax_id_type") Optional<? extends LegalEntityTaxIdType> taxIdType,
@@ -321,6 +331,7 @@ public class LegalEntity {
     Utils.checkNotNull(regulatedInvestmentCompany, "regulatedInvestmentCompany");
     Utils.checkNotNull(relatedDocumentIds, "relatedDocumentIds");
     Utils.checkNotNull(revocableTrust, "revocableTrust");
+    Utils.checkNotNull(taxFormId, "taxFormId");
     Utils.checkNotNull(taxId, "taxId");
     Utils.checkNotNull(taxIdLastFour, "taxIdLastFour");
     Utils.checkNotNull(taxIdType, "taxIdType");
@@ -355,6 +366,7 @@ public class LegalEntity {
     this.regulatedInvestmentCompany = regulatedInvestmentCompany;
     this.relatedDocumentIds = relatedDocumentIds;
     this.revocableTrust = revocableTrust;
+    this.taxFormId = taxFormId;
     this.taxId = taxId;
     this.taxIdLastFour = taxIdLastFour;
     this.taxIdType = taxIdType;
@@ -396,6 +408,7 @@ public class LegalEntity {
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
+        Optional.empty(),
         JsonNullable.undefined());
   }
 
@@ -417,6 +430,7 @@ public class LegalEntity {
     return brokerDealer;
   }
 
+  /** The Standard Industrial Classification (SIC) of the entity. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<LegalEntityBusinessIndustrialClassification> businessIndustrialClassification() {
@@ -642,6 +656,15 @@ public class LegalEntity {
     return revocableTrust;
   }
 
+  /**
+   * Unique identifier for the tax form associated with this legal entity. This identifier is
+   * assigned after successful consent to tax certification
+   */
+  @JsonIgnore
+  public Optional<String> taxFormId() {
+    return taxFormId;
+  }
+
   /** The full U.S. tax ID for a related entity; Must be provided with `EIN` tax ID type */
   @JsonIgnore
   public Optional<String> taxId() {
@@ -720,6 +743,7 @@ public class LegalEntity {
     return this;
   }
 
+  /** The Standard Industrial Classification (SIC) of the entity. */
   public LegalEntity withBusinessIndustrialClassification(
       LegalEntityBusinessIndustrialClassification businessIndustrialClassification) {
     Utils.checkNotNull(businessIndustrialClassification, "businessIndustrialClassification");
@@ -727,6 +751,7 @@ public class LegalEntity {
     return this;
   }
 
+  /** The Standard Industrial Classification (SIC) of the entity. */
   public LegalEntity withBusinessIndustrialClassification(
       Optional<? extends LegalEntityBusinessIndustrialClassification>
           businessIndustrialClassification) {
@@ -1211,6 +1236,26 @@ public class LegalEntity {
     return this;
   }
 
+  /**
+   * Unique identifier for the tax form associated with this legal entity. This identifier is
+   * assigned after successful consent to tax certification
+   */
+  public LegalEntity withTaxFormId(String taxFormId) {
+    Utils.checkNotNull(taxFormId, "taxFormId");
+    this.taxFormId = Optional.ofNullable(taxFormId);
+    return this;
+  }
+
+  /**
+   * Unique identifier for the tax form associated with this legal entity. This identifier is
+   * assigned after successful consent to tax certification
+   */
+  public LegalEntity withTaxFormId(Optional<String> taxFormId) {
+    Utils.checkNotNull(taxFormId, "taxFormId");
+    this.taxFormId = taxFormId;
+    return this;
+  }
+
   /** The full U.S. tax ID for a related entity; Must be provided with `EIN` tax ID type */
   public LegalEntity withTaxId(String taxId) {
     Utils.checkNotNull(taxId, "taxId");
@@ -1322,6 +1367,7 @@ public class LegalEntity {
             this.regulatedInvestmentCompany, other.regulatedInvestmentCompany)
         && Utils.enhancedDeepEquals(this.relatedDocumentIds, other.relatedDocumentIds)
         && Utils.enhancedDeepEquals(this.revocableTrust, other.revocableTrust)
+        && Utils.enhancedDeepEquals(this.taxFormId, other.taxFormId)
         && Utils.enhancedDeepEquals(this.taxId, other.taxId)
         && Utils.enhancedDeepEquals(this.taxIdLastFour, other.taxIdLastFour)
         && Utils.enhancedDeepEquals(this.taxIdType, other.taxIdType)
@@ -1361,6 +1407,7 @@ public class LegalEntity {
         regulatedInvestmentCompany,
         relatedDocumentIds,
         revocableTrust,
+        taxFormId,
         taxId,
         taxIdLastFour,
         taxIdType,
@@ -1431,6 +1478,8 @@ public class LegalEntity {
         relatedDocumentIds,
         "revocableTrust",
         revocableTrust,
+        "taxFormId",
+        taxFormId,
         "taxId",
         taxId,
         "taxIdLastFour",
@@ -1507,6 +1556,8 @@ public class LegalEntity {
 
     private Optional<Boolean> revocableTrust = Optional.empty();
 
+    private Optional<String> taxFormId = Optional.empty();
+
     private Optional<String> taxId = Optional.empty();
 
     private Optional<String> taxIdLastFour = Optional.empty();
@@ -1565,6 +1616,7 @@ public class LegalEntity {
       return this;
     }
 
+    /** The Standard Industrial Classification (SIC) of the entity. */
     public Builder businessIndustrialClassification(
         LegalEntityBusinessIndustrialClassification businessIndustrialClassification) {
       Utils.checkNotNull(businessIndustrialClassification, "businessIndustrialClassification");
@@ -1572,6 +1624,7 @@ public class LegalEntity {
       return this;
     }
 
+    /** The Standard Industrial Classification (SIC) of the entity. */
     public Builder businessIndustrialClassification(
         Optional<? extends LegalEntityBusinessIndustrialClassification>
             businessIndustrialClassification) {
@@ -2056,6 +2109,26 @@ public class LegalEntity {
       return this;
     }
 
+    /**
+     * Unique identifier for the tax form associated with this legal entity. This identifier is
+     * assigned after successful consent to tax certification
+     */
+    public Builder taxFormId(String taxFormId) {
+      Utils.checkNotNull(taxFormId, "taxFormId");
+      this.taxFormId = Optional.ofNullable(taxFormId);
+      return this;
+    }
+
+    /**
+     * Unique identifier for the tax form associated with this legal entity. This identifier is
+     * assigned after successful consent to tax certification
+     */
+    public Builder taxFormId(Optional<String> taxFormId) {
+      Utils.checkNotNull(taxFormId, "taxFormId");
+      this.taxFormId = taxFormId;
+      return this;
+    }
+
     /** The full U.S. tax ID for a related entity; Must be provided with `EIN` tax ID type */
     public Builder taxId(String taxId) {
       Utils.checkNotNull(taxId, "taxId");
@@ -2157,6 +2230,7 @@ public class LegalEntity {
           regulatedInvestmentCompany,
           relatedDocumentIds,
           revocableTrust,
+          taxFormId,
           taxId,
           taxIdLastFour,
           taxIdType,

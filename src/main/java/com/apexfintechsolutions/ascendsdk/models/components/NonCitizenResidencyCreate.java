@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * accounts.
  */
 public class NonCitizenResidencyCreate {
-
+  /** The residency status of the non-citizen resident. */
   @JsonProperty("residency_status")
   private ResidencyStatus residencyStatus;
 
@@ -26,6 +26,7 @@ public class NonCitizenResidencyCreate {
     this.residencyStatus = residencyStatus;
   }
 
+  /** The residency status of the non-citizen resident. */
   @JsonIgnore
   public ResidencyStatus residencyStatus() {
     return residencyStatus;
@@ -35,6 +36,7 @@ public class NonCitizenResidencyCreate {
     return new Builder();
   }
 
+  /** The residency status of the non-citizen resident. */
   public NonCitizenResidencyCreate withResidencyStatus(ResidencyStatus residencyStatus) {
     Utils.checkNotNull(residencyStatus, "residencyStatus");
     this.residencyStatus = residencyStatus;
@@ -72,6 +74,7 @@ public class NonCitizenResidencyCreate {
       // force use of static builder() method
     }
 
+    /** The residency status of the non-citizen resident. */
     public Builder residencyStatus(ResidencyStatus residencyStatus) {
       Utils.checkNotNull(residencyStatus, "residencyStatus");
       this.residencyStatus = residencyStatus;
