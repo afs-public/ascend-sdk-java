@@ -8,6 +8,7 @@
 * [createOptionOrder](#createoptionorder) - Create Option Order
 * [getOptionOrder](#getoptionorder) - Get Option Order
 * [cancelOptionOrder](#canceloptionorder) - Cancel Option Order
+* [setOptionExtraReportingData](#setoptionextrareportingdata) - Set Option Extra Reporting Data
 
 ## createOptionOrder
 
@@ -217,6 +218,77 @@ public class Application {
 ### Response
 
 **[OptionOrderServiceCancelOptionOrderResponse](../../models/operations/OptionOrderServiceCancelOptionOrderResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 401, 403, 404     | application/json       |
+| models/errors/Status   | 500, 503               | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## setOptionExtraReportingData
+
+Sets post-cancel reporting data for an option order.
+
+ The option order must be in a canceled or pending_cancel state. Requires the option order resource name and the cancel_confirmed_time. If cancel_confirmed_time has already been set by a prior call, the existing value is preserved and the response reflects the original value.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="OptionOrderService_SetOptionExtraReportingData" method="post" path="/trading/v1/accounts/{account_id}/optionOrders/{optionOrder_id}:setExtraReportingData" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.OptionOrderServiceSetOptionExtraReportingDataResponse;
+import java.lang.Exception;
+import java.time.OffsetDateTime;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        OptionOrderServiceSetOptionExtraReportingDataResponse res = sdk.optionOrders().setOptionExtraReportingData()
+                .accountId("01HBRQ5BW6ZAY4BNWP4GWRD80X")
+                .optionOrderId("ebb0c9b5-2c74-45c9-a4ab-40596b778706")
+                .setOptionExtraReportingDataRequestCreate(SetOptionExtraReportingDataRequestCreate.builder()
+                    .cancelConfirmedTime(OffsetDateTime.parse("2025-12-13T15:28:17.262732Z"))
+                    .name("accounts/01HBRQ5BW6ZAY4BNWP4GWRD80X/optionOrders/ebb0c9b5-2c74-45c9-a4ab-40596b778706")
+                    .build())
+                .call();
+
+        if (res.optionOrder().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                       | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     | Example                                                                                                         |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `accountId`                                                                                                     | *String*                                                                                                        | :heavy_check_mark:                                                                                              | The account id.                                                                                                 | 01HBRQ5BW6ZAY4BNWP4GWRD80X                                                                                      |
+| `optionOrderId`                                                                                                 | *String*                                                                                                        | :heavy_check_mark:                                                                                              | The optionOrder id.                                                                                             | ebb0c9b5-2c74-45c9-a4ab-40596b778706                                                                            |
+| `setOptionExtraReportingDataRequestCreate`                                                                      | [SetOptionExtraReportingDataRequestCreate](../../models/components/SetOptionExtraReportingDataRequestCreate.md) | :heavy_check_mark:                                                                                              | N/A                                                                                                             |                                                                                                                 |
+
+### Response
+
+**[OptionOrderServiceSetOptionExtraReportingDataResponse](../../models/operations/OptionOrderServiceSetOptionExtraReportingDataResponse.md)**
 
 ### Errors
 

@@ -88,7 +88,8 @@ public class OrderCreate {
    * A string attribute denoting the country of issuance or where the asset is trading. * Only
    * available for Mutual Fund and Fixed Income orders. * Only available when the identifier_type is
    * SYMBOL or CUSIP. * Defaults to US when the identifier_type is SYMBOL or CUSIP. * Complies with
-   * ISO-3166 Alpha-2 Codes
+   * ISO-3166 Alpha-2 Codes * identifier_issuing_region_code should match the issuing_region_code
+   * from the Assets API or the order will be REJECTED
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("identifier_issuing_region_code")
@@ -432,7 +433,8 @@ public class OrderCreate {
    * A string attribute denoting the country of issuance or where the asset is trading. * Only
    * available for Mutual Fund and Fixed Income orders. * Only available when the identifier_type is
    * SYMBOL or CUSIP. * Defaults to US when the identifier_type is SYMBOL or CUSIP. * Complies with
-   * ISO-3166 Alpha-2 Codes
+   * ISO-3166 Alpha-2 Codes * identifier_issuing_region_code should match the issuing_region_code
+   * from the Assets API or the order will be REJECTED
    */
   @JsonIgnore
   public Optional<String> identifierIssuingRegionCode() {
@@ -759,7 +761,8 @@ public class OrderCreate {
    * A string attribute denoting the country of issuance or where the asset is trading. * Only
    * available for Mutual Fund and Fixed Income orders. * Only available when the identifier_type is
    * SYMBOL or CUSIP. * Defaults to US when the identifier_type is SYMBOL or CUSIP. * Complies with
-   * ISO-3166 Alpha-2 Codes
+   * ISO-3166 Alpha-2 Codes * identifier_issuing_region_code should match the issuing_region_code
+   * from the Assets API or the order will be REJECTED
    */
   public OrderCreate withIdentifierIssuingRegionCode(String identifierIssuingRegionCode) {
     Utils.checkNotNull(identifierIssuingRegionCode, "identifierIssuingRegionCode");
@@ -771,7 +774,8 @@ public class OrderCreate {
    * A string attribute denoting the country of issuance or where the asset is trading. * Only
    * available for Mutual Fund and Fixed Income orders. * Only available when the identifier_type is
    * SYMBOL or CUSIP. * Defaults to US when the identifier_type is SYMBOL or CUSIP. * Complies with
-   * ISO-3166 Alpha-2 Codes
+   * ISO-3166 Alpha-2 Codes * identifier_issuing_region_code should match the issuing_region_code
+   * from the Assets API or the order will be REJECTED
    */
   public OrderCreate withIdentifierIssuingRegionCode(Optional<String> identifierIssuingRegionCode) {
     Utils.checkNotNull(identifierIssuingRegionCode, "identifierIssuingRegionCode");
@@ -1399,7 +1403,8 @@ public class OrderCreate {
      * A string attribute denoting the country of issuance or where the asset is trading. * Only
      * available for Mutual Fund and Fixed Income orders. * Only available when the identifier_type
      * is SYMBOL or CUSIP. * Defaults to US when the identifier_type is SYMBOL or CUSIP. * Complies
-     * with ISO-3166 Alpha-2 Codes
+     * with ISO-3166 Alpha-2 Codes * identifier_issuing_region_code should match the
+     * issuing_region_code from the Assets API or the order will be REJECTED
      */
     public Builder identifierIssuingRegionCode(String identifierIssuingRegionCode) {
       Utils.checkNotNull(identifierIssuingRegionCode, "identifierIssuingRegionCode");
@@ -1411,7 +1416,8 @@ public class OrderCreate {
      * A string attribute denoting the country of issuance or where the asset is trading. * Only
      * available for Mutual Fund and Fixed Income orders. * Only available when the identifier_type
      * is SYMBOL or CUSIP. * Defaults to US when the identifier_type is SYMBOL or CUSIP. * Complies
-     * with ISO-3166 Alpha-2 Codes
+     * with ISO-3166 Alpha-2 Codes * identifier_issuing_region_code should match the
+     * issuing_region_code from the Assets API or the order will be REJECTED
      */
     public Builder identifierIssuingRegionCode(Optional<String> identifierIssuingRegionCode) {
       Utils.checkNotNull(identifierIssuingRegionCode, "identifierIssuingRegionCode");

@@ -40,7 +40,7 @@ import java.util.Optional;
 /**
  * CompressedOrderOrderType
  *
- * <p>The execution type of this order. Only MARKET is supported.
+ * <p>The execution type of this order.
  */
 @JsonDeserialize(using = CompressedOrderOrderType._Deserializer.class)
 @JsonSerialize(using = CompressedOrderOrderType._Serializer.class)

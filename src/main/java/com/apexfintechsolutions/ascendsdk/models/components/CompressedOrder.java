@@ -135,7 +135,7 @@ public class CompressedOrder {
   @JsonProperty("order_status")
   private Optional<? extends CompressedOrderOrderStatus> orderStatus;
 
-  /** The execution type of this order. Only MARKET is supported. */
+  /** The execution type of this order. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("order_type")
   private Optional<? extends CompressedOrderOrderType> orderType;
@@ -416,7 +416,7 @@ public class CompressedOrder {
     return (Optional<CompressedOrderOrderStatus>) orderStatus;
   }
 
-  /** The execution type of this order. Only MARKET is supported. */
+  /** The execution type of this order. */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<CompressedOrderOrderType> orderType() {
@@ -775,14 +775,14 @@ public class CompressedOrder {
     return this;
   }
 
-  /** The execution type of this order. Only MARKET is supported. */
+  /** The execution type of this order. */
   public CompressedOrder withOrderType(CompressedOrderOrderType orderType) {
     Utils.checkNotNull(orderType, "orderType");
     this.orderType = Optional.ofNullable(orderType);
     return this;
   }
 
-  /** The execution type of this order. Only MARKET is supported. */
+  /** The execution type of this order. */
   public CompressedOrder withOrderType(Optional<? extends CompressedOrderOrderType> orderType) {
     Utils.checkNotNull(orderType, "orderType");
     this.orderType = orderType;
@@ -1341,14 +1341,14 @@ public class CompressedOrder {
       return this;
     }
 
-    /** The execution type of this order. Only MARKET is supported. */
+    /** The execution type of this order. */
     public Builder orderType(CompressedOrderOrderType orderType) {
       Utils.checkNotNull(orderType, "orderType");
       this.orderType = Optional.ofNullable(orderType);
       return this;
     }
 
-    /** The execution type of this order. Only MARKET is supported. */
+    /** The execution type of this order. */
     public Builder orderType(Optional<? extends CompressedOrderOrderType> orderType) {
       Utils.checkNotNull(orderType, "orderType");
       this.orderType = orderType;

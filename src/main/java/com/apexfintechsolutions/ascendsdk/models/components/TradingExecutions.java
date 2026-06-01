@@ -43,6 +43,11 @@ public class TradingExecutions {
   @JsonProperty("executed_time")
   private JsonNullable<OffsetDateTime> executedTime;
 
+  /** This id field represents the unique id of the execution */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("execution_id")
+  private Optional<String> executionId;
+
   /**
    * The net currency amount exchanged in this transaction, in the order currency. Will only be
    * present for orders of Fixed Income assets.
@@ -74,6 +79,7 @@ public class TradingExecutions {
       @JsonProperty("executed_prices")
           Optional<? extends List<TradingExecutedPrice>> executedPrices,
       @JsonProperty("executed_time") JsonNullable<OffsetDateTime> executedTime,
+      @JsonProperty("execution_id") Optional<String> executionId,
       @JsonProperty("gross_credit_amount")
           JsonNullable<? extends GrossCreditAmount> grossCreditAmount,
       @JsonProperty("prevailing_market_price")
@@ -82,12 +88,14 @@ public class TradingExecutions {
     Utils.checkNotNull(accruedInterestAmount, "accruedInterestAmount");
     Utils.checkNotNull(executedPrices, "executedPrices");
     Utils.checkNotNull(executedTime, "executedTime");
+    Utils.checkNotNull(executionId, "executionId");
     Utils.checkNotNull(grossCreditAmount, "grossCreditAmount");
     Utils.checkNotNull(prevailingMarketPrice, "prevailingMarketPrice");
     Utils.checkNotNull(quantity, "quantity");
     this.accruedInterestAmount = accruedInterestAmount;
     this.executedPrices = executedPrices;
     this.executedTime = executedTime;
+    this.executionId = executionId;
     this.grossCreditAmount = grossCreditAmount;
     this.prevailingMarketPrice = prevailingMarketPrice;
     this.quantity = quantity;
@@ -98,6 +106,7 @@ public class TradingExecutions {
         JsonNullable.undefined(),
         Optional.empty(),
         JsonNullable.undefined(),
+        Optional.empty(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined());
@@ -129,6 +138,12 @@ public class TradingExecutions {
   @JsonIgnore
   public JsonNullable<OffsetDateTime> executedTime() {
     return executedTime;
+  }
+
+  /** This id field represents the unique id of the execution */
+  @JsonIgnore
+  public Optional<String> executionId() {
+    return executionId;
   }
 
   /**
@@ -225,6 +240,20 @@ public class TradingExecutions {
     return this;
   }
 
+  /** This id field represents the unique id of the execution */
+  public TradingExecutions withExecutionId(String executionId) {
+    Utils.checkNotNull(executionId, "executionId");
+    this.executionId = Optional.ofNullable(executionId);
+    return this;
+  }
+
+  /** This id field represents the unique id of the execution */
+  public TradingExecutions withExecutionId(Optional<String> executionId) {
+    Utils.checkNotNull(executionId, "executionId");
+    this.executionId = executionId;
+    return this;
+  }
+
   /**
    * The net currency amount exchanged in this transaction, in the order currency. Will only be
    * present for orders of Fixed Income assets.
@@ -300,6 +329,7 @@ public class TradingExecutions {
     return Utils.enhancedDeepEquals(this.accruedInterestAmount, other.accruedInterestAmount)
         && Utils.enhancedDeepEquals(this.executedPrices, other.executedPrices)
         && Utils.enhancedDeepEquals(this.executedTime, other.executedTime)
+        && Utils.enhancedDeepEquals(this.executionId, other.executionId)
         && Utils.enhancedDeepEquals(this.grossCreditAmount, other.grossCreditAmount)
         && Utils.enhancedDeepEquals(this.prevailingMarketPrice, other.prevailingMarketPrice)
         && Utils.enhancedDeepEquals(this.quantity, other.quantity);
@@ -311,6 +341,7 @@ public class TradingExecutions {
         accruedInterestAmount,
         executedPrices,
         executedTime,
+        executionId,
         grossCreditAmount,
         prevailingMarketPrice,
         quantity);
@@ -326,6 +357,8 @@ public class TradingExecutions {
         executedPrices,
         "executedTime",
         executedTime,
+        "executionId",
+        executionId,
         "grossCreditAmount",
         grossCreditAmount,
         "prevailingMarketPrice",
@@ -343,6 +376,8 @@ public class TradingExecutions {
     private Optional<? extends List<TradingExecutedPrice>> executedPrices = Optional.empty();
 
     private JsonNullable<OffsetDateTime> executedTime = JsonNullable.undefined();
+
+    private Optional<String> executionId = Optional.empty();
 
     private JsonNullable<? extends GrossCreditAmount> grossCreditAmount = JsonNullable.undefined();
 
@@ -414,6 +449,20 @@ public class TradingExecutions {
       return this;
     }
 
+    /** This id field represents the unique id of the execution */
+    public Builder executionId(String executionId) {
+      Utils.checkNotNull(executionId, "executionId");
+      this.executionId = Optional.ofNullable(executionId);
+      return this;
+    }
+
+    /** This id field represents the unique id of the execution */
+    public Builder executionId(Optional<String> executionId) {
+      Utils.checkNotNull(executionId, "executionId");
+      this.executionId = executionId;
+      return this;
+    }
+
     /**
      * The net currency amount exchanged in this transaction, in the order currency. Will only be
      * present for orders of Fixed Income assets.
@@ -481,6 +530,7 @@ public class TradingExecutions {
           accruedInterestAmount,
           executedPrices,
           executedTime,
+          executionId,
           grossCreditAmount,
           prevailingMarketPrice,
           quantity);

@@ -109,6 +109,8 @@ public class OptionOrderOrderRejectedReason {
       new OptionOrderOrderRejectedReason("CLIENT_RECEIVED_TIME_REQUIRED");
   public static final OptionOrderOrderRejectedReason UNSUPPORTED_PRICE_VALUE =
       new OptionOrderOrderRejectedReason("UNSUPPORTED_PRICE_VALUE");
+  public static final OptionOrderOrderRejectedReason BOX_TRADES_PROHIBITED =
+      new OptionOrderOrderRejectedReason("BOX_TRADES_PROHIBITED");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -214,6 +216,7 @@ public class OptionOrderOrderRejectedReason {
     map.put("INVALID_ORDER_QUANTITY", INVALID_ORDER_QUANTITY);
     map.put("CLIENT_RECEIVED_TIME_REQUIRED", CLIENT_RECEIVED_TIME_REQUIRED);
     map.put("UNSUPPORTED_PRICE_VALUE", UNSUPPORTED_PRICE_VALUE);
+    map.put("BOX_TRADES_PROHIBITED", BOX_TRADES_PROHIBITED);
     return map;
   }
 
@@ -268,6 +271,7 @@ public class OptionOrderOrderRejectedReason {
         "CLIENT_RECEIVED_TIME_REQUIRED",
         OptionOrderOrderRejectedReasonEnum.CLIENT_RECEIVED_TIME_REQUIRED);
     map.put("UNSUPPORTED_PRICE_VALUE", OptionOrderOrderRejectedReasonEnum.UNSUPPORTED_PRICE_VALUE);
+    map.put("BOX_TRADES_PROHIBITED", OptionOrderOrderRejectedReasonEnum.BOX_TRADES_PROHIBITED);
     return map;
   }
 
@@ -334,6 +338,7 @@ public class OptionOrderOrderRejectedReason {
     INVALID_ORDER_QUANTITY("INVALID_ORDER_QUANTITY"),
     CLIENT_RECEIVED_TIME_REQUIRED("CLIENT_RECEIVED_TIME_REQUIRED"),
     UNSUPPORTED_PRICE_VALUE("UNSUPPORTED_PRICE_VALUE"),
+    BOX_TRADES_PROHIBITED("BOX_TRADES_PROHIBITED"),
     ;
 
     private final String value;
