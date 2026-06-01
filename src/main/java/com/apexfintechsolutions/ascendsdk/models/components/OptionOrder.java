@@ -30,6 +30,14 @@ public class OptionOrder {
   @JsonProperty("broker_capacity")
   private Optional<? extends OptionOrderBrokerCapacity> brokerCapacity;
 
+  /**
+   * Whether the cancel was initiated by the correspondent firm (FIRM) or the customer (CLIENT).
+   * Populated from the CancelOptionOrderRequest.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("cancel_initiator")
+  private Optional<? extends OptionOrderCancelInitiator> cancelInitiator;
+
   /** Used to explain why an option order is canceled */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("cancel_reason")
@@ -40,6 +48,22 @@ public class OptionOrder {
   @JsonProperty("cancel_rejected_reason")
   private Optional<? extends OptionOrderCancelRejectedReason> cancelRejectedReason;
 
+  /**
+   * The time the correspondent received the cancel instruction from the customer. Populated from
+   * the CancelOptionOrderRequest.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_cancel_received_time")
+  private JsonNullable<OffsetDateTime> clientCancelReceivedTime;
+
+  /**
+   * The time the correspondent sent the cancel request. Populated from the
+   * CancelOptionOrderRequest.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_cancel_sent_time")
+  private JsonNullable<OffsetDateTime> clientCancelSentTime;
+
   /** User-supplied unique option order ID. Cannot be more than 40 characters long. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("client_order_id")
@@ -49,6 +73,14 @@ public class OptionOrder {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("client_received_time")
   private JsonNullable<OffsetDateTime> clientReceivedTime;
+
+  /**
+   * The time the correspondent sent the original order to Apex. Set at order creation and cannot be
+   * modified. Required for correspondents using Apex CAT reporting services.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_sent_time")
+  private JsonNullable<OffsetDateTime> clientSentTime;
 
   /** Time of the option order creation */
   @JsonInclude(Include.NON_ABSENT)
@@ -81,6 +113,11 @@ public class OptionOrder {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("currency_code")
   private Optional<String> currencyCode;
+
+  /** Post-cancel reporting data provided via the SetOptionExtraReportingData endpoint. */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("extra_reporting_data")
+  private JsonNullable<? extends OptionOrderExtraReportingData> extraReportingData;
 
   /** Fees that will be applied to this option order. */
   @JsonInclude(Include.NON_ABSENT)
@@ -187,17 +224,25 @@ public class OptionOrder {
   public OptionOrder(
       @JsonProperty("account_id") Optional<String> accountId,
       @JsonProperty("broker_capacity") Optional<? extends OptionOrderBrokerCapacity> brokerCapacity,
+      @JsonProperty("cancel_initiator")
+          Optional<? extends OptionOrderCancelInitiator> cancelInitiator,
       @JsonProperty("cancel_reason") Optional<String> cancelReason,
       @JsonProperty("cancel_rejected_reason")
           Optional<? extends OptionOrderCancelRejectedReason> cancelRejectedReason,
+      @JsonProperty("client_cancel_received_time")
+          JsonNullable<OffsetDateTime> clientCancelReceivedTime,
+      @JsonProperty("client_cancel_sent_time") JsonNullable<OffsetDateTime> clientCancelSentTime,
       @JsonProperty("client_order_id") Optional<String> clientOrderId,
       @JsonProperty("client_received_time") JsonNullable<OffsetDateTime> clientReceivedTime,
+      @JsonProperty("client_sent_time") JsonNullable<OffsetDateTime> clientSentTime,
       @JsonProperty("create_time") JsonNullable<OffsetDateTime> createTime,
       @JsonProperty("cumulative_notional_value")
           JsonNullable<? extends OptionOrderCumulativeNotionalValue> cumulativeNotionalValue,
       @JsonProperty("cumulative_notional_value_direction")
           Optional<? extends CumulativeNotionalValueDirection> cumulativeNotionalValueDirection,
       @JsonProperty("currency_code") Optional<String> currencyCode,
+      @JsonProperty("extra_reporting_data")
+          JsonNullable<? extends OptionOrderExtraReportingData> extraReportingData,
       @JsonProperty("fees") Optional<? extends List<TradingFee>> fees,
       @JsonProperty("last_update_time") JsonNullable<OffsetDateTime> lastUpdateTime,
       @JsonProperty("legs") Optional<? extends List<OptionOrderLeg>> legs,
@@ -217,14 +262,19 @@ public class OptionOrder {
       @JsonProperty("time_in_force") Optional<? extends OptionOrderTimeInForce> timeInForce) {
     Utils.checkNotNull(accountId, "accountId");
     Utils.checkNotNull(brokerCapacity, "brokerCapacity");
+    Utils.checkNotNull(cancelInitiator, "cancelInitiator");
     Utils.checkNotNull(cancelReason, "cancelReason");
     Utils.checkNotNull(cancelRejectedReason, "cancelRejectedReason");
+    Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+    Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
     Utils.checkNotNull(clientOrderId, "clientOrderId");
     Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
+    Utils.checkNotNull(clientSentTime, "clientSentTime");
     Utils.checkNotNull(createTime, "createTime");
     Utils.checkNotNull(cumulativeNotionalValue, "cumulativeNotionalValue");
     Utils.checkNotNull(cumulativeNotionalValueDirection, "cumulativeNotionalValueDirection");
     Utils.checkNotNull(currencyCode, "currencyCode");
+    Utils.checkNotNull(extraReportingData, "extraReportingData");
     Utils.checkNotNull(fees, "fees");
     Utils.checkNotNull(lastUpdateTime, "lastUpdateTime");
     Utils.checkNotNull(legs, "legs");
@@ -241,14 +291,19 @@ public class OptionOrder {
     Utils.checkNotNull(timeInForce, "timeInForce");
     this.accountId = accountId;
     this.brokerCapacity = brokerCapacity;
+    this.cancelInitiator = cancelInitiator;
     this.cancelReason = cancelReason;
     this.cancelRejectedReason = cancelRejectedReason;
+    this.clientCancelReceivedTime = clientCancelReceivedTime;
+    this.clientCancelSentTime = clientCancelSentTime;
     this.clientOrderId = clientOrderId;
     this.clientReceivedTime = clientReceivedTime;
+    this.clientSentTime = clientSentTime;
     this.createTime = createTime;
     this.cumulativeNotionalValue = cumulativeNotionalValue;
     this.cumulativeNotionalValueDirection = cumulativeNotionalValueDirection;
     this.currencyCode = currencyCode;
+    this.extraReportingData = extraReportingData;
     this.fees = fees;
     this.lastUpdateTime = lastUpdateTime;
     this.legs = legs;
@@ -274,9 +329,14 @@ public class OptionOrder {
         Optional.empty(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
+        Optional.empty(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
         Optional.empty(),
+        JsonNullable.undefined(),
         Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty(),
@@ -306,6 +366,16 @@ public class OptionOrder {
     return (Optional<OptionOrderBrokerCapacity>) brokerCapacity;
   }
 
+  /**
+   * Whether the cancel was initiated by the correspondent firm (FIRM) or the customer (CLIENT).
+   * Populated from the CancelOptionOrderRequest.
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<OptionOrderCancelInitiator> cancelInitiator() {
+    return (Optional<OptionOrderCancelInitiator>) cancelInitiator;
+  }
+
   /** Used to explain why an option order is canceled */
   @JsonIgnore
   public Optional<String> cancelReason() {
@@ -319,6 +389,24 @@ public class OptionOrder {
     return (Optional<OptionOrderCancelRejectedReason>) cancelRejectedReason;
   }
 
+  /**
+   * The time the correspondent received the cancel instruction from the customer. Populated from
+   * the CancelOptionOrderRequest.
+   */
+  @JsonIgnore
+  public JsonNullable<OffsetDateTime> clientCancelReceivedTime() {
+    return clientCancelReceivedTime;
+  }
+
+  /**
+   * The time the correspondent sent the cancel request. Populated from the
+   * CancelOptionOrderRequest.
+   */
+  @JsonIgnore
+  public JsonNullable<OffsetDateTime> clientCancelSentTime() {
+    return clientCancelSentTime;
+  }
+
   /** User-supplied unique option order ID. Cannot be more than 40 characters long. */
   @JsonIgnore
   public Optional<String> clientOrderId() {
@@ -329,6 +417,15 @@ public class OptionOrder {
   @JsonIgnore
   public JsonNullable<OffsetDateTime> clientReceivedTime() {
     return clientReceivedTime;
+  }
+
+  /**
+   * The time the correspondent sent the original order to Apex. Set at order creation and cannot be
+   * modified. Required for correspondents using Apex CAT reporting services.
+   */
+  @JsonIgnore
+  public JsonNullable<OffsetDateTime> clientSentTime() {
+    return clientSentTime;
   }
 
   /** Time of the option order creation */
@@ -367,6 +464,13 @@ public class OptionOrder {
   @JsonIgnore
   public Optional<String> currencyCode() {
     return currencyCode;
+  }
+
+  /** Post-cancel reporting data provided via the SetOptionExtraReportingData endpoint. */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<OptionOrderExtraReportingData> extraReportingData() {
+    return (JsonNullable<OptionOrderExtraReportingData>) extraReportingData;
   }
 
   /** Fees that will be applied to this option order. */
@@ -527,6 +631,27 @@ public class OptionOrder {
     return this;
   }
 
+  /**
+   * Whether the cancel was initiated by the correspondent firm (FIRM) or the customer (CLIENT).
+   * Populated from the CancelOptionOrderRequest.
+   */
+  public OptionOrder withCancelInitiator(OptionOrderCancelInitiator cancelInitiator) {
+    Utils.checkNotNull(cancelInitiator, "cancelInitiator");
+    this.cancelInitiator = Optional.ofNullable(cancelInitiator);
+    return this;
+  }
+
+  /**
+   * Whether the cancel was initiated by the correspondent firm (FIRM) or the customer (CLIENT).
+   * Populated from the CancelOptionOrderRequest.
+   */
+  public OptionOrder withCancelInitiator(
+      Optional<? extends OptionOrderCancelInitiator> cancelInitiator) {
+    Utils.checkNotNull(cancelInitiator, "cancelInitiator");
+    this.cancelInitiator = cancelInitiator;
+    return this;
+  }
+
   /** Used to explain why an option order is canceled */
   public OptionOrder withCancelReason(String cancelReason) {
     Utils.checkNotNull(cancelReason, "cancelReason");
@@ -557,6 +682,47 @@ public class OptionOrder {
     return this;
   }
 
+  /**
+   * The time the correspondent received the cancel instruction from the customer. Populated from
+   * the CancelOptionOrderRequest.
+   */
+  public OptionOrder withClientCancelReceivedTime(OffsetDateTime clientCancelReceivedTime) {
+    Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+    this.clientCancelReceivedTime = JsonNullable.of(clientCancelReceivedTime);
+    return this;
+  }
+
+  /**
+   * The time the correspondent received the cancel instruction from the customer. Populated from
+   * the CancelOptionOrderRequest.
+   */
+  public OptionOrder withClientCancelReceivedTime(
+      JsonNullable<OffsetDateTime> clientCancelReceivedTime) {
+    Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+    this.clientCancelReceivedTime = clientCancelReceivedTime;
+    return this;
+  }
+
+  /**
+   * The time the correspondent sent the cancel request. Populated from the
+   * CancelOptionOrderRequest.
+   */
+  public OptionOrder withClientCancelSentTime(OffsetDateTime clientCancelSentTime) {
+    Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
+    this.clientCancelSentTime = JsonNullable.of(clientCancelSentTime);
+    return this;
+  }
+
+  /**
+   * The time the correspondent sent the cancel request. Populated from the
+   * CancelOptionOrderRequest.
+   */
+  public OptionOrder withClientCancelSentTime(JsonNullable<OffsetDateTime> clientCancelSentTime) {
+    Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
+    this.clientCancelSentTime = clientCancelSentTime;
+    return this;
+  }
+
   /** User-supplied unique option order ID. Cannot be more than 40 characters long. */
   public OptionOrder withClientOrderId(String clientOrderId) {
     Utils.checkNotNull(clientOrderId, "clientOrderId");
@@ -582,6 +748,26 @@ public class OptionOrder {
   public OptionOrder withClientReceivedTime(JsonNullable<OffsetDateTime> clientReceivedTime) {
     Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
     this.clientReceivedTime = clientReceivedTime;
+    return this;
+  }
+
+  /**
+   * The time the correspondent sent the original order to Apex. Set at order creation and cannot be
+   * modified. Required for correspondents using Apex CAT reporting services.
+   */
+  public OptionOrder withClientSentTime(OffsetDateTime clientSentTime) {
+    Utils.checkNotNull(clientSentTime, "clientSentTime");
+    this.clientSentTime = JsonNullable.of(clientSentTime);
+    return this;
+  }
+
+  /**
+   * The time the correspondent sent the original order to Apex. Set at order creation and cannot be
+   * modified. Required for correspondents using Apex CAT reporting services.
+   */
+  public OptionOrder withClientSentTime(JsonNullable<OffsetDateTime> clientSentTime) {
+    Utils.checkNotNull(clientSentTime, "clientSentTime");
+    this.clientSentTime = clientSentTime;
     return this;
   }
 
@@ -666,6 +852,21 @@ public class OptionOrder {
   public OptionOrder withCurrencyCode(Optional<String> currencyCode) {
     Utils.checkNotNull(currencyCode, "currencyCode");
     this.currencyCode = currencyCode;
+    return this;
+  }
+
+  /** Post-cancel reporting data provided via the SetOptionExtraReportingData endpoint. */
+  public OptionOrder withExtraReportingData(OptionOrderExtraReportingData extraReportingData) {
+    Utils.checkNotNull(extraReportingData, "extraReportingData");
+    this.extraReportingData = JsonNullable.of(extraReportingData);
+    return this;
+  }
+
+  /** Post-cancel reporting data provided via the SetOptionExtraReportingData endpoint. */
+  public OptionOrder withExtraReportingData(
+      JsonNullable<? extends OptionOrderExtraReportingData> extraReportingData) {
+    Utils.checkNotNull(extraReportingData, "extraReportingData");
+    this.extraReportingData = extraReportingData;
     return this;
   }
 
@@ -941,15 +1142,20 @@ public class OptionOrder {
     OptionOrder other = (OptionOrder) o;
     return Utils.enhancedDeepEquals(this.accountId, other.accountId)
         && Utils.enhancedDeepEquals(this.brokerCapacity, other.brokerCapacity)
+        && Utils.enhancedDeepEquals(this.cancelInitiator, other.cancelInitiator)
         && Utils.enhancedDeepEquals(this.cancelReason, other.cancelReason)
         && Utils.enhancedDeepEquals(this.cancelRejectedReason, other.cancelRejectedReason)
+        && Utils.enhancedDeepEquals(this.clientCancelReceivedTime, other.clientCancelReceivedTime)
+        && Utils.enhancedDeepEquals(this.clientCancelSentTime, other.clientCancelSentTime)
         && Utils.enhancedDeepEquals(this.clientOrderId, other.clientOrderId)
         && Utils.enhancedDeepEquals(this.clientReceivedTime, other.clientReceivedTime)
+        && Utils.enhancedDeepEquals(this.clientSentTime, other.clientSentTime)
         && Utils.enhancedDeepEquals(this.createTime, other.createTime)
         && Utils.enhancedDeepEquals(this.cumulativeNotionalValue, other.cumulativeNotionalValue)
         && Utils.enhancedDeepEquals(
             this.cumulativeNotionalValueDirection, other.cumulativeNotionalValueDirection)
         && Utils.enhancedDeepEquals(this.currencyCode, other.currencyCode)
+        && Utils.enhancedDeepEquals(this.extraReportingData, other.extraReportingData)
         && Utils.enhancedDeepEquals(this.fees, other.fees)
         && Utils.enhancedDeepEquals(this.lastUpdateTime, other.lastUpdateTime)
         && Utils.enhancedDeepEquals(this.legs, other.legs)
@@ -972,14 +1178,19 @@ public class OptionOrder {
     return Utils.enhancedHash(
         accountId,
         brokerCapacity,
+        cancelInitiator,
         cancelReason,
         cancelRejectedReason,
+        clientCancelReceivedTime,
+        clientCancelSentTime,
         clientOrderId,
         clientReceivedTime,
+        clientSentTime,
         createTime,
         cumulativeNotionalValue,
         cumulativeNotionalValueDirection,
         currencyCode,
+        extraReportingData,
         fees,
         lastUpdateTime,
         legs,
@@ -1004,14 +1215,22 @@ public class OptionOrder {
         accountId,
         "brokerCapacity",
         brokerCapacity,
+        "cancelInitiator",
+        cancelInitiator,
         "cancelReason",
         cancelReason,
         "cancelRejectedReason",
         cancelRejectedReason,
+        "clientCancelReceivedTime",
+        clientCancelReceivedTime,
+        "clientCancelSentTime",
+        clientCancelSentTime,
         "clientOrderId",
         clientOrderId,
         "clientReceivedTime",
         clientReceivedTime,
+        "clientSentTime",
+        clientSentTime,
         "createTime",
         createTime,
         "cumulativeNotionalValue",
@@ -1020,6 +1239,8 @@ public class OptionOrder {
         cumulativeNotionalValueDirection,
         "currencyCode",
         currencyCode,
+        "extraReportingData",
+        extraReportingData,
         "fees",
         fees,
         "lastUpdateTime",
@@ -1057,14 +1278,22 @@ public class OptionOrder {
 
     private Optional<? extends OptionOrderBrokerCapacity> brokerCapacity = Optional.empty();
 
+    private Optional<? extends OptionOrderCancelInitiator> cancelInitiator = Optional.empty();
+
     private Optional<String> cancelReason = Optional.empty();
 
     private Optional<? extends OptionOrderCancelRejectedReason> cancelRejectedReason =
         Optional.empty();
 
+    private JsonNullable<OffsetDateTime> clientCancelReceivedTime = JsonNullable.undefined();
+
+    private JsonNullable<OffsetDateTime> clientCancelSentTime = JsonNullable.undefined();
+
     private Optional<String> clientOrderId = Optional.empty();
 
     private JsonNullable<OffsetDateTime> clientReceivedTime = JsonNullable.undefined();
+
+    private JsonNullable<OffsetDateTime> clientSentTime = JsonNullable.undefined();
 
     private JsonNullable<OffsetDateTime> createTime = JsonNullable.undefined();
 
@@ -1075,6 +1304,9 @@ public class OptionOrder {
         Optional.empty();
 
     private Optional<String> currencyCode = Optional.empty();
+
+    private JsonNullable<? extends OptionOrderExtraReportingData> extraReportingData =
+        JsonNullable.undefined();
 
     private Optional<? extends List<TradingFee>> fees = Optional.empty();
 
@@ -1138,6 +1370,26 @@ public class OptionOrder {
       return this;
     }
 
+    /**
+     * Whether the cancel was initiated by the correspondent firm (FIRM) or the customer (CLIENT).
+     * Populated from the CancelOptionOrderRequest.
+     */
+    public Builder cancelInitiator(OptionOrderCancelInitiator cancelInitiator) {
+      Utils.checkNotNull(cancelInitiator, "cancelInitiator");
+      this.cancelInitiator = Optional.ofNullable(cancelInitiator);
+      return this;
+    }
+
+    /**
+     * Whether the cancel was initiated by the correspondent firm (FIRM) or the customer (CLIENT).
+     * Populated from the CancelOptionOrderRequest.
+     */
+    public Builder cancelInitiator(Optional<? extends OptionOrderCancelInitiator> cancelInitiator) {
+      Utils.checkNotNull(cancelInitiator, "cancelInitiator");
+      this.cancelInitiator = cancelInitiator;
+      return this;
+    }
+
     /** Used to explain why an option order is canceled */
     public Builder cancelReason(String cancelReason) {
       Utils.checkNotNull(cancelReason, "cancelReason");
@@ -1167,6 +1419,46 @@ public class OptionOrder {
       return this;
     }
 
+    /**
+     * The time the correspondent received the cancel instruction from the customer. Populated from
+     * the CancelOptionOrderRequest.
+     */
+    public Builder clientCancelReceivedTime(OffsetDateTime clientCancelReceivedTime) {
+      Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+      this.clientCancelReceivedTime = JsonNullable.of(clientCancelReceivedTime);
+      return this;
+    }
+
+    /**
+     * The time the correspondent received the cancel instruction from the customer. Populated from
+     * the CancelOptionOrderRequest.
+     */
+    public Builder clientCancelReceivedTime(JsonNullable<OffsetDateTime> clientCancelReceivedTime) {
+      Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+      this.clientCancelReceivedTime = clientCancelReceivedTime;
+      return this;
+    }
+
+    /**
+     * The time the correspondent sent the cancel request. Populated from the
+     * CancelOptionOrderRequest.
+     */
+    public Builder clientCancelSentTime(OffsetDateTime clientCancelSentTime) {
+      Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
+      this.clientCancelSentTime = JsonNullable.of(clientCancelSentTime);
+      return this;
+    }
+
+    /**
+     * The time the correspondent sent the cancel request. Populated from the
+     * CancelOptionOrderRequest.
+     */
+    public Builder clientCancelSentTime(JsonNullable<OffsetDateTime> clientCancelSentTime) {
+      Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
+      this.clientCancelSentTime = clientCancelSentTime;
+      return this;
+    }
+
     /** User-supplied unique option order ID. Cannot be more than 40 characters long. */
     public Builder clientOrderId(String clientOrderId) {
       Utils.checkNotNull(clientOrderId, "clientOrderId");
@@ -1192,6 +1484,26 @@ public class OptionOrder {
     public Builder clientReceivedTime(JsonNullable<OffsetDateTime> clientReceivedTime) {
       Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
       this.clientReceivedTime = clientReceivedTime;
+      return this;
+    }
+
+    /**
+     * The time the correspondent sent the original order to Apex. Set at order creation and cannot
+     * be modified. Required for correspondents using Apex CAT reporting services.
+     */
+    public Builder clientSentTime(OffsetDateTime clientSentTime) {
+      Utils.checkNotNull(clientSentTime, "clientSentTime");
+      this.clientSentTime = JsonNullable.of(clientSentTime);
+      return this;
+    }
+
+    /**
+     * The time the correspondent sent the original order to Apex. Set at order creation and cannot
+     * be modified. Required for correspondents using Apex CAT reporting services.
+     */
+    public Builder clientSentTime(JsonNullable<OffsetDateTime> clientSentTime) {
+      Utils.checkNotNull(clientSentTime, "clientSentTime");
+      this.clientSentTime = clientSentTime;
       return this;
     }
 
@@ -1276,6 +1588,21 @@ public class OptionOrder {
     public Builder currencyCode(Optional<String> currencyCode) {
       Utils.checkNotNull(currencyCode, "currencyCode");
       this.currencyCode = currencyCode;
+      return this;
+    }
+
+    /** Post-cancel reporting data provided via the SetOptionExtraReportingData endpoint. */
+    public Builder extraReportingData(OptionOrderExtraReportingData extraReportingData) {
+      Utils.checkNotNull(extraReportingData, "extraReportingData");
+      this.extraReportingData = JsonNullable.of(extraReportingData);
+      return this;
+    }
+
+    /** Post-cancel reporting data provided via the SetOptionExtraReportingData endpoint. */
+    public Builder extraReportingData(
+        JsonNullable<? extends OptionOrderExtraReportingData> extraReportingData) {
+      Utils.checkNotNull(extraReportingData, "extraReportingData");
+      this.extraReportingData = extraReportingData;
       return this;
     }
 
@@ -1544,14 +1871,19 @@ public class OptionOrder {
       return new OptionOrder(
           accountId,
           brokerCapacity,
+          cancelInitiator,
           cancelReason,
           cancelRejectedReason,
+          clientCancelReceivedTime,
+          clientCancelSentTime,
           clientOrderId,
           clientReceivedTime,
+          clientSentTime,
           createTime,
           cumulativeNotionalValue,
           cumulativeNotionalValueDirection,
           currencyCode,
+          extraReportingData,
           fees,
           lastUpdateTime,
           legs,

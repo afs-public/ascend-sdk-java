@@ -36,8 +36,17 @@ public class AccountAssetBuyingPower {
       dayTradeBuyingPowerAmount;
 
   /**
-   * The is_day_trade_buying_power_allowed boolean will be true if the account is a Margin account,
-   * PDT is true and SOD Account equity &gt;= $25,000, otherwise it will be false.
+   * The intraday_buying_power_amount is the intraday trade buying power of the account in USD,
+   * returned from the request.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("intraday_buying_power_amount")
+  private JsonNullable<? extends AssetBuyingPowerIntradayBuyingPowerAmount>
+      intradayBuyingPowerAmount;
+
+  /**
+   * is_day_trade_buying_power_allowed indicates whether day trade buying power is available for the
+   * account.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("is_day_trade_buying_power_allowed")
@@ -59,21 +68,27 @@ public class AccountAssetBuyingPower {
       @JsonProperty("day_trade_buying_power_amount")
           JsonNullable<? extends AssetBuyingPowerDayTradeBuyingPowerAmount>
               dayTradeBuyingPowerAmount,
+      @JsonProperty("intraday_buying_power_amount")
+          JsonNullable<? extends AssetBuyingPowerIntradayBuyingPowerAmount>
+              intradayBuyingPowerAmount,
       @JsonProperty("is_day_trade_buying_power_allowed")
           Optional<Boolean> isDayTradeBuyingPowerAllowed,
       @JsonProperty("sma_amount") JsonNullable<? extends AssetBuyingPowerSmaAmount> smaAmount) {
     Utils.checkNotNull(buyingPowerAmount, "buyingPowerAmount");
     Utils.checkNotNull(dayTradeBuyingPowerAmount, "dayTradeBuyingPowerAmount");
+    Utils.checkNotNull(intradayBuyingPowerAmount, "intradayBuyingPowerAmount");
     Utils.checkNotNull(isDayTradeBuyingPowerAllowed, "isDayTradeBuyingPowerAllowed");
     Utils.checkNotNull(smaAmount, "smaAmount");
     this.buyingPowerAmount = buyingPowerAmount;
     this.dayTradeBuyingPowerAmount = dayTradeBuyingPowerAmount;
+    this.intradayBuyingPowerAmount = intradayBuyingPowerAmount;
     this.isDayTradeBuyingPowerAllowed = isDayTradeBuyingPowerAllowed;
     this.smaAmount = smaAmount;
   }
 
   public AccountAssetBuyingPower() {
     this(
+        JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
@@ -101,8 +116,18 @@ public class AccountAssetBuyingPower {
   }
 
   /**
-   * The is_day_trade_buying_power_allowed boolean will be true if the account is a Margin account,
-   * PDT is true and SOD Account equity &gt;= $25,000, otherwise it will be false.
+   * The intraday_buying_power_amount is the intraday trade buying power of the account in USD,
+   * returned from the request.
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<AssetBuyingPowerIntradayBuyingPowerAmount> intradayBuyingPowerAmount() {
+    return (JsonNullable<AssetBuyingPowerIntradayBuyingPowerAmount>) intradayBuyingPowerAmount;
+  }
+
+  /**
+   * is_day_trade_buying_power_allowed indicates whether day trade buying power is available for the
+   * account.
    */
   @JsonIgnore
   public Optional<Boolean> isDayTradeBuyingPowerAllowed() {
@@ -169,8 +194,30 @@ public class AccountAssetBuyingPower {
   }
 
   /**
-   * The is_day_trade_buying_power_allowed boolean will be true if the account is a Margin account,
-   * PDT is true and SOD Account equity &gt;= $25,000, otherwise it will be false.
+   * The intraday_buying_power_amount is the intraday trade buying power of the account in USD,
+   * returned from the request.
+   */
+  public AccountAssetBuyingPower withIntradayBuyingPowerAmount(
+      AssetBuyingPowerIntradayBuyingPowerAmount intradayBuyingPowerAmount) {
+    Utils.checkNotNull(intradayBuyingPowerAmount, "intradayBuyingPowerAmount");
+    this.intradayBuyingPowerAmount = JsonNullable.of(intradayBuyingPowerAmount);
+    return this;
+  }
+
+  /**
+   * The intraday_buying_power_amount is the intraday trade buying power of the account in USD,
+   * returned from the request.
+   */
+  public AccountAssetBuyingPower withIntradayBuyingPowerAmount(
+      JsonNullable<? extends AssetBuyingPowerIntradayBuyingPowerAmount> intradayBuyingPowerAmount) {
+    Utils.checkNotNull(intradayBuyingPowerAmount, "intradayBuyingPowerAmount");
+    this.intradayBuyingPowerAmount = intradayBuyingPowerAmount;
+    return this;
+  }
+
+  /**
+   * is_day_trade_buying_power_allowed indicates whether day trade buying power is available for the
+   * account.
    */
   public AccountAssetBuyingPower withIsDayTradeBuyingPowerAllowed(
       boolean isDayTradeBuyingPowerAllowed) {
@@ -180,8 +227,8 @@ public class AccountAssetBuyingPower {
   }
 
   /**
-   * The is_day_trade_buying_power_allowed boolean will be true if the account is a Margin account,
-   * PDT is true and SOD Account equity &gt;= $25,000, otherwise it will be false.
+   * is_day_trade_buying_power_allowed indicates whether day trade buying power is available for the
+   * account.
    */
   public AccountAssetBuyingPower withIsDayTradeBuyingPowerAllowed(
       Optional<Boolean> isDayTradeBuyingPowerAllowed) {
@@ -224,6 +271,7 @@ public class AccountAssetBuyingPower {
     AccountAssetBuyingPower other = (AccountAssetBuyingPower) o;
     return Utils.enhancedDeepEquals(this.buyingPowerAmount, other.buyingPowerAmount)
         && Utils.enhancedDeepEquals(this.dayTradeBuyingPowerAmount, other.dayTradeBuyingPowerAmount)
+        && Utils.enhancedDeepEquals(this.intradayBuyingPowerAmount, other.intradayBuyingPowerAmount)
         && Utils.enhancedDeepEquals(
             this.isDayTradeBuyingPowerAllowed, other.isDayTradeBuyingPowerAllowed)
         && Utils.enhancedDeepEquals(this.smaAmount, other.smaAmount);
@@ -232,7 +280,11 @@ public class AccountAssetBuyingPower {
   @Override
   public int hashCode() {
     return Utils.enhancedHash(
-        buyingPowerAmount, dayTradeBuyingPowerAmount, isDayTradeBuyingPowerAllowed, smaAmount);
+        buyingPowerAmount,
+        dayTradeBuyingPowerAmount,
+        intradayBuyingPowerAmount,
+        isDayTradeBuyingPowerAllowed,
+        smaAmount);
   }
 
   @Override
@@ -243,6 +295,8 @@ public class AccountAssetBuyingPower {
         buyingPowerAmount,
         "dayTradeBuyingPowerAmount",
         dayTradeBuyingPowerAmount,
+        "intradayBuyingPowerAmount",
+        intradayBuyingPowerAmount,
         "isDayTradeBuyingPowerAllowed",
         isDayTradeBuyingPowerAllowed,
         "smaAmount",
@@ -257,6 +311,9 @@ public class AccountAssetBuyingPower {
 
     private JsonNullable<? extends AssetBuyingPowerDayTradeBuyingPowerAmount>
         dayTradeBuyingPowerAmount = JsonNullable.undefined();
+
+    private JsonNullable<? extends AssetBuyingPowerIntradayBuyingPowerAmount>
+        intradayBuyingPowerAmount = JsonNullable.undefined();
 
     private Optional<Boolean> isDayTradeBuyingPowerAllowed = Optional.empty();
 
@@ -311,8 +368,31 @@ public class AccountAssetBuyingPower {
     }
 
     /**
-     * The is_day_trade_buying_power_allowed boolean will be true if the account is a Margin
-     * account, PDT is true and SOD Account equity &gt;= $25,000, otherwise it will be false.
+     * The intraday_buying_power_amount is the intraday trade buying power of the account in USD,
+     * returned from the request.
+     */
+    public Builder intradayBuyingPowerAmount(
+        AssetBuyingPowerIntradayBuyingPowerAmount intradayBuyingPowerAmount) {
+      Utils.checkNotNull(intradayBuyingPowerAmount, "intradayBuyingPowerAmount");
+      this.intradayBuyingPowerAmount = JsonNullable.of(intradayBuyingPowerAmount);
+      return this;
+    }
+
+    /**
+     * The intraday_buying_power_amount is the intraday trade buying power of the account in USD,
+     * returned from the request.
+     */
+    public Builder intradayBuyingPowerAmount(
+        JsonNullable<? extends AssetBuyingPowerIntradayBuyingPowerAmount>
+            intradayBuyingPowerAmount) {
+      Utils.checkNotNull(intradayBuyingPowerAmount, "intradayBuyingPowerAmount");
+      this.intradayBuyingPowerAmount = intradayBuyingPowerAmount;
+      return this;
+    }
+
+    /**
+     * is_day_trade_buying_power_allowed indicates whether day trade buying power is available for
+     * the account.
      */
     public Builder isDayTradeBuyingPowerAllowed(boolean isDayTradeBuyingPowerAllowed) {
       Utils.checkNotNull(isDayTradeBuyingPowerAllowed, "isDayTradeBuyingPowerAllowed");
@@ -321,8 +401,8 @@ public class AccountAssetBuyingPower {
     }
 
     /**
-     * The is_day_trade_buying_power_allowed boolean will be true if the account is a Margin
-     * account, PDT is true and SOD Account equity &gt;= $25,000, otherwise it will be false.
+     * is_day_trade_buying_power_allowed indicates whether day trade buying power is available for
+     * the account.
      */
     public Builder isDayTradeBuyingPowerAllowed(Optional<Boolean> isDayTradeBuyingPowerAllowed) {
       Utils.checkNotNull(isDayTradeBuyingPowerAllowed, "isDayTradeBuyingPowerAllowed");
@@ -355,7 +435,11 @@ public class AccountAssetBuyingPower {
     public AccountAssetBuyingPower build() {
 
       return new AccountAssetBuyingPower(
-          buyingPowerAmount, dayTradeBuyingPowerAmount, isDayTradeBuyingPowerAllowed, smaAmount);
+          buyingPowerAmount,
+          dayTradeBuyingPowerAmount,
+          intradayBuyingPowerAmount,
+          isDayTradeBuyingPowerAllowed,
+          smaAmount);
     }
   }
 }

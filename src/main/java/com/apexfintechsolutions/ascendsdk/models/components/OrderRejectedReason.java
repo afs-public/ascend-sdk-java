@@ -120,6 +120,22 @@ public class OrderRejectedReason {
       new OrderRejectedReason("BELOW_ROUND_UP_MINIMUM");
   public static final OrderRejectedReason STOP_PRICE_BELOW_MARKET_PRICE =
       new OrderRejectedReason("STOP_PRICE_BELOW_MARKET_PRICE");
+  public static final OrderRejectedReason POSITION_THRESHOLD_VIOLATION =
+      new OrderRejectedReason("POSITION_THRESHOLD_VIOLATION");
+  public static final OrderRejectedReason UNSUPPORTED_PRICE_VALUE =
+      new OrderRejectedReason("UNSUPPORTED_PRICE_VALUE");
+  public static final OrderRejectedReason ASSET_NOT_SHORTABLE =
+      new OrderRejectedReason("ASSET_NOT_SHORTABLE");
+  public static final OrderRejectedReason BOX_TRADES_PROHIBITED =
+      new OrderRejectedReason("BOX_TRADES_PROHIBITED");
+  public static final OrderRejectedReason DESK_ORDER_NOT_ALLOWED =
+      new OrderRejectedReason("DESK_ORDER_NOT_ALLOWED");
+  public static final OrderRejectedReason UNSUPPORTED_TRADING_SESSION_FOR_ASSET =
+      new OrderRejectedReason("UNSUPPORTED_TRADING_SESSION_FOR_ASSET");
+  public static final OrderRejectedReason UNSUPPORTED_ORDER_TYPE_FOR_ASSET =
+      new OrderRejectedReason("UNSUPPORTED_ORDER_TYPE_FOR_ASSET");
+  public static final OrderRejectedReason UNSUPPORTED_TIME_IN_FORCE_FOR_ASSET =
+      new OrderRejectedReason("UNSUPPORTED_TIME_IN_FORCE_FOR_ASSET");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -233,6 +249,14 @@ public class OrderRejectedReason {
     map.put("ASSET_NOT_SET_UP_FOR_ROUND_UPS", ASSET_NOT_SET_UP_FOR_ROUND_UPS);
     map.put("BELOW_ROUND_UP_MINIMUM", BELOW_ROUND_UP_MINIMUM);
     map.put("STOP_PRICE_BELOW_MARKET_PRICE", STOP_PRICE_BELOW_MARKET_PRICE);
+    map.put("POSITION_THRESHOLD_VIOLATION", POSITION_THRESHOLD_VIOLATION);
+    map.put("UNSUPPORTED_PRICE_VALUE", UNSUPPORTED_PRICE_VALUE);
+    map.put("ASSET_NOT_SHORTABLE", ASSET_NOT_SHORTABLE);
+    map.put("BOX_TRADES_PROHIBITED", BOX_TRADES_PROHIBITED);
+    map.put("DESK_ORDER_NOT_ALLOWED", DESK_ORDER_NOT_ALLOWED);
+    map.put("UNSUPPORTED_TRADING_SESSION_FOR_ASSET", UNSUPPORTED_TRADING_SESSION_FOR_ASSET);
+    map.put("UNSUPPORTED_ORDER_TYPE_FOR_ASSET", UNSUPPORTED_ORDER_TYPE_FOR_ASSET);
+    map.put("UNSUPPORTED_TIME_IN_FORCE_FOR_ASSET", UNSUPPORTED_TIME_IN_FORCE_FOR_ASSET);
     return map;
   }
 
@@ -291,6 +315,20 @@ public class OrderRejectedReason {
         "ASSET_NOT_SET_UP_FOR_ROUND_UPS", OrderRejectedReasonEnum.ASSET_NOT_SET_UP_FOR_ROUND_UPS);
     map.put("BELOW_ROUND_UP_MINIMUM", OrderRejectedReasonEnum.BELOW_ROUND_UP_MINIMUM);
     map.put("STOP_PRICE_BELOW_MARKET_PRICE", OrderRejectedReasonEnum.STOP_PRICE_BELOW_MARKET_PRICE);
+    map.put("POSITION_THRESHOLD_VIOLATION", OrderRejectedReasonEnum.POSITION_THRESHOLD_VIOLATION);
+    map.put("UNSUPPORTED_PRICE_VALUE", OrderRejectedReasonEnum.UNSUPPORTED_PRICE_VALUE);
+    map.put("ASSET_NOT_SHORTABLE", OrderRejectedReasonEnum.ASSET_NOT_SHORTABLE);
+    map.put("BOX_TRADES_PROHIBITED", OrderRejectedReasonEnum.BOX_TRADES_PROHIBITED);
+    map.put("DESK_ORDER_NOT_ALLOWED", OrderRejectedReasonEnum.DESK_ORDER_NOT_ALLOWED);
+    map.put(
+        "UNSUPPORTED_TRADING_SESSION_FOR_ASSET",
+        OrderRejectedReasonEnum.UNSUPPORTED_TRADING_SESSION_FOR_ASSET);
+    map.put(
+        "UNSUPPORTED_ORDER_TYPE_FOR_ASSET",
+        OrderRejectedReasonEnum.UNSUPPORTED_ORDER_TYPE_FOR_ASSET);
+    map.put(
+        "UNSUPPORTED_TIME_IN_FORCE_FOR_ASSET",
+        OrderRejectedReasonEnum.UNSUPPORTED_TIME_IN_FORCE_FOR_ASSET);
     return map;
   }
 
@@ -364,6 +402,14 @@ public class OrderRejectedReason {
     ASSET_NOT_SET_UP_FOR_ROUND_UPS("ASSET_NOT_SET_UP_FOR_ROUND_UPS"),
     BELOW_ROUND_UP_MINIMUM("BELOW_ROUND_UP_MINIMUM"),
     STOP_PRICE_BELOW_MARKET_PRICE("STOP_PRICE_BELOW_MARKET_PRICE"),
+    POSITION_THRESHOLD_VIOLATION("POSITION_THRESHOLD_VIOLATION"),
+    UNSUPPORTED_PRICE_VALUE("UNSUPPORTED_PRICE_VALUE"),
+    ASSET_NOT_SHORTABLE("ASSET_NOT_SHORTABLE"),
+    BOX_TRADES_PROHIBITED("BOX_TRADES_PROHIBITED"),
+    DESK_ORDER_NOT_ALLOWED("DESK_ORDER_NOT_ALLOWED"),
+    UNSUPPORTED_TRADING_SESSION_FOR_ASSET("UNSUPPORTED_TRADING_SESSION_FOR_ASSET"),
+    UNSUPPORTED_ORDER_TYPE_FOR_ASSET("UNSUPPORTED_ORDER_TYPE_FOR_ASSET"),
+    UNSUPPORTED_TIME_IN_FORCE_FOR_ASSET("UNSUPPORTED_TIME_IN_FORCE_FOR_ASSET"),
     ;
 
     private final String value;

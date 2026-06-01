@@ -38,33 +38,17 @@ public class WatchlistMatch {
   @JsonProperty("exclude_from_screening")
   private Optional<Boolean> excludeFromScreening;
 
-  /**
-   * The attributes used in watchlist screening, one of: - `MATCH_ATTRIBUTE_UNSPECIFIED` -
-   * Default/Null value. - `NAME` - Matched on name. - `PHONE_NUMBER` - Matched on phone number. -
-   * `BIRTH_DATE` - Matched on birth date. - `IDENTIFICATION` - Matched on identification. - `EMAIL`
-   * - Matched on email. - `ADDRESS` - Matched on address.
-   */
+  /** The attributes used in watchlist screening */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("match_attributes")
   private Optional<? extends List<MatchAttributes>> matchAttributes;
 
-  /**
-   * The match state for a profile, one of: - `MATCH_UNSPECIFIED` - Default/Null value. -
-   * `CONFIRMED_MATCH` - Match is confirmed. - `POTENTIAL_MATCH` - Match is a potential. -
-   * `NO_MATCH` - Match is confirmed not to be a match. - `INCONCLUSIVE` - Match is deemed to be
-   * inconclusive.
-   */
+  /** The match state for a profile */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("match_state")
   private Optional<? extends MatchState> matchState;
 
-  /**
-   * The type of watchlist match, one of: - `MATCH_TYPE_UNSPECIFIED` - Default/Null value. -
-   * `NON_OFAC_SANCTIONS` - Matched on a non OFAC sanctions list. - `RELATIVE_OR_CLOSE_ASSOCIATE` -
-   * Matched on a relative or close associate. - `OFAC_SANCTIONS` - Matched on a OFAC sanctions
-   * list. - `POLITICALLY_EXPOSED_PERSON` - Matched on a politically exposed person list. - `DNDB` -
-   * Matched on a do not do business list. - `NEGATIVE_NEWS` - Matched on a negative news list.
-   */
+  /** The type of watchlist match */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("match_types")
   private Optional<? extends List<MatchTypes>> matchTypes;
@@ -149,37 +133,21 @@ public class WatchlistMatch {
     return excludeFromScreening;
   }
 
-  /**
-   * The attributes used in watchlist screening, one of: - `MATCH_ATTRIBUTE_UNSPECIFIED` -
-   * Default/Null value. - `NAME` - Matched on name. - `PHONE_NUMBER` - Matched on phone number. -
-   * `BIRTH_DATE` - Matched on birth date. - `IDENTIFICATION` - Matched on identification. - `EMAIL`
-   * - Matched on email. - `ADDRESS` - Matched on address.
-   */
+  /** The attributes used in watchlist screening */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<List<MatchAttributes>> matchAttributes() {
     return (Optional<List<MatchAttributes>>) matchAttributes;
   }
 
-  /**
-   * The match state for a profile, one of: - `MATCH_UNSPECIFIED` - Default/Null value. -
-   * `CONFIRMED_MATCH` - Match is confirmed. - `POTENTIAL_MATCH` - Match is a potential. -
-   * `NO_MATCH` - Match is confirmed not to be a match. - `INCONCLUSIVE` - Match is deemed to be
-   * inconclusive.
-   */
+  /** The match state for a profile */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<MatchState> matchState() {
     return (Optional<MatchState>) matchState;
   }
 
-  /**
-   * The type of watchlist match, one of: - `MATCH_TYPE_UNSPECIFIED` - Default/Null value. -
-   * `NON_OFAC_SANCTIONS` - Matched on a non OFAC sanctions list. - `RELATIVE_OR_CLOSE_ASSOCIATE` -
-   * Matched on a relative or close associate. - `OFAC_SANCTIONS` - Matched on a OFAC sanctions
-   * list. - `POLITICALLY_EXPOSED_PERSON` - Matched on a politically exposed person list. - `DNDB` -
-   * Matched on a do not do business list. - `NEGATIVE_NEWS` - Matched on a negative news list.
-   */
+  /** The type of watchlist match */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<List<MatchTypes>> matchTypes() {
@@ -256,24 +224,14 @@ public class WatchlistMatch {
     return this;
   }
 
-  /**
-   * The attributes used in watchlist screening, one of: - `MATCH_ATTRIBUTE_UNSPECIFIED` -
-   * Default/Null value. - `NAME` - Matched on name. - `PHONE_NUMBER` - Matched on phone number. -
-   * `BIRTH_DATE` - Matched on birth date. - `IDENTIFICATION` - Matched on identification. - `EMAIL`
-   * - Matched on email. - `ADDRESS` - Matched on address.
-   */
+  /** The attributes used in watchlist screening */
   public WatchlistMatch withMatchAttributes(List<MatchAttributes> matchAttributes) {
     Utils.checkNotNull(matchAttributes, "matchAttributes");
     this.matchAttributes = Optional.ofNullable(matchAttributes);
     return this;
   }
 
-  /**
-   * The attributes used in watchlist screening, one of: - `MATCH_ATTRIBUTE_UNSPECIFIED` -
-   * Default/Null value. - `NAME` - Matched on name. - `PHONE_NUMBER` - Matched on phone number. -
-   * `BIRTH_DATE` - Matched on birth date. - `IDENTIFICATION` - Matched on identification. - `EMAIL`
-   * - Matched on email. - `ADDRESS` - Matched on address.
-   */
+  /** The attributes used in watchlist screening */
   public WatchlistMatch withMatchAttributes(
       Optional<? extends List<MatchAttributes>> matchAttributes) {
     Utils.checkNotNull(matchAttributes, "matchAttributes");
@@ -281,50 +239,28 @@ public class WatchlistMatch {
     return this;
   }
 
-  /**
-   * The match state for a profile, one of: - `MATCH_UNSPECIFIED` - Default/Null value. -
-   * `CONFIRMED_MATCH` - Match is confirmed. - `POTENTIAL_MATCH` - Match is a potential. -
-   * `NO_MATCH` - Match is confirmed not to be a match. - `INCONCLUSIVE` - Match is deemed to be
-   * inconclusive.
-   */
+  /** The match state for a profile */
   public WatchlistMatch withMatchState(MatchState matchState) {
     Utils.checkNotNull(matchState, "matchState");
     this.matchState = Optional.ofNullable(matchState);
     return this;
   }
 
-  /**
-   * The match state for a profile, one of: - `MATCH_UNSPECIFIED` - Default/Null value. -
-   * `CONFIRMED_MATCH` - Match is confirmed. - `POTENTIAL_MATCH` - Match is a potential. -
-   * `NO_MATCH` - Match is confirmed not to be a match. - `INCONCLUSIVE` - Match is deemed to be
-   * inconclusive.
-   */
+  /** The match state for a profile */
   public WatchlistMatch withMatchState(Optional<? extends MatchState> matchState) {
     Utils.checkNotNull(matchState, "matchState");
     this.matchState = matchState;
     return this;
   }
 
-  /**
-   * The type of watchlist match, one of: - `MATCH_TYPE_UNSPECIFIED` - Default/Null value. -
-   * `NON_OFAC_SANCTIONS` - Matched on a non OFAC sanctions list. - `RELATIVE_OR_CLOSE_ASSOCIATE` -
-   * Matched on a relative or close associate. - `OFAC_SANCTIONS` - Matched on a OFAC sanctions
-   * list. - `POLITICALLY_EXPOSED_PERSON` - Matched on a politically exposed person list. - `DNDB` -
-   * Matched on a do not do business list. - `NEGATIVE_NEWS` - Matched on a negative news list.
-   */
+  /** The type of watchlist match */
   public WatchlistMatch withMatchTypes(List<MatchTypes> matchTypes) {
     Utils.checkNotNull(matchTypes, "matchTypes");
     this.matchTypes = Optional.ofNullable(matchTypes);
     return this;
   }
 
-  /**
-   * The type of watchlist match, one of: - `MATCH_TYPE_UNSPECIFIED` - Default/Null value. -
-   * `NON_OFAC_SANCTIONS` - Matched on a non OFAC sanctions list. - `RELATIVE_OR_CLOSE_ASSOCIATE` -
-   * Matched on a relative or close associate. - `OFAC_SANCTIONS` - Matched on a OFAC sanctions
-   * list. - `POLITICALLY_EXPOSED_PERSON` - Matched on a politically exposed person list. - `DNDB` -
-   * Matched on a do not do business list. - `NEGATIVE_NEWS` - Matched on a negative news list.
-   */
+  /** The type of watchlist match */
   public WatchlistMatch withMatchTypes(Optional<? extends List<MatchTypes>> matchTypes) {
     Utils.checkNotNull(matchTypes, "matchTypes");
     this.matchTypes = matchTypes;
@@ -504,74 +440,42 @@ public class WatchlistMatch {
       return this;
     }
 
-    /**
-     * The attributes used in watchlist screening, one of: - `MATCH_ATTRIBUTE_UNSPECIFIED` -
-     * Default/Null value. - `NAME` - Matched on name. - `PHONE_NUMBER` - Matched on phone number. -
-     * `BIRTH_DATE` - Matched on birth date. - `IDENTIFICATION` - Matched on identification. -
-     * `EMAIL` - Matched on email. - `ADDRESS` - Matched on address.
-     */
+    /** The attributes used in watchlist screening */
     public Builder matchAttributes(List<MatchAttributes> matchAttributes) {
       Utils.checkNotNull(matchAttributes, "matchAttributes");
       this.matchAttributes = Optional.ofNullable(matchAttributes);
       return this;
     }
 
-    /**
-     * The attributes used in watchlist screening, one of: - `MATCH_ATTRIBUTE_UNSPECIFIED` -
-     * Default/Null value. - `NAME` - Matched on name. - `PHONE_NUMBER` - Matched on phone number. -
-     * `BIRTH_DATE` - Matched on birth date. - `IDENTIFICATION` - Matched on identification. -
-     * `EMAIL` - Matched on email. - `ADDRESS` - Matched on address.
-     */
+    /** The attributes used in watchlist screening */
     public Builder matchAttributes(Optional<? extends List<MatchAttributes>> matchAttributes) {
       Utils.checkNotNull(matchAttributes, "matchAttributes");
       this.matchAttributes = matchAttributes;
       return this;
     }
 
-    /**
-     * The match state for a profile, one of: - `MATCH_UNSPECIFIED` - Default/Null value. -
-     * `CONFIRMED_MATCH` - Match is confirmed. - `POTENTIAL_MATCH` - Match is a potential. -
-     * `NO_MATCH` - Match is confirmed not to be a match. - `INCONCLUSIVE` - Match is deemed to be
-     * inconclusive.
-     */
+    /** The match state for a profile */
     public Builder matchState(MatchState matchState) {
       Utils.checkNotNull(matchState, "matchState");
       this.matchState = Optional.ofNullable(matchState);
       return this;
     }
 
-    /**
-     * The match state for a profile, one of: - `MATCH_UNSPECIFIED` - Default/Null value. -
-     * `CONFIRMED_MATCH` - Match is confirmed. - `POTENTIAL_MATCH` - Match is a potential. -
-     * `NO_MATCH` - Match is confirmed not to be a match. - `INCONCLUSIVE` - Match is deemed to be
-     * inconclusive.
-     */
+    /** The match state for a profile */
     public Builder matchState(Optional<? extends MatchState> matchState) {
       Utils.checkNotNull(matchState, "matchState");
       this.matchState = matchState;
       return this;
     }
 
-    /**
-     * The type of watchlist match, one of: - `MATCH_TYPE_UNSPECIFIED` - Default/Null value. -
-     * `NON_OFAC_SANCTIONS` - Matched on a non OFAC sanctions list. - `RELATIVE_OR_CLOSE_ASSOCIATE`
-     * - Matched on a relative or close associate. - `OFAC_SANCTIONS` - Matched on a OFAC sanctions
-     * list. - `POLITICALLY_EXPOSED_PERSON` - Matched on a politically exposed person list. - `DNDB`
-     * - Matched on a do not do business list. - `NEGATIVE_NEWS` - Matched on a negative news list.
-     */
+    /** The type of watchlist match */
     public Builder matchTypes(List<MatchTypes> matchTypes) {
       Utils.checkNotNull(matchTypes, "matchTypes");
       this.matchTypes = Optional.ofNullable(matchTypes);
       return this;
     }
 
-    /**
-     * The type of watchlist match, one of: - `MATCH_TYPE_UNSPECIFIED` - Default/Null value. -
-     * `NON_OFAC_SANCTIONS` - Matched on a non OFAC sanctions list. - `RELATIVE_OR_CLOSE_ASSOCIATE`
-     * - Matched on a relative or close associate. - `OFAC_SANCTIONS` - Matched on a OFAC sanctions
-     * list. - `POLITICALLY_EXPOSED_PERSON` - Matched on a politically exposed person list. - `DNDB`
-     * - Matched on a do not do business list. - `NEGATIVE_NEWS` - Matched on a negative news list.
-     */
+    /** The type of watchlist match */
     public Builder matchTypes(Optional<? extends List<MatchTypes>> matchTypes) {
       Utils.checkNotNull(matchTypes, "matchTypes");
       this.matchTypes = matchTypes;

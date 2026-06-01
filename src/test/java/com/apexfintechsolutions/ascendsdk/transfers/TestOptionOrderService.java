@@ -2,6 +2,7 @@ package com.apexfintechsolutions.ascendsdk;
 
 import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import java.time.OffsetDateTime;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
@@ -107,6 +108,31 @@ public class TestOptionOrderService {
     } catch (Status status) {
       Assertions.assertEquals(9, status.code().get());
       Assertions.assertTrue(status.message().get().toLowerCase().contains("not in cancelable"));
+    }
+  }
+
+  @Order(4)
+  @Test
+  public void test_option_order_service_set_option_extra_reporting_data() throws Exception {
+    var request =
+        SetOptionExtraReportingDataRequestCreate.builder()
+            .name(optionOrder.name().get())
+            .cancelConfirmedTime(OffsetDateTime.now())
+            .build();
+
+    try {
+      var res =
+          sdk.optionOrders()
+              .setOptionExtraReportingData(account.accountId().get(), optionOrderId, request);
+
+      Assertions.assertNotNull(res);
+      Assertions.assertEquals(200, res.statusCode());
+      Assertions.assertTrue(res.optionOrder().isPresent());
+      Assertions.assertTrue(res.optionOrder().get().extraReportingData().isPresent());
+      Assertions.assertTrue(
+          res.optionOrder().get().extraReportingData().get().cancelConfirmedTime().isPresent());
+    } catch (Status status) {
+      Assertions.assertEquals(9, status.code().get());
     }
   }
 }

@@ -7,6 +7,7 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.models.components.CancelOptionOrderRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.OptionOrderCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.SetOptionExtraReportingDataRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.operations.OptionOrderServiceCancelOptionOrderRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.OptionOrderServiceCancelOptionOrderRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.OptionOrderServiceCancelOptionOrderResponse;
@@ -16,9 +17,13 @@ import com.apexfintechsolutions.ascendsdk.models.operations.OptionOrderServiceCr
 import com.apexfintechsolutions.ascendsdk.models.operations.OptionOrderServiceGetOptionOrderRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.OptionOrderServiceGetOptionOrderRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.OptionOrderServiceGetOptionOrderResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.OptionOrderServiceSetOptionExtraReportingDataRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.OptionOrderServiceSetOptionExtraReportingDataRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.OptionOrderServiceSetOptionExtraReportingDataResponse;
 import com.apexfintechsolutions.ascendsdk.operations.OptionOrderServiceCancelOptionOrder;
 import com.apexfintechsolutions.ascendsdk.operations.OptionOrderServiceCreateOptionOrder;
 import com.apexfintechsolutions.ascendsdk.operations.OptionOrderServiceGetOptionOrder;
+import com.apexfintechsolutions.ascendsdk.operations.OptionOrderServiceSetOptionExtraReportingData;
 import com.apexfintechsolutions.ascendsdk.utils.Options;
 import java.util.Optional;
 
@@ -232,6 +237,83 @@ public class OptionOrders {
     RequestOperation<
             OptionOrderServiceCancelOptionOrderRequest, OptionOrderServiceCancelOptionOrderResponse>
         operation = new OptionOrderServiceCancelOptionOrder.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Set Option Extra Reporting Data
+   *
+   * <p>Sets post-cancel reporting data for an option order.
+   *
+   * <p>The option order must be in a canceled or pending_cancel state. Requires the option order
+   * resource name and the cancel_confirmed_time. If cancel_confirmed_time has already been set by a
+   * prior call, the existing value is preserved and the response reflects the original value.
+   *
+   * @return The call builder
+   */
+  public OptionOrderServiceSetOptionExtraReportingDataRequestBuilder setOptionExtraReportingData() {
+    return new OptionOrderServiceSetOptionExtraReportingDataRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * Set Option Extra Reporting Data
+   *
+   * <p>Sets post-cancel reporting data for an option order.
+   *
+   * <p>The option order must be in a canceled or pending_cancel state. Requires the option order
+   * resource name and the cancel_confirmed_time. If cancel_confirmed_time has already been set by a
+   * prior call, the existing value is preserved and the response reflects the original value.
+   *
+   * @param accountId The account id.
+   * @param optionOrderId The optionOrder id.
+   * @param setOptionExtraReportingDataRequestCreate Request message for
+   *     SetOptionExtraReportingData.
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public OptionOrderServiceSetOptionExtraReportingDataResponse setOptionExtraReportingData(
+      String accountId,
+      String optionOrderId,
+      SetOptionExtraReportingDataRequestCreate setOptionExtraReportingDataRequestCreate)
+      throws Exception {
+    return setOptionExtraReportingData(
+        accountId, optionOrderId, setOptionExtraReportingDataRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Set Option Extra Reporting Data
+   *
+   * <p>Sets post-cancel reporting data for an option order.
+   *
+   * <p>The option order must be in a canceled or pending_cancel state. Requires the option order
+   * resource name and the cancel_confirmed_time. If cancel_confirmed_time has already been set by a
+   * prior call, the existing value is preserved and the response reflects the original value.
+   *
+   * @param accountId The account id.
+   * @param optionOrderId The optionOrder id.
+   * @param setOptionExtraReportingDataRequestCreate Request message for
+   *     SetOptionExtraReportingData.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public OptionOrderServiceSetOptionExtraReportingDataResponse setOptionExtraReportingData(
+      String accountId,
+      String optionOrderId,
+      SetOptionExtraReportingDataRequestCreate setOptionExtraReportingDataRequestCreate,
+      Optional<Options> options)
+      throws Exception {
+    OptionOrderServiceSetOptionExtraReportingDataRequest request =
+        OptionOrderServiceSetOptionExtraReportingDataRequest.builder()
+            .accountId(accountId)
+            .optionOrderId(optionOrderId)
+            .setOptionExtraReportingDataRequestCreate(setOptionExtraReportingDataRequestCreate)
+            .build();
+    RequestOperation<
+            OptionOrderServiceSetOptionExtraReportingDataRequest,
+            OptionOrderServiceSetOptionExtraReportingDataResponse>
+        operation =
+            new OptionOrderServiceSetOptionExtraReportingData.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

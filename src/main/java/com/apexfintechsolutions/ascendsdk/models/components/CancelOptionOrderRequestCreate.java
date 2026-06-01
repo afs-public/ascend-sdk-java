@@ -6,7 +6,12 @@ package com.apexfintechsolutions.ascendsdk.models.components;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.OffsetDateTime;
+import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * CancelOptionOrderRequestCreate
@@ -14,14 +19,84 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * <p>The message to request cancellation of an existing option order
  */
 public class CancelOptionOrderRequestCreate {
+  /**
+   * Identifies whether the cancel was initiated by the correspondent firm (FIRM) or the customer
+   * (CLIENT). Defaults to CLIENT if not provided. Required for correspondents using Apex CAT
+   * reporting services.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("cancel_initiator")
+  private Optional<? extends CancelOptionOrderRequestCreateCancelInitiator> cancelInitiator;
+
+  /**
+   * The time the correspondent received the cancel instruction from the customer. Required for
+   * correspondents using Apex CAT reporting services.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_cancel_received_time")
+  private JsonNullable<OffsetDateTime> clientCancelReceivedTime;
+
+  /**
+   * The time the correspondent sent this cancel request, before Apex received it. Required for
+   * correspondents using Apex CAT reporting services.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_cancel_sent_time")
+  private JsonNullable<OffsetDateTime> clientCancelSentTime;
+
   /** Format: accounts/{account_id}/optionOrders/{option_order_id} */
   @JsonProperty("name")
   private String name;
 
   @JsonCreator
-  public CancelOptionOrderRequestCreate(@JsonProperty("name") String name) {
+  public CancelOptionOrderRequestCreate(
+      @JsonProperty("cancel_initiator")
+          Optional<? extends CancelOptionOrderRequestCreateCancelInitiator> cancelInitiator,
+      @JsonProperty("client_cancel_received_time")
+          JsonNullable<OffsetDateTime> clientCancelReceivedTime,
+      @JsonProperty("client_cancel_sent_time") JsonNullable<OffsetDateTime> clientCancelSentTime,
+      @JsonProperty("name") String name) {
+    Utils.checkNotNull(cancelInitiator, "cancelInitiator");
+    Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+    Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
     Utils.checkNotNull(name, "name");
+    this.cancelInitiator = cancelInitiator;
+    this.clientCancelReceivedTime = clientCancelReceivedTime;
+    this.clientCancelSentTime = clientCancelSentTime;
     this.name = name;
+  }
+
+  public CancelOptionOrderRequestCreate(String name) {
+    this(Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(), name);
+  }
+
+  /**
+   * Identifies whether the cancel was initiated by the correspondent firm (FIRM) or the customer
+   * (CLIENT). Defaults to CLIENT if not provided. Required for correspondents using Apex CAT
+   * reporting services.
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<CancelOptionOrderRequestCreateCancelInitiator> cancelInitiator() {
+    return (Optional<CancelOptionOrderRequestCreateCancelInitiator>) cancelInitiator;
+  }
+
+  /**
+   * The time the correspondent received the cancel instruction from the customer. Required for
+   * correspondents using Apex CAT reporting services.
+   */
+  @JsonIgnore
+  public JsonNullable<OffsetDateTime> clientCancelReceivedTime() {
+    return clientCancelReceivedTime;
+  }
+
+  /**
+   * The time the correspondent sent this cancel request, before Apex received it. Required for
+   * correspondents using Apex CAT reporting services.
+   */
+  @JsonIgnore
+  public JsonNullable<OffsetDateTime> clientCancelSentTime() {
+    return clientCancelSentTime;
   }
 
   /** Format: accounts/{account_id}/optionOrders/{option_order_id} */
@@ -32,6 +107,74 @@ public class CancelOptionOrderRequestCreate {
 
   public static Builder builder() {
     return new Builder();
+  }
+
+  /**
+   * Identifies whether the cancel was initiated by the correspondent firm (FIRM) or the customer
+   * (CLIENT). Defaults to CLIENT if not provided. Required for correspondents using Apex CAT
+   * reporting services.
+   */
+  public CancelOptionOrderRequestCreate withCancelInitiator(
+      CancelOptionOrderRequestCreateCancelInitiator cancelInitiator) {
+    Utils.checkNotNull(cancelInitiator, "cancelInitiator");
+    this.cancelInitiator = Optional.ofNullable(cancelInitiator);
+    return this;
+  }
+
+  /**
+   * Identifies whether the cancel was initiated by the correspondent firm (FIRM) or the customer
+   * (CLIENT). Defaults to CLIENT if not provided. Required for correspondents using Apex CAT
+   * reporting services.
+   */
+  public CancelOptionOrderRequestCreate withCancelInitiator(
+      Optional<? extends CancelOptionOrderRequestCreateCancelInitiator> cancelInitiator) {
+    Utils.checkNotNull(cancelInitiator, "cancelInitiator");
+    this.cancelInitiator = cancelInitiator;
+    return this;
+  }
+
+  /**
+   * The time the correspondent received the cancel instruction from the customer. Required for
+   * correspondents using Apex CAT reporting services.
+   */
+  public CancelOptionOrderRequestCreate withClientCancelReceivedTime(
+      OffsetDateTime clientCancelReceivedTime) {
+    Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+    this.clientCancelReceivedTime = JsonNullable.of(clientCancelReceivedTime);
+    return this;
+  }
+
+  /**
+   * The time the correspondent received the cancel instruction from the customer. Required for
+   * correspondents using Apex CAT reporting services.
+   */
+  public CancelOptionOrderRequestCreate withClientCancelReceivedTime(
+      JsonNullable<OffsetDateTime> clientCancelReceivedTime) {
+    Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+    this.clientCancelReceivedTime = clientCancelReceivedTime;
+    return this;
+  }
+
+  /**
+   * The time the correspondent sent this cancel request, before Apex received it. Required for
+   * correspondents using Apex CAT reporting services.
+   */
+  public CancelOptionOrderRequestCreate withClientCancelSentTime(
+      OffsetDateTime clientCancelSentTime) {
+    Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
+    this.clientCancelSentTime = JsonNullable.of(clientCancelSentTime);
+    return this;
+  }
+
+  /**
+   * The time the correspondent sent this cancel request, before Apex received it. Required for
+   * correspondents using Apex CAT reporting services.
+   */
+  public CancelOptionOrderRequestCreate withClientCancelSentTime(
+      JsonNullable<OffsetDateTime> clientCancelSentTime) {
+    Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
+    this.clientCancelSentTime = clientCancelSentTime;
+    return this;
   }
 
   /** Format: accounts/{account_id}/optionOrders/{option_order_id} */
@@ -50,26 +193,109 @@ public class CancelOptionOrderRequestCreate {
       return false;
     }
     CancelOptionOrderRequestCreate other = (CancelOptionOrderRequestCreate) o;
-    return Utils.enhancedDeepEquals(this.name, other.name);
+    return Utils.enhancedDeepEquals(this.cancelInitiator, other.cancelInitiator)
+        && Utils.enhancedDeepEquals(this.clientCancelReceivedTime, other.clientCancelReceivedTime)
+        && Utils.enhancedDeepEquals(this.clientCancelSentTime, other.clientCancelSentTime)
+        && Utils.enhancedDeepEquals(this.name, other.name);
   }
 
   @Override
   public int hashCode() {
-    return Utils.enhancedHash(name);
+    return Utils.enhancedHash(
+        cancelInitiator, clientCancelReceivedTime, clientCancelSentTime, name);
   }
 
   @Override
   public String toString() {
-    return Utils.toString(CancelOptionOrderRequestCreate.class, "name", name);
+    return Utils.toString(
+        CancelOptionOrderRequestCreate.class,
+        "cancelInitiator",
+        cancelInitiator,
+        "clientCancelReceivedTime",
+        clientCancelReceivedTime,
+        "clientCancelSentTime",
+        clientCancelSentTime,
+        "name",
+        name);
   }
 
   @SuppressWarnings("UnusedReturnValue")
   public static final class Builder {
 
+    private Optional<? extends CancelOptionOrderRequestCreateCancelInitiator> cancelInitiator =
+        Optional.empty();
+
+    private JsonNullable<OffsetDateTime> clientCancelReceivedTime = JsonNullable.undefined();
+
+    private JsonNullable<OffsetDateTime> clientCancelSentTime = JsonNullable.undefined();
+
     private String name;
 
     private Builder() {
       // force use of static builder() method
+    }
+
+    /**
+     * Identifies whether the cancel was initiated by the correspondent firm (FIRM) or the customer
+     * (CLIENT). Defaults to CLIENT if not provided. Required for correspondents using Apex CAT
+     * reporting services.
+     */
+    public Builder cancelInitiator(CancelOptionOrderRequestCreateCancelInitiator cancelInitiator) {
+      Utils.checkNotNull(cancelInitiator, "cancelInitiator");
+      this.cancelInitiator = Optional.ofNullable(cancelInitiator);
+      return this;
+    }
+
+    /**
+     * Identifies whether the cancel was initiated by the correspondent firm (FIRM) or the customer
+     * (CLIENT). Defaults to CLIENT if not provided. Required for correspondents using Apex CAT
+     * reporting services.
+     */
+    public Builder cancelInitiator(
+        Optional<? extends CancelOptionOrderRequestCreateCancelInitiator> cancelInitiator) {
+      Utils.checkNotNull(cancelInitiator, "cancelInitiator");
+      this.cancelInitiator = cancelInitiator;
+      return this;
+    }
+
+    /**
+     * The time the correspondent received the cancel instruction from the customer. Required for
+     * correspondents using Apex CAT reporting services.
+     */
+    public Builder clientCancelReceivedTime(OffsetDateTime clientCancelReceivedTime) {
+      Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+      this.clientCancelReceivedTime = JsonNullable.of(clientCancelReceivedTime);
+      return this;
+    }
+
+    /**
+     * The time the correspondent received the cancel instruction from the customer. Required for
+     * correspondents using Apex CAT reporting services.
+     */
+    public Builder clientCancelReceivedTime(JsonNullable<OffsetDateTime> clientCancelReceivedTime) {
+      Utils.checkNotNull(clientCancelReceivedTime, "clientCancelReceivedTime");
+      this.clientCancelReceivedTime = clientCancelReceivedTime;
+      return this;
+    }
+
+    /**
+     * The time the correspondent sent this cancel request, before Apex received it. Required for
+     * correspondents using Apex CAT reporting services.
+     */
+    public Builder clientCancelSentTime(OffsetDateTime clientCancelSentTime) {
+      Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
+      this.clientCancelSentTime = JsonNullable.of(clientCancelSentTime);
+      return this;
+    }
+
+    /**
+     * The time the correspondent sent this cancel request, before Apex received it. Required for
+     * correspondents using Apex CAT reporting services.
+     */
+    public Builder clientCancelSentTime(JsonNullable<OffsetDateTime> clientCancelSentTime) {
+      Utils.checkNotNull(clientCancelSentTime, "clientCancelSentTime");
+      this.clientCancelSentTime = clientCancelSentTime;
+      return this;
     }
 
     /** Format: accounts/{account_id}/optionOrders/{option_order_id} */
@@ -81,7 +307,8 @@ public class CancelOptionOrderRequestCreate {
 
     public CancelOptionOrderRequestCreate build() {
 
-      return new CancelOptionOrderRequestCreate(name);
+      return new CancelOptionOrderRequestCreate(
+          cancelInitiator, clientCancelReceivedTime, clientCancelSentTime, name);
     }
   }
 }

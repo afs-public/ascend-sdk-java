@@ -40,9 +40,7 @@ import java.util.Optional;
 /**
  * MatchState
  *
- * <p>The match state for a profile, one of: - `MATCH_UNSPECIFIED` - Default/Null value. -
- * `CONFIRMED_MATCH` - Match is confirmed. - `POTENTIAL_MATCH` - Match is a potential. - `NO_MATCH`
- * - Match is confirmed not to be a match. - `INCONCLUSIVE` - Match is deemed to be inconclusive.
+ * <p>The match state for a profile
  */
 @JsonDeserialize(using = MatchState._Deserializer.class)
 @JsonSerialize(using = MatchState._Serializer.class)

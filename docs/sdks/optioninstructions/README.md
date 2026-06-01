@@ -113,8 +113,8 @@ public class Application {
             .build();
 
         ExerciseServiceListOptionInstructionsRequest req = ExerciseServiceListOptionInstructionsRequest.builder()
-                .accountId("ACC123456")
-                .assetId("12345")
+                .accountId("-")
+                .assetId("-")
                 .pageSize(50)
                 .pageToken("eyJvZmZzZXQiOjUwfQ==")
                 .filter("type == 'DO_NOT_EXERCISE' && account_id == '12345'")

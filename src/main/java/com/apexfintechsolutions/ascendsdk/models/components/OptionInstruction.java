@@ -25,6 +25,11 @@ public class OptionInstruction {
   @JsonProperty("account_id")
   private Optional<String> accountId;
 
+  /** Client-provided reference for tracking and duplicate detection on the client side */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_reference")
+  private Optional<String> clientReference;
+
   /** The time the instruction was created */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("create_time")
@@ -81,6 +86,7 @@ public class OptionInstruction {
   @JsonCreator
   public OptionInstruction(
       @JsonProperty("account_id") Optional<String> accountId,
+      @JsonProperty("client_reference") Optional<String> clientReference,
       @JsonProperty("create_time") JsonNullable<OffsetDateTime> createTime,
       @JsonProperty("identifier") Optional<String> identifier,
       @JsonProperty("identifier_type")
@@ -93,6 +99,7 @@ public class OptionInstruction {
       @JsonProperty("type") Optional<? extends OptionInstructionType> type,
       @JsonProperty("update_time") JsonNullable<OffsetDateTime> updateTime) {
     Utils.checkNotNull(accountId, "accountId");
+    Utils.checkNotNull(clientReference, "clientReference");
     Utils.checkNotNull(createTime, "createTime");
     Utils.checkNotNull(identifier, "identifier");
     Utils.checkNotNull(identifierType, "identifierType");
@@ -104,6 +111,7 @@ public class OptionInstruction {
     Utils.checkNotNull(type, "type");
     Utils.checkNotNull(updateTime, "updateTime");
     this.accountId = accountId;
+    this.clientReference = clientReference;
     this.createTime = createTime;
     this.identifier = identifier;
     this.identifierType = identifierType;
@@ -118,6 +126,7 @@ public class OptionInstruction {
 
   public OptionInstruction() {
     this(
+        Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty(),
@@ -135,6 +144,12 @@ public class OptionInstruction {
   @JsonIgnore
   public Optional<String> accountId() {
     return accountId;
+  }
+
+  /** Client-provided reference for tracking and duplicate detection on the client side */
+  @JsonIgnore
+  public Optional<String> clientReference() {
+    return clientReference;
   }
 
   /** The time the instruction was created */
@@ -219,6 +234,20 @@ public class OptionInstruction {
   public OptionInstruction withAccountId(Optional<String> accountId) {
     Utils.checkNotNull(accountId, "accountId");
     this.accountId = accountId;
+    return this;
+  }
+
+  /** Client-provided reference for tracking and duplicate detection on the client side */
+  public OptionInstruction withClientReference(String clientReference) {
+    Utils.checkNotNull(clientReference, "clientReference");
+    this.clientReference = Optional.ofNullable(clientReference);
+    return this;
+  }
+
+  /** Client-provided reference for tracking and duplicate detection on the client side */
+  public OptionInstruction withClientReference(Optional<String> clientReference) {
+    Utils.checkNotNull(clientReference, "clientReference");
+    this.clientReference = clientReference;
     return this;
   }
 
@@ -380,6 +409,7 @@ public class OptionInstruction {
     }
     OptionInstruction other = (OptionInstruction) o;
     return Utils.enhancedDeepEquals(this.accountId, other.accountId)
+        && Utils.enhancedDeepEquals(this.clientReference, other.clientReference)
         && Utils.enhancedDeepEquals(this.createTime, other.createTime)
         && Utils.enhancedDeepEquals(this.identifier, other.identifier)
         && Utils.enhancedDeepEquals(this.identifierType, other.identifierType)
@@ -396,6 +426,7 @@ public class OptionInstruction {
   public int hashCode() {
     return Utils.enhancedHash(
         accountId,
+        clientReference,
         createTime,
         identifier,
         identifierType,
@@ -414,6 +445,8 @@ public class OptionInstruction {
         OptionInstruction.class,
         "accountId",
         accountId,
+        "clientReference",
+        clientReference,
         "createTime",
         createTime,
         "identifier",
@@ -440,6 +473,8 @@ public class OptionInstruction {
   public static final class Builder {
 
     private Optional<String> accountId = Optional.empty();
+
+    private Optional<String> clientReference = Optional.empty();
 
     private JsonNullable<OffsetDateTime> createTime = JsonNullable.undefined();
 
@@ -476,6 +511,20 @@ public class OptionInstruction {
     public Builder accountId(Optional<String> accountId) {
       Utils.checkNotNull(accountId, "accountId");
       this.accountId = accountId;
+      return this;
+    }
+
+    /** Client-provided reference for tracking and duplicate detection on the client side */
+    public Builder clientReference(String clientReference) {
+      Utils.checkNotNull(clientReference, "clientReference");
+      this.clientReference = Optional.ofNullable(clientReference);
+      return this;
+    }
+
+    /** Client-provided reference for tracking and duplicate detection on the client side */
+    public Builder clientReference(Optional<String> clientReference) {
+      Utils.checkNotNull(clientReference, "clientReference");
+      this.clientReference = clientReference;
       return this;
     }
 
@@ -630,6 +679,7 @@ public class OptionInstruction {
 
       return new OptionInstruction(
           accountId,
+          clientReference,
           createTime,
           identifier,
           identifierType,

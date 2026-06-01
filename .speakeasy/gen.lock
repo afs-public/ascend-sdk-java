@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 04604b59-b953-4711-ac65-9ad5897162b4
 management:
-  docChecksum: a4d6cb82123eaa1be499950ba1fe9f44
-  docVersion: v1:20260518:uat:21f073ab387d
+  docChecksum: 0bd3b57a3616d11a162738af9fb265fa
+  docVersion: v1:20260529:uat:bc2fbef672de
   speakeasyVersion: 1.608.0
   generationVersion: 2.691.6
-  releaseVersion: 1.6.7
-  configChecksum: 4020a6526f5fbac11ec0855f3cc37146
+  releaseVersion: 1.6.8
+  configChecksum: 1dd43ea78ccb30d0b8bda13f559919b2
 features:
   java:
     additionalDependencies: 0.1.0
@@ -393,6 +393,7 @@ generatedFiles:
   - docs/models/components/AssetBuyingPowerAssetBuyingPowerMaxAmount.md
   - docs/models/components/AssetBuyingPowerBuyingPowerAmount.md
   - docs/models/components/AssetBuyingPowerDayTradeBuyingPowerAmount.md
+  - docs/models/components/AssetBuyingPowerIntradayBuyingPowerAmount.md
   - docs/models/components/AssetBuyingPowerMaxAmount.md
   - docs/models/components/AssetBuyingPowerMaxPurchaseQuantity.md
   - docs/models/components/AssetBuyingPowerPercentageRequirements.md
@@ -554,6 +555,7 @@ generatedFiles:
   - docs/models/components/CancelInitiator.md
   - docs/models/components/CancelOptionInstructionRequestCreate.md
   - docs/models/components/CancelOptionOrderRequestCreate.md
+  - docs/models/components/CancelOptionOrderRequestCreateCancelInitiator.md
   - docs/models/components/CancelOrderRequestCreate.md
   - docs/models/components/CancelOrderRequestCreateCancelInitiator.md
   - docs/models/components/CancelPositionJournalRequestCreate.md
@@ -1322,6 +1324,7 @@ generatedFiles:
   - docs/models/components/InterestedPartyUpdateTradeConfirmationDeliveryPreference.md
   - docs/models/components/Intermediary.md
   - docs/models/components/InternationalBankDetails.md
+  - docs/models/components/IntradayBuyingPowerAmount.md
   - docs/models/components/Investigation.md
   - docs/models/components/InvestigationBirthDate.md
   - docs/models/components/InvestigationExecutionDate.md
@@ -1573,6 +1576,7 @@ generatedFiles:
   - docs/models/components/OptionInstructionType.md
   - docs/models/components/OptionOrder.md
   - docs/models/components/OptionOrderBrokerCapacity.md
+  - docs/models/components/OptionOrderCancelInitiator.md
   - docs/models/components/OptionOrderCancelRejectedReason.md
   - docs/models/components/OptionOrderCreate.md
   - docs/models/components/OptionOrderCreateBrokerCapacity.md
@@ -1580,6 +1584,7 @@ generatedFiles:
   - docs/models/components/OptionOrderCreateSpecialReportingInstructions.md
   - docs/models/components/OptionOrderCreateTimeInForce.md
   - docs/models/components/OptionOrderCumulativeNotionalValue.md
+  - docs/models/components/OptionOrderExtraReportingData.md
   - docs/models/components/OptionOrderLeg.md
   - docs/models/components/OptionOrderLegAssetType.md
   - docs/models/components/OptionOrderLegCreate.md
@@ -2015,6 +2020,7 @@ generatedFiles:
   - docs/models/components/SetExtraReportingDataResponseSide.md
   - docs/models/components/SetExtraReportingDataResponseSpecialReportingInstructions.md
   - docs/models/components/SetExtraReportingDataResponseTimeInForce.md
+  - docs/models/components/SetOptionExtraReportingDataRequestCreate.md
   - docs/models/components/SettleAlternativeOrderRequestCreate.md
   - docs/models/components/SettleDate.md
   - docs/models/components/Settled.md
@@ -2647,6 +2653,8 @@ generatedFiles:
   - docs/models/operations/OptionOrderServiceCreateOptionOrderResponse.md
   - docs/models/operations/OptionOrderServiceGetOptionOrderRequest.md
   - docs/models/operations/OptionOrderServiceGetOptionOrderResponse.md
+  - docs/models/operations/OptionOrderServiceSetOptionExtraReportingDataRequest.md
+  - docs/models/operations/OptionOrderServiceSetOptionExtraReportingDataResponse.md
   - docs/models/operations/OrderPriceServicePreviewOrderCostRequest.md
   - docs/models/operations/OrderPriceServicePreviewOrderCostResponse.md
   - docs/models/operations/OrderPriceServiceRetrieveFixedIncomeMarksRequest.md
@@ -3205,6 +3213,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetBuyingPowerAssetBuyingPowerMaxAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetBuyingPowerBuyingPowerAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetBuyingPowerDayTradeBuyingPowerAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetBuyingPowerIntradayBuyingPowerAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetBuyingPowerMaxAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetBuyingPowerMaxPurchaseQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetBuyingPowerPercentageRequirements.java
@@ -3366,6 +3375,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelInitiator.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelOptionInstructionRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelOptionOrderRequestCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelOptionOrderRequestCreateCancelInitiator.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelOrderRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelOrderRequestCreateCancelInitiator.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelPositionJournalRequestCreate.java
@@ -4134,6 +4144,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/InterestedPartyUpdateTradeConfirmationDeliveryPreference.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Intermediary.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/InternationalBankDetails.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/IntradayBuyingPowerAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Investigation.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/InvestigationBirthDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/InvestigationExecutionDate.java
@@ -4385,6 +4396,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionInstructionType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderBrokerCapacity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderCancelInitiator.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderCancelRejectedReason.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderCreateBrokerCapacity.java
@@ -4392,6 +4404,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderCreateSpecialReportingInstructions.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderCreateTimeInForce.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderCumulativeNotionalValue.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderExtraReportingData.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderLeg.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderLegAssetType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionOrderLegCreate.java
@@ -4827,6 +4840,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SetExtraReportingDataResponseSide.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SetExtraReportingDataResponseSpecialReportingInstructions.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SetExtraReportingDataResponseTimeInForce.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SetOptionExtraReportingDataRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SettleAlternativeOrderRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SettleDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Settled.java
@@ -5642,6 +5656,9 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OptionOrderServiceGetOptionOrderRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OptionOrderServiceGetOptionOrderRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OptionOrderServiceGetOptionOrderResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OptionOrderServiceSetOptionExtraReportingDataRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OptionOrderServiceSetOptionExtraReportingDataRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OptionOrderServiceSetOptionExtraReportingDataResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OrderPriceServicePreviewOrderCostRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OrderPriceServicePreviewOrderCostRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/OrderPriceServicePreviewOrderCostResponse.java
@@ -5978,6 +5995,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OptionOrderServiceCancelOptionOrder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OptionOrderServiceCreateOptionOrder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OptionOrderServiceGetOptionOrder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OptionOrderServiceSetOptionExtraReportingData.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OrderPriceServicePreviewOrderCost.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OrderPriceServiceRetrieveFixedIncomeMarks.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/OrderPriceServiceRetrieveQuote.java
@@ -9327,8 +9345,8 @@ examples:
     speakeasy-default-exercise-service-list-option-instructions:
       parameters:
         path:
-          account_id: "ACC123456"
-          asset_id: "12345"
+          account_id: "-"
+          asset_id: "-"
       responses:
         "200":
           application/json: {}
@@ -9426,6 +9444,23 @@ examples:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
       requestBody:
         application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  OptionOrderService_SetOptionExtraReportingData:
+    speakeasy-default-option-order-service-set-option-extra-reporting-data:
+      parameters:
+        path:
+          account_id: "01HBRQ5BW6ZAY4BNWP4GWRD80X"
+          optionOrder_id: "ebb0c9b5-2c74-45c9-a4ab-40596b778706"
+      requestBody:
+        application/json: {"cancel_confirmed_time": "2025-12-13T15:28:17.262732Z", "name": "accounts/01HBRQ5BW6ZAY4BNWP4GWRD80X/optionOrders/ebb0c9b5-2c74-45c9-a4ab-40596b778706"}
       responses:
         "200":
           application/json: {}

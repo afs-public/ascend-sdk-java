@@ -6,7 +6,10 @@ package com.apexfintechsolutions.ascendsdk.models.components;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Optional;
 
 /**
  * OptionInstructionCreate
@@ -18,6 +21,11 @@ public class OptionInstructionCreate {
   /** Account identifier */
   @JsonProperty("account_id")
   private String accountId;
+
+  /** Client-provided reference for tracking and duplicate detection on the client side */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_reference")
+  private Optional<String> clientReference;
 
   /** The asset identifier */
   @JsonProperty("identifier")
@@ -45,26 +53,44 @@ public class OptionInstructionCreate {
   @JsonCreator
   public OptionInstructionCreate(
       @JsonProperty("account_id") String accountId,
+      @JsonProperty("client_reference") Optional<String> clientReference,
       @JsonProperty("identifier") String identifier,
       @JsonProperty("identifier_type") OptionInstructionCreateIdentifierType identifierType,
       @JsonProperty("quantity") DecimalCreate quantity,
       @JsonProperty("type") OptionInstructionCreateType type) {
     Utils.checkNotNull(accountId, "accountId");
+    Utils.checkNotNull(clientReference, "clientReference");
     Utils.checkNotNull(identifier, "identifier");
     Utils.checkNotNull(identifierType, "identifierType");
     Utils.checkNotNull(quantity, "quantity");
     Utils.checkNotNull(type, "type");
     this.accountId = accountId;
+    this.clientReference = clientReference;
     this.identifier = identifier;
     this.identifierType = identifierType;
     this.quantity = quantity;
     this.type = type;
   }
 
+  public OptionInstructionCreate(
+      String accountId,
+      String identifier,
+      OptionInstructionCreateIdentifierType identifierType,
+      DecimalCreate quantity,
+      OptionInstructionCreateType type) {
+    this(accountId, Optional.empty(), identifier, identifierType, quantity, type);
+  }
+
   /** Account identifier */
   @JsonIgnore
   public String accountId() {
     return accountId;
+  }
+
+  /** Client-provided reference for tracking and duplicate detection on the client side */
+  @JsonIgnore
+  public Optional<String> clientReference() {
+    return clientReference;
   }
 
   /** The asset identifier */
@@ -106,6 +132,20 @@ public class OptionInstructionCreate {
   public OptionInstructionCreate withAccountId(String accountId) {
     Utils.checkNotNull(accountId, "accountId");
     this.accountId = accountId;
+    return this;
+  }
+
+  /** Client-provided reference for tracking and duplicate detection on the client side */
+  public OptionInstructionCreate withClientReference(String clientReference) {
+    Utils.checkNotNull(clientReference, "clientReference");
+    this.clientReference = Optional.ofNullable(clientReference);
+    return this;
+  }
+
+  /** Client-provided reference for tracking and duplicate detection on the client side */
+  public OptionInstructionCreate withClientReference(Optional<String> clientReference) {
+    Utils.checkNotNull(clientReference, "clientReference");
+    this.clientReference = clientReference;
     return this;
   }
 
@@ -155,6 +195,7 @@ public class OptionInstructionCreate {
     }
     OptionInstructionCreate other = (OptionInstructionCreate) o;
     return Utils.enhancedDeepEquals(this.accountId, other.accountId)
+        && Utils.enhancedDeepEquals(this.clientReference, other.clientReference)
         && Utils.enhancedDeepEquals(this.identifier, other.identifier)
         && Utils.enhancedDeepEquals(this.identifierType, other.identifierType)
         && Utils.enhancedDeepEquals(this.quantity, other.quantity)
@@ -163,7 +204,8 @@ public class OptionInstructionCreate {
 
   @Override
   public int hashCode() {
-    return Utils.enhancedHash(accountId, identifier, identifierType, quantity, type);
+    return Utils.enhancedHash(
+        accountId, clientReference, identifier, identifierType, quantity, type);
   }
 
   @Override
@@ -172,6 +214,8 @@ public class OptionInstructionCreate {
         OptionInstructionCreate.class,
         "accountId",
         accountId,
+        "clientReference",
+        clientReference,
         "identifier",
         identifier,
         "identifierType",
@@ -186,6 +230,8 @@ public class OptionInstructionCreate {
   public static final class Builder {
 
     private String accountId;
+
+    private Optional<String> clientReference = Optional.empty();
 
     private String identifier;
 
@@ -203,6 +249,20 @@ public class OptionInstructionCreate {
     public Builder accountId(String accountId) {
       Utils.checkNotNull(accountId, "accountId");
       this.accountId = accountId;
+      return this;
+    }
+
+    /** Client-provided reference for tracking and duplicate detection on the client side */
+    public Builder clientReference(String clientReference) {
+      Utils.checkNotNull(clientReference, "clientReference");
+      this.clientReference = Optional.ofNullable(clientReference);
+      return this;
+    }
+
+    /** Client-provided reference for tracking and duplicate detection on the client side */
+    public Builder clientReference(Optional<String> clientReference) {
+      Utils.checkNotNull(clientReference, "clientReference");
+      this.clientReference = clientReference;
       return this;
     }
 
@@ -244,7 +304,8 @@ public class OptionInstructionCreate {
 
     public OptionInstructionCreate build() {
 
-      return new OptionInstructionCreate(accountId, identifier, identifierType, quantity, type);
+      return new OptionInstructionCreate(
+          accountId, clientReference, identifier, identifierType, quantity, type);
     }
   }
 }

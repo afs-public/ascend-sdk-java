@@ -34,6 +34,14 @@ public class OptionOrderCreate {
   private JsonNullable<OffsetDateTime> clientReceivedTime;
 
   /**
+   * The time the correspondent sent the original order to Apex. Set at order creation and cannot be
+   * modified. Required for correspondents using Apex CAT reporting services.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_sent_time")
+  private JsonNullable<OffsetDateTime> clientSentTime;
+
+  /**
    * Only "USD" is supported. Full list of currency codes is defined at:
    * https://en.wikipedia.org/wiki/ISO_4217
    */
@@ -121,6 +129,7 @@ public class OptionOrderCreate {
       @JsonProperty("broker_capacity") OptionOrderCreateBrokerCapacity brokerCapacity,
       @JsonProperty("client_order_id") String clientOrderId,
       @JsonProperty("client_received_time") JsonNullable<OffsetDateTime> clientReceivedTime,
+      @JsonProperty("client_sent_time") JsonNullable<OffsetDateTime> clientSentTime,
       @JsonProperty("currency_code") String currencyCode,
       @JsonProperty("fees") Optional<? extends List<FeeCreate>> fees,
       @JsonProperty("legs") List<OptionOrderLegCreate> legs,
@@ -136,6 +145,7 @@ public class OptionOrderCreate {
     Utils.checkNotNull(brokerCapacity, "brokerCapacity");
     Utils.checkNotNull(clientOrderId, "clientOrderId");
     Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
+    Utils.checkNotNull(clientSentTime, "clientSentTime");
     Utils.checkNotNull(currencyCode, "currencyCode");
     Utils.checkNotNull(fees, "fees");
     Utils.checkNotNull(legs, "legs");
@@ -149,6 +159,7 @@ public class OptionOrderCreate {
     this.brokerCapacity = brokerCapacity;
     this.clientOrderId = clientOrderId;
     this.clientReceivedTime = clientReceivedTime;
+    this.clientSentTime = clientSentTime;
     this.currencyCode = currencyCode;
     this.fees = fees;
     this.legs = legs;
@@ -175,6 +186,7 @@ public class OptionOrderCreate {
     this(
         brokerCapacity,
         clientOrderId,
+        JsonNullable.undefined(),
         JsonNullable.undefined(),
         currencyCode,
         Optional.empty(),
@@ -204,6 +216,15 @@ public class OptionOrderCreate {
   @JsonIgnore
   public JsonNullable<OffsetDateTime> clientReceivedTime() {
     return clientReceivedTime;
+  }
+
+  /**
+   * The time the correspondent sent the original order to Apex. Set at order creation and cannot be
+   * modified. Required for correspondents using Apex CAT reporting services.
+   */
+  @JsonIgnore
+  public JsonNullable<OffsetDateTime> clientSentTime() {
+    return clientSentTime;
   }
 
   /**
@@ -339,6 +360,26 @@ public class OptionOrderCreate {
   public OptionOrderCreate withClientReceivedTime(JsonNullable<OffsetDateTime> clientReceivedTime) {
     Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
     this.clientReceivedTime = clientReceivedTime;
+    return this;
+  }
+
+  /**
+   * The time the correspondent sent the original order to Apex. Set at order creation and cannot be
+   * modified. Required for correspondents using Apex CAT reporting services.
+   */
+  public OptionOrderCreate withClientSentTime(OffsetDateTime clientSentTime) {
+    Utils.checkNotNull(clientSentTime, "clientSentTime");
+    this.clientSentTime = JsonNullable.of(clientSentTime);
+    return this;
+  }
+
+  /**
+   * The time the correspondent sent the original order to Apex. Set at order creation and cannot be
+   * modified. Required for correspondents using Apex CAT reporting services.
+   */
+  public OptionOrderCreate withClientSentTime(JsonNullable<OffsetDateTime> clientSentTime) {
+    Utils.checkNotNull(clientSentTime, "clientSentTime");
+    this.clientSentTime = clientSentTime;
     return this;
   }
 
@@ -484,6 +525,7 @@ public class OptionOrderCreate {
     return Utils.enhancedDeepEquals(this.brokerCapacity, other.brokerCapacity)
         && Utils.enhancedDeepEquals(this.clientOrderId, other.clientOrderId)
         && Utils.enhancedDeepEquals(this.clientReceivedTime, other.clientReceivedTime)
+        && Utils.enhancedDeepEquals(this.clientSentTime, other.clientSentTime)
         && Utils.enhancedDeepEquals(this.currencyCode, other.currencyCode)
         && Utils.enhancedDeepEquals(this.fees, other.fees)
         && Utils.enhancedDeepEquals(this.legs, other.legs)
@@ -503,6 +545,7 @@ public class OptionOrderCreate {
         brokerCapacity,
         clientOrderId,
         clientReceivedTime,
+        clientSentTime,
         currencyCode,
         fees,
         legs,
@@ -525,6 +568,8 @@ public class OptionOrderCreate {
         clientOrderId,
         "clientReceivedTime",
         clientReceivedTime,
+        "clientSentTime",
+        clientSentTime,
         "currencyCode",
         currencyCode,
         "fees",
@@ -555,6 +600,8 @@ public class OptionOrderCreate {
     private String clientOrderId;
 
     private JsonNullable<OffsetDateTime> clientReceivedTime = JsonNullable.undefined();
+
+    private JsonNullable<OffsetDateTime> clientSentTime = JsonNullable.undefined();
 
     private String currencyCode;
 
@@ -606,6 +653,26 @@ public class OptionOrderCreate {
     public Builder clientReceivedTime(JsonNullable<OffsetDateTime> clientReceivedTime) {
       Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
       this.clientReceivedTime = clientReceivedTime;
+      return this;
+    }
+
+    /**
+     * The time the correspondent sent the original order to Apex. Set at order creation and cannot
+     * be modified. Required for correspondents using Apex CAT reporting services.
+     */
+    public Builder clientSentTime(OffsetDateTime clientSentTime) {
+      Utils.checkNotNull(clientSentTime, "clientSentTime");
+      this.clientSentTime = JsonNullable.of(clientSentTime);
+      return this;
+    }
+
+    /**
+     * The time the correspondent sent the original order to Apex. Set at order creation and cannot
+     * be modified. Required for correspondents using Apex CAT reporting services.
+     */
+    public Builder clientSentTime(JsonNullable<OffsetDateTime> clientSentTime) {
+      Utils.checkNotNull(clientSentTime, "clientSentTime");
+      this.clientSentTime = clientSentTime;
       return this;
     }
 
@@ -747,6 +814,7 @@ public class OptionOrderCreate {
           brokerCapacity,
           clientOrderId,
           clientReceivedTime,
+          clientSentTime,
           currencyCode,
           fees,
           legs,
