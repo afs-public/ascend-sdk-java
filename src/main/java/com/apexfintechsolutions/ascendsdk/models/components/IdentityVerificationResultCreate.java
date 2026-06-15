@@ -34,6 +34,13 @@ public class IdentityVerificationResultCreate {
   private boolean birthDateVerified;
 
   /**
+   * Indicates whether the client has directly verified the identity documents (defaults to false).
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_directly_verified_id_docs")
+  private Optional<Boolean> clientDirectlyVerifiedIdDocs;
+
+  /**
    * Represents a whole or partial calendar date, such as a birthday. The time of day and time zone
    * are either specified elsewhere or are insignificant. The date is relative to the Gregorian
    * Calendar. This can represent one of the following:
@@ -93,6 +100,8 @@ public class IdentityVerificationResultCreate {
   public IdentityVerificationResultCreate(
       @JsonProperty("address_verified") boolean addressVerified,
       @JsonProperty("birth_date_verified") boolean birthDateVerified,
+      @JsonProperty("client_directly_verified_id_docs")
+          Optional<Boolean> clientDirectlyVerifiedIdDocs,
       @JsonProperty("execution_date") DateCreate executionDate,
       @JsonProperty("external_case_id") String externalCaseId,
       @JsonProperty("identity_verification_document_ids")
@@ -103,6 +112,7 @@ public class IdentityVerificationResultCreate {
       @JsonProperty("vendor") String vendor) {
     Utils.checkNotNull(addressVerified, "addressVerified");
     Utils.checkNotNull(birthDateVerified, "birthDateVerified");
+    Utils.checkNotNull(clientDirectlyVerifiedIdDocs, "clientDirectlyVerifiedIdDocs");
     Utils.checkNotNull(executionDate, "executionDate");
     Utils.checkNotNull(externalCaseId, "externalCaseId");
     Utils.checkNotNull(identityVerificationDocumentIds, "identityVerificationDocumentIds");
@@ -112,6 +122,7 @@ public class IdentityVerificationResultCreate {
     Utils.checkNotNull(vendor, "vendor");
     this.addressVerified = addressVerified;
     this.birthDateVerified = birthDateVerified;
+    this.clientDirectlyVerifiedIdDocs = clientDirectlyVerifiedIdDocs;
     this.executionDate = executionDate;
     this.externalCaseId = externalCaseId;
     this.identityVerificationDocumentIds = identityVerificationDocumentIds;
@@ -132,6 +143,7 @@ public class IdentityVerificationResultCreate {
     this(
         addressVerified,
         birthDateVerified,
+        Optional.empty(),
         executionDate,
         externalCaseId,
         Optional.empty(),
@@ -157,6 +169,14 @@ public class IdentityVerificationResultCreate {
   @JsonIgnore
   public boolean birthDateVerified() {
     return birthDateVerified;
+  }
+
+  /**
+   * Indicates whether the client has directly verified the identity documents (defaults to false).
+   */
+  @JsonIgnore
+  public Optional<Boolean> clientDirectlyVerifiedIdDocs() {
+    return clientDirectlyVerifiedIdDocs;
   }
 
   /**
@@ -249,6 +269,26 @@ public class IdentityVerificationResultCreate {
   public IdentityVerificationResultCreate withBirthDateVerified(boolean birthDateVerified) {
     Utils.checkNotNull(birthDateVerified, "birthDateVerified");
     this.birthDateVerified = birthDateVerified;
+    return this;
+  }
+
+  /**
+   * Indicates whether the client has directly verified the identity documents (defaults to false).
+   */
+  public IdentityVerificationResultCreate withClientDirectlyVerifiedIdDocs(
+      boolean clientDirectlyVerifiedIdDocs) {
+    Utils.checkNotNull(clientDirectlyVerifiedIdDocs, "clientDirectlyVerifiedIdDocs");
+    this.clientDirectlyVerifiedIdDocs = Optional.ofNullable(clientDirectlyVerifiedIdDocs);
+    return this;
+  }
+
+  /**
+   * Indicates whether the client has directly verified the identity documents (defaults to false).
+   */
+  public IdentityVerificationResultCreate withClientDirectlyVerifiedIdDocs(
+      Optional<Boolean> clientDirectlyVerifiedIdDocs) {
+    Utils.checkNotNull(clientDirectlyVerifiedIdDocs, "clientDirectlyVerifiedIdDocs");
+    this.clientDirectlyVerifiedIdDocs = clientDirectlyVerifiedIdDocs;
     return this;
   }
 
@@ -362,6 +402,8 @@ public class IdentityVerificationResultCreate {
     IdentityVerificationResultCreate other = (IdentityVerificationResultCreate) o;
     return Utils.enhancedDeepEquals(this.addressVerified, other.addressVerified)
         && Utils.enhancedDeepEquals(this.birthDateVerified, other.birthDateVerified)
+        && Utils.enhancedDeepEquals(
+            this.clientDirectlyVerifiedIdDocs, other.clientDirectlyVerifiedIdDocs)
         && Utils.enhancedDeepEquals(this.executionDate, other.executionDate)
         && Utils.enhancedDeepEquals(this.externalCaseId, other.externalCaseId)
         && Utils.enhancedDeepEquals(
@@ -377,6 +419,7 @@ public class IdentityVerificationResultCreate {
     return Utils.enhancedHash(
         addressVerified,
         birthDateVerified,
+        clientDirectlyVerifiedIdDocs,
         executionDate,
         externalCaseId,
         identityVerificationDocumentIds,
@@ -394,6 +437,8 @@ public class IdentityVerificationResultCreate {
         addressVerified,
         "birthDateVerified",
         birthDateVerified,
+        "clientDirectlyVerifiedIdDocs",
+        clientDirectlyVerifiedIdDocs,
         "executionDate",
         executionDate,
         "externalCaseId",
@@ -416,6 +461,8 @@ public class IdentityVerificationResultCreate {
     private Boolean addressVerified;
 
     private Boolean birthDateVerified;
+
+    private Optional<Boolean> clientDirectlyVerifiedIdDocs = Optional.empty();
 
     private DateCreate executionDate;
 
@@ -452,6 +499,26 @@ public class IdentityVerificationResultCreate {
     public Builder birthDateVerified(boolean birthDateVerified) {
       Utils.checkNotNull(birthDateVerified, "birthDateVerified");
       this.birthDateVerified = birthDateVerified;
+      return this;
+    }
+
+    /**
+     * Indicates whether the client has directly verified the identity documents (defaults to
+     * false).
+     */
+    public Builder clientDirectlyVerifiedIdDocs(boolean clientDirectlyVerifiedIdDocs) {
+      Utils.checkNotNull(clientDirectlyVerifiedIdDocs, "clientDirectlyVerifiedIdDocs");
+      this.clientDirectlyVerifiedIdDocs = Optional.ofNullable(clientDirectlyVerifiedIdDocs);
+      return this;
+    }
+
+    /**
+     * Indicates whether the client has directly verified the identity documents (defaults to
+     * false).
+     */
+    public Builder clientDirectlyVerifiedIdDocs(Optional<Boolean> clientDirectlyVerifiedIdDocs) {
+      Utils.checkNotNull(clientDirectlyVerifiedIdDocs, "clientDirectlyVerifiedIdDocs");
+      this.clientDirectlyVerifiedIdDocs = clientDirectlyVerifiedIdDocs;
       return this;
     }
 
@@ -558,6 +625,7 @@ public class IdentityVerificationResultCreate {
       return new IdentityVerificationResultCreate(
           addressVerified,
           birthDateVerified,
+          clientDirectlyVerifiedIdDocs,
           executionDate,
           externalCaseId,
           identityVerificationDocumentIds,

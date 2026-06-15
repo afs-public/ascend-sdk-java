@@ -32,6 +32,11 @@ public class TaxProfileUpdate {
   @JsonProperty("legal_tax_region_code")
   private Optional<String> legalTaxRegionCode;
 
+  /** Whether treaty benefits are requested. Only applicable for W_8BEN and W_8BEN_E form types. */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("treaty_benefits_requested")
+  private Optional<Boolean> treatyBenefitsRequested;
+
   /** United States Individual Taxpayer Identification Number (ITIN) status. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("us_tin_status")
@@ -43,19 +48,22 @@ public class TaxProfileUpdate {
           Optional<? extends TaxProfileUpdateFederalTaxClassification> federalTaxClassification,
       @JsonProperty("irs_form_type") Optional<? extends TaxProfileUpdateIrsFormType> irsFormType,
       @JsonProperty("legal_tax_region_code") Optional<String> legalTaxRegionCode,
+      @JsonProperty("treaty_benefits_requested") Optional<Boolean> treatyBenefitsRequested,
       @JsonProperty("us_tin_status") Optional<? extends TaxProfileUpdateUsTinStatus> usTinStatus) {
     Utils.checkNotNull(federalTaxClassification, "federalTaxClassification");
     Utils.checkNotNull(irsFormType, "irsFormType");
     Utils.checkNotNull(legalTaxRegionCode, "legalTaxRegionCode");
+    Utils.checkNotNull(treatyBenefitsRequested, "treatyBenefitsRequested");
     Utils.checkNotNull(usTinStatus, "usTinStatus");
     this.federalTaxClassification = federalTaxClassification;
     this.irsFormType = irsFormType;
     this.legalTaxRegionCode = legalTaxRegionCode;
+    this.treatyBenefitsRequested = treatyBenefitsRequested;
     this.usTinStatus = usTinStatus;
   }
 
   public TaxProfileUpdate() {
-    this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /** Federal tax classification. */
@@ -76,6 +84,12 @@ public class TaxProfileUpdate {
   @JsonIgnore
   public Optional<String> legalTaxRegionCode() {
     return legalTaxRegionCode;
+  }
+
+  /** Whether treaty benefits are requested. Only applicable for W_8BEN and W_8BEN_E form types. */
+  @JsonIgnore
+  public Optional<Boolean> treatyBenefitsRequested() {
+    return treatyBenefitsRequested;
   }
 
   /** United States Individual Taxpayer Identification Number (ITIN) status. */
@@ -134,6 +148,20 @@ public class TaxProfileUpdate {
     return this;
   }
 
+  /** Whether treaty benefits are requested. Only applicable for W_8BEN and W_8BEN_E form types. */
+  public TaxProfileUpdate withTreatyBenefitsRequested(boolean treatyBenefitsRequested) {
+    Utils.checkNotNull(treatyBenefitsRequested, "treatyBenefitsRequested");
+    this.treatyBenefitsRequested = Optional.ofNullable(treatyBenefitsRequested);
+    return this;
+  }
+
+  /** Whether treaty benefits are requested. Only applicable for W_8BEN and W_8BEN_E form types. */
+  public TaxProfileUpdate withTreatyBenefitsRequested(Optional<Boolean> treatyBenefitsRequested) {
+    Utils.checkNotNull(treatyBenefitsRequested, "treatyBenefitsRequested");
+    this.treatyBenefitsRequested = treatyBenefitsRequested;
+    return this;
+  }
+
   /** United States Individual Taxpayer Identification Number (ITIN) status. */
   public TaxProfileUpdate withUsTinStatus(TaxProfileUpdateUsTinStatus usTinStatus) {
     Utils.checkNotNull(usTinStatus, "usTinStatus");
@@ -161,13 +189,18 @@ public class TaxProfileUpdate {
     return Utils.enhancedDeepEquals(this.federalTaxClassification, other.federalTaxClassification)
         && Utils.enhancedDeepEquals(this.irsFormType, other.irsFormType)
         && Utils.enhancedDeepEquals(this.legalTaxRegionCode, other.legalTaxRegionCode)
+        && Utils.enhancedDeepEquals(this.treatyBenefitsRequested, other.treatyBenefitsRequested)
         && Utils.enhancedDeepEquals(this.usTinStatus, other.usTinStatus);
   }
 
   @Override
   public int hashCode() {
     return Utils.enhancedHash(
-        federalTaxClassification, irsFormType, legalTaxRegionCode, usTinStatus);
+        federalTaxClassification,
+        irsFormType,
+        legalTaxRegionCode,
+        treatyBenefitsRequested,
+        usTinStatus);
   }
 
   @Override
@@ -180,6 +213,8 @@ public class TaxProfileUpdate {
         irsFormType,
         "legalTaxRegionCode",
         legalTaxRegionCode,
+        "treatyBenefitsRequested",
+        treatyBenefitsRequested,
         "usTinStatus",
         usTinStatus);
   }
@@ -193,6 +228,8 @@ public class TaxProfileUpdate {
     private Optional<? extends TaxProfileUpdateIrsFormType> irsFormType = Optional.empty();
 
     private Optional<String> legalTaxRegionCode = Optional.empty();
+
+    private Optional<Boolean> treatyBenefitsRequested = Optional.empty();
 
     private Optional<? extends TaxProfileUpdateUsTinStatus> usTinStatus = Optional.empty();
 
@@ -244,6 +281,24 @@ public class TaxProfileUpdate {
       return this;
     }
 
+    /**
+     * Whether treaty benefits are requested. Only applicable for W_8BEN and W_8BEN_E form types.
+     */
+    public Builder treatyBenefitsRequested(boolean treatyBenefitsRequested) {
+      Utils.checkNotNull(treatyBenefitsRequested, "treatyBenefitsRequested");
+      this.treatyBenefitsRequested = Optional.ofNullable(treatyBenefitsRequested);
+      return this;
+    }
+
+    /**
+     * Whether treaty benefits are requested. Only applicable for W_8BEN and W_8BEN_E form types.
+     */
+    public Builder treatyBenefitsRequested(Optional<Boolean> treatyBenefitsRequested) {
+      Utils.checkNotNull(treatyBenefitsRequested, "treatyBenefitsRequested");
+      this.treatyBenefitsRequested = treatyBenefitsRequested;
+      return this;
+    }
+
     /** United States Individual Taxpayer Identification Number (ITIN) status. */
     public Builder usTinStatus(TaxProfileUpdateUsTinStatus usTinStatus) {
       Utils.checkNotNull(usTinStatus, "usTinStatus");
@@ -261,7 +316,11 @@ public class TaxProfileUpdate {
     public TaxProfileUpdate build() {
 
       return new TaxProfileUpdate(
-          federalTaxClassification, irsFormType, legalTaxRegionCode, usTinStatus);
+          federalTaxClassification,
+          irsFormType,
+          legalTaxRegionCode,
+          treatyBenefitsRequested,
+          usTinStatus);
     }
   }
 }

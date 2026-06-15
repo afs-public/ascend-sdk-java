@@ -22,14 +22,26 @@ public class IdentifierUpdate {
   @JsonProperty("type")
   private Optional<? extends IdentifierUpdateType> type;
 
+  /**
+   * The value of the identifier. Immutable for ORIGINATING_FDID and ORIGINATING_CAT_REPORTER_CRD;
+   * may be updated for ORIGINATING_ACCOUNT_ID and CLIENT_ACCOUNT_ID.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("value")
+  private Optional<String> value;
+
   @JsonCreator
-  public IdentifierUpdate(@JsonProperty("type") Optional<? extends IdentifierUpdateType> type) {
+  public IdentifierUpdate(
+      @JsonProperty("type") Optional<? extends IdentifierUpdateType> type,
+      @JsonProperty("value") Optional<String> value) {
     Utils.checkNotNull(type, "type");
+    Utils.checkNotNull(value, "value");
     this.type = type;
+    this.value = value;
   }
 
   public IdentifierUpdate() {
-    this(Optional.empty());
+    this(Optional.empty(), Optional.empty());
   }
 
   /** The type of identifier */
@@ -37,6 +49,15 @@ public class IdentifierUpdate {
   @JsonIgnore
   public Optional<IdentifierUpdateType> type() {
     return (Optional<IdentifierUpdateType>) type;
+  }
+
+  /**
+   * The value of the identifier. Immutable for ORIGINATING_FDID and ORIGINATING_CAT_REPORTER_CRD;
+   * may be updated for ORIGINATING_ACCOUNT_ID and CLIENT_ACCOUNT_ID.
+   */
+  @JsonIgnore
+  public Optional<String> value() {
+    return value;
   }
 
   public static Builder builder() {
@@ -57,6 +78,26 @@ public class IdentifierUpdate {
     return this;
   }
 
+  /**
+   * The value of the identifier. Immutable for ORIGINATING_FDID and ORIGINATING_CAT_REPORTER_CRD;
+   * may be updated for ORIGINATING_ACCOUNT_ID and CLIENT_ACCOUNT_ID.
+   */
+  public IdentifierUpdate withValue(String value) {
+    Utils.checkNotNull(value, "value");
+    this.value = Optional.ofNullable(value);
+    return this;
+  }
+
+  /**
+   * The value of the identifier. Immutable for ORIGINATING_FDID and ORIGINATING_CAT_REPORTER_CRD;
+   * may be updated for ORIGINATING_ACCOUNT_ID and CLIENT_ACCOUNT_ID.
+   */
+  public IdentifierUpdate withValue(Optional<String> value) {
+    Utils.checkNotNull(value, "value");
+    this.value = value;
+    return this;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -66,23 +107,26 @@ public class IdentifierUpdate {
       return false;
     }
     IdentifierUpdate other = (IdentifierUpdate) o;
-    return Utils.enhancedDeepEquals(this.type, other.type);
+    return Utils.enhancedDeepEquals(this.type, other.type)
+        && Utils.enhancedDeepEquals(this.value, other.value);
   }
 
   @Override
   public int hashCode() {
-    return Utils.enhancedHash(type);
+    return Utils.enhancedHash(type, value);
   }
 
   @Override
   public String toString() {
-    return Utils.toString(IdentifierUpdate.class, "type", type);
+    return Utils.toString(IdentifierUpdate.class, "type", type, "value", value);
   }
 
   @SuppressWarnings("UnusedReturnValue")
   public static final class Builder {
 
     private Optional<? extends IdentifierUpdateType> type = Optional.empty();
+
+    private Optional<String> value = Optional.empty();
 
     private Builder() {
       // force use of static builder() method
@@ -102,9 +146,29 @@ public class IdentifierUpdate {
       return this;
     }
 
+    /**
+     * The value of the identifier. Immutable for ORIGINATING_FDID and ORIGINATING_CAT_REPORTER_CRD;
+     * may be updated for ORIGINATING_ACCOUNT_ID and CLIENT_ACCOUNT_ID.
+     */
+    public Builder value(String value) {
+      Utils.checkNotNull(value, "value");
+      this.value = Optional.ofNullable(value);
+      return this;
+    }
+
+    /**
+     * The value of the identifier. Immutable for ORIGINATING_FDID and ORIGINATING_CAT_REPORTER_CRD;
+     * may be updated for ORIGINATING_ACCOUNT_ID and CLIENT_ACCOUNT_ID.
+     */
+    public Builder value(Optional<String> value) {
+      Utils.checkNotNull(value, "value");
+      this.value = value;
+      return this;
+    }
+
     public IdentifierUpdate build() {
 
-      return new IdentifierUpdate(type);
+      return new IdentifierUpdate(type, value);
     }
   }
 }

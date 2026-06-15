@@ -18,7 +18,10 @@ public class IdentifierCreate {
   @JsonProperty("type")
   private IdentifierCreateType type;
 
-  /** The value of the identifier */
+  /**
+   * The value of the identifier. Immutable for ORIGINATING_FDID and ORIGINATING_CAT_REPORTER_CRD;
+   * may be updated for ORIGINATING_ACCOUNT_ID and CLIENT_ACCOUNT_ID.
+   */
   @JsonProperty("value")
   private String value;
 
@@ -37,7 +40,10 @@ public class IdentifierCreate {
     return type;
   }
 
-  /** The value of the identifier */
+  /**
+   * The value of the identifier. Immutable for ORIGINATING_FDID and ORIGINATING_CAT_REPORTER_CRD;
+   * may be updated for ORIGINATING_ACCOUNT_ID and CLIENT_ACCOUNT_ID.
+   */
   @JsonIgnore
   public String value() {
     return value;
@@ -54,7 +60,10 @@ public class IdentifierCreate {
     return this;
   }
 
-  /** The value of the identifier */
+  /**
+   * The value of the identifier. Immutable for ORIGINATING_FDID and ORIGINATING_CAT_REPORTER_CRD;
+   * may be updated for ORIGINATING_ACCOUNT_ID and CLIENT_ACCOUNT_ID.
+   */
   public IdentifierCreate withValue(String value) {
     Utils.checkNotNull(value, "value");
     this.value = value;
@@ -102,7 +111,10 @@ public class IdentifierCreate {
       return this;
     }
 
-    /** The value of the identifier */
+    /**
+     * The value of the identifier. Immutable for ORIGINATING_FDID and ORIGINATING_CAT_REPORTER_CRD;
+     * may be updated for ORIGINATING_ACCOUNT_ID and CLIENT_ACCOUNT_ID.
+     */
     public Builder value(String value) {
       Utils.checkNotNull(value, "value");
       this.value = value;
