@@ -22,7 +22,10 @@ public class Identifier {
   @JsonProperty("type")
   private Optional<? extends IdentifierType1> type;
 
-  /** The value of the identifier */
+  /**
+   * The value of the identifier. Immutable for ORIGINATING_FDID and ORIGINATING_CAT_REPORTER_CRD;
+   * may be updated for ORIGINATING_ACCOUNT_ID and CLIENT_ACCOUNT_ID.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("value")
   private Optional<String> value;
@@ -48,7 +51,10 @@ public class Identifier {
     return (Optional<IdentifierType1>) type;
   }
 
-  /** The value of the identifier */
+  /**
+   * The value of the identifier. Immutable for ORIGINATING_FDID and ORIGINATING_CAT_REPORTER_CRD;
+   * may be updated for ORIGINATING_ACCOUNT_ID and CLIENT_ACCOUNT_ID.
+   */
   @JsonIgnore
   public Optional<String> value() {
     return value;
@@ -72,14 +78,20 @@ public class Identifier {
     return this;
   }
 
-  /** The value of the identifier */
+  /**
+   * The value of the identifier. Immutable for ORIGINATING_FDID and ORIGINATING_CAT_REPORTER_CRD;
+   * may be updated for ORIGINATING_ACCOUNT_ID and CLIENT_ACCOUNT_ID.
+   */
   public Identifier withValue(String value) {
     Utils.checkNotNull(value, "value");
     this.value = Optional.ofNullable(value);
     return this;
   }
 
-  /** The value of the identifier */
+  /**
+   * The value of the identifier. Immutable for ORIGINATING_FDID and ORIGINATING_CAT_REPORTER_CRD;
+   * may be updated for ORIGINATING_ACCOUNT_ID and CLIENT_ACCOUNT_ID.
+   */
   public Identifier withValue(Optional<String> value) {
     Utils.checkNotNull(value, "value");
     this.value = value;
@@ -134,14 +146,20 @@ public class Identifier {
       return this;
     }
 
-    /** The value of the identifier */
+    /**
+     * The value of the identifier. Immutable for ORIGINATING_FDID and ORIGINATING_CAT_REPORTER_CRD;
+     * may be updated for ORIGINATING_ACCOUNT_ID and CLIENT_ACCOUNT_ID.
+     */
     public Builder value(String value) {
       Utils.checkNotNull(value, "value");
       this.value = Optional.ofNullable(value);
       return this;
     }
 
-    /** The value of the identifier */
+    /**
+     * The value of the identifier. Immutable for ORIGINATING_FDID and ORIGINATING_CAT_REPORTER_CRD;
+     * may be updated for ORIGINATING_ACCOUNT_ID and CLIENT_ACCOUNT_ID.
+     */
     public Builder value(Optional<String> value) {
       Utils.checkNotNull(value, "value");
       this.value = value;

@@ -36,6 +36,18 @@ public class LegalNaturalPersonIdentityVerificationResult {
   @JsonProperty("birth_date_verified")
   private Optional<Boolean> birthDateVerified;
 
+  /** Document IDs for identity documents that were directly verified by the client. */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_directly_verified_document_ids")
+  private Optional<? extends List<String>> clientDirectlyVerifiedDocumentIds;
+
+  /**
+   * Indicates whether the client has directly verified the identity documents (defaults to false).
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("client_directly_verified_id_docs")
+  private Optional<Boolean> clientDirectlyVerifiedIdDocs;
+
   /** The datetime external identity verification results were run on a natural person */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("execution_date")
@@ -95,6 +107,10 @@ public class LegalNaturalPersonIdentityVerificationResult {
   public LegalNaturalPersonIdentityVerificationResult(
       @JsonProperty("address_verified") Optional<Boolean> addressVerified,
       @JsonProperty("birth_date_verified") Optional<Boolean> birthDateVerified,
+      @JsonProperty("client_directly_verified_document_ids")
+          Optional<? extends List<String>> clientDirectlyVerifiedDocumentIds,
+      @JsonProperty("client_directly_verified_id_docs")
+          Optional<Boolean> clientDirectlyVerifiedIdDocs,
       @JsonProperty("execution_date") JsonNullable<? extends ExecutionDate> executionDate,
       @JsonProperty("external_case_id") Optional<String> externalCaseId,
       @JsonProperty("identity_verification_document_ids")
@@ -107,6 +123,8 @@ public class LegalNaturalPersonIdentityVerificationResult {
       @JsonProperty("vendor") Optional<String> vendor) {
     Utils.checkNotNull(addressVerified, "addressVerified");
     Utils.checkNotNull(birthDateVerified, "birthDateVerified");
+    Utils.checkNotNull(clientDirectlyVerifiedDocumentIds, "clientDirectlyVerifiedDocumentIds");
+    Utils.checkNotNull(clientDirectlyVerifiedIdDocs, "clientDirectlyVerifiedIdDocs");
     Utils.checkNotNull(executionDate, "executionDate");
     Utils.checkNotNull(externalCaseId, "externalCaseId");
     Utils.checkNotNull(identityVerificationDocumentIds, "identityVerificationDocumentIds");
@@ -117,6 +135,8 @@ public class LegalNaturalPersonIdentityVerificationResult {
     Utils.checkNotNull(vendor, "vendor");
     this.addressVerified = addressVerified;
     this.birthDateVerified = birthDateVerified;
+    this.clientDirectlyVerifiedDocumentIds = clientDirectlyVerifiedDocumentIds;
+    this.clientDirectlyVerifiedIdDocs = clientDirectlyVerifiedIdDocs;
     this.executionDate = executionDate;
     this.externalCaseId = externalCaseId;
     this.identityVerificationDocumentIds = identityVerificationDocumentIds;
@@ -129,6 +149,8 @@ public class LegalNaturalPersonIdentityVerificationResult {
 
   public LegalNaturalPersonIdentityVerificationResult() {
     this(
+        Optional.empty(),
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined(),
@@ -157,6 +179,21 @@ public class LegalNaturalPersonIdentityVerificationResult {
   @JsonIgnore
   public Optional<Boolean> birthDateVerified() {
     return birthDateVerified;
+  }
+
+  /** Document IDs for identity documents that were directly verified by the client. */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<List<String>> clientDirectlyVerifiedDocumentIds() {
+    return (Optional<List<String>>) clientDirectlyVerifiedDocumentIds;
+  }
+
+  /**
+   * Indicates whether the client has directly verified the identity documents (defaults to false).
+   */
+  @JsonIgnore
+  public Optional<Boolean> clientDirectlyVerifiedIdDocs() {
+    return clientDirectlyVerifiedIdDocs;
   }
 
   /** The datetime external identity verification results were run on a natural person */
@@ -268,6 +305,42 @@ public class LegalNaturalPersonIdentityVerificationResult {
       Optional<Boolean> birthDateVerified) {
     Utils.checkNotNull(birthDateVerified, "birthDateVerified");
     this.birthDateVerified = birthDateVerified;
+    return this;
+  }
+
+  /** Document IDs for identity documents that were directly verified by the client. */
+  public LegalNaturalPersonIdentityVerificationResult withClientDirectlyVerifiedDocumentIds(
+      List<String> clientDirectlyVerifiedDocumentIds) {
+    Utils.checkNotNull(clientDirectlyVerifiedDocumentIds, "clientDirectlyVerifiedDocumentIds");
+    this.clientDirectlyVerifiedDocumentIds = Optional.ofNullable(clientDirectlyVerifiedDocumentIds);
+    return this;
+  }
+
+  /** Document IDs for identity documents that were directly verified by the client. */
+  public LegalNaturalPersonIdentityVerificationResult withClientDirectlyVerifiedDocumentIds(
+      Optional<? extends List<String>> clientDirectlyVerifiedDocumentIds) {
+    Utils.checkNotNull(clientDirectlyVerifiedDocumentIds, "clientDirectlyVerifiedDocumentIds");
+    this.clientDirectlyVerifiedDocumentIds = clientDirectlyVerifiedDocumentIds;
+    return this;
+  }
+
+  /**
+   * Indicates whether the client has directly verified the identity documents (defaults to false).
+   */
+  public LegalNaturalPersonIdentityVerificationResult withClientDirectlyVerifiedIdDocs(
+      boolean clientDirectlyVerifiedIdDocs) {
+    Utils.checkNotNull(clientDirectlyVerifiedIdDocs, "clientDirectlyVerifiedIdDocs");
+    this.clientDirectlyVerifiedIdDocs = Optional.ofNullable(clientDirectlyVerifiedIdDocs);
+    return this;
+  }
+
+  /**
+   * Indicates whether the client has directly verified the identity documents (defaults to false).
+   */
+  public LegalNaturalPersonIdentityVerificationResult withClientDirectlyVerifiedIdDocs(
+      Optional<Boolean> clientDirectlyVerifiedIdDocs) {
+    Utils.checkNotNull(clientDirectlyVerifiedIdDocs, "clientDirectlyVerifiedIdDocs");
+    this.clientDirectlyVerifiedIdDocs = clientDirectlyVerifiedIdDocs;
     return this;
   }
 
@@ -436,6 +509,10 @@ public class LegalNaturalPersonIdentityVerificationResult {
         (LegalNaturalPersonIdentityVerificationResult) o;
     return Utils.enhancedDeepEquals(this.addressVerified, other.addressVerified)
         && Utils.enhancedDeepEquals(this.birthDateVerified, other.birthDateVerified)
+        && Utils.enhancedDeepEquals(
+            this.clientDirectlyVerifiedDocumentIds, other.clientDirectlyVerifiedDocumentIds)
+        && Utils.enhancedDeepEquals(
+            this.clientDirectlyVerifiedIdDocs, other.clientDirectlyVerifiedIdDocs)
         && Utils.enhancedDeepEquals(this.executionDate, other.executionDate)
         && Utils.enhancedDeepEquals(this.externalCaseId, other.externalCaseId)
         && Utils.enhancedDeepEquals(
@@ -453,6 +530,8 @@ public class LegalNaturalPersonIdentityVerificationResult {
     return Utils.enhancedHash(
         addressVerified,
         birthDateVerified,
+        clientDirectlyVerifiedDocumentIds,
+        clientDirectlyVerifiedIdDocs,
         executionDate,
         externalCaseId,
         identityVerificationDocumentIds,
@@ -471,6 +550,10 @@ public class LegalNaturalPersonIdentityVerificationResult {
         addressVerified,
         "birthDateVerified",
         birthDateVerified,
+        "clientDirectlyVerifiedDocumentIds",
+        clientDirectlyVerifiedDocumentIds,
+        "clientDirectlyVerifiedIdDocs",
+        clientDirectlyVerifiedIdDocs,
         "executionDate",
         executionDate,
         "externalCaseId",
@@ -495,6 +578,10 @@ public class LegalNaturalPersonIdentityVerificationResult {
     private Optional<Boolean> addressVerified = Optional.empty();
 
     private Optional<Boolean> birthDateVerified = Optional.empty();
+
+    private Optional<? extends List<String>> clientDirectlyVerifiedDocumentIds = Optional.empty();
+
+    private Optional<Boolean> clientDirectlyVerifiedIdDocs = Optional.empty();
 
     private JsonNullable<? extends ExecutionDate> executionDate = JsonNullable.undefined();
 
@@ -553,6 +640,43 @@ public class LegalNaturalPersonIdentityVerificationResult {
     public Builder birthDateVerified(Optional<Boolean> birthDateVerified) {
       Utils.checkNotNull(birthDateVerified, "birthDateVerified");
       this.birthDateVerified = birthDateVerified;
+      return this;
+    }
+
+    /** Document IDs for identity documents that were directly verified by the client. */
+    public Builder clientDirectlyVerifiedDocumentIds(
+        List<String> clientDirectlyVerifiedDocumentIds) {
+      Utils.checkNotNull(clientDirectlyVerifiedDocumentIds, "clientDirectlyVerifiedDocumentIds");
+      this.clientDirectlyVerifiedDocumentIds =
+          Optional.ofNullable(clientDirectlyVerifiedDocumentIds);
+      return this;
+    }
+
+    /** Document IDs for identity documents that were directly verified by the client. */
+    public Builder clientDirectlyVerifiedDocumentIds(
+        Optional<? extends List<String>> clientDirectlyVerifiedDocumentIds) {
+      Utils.checkNotNull(clientDirectlyVerifiedDocumentIds, "clientDirectlyVerifiedDocumentIds");
+      this.clientDirectlyVerifiedDocumentIds = clientDirectlyVerifiedDocumentIds;
+      return this;
+    }
+
+    /**
+     * Indicates whether the client has directly verified the identity documents (defaults to
+     * false).
+     */
+    public Builder clientDirectlyVerifiedIdDocs(boolean clientDirectlyVerifiedIdDocs) {
+      Utils.checkNotNull(clientDirectlyVerifiedIdDocs, "clientDirectlyVerifiedIdDocs");
+      this.clientDirectlyVerifiedIdDocs = Optional.ofNullable(clientDirectlyVerifiedIdDocs);
+      return this;
+    }
+
+    /**
+     * Indicates whether the client has directly verified the identity documents (defaults to
+     * false).
+     */
+    public Builder clientDirectlyVerifiedIdDocs(Optional<Boolean> clientDirectlyVerifiedIdDocs) {
+      Utils.checkNotNull(clientDirectlyVerifiedIdDocs, "clientDirectlyVerifiedIdDocs");
+      this.clientDirectlyVerifiedIdDocs = clientDirectlyVerifiedIdDocs;
       return this;
     }
 
@@ -706,6 +830,8 @@ public class LegalNaturalPersonIdentityVerificationResult {
       return new LegalNaturalPersonIdentityVerificationResult(
           addressVerified,
           birthDateVerified,
+          clientDirectlyVerifiedDocumentIds,
+          clientDirectlyVerifiedIdDocs,
           executionDate,
           externalCaseId,
           identityVerificationDocumentIds,

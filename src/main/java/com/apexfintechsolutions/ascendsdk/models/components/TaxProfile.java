@@ -59,6 +59,11 @@ public class TaxProfile {
   @JsonProperty("taxpayer_certification_state")
   private Optional<? extends TaxpayerCertificationState> taxpayerCertificationState;
 
+  /** Whether treaty benefits are requested. Only applicable for W_8BEN and W_8BEN_E form types. */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("treaty_benefits_requested")
+  private Optional<Boolean> treatyBenefitsRequested;
+
   /** United States Individual Taxpayer Identification Number (ITIN) status. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("us_tin_status")
@@ -84,6 +89,7 @@ public class TaxProfile {
           JsonNullable<? extends TaxCertificationDate> taxCertificationDate,
       @JsonProperty("taxpayer_certification_state")
           Optional<? extends TaxpayerCertificationState> taxpayerCertificationState,
+      @JsonProperty("treaty_benefits_requested") Optional<Boolean> treatyBenefitsRequested,
       @JsonProperty("us_tin_status") Optional<? extends LegalNaturalPersonUsTinStatus> usTinStatus,
       @JsonProperty("withholding_state")
           Optional<? extends LegalNaturalPersonWithholdingState> withholdingState) {
@@ -95,6 +101,7 @@ public class TaxProfile {
     Utils.checkNotNull(reportingEligibility, "reportingEligibility");
     Utils.checkNotNull(taxCertificationDate, "taxCertificationDate");
     Utils.checkNotNull(taxpayerCertificationState, "taxpayerCertificationState");
+    Utils.checkNotNull(treatyBenefitsRequested, "treatyBenefitsRequested");
     Utils.checkNotNull(usTinStatus, "usTinStatus");
     Utils.checkNotNull(withholdingState, "withholdingState");
     this.cNoticeDate = cNoticeDate;
@@ -105,6 +112,7 @@ public class TaxProfile {
     this.reportingEligibility = reportingEligibility;
     this.taxCertificationDate = taxCertificationDate;
     this.taxpayerCertificationState = taxpayerCertificationState;
+    this.treatyBenefitsRequested = treatyBenefitsRequested;
     this.usTinStatus = usTinStatus;
     this.withholdingState = withholdingState;
   }
@@ -118,6 +126,7 @@ public class TaxProfile {
         Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined(),
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty());
@@ -176,6 +185,12 @@ public class TaxProfile {
   @JsonIgnore
   public Optional<TaxpayerCertificationState> taxpayerCertificationState() {
     return (Optional<TaxpayerCertificationState>) taxpayerCertificationState;
+  }
+
+  /** Whether treaty benefits are requested. Only applicable for W_8BEN and W_8BEN_E form types. */
+  @JsonIgnore
+  public Optional<Boolean> treatyBenefitsRequested() {
+    return treatyBenefitsRequested;
   }
 
   /** United States Individual Taxpayer Identification Number (ITIN) status. */
@@ -315,6 +330,20 @@ public class TaxProfile {
     return this;
   }
 
+  /** Whether treaty benefits are requested. Only applicable for W_8BEN and W_8BEN_E form types. */
+  public TaxProfile withTreatyBenefitsRequested(boolean treatyBenefitsRequested) {
+    Utils.checkNotNull(treatyBenefitsRequested, "treatyBenefitsRequested");
+    this.treatyBenefitsRequested = Optional.ofNullable(treatyBenefitsRequested);
+    return this;
+  }
+
+  /** Whether treaty benefits are requested. Only applicable for W_8BEN and W_8BEN_E form types. */
+  public TaxProfile withTreatyBenefitsRequested(Optional<Boolean> treatyBenefitsRequested) {
+    Utils.checkNotNull(treatyBenefitsRequested, "treatyBenefitsRequested");
+    this.treatyBenefitsRequested = treatyBenefitsRequested;
+    return this;
+  }
+
   /** United States Individual Taxpayer Identification Number (ITIN) status. */
   public TaxProfile withUsTinStatus(LegalNaturalPersonUsTinStatus usTinStatus) {
     Utils.checkNotNull(usTinStatus, "usTinStatus");
@@ -362,6 +391,7 @@ public class TaxProfile {
         && Utils.enhancedDeepEquals(this.taxCertificationDate, other.taxCertificationDate)
         && Utils.enhancedDeepEquals(
             this.taxpayerCertificationState, other.taxpayerCertificationState)
+        && Utils.enhancedDeepEquals(this.treatyBenefitsRequested, other.treatyBenefitsRequested)
         && Utils.enhancedDeepEquals(this.usTinStatus, other.usTinStatus)
         && Utils.enhancedDeepEquals(this.withholdingState, other.withholdingState);
   }
@@ -377,6 +407,7 @@ public class TaxProfile {
         reportingEligibility,
         taxCertificationDate,
         taxpayerCertificationState,
+        treatyBenefitsRequested,
         usTinStatus,
         withholdingState);
   }
@@ -401,6 +432,8 @@ public class TaxProfile {
         taxCertificationDate,
         "taxpayerCertificationState",
         taxpayerCertificationState,
+        "treatyBenefitsRequested",
+        treatyBenefitsRequested,
         "usTinStatus",
         usTinStatus,
         "withholdingState",
@@ -428,6 +461,8 @@ public class TaxProfile {
 
     private Optional<? extends TaxpayerCertificationState> taxpayerCertificationState =
         Optional.empty();
+
+    private Optional<Boolean> treatyBenefitsRequested = Optional.empty();
 
     private Optional<? extends LegalNaturalPersonUsTinStatus> usTinStatus = Optional.empty();
 
@@ -556,6 +591,24 @@ public class TaxProfile {
       return this;
     }
 
+    /**
+     * Whether treaty benefits are requested. Only applicable for W_8BEN and W_8BEN_E form types.
+     */
+    public Builder treatyBenefitsRequested(boolean treatyBenefitsRequested) {
+      Utils.checkNotNull(treatyBenefitsRequested, "treatyBenefitsRequested");
+      this.treatyBenefitsRequested = Optional.ofNullable(treatyBenefitsRequested);
+      return this;
+    }
+
+    /**
+     * Whether treaty benefits are requested. Only applicable for W_8BEN and W_8BEN_E form types.
+     */
+    public Builder treatyBenefitsRequested(Optional<Boolean> treatyBenefitsRequested) {
+      Utils.checkNotNull(treatyBenefitsRequested, "treatyBenefitsRequested");
+      this.treatyBenefitsRequested = treatyBenefitsRequested;
+      return this;
+    }
+
     /** United States Individual Taxpayer Identification Number (ITIN) status. */
     public Builder usTinStatus(LegalNaturalPersonUsTinStatus usTinStatus) {
       Utils.checkNotNull(usTinStatus, "usTinStatus");
@@ -596,6 +649,7 @@ public class TaxProfile {
           reportingEligibility,
           taxCertificationDate,
           taxpayerCertificationState,
+          treatyBenefitsRequested,
           usTinStatus,
           withholdingState);
     }

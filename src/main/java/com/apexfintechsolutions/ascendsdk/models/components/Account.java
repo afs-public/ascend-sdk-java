@@ -230,12 +230,14 @@ public class Account {
   private Optional<? extends List<Party>> parties;
 
   /**
-   * Indicates if the customer is a PDT; This is set if the account executes four or more day trades
-   * (buy and sell the same security intraday) within a period of five business days. By default,
-   * this is set to `false`.
+   * Deprecated: PDT designation no longer applies. This indicator will always be set to `false`.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("pattern_day_trader")
+  @Deprecated
   private Optional<Boolean> patternDayTrader;
 
   /** The primary registered representative for the account */
@@ -702,10 +704,12 @@ public class Account {
   }
 
   /**
-   * Indicates if the customer is a PDT; This is set if the account executes four or more day trades
-   * (buy and sell the same security intraday) within a period of five business days. By default,
-   * this is set to `false`.
+   * Deprecated: PDT designation no longer applies. This indicator will always be set to `false`.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
    */
+  @Deprecated
   @JsonIgnore
   public Optional<Boolean> patternDayTrader() {
     return patternDayTrader;
@@ -1314,10 +1318,12 @@ public class Account {
   }
 
   /**
-   * Indicates if the customer is a PDT; This is set if the account executes four or more day trades
-   * (buy and sell the same security intraday) within a period of five business days. By default,
-   * this is set to `false`.
+   * Deprecated: PDT designation no longer applies. This indicator will always be set to `false`.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
    */
+  @Deprecated
   public Account withPatternDayTrader(boolean patternDayTrader) {
     Utils.checkNotNull(patternDayTrader, "patternDayTrader");
     this.patternDayTrader = Optional.ofNullable(patternDayTrader);
@@ -1325,10 +1331,12 @@ public class Account {
   }
 
   /**
-   * Indicates if the customer is a PDT; This is set if the account executes four or more day trades
-   * (buy and sell the same security intraday) within a period of five business days. By default,
-   * this is set to `false`.
+   * Deprecated: PDT designation no longer applies. This indicator will always be set to `false`.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as
+   *     soon as possible.
    */
+  @Deprecated
   public Account withPatternDayTrader(Optional<Boolean> patternDayTrader) {
     Utils.checkNotNull(patternDayTrader, "patternDayTrader");
     this.patternDayTrader = patternDayTrader;
@@ -1696,7 +1704,7 @@ public class Account {
 
     private Optional<? extends List<Party>> parties = Optional.empty();
 
-    private Optional<Boolean> patternDayTrader = Optional.empty();
+    @Deprecated private Optional<Boolean> patternDayTrader = Optional.empty();
 
     private Optional<String> primaryRegisteredRepId = Optional.empty();
 
@@ -2256,10 +2264,12 @@ public class Account {
     }
 
     /**
-     * Indicates if the customer is a PDT; This is set if the account executes four or more day
-     * trades (buy and sell the same security intraday) within a period of five business days. By
-     * default, this is set to `false`.
+     * Deprecated: PDT designation no longer applies. This indicator will always be set to `false`.
+     *
+     * @deprecated field: This will be removed in a future release, please migrate away from it as
+     *     soon as possible.
      */
+    @Deprecated
     public Builder patternDayTrader(boolean patternDayTrader) {
       Utils.checkNotNull(patternDayTrader, "patternDayTrader");
       this.patternDayTrader = Optional.ofNullable(patternDayTrader);
@@ -2267,10 +2277,12 @@ public class Account {
     }
 
     /**
-     * Indicates if the customer is a PDT; This is set if the account executes four or more day
-     * trades (buy and sell the same security intraday) within a period of five business days. By
-     * default, this is set to `false`.
+     * Deprecated: PDT designation no longer applies. This indicator will always be set to `false`.
+     *
+     * @deprecated field: This will be removed in a future release, please migrate away from it as
+     *     soon as possible.
      */
+    @Deprecated
     public Builder patternDayTrader(Optional<Boolean> patternDayTrader) {
       Utils.checkNotNull(patternDayTrader, "patternDayTrader");
       this.patternDayTrader = patternDayTrader;
