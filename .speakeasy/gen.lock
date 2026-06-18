@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 04604b59-b953-4711-ac65-9ad5897162b4
 management:
-  docChecksum: 8da6796d5439d85f9497ea0c33ba91e5
-  docVersion: v1:20260615:uat:021f8945feda
+  docChecksum: bf2ac44ce30ef03c0d91cc453e77345a
+  docVersion: v1:20260618:uat:efef5adf4719
   speakeasyVersion: 1.608.0
   generationVersion: 2.691.6
-  releaseVersion: 1.6.9
-  configChecksum: 9176c1377a84e3b224202c5191f57293
+  releaseVersion: 1.6.10
+  configChecksum: e052e2f3508d02165a64c17dba22374a
 features:
   java:
     additionalDependencies: 0.1.0
@@ -148,9 +148,11 @@ generatedFiles:
   - docs/models/components/ActivityAction.md
   - docs/models/components/ActivityActivityDate.md
   - docs/models/components/ActivityAllocation.md
+  - docs/models/components/ActivityAssignment.md
   - docs/models/components/ActivityBondDefault.md
   - docs/models/components/ActivityBondDefaultQuantity.md
   - docs/models/components/ActivityBrokerCapacity.md
+  - docs/models/components/ActivityCapacity.md
   - docs/models/components/ActivityCapitalGains.md
   - docs/models/components/ActivityCapitalGainsCorporateActionGeneralInformation.md
   - docs/models/components/ActivityCapitalGainsPaymentDate.md
@@ -188,6 +190,11 @@ generatedFiles:
   - docs/models/components/ActivityExchangeCorporateActionGeneralInformation.md
   - docs/models/components/ActivityExchangeStockRate.md
   - docs/models/components/ActivityExchangeType.md
+  - docs/models/components/ActivityExercise.md
+  - docs/models/components/ActivityExerciseCapacity.md
+  - docs/models/components/ActivityExerciseOptionContractQuantity.md
+  - docs/models/components/ActivityExerciseType.md
+  - docs/models/components/ActivityExpiration.md
   - docs/models/components/ActivityFactorDenominator.md
   - docs/models/components/ActivityFactorNumerator.md
   - docs/models/components/ActivityFairMarketValue.md
@@ -230,12 +237,15 @@ generatedFiles:
   - docs/models/components/ActivityMergerStockRate.md
   - docs/models/components/ActivityMergerType.md
   - docs/models/components/ActivityMethod.md
+  - docs/models/components/ActivityMoneyness.md
   - docs/models/components/ActivityNameChange.md
   - docs/models/components/ActivityNameChangeAction.md
   - docs/models/components/ActivityNameChangeCorporateActionGeneralInformation.md
   - docs/models/components/ActivityNameChangeEffectiveDate.md
   - docs/models/components/ActivityNameChangeQuantity.md
   - docs/models/components/ActivityNetAmount.md
+  - docs/models/components/ActivityOptionAdjustment.md
+  - docs/models/components/ActivityOptionContractQuantity.md
   - docs/models/components/ActivityOutcome.md
   - docs/models/components/ActivityPayDate.md
   - docs/models/components/ActivityPaymentDate.md
@@ -416,6 +426,7 @@ generatedFiles:
   - docs/models/components/AssetType.md
   - docs/models/components/AssetType1.md
   - docs/models/components/AssignLargeTraderRequestCreate.md
+  - docs/models/components/Assignment.md
   - docs/models/components/AuditTrail.md
   - docs/models/components/AuditType.md
   - docs/models/components/AvailableCashToWithdrawAmount.md
@@ -597,6 +608,7 @@ generatedFiles:
   - docs/models/components/CancelTradeResponseWhenIssued.md
   - docs/models/components/CancelWireWithdrawalRequestCreate.md
   - docs/models/components/CancelWireWithdrawalScheduleRequestCreate.md
+  - docs/models/components/Capacity.md
   - docs/models/components/CapitalGains.md
   - docs/models/components/CashAmount.md
   - docs/models/components/CashDividend.md
@@ -940,6 +952,7 @@ generatedFiles:
   - docs/models/components/EntryAction.md
   - docs/models/components/EntryBondDefaultQuantity.md
   - docs/models/components/EntryBrokerCapacity.md
+  - docs/models/components/EntryCapacity.md
   - docs/models/components/EntryCapitalGainsCorporateActionGeneralInformation.md
   - docs/models/components/EntryCapitalGainsQuantity.md
   - docs/models/components/EntryCashDividendCashRate.md
@@ -1003,6 +1016,7 @@ generatedFiles:
   - docs/models/components/EntryNameChangeCorporateActionGeneralInformation.md
   - docs/models/components/EntryNameChangeEffectiveDate.md
   - docs/models/components/EntryNameChangeQuantity.md
+  - docs/models/components/EntryOptionContractQuantity.md
   - docs/models/components/EntryPayDate.md
   - docs/models/components/EntryPaymentDate.md
   - docs/models/components/EntryPaymentInKindCorporateActionGeneralInformation.md
@@ -1109,8 +1123,11 @@ generatedFiles:
   - docs/models/components/ExecutionQuantity.md
   - docs/models/components/ExecutionState.md
   - docs/models/components/ExemptCustomerReason.md
+  - docs/models/components/Exercise.md
   - docs/models/components/ExerciseStyle.md
+  - docs/models/components/ExerciseType.md
   - docs/models/components/ExpectedNotionalCeilingAmount.md
+  - docs/models/components/Expiration.md
   - docs/models/components/ExpirationDate.md
   - docs/models/components/ExternalAccount.md
   - docs/models/components/ExternalAccountCreate.md
@@ -1526,6 +1543,7 @@ generatedFiles:
   - docs/models/components/MinimumSubsequentSubscriptionAmount.md
   - docs/models/components/Money.md
   - docs/models/components/MoneyMarketFundSweep.md
+  - docs/models/components/Moneyness.md
   - docs/models/components/MutualFund.md
   - docs/models/components/MutualFundType.md
   - docs/models/components/NachaNocCreate.md
@@ -1564,6 +1582,8 @@ generatedFiles:
   - docs/models/components/OperatingEnrollmentMetadataCreate.md
   - docs/models/components/OperatingPurpose.md
   - docs/models/components/Option.md
+  - docs/models/components/OptionAdjustment.md
+  - docs/models/components/OptionContractQuantity.md
   - docs/models/components/OptionDeliverable.md
   - docs/models/components/OptionDeliverableQuantity.md
   - docs/models/components/OptionInstruction.md
@@ -2031,6 +2051,7 @@ generatedFiles:
   - docs/models/components/SettlementStatus.md
   - docs/models/components/SettlementStyle.md
   - docs/models/components/SettlementType.md
+  - docs/models/components/Short.md
   - docs/models/components/ShortCode.md
   - docs/models/components/Side.md
   - docs/models/components/SideModifier.md
@@ -2968,9 +2989,11 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityAction.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityActivityDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityAllocation.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityAssignment.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityBondDefault.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityBondDefaultQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityBrokerCapacity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityCapacity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityCapitalGains.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityCapitalGainsCorporateActionGeneralInformation.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityCapitalGainsPaymentDate.java
@@ -3008,6 +3031,11 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityExchangeCorporateActionGeneralInformation.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityExchangeStockRate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityExchangeType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityExercise.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityExerciseCapacity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityExerciseOptionContractQuantity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityExerciseType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityExpiration.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityFactorDenominator.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityFactorNumerator.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityFairMarketValue.java
@@ -3050,12 +3078,15 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityMergerStockRate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityMergerType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityMethod.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityMoneyness.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityNameChange.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityNameChangeAction.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityNameChangeCorporateActionGeneralInformation.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityNameChangeEffectiveDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityNameChangeQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityNetAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityOptionAdjustment.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityOptionContractQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityOutcome.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityPayDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityPaymentDate.java
@@ -3236,6 +3267,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssetType1.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AssignLargeTraderRequestCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Assignment.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AuditTrail.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AuditType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AvailableCashToWithdrawAmount.java
@@ -3417,6 +3449,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelTradeResponseWhenIssued.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelWireWithdrawalRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CancelWireWithdrawalScheduleRequestCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Capacity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CapitalGains.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CashDividend.java
@@ -3760,6 +3793,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryAction.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryBondDefaultQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryBrokerCapacity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryCapacity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryCapitalGainsCorporateActionGeneralInformation.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryCapitalGainsQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryCashDividendCashRate.java
@@ -3823,6 +3857,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryNameChangeCorporateActionGeneralInformation.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryNameChangeEffectiveDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryNameChangeQuantity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryOptionContractQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryPayDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryPaymentDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EntryPaymentInKindCorporateActionGeneralInformation.java
@@ -3929,8 +3964,11 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExecutionQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExecutionState.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExemptCustomerReason.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Exercise.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExerciseStyle.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExerciseType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExpectedNotionalCeilingAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Expiration.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExpirationDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExternalAccount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ExternalAccountCreate.java
@@ -4346,6 +4384,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MinimumSubsequentSubscriptionAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Money.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MoneyMarketFundSweep.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Moneyness.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MutualFund.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MutualFundType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/NachaNocCreate.java
@@ -4384,6 +4423,8 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OperatingEnrollmentMetadataCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OperatingPurpose.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Option.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionAdjustment.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionContractQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionDeliverable.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionDeliverableQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OptionInstruction.java
@@ -4851,6 +4892,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SettlementStatus.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SettlementStyle.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SettlementType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Short.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ShortCode.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Side.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SideModifier.java

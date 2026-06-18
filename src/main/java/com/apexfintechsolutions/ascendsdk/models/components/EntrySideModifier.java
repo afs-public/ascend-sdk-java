@@ -54,6 +54,7 @@ public class EntrySideModifier {
   public static final EntrySideModifier SHORT_COVER = new EntrySideModifier("SHORT_COVER");
   public static final EntrySideModifier OPEN = new EntrySideModifier("OPEN");
   public static final EntrySideModifier CLOSE = new EntrySideModifier("CLOSE");
+  public static final EntrySideModifier COVER = new EntrySideModifier("COVER");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -127,6 +128,7 @@ public class EntrySideModifier {
     map.put("SHORT_COVER", SHORT_COVER);
     map.put("OPEN", OPEN);
     map.put("CLOSE", CLOSE);
+    map.put("COVER", COVER);
     return map;
   }
 
@@ -138,6 +140,7 @@ public class EntrySideModifier {
     map.put("SHORT_COVER", EntrySideModifierEnum.SHORT_COVER);
     map.put("OPEN", EntrySideModifierEnum.OPEN);
     map.put("CLOSE", EntrySideModifierEnum.CLOSE);
+    map.put("COVER", EntrySideModifierEnum.COVER);
     return map;
   }
 
@@ -178,6 +181,7 @@ public class EntrySideModifier {
     SHORT_COVER("SHORT_COVER"),
     OPEN("OPEN"),
     CLOSE("CLOSE"),
+    COVER("COVER"),
     ;
 
     private final String value;

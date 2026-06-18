@@ -53,6 +53,7 @@ public class ActivitySideModifier {
   public static final ActivitySideModifier SHORT_COVER = new ActivitySideModifier("SHORT_COVER");
   public static final ActivitySideModifier OPEN = new ActivitySideModifier("OPEN");
   public static final ActivitySideModifier CLOSE = new ActivitySideModifier("CLOSE");
+  public static final ActivitySideModifier COVER = new ActivitySideModifier("COVER");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -126,6 +127,7 @@ public class ActivitySideModifier {
     map.put("SHORT_COVER", SHORT_COVER);
     map.put("OPEN", OPEN);
     map.put("CLOSE", CLOSE);
+    map.put("COVER", COVER);
     return map;
   }
 
@@ -137,6 +139,7 @@ public class ActivitySideModifier {
     map.put("SHORT_COVER", ActivitySideModifierEnum.SHORT_COVER);
     map.put("OPEN", ActivitySideModifierEnum.OPEN);
     map.put("CLOSE", ActivitySideModifierEnum.CLOSE);
+    map.put("COVER", ActivitySideModifierEnum.COVER);
     return map;
   }
 
@@ -177,6 +180,7 @@ public class ActivitySideModifier {
     SHORT_COVER("SHORT_COVER"),
     OPEN("OPEN"),
     CLOSE("CLOSE"),
+    COVER("COVER"),
     ;
 
     private final String value;

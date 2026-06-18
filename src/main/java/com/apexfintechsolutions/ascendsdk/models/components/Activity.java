@@ -115,6 +115,15 @@ public class Activity {
   @JsonProperty("asset_id")
   private Optional<String> assetId;
 
+  /**
+   * When booked with a type of MOVEMENT, this subtype will remove an options position due to
+   * assignment. When booked with a type of TRADE, this subtype records the purchase/ sale of the
+   * underlying asset from the assignment of an options position
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("assignment")
+  private JsonNullable<? extends ActivityAssignment> assignment;
+
   /** Object containing metadata for bond defaults */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("bond_default")
@@ -226,6 +235,23 @@ public class Activity {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("exchange")
   private JsonNullable<? extends ActivityExchange> exchange;
+
+  /**
+   * When booked with a type of MOVEMENT, this subtype will remove an options position due to
+   * exercise. When booked with a type of TRADE, this subtype records the purchase/ sale of the
+   * underlying asset from exercising an options position
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("exercise")
+  private JsonNullable<? extends ActivityExercise> exercise;
+
+  /**
+   * Used to record the removal of positions in options assets that have reached or passed their
+   * expiration date and expired worthless
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("expiration")
+  private JsonNullable<? extends ActivityExpiration> expiration;
 
   /**
    * Used to record Fees that have been assessed to account and capture details related to the fee
@@ -345,6 +371,15 @@ public class Activity {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("none")
   private JsonNullable<? extends None> none;
+
+  /**
+   * Used to record the adjustment of an options position. Usually these adjustments are due to a
+   * corporate action event in the underlying asset, though in rare cases, the OCC may make
+   * adjustments for other reasons
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("option_adjustment")
+  private JsonNullable<? extends ActivityOptionAdjustment> optionAdjustment;
 
   /**
    * The resource name of the API resource that originated this ledger entry or activity. This field
@@ -631,6 +666,7 @@ public class Activity {
       @JsonProperty("allocation") JsonNullable<? extends ActivityAllocation> allocation,
       @JsonProperty("asset_description") Optional<String> assetDescription,
       @JsonProperty("asset_id") Optional<String> assetId,
+      @JsonProperty("assignment") JsonNullable<? extends ActivityAssignment> assignment,
       @JsonProperty("bond_default") JsonNullable<? extends ActivityBondDefault> bondDefault,
       @JsonProperty("capital_gains") JsonNullable<? extends ActivityCapitalGains> capitalGains,
       @JsonProperty("cash_dividend") JsonNullable<? extends ActivityCashDividend> cashDividend,
@@ -651,6 +687,8 @@ public class Activity {
       @JsonProperty("event_contract_settlement")
           JsonNullable<? extends ActivityEventContractSettlement> eventContractSettlement,
       @JsonProperty("exchange") JsonNullable<? extends ActivityExchange> exchange,
+      @JsonProperty("exercise") JsonNullable<? extends ActivityExercise> exercise,
+      @JsonProperty("expiration") JsonNullable<? extends ActivityExpiration> expiration,
       @JsonProperty("fee") JsonNullable<? extends ActivityFee> fee,
       @JsonProperty("fees") Optional<? extends List<Fee>> fees,
       @JsonProperty("fpsl") JsonNullable<? extends ActivityFpsl> fpsl,
@@ -669,6 +707,8 @@ public class Activity {
       @JsonProperty("next_activity_process_date")
           JsonNullable<? extends NextActivityProcessDate> nextActivityProcessDate,
       @JsonProperty("none") JsonNullable<? extends None> none,
+      @JsonProperty("option_adjustment")
+          JsonNullable<? extends ActivityOptionAdjustment> optionAdjustment,
       @JsonProperty("originating_resource_name") Optional<String> originatingResourceName,
       @JsonProperty("payment_in_kind") JsonNullable<? extends ActivityPaymentInKind> paymentInKind,
       @JsonProperty("previous_activity_id") Optional<String> previousActivityId,
@@ -728,6 +768,7 @@ public class Activity {
     Utils.checkNotNull(allocation, "allocation");
     Utils.checkNotNull(assetDescription, "assetDescription");
     Utils.checkNotNull(assetId, "assetId");
+    Utils.checkNotNull(assignment, "assignment");
     Utils.checkNotNull(bondDefault, "bondDefault");
     Utils.checkNotNull(capitalGains, "capitalGains");
     Utils.checkNotNull(cashDividend, "cashDividend");
@@ -745,6 +786,8 @@ public class Activity {
     Utils.checkNotNull(drip, "drip");
     Utils.checkNotNull(eventContractSettlement, "eventContractSettlement");
     Utils.checkNotNull(exchange, "exchange");
+    Utils.checkNotNull(exercise, "exercise");
+    Utils.checkNotNull(expiration, "expiration");
     Utils.checkNotNull(fee, "fee");
     Utils.checkNotNull(fees, "fees");
     Utils.checkNotNull(fpsl, "fpsl");
@@ -761,6 +804,7 @@ public class Activity {
     Utils.checkNotNull(nextActivityId, "nextActivityId");
     Utils.checkNotNull(nextActivityProcessDate, "nextActivityProcessDate");
     Utils.checkNotNull(none, "none");
+    Utils.checkNotNull(optionAdjustment, "optionAdjustment");
     Utils.checkNotNull(originatingResourceName, "originatingResourceName");
     Utils.checkNotNull(paymentInKind, "paymentInKind");
     Utils.checkNotNull(previousActivityId, "previousActivityId");
@@ -811,6 +855,7 @@ public class Activity {
     this.allocation = allocation;
     this.assetDescription = assetDescription;
     this.assetId = assetId;
+    this.assignment = assignment;
     this.bondDefault = bondDefault;
     this.capitalGains = capitalGains;
     this.cashDividend = cashDividend;
@@ -828,6 +873,8 @@ public class Activity {
     this.drip = drip;
     this.eventContractSettlement = eventContractSettlement;
     this.exchange = exchange;
+    this.exercise = exercise;
+    this.expiration = expiration;
     this.fee = fee;
     this.fees = fees;
     this.fpsl = fpsl;
@@ -844,6 +891,7 @@ public class Activity {
     this.nextActivityId = nextActivityId;
     this.nextActivityProcessDate = nextActivityProcessDate;
     this.none = none;
+    this.optionAdjustment = optionAdjustment;
     this.originatingResourceName = originatingResourceName;
     this.paymentInKind = paymentInKind;
     this.previousActivityId = previousActivityId;
@@ -903,22 +951,16 @@ public class Activity {
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
-        Optional.empty(),
-        JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
-        Optional.empty(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
-        JsonNullable.undefined(),
         Optional.empty(),
+        JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
@@ -927,8 +969,18 @@ public class Activity {
         JsonNullable.undefined(),
         Optional.empty(),
         JsonNullable.undefined(),
+        Optional.empty(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        Optional.empty(),
+        JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
@@ -1084,6 +1136,17 @@ public class Activity {
     return assetId;
   }
 
+  /**
+   * When booked with a type of MOVEMENT, this subtype will remove an options position due to
+   * assignment. When booked with a type of TRADE, this subtype records the purchase/ sale of the
+   * underlying asset from the assignment of an options position
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<ActivityAssignment> assignment() {
+    return (JsonNullable<ActivityAssignment>) assignment;
+  }
+
   /** Object containing metadata for bond defaults */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -1223,6 +1286,27 @@ public class Activity {
   @JsonIgnore
   public JsonNullable<ActivityExchange> exchange() {
     return (JsonNullable<ActivityExchange>) exchange;
+  }
+
+  /**
+   * When booked with a type of MOVEMENT, this subtype will remove an options position due to
+   * exercise. When booked with a type of TRADE, this subtype records the purchase/ sale of the
+   * underlying asset from exercising an options position
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<ActivityExercise> exercise() {
+    return (JsonNullable<ActivityExercise>) exercise;
+  }
+
+  /**
+   * Used to record the removal of positions in options assets that have reached or passed their
+   * expiration date and expired worthless
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<ActivityExpiration> expiration() {
+    return (JsonNullable<ActivityExpiration>) expiration;
   }
 
   /**
@@ -1371,6 +1455,17 @@ public class Activity {
   @JsonIgnore
   public JsonNullable<None> none() {
     return (JsonNullable<None>) none;
+  }
+
+  /**
+   * Used to record the adjustment of an options position. Usually these adjustments are due to a
+   * corporate action event in the underlying asset, though in rare cases, the OCC may make
+   * adjustments for other reasons
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<ActivityOptionAdjustment> optionAdjustment() {
+    return (JsonNullable<ActivityOptionAdjustment>) optionAdjustment;
   }
 
   /**
@@ -1956,6 +2051,28 @@ public class Activity {
     return this;
   }
 
+  /**
+   * When booked with a type of MOVEMENT, this subtype will remove an options position due to
+   * assignment. When booked with a type of TRADE, this subtype records the purchase/ sale of the
+   * underlying asset from the assignment of an options position
+   */
+  public Activity withAssignment(ActivityAssignment assignment) {
+    Utils.checkNotNull(assignment, "assignment");
+    this.assignment = JsonNullable.of(assignment);
+    return this;
+  }
+
+  /**
+   * When booked with a type of MOVEMENT, this subtype will remove an options position due to
+   * assignment. When booked with a type of TRADE, this subtype records the purchase/ sale of the
+   * underlying asset from the assignment of an options position
+   */
+  public Activity withAssignment(JsonNullable<? extends ActivityAssignment> assignment) {
+    Utils.checkNotNull(assignment, "assignment");
+    this.assignment = assignment;
+    return this;
+  }
+
   /** Object containing metadata for bond defaults */
   public Activity withBondDefault(ActivityBondDefault bondDefault) {
     Utils.checkNotNull(bondDefault, "bondDefault");
@@ -2247,6 +2364,48 @@ public class Activity {
   public Activity withExchange(JsonNullable<? extends ActivityExchange> exchange) {
     Utils.checkNotNull(exchange, "exchange");
     this.exchange = exchange;
+    return this;
+  }
+
+  /**
+   * When booked with a type of MOVEMENT, this subtype will remove an options position due to
+   * exercise. When booked with a type of TRADE, this subtype records the purchase/ sale of the
+   * underlying asset from exercising an options position
+   */
+  public Activity withExercise(ActivityExercise exercise) {
+    Utils.checkNotNull(exercise, "exercise");
+    this.exercise = JsonNullable.of(exercise);
+    return this;
+  }
+
+  /**
+   * When booked with a type of MOVEMENT, this subtype will remove an options position due to
+   * exercise. When booked with a type of TRADE, this subtype records the purchase/ sale of the
+   * underlying asset from exercising an options position
+   */
+  public Activity withExercise(JsonNullable<? extends ActivityExercise> exercise) {
+    Utils.checkNotNull(exercise, "exercise");
+    this.exercise = exercise;
+    return this;
+  }
+
+  /**
+   * Used to record the removal of positions in options assets that have reached or passed their
+   * expiration date and expired worthless
+   */
+  public Activity withExpiration(ActivityExpiration expiration) {
+    Utils.checkNotNull(expiration, "expiration");
+    this.expiration = JsonNullable.of(expiration);
+    return this;
+  }
+
+  /**
+   * Used to record the removal of positions in options assets that have reached or passed their
+   * expiration date and expired worthless
+   */
+  public Activity withExpiration(JsonNullable<? extends ActivityExpiration> expiration) {
+    Utils.checkNotNull(expiration, "expiration");
+    this.expiration = expiration;
     return this;
   }
 
@@ -2551,6 +2710,29 @@ public class Activity {
   public Activity withNone(JsonNullable<? extends None> none) {
     Utils.checkNotNull(none, "none");
     this.none = none;
+    return this;
+  }
+
+  /**
+   * Used to record the adjustment of an options position. Usually these adjustments are due to a
+   * corporate action event in the underlying asset, though in rare cases, the OCC may make
+   * adjustments for other reasons
+   */
+  public Activity withOptionAdjustment(ActivityOptionAdjustment optionAdjustment) {
+    Utils.checkNotNull(optionAdjustment, "optionAdjustment");
+    this.optionAdjustment = JsonNullable.of(optionAdjustment);
+    return this;
+  }
+
+  /**
+   * Used to record the adjustment of an options position. Usually these adjustments are due to a
+   * corporate action event in the underlying asset, though in rare cases, the OCC may make
+   * adjustments for other reasons
+   */
+  public Activity withOptionAdjustment(
+      JsonNullable<? extends ActivityOptionAdjustment> optionAdjustment) {
+    Utils.checkNotNull(optionAdjustment, "optionAdjustment");
+    this.optionAdjustment = optionAdjustment;
     return this;
   }
 
@@ -3268,6 +3450,7 @@ public class Activity {
         && Utils.enhancedDeepEquals(this.allocation, other.allocation)
         && Utils.enhancedDeepEquals(this.assetDescription, other.assetDescription)
         && Utils.enhancedDeepEquals(this.assetId, other.assetId)
+        && Utils.enhancedDeepEquals(this.assignment, other.assignment)
         && Utils.enhancedDeepEquals(this.bondDefault, other.bondDefault)
         && Utils.enhancedDeepEquals(this.capitalGains, other.capitalGains)
         && Utils.enhancedDeepEquals(this.cashDividend, other.cashDividend)
@@ -3286,6 +3469,8 @@ public class Activity {
         && Utils.enhancedDeepEquals(this.drip, other.drip)
         && Utils.enhancedDeepEquals(this.eventContractSettlement, other.eventContractSettlement)
         && Utils.enhancedDeepEquals(this.exchange, other.exchange)
+        && Utils.enhancedDeepEquals(this.exercise, other.exercise)
+        && Utils.enhancedDeepEquals(this.expiration, other.expiration)
         && Utils.enhancedDeepEquals(this.fee, other.fee)
         && Utils.enhancedDeepEquals(this.fees, other.fees)
         && Utils.enhancedDeepEquals(this.fpsl, other.fpsl)
@@ -3302,6 +3487,7 @@ public class Activity {
         && Utils.enhancedDeepEquals(this.nextActivityId, other.nextActivityId)
         && Utils.enhancedDeepEquals(this.nextActivityProcessDate, other.nextActivityProcessDate)
         && Utils.enhancedDeepEquals(this.none, other.none)
+        && Utils.enhancedDeepEquals(this.optionAdjustment, other.optionAdjustment)
         && Utils.enhancedDeepEquals(this.originatingResourceName, other.originatingResourceName)
         && Utils.enhancedDeepEquals(this.paymentInKind, other.paymentInKind)
         && Utils.enhancedDeepEquals(this.previousActivityId, other.previousActivityId)
@@ -3357,6 +3543,7 @@ public class Activity {
         allocation,
         assetDescription,
         assetId,
+        assignment,
         bondDefault,
         capitalGains,
         cashDividend,
@@ -3374,6 +3561,8 @@ public class Activity {
         drip,
         eventContractSettlement,
         exchange,
+        exercise,
+        expiration,
         fee,
         fees,
         fpsl,
@@ -3390,6 +3579,7 @@ public class Activity {
         nextActivityId,
         nextActivityProcessDate,
         none,
+        optionAdjustment,
         originatingResourceName,
         paymentInKind,
         previousActivityId,
@@ -3459,6 +3649,8 @@ public class Activity {
         assetDescription,
         "assetId",
         assetId,
+        "assignment",
+        assignment,
         "bondDefault",
         bondDefault,
         "capitalGains",
@@ -3493,6 +3685,10 @@ public class Activity {
         eventContractSettlement,
         "exchange",
         exchange,
+        "exercise",
+        exercise,
+        "expiration",
+        expiration,
         "fee",
         fee,
         "fees",
@@ -3525,6 +3721,8 @@ public class Activity {
         nextActivityProcessDate,
         "none",
         none,
+        "optionAdjustment",
+        optionAdjustment,
         "originatingResourceName",
         originatingResourceName,
         "paymentInKind",
@@ -3633,6 +3831,8 @@ public class Activity {
 
     private Optional<String> assetId = Optional.empty();
 
+    private JsonNullable<? extends ActivityAssignment> assignment = JsonNullable.undefined();
+
     private JsonNullable<? extends ActivityBondDefault> bondDefault = JsonNullable.undefined();
 
     private JsonNullable<? extends ActivityCapitalGains> capitalGains = JsonNullable.undefined();
@@ -3669,6 +3869,10 @@ public class Activity {
 
     private JsonNullable<? extends ActivityExchange> exchange = JsonNullable.undefined();
 
+    private JsonNullable<? extends ActivityExercise> exercise = JsonNullable.undefined();
+
+    private JsonNullable<? extends ActivityExpiration> expiration = JsonNullable.undefined();
+
     private JsonNullable<? extends ActivityFee> fee = JsonNullable.undefined();
 
     private Optional<? extends List<Fee>> fees = Optional.empty();
@@ -3702,6 +3906,9 @@ public class Activity {
         JsonNullable.undefined();
 
     private JsonNullable<? extends None> none = JsonNullable.undefined();
+
+    private JsonNullable<? extends ActivityOptionAdjustment> optionAdjustment =
+        JsonNullable.undefined();
 
     private Optional<String> originatingResourceName = Optional.empty();
 
@@ -4033,6 +4240,28 @@ public class Activity {
       return this;
     }
 
+    /**
+     * When booked with a type of MOVEMENT, this subtype will remove an options position due to
+     * assignment. When booked with a type of TRADE, this subtype records the purchase/ sale of the
+     * underlying asset from the assignment of an options position
+     */
+    public Builder assignment(ActivityAssignment assignment) {
+      Utils.checkNotNull(assignment, "assignment");
+      this.assignment = JsonNullable.of(assignment);
+      return this;
+    }
+
+    /**
+     * When booked with a type of MOVEMENT, this subtype will remove an options position due to
+     * assignment. When booked with a type of TRADE, this subtype records the purchase/ sale of the
+     * underlying asset from the assignment of an options position
+     */
+    public Builder assignment(JsonNullable<? extends ActivityAssignment> assignment) {
+      Utils.checkNotNull(assignment, "assignment");
+      this.assignment = assignment;
+      return this;
+    }
+
     /** Object containing metadata for bond defaults */
     public Builder bondDefault(ActivityBondDefault bondDefault) {
       Utils.checkNotNull(bondDefault, "bondDefault");
@@ -4339,6 +4568,48 @@ public class Activity {
     }
 
     /**
+     * When booked with a type of MOVEMENT, this subtype will remove an options position due to
+     * exercise. When booked with a type of TRADE, this subtype records the purchase/ sale of the
+     * underlying asset from exercising an options position
+     */
+    public Builder exercise(ActivityExercise exercise) {
+      Utils.checkNotNull(exercise, "exercise");
+      this.exercise = JsonNullable.of(exercise);
+      return this;
+    }
+
+    /**
+     * When booked with a type of MOVEMENT, this subtype will remove an options position due to
+     * exercise. When booked with a type of TRADE, this subtype records the purchase/ sale of the
+     * underlying asset from exercising an options position
+     */
+    public Builder exercise(JsonNullable<? extends ActivityExercise> exercise) {
+      Utils.checkNotNull(exercise, "exercise");
+      this.exercise = exercise;
+      return this;
+    }
+
+    /**
+     * Used to record the removal of positions in options assets that have reached or passed their
+     * expiration date and expired worthless
+     */
+    public Builder expiration(ActivityExpiration expiration) {
+      Utils.checkNotNull(expiration, "expiration");
+      this.expiration = JsonNullable.of(expiration);
+      return this;
+    }
+
+    /**
+     * Used to record the removal of positions in options assets that have reached or passed their
+     * expiration date and expired worthless
+     */
+    public Builder expiration(JsonNullable<? extends ActivityExpiration> expiration) {
+      Utils.checkNotNull(expiration, "expiration");
+      this.expiration = expiration;
+      return this;
+    }
+
+    /**
      * Used to record Fees that have been assessed to account and capture details related to the fee
      */
     public Builder fee(ActivityFee fee) {
@@ -4639,6 +4910,29 @@ public class Activity {
     public Builder none(JsonNullable<? extends None> none) {
       Utils.checkNotNull(none, "none");
       this.none = none;
+      return this;
+    }
+
+    /**
+     * Used to record the adjustment of an options position. Usually these adjustments are due to a
+     * corporate action event in the underlying asset, though in rare cases, the OCC may make
+     * adjustments for other reasons
+     */
+    public Builder optionAdjustment(ActivityOptionAdjustment optionAdjustment) {
+      Utils.checkNotNull(optionAdjustment, "optionAdjustment");
+      this.optionAdjustment = JsonNullable.of(optionAdjustment);
+      return this;
+    }
+
+    /**
+     * Used to record the adjustment of an options position. Usually these adjustments are due to a
+     * corporate action event in the underlying asset, though in rare cases, the OCC may make
+     * adjustments for other reasons
+     */
+    public Builder optionAdjustment(
+        JsonNullable<? extends ActivityOptionAdjustment> optionAdjustment) {
+      Utils.checkNotNull(optionAdjustment, "optionAdjustment");
+      this.optionAdjustment = optionAdjustment;
       return this;
     }
 
@@ -5349,6 +5643,7 @@ public class Activity {
           allocation,
           assetDescription,
           assetId,
+          assignment,
           bondDefault,
           capitalGains,
           cashDividend,
@@ -5366,6 +5661,8 @@ public class Activity {
           drip,
           eventContractSettlement,
           exchange,
+          exercise,
+          expiration,
           fee,
           fees,
           fpsl,
@@ -5382,6 +5679,7 @@ public class Activity {
           nextActivityId,
           nextActivityProcessDate,
           none,
+          optionAdjustment,
           originatingResourceName,
           paymentInKind,
           previousActivityId,

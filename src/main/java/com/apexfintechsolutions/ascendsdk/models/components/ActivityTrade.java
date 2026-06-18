@@ -107,6 +107,15 @@ public class ActivityTrade {
   @JsonProperty("is_writeoff")
   private Optional<Boolean> isWriteoff;
 
+  /**
+   * Identifier of the stock locate that authorizes a short sale. For easy-to-borrow (ETB)
+   * securities the value is "ETB". Required when side_modifier is SHORT; omitted for non-short-sale
+   * trades.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("locate_id")
+  private Optional<String> locateId;
+
   /** Repeated record containing information about the tax lots, if specified */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("lots")
@@ -185,6 +194,7 @@ public class ActivityTrade {
       @JsonProperty("gateway_client_order_id") Optional<String> gatewayClientOrderId,
       @JsonProperty("internal_error") Optional<Boolean> internalError,
       @JsonProperty("is_writeoff") Optional<Boolean> isWriteoff,
+      @JsonProperty("locate_id") Optional<String> locateId,
       @JsonProperty("lots") Optional<? extends List<Lot>> lots,
       @JsonProperty("order_id") Optional<String> orderId,
       @JsonProperty("prevailing_market_price")
@@ -212,6 +222,7 @@ public class ActivityTrade {
     Utils.checkNotNull(gatewayClientOrderId, "gatewayClientOrderId");
     Utils.checkNotNull(internalError, "internalError");
     Utils.checkNotNull(isWriteoff, "isWriteoff");
+    Utils.checkNotNull(locateId, "locateId");
     Utils.checkNotNull(lots, "lots");
     Utils.checkNotNull(orderId, "orderId");
     Utils.checkNotNull(prevailingMarketPrice, "prevailingMarketPrice");
@@ -237,6 +248,7 @@ public class ActivityTrade {
     this.gatewayClientOrderId = gatewayClientOrderId;
     this.internalError = internalError;
     this.isWriteoff = isWriteoff;
+    this.locateId = locateId;
     this.lots = lots;
     this.orderId = orderId;
     this.prevailingMarketPrice = prevailingMarketPrice;
@@ -250,6 +262,7 @@ public class ActivityTrade {
 
   public ActivityTrade() {
     this(
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
@@ -381,6 +394,16 @@ public class ActivityTrade {
   @JsonIgnore
   public Optional<Boolean> isWriteoff() {
     return isWriteoff;
+  }
+
+  /**
+   * Identifier of the stock locate that authorizes a short sale. For easy-to-borrow (ETB)
+   * securities the value is "ETB". Required when side_modifier is SHORT; omitted for non-short-sale
+   * trades.
+   */
+  @JsonIgnore
+  public Optional<String> locateId() {
+    return locateId;
   }
 
   /** Repeated record containing information about the tax lots, if specified */
@@ -700,6 +723,28 @@ public class ActivityTrade {
     return this;
   }
 
+  /**
+   * Identifier of the stock locate that authorizes a short sale. For easy-to-borrow (ETB)
+   * securities the value is "ETB". Required when side_modifier is SHORT; omitted for non-short-sale
+   * trades.
+   */
+  public ActivityTrade withLocateId(String locateId) {
+    Utils.checkNotNull(locateId, "locateId");
+    this.locateId = Optional.ofNullable(locateId);
+    return this;
+  }
+
+  /**
+   * Identifier of the stock locate that authorizes a short sale. For easy-to-borrow (ETB)
+   * securities the value is "ETB". Required when side_modifier is SHORT; omitted for non-short-sale
+   * trades.
+   */
+  public ActivityTrade withLocateId(Optional<String> locateId) {
+    Utils.checkNotNull(locateId, "locateId");
+    this.locateId = locateId;
+    return this;
+  }
+
   /** Repeated record containing information about the tax lots, if specified */
   public ActivityTrade withLots(List<Lot> lots) {
     Utils.checkNotNull(lots, "lots");
@@ -883,6 +928,7 @@ public class ActivityTrade {
         && Utils.enhancedDeepEquals(this.gatewayClientOrderId, other.gatewayClientOrderId)
         && Utils.enhancedDeepEquals(this.internalError, other.internalError)
         && Utils.enhancedDeepEquals(this.isWriteoff, other.isWriteoff)
+        && Utils.enhancedDeepEquals(this.locateId, other.locateId)
         && Utils.enhancedDeepEquals(this.lots, other.lots)
         && Utils.enhancedDeepEquals(this.orderId, other.orderId)
         && Utils.enhancedDeepEquals(this.prevailingMarketPrice, other.prevailingMarketPrice)
@@ -913,6 +959,7 @@ public class ActivityTrade {
         gatewayClientOrderId,
         internalError,
         isWriteoff,
+        locateId,
         lots,
         orderId,
         prevailingMarketPrice,
@@ -960,6 +1007,8 @@ public class ActivityTrade {
         internalError,
         "isWriteoff",
         isWriteoff,
+        "locateId",
+        locateId,
         "lots",
         lots,
         "orderId",
@@ -1014,6 +1063,8 @@ public class ActivityTrade {
     private Optional<Boolean> internalError = Optional.empty();
 
     private Optional<Boolean> isWriteoff = Optional.empty();
+
+    private Optional<String> locateId = Optional.empty();
 
     private Optional<? extends List<Lot>> lots = Optional.empty();
 
@@ -1277,6 +1328,28 @@ public class ActivityTrade {
       return this;
     }
 
+    /**
+     * Identifier of the stock locate that authorizes a short sale. For easy-to-borrow (ETB)
+     * securities the value is "ETB". Required when side_modifier is SHORT; omitted for
+     * non-short-sale trades.
+     */
+    public Builder locateId(String locateId) {
+      Utils.checkNotNull(locateId, "locateId");
+      this.locateId = Optional.ofNullable(locateId);
+      return this;
+    }
+
+    /**
+     * Identifier of the stock locate that authorizes a short sale. For easy-to-borrow (ETB)
+     * securities the value is "ETB". Required when side_modifier is SHORT; omitted for
+     * non-short-sale trades.
+     */
+    public Builder locateId(Optional<String> locateId) {
+      Utils.checkNotNull(locateId, "locateId");
+      this.locateId = locateId;
+      return this;
+    }
+
     /** Repeated record containing information about the tax lots, if specified */
     public Builder lots(List<Lot> lots) {
       Utils.checkNotNull(lots, "lots");
@@ -1450,6 +1523,7 @@ public class ActivityTrade {
           gatewayClientOrderId,
           internalError,
           isWriteoff,
+          locateId,
           lots,
           orderId,
           prevailingMarketPrice,

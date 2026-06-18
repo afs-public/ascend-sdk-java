@@ -31,9 +31,12 @@ public class LedgerListEntriesRequest {
   private Optional<String> pageToken;
 
   /**
-   * A CEL string to filter results; See the [CEL
-   * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
-   * Guides for more information;
+   * For optimal performance, include process_date or activity_date in the CEL expression. Adding
+   * asset_id, type, and/or subtype_category further improves query efficiency when applicable.
+   * Queries without date fields will have slower response times.
+   *
+   * <p>See the CEL Search guide for more information:
+   * https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search
    */
   @SpeakeasyMetadata("queryParam:style=form,explode=true,name=filter")
   private Optional<String> filter;
@@ -85,9 +88,12 @@ public class LedgerListEntriesRequest {
   }
 
   /**
-   * A CEL string to filter results; See the [CEL
-   * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
-   * Guides for more information;
+   * For optimal performance, include process_date or activity_date in the CEL expression. Adding
+   * asset_id, type, and/or subtype_category further improves query efficiency when applicable.
+   * Queries without date fields will have slower response times.
+   *
+   * <p>See the CEL Search guide for more information:
+   * https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search
    */
   @JsonIgnore
   public Optional<String> filter() {
@@ -150,9 +156,12 @@ public class LedgerListEntriesRequest {
   }
 
   /**
-   * A CEL string to filter results; See the [CEL
-   * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
-   * Guides for more information;
+   * For optimal performance, include process_date or activity_date in the CEL expression. Adding
+   * asset_id, type, and/or subtype_category further improves query efficiency when applicable.
+   * Queries without date fields will have slower response times.
+   *
+   * <p>See the CEL Search guide for more information:
+   * https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search
    */
   public LedgerListEntriesRequest withFilter(String filter) {
     Utils.checkNotNull(filter, "filter");
@@ -161,9 +170,12 @@ public class LedgerListEntriesRequest {
   }
 
   /**
-   * A CEL string to filter results; See the [CEL
-   * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
-   * Guides for more information;
+   * For optimal performance, include process_date or activity_date in the CEL expression. Adding
+   * asset_id, type, and/or subtype_category further improves query efficiency when applicable.
+   * Queries without date fields will have slower response times.
+   *
+   * <p>See the CEL Search guide for more information:
+   * https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search
    */
   public LedgerListEntriesRequest withFilter(Optional<String> filter) {
     Utils.checkNotNull(filter, "filter");
@@ -272,9 +284,12 @@ public class LedgerListEntriesRequest {
     }
 
     /**
-     * A CEL string to filter results; See the [CEL
-     * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
-     * Guides for more information;
+     * For optimal performance, include process_date or activity_date in the CEL expression. Adding
+     * asset_id, type, and/or subtype_category further improves query efficiency when applicable.
+     * Queries without date fields will have slower response times.
+     *
+     * <p>See the CEL Search guide for more information:
+     * https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search
      */
     public Builder filter(String filter) {
       Utils.checkNotNull(filter, "filter");
@@ -283,9 +298,12 @@ public class LedgerListEntriesRequest {
     }
 
     /**
-     * A CEL string to filter results; See the [CEL
-     * Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
-     * Guides for more information;
+     * For optimal performance, include process_date or activity_date in the CEL expression. Adding
+     * asset_id, type, and/or subtype_category further improves query efficiency when applicable.
+     * Queries without date fields will have slower response times.
+     *
+     * <p>See the CEL Search guide for more information:
+     * https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search
      */
     public Builder filter(Optional<String> filter) {
       Utils.checkNotNull(filter, "filter");

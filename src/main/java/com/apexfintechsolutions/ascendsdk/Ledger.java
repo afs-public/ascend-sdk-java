@@ -73,9 +73,11 @@ public class Ledger {
    *     retrieve the subsequent page When paginating, all other parameters provided to
    *     `ListEntries` must match the call that provided the page token in order to maintain a
    *     stable result set
-   * @param filter A CEL string to filter results; See the [CEL
-   *     Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
-   *     Guides for more information;
+   * @param filter For optimal performance, include process_date or activity_date in the CEL
+   *     expression. Adding asset_id, type, and/or subtype_category further improves query
+   *     efficiency when applicable. Queries without date fields will have slower response times.
+   *     <p>See the CEL Search guide for more information:
+   *     https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search
    * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
@@ -137,9 +139,11 @@ public class Ledger {
    *     retrieve the subsequent page When paginating, all other parameters provided to
    *     `ListActivity` must match the call that provided the page token in order to maintain a
    *     stable result set
-   * @param filter A CEL string to filter results; See the [CEL
-   *     Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in
-   *     Guides for more information;
+   * @param filter For optimal performance, include process_date or activity_date in the CEL
+   *     expression. Adding asset_id, type, and/or subtype_category further improves query
+   *     efficiency when applicable. Queries without date fields will have slower response times.
+   *     <p>See the CEL Search guide for more information:
+   *     https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search
    * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
@@ -195,10 +199,10 @@ public class Ledger {
    *
    * @param accountId The account id.
    * @param pageSize The maximum number of positions to return. The service may return fewer than
-   *     this value Default is 100 (subject to change) The maximum is 1000, values exceeding this
-   *     will be set to 1000 (subject to change)
+   *     this valueDefault is 100 (subject to change)The maximum is 1000, values exceeding this will
+   *     be set to 1000 (subject to change)
    * @param pageToken This page token comes from a previous `ListPositions` call; provide this token
-   *     to retrieve the subsequent page When paginating, all other parameters you include in
+   *     to retrieve the subsequent pageWhen paginating, all other parameters you include in
    *     `ListPositions` must match the call that includes the page token to maintain a stable
    *     result set
    * @param filter A CEL string to filter results; See the [CEL

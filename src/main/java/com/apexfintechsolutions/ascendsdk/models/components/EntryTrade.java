@@ -108,6 +108,15 @@ public class EntryTrade {
   @JsonProperty("is_writeoff")
   private Optional<Boolean> isWriteoff;
 
+  /**
+   * Identifier of the stock locate that authorizes a short sale. For easy-to-borrow (ETB)
+   * securities the value is "ETB". Required when side_modifier is SHORT; omitted for non-short-sale
+   * trades.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("locate_id")
+  private Optional<String> locateId;
+
   /** Trade lots */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("lots")
@@ -183,6 +192,7 @@ public class EntryTrade {
       @JsonProperty("gateway_client_order_id") Optional<String> gatewayClientOrderId,
       @JsonProperty("internal_error") Optional<Boolean> internalError,
       @JsonProperty("is_writeoff") Optional<Boolean> isWriteoff,
+      @JsonProperty("locate_id") Optional<String> locateId,
       @JsonProperty("lots") Optional<? extends List<Lot>> lots,
       @JsonProperty("market") Optional<String> market,
       @JsonProperty("order_id") Optional<String> orderId,
@@ -211,6 +221,7 @@ public class EntryTrade {
     Utils.checkNotNull(gatewayClientOrderId, "gatewayClientOrderId");
     Utils.checkNotNull(internalError, "internalError");
     Utils.checkNotNull(isWriteoff, "isWriteoff");
+    Utils.checkNotNull(locateId, "locateId");
     Utils.checkNotNull(lots, "lots");
     Utils.checkNotNull(market, "market");
     Utils.checkNotNull(orderId, "orderId");
@@ -237,6 +248,7 @@ public class EntryTrade {
     this.gatewayClientOrderId = gatewayClientOrderId;
     this.internalError = internalError;
     this.isWriteoff = isWriteoff;
+    this.locateId = locateId;
     this.lots = lots;
     this.market = market;
     this.orderId = orderId;
@@ -250,6 +262,7 @@ public class EntryTrade {
 
   public EntryTrade() {
     this(
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
@@ -383,6 +396,16 @@ public class EntryTrade {
   @JsonIgnore
   public Optional<Boolean> isWriteoff() {
     return isWriteoff;
+  }
+
+  /**
+   * Identifier of the stock locate that authorizes a short sale. For easy-to-borrow (ETB)
+   * securities the value is "ETB". Required when side_modifier is SHORT; omitted for non-short-sale
+   * trades.
+   */
+  @JsonIgnore
+  public Optional<String> locateId() {
+    return locateId;
   }
 
   /** Trade lots */
@@ -704,6 +727,28 @@ public class EntryTrade {
     return this;
   }
 
+  /**
+   * Identifier of the stock locate that authorizes a short sale. For easy-to-borrow (ETB)
+   * securities the value is "ETB". Required when side_modifier is SHORT; omitted for non-short-sale
+   * trades.
+   */
+  public EntryTrade withLocateId(String locateId) {
+    Utils.checkNotNull(locateId, "locateId");
+    this.locateId = Optional.ofNullable(locateId);
+    return this;
+  }
+
+  /**
+   * Identifier of the stock locate that authorizes a short sale. For easy-to-borrow (ETB)
+   * securities the value is "ETB". Required when side_modifier is SHORT; omitted for non-short-sale
+   * trades.
+   */
+  public EntryTrade withLocateId(Optional<String> locateId) {
+    Utils.checkNotNull(locateId, "locateId");
+    this.locateId = locateId;
+    return this;
+  }
+
   /** Trade lots */
   public EntryTrade withLots(List<Lot> lots) {
     Utils.checkNotNull(lots, "lots");
@@ -879,6 +924,7 @@ public class EntryTrade {
         && Utils.enhancedDeepEquals(this.gatewayClientOrderId, other.gatewayClientOrderId)
         && Utils.enhancedDeepEquals(this.internalError, other.internalError)
         && Utils.enhancedDeepEquals(this.isWriteoff, other.isWriteoff)
+        && Utils.enhancedDeepEquals(this.locateId, other.locateId)
         && Utils.enhancedDeepEquals(this.lots, other.lots)
         && Utils.enhancedDeepEquals(this.market, other.market)
         && Utils.enhancedDeepEquals(this.orderId, other.orderId)
@@ -910,6 +956,7 @@ public class EntryTrade {
         gatewayClientOrderId,
         internalError,
         isWriteoff,
+        locateId,
         lots,
         market,
         orderId,
@@ -959,6 +1006,8 @@ public class EntryTrade {
         internalError,
         "isWriteoff",
         isWriteoff,
+        "locateId",
+        locateId,
         "lots",
         lots,
         "market",
@@ -1015,6 +1064,8 @@ public class EntryTrade {
     private Optional<Boolean> internalError = Optional.empty();
 
     private Optional<Boolean> isWriteoff = Optional.empty();
+
+    private Optional<String> locateId = Optional.empty();
 
     private Optional<? extends List<Lot>> lots = Optional.empty();
 
@@ -1286,6 +1337,28 @@ public class EntryTrade {
       return this;
     }
 
+    /**
+     * Identifier of the stock locate that authorizes a short sale. For easy-to-borrow (ETB)
+     * securities the value is "ETB". Required when side_modifier is SHORT; omitted for
+     * non-short-sale trades.
+     */
+    public Builder locateId(String locateId) {
+      Utils.checkNotNull(locateId, "locateId");
+      this.locateId = Optional.ofNullable(locateId);
+      return this;
+    }
+
+    /**
+     * Identifier of the stock locate that authorizes a short sale. For easy-to-borrow (ETB)
+     * securities the value is "ETB". Required when side_modifier is SHORT; omitted for
+     * non-short-sale trades.
+     */
+    public Builder locateId(Optional<String> locateId) {
+      Utils.checkNotNull(locateId, "locateId");
+      this.locateId = locateId;
+      return this;
+    }
+
     /** Trade lots */
     public Builder lots(List<Lot> lots) {
       Utils.checkNotNull(lots, "lots");
@@ -1454,6 +1527,7 @@ public class EntryTrade {
           gatewayClientOrderId,
           internalError,
           isWriteoff,
+          locateId,
           lots,
           market,
           orderId,
