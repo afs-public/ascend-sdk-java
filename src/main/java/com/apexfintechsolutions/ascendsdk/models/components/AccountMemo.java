@@ -52,6 +52,7 @@ public class AccountMemo {
   public static final AccountMemo PENDING_OUTGOING_ACAT = new AccountMemo("PENDING_OUTGOING_ACAT");
   public static final AccountMemo PENDING_DRIP = new AccountMemo("PENDING_DRIP");
   public static final AccountMemo PENDING_WITHDRAWAL = new AccountMemo("PENDING_WITHDRAWAL");
+  public static final AccountMemo SHORT = new AccountMemo("SHORT");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -125,6 +126,7 @@ public class AccountMemo {
     map.put("PENDING_OUTGOING_ACAT", PENDING_OUTGOING_ACAT);
     map.put("PENDING_DRIP", PENDING_DRIP);
     map.put("PENDING_WITHDRAWAL", PENDING_WITHDRAWAL);
+    map.put("SHORT", SHORT);
     return map;
   }
 
@@ -136,6 +138,7 @@ public class AccountMemo {
     map.put("PENDING_OUTGOING_ACAT", AccountMemoEnum.PENDING_OUTGOING_ACAT);
     map.put("PENDING_DRIP", AccountMemoEnum.PENDING_DRIP);
     map.put("PENDING_WITHDRAWAL", AccountMemoEnum.PENDING_WITHDRAWAL);
+    map.put("SHORT", AccountMemoEnum.SHORT);
     return map;
   }
 
@@ -176,6 +179,7 @@ public class AccountMemo {
     PENDING_OUTGOING_ACAT("PENDING_OUTGOING_ACAT"),
     PENDING_DRIP("PENDING_DRIP"),
     PENDING_WITHDRAWAL("PENDING_WITHDRAWAL"),
+    SHORT("SHORT"),
     ;
 
     private final String value;

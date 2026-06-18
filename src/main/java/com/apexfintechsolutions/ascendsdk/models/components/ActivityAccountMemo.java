@@ -56,6 +56,7 @@ public class ActivityAccountMemo {
   public static final ActivityAccountMemo PENDING_DRIP = new ActivityAccountMemo("PENDING_DRIP");
   public static final ActivityAccountMemo PENDING_WITHDRAWAL =
       new ActivityAccountMemo("PENDING_WITHDRAWAL");
+  public static final ActivityAccountMemo SHORT = new ActivityAccountMemo("SHORT");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -129,6 +130,7 @@ public class ActivityAccountMemo {
     map.put("PENDING_OUTGOING_ACAT", PENDING_OUTGOING_ACAT);
     map.put("PENDING_DRIP", PENDING_DRIP);
     map.put("PENDING_WITHDRAWAL", PENDING_WITHDRAWAL);
+    map.put("SHORT", SHORT);
     return map;
   }
 
@@ -140,6 +142,7 @@ public class ActivityAccountMemo {
     map.put("PENDING_OUTGOING_ACAT", ActivityAccountMemoEnum.PENDING_OUTGOING_ACAT);
     map.put("PENDING_DRIP", ActivityAccountMemoEnum.PENDING_DRIP);
     map.put("PENDING_WITHDRAWAL", ActivityAccountMemoEnum.PENDING_WITHDRAWAL);
+    map.put("SHORT", ActivityAccountMemoEnum.SHORT);
     return map;
   }
 
@@ -180,6 +183,7 @@ public class ActivityAccountMemo {
     PENDING_OUTGOING_ACAT("PENDING_OUTGOING_ACAT"),
     PENDING_DRIP("PENDING_DRIP"),
     PENDING_WITHDRAWAL("PENDING_WITHDRAWAL"),
+    SHORT("SHORT"),
     ;
 
     private final String value;

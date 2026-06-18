@@ -16,7 +16,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'com.apexfintechsolutions:ascendsdk:1.6.9'
+implementation 'com.apexfintechsolutions:ascendsdk:1.6.10'
 ```
 
 Maven:
@@ -24,7 +24,7 @@ Maven:
 <dependency>
     <groupId>com.apexfintechsolutions</groupId>
     <artifactId>ascendsdk</artifactId>
-    <version>1.6.9</version>
+    <version>1.6.10</version>
 </dependency>
 ```
 

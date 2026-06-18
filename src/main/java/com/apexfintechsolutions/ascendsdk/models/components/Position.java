@@ -138,6 +138,15 @@ public class Position {
   private JsonNullable<? extends Settled> settled;
 
   /**
+   * Represents the amount of an asset that has been sold short, where shares were borrowed and sold
+   * with an obligation to repurchase and return them. This memo distinguishes intentional short
+   * sales from other negative position states
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("short")
+  private JsonNullable<? extends Short> short_;
+
+  /**
    * This field represents the total amount of an asset owned by the account including transactions
    * that have been executed but not yet settled, commonly known as the trade date position. It
    * includes all transactions recorded in the Ledger with process_date and activity_date on or
@@ -180,6 +189,7 @@ public class Position {
           JsonNullable<? extends PendingWithdrawal> pendingWithdrawal,
       @JsonProperty("position_version") Optional<String> positionVersion,
       @JsonProperty("settled") JsonNullable<? extends Settled> settled,
+      @JsonProperty("short") JsonNullable<? extends Short> short_,
       @JsonProperty("trade") JsonNullable<? extends PositionTrade> trade,
       @JsonProperty("unrestricted") JsonNullable<? extends Unrestricted> unrestricted) {
     Utils.checkNotNull(accountId, "accountId");
@@ -197,6 +207,7 @@ public class Position {
     Utils.checkNotNull(pendingWithdrawal, "pendingWithdrawal");
     Utils.checkNotNull(positionVersion, "positionVersion");
     Utils.checkNotNull(settled, "settled");
+    Utils.checkNotNull(short_, "short_");
     Utils.checkNotNull(trade, "trade");
     Utils.checkNotNull(unrestricted, "unrestricted");
     this.accountId = accountId;
@@ -214,6 +225,7 @@ public class Position {
     this.pendingWithdrawal = pendingWithdrawal;
     this.positionVersion = positionVersion;
     this.settled = settled;
+    this.short_ = short_;
     this.trade = trade;
     this.unrestricted = unrestricted;
   }
@@ -234,6 +246,7 @@ public class Position {
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
+        JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined());
@@ -381,6 +394,17 @@ public class Position {
   @JsonIgnore
   public JsonNullable<Settled> settled() {
     return (JsonNullable<Settled>) settled;
+  }
+
+  /**
+   * Represents the amount of an asset that has been sold short, where shares were borrowed and sold
+   * with an obligation to repurchase and return them. This memo distinguishes intentional short
+   * sales from other negative position states
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<Short> short_() {
+    return (JsonNullable<Short>) short_;
   }
 
   /**
@@ -716,6 +740,28 @@ public class Position {
   }
 
   /**
+   * Represents the amount of an asset that has been sold short, where shares were borrowed and sold
+   * with an obligation to repurchase and return them. This memo distinguishes intentional short
+   * sales from other negative position states
+   */
+  public Position withShort(Short short_) {
+    Utils.checkNotNull(short_, "short_");
+    this.short_ = JsonNullable.of(short_);
+    return this;
+  }
+
+  /**
+   * Represents the amount of an asset that has been sold short, where shares were borrowed and sold
+   * with an obligation to repurchase and return them. This memo distinguishes intentional short
+   * sales from other negative position states
+   */
+  public Position withShort(JsonNullable<? extends Short> short_) {
+    Utils.checkNotNull(short_, "short_");
+    this.short_ = short_;
+    return this;
+  }
+
+  /**
    * This field represents the total amount of an asset owned by the account including transactions
    * that have been executed but not yet settled, commonly known as the trade date position. It
    * includes all transactions recorded in the Ledger with process_date and activity_date on or
@@ -795,6 +841,7 @@ public class Position {
         && Utils.enhancedDeepEquals(this.pendingWithdrawal, other.pendingWithdrawal)
         && Utils.enhancedDeepEquals(this.positionVersion, other.positionVersion)
         && Utils.enhancedDeepEquals(this.settled, other.settled)
+        && Utils.enhancedDeepEquals(this.short_, other.short_)
         && Utils.enhancedDeepEquals(this.trade, other.trade)
         && Utils.enhancedDeepEquals(this.unrestricted, other.unrestricted);
   }
@@ -817,6 +864,7 @@ public class Position {
         pendingWithdrawal,
         positionVersion,
         settled,
+        short_,
         trade,
         unrestricted);
   }
@@ -855,6 +903,8 @@ public class Position {
         positionVersion,
         "settled",
         settled,
+        "short_",
+        short_,
         "trade",
         trade,
         "unrestricted",
@@ -894,6 +944,8 @@ public class Position {
     private Optional<String> positionVersion = Optional.empty();
 
     private JsonNullable<? extends Settled> settled = JsonNullable.undefined();
+
+    private JsonNullable<? extends Short> short_ = JsonNullable.undefined();
 
     private JsonNullable<? extends PositionTrade> trade = JsonNullable.undefined();
 
@@ -1203,6 +1255,28 @@ public class Position {
     }
 
     /**
+     * Represents the amount of an asset that has been sold short, where shares were borrowed and
+     * sold with an obligation to repurchase and return them. This memo distinguishes intentional
+     * short sales from other negative position states
+     */
+    public Builder short_(Short short_) {
+      Utils.checkNotNull(short_, "short_");
+      this.short_ = JsonNullable.of(short_);
+      return this;
+    }
+
+    /**
+     * Represents the amount of an asset that has been sold short, where shares were borrowed and
+     * sold with an obligation to repurchase and return them. This memo distinguishes intentional
+     * short sales from other negative position states
+     */
+    public Builder short_(JsonNullable<? extends Short> short_) {
+      Utils.checkNotNull(short_, "short_");
+      this.short_ = short_;
+      return this;
+    }
+
+    /**
      * This field represents the total amount of an asset owned by the account including
      * transactions that have been executed but not yet settled, commonly known as the trade date
      * position. It includes all transactions recorded in the Ledger with process_date and
@@ -1276,6 +1350,7 @@ public class Position {
           pendingWithdrawal,
           positionVersion,
           settled,
+          short_,
           trade,
           unrestricted);
     }

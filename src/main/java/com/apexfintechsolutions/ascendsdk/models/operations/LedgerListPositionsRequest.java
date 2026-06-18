@@ -15,8 +15,8 @@ public class LedgerListPositionsRequest {
   private String accountId;
 
   /**
-   * The maximum number of positions to return. The service may return fewer than this value Default
-   * is 100 (subject to change) The maximum is 1000, values exceeding this will be set to 1000
+   * The maximum number of positions to return. The service may return fewer than this valueDefault
+   * is 100 (subject to change)The maximum is 1000, values exceeding this will be set to 1000
    * (subject to change)
    */
   @SpeakeasyMetadata("queryParam:style=form,explode=true,name=page_size")
@@ -24,7 +24,7 @@ public class LedgerListPositionsRequest {
 
   /**
    * This page token comes from a previous `ListPositions` call; provide this token to retrieve the
-   * subsequent page When paginating, all other parameters you include in `ListPositions` must match
+   * subsequent pageWhen paginating, all other parameters you include in `ListPositions` must match
    * the call that includes the page token to maintain a stable result set
    */
   @SpeakeasyMetadata("queryParam:style=form,explode=true,name=page_token")
@@ -65,8 +65,8 @@ public class LedgerListPositionsRequest {
   }
 
   /**
-   * The maximum number of positions to return. The service may return fewer than this value Default
-   * is 100 (subject to change) The maximum is 1000, values exceeding this will be set to 1000
+   * The maximum number of positions to return. The service may return fewer than this valueDefault
+   * is 100 (subject to change)The maximum is 1000, values exceeding this will be set to 1000
    * (subject to change)
    */
   @JsonIgnore
@@ -76,7 +76,7 @@ public class LedgerListPositionsRequest {
 
   /**
    * This page token comes from a previous `ListPositions` call; provide this token to retrieve the
-   * subsequent page When paginating, all other parameters you include in `ListPositions` must match
+   * subsequent pageWhen paginating, all other parameters you include in `ListPositions` must match
    * the call that includes the page token to maintain a stable result set
    */
   @JsonIgnore
@@ -106,8 +106,8 @@ public class LedgerListPositionsRequest {
   }
 
   /**
-   * The maximum number of positions to return. The service may return fewer than this value Default
-   * is 100 (subject to change) The maximum is 1000, values exceeding this will be set to 1000
+   * The maximum number of positions to return. The service may return fewer than this valueDefault
+   * is 100 (subject to change)The maximum is 1000, values exceeding this will be set to 1000
    * (subject to change)
    */
   public LedgerListPositionsRequest withPageSize(int pageSize) {
@@ -117,8 +117,8 @@ public class LedgerListPositionsRequest {
   }
 
   /**
-   * The maximum number of positions to return. The service may return fewer than this value Default
-   * is 100 (subject to change) The maximum is 1000, values exceeding this will be set to 1000
+   * The maximum number of positions to return. The service may return fewer than this valueDefault
+   * is 100 (subject to change)The maximum is 1000, values exceeding this will be set to 1000
    * (subject to change)
    */
   public LedgerListPositionsRequest withPageSize(Optional<Integer> pageSize) {
@@ -129,7 +129,7 @@ public class LedgerListPositionsRequest {
 
   /**
    * This page token comes from a previous `ListPositions` call; provide this token to retrieve the
-   * subsequent page When paginating, all other parameters you include in `ListPositions` must match
+   * subsequent pageWhen paginating, all other parameters you include in `ListPositions` must match
    * the call that includes the page token to maintain a stable result set
    */
   public LedgerListPositionsRequest withPageToken(String pageToken) {
@@ -140,7 +140,7 @@ public class LedgerListPositionsRequest {
 
   /**
    * This page token comes from a previous `ListPositions` call; provide this token to retrieve the
-   * subsequent page When paginating, all other parameters you include in `ListPositions` must match
+   * subsequent pageWhen paginating, all other parameters you include in `ListPositions` must match
    * the call that includes the page token to maintain a stable result set
    */
   public LedgerListPositionsRequest withPageToken(Optional<String> pageToken) {
@@ -228,9 +228,9 @@ public class LedgerListPositionsRequest {
     }
 
     /**
-     * The maximum number of positions to return. The service may return fewer than this value
-     * Default is 100 (subject to change) The maximum is 1000, values exceeding this will be set to
-     * 1000 (subject to change)
+     * The maximum number of positions to return. The service may return fewer than this
+     * valueDefault is 100 (subject to change)The maximum is 1000, values exceeding this will be set
+     * to 1000 (subject to change)
      */
     public Builder pageSize(int pageSize) {
       Utils.checkNotNull(pageSize, "pageSize");
@@ -239,9 +239,9 @@ public class LedgerListPositionsRequest {
     }
 
     /**
-     * The maximum number of positions to return. The service may return fewer than this value
-     * Default is 100 (subject to change) The maximum is 1000, values exceeding this will be set to
-     * 1000 (subject to change)
+     * The maximum number of positions to return. The service may return fewer than this
+     * valueDefault is 100 (subject to change)The maximum is 1000, values exceeding this will be set
+     * to 1000 (subject to change)
      */
     public Builder pageSize(Optional<Integer> pageSize) {
       Utils.checkNotNull(pageSize, "pageSize");
@@ -251,7 +251,7 @@ public class LedgerListPositionsRequest {
 
     /**
      * This page token comes from a previous `ListPositions` call; provide this token to retrieve
-     * the subsequent page When paginating, all other parameters you include in `ListPositions` must
+     * the subsequent pageWhen paginating, all other parameters you include in `ListPositions` must
      * match the call that includes the page token to maintain a stable result set
      */
     public Builder pageToken(String pageToken) {
@@ -262,7 +262,7 @@ public class LedgerListPositionsRequest {
 
     /**
      * This page token comes from a previous `ListPositions` call; provide this token to retrieve
-     * the subsequent page When paginating, all other parameters you include in `ListPositions` must
+     * the subsequent pageWhen paginating, all other parameters you include in `ListPositions` must
      * match the call that includes the page token to maintain a stable result set
      */
     public Builder pageToken(Optional<String> pageToken) {

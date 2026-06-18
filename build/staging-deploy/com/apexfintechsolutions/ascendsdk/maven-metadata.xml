@@ -3,11 +3,11 @@
   <groupId>com.apexfintechsolutions</groupId>
   <artifactId>ascendsdk</artifactId>
   <versioning>
-    <latest>1.6.9</latest>
-    <release>1.6.9</release>
+    <latest>1.6.10</latest>
+    <release>1.6.10</release>
     <versions>
-      <version>1.6.9</version>
+      <version>1.6.10</version>
     </versions>
-    <lastUpdated>20260615185552</lastUpdated>
+    <lastUpdated>20260618194915</lastUpdated>
   </versioning>
 </metadata>
