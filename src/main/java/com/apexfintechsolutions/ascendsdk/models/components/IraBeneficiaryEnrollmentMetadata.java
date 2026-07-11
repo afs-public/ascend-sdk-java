@@ -48,7 +48,7 @@ public class IraBeneficiaryEnrollmentMetadata {
   /** Indicates if the customer is the spouse of the decedent */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("inheritor_is_decedents_spouse")
-  private Optional<Boolean> inheritorIsDecedentsSpouse;
+  private JsonNullable<Boolean> inheritorIsDecedentsSpouse;
 
   @JsonCreator
   public IraBeneficiaryEnrollmentMetadata(
@@ -62,7 +62,8 @@ public class IraBeneficiaryEnrollmentMetadata {
       @JsonProperty("inherited_from_owner_death_date")
           JsonNullable<? extends InheritedFromOwnerDeathDate> inheritedFromOwnerDeathDate,
       @JsonProperty("inherited_from_owner_name") Optional<String> inheritedFromOwnerName,
-      @JsonProperty("inheritor_is_decedents_spouse") Optional<Boolean> inheritorIsDecedentsSpouse) {
+      @JsonProperty("inheritor_is_decedents_spouse")
+          JsonNullable<Boolean> inheritorIsDecedentsSpouse) {
     Utils.checkNotNull(dividendReinvestmentPlan, "dividendReinvestmentPlan");
     Utils.checkNotNull(fdicCashSweep, "fdicCashSweep");
     Utils.checkNotNull(inheritedFromOwnerBirthDate, "inheritedFromOwnerBirthDate");
@@ -84,7 +85,7 @@ public class IraBeneficiaryEnrollmentMetadata {
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
-        Optional.empty());
+        JsonNullable.undefined());
   }
 
   /** Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL */
@@ -125,7 +126,7 @@ public class IraBeneficiaryEnrollmentMetadata {
 
   /** Indicates if the customer is the spouse of the decedent */
   @JsonIgnore
-  public Optional<Boolean> inheritorIsDecedentsSpouse() {
+  public JsonNullable<Boolean> inheritorIsDecedentsSpouse() {
     return inheritorIsDecedentsSpouse;
   }
 
@@ -218,13 +219,13 @@ public class IraBeneficiaryEnrollmentMetadata {
   public IraBeneficiaryEnrollmentMetadata withInheritorIsDecedentsSpouse(
       boolean inheritorIsDecedentsSpouse) {
     Utils.checkNotNull(inheritorIsDecedentsSpouse, "inheritorIsDecedentsSpouse");
-    this.inheritorIsDecedentsSpouse = Optional.ofNullable(inheritorIsDecedentsSpouse);
+    this.inheritorIsDecedentsSpouse = JsonNullable.of(inheritorIsDecedentsSpouse);
     return this;
   }
 
   /** Indicates if the customer is the spouse of the decedent */
   public IraBeneficiaryEnrollmentMetadata withInheritorIsDecedentsSpouse(
-      Optional<Boolean> inheritorIsDecedentsSpouse) {
+      JsonNullable<Boolean> inheritorIsDecedentsSpouse) {
     Utils.checkNotNull(inheritorIsDecedentsSpouse, "inheritorIsDecedentsSpouse");
     this.inheritorIsDecedentsSpouse = inheritorIsDecedentsSpouse;
     return this;
@@ -296,7 +297,7 @@ public class IraBeneficiaryEnrollmentMetadata {
 
     private Optional<String> inheritedFromOwnerName = Optional.empty();
 
-    private Optional<Boolean> inheritorIsDecedentsSpouse = Optional.empty();
+    private JsonNullable<Boolean> inheritorIsDecedentsSpouse = JsonNullable.undefined();
 
     private Builder() {
       // force use of static builder() method
@@ -385,12 +386,12 @@ public class IraBeneficiaryEnrollmentMetadata {
     /** Indicates if the customer is the spouse of the decedent */
     public Builder inheritorIsDecedentsSpouse(boolean inheritorIsDecedentsSpouse) {
       Utils.checkNotNull(inheritorIsDecedentsSpouse, "inheritorIsDecedentsSpouse");
-      this.inheritorIsDecedentsSpouse = Optional.ofNullable(inheritorIsDecedentsSpouse);
+      this.inheritorIsDecedentsSpouse = JsonNullable.of(inheritorIsDecedentsSpouse);
       return this;
     }
 
     /** Indicates if the customer is the spouse of the decedent */
-    public Builder inheritorIsDecedentsSpouse(Optional<Boolean> inheritorIsDecedentsSpouse) {
+    public Builder inheritorIsDecedentsSpouse(JsonNullable<Boolean> inheritorIsDecedentsSpouse) {
       Utils.checkNotNull(inheritorIsDecedentsSpouse, "inheritorIsDecedentsSpouse");
       this.inheritorIsDecedentsSpouse = inheritorIsDecedentsSpouse;
       return this;

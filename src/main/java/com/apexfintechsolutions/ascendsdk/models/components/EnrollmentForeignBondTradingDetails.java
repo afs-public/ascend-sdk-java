@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * EnrollmentForeignBondTradingDetails
@@ -21,7 +22,7 @@ public class EnrollmentForeignBondTradingDetails {
   /** Does the account anticipate trading in foreign bonds */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("foreign_bond_trading")
-  private Optional<Boolean> foreignBondTrading;
+  private JsonNullable<Boolean> foreignBondTrading;
 
   /** The foreign bond trading countries details. If yes, than please provide details */
   @JsonInclude(Include.NON_ABSENT)
@@ -30,7 +31,7 @@ public class EnrollmentForeignBondTradingDetails {
 
   @JsonCreator
   public EnrollmentForeignBondTradingDetails(
-      @JsonProperty("foreign_bond_trading") Optional<Boolean> foreignBondTrading,
+      @JsonProperty("foreign_bond_trading") JsonNullable<Boolean> foreignBondTrading,
       @JsonProperty("foreign_bond_trading_detail")
           Optional<? extends List<ForeignBondTradingDetail>> foreignBondTradingDetail) {
     Utils.checkNotNull(foreignBondTrading, "foreignBondTrading");
@@ -40,12 +41,12 @@ public class EnrollmentForeignBondTradingDetails {
   }
 
   public EnrollmentForeignBondTradingDetails() {
-    this(Optional.empty(), Optional.empty());
+    this(JsonNullable.undefined(), Optional.empty());
   }
 
   /** Does the account anticipate trading in foreign bonds */
   @JsonIgnore
-  public Optional<Boolean> foreignBondTrading() {
+  public JsonNullable<Boolean> foreignBondTrading() {
     return foreignBondTrading;
   }
 
@@ -63,13 +64,13 @@ public class EnrollmentForeignBondTradingDetails {
   /** Does the account anticipate trading in foreign bonds */
   public EnrollmentForeignBondTradingDetails withForeignBondTrading(boolean foreignBondTrading) {
     Utils.checkNotNull(foreignBondTrading, "foreignBondTrading");
-    this.foreignBondTrading = Optional.ofNullable(foreignBondTrading);
+    this.foreignBondTrading = JsonNullable.of(foreignBondTrading);
     return this;
   }
 
   /** Does the account anticipate trading in foreign bonds */
   public EnrollmentForeignBondTradingDetails withForeignBondTrading(
-      Optional<Boolean> foreignBondTrading) {
+      JsonNullable<Boolean> foreignBondTrading) {
     Utils.checkNotNull(foreignBondTrading, "foreignBondTrading");
     this.foreignBondTrading = foreignBondTrading;
     return this;
@@ -122,7 +123,7 @@ public class EnrollmentForeignBondTradingDetails {
   @SuppressWarnings("UnusedReturnValue")
   public static final class Builder {
 
-    private Optional<Boolean> foreignBondTrading = Optional.empty();
+    private JsonNullable<Boolean> foreignBondTrading = JsonNullable.undefined();
 
     private Optional<? extends List<ForeignBondTradingDetail>> foreignBondTradingDetail =
         Optional.empty();
@@ -134,12 +135,12 @@ public class EnrollmentForeignBondTradingDetails {
     /** Does the account anticipate trading in foreign bonds */
     public Builder foreignBondTrading(boolean foreignBondTrading) {
       Utils.checkNotNull(foreignBondTrading, "foreignBondTrading");
-      this.foreignBondTrading = Optional.ofNullable(foreignBondTrading);
+      this.foreignBondTrading = JsonNullable.of(foreignBondTrading);
       return this;
     }
 
     /** Does the account anticipate trading in foreign bonds */
-    public Builder foreignBondTrading(Optional<Boolean> foreignBondTrading) {
+    public Builder foreignBondTrading(JsonNullable<Boolean> foreignBondTrading) {
       Utils.checkNotNull(foreignBondTrading, "foreignBondTrading");
       this.foreignBondTrading = foreignBondTrading;
       return this;

@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * EnrollmentLlcEnrollmentMetadataOtherAccounts
@@ -32,14 +33,14 @@ public class EnrollmentLlcEnrollmentMetadataOtherAccounts {
   /** The owner has other accounts at Apex */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("owner_has_other_accounts_at_apex")
-  private Optional<Boolean> ownerHasOtherAccountsAtApex;
+  private JsonNullable<Boolean> ownerHasOtherAccountsAtApex;
 
   @JsonCreator
   public EnrollmentLlcEnrollmentMetadataOtherAccounts(
       @JsonProperty("account_names") Optional<? extends List<String>> accountNames,
       @JsonProperty("account_numbers") Optional<? extends List<String>> accountNumbers,
       @JsonProperty("owner_has_other_accounts_at_apex")
-          Optional<Boolean> ownerHasOtherAccountsAtApex) {
+          JsonNullable<Boolean> ownerHasOtherAccountsAtApex) {
     Utils.checkNotNull(accountNames, "accountNames");
     Utils.checkNotNull(accountNumbers, "accountNumbers");
     Utils.checkNotNull(ownerHasOtherAccountsAtApex, "ownerHasOtherAccountsAtApex");
@@ -49,7 +50,7 @@ public class EnrollmentLlcEnrollmentMetadataOtherAccounts {
   }
 
   public EnrollmentLlcEnrollmentMetadataOtherAccounts() {
-    this(Optional.empty(), Optional.empty(), Optional.empty());
+    this(Optional.empty(), Optional.empty(), JsonNullable.undefined());
   }
 
   /** Other account names held at Apex */
@@ -68,7 +69,7 @@ public class EnrollmentLlcEnrollmentMetadataOtherAccounts {
 
   /** The owner has other accounts at Apex */
   @JsonIgnore
-  public Optional<Boolean> ownerHasOtherAccountsAtApex() {
+  public JsonNullable<Boolean> ownerHasOtherAccountsAtApex() {
     return ownerHasOtherAccountsAtApex;
   }
 
@@ -111,13 +112,13 @@ public class EnrollmentLlcEnrollmentMetadataOtherAccounts {
   public EnrollmentLlcEnrollmentMetadataOtherAccounts withOwnerHasOtherAccountsAtApex(
       boolean ownerHasOtherAccountsAtApex) {
     Utils.checkNotNull(ownerHasOtherAccountsAtApex, "ownerHasOtherAccountsAtApex");
-    this.ownerHasOtherAccountsAtApex = Optional.ofNullable(ownerHasOtherAccountsAtApex);
+    this.ownerHasOtherAccountsAtApex = JsonNullable.of(ownerHasOtherAccountsAtApex);
     return this;
   }
 
   /** The owner has other accounts at Apex */
   public EnrollmentLlcEnrollmentMetadataOtherAccounts withOwnerHasOtherAccountsAtApex(
-      Optional<Boolean> ownerHasOtherAccountsAtApex) {
+      JsonNullable<Boolean> ownerHasOtherAccountsAtApex) {
     Utils.checkNotNull(ownerHasOtherAccountsAtApex, "ownerHasOtherAccountsAtApex");
     this.ownerHasOtherAccountsAtApex = ownerHasOtherAccountsAtApex;
     return this;
@@ -163,7 +164,7 @@ public class EnrollmentLlcEnrollmentMetadataOtherAccounts {
 
     private Optional<? extends List<String>> accountNumbers = Optional.empty();
 
-    private Optional<Boolean> ownerHasOtherAccountsAtApex = Optional.empty();
+    private JsonNullable<Boolean> ownerHasOtherAccountsAtApex = JsonNullable.undefined();
 
     private Builder() {
       // force use of static builder() method
@@ -200,12 +201,12 @@ public class EnrollmentLlcEnrollmentMetadataOtherAccounts {
     /** The owner has other accounts at Apex */
     public Builder ownerHasOtherAccountsAtApex(boolean ownerHasOtherAccountsAtApex) {
       Utils.checkNotNull(ownerHasOtherAccountsAtApex, "ownerHasOtherAccountsAtApex");
-      this.ownerHasOtherAccountsAtApex = Optional.ofNullable(ownerHasOtherAccountsAtApex);
+      this.ownerHasOtherAccountsAtApex = JsonNullable.of(ownerHasOtherAccountsAtApex);
       return this;
     }
 
     /** The owner has other accounts at Apex */
-    public Builder ownerHasOtherAccountsAtApex(Optional<Boolean> ownerHasOtherAccountsAtApex) {
+    public Builder ownerHasOtherAccountsAtApex(JsonNullable<Boolean> ownerHasOtherAccountsAtApex) {
       Utils.checkNotNull(ownerHasOtherAccountsAtApex, "ownerHasOtherAccountsAtApex");
       this.ownerHasOtherAccountsAtApex = ownerHasOtherAccountsAtApex;
       return this;

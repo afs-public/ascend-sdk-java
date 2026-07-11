@@ -55,6 +55,9 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
   public static final DeactivateEnrollmentRequestCreateEnrollmentType REGISTRATION_INDIVIDUAL =
       new DeactivateEnrollmentRequestCreateEnrollmentType("REGISTRATION_INDIVIDUAL");
   public static final DeactivateEnrollmentRequestCreateEnrollmentType
+      LENDING_LIMITED_PURPOSE_MARGIN =
+          new DeactivateEnrollmentRequestCreateEnrollmentType("LENDING_LIMITED_PURPOSE_MARGIN");
+  public static final DeactivateEnrollmentRequestCreateEnrollmentType
       LENDING_FULLY_PAID_STOCK_LOAN =
           new DeactivateEnrollmentRequestCreateEnrollmentType("LENDING_FULLY_PAID_STOCK_LOAN");
   public static final DeactivateEnrollmentRequestCreateEnrollmentType BENEFICIARY_DESIGNATION =
@@ -192,6 +195,7 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
     Map<String, DeactivateEnrollmentRequestCreateEnrollmentType> map = new LinkedHashMap<>();
     map.put("ENROLLMENT_TYPE_UNSPECIFIED", ENROLLMENT_TYPE_UNSPECIFIED);
     map.put("REGISTRATION_INDIVIDUAL", REGISTRATION_INDIVIDUAL);
+    map.put("LENDING_LIMITED_PURPOSE_MARGIN", LENDING_LIMITED_PURPOSE_MARGIN);
     map.put("LENDING_FULLY_PAID_STOCK_LOAN", LENDING_FULLY_PAID_STOCK_LOAN);
     map.put("BENEFICIARY_DESIGNATION", BENEFICIARY_DESIGNATION);
     map.put("REGISTRATION_JOINT_WROS", REGISTRATION_JOINT_WROS);
@@ -232,6 +236,9 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
     map.put(
         "REGISTRATION_INDIVIDUAL",
         DeactivateEnrollmentRequestCreateEnrollmentTypeEnum.REGISTRATION_INDIVIDUAL);
+    map.put(
+        "LENDING_LIMITED_PURPOSE_MARGIN",
+        DeactivateEnrollmentRequestCreateEnrollmentTypeEnum.LENDING_LIMITED_PURPOSE_MARGIN);
     map.put(
         "LENDING_FULLY_PAID_STOCK_LOAN",
         DeactivateEnrollmentRequestCreateEnrollmentTypeEnum.LENDING_FULLY_PAID_STOCK_LOAN);
@@ -355,6 +362,7 @@ public class DeactivateEnrollmentRequestCreateEnrollmentType {
   public enum DeactivateEnrollmentRequestCreateEnrollmentTypeEnum {
     ENROLLMENT_TYPE_UNSPECIFIED("ENROLLMENT_TYPE_UNSPECIFIED"),
     REGISTRATION_INDIVIDUAL("REGISTRATION_INDIVIDUAL"),
+    LENDING_LIMITED_PURPOSE_MARGIN("LENDING_LIMITED_PURPOSE_MARGIN"),
     LENDING_FULLY_PAID_STOCK_LOAN("LENDING_FULLY_PAID_STOCK_LOAN"),
     BENEFICIARY_DESIGNATION("BENEFICIARY_DESIGNATION"),
     REGISTRATION_JOINT_WROS("REGISTRATION_JOINT_WROS"),

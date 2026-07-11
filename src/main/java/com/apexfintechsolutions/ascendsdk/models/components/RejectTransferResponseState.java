@@ -71,6 +71,10 @@ public class RejectTransferResponseState {
       new RejectTransferResponseState("COMPLETED");
   public static final RejectTransferResponseState PURGED =
       new RejectTransferResponseState("PURGED");
+  public static final RejectTransferResponseState PENDING_REVIEW_MARGINS =
+      new RejectTransferResponseState("PENDING_REVIEW_MARGINS");
+  public static final RejectTransferResponseState PENDING_SUBMISSION =
+      new RejectTransferResponseState("PENDING_SUBMISSION");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -152,6 +156,8 @@ public class RejectTransferResponseState {
     map.put("PENDING_BOOKKEEPING", PENDING_BOOKKEEPING);
     map.put("COMPLETED", COMPLETED);
     map.put("PURGED", PURGED);
+    map.put("PENDING_REVIEW_MARGINS", PENDING_REVIEW_MARGINS);
+    map.put("PENDING_SUBMISSION", PENDING_SUBMISSION);
     return map;
   }
 
@@ -170,6 +176,8 @@ public class RejectTransferResponseState {
     map.put("PENDING_BOOKKEEPING", RejectTransferResponseStateEnum.PENDING_BOOKKEEPING);
     map.put("COMPLETED", RejectTransferResponseStateEnum.COMPLETED);
     map.put("PURGED", RejectTransferResponseStateEnum.PURGED);
+    map.put("PENDING_REVIEW_MARGINS", RejectTransferResponseStateEnum.PENDING_REVIEW_MARGINS);
+    map.put("PENDING_SUBMISSION", RejectTransferResponseStateEnum.PENDING_SUBMISSION);
     return map;
   }
 
@@ -218,6 +226,8 @@ public class RejectTransferResponseState {
     PENDING_BOOKKEEPING("PENDING_BOOKKEEPING"),
     COMPLETED("COMPLETED"),
     PURGED("PURGED"),
+    PENDING_REVIEW_MARGINS("PENDING_REVIEW_MARGINS"),
+    PENDING_SUBMISSION("PENDING_SUBMISSION"),
     ;
 
     private final String value;

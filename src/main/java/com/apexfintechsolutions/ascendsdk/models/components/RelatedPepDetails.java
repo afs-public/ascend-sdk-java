@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * RelatedPepDetails
@@ -24,7 +25,7 @@ public class RelatedPepDetails {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("direct_or_indirect_related_peps")
-  private Optional<Boolean> directOrIndirectRelatedPeps;
+  private JsonNullable<Boolean> directOrIndirectRelatedPeps;
 
   /** Related Peps */
   @JsonInclude(Include.NON_ABSENT)
@@ -34,7 +35,7 @@ public class RelatedPepDetails {
   @JsonCreator
   public RelatedPepDetails(
       @JsonProperty("direct_or_indirect_related_peps")
-          Optional<Boolean> directOrIndirectRelatedPeps,
+          JsonNullable<Boolean> directOrIndirectRelatedPeps,
       @JsonProperty("related_peps") Optional<? extends List<RelatedPep>> relatedPeps) {
     Utils.checkNotNull(directOrIndirectRelatedPeps, "directOrIndirectRelatedPeps");
     Utils.checkNotNull(relatedPeps, "relatedPeps");
@@ -43,7 +44,7 @@ public class RelatedPepDetails {
   }
 
   public RelatedPepDetails() {
-    this(Optional.empty(), Optional.empty());
+    this(JsonNullable.undefined(), Optional.empty());
   }
 
   /**
@@ -51,7 +52,7 @@ public class RelatedPepDetails {
    * persons
    */
   @JsonIgnore
-  public Optional<Boolean> directOrIndirectRelatedPeps() {
+  public JsonNullable<Boolean> directOrIndirectRelatedPeps() {
     return directOrIndirectRelatedPeps;
   }
 
@@ -72,7 +73,7 @@ public class RelatedPepDetails {
    */
   public RelatedPepDetails withDirectOrIndirectRelatedPeps(boolean directOrIndirectRelatedPeps) {
     Utils.checkNotNull(directOrIndirectRelatedPeps, "directOrIndirectRelatedPeps");
-    this.directOrIndirectRelatedPeps = Optional.ofNullable(directOrIndirectRelatedPeps);
+    this.directOrIndirectRelatedPeps = JsonNullable.of(directOrIndirectRelatedPeps);
     return this;
   }
 
@@ -81,7 +82,7 @@ public class RelatedPepDetails {
    * persons
    */
   public RelatedPepDetails withDirectOrIndirectRelatedPeps(
-      Optional<Boolean> directOrIndirectRelatedPeps) {
+      JsonNullable<Boolean> directOrIndirectRelatedPeps) {
     Utils.checkNotNull(directOrIndirectRelatedPeps, "directOrIndirectRelatedPeps");
     this.directOrIndirectRelatedPeps = directOrIndirectRelatedPeps;
     return this;
@@ -133,7 +134,7 @@ public class RelatedPepDetails {
   @SuppressWarnings("UnusedReturnValue")
   public static final class Builder {
 
-    private Optional<Boolean> directOrIndirectRelatedPeps = Optional.empty();
+    private JsonNullable<Boolean> directOrIndirectRelatedPeps = JsonNullable.undefined();
 
     private Optional<? extends List<RelatedPep>> relatedPeps = Optional.empty();
 
@@ -147,7 +148,7 @@ public class RelatedPepDetails {
      */
     public Builder directOrIndirectRelatedPeps(boolean directOrIndirectRelatedPeps) {
       Utils.checkNotNull(directOrIndirectRelatedPeps, "directOrIndirectRelatedPeps");
-      this.directOrIndirectRelatedPeps = Optional.ofNullable(directOrIndirectRelatedPeps);
+      this.directOrIndirectRelatedPeps = JsonNullable.of(directOrIndirectRelatedPeps);
       return this;
     }
 
@@ -155,7 +156,7 @@ public class RelatedPepDetails {
      * Indication as to whether or not an account has direct or indirect related politically exposed
      * persons
      */
-    public Builder directOrIndirectRelatedPeps(Optional<Boolean> directOrIndirectRelatedPeps) {
+    public Builder directOrIndirectRelatedPeps(JsonNullable<Boolean> directOrIndirectRelatedPeps) {
       Utils.checkNotNull(directOrIndirectRelatedPeps, "directOrIndirectRelatedPeps");
       this.directOrIndirectRelatedPeps = directOrIndirectRelatedPeps;
       return this;

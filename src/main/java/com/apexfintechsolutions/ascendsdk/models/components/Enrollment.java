@@ -170,6 +170,11 @@ public class Enrollment {
   private JsonNullable<? extends OrdersOptionsTradingEnrollmentMetadata>
       ordersOptionsTradingEnrollmentMetadata;
 
+  /** Metadata for the REGISTRATION_PARTNERSHIP enrollment type */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("partnership_enrollment_metadata")
+  private JsonNullable<? extends PartnershipEnrollmentMetadata> partnershipEnrollmentMetadata;
+
   /**
    * The ULID is associated with the approver of a given enrollment. The approver you create will
    * contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID
@@ -276,6 +281,8 @@ public class Enrollment {
       @JsonProperty("orders_options_trading_enrollment_metadata")
           JsonNullable<? extends OrdersOptionsTradingEnrollmentMetadata>
               ordersOptionsTradingEnrollmentMetadata,
+      @JsonProperty("partnership_enrollment_metadata")
+          JsonNullable<? extends PartnershipEnrollmentMetadata> partnershipEnrollmentMetadata,
       @JsonProperty("principal_approver_id") Optional<String> principalApproverId,
       @JsonProperty("sole_proprietorship_enrollment_metadata")
           JsonNullable<? extends SoleProprietorshipEnrollmentMetadata>
@@ -323,6 +330,7 @@ public class Enrollment {
     Utils.checkNotNull(operatingEnrollmentMetadata, "operatingEnrollmentMetadata");
     Utils.checkNotNull(
         ordersOptionsTradingEnrollmentMetadata, "ordersOptionsTradingEnrollmentMetadata");
+    Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
     Utils.checkNotNull(principalApproverId, "principalApproverId");
     Utils.checkNotNull(
         soleProprietorshipEnrollmentMetadata, "soleProprietorshipEnrollmentMetadata");
@@ -360,6 +368,7 @@ public class Enrollment {
     this.name = name;
     this.operatingEnrollmentMetadata = operatingEnrollmentMetadata;
     this.ordersOptionsTradingEnrollmentMetadata = ordersOptionsTradingEnrollmentMetadata;
+    this.partnershipEnrollmentMetadata = partnershipEnrollmentMetadata;
     this.principalApproverId = principalApproverId;
     this.soleProprietorshipEnrollmentMetadata = soleProprietorshipEnrollmentMetadata;
     this.state = state;
@@ -396,6 +405,7 @@ public class Enrollment {
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
+        JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
@@ -613,6 +623,13 @@ public class Enrollment {
       ordersOptionsTradingEnrollmentMetadata() {
     return (JsonNullable<OrdersOptionsTradingEnrollmentMetadata>)
         ordersOptionsTradingEnrollmentMetadata;
+  }
+
+  /** Metadata for the REGISTRATION_PARTNERSHIP enrollment type */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public JsonNullable<PartnershipEnrollmentMetadata> partnershipEnrollmentMetadata() {
+    return (JsonNullable<PartnershipEnrollmentMetadata>) partnershipEnrollmentMetadata;
   }
 
   /**
@@ -1149,6 +1166,22 @@ public class Enrollment {
     return this;
   }
 
+  /** Metadata for the REGISTRATION_PARTNERSHIP enrollment type */
+  public Enrollment withPartnershipEnrollmentMetadata(
+      PartnershipEnrollmentMetadata partnershipEnrollmentMetadata) {
+    Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
+    this.partnershipEnrollmentMetadata = JsonNullable.of(partnershipEnrollmentMetadata);
+    return this;
+  }
+
+  /** Metadata for the REGISTRATION_PARTNERSHIP enrollment type */
+  public Enrollment withPartnershipEnrollmentMetadata(
+      JsonNullable<? extends PartnershipEnrollmentMetadata> partnershipEnrollmentMetadata) {
+    Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
+    this.partnershipEnrollmentMetadata = partnershipEnrollmentMetadata;
+    return this;
+  }
+
   /**
    * The ULID is associated with the approver of a given enrollment. The approver you create will
    * contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID
@@ -1337,6 +1370,8 @@ public class Enrollment {
         && Utils.enhancedDeepEquals(
             this.ordersOptionsTradingEnrollmentMetadata,
             other.ordersOptionsTradingEnrollmentMetadata)
+        && Utils.enhancedDeepEquals(
+            this.partnershipEnrollmentMetadata, other.partnershipEnrollmentMetadata)
         && Utils.enhancedDeepEquals(this.principalApproverId, other.principalApproverId)
         && Utils.enhancedDeepEquals(
             this.soleProprietorshipEnrollmentMetadata, other.soleProprietorshipEnrollmentMetadata)
@@ -1379,6 +1414,7 @@ public class Enrollment {
         name,
         operatingEnrollmentMetadata,
         ordersOptionsTradingEnrollmentMetadata,
+        partnershipEnrollmentMetadata,
         principalApproverId,
         soleProprietorshipEnrollmentMetadata,
         state,
@@ -1446,6 +1482,8 @@ public class Enrollment {
         operatingEnrollmentMetadata,
         "ordersOptionsTradingEnrollmentMetadata",
         ordersOptionsTradingEnrollmentMetadata,
+        "partnershipEnrollmentMetadata",
+        partnershipEnrollmentMetadata,
         "principalApproverId",
         principalApproverId,
         "soleProprietorshipEnrollmentMetadata",
@@ -1541,6 +1579,9 @@ public class Enrollment {
 
     private JsonNullable<? extends OrdersOptionsTradingEnrollmentMetadata>
         ordersOptionsTradingEnrollmentMetadata = JsonNullable.undefined();
+
+    private JsonNullable<? extends PartnershipEnrollmentMetadata> partnershipEnrollmentMetadata =
+        JsonNullable.undefined();
 
     private Optional<String> principalApproverId = Optional.empty();
 
@@ -2032,6 +2073,22 @@ public class Enrollment {
       return this;
     }
 
+    /** Metadata for the REGISTRATION_PARTNERSHIP enrollment type */
+    public Builder partnershipEnrollmentMetadata(
+        PartnershipEnrollmentMetadata partnershipEnrollmentMetadata) {
+      Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
+      this.partnershipEnrollmentMetadata = JsonNullable.of(partnershipEnrollmentMetadata);
+      return this;
+    }
+
+    /** Metadata for the REGISTRATION_PARTNERSHIP enrollment type */
+    public Builder partnershipEnrollmentMetadata(
+        JsonNullable<? extends PartnershipEnrollmentMetadata> partnershipEnrollmentMetadata) {
+      Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
+      this.partnershipEnrollmentMetadata = partnershipEnrollmentMetadata;
+      return this;
+    }
+
     /**
      * The ULID is associated with the approver of a given enrollment. The approver you create will
      * contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID
@@ -2191,6 +2248,7 @@ public class Enrollment {
           name,
           operatingEnrollmentMetadata,
           ordersOptionsTradingEnrollmentMetadata,
+          partnershipEnrollmentMetadata,
           principalApproverId,
           soleProprietorshipEnrollmentMetadata,
           state,

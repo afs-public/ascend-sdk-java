@@ -9,4 +9,4 @@ A customer-disclosed list of other Apex-held accounts owned by the Entity applic
 | ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
 | `accountNames`                       | List\<*String*>                      | :heavy_minus_sign:                   | Other account names held at Apex     | [<br/>"John Doe Trading"<br/>]       |
 | `accountNumbers`                     | List\<*String*>                      | :heavy_minus_sign:                   | Other account numbers held at Apex   | [<br/>"N6D8ZJP"<br/>]                |
-| `ownerHasOtherAccountsAtApex`        | *Optional\<Boolean>*                 | :heavy_minus_sign:                   | The owner has other accounts at Apex | true                                 |
+| `ownerHasOtherAccountsAtApex`        | *JsonNullable\<Boolean>*             | :heavy_minus_sign:                   | The owner has other accounts at Apex | true                                 |

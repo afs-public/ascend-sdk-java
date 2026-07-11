@@ -50,6 +50,8 @@ public class EnrollmentCreateType {
       new EnrollmentCreateType("ENROLLMENT_TYPE_UNSPECIFIED");
   public static final EnrollmentCreateType REGISTRATION_INDIVIDUAL =
       new EnrollmentCreateType("REGISTRATION_INDIVIDUAL");
+  public static final EnrollmentCreateType LENDING_LIMITED_PURPOSE_MARGIN =
+      new EnrollmentCreateType("LENDING_LIMITED_PURPOSE_MARGIN");
   public static final EnrollmentCreateType LENDING_FULLY_PAID_STOCK_LOAN =
       new EnrollmentCreateType("LENDING_FULLY_PAID_STOCK_LOAN");
   public static final EnrollmentCreateType BENEFICIARY_DESIGNATION =
@@ -174,6 +176,7 @@ public class EnrollmentCreateType {
     Map<String, EnrollmentCreateType> map = new LinkedHashMap<>();
     map.put("ENROLLMENT_TYPE_UNSPECIFIED", ENROLLMENT_TYPE_UNSPECIFIED);
     map.put("REGISTRATION_INDIVIDUAL", REGISTRATION_INDIVIDUAL);
+    map.put("LENDING_LIMITED_PURPOSE_MARGIN", LENDING_LIMITED_PURPOSE_MARGIN);
     map.put("LENDING_FULLY_PAID_STOCK_LOAN", LENDING_FULLY_PAID_STOCK_LOAN);
     map.put("BENEFICIARY_DESIGNATION", BENEFICIARY_DESIGNATION);
     map.put("REGISTRATION_JOINT_WROS", REGISTRATION_JOINT_WROS);
@@ -209,6 +212,8 @@ public class EnrollmentCreateType {
     Map<String, EnrollmentCreateTypeEnum> map = new HashMap<>();
     map.put("ENROLLMENT_TYPE_UNSPECIFIED", EnrollmentCreateTypeEnum.ENROLLMENT_TYPE_UNSPECIFIED);
     map.put("REGISTRATION_INDIVIDUAL", EnrollmentCreateTypeEnum.REGISTRATION_INDIVIDUAL);
+    map.put(
+        "LENDING_LIMITED_PURPOSE_MARGIN", EnrollmentCreateTypeEnum.LENDING_LIMITED_PURPOSE_MARGIN);
     map.put(
         "LENDING_FULLY_PAID_STOCK_LOAN", EnrollmentCreateTypeEnum.LENDING_FULLY_PAID_STOCK_LOAN);
     map.put("BENEFICIARY_DESIGNATION", EnrollmentCreateTypeEnum.BENEFICIARY_DESIGNATION);
@@ -284,6 +289,7 @@ public class EnrollmentCreateType {
   public enum EnrollmentCreateTypeEnum {
     ENROLLMENT_TYPE_UNSPECIFIED("ENROLLMENT_TYPE_UNSPECIFIED"),
     REGISTRATION_INDIVIDUAL("REGISTRATION_INDIVIDUAL"),
+    LENDING_LIMITED_PURPOSE_MARGIN("LENDING_LIMITED_PURPOSE_MARGIN"),
     LENDING_FULLY_PAID_STOCK_LOAN("LENDING_FULLY_PAID_STOCK_LOAN"),
     BENEFICIARY_DESIGNATION("BENEFICIARY_DESIGNATION"),
     REGISTRATION_JOINT_WROS("REGISTRATION_JOINT_WROS"),

@@ -21,6 +21,14 @@ public class OperatingEnrollmentMetadataCreate {
   @JsonProperty("operating_purpose")
   private OperatingPurpose operatingPurpose;
 
+  /**
+   * Indicates whether the depository is foreign (true) or domestic (false). Used for
+   * CONTROL_DEPOSITORY operating purpose to determine FINRA COA code.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("represents_foreign_entity")
+  private Optional<Boolean> representsForeignEntity;
+
   /** Optional subtitle for the operating purpose */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("subtitle")
@@ -34,25 +42,37 @@ public class OperatingEnrollmentMetadataCreate {
   @JsonCreator
   public OperatingEnrollmentMetadataCreate(
       @JsonProperty("operating_purpose") OperatingPurpose operatingPurpose,
+      @JsonProperty("represents_foreign_entity") Optional<Boolean> representsForeignEntity,
       @JsonProperty("subtitle") Optional<String> subtitle,
       @JsonProperty("tax_withholding_metadata")
           Optional<? extends TaxWithholdingMetadataCreate> taxWithholdingMetadata) {
     Utils.checkNotNull(operatingPurpose, "operatingPurpose");
+    Utils.checkNotNull(representsForeignEntity, "representsForeignEntity");
     Utils.checkNotNull(subtitle, "subtitle");
     Utils.checkNotNull(taxWithholdingMetadata, "taxWithholdingMetadata");
     this.operatingPurpose = operatingPurpose;
+    this.representsForeignEntity = representsForeignEntity;
     this.subtitle = subtitle;
     this.taxWithholdingMetadata = taxWithholdingMetadata;
   }
 
   public OperatingEnrollmentMetadataCreate(OperatingPurpose operatingPurpose) {
-    this(operatingPurpose, Optional.empty(), Optional.empty());
+    this(operatingPurpose, Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /** The purpose of the operating account. */
   @JsonIgnore
   public OperatingPurpose operatingPurpose() {
     return operatingPurpose;
+  }
+
+  /**
+   * Indicates whether the depository is foreign (true) or domestic (false). Used for
+   * CONTROL_DEPOSITORY operating purpose to determine FINRA COA code.
+   */
+  @JsonIgnore
+  public Optional<Boolean> representsForeignEntity() {
+    return representsForeignEntity;
   }
 
   /** Optional subtitle for the operating purpose */
@@ -76,6 +96,28 @@ public class OperatingEnrollmentMetadataCreate {
   public OperatingEnrollmentMetadataCreate withOperatingPurpose(OperatingPurpose operatingPurpose) {
     Utils.checkNotNull(operatingPurpose, "operatingPurpose");
     this.operatingPurpose = operatingPurpose;
+    return this;
+  }
+
+  /**
+   * Indicates whether the depository is foreign (true) or domestic (false). Used for
+   * CONTROL_DEPOSITORY operating purpose to determine FINRA COA code.
+   */
+  public OperatingEnrollmentMetadataCreate withRepresentsForeignEntity(
+      boolean representsForeignEntity) {
+    Utils.checkNotNull(representsForeignEntity, "representsForeignEntity");
+    this.representsForeignEntity = Optional.ofNullable(representsForeignEntity);
+    return this;
+  }
+
+  /**
+   * Indicates whether the depository is foreign (true) or domestic (false). Used for
+   * CONTROL_DEPOSITORY operating purpose to determine FINRA COA code.
+   */
+  public OperatingEnrollmentMetadataCreate withRepresentsForeignEntity(
+      Optional<Boolean> representsForeignEntity) {
+    Utils.checkNotNull(representsForeignEntity, "representsForeignEntity");
+    this.representsForeignEntity = representsForeignEntity;
     return this;
   }
 
@@ -119,13 +161,15 @@ public class OperatingEnrollmentMetadataCreate {
     }
     OperatingEnrollmentMetadataCreate other = (OperatingEnrollmentMetadataCreate) o;
     return Utils.enhancedDeepEquals(this.operatingPurpose, other.operatingPurpose)
+        && Utils.enhancedDeepEquals(this.representsForeignEntity, other.representsForeignEntity)
         && Utils.enhancedDeepEquals(this.subtitle, other.subtitle)
         && Utils.enhancedDeepEquals(this.taxWithholdingMetadata, other.taxWithholdingMetadata);
   }
 
   @Override
   public int hashCode() {
-    return Utils.enhancedHash(operatingPurpose, subtitle, taxWithholdingMetadata);
+    return Utils.enhancedHash(
+        operatingPurpose, representsForeignEntity, subtitle, taxWithholdingMetadata);
   }
 
   @Override
@@ -134,6 +178,8 @@ public class OperatingEnrollmentMetadataCreate {
         OperatingEnrollmentMetadataCreate.class,
         "operatingPurpose",
         operatingPurpose,
+        "representsForeignEntity",
+        representsForeignEntity,
         "subtitle",
         subtitle,
         "taxWithholdingMetadata",
@@ -144,6 +190,8 @@ public class OperatingEnrollmentMetadataCreate {
   public static final class Builder {
 
     private OperatingPurpose operatingPurpose;
+
+    private Optional<Boolean> representsForeignEntity = Optional.empty();
 
     private Optional<String> subtitle = Optional.empty();
 
@@ -158,6 +206,26 @@ public class OperatingEnrollmentMetadataCreate {
     public Builder operatingPurpose(OperatingPurpose operatingPurpose) {
       Utils.checkNotNull(operatingPurpose, "operatingPurpose");
       this.operatingPurpose = operatingPurpose;
+      return this;
+    }
+
+    /**
+     * Indicates whether the depository is foreign (true) or domestic (false). Used for
+     * CONTROL_DEPOSITORY operating purpose to determine FINRA COA code.
+     */
+    public Builder representsForeignEntity(boolean representsForeignEntity) {
+      Utils.checkNotNull(representsForeignEntity, "representsForeignEntity");
+      this.representsForeignEntity = Optional.ofNullable(representsForeignEntity);
+      return this;
+    }
+
+    /**
+     * Indicates whether the depository is foreign (true) or domestic (false). Used for
+     * CONTROL_DEPOSITORY operating purpose to determine FINRA COA code.
+     */
+    public Builder representsForeignEntity(Optional<Boolean> representsForeignEntity) {
+      Utils.checkNotNull(representsForeignEntity, "representsForeignEntity");
+      this.representsForeignEntity = representsForeignEntity;
       return this;
     }
 
@@ -193,7 +261,7 @@ public class OperatingEnrollmentMetadataCreate {
     public OperatingEnrollmentMetadataCreate build() {
 
       return new OperatingEnrollmentMetadataCreate(
-          operatingPurpose, subtitle, taxWithholdingMetadata);
+          operatingPurpose, representsForeignEntity, subtitle, taxWithholdingMetadata);
     }
   }
 }

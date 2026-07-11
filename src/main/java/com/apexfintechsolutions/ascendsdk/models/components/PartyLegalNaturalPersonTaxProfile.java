@@ -64,7 +64,7 @@ public class PartyLegalNaturalPersonTaxProfile {
   /** Whether treaty benefits are requested. Only applicable for W_8BEN and W_8BEN_E form types. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("treaty_benefits_requested")
-  private Optional<Boolean> treatyBenefitsRequested;
+  private JsonNullable<Boolean> treatyBenefitsRequested;
 
   /** United States Individual Taxpayer Identification Number (ITIN) status. */
   @JsonInclude(Include.NON_ABSENT)
@@ -95,7 +95,7 @@ public class PartyLegalNaturalPersonTaxProfile {
       @JsonProperty("taxpayer_certification_state")
           Optional<? extends PartyLegalNaturalPersonTaxpayerCertificationState>
               taxpayerCertificationState,
-      @JsonProperty("treaty_benefits_requested") Optional<Boolean> treatyBenefitsRequested,
+      @JsonProperty("treaty_benefits_requested") JsonNullable<Boolean> treatyBenefitsRequested,
       @JsonProperty("us_tin_status")
           Optional<? extends PartyLegalNaturalPersonUsTinStatus> usTinStatus,
       @JsonProperty("withholding_state")
@@ -134,7 +134,7 @@ public class PartyLegalNaturalPersonTaxProfile {
         Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty(),
-        Optional.empty(),
+        JsonNullable.undefined(),
         Optional.empty(),
         Optional.empty());
   }
@@ -196,7 +196,7 @@ public class PartyLegalNaturalPersonTaxProfile {
 
   /** Whether treaty benefits are requested. Only applicable for W_8BEN and W_8BEN_E form types. */
   @JsonIgnore
-  public Optional<Boolean> treatyBenefitsRequested() {
+  public JsonNullable<Boolean> treatyBenefitsRequested() {
     return treatyBenefitsRequested;
   }
 
@@ -351,13 +351,13 @@ public class PartyLegalNaturalPersonTaxProfile {
   public PartyLegalNaturalPersonTaxProfile withTreatyBenefitsRequested(
       boolean treatyBenefitsRequested) {
     Utils.checkNotNull(treatyBenefitsRequested, "treatyBenefitsRequested");
-    this.treatyBenefitsRequested = Optional.ofNullable(treatyBenefitsRequested);
+    this.treatyBenefitsRequested = JsonNullable.of(treatyBenefitsRequested);
     return this;
   }
 
   /** Whether treaty benefits are requested. Only applicable for W_8BEN and W_8BEN_E form types. */
   public PartyLegalNaturalPersonTaxProfile withTreatyBenefitsRequested(
-      Optional<Boolean> treatyBenefitsRequested) {
+      JsonNullable<Boolean> treatyBenefitsRequested) {
     Utils.checkNotNull(treatyBenefitsRequested, "treatyBenefitsRequested");
     this.treatyBenefitsRequested = treatyBenefitsRequested;
     return this;
@@ -487,7 +487,7 @@ public class PartyLegalNaturalPersonTaxProfile {
     private Optional<? extends PartyLegalNaturalPersonTaxpayerCertificationState>
         taxpayerCertificationState = Optional.empty();
 
-    private Optional<Boolean> treatyBenefitsRequested = Optional.empty();
+    private JsonNullable<Boolean> treatyBenefitsRequested = JsonNullable.undefined();
 
     private Optional<? extends PartyLegalNaturalPersonUsTinStatus> usTinStatus = Optional.empty();
 
@@ -627,14 +627,14 @@ public class PartyLegalNaturalPersonTaxProfile {
      */
     public Builder treatyBenefitsRequested(boolean treatyBenefitsRequested) {
       Utils.checkNotNull(treatyBenefitsRequested, "treatyBenefitsRequested");
-      this.treatyBenefitsRequested = Optional.ofNullable(treatyBenefitsRequested);
+      this.treatyBenefitsRequested = JsonNullable.of(treatyBenefitsRequested);
       return this;
     }
 
     /**
      * Whether treaty benefits are requested. Only applicable for W_8BEN and W_8BEN_E form types.
      */
-    public Builder treatyBenefitsRequested(Optional<Boolean> treatyBenefitsRequested) {
+    public Builder treatyBenefitsRequested(JsonNullable<Boolean> treatyBenefitsRequested) {
       Utils.checkNotNull(treatyBenefitsRequested, "treatyBenefitsRequested");
       this.treatyBenefitsRequested = treatyBenefitsRequested;
       return this;

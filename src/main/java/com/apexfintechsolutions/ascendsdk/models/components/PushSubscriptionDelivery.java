@@ -27,7 +27,7 @@ public class PushSubscriptionDelivery {
   /** The total time spent delivering */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("duration")
-  private Optional<String> duration;
+  private JsonNullable<String> duration;
 
   /** The resource name of the event; Format: messages/{message} */
   @JsonInclude(Include.NON_ABSENT)
@@ -64,7 +64,7 @@ public class PushSubscriptionDelivery {
   @JsonCreator
   public PushSubscriptionDelivery(
       @JsonProperty("delivery_id") Optional<String> deliveryId,
-      @JsonProperty("duration") Optional<String> duration,
+      @JsonProperty("duration") JsonNullable<String> duration,
       @JsonProperty("event") Optional<String> event,
       @JsonProperty("event_publish_time") JsonNullable<OffsetDateTime> eventPublishTime,
       @JsonProperty("last_response") Optional<String> lastResponse,
@@ -92,7 +92,7 @@ public class PushSubscriptionDelivery {
   public PushSubscriptionDelivery() {
     this(
         Optional.empty(),
-        Optional.empty(),
+        JsonNullable.undefined(),
         Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty(),
@@ -109,7 +109,7 @@ public class PushSubscriptionDelivery {
 
   /** The total time spent delivering */
   @JsonIgnore
-  public Optional<String> duration() {
+  public JsonNullable<String> duration() {
     return duration;
   }
 
@@ -173,12 +173,12 @@ public class PushSubscriptionDelivery {
   /** The total time spent delivering */
   public PushSubscriptionDelivery withDuration(String duration) {
     Utils.checkNotNull(duration, "duration");
-    this.duration = Optional.ofNullable(duration);
+    this.duration = JsonNullable.of(duration);
     return this;
   }
 
   /** The total time spent delivering */
-  public PushSubscriptionDelivery withDuration(Optional<String> duration) {
+  public PushSubscriptionDelivery withDuration(JsonNullable<String> duration) {
     Utils.checkNotNull(duration, "duration");
     this.duration = duration;
     return this;
@@ -325,7 +325,7 @@ public class PushSubscriptionDelivery {
 
     private Optional<String> deliveryId = Optional.empty();
 
-    private Optional<String> duration = Optional.empty();
+    private JsonNullable<String> duration = JsonNullable.undefined();
 
     private Optional<String> event = Optional.empty();
 
@@ -360,12 +360,12 @@ public class PushSubscriptionDelivery {
     /** The total time spent delivering */
     public Builder duration(String duration) {
       Utils.checkNotNull(duration, "duration");
-      this.duration = Optional.ofNullable(duration);
+      this.duration = JsonNullable.of(duration);
       return this;
     }
 
     /** The total time spent delivering */
-    public Builder duration(Optional<String> duration) {
+    public Builder duration(JsonNullable<String> duration) {
       Utils.checkNotNull(duration, "duration");
       this.duration = duration;
       return this;

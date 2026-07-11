@@ -30,7 +30,7 @@ public class ForeignIdentification {
   /** Denotes if the identification is a tax id or other */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("ftin")
-  private Optional<Boolean> ftin;
+  private JsonNullable<Boolean> ftin;
 
   /** Identification number */
   @JsonInclude(Include.NON_ABSENT)
@@ -55,7 +55,7 @@ public class ForeignIdentification {
   @JsonCreator
   public ForeignIdentification(
       @JsonProperty("expiration_date") JsonNullable<? extends ExpirationDate> expirationDate,
-      @JsonProperty("ftin") Optional<Boolean> ftin,
+      @JsonProperty("ftin") JsonNullable<Boolean> ftin,
       @JsonProperty("identification_number") Optional<String> identificationNumber,
       @JsonProperty("issue_date") JsonNullable<? extends IssueDate> issueDate,
       @JsonProperty("issuing_region_code") Optional<String> issuingRegionCode,
@@ -77,7 +77,7 @@ public class ForeignIdentification {
   public ForeignIdentification() {
     this(
         JsonNullable.undefined(),
-        Optional.empty(),
+        JsonNullable.undefined(),
         Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty(),
@@ -93,7 +93,7 @@ public class ForeignIdentification {
 
   /** Denotes if the identification is a tax id or other */
   @JsonIgnore
-  public Optional<Boolean> ftin() {
+  public JsonNullable<Boolean> ftin() {
     return ftin;
   }
 
@@ -145,12 +145,12 @@ public class ForeignIdentification {
   /** Denotes if the identification is a tax id or other */
   public ForeignIdentification withFtin(boolean ftin) {
     Utils.checkNotNull(ftin, "ftin");
-    this.ftin = Optional.ofNullable(ftin);
+    this.ftin = JsonNullable.of(ftin);
     return this;
   }
 
   /** Denotes if the identification is a tax id or other */
-  public ForeignIdentification withFtin(Optional<Boolean> ftin) {
+  public ForeignIdentification withFtin(JsonNullable<Boolean> ftin) {
     Utils.checkNotNull(ftin, "ftin");
     this.ftin = ftin;
     return this;
@@ -258,7 +258,7 @@ public class ForeignIdentification {
 
     private JsonNullable<? extends ExpirationDate> expirationDate = JsonNullable.undefined();
 
-    private Optional<Boolean> ftin = Optional.empty();
+    private JsonNullable<Boolean> ftin = JsonNullable.undefined();
 
     private Optional<String> identificationNumber = Optional.empty();
 
@@ -289,12 +289,12 @@ public class ForeignIdentification {
     /** Denotes if the identification is a tax id or other */
     public Builder ftin(boolean ftin) {
       Utils.checkNotNull(ftin, "ftin");
-      this.ftin = Optional.ofNullable(ftin);
+      this.ftin = JsonNullable.of(ftin);
       return this;
     }
 
     /** Denotes if the identification is a tax id or other */
-    public Builder ftin(Optional<Boolean> ftin) {
+    public Builder ftin(JsonNullable<Boolean> ftin) {
       Utils.checkNotNull(ftin, "ftin");
       this.ftin = ftin;
       return this;
