@@ -51,6 +51,6 @@ dependencies {
     testImplementation 'io.qase:qase-junit5-reporter:4.1.29'
 
     if (project.hasProperty("testPublishedSDK")) {
-        testImplementation 'com.apexfintechsolutions:ascendsdk:1.6.8'
+        testImplementation 'com.apexfintechsolutions:ascendsdk:1.6.11'
     }
 }

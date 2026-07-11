@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * FuturesEnrollmentMetadata
@@ -20,22 +21,22 @@ public class FuturesEnrollmentMetadata {
   /** Indicates whether the account is registered with the CFTC NFA */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("ctfc_nfa_registered")
-  private Optional<Boolean> ctfcNfaRegistered;
+  private JsonNullable<Boolean> ctfcNfaRegistered;
 
   /** Indicates whether the account owner is a member of any exchanges */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("exchange_member")
-  private Optional<Boolean> exchangeMember;
+  private JsonNullable<Boolean> exchangeMember;
 
   /** Indicates whether the futures account is owned or controlled by a FCM */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("fcm_owned_or_controlled")
-  private Optional<Boolean> fcmOwnedOrControlled;
+  private JsonNullable<Boolean> fcmOwnedOrControlled;
 
   /** Indicates whether the funds in the futures account are owned by the account owner */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("funds_owned_by_account_owner")
-  private Optional<Boolean> fundsOwnedByAccountOwner;
+  private JsonNullable<Boolean> fundsOwnedByAccountOwner;
 
   /**
    * Indicates whether the account owner has prior experience trading futures
@@ -46,7 +47,7 @@ public class FuturesEnrollmentMetadata {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("futures_experience")
   @Deprecated
-  private Optional<Boolean> futuresExperience;
+  private JsonNullable<Boolean> futuresExperience;
 
   /** The primary investment objective for the futures account */
   @JsonInclude(Include.NON_ABSENT)
@@ -62,7 +63,7 @@ public class FuturesEnrollmentMetadata {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("investment_retired_funds")
   @Deprecated
-  private Optional<Boolean> investmentRetiredFunds;
+  private JsonNullable<Boolean> investmentRetiredFunds;
 
   /**
    * Indicates whether the account owner has experience with various trading options and strategies
@@ -73,12 +74,12 @@ public class FuturesEnrollmentMetadata {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("options_experience")
   @Deprecated
-  private Optional<Boolean> optionsExperience;
+  private JsonNullable<Boolean> optionsExperience;
 
   /** Indicates whether the account owner understands the risks associated with trading futures */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("understand_futures_risks")
-  private Optional<Boolean> understandFuturesRisks;
+  private JsonNullable<Boolean> understandFuturesRisks;
 
   /**
    * Indicates whether the account owner understands that losses can exceed deposited funds
@@ -89,21 +90,22 @@ public class FuturesEnrollmentMetadata {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("understand_loss_beyond_funds")
   @Deprecated
-  private Optional<Boolean> understandLossBeyondFunds;
+  private JsonNullable<Boolean> understandLossBeyondFunds;
 
   @JsonCreator
   public FuturesEnrollmentMetadata(
-      @JsonProperty("ctfc_nfa_registered") Optional<Boolean> ctfcNfaRegistered,
-      @JsonProperty("exchange_member") Optional<Boolean> exchangeMember,
-      @JsonProperty("fcm_owned_or_controlled") Optional<Boolean> fcmOwnedOrControlled,
-      @JsonProperty("funds_owned_by_account_owner") Optional<Boolean> fundsOwnedByAccountOwner,
-      @JsonProperty("futures_experience") Optional<Boolean> futuresExperience,
+      @JsonProperty("ctfc_nfa_registered") JsonNullable<Boolean> ctfcNfaRegistered,
+      @JsonProperty("exchange_member") JsonNullable<Boolean> exchangeMember,
+      @JsonProperty("fcm_owned_or_controlled") JsonNullable<Boolean> fcmOwnedOrControlled,
+      @JsonProperty("funds_owned_by_account_owner") JsonNullable<Boolean> fundsOwnedByAccountOwner,
+      @JsonProperty("futures_experience") JsonNullable<Boolean> futuresExperience,
       @JsonProperty("futures_investment_objective")
           Optional<? extends EnrollmentFuturesInvestmentObjective> futuresInvestmentObjective,
-      @JsonProperty("investment_retired_funds") Optional<Boolean> investmentRetiredFunds,
-      @JsonProperty("options_experience") Optional<Boolean> optionsExperience,
-      @JsonProperty("understand_futures_risks") Optional<Boolean> understandFuturesRisks,
-      @JsonProperty("understand_loss_beyond_funds") Optional<Boolean> understandLossBeyondFunds) {
+      @JsonProperty("investment_retired_funds") JsonNullable<Boolean> investmentRetiredFunds,
+      @JsonProperty("options_experience") JsonNullable<Boolean> optionsExperience,
+      @JsonProperty("understand_futures_risks") JsonNullable<Boolean> understandFuturesRisks,
+      @JsonProperty("understand_loss_beyond_funds")
+          JsonNullable<Boolean> understandLossBeyondFunds) {
     Utils.checkNotNull(ctfcNfaRegistered, "ctfcNfaRegistered");
     Utils.checkNotNull(exchangeMember, "exchangeMember");
     Utils.checkNotNull(fcmOwnedOrControlled, "fcmOwnedOrControlled");
@@ -128,39 +130,39 @@ public class FuturesEnrollmentMetadata {
 
   public FuturesEnrollmentMetadata() {
     this(
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
         Optional.empty(),
-        Optional.empty(),
-        Optional.empty(),
-        Optional.empty(),
-        Optional.empty(),
-        Optional.empty(),
-        Optional.empty(),
-        Optional.empty(),
-        Optional.empty(),
-        Optional.empty());
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined(),
+        JsonNullable.undefined());
   }
 
   /** Indicates whether the account is registered with the CFTC NFA */
   @JsonIgnore
-  public Optional<Boolean> ctfcNfaRegistered() {
+  public JsonNullable<Boolean> ctfcNfaRegistered() {
     return ctfcNfaRegistered;
   }
 
   /** Indicates whether the account owner is a member of any exchanges */
   @JsonIgnore
-  public Optional<Boolean> exchangeMember() {
+  public JsonNullable<Boolean> exchangeMember() {
     return exchangeMember;
   }
 
   /** Indicates whether the futures account is owned or controlled by a FCM */
   @JsonIgnore
-  public Optional<Boolean> fcmOwnedOrControlled() {
+  public JsonNullable<Boolean> fcmOwnedOrControlled() {
     return fcmOwnedOrControlled;
   }
 
   /** Indicates whether the funds in the futures account are owned by the account owner */
   @JsonIgnore
-  public Optional<Boolean> fundsOwnedByAccountOwner() {
+  public JsonNullable<Boolean> fundsOwnedByAccountOwner() {
     return fundsOwnedByAccountOwner;
   }
 
@@ -172,7 +174,7 @@ public class FuturesEnrollmentMetadata {
    */
   @Deprecated
   @JsonIgnore
-  public Optional<Boolean> futuresExperience() {
+  public JsonNullable<Boolean> futuresExperience() {
     return futuresExperience;
   }
 
@@ -191,7 +193,7 @@ public class FuturesEnrollmentMetadata {
    */
   @Deprecated
   @JsonIgnore
-  public Optional<Boolean> investmentRetiredFunds() {
+  public JsonNullable<Boolean> investmentRetiredFunds() {
     return investmentRetiredFunds;
   }
 
@@ -203,13 +205,13 @@ public class FuturesEnrollmentMetadata {
    */
   @Deprecated
   @JsonIgnore
-  public Optional<Boolean> optionsExperience() {
+  public JsonNullable<Boolean> optionsExperience() {
     return optionsExperience;
   }
 
   /** Indicates whether the account owner understands the risks associated with trading futures */
   @JsonIgnore
-  public Optional<Boolean> understandFuturesRisks() {
+  public JsonNullable<Boolean> understandFuturesRisks() {
     return understandFuturesRisks;
   }
 
@@ -221,7 +223,7 @@ public class FuturesEnrollmentMetadata {
    */
   @Deprecated
   @JsonIgnore
-  public Optional<Boolean> understandLossBeyondFunds() {
+  public JsonNullable<Boolean> understandLossBeyondFunds() {
     return understandLossBeyondFunds;
   }
 
@@ -232,12 +234,12 @@ public class FuturesEnrollmentMetadata {
   /** Indicates whether the account is registered with the CFTC NFA */
   public FuturesEnrollmentMetadata withCtfcNfaRegistered(boolean ctfcNfaRegistered) {
     Utils.checkNotNull(ctfcNfaRegistered, "ctfcNfaRegistered");
-    this.ctfcNfaRegistered = Optional.ofNullable(ctfcNfaRegistered);
+    this.ctfcNfaRegistered = JsonNullable.of(ctfcNfaRegistered);
     return this;
   }
 
   /** Indicates whether the account is registered with the CFTC NFA */
-  public FuturesEnrollmentMetadata withCtfcNfaRegistered(Optional<Boolean> ctfcNfaRegistered) {
+  public FuturesEnrollmentMetadata withCtfcNfaRegistered(JsonNullable<Boolean> ctfcNfaRegistered) {
     Utils.checkNotNull(ctfcNfaRegistered, "ctfcNfaRegistered");
     this.ctfcNfaRegistered = ctfcNfaRegistered;
     return this;
@@ -246,12 +248,12 @@ public class FuturesEnrollmentMetadata {
   /** Indicates whether the account owner is a member of any exchanges */
   public FuturesEnrollmentMetadata withExchangeMember(boolean exchangeMember) {
     Utils.checkNotNull(exchangeMember, "exchangeMember");
-    this.exchangeMember = Optional.ofNullable(exchangeMember);
+    this.exchangeMember = JsonNullable.of(exchangeMember);
     return this;
   }
 
   /** Indicates whether the account owner is a member of any exchanges */
-  public FuturesEnrollmentMetadata withExchangeMember(Optional<Boolean> exchangeMember) {
+  public FuturesEnrollmentMetadata withExchangeMember(JsonNullable<Boolean> exchangeMember) {
     Utils.checkNotNull(exchangeMember, "exchangeMember");
     this.exchangeMember = exchangeMember;
     return this;
@@ -260,13 +262,13 @@ public class FuturesEnrollmentMetadata {
   /** Indicates whether the futures account is owned or controlled by a FCM */
   public FuturesEnrollmentMetadata withFcmOwnedOrControlled(boolean fcmOwnedOrControlled) {
     Utils.checkNotNull(fcmOwnedOrControlled, "fcmOwnedOrControlled");
-    this.fcmOwnedOrControlled = Optional.ofNullable(fcmOwnedOrControlled);
+    this.fcmOwnedOrControlled = JsonNullable.of(fcmOwnedOrControlled);
     return this;
   }
 
   /** Indicates whether the futures account is owned or controlled by a FCM */
   public FuturesEnrollmentMetadata withFcmOwnedOrControlled(
-      Optional<Boolean> fcmOwnedOrControlled) {
+      JsonNullable<Boolean> fcmOwnedOrControlled) {
     Utils.checkNotNull(fcmOwnedOrControlled, "fcmOwnedOrControlled");
     this.fcmOwnedOrControlled = fcmOwnedOrControlled;
     return this;
@@ -275,13 +277,13 @@ public class FuturesEnrollmentMetadata {
   /** Indicates whether the funds in the futures account are owned by the account owner */
   public FuturesEnrollmentMetadata withFundsOwnedByAccountOwner(boolean fundsOwnedByAccountOwner) {
     Utils.checkNotNull(fundsOwnedByAccountOwner, "fundsOwnedByAccountOwner");
-    this.fundsOwnedByAccountOwner = Optional.ofNullable(fundsOwnedByAccountOwner);
+    this.fundsOwnedByAccountOwner = JsonNullable.of(fundsOwnedByAccountOwner);
     return this;
   }
 
   /** Indicates whether the funds in the futures account are owned by the account owner */
   public FuturesEnrollmentMetadata withFundsOwnedByAccountOwner(
-      Optional<Boolean> fundsOwnedByAccountOwner) {
+      JsonNullable<Boolean> fundsOwnedByAccountOwner) {
     Utils.checkNotNull(fundsOwnedByAccountOwner, "fundsOwnedByAccountOwner");
     this.fundsOwnedByAccountOwner = fundsOwnedByAccountOwner;
     return this;
@@ -296,7 +298,7 @@ public class FuturesEnrollmentMetadata {
   @Deprecated
   public FuturesEnrollmentMetadata withFuturesExperience(boolean futuresExperience) {
     Utils.checkNotNull(futuresExperience, "futuresExperience");
-    this.futuresExperience = Optional.ofNullable(futuresExperience);
+    this.futuresExperience = JsonNullable.of(futuresExperience);
     return this;
   }
 
@@ -307,7 +309,7 @@ public class FuturesEnrollmentMetadata {
    *     soon as possible.
    */
   @Deprecated
-  public FuturesEnrollmentMetadata withFuturesExperience(Optional<Boolean> futuresExperience) {
+  public FuturesEnrollmentMetadata withFuturesExperience(JsonNullable<Boolean> futuresExperience) {
     Utils.checkNotNull(futuresExperience, "futuresExperience");
     this.futuresExperience = futuresExperience;
     return this;
@@ -338,7 +340,7 @@ public class FuturesEnrollmentMetadata {
   @Deprecated
   public FuturesEnrollmentMetadata withInvestmentRetiredFunds(boolean investmentRetiredFunds) {
     Utils.checkNotNull(investmentRetiredFunds, "investmentRetiredFunds");
-    this.investmentRetiredFunds = Optional.ofNullable(investmentRetiredFunds);
+    this.investmentRetiredFunds = JsonNullable.of(investmentRetiredFunds);
     return this;
   }
 
@@ -350,7 +352,7 @@ public class FuturesEnrollmentMetadata {
    */
   @Deprecated
   public FuturesEnrollmentMetadata withInvestmentRetiredFunds(
-      Optional<Boolean> investmentRetiredFunds) {
+      JsonNullable<Boolean> investmentRetiredFunds) {
     Utils.checkNotNull(investmentRetiredFunds, "investmentRetiredFunds");
     this.investmentRetiredFunds = investmentRetiredFunds;
     return this;
@@ -365,7 +367,7 @@ public class FuturesEnrollmentMetadata {
   @Deprecated
   public FuturesEnrollmentMetadata withOptionsExperience(boolean optionsExperience) {
     Utils.checkNotNull(optionsExperience, "optionsExperience");
-    this.optionsExperience = Optional.ofNullable(optionsExperience);
+    this.optionsExperience = JsonNullable.of(optionsExperience);
     return this;
   }
 
@@ -376,7 +378,7 @@ public class FuturesEnrollmentMetadata {
    *     soon as possible.
    */
   @Deprecated
-  public FuturesEnrollmentMetadata withOptionsExperience(Optional<Boolean> optionsExperience) {
+  public FuturesEnrollmentMetadata withOptionsExperience(JsonNullable<Boolean> optionsExperience) {
     Utils.checkNotNull(optionsExperience, "optionsExperience");
     this.optionsExperience = optionsExperience;
     return this;
@@ -385,13 +387,13 @@ public class FuturesEnrollmentMetadata {
   /** Indicates whether the account owner understands the risks associated with trading futures */
   public FuturesEnrollmentMetadata withUnderstandFuturesRisks(boolean understandFuturesRisks) {
     Utils.checkNotNull(understandFuturesRisks, "understandFuturesRisks");
-    this.understandFuturesRisks = Optional.ofNullable(understandFuturesRisks);
+    this.understandFuturesRisks = JsonNullable.of(understandFuturesRisks);
     return this;
   }
 
   /** Indicates whether the account owner understands the risks associated with trading futures */
   public FuturesEnrollmentMetadata withUnderstandFuturesRisks(
-      Optional<Boolean> understandFuturesRisks) {
+      JsonNullable<Boolean> understandFuturesRisks) {
     Utils.checkNotNull(understandFuturesRisks, "understandFuturesRisks");
     this.understandFuturesRisks = understandFuturesRisks;
     return this;
@@ -407,7 +409,7 @@ public class FuturesEnrollmentMetadata {
   public FuturesEnrollmentMetadata withUnderstandLossBeyondFunds(
       boolean understandLossBeyondFunds) {
     Utils.checkNotNull(understandLossBeyondFunds, "understandLossBeyondFunds");
-    this.understandLossBeyondFunds = Optional.ofNullable(understandLossBeyondFunds);
+    this.understandLossBeyondFunds = JsonNullable.of(understandLossBeyondFunds);
     return this;
   }
 
@@ -419,7 +421,7 @@ public class FuturesEnrollmentMetadata {
    */
   @Deprecated
   public FuturesEnrollmentMetadata withUnderstandLossBeyondFunds(
-      Optional<Boolean> understandLossBeyondFunds) {
+      JsonNullable<Boolean> understandLossBeyondFunds) {
     Utils.checkNotNull(understandLossBeyondFunds, "understandLossBeyondFunds");
     this.understandLossBeyondFunds = understandLossBeyondFunds;
     return this;
@@ -492,26 +494,26 @@ public class FuturesEnrollmentMetadata {
   @SuppressWarnings("UnusedReturnValue")
   public static final class Builder {
 
-    private Optional<Boolean> ctfcNfaRegistered = Optional.empty();
+    private JsonNullable<Boolean> ctfcNfaRegistered = JsonNullable.undefined();
 
-    private Optional<Boolean> exchangeMember = Optional.empty();
+    private JsonNullable<Boolean> exchangeMember = JsonNullable.undefined();
 
-    private Optional<Boolean> fcmOwnedOrControlled = Optional.empty();
+    private JsonNullable<Boolean> fcmOwnedOrControlled = JsonNullable.undefined();
 
-    private Optional<Boolean> fundsOwnedByAccountOwner = Optional.empty();
+    private JsonNullable<Boolean> fundsOwnedByAccountOwner = JsonNullable.undefined();
 
-    @Deprecated private Optional<Boolean> futuresExperience = Optional.empty();
+    @Deprecated private JsonNullable<Boolean> futuresExperience = JsonNullable.undefined();
 
     private Optional<? extends EnrollmentFuturesInvestmentObjective> futuresInvestmentObjective =
         Optional.empty();
 
-    @Deprecated private Optional<Boolean> investmentRetiredFunds = Optional.empty();
+    @Deprecated private JsonNullable<Boolean> investmentRetiredFunds = JsonNullable.undefined();
 
-    @Deprecated private Optional<Boolean> optionsExperience = Optional.empty();
+    @Deprecated private JsonNullable<Boolean> optionsExperience = JsonNullable.undefined();
 
-    private Optional<Boolean> understandFuturesRisks = Optional.empty();
+    private JsonNullable<Boolean> understandFuturesRisks = JsonNullable.undefined();
 
-    @Deprecated private Optional<Boolean> understandLossBeyondFunds = Optional.empty();
+    @Deprecated private JsonNullable<Boolean> understandLossBeyondFunds = JsonNullable.undefined();
 
     private Builder() {
       // force use of static builder() method
@@ -520,12 +522,12 @@ public class FuturesEnrollmentMetadata {
     /** Indicates whether the account is registered with the CFTC NFA */
     public Builder ctfcNfaRegistered(boolean ctfcNfaRegistered) {
       Utils.checkNotNull(ctfcNfaRegistered, "ctfcNfaRegistered");
-      this.ctfcNfaRegistered = Optional.ofNullable(ctfcNfaRegistered);
+      this.ctfcNfaRegistered = JsonNullable.of(ctfcNfaRegistered);
       return this;
     }
 
     /** Indicates whether the account is registered with the CFTC NFA */
-    public Builder ctfcNfaRegistered(Optional<Boolean> ctfcNfaRegistered) {
+    public Builder ctfcNfaRegistered(JsonNullable<Boolean> ctfcNfaRegistered) {
       Utils.checkNotNull(ctfcNfaRegistered, "ctfcNfaRegistered");
       this.ctfcNfaRegistered = ctfcNfaRegistered;
       return this;
@@ -534,12 +536,12 @@ public class FuturesEnrollmentMetadata {
     /** Indicates whether the account owner is a member of any exchanges */
     public Builder exchangeMember(boolean exchangeMember) {
       Utils.checkNotNull(exchangeMember, "exchangeMember");
-      this.exchangeMember = Optional.ofNullable(exchangeMember);
+      this.exchangeMember = JsonNullable.of(exchangeMember);
       return this;
     }
 
     /** Indicates whether the account owner is a member of any exchanges */
-    public Builder exchangeMember(Optional<Boolean> exchangeMember) {
+    public Builder exchangeMember(JsonNullable<Boolean> exchangeMember) {
       Utils.checkNotNull(exchangeMember, "exchangeMember");
       this.exchangeMember = exchangeMember;
       return this;
@@ -548,12 +550,12 @@ public class FuturesEnrollmentMetadata {
     /** Indicates whether the futures account is owned or controlled by a FCM */
     public Builder fcmOwnedOrControlled(boolean fcmOwnedOrControlled) {
       Utils.checkNotNull(fcmOwnedOrControlled, "fcmOwnedOrControlled");
-      this.fcmOwnedOrControlled = Optional.ofNullable(fcmOwnedOrControlled);
+      this.fcmOwnedOrControlled = JsonNullable.of(fcmOwnedOrControlled);
       return this;
     }
 
     /** Indicates whether the futures account is owned or controlled by a FCM */
-    public Builder fcmOwnedOrControlled(Optional<Boolean> fcmOwnedOrControlled) {
+    public Builder fcmOwnedOrControlled(JsonNullable<Boolean> fcmOwnedOrControlled) {
       Utils.checkNotNull(fcmOwnedOrControlled, "fcmOwnedOrControlled");
       this.fcmOwnedOrControlled = fcmOwnedOrControlled;
       return this;
@@ -562,12 +564,12 @@ public class FuturesEnrollmentMetadata {
     /** Indicates whether the funds in the futures account are owned by the account owner */
     public Builder fundsOwnedByAccountOwner(boolean fundsOwnedByAccountOwner) {
       Utils.checkNotNull(fundsOwnedByAccountOwner, "fundsOwnedByAccountOwner");
-      this.fundsOwnedByAccountOwner = Optional.ofNullable(fundsOwnedByAccountOwner);
+      this.fundsOwnedByAccountOwner = JsonNullable.of(fundsOwnedByAccountOwner);
       return this;
     }
 
     /** Indicates whether the funds in the futures account are owned by the account owner */
-    public Builder fundsOwnedByAccountOwner(Optional<Boolean> fundsOwnedByAccountOwner) {
+    public Builder fundsOwnedByAccountOwner(JsonNullable<Boolean> fundsOwnedByAccountOwner) {
       Utils.checkNotNull(fundsOwnedByAccountOwner, "fundsOwnedByAccountOwner");
       this.fundsOwnedByAccountOwner = fundsOwnedByAccountOwner;
       return this;
@@ -582,7 +584,7 @@ public class FuturesEnrollmentMetadata {
     @Deprecated
     public Builder futuresExperience(boolean futuresExperience) {
       Utils.checkNotNull(futuresExperience, "futuresExperience");
-      this.futuresExperience = Optional.ofNullable(futuresExperience);
+      this.futuresExperience = JsonNullable.of(futuresExperience);
       return this;
     }
 
@@ -593,7 +595,7 @@ public class FuturesEnrollmentMetadata {
      *     soon as possible.
      */
     @Deprecated
-    public Builder futuresExperience(Optional<Boolean> futuresExperience) {
+    public Builder futuresExperience(JsonNullable<Boolean> futuresExperience) {
       Utils.checkNotNull(futuresExperience, "futuresExperience");
       this.futuresExperience = futuresExperience;
       return this;
@@ -624,7 +626,7 @@ public class FuturesEnrollmentMetadata {
     @Deprecated
     public Builder investmentRetiredFunds(boolean investmentRetiredFunds) {
       Utils.checkNotNull(investmentRetiredFunds, "investmentRetiredFunds");
-      this.investmentRetiredFunds = Optional.ofNullable(investmentRetiredFunds);
+      this.investmentRetiredFunds = JsonNullable.of(investmentRetiredFunds);
       return this;
     }
 
@@ -635,7 +637,7 @@ public class FuturesEnrollmentMetadata {
      *     soon as possible.
      */
     @Deprecated
-    public Builder investmentRetiredFunds(Optional<Boolean> investmentRetiredFunds) {
+    public Builder investmentRetiredFunds(JsonNullable<Boolean> investmentRetiredFunds) {
       Utils.checkNotNull(investmentRetiredFunds, "investmentRetiredFunds");
       this.investmentRetiredFunds = investmentRetiredFunds;
       return this;
@@ -651,7 +653,7 @@ public class FuturesEnrollmentMetadata {
     @Deprecated
     public Builder optionsExperience(boolean optionsExperience) {
       Utils.checkNotNull(optionsExperience, "optionsExperience");
-      this.optionsExperience = Optional.ofNullable(optionsExperience);
+      this.optionsExperience = JsonNullable.of(optionsExperience);
       return this;
     }
 
@@ -663,7 +665,7 @@ public class FuturesEnrollmentMetadata {
      *     soon as possible.
      */
     @Deprecated
-    public Builder optionsExperience(Optional<Boolean> optionsExperience) {
+    public Builder optionsExperience(JsonNullable<Boolean> optionsExperience) {
       Utils.checkNotNull(optionsExperience, "optionsExperience");
       this.optionsExperience = optionsExperience;
       return this;
@@ -672,12 +674,12 @@ public class FuturesEnrollmentMetadata {
     /** Indicates whether the account owner understands the risks associated with trading futures */
     public Builder understandFuturesRisks(boolean understandFuturesRisks) {
       Utils.checkNotNull(understandFuturesRisks, "understandFuturesRisks");
-      this.understandFuturesRisks = Optional.ofNullable(understandFuturesRisks);
+      this.understandFuturesRisks = JsonNullable.of(understandFuturesRisks);
       return this;
     }
 
     /** Indicates whether the account owner understands the risks associated with trading futures */
-    public Builder understandFuturesRisks(Optional<Boolean> understandFuturesRisks) {
+    public Builder understandFuturesRisks(JsonNullable<Boolean> understandFuturesRisks) {
       Utils.checkNotNull(understandFuturesRisks, "understandFuturesRisks");
       this.understandFuturesRisks = understandFuturesRisks;
       return this;
@@ -692,7 +694,7 @@ public class FuturesEnrollmentMetadata {
     @Deprecated
     public Builder understandLossBeyondFunds(boolean understandLossBeyondFunds) {
       Utils.checkNotNull(understandLossBeyondFunds, "understandLossBeyondFunds");
-      this.understandLossBeyondFunds = Optional.ofNullable(understandLossBeyondFunds);
+      this.understandLossBeyondFunds = JsonNullable.of(understandLossBeyondFunds);
       return this;
     }
 
@@ -703,7 +705,7 @@ public class FuturesEnrollmentMetadata {
      *     soon as possible.
      */
     @Deprecated
-    public Builder understandLossBeyondFunds(Optional<Boolean> understandLossBeyondFunds) {
+    public Builder understandLossBeyondFunds(JsonNullable<Boolean> understandLossBeyondFunds) {
       Utils.checkNotNull(understandLossBeyondFunds, "understandLossBeyondFunds");
       this.understandLossBeyondFunds = understandLossBeyondFunds;
       return this;

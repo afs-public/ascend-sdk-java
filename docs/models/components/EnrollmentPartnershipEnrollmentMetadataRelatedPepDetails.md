@@ -1,0 +1,11 @@
+# EnrollmentPartnershipEnrollmentMetadataRelatedPepDetails
+
+Information about the related politically exposed persons
+
+
+## Fields
+
+| Field                                                                                                 | Type                                                                                                  | Required                                                                                              | Description                                                                                           | Example                                                                                               |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `directOrIndirectRelatedPeps`                                                                         | *JsonNullable\<Boolean>*                                                                              | :heavy_minus_sign:                                                                                    | Indication as to whether or not an account has direct or indirect related politically exposed persons | true                                                                                                  |
+| `relatedPeps`                                                                                         | List\<[RelatedPep](../../models/components/RelatedPep.md)>                                            | :heavy_minus_sign:                                                                                    | Related Peps                                                                                          |                                                                                                       |

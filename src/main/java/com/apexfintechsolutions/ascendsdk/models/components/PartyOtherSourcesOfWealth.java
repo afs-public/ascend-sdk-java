@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * PartyOtherSourcesOfWealth
@@ -20,7 +21,7 @@ public class PartyOtherSourcesOfWealth {
   /** Indicates whether the applicant has other sources of wealth. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("applicant_has_other_sources_of_wealth")
-  private Optional<Boolean> applicantHasOtherSourcesOfWealth;
+  private JsonNullable<Boolean> applicantHasOtherSourcesOfWealth;
 
   /**
    * The applicant's other source of wealth description. If the applicant has no other sources of
@@ -41,7 +42,7 @@ public class PartyOtherSourcesOfWealth {
   @JsonCreator
   public PartyOtherSourcesOfWealth(
       @JsonProperty("applicant_has_other_sources_of_wealth")
-          Optional<Boolean> applicantHasOtherSourcesOfWealth,
+          JsonNullable<Boolean> applicantHasOtherSourcesOfWealth,
       @JsonProperty("other_sources_of_wealth") Optional<String> otherSourcesOfWealth,
       @JsonProperty("other_sources_of_wealth_verification")
           Optional<String> otherSourcesOfWealthVerification) {
@@ -54,12 +55,12 @@ public class PartyOtherSourcesOfWealth {
   }
 
   public PartyOtherSourcesOfWealth() {
-    this(Optional.empty(), Optional.empty(), Optional.empty());
+    this(JsonNullable.undefined(), Optional.empty(), Optional.empty());
   }
 
   /** Indicates whether the applicant has other sources of wealth. */
   @JsonIgnore
-  public Optional<Boolean> applicantHasOtherSourcesOfWealth() {
+  public JsonNullable<Boolean> applicantHasOtherSourcesOfWealth() {
     return applicantHasOtherSourcesOfWealth;
   }
 
@@ -89,13 +90,13 @@ public class PartyOtherSourcesOfWealth {
   public PartyOtherSourcesOfWealth withApplicantHasOtherSourcesOfWealth(
       boolean applicantHasOtherSourcesOfWealth) {
     Utils.checkNotNull(applicantHasOtherSourcesOfWealth, "applicantHasOtherSourcesOfWealth");
-    this.applicantHasOtherSourcesOfWealth = Optional.ofNullable(applicantHasOtherSourcesOfWealth);
+    this.applicantHasOtherSourcesOfWealth = JsonNullable.of(applicantHasOtherSourcesOfWealth);
     return this;
   }
 
   /** Indicates whether the applicant has other sources of wealth. */
   public PartyOtherSourcesOfWealth withApplicantHasOtherSourcesOfWealth(
-      Optional<Boolean> applicantHasOtherSourcesOfWealth) {
+      JsonNullable<Boolean> applicantHasOtherSourcesOfWealth) {
     Utils.checkNotNull(applicantHasOtherSourcesOfWealth, "applicantHasOtherSourcesOfWealth");
     this.applicantHasOtherSourcesOfWealth = applicantHasOtherSourcesOfWealth;
     return this;
@@ -180,7 +181,7 @@ public class PartyOtherSourcesOfWealth {
   @SuppressWarnings("UnusedReturnValue")
   public static final class Builder {
 
-    private Optional<Boolean> applicantHasOtherSourcesOfWealth = Optional.empty();
+    private JsonNullable<Boolean> applicantHasOtherSourcesOfWealth = JsonNullable.undefined();
 
     private Optional<String> otherSourcesOfWealth = Optional.empty();
 
@@ -193,13 +194,13 @@ public class PartyOtherSourcesOfWealth {
     /** Indicates whether the applicant has other sources of wealth. */
     public Builder applicantHasOtherSourcesOfWealth(boolean applicantHasOtherSourcesOfWealth) {
       Utils.checkNotNull(applicantHasOtherSourcesOfWealth, "applicantHasOtherSourcesOfWealth");
-      this.applicantHasOtherSourcesOfWealth = Optional.ofNullable(applicantHasOtherSourcesOfWealth);
+      this.applicantHasOtherSourcesOfWealth = JsonNullable.of(applicantHasOtherSourcesOfWealth);
       return this;
     }
 
     /** Indicates whether the applicant has other sources of wealth. */
     public Builder applicantHasOtherSourcesOfWealth(
-        Optional<Boolean> applicantHasOtherSourcesOfWealth) {
+        JsonNullable<Boolean> applicantHasOtherSourcesOfWealth) {
       Utils.checkNotNull(applicantHasOtherSourcesOfWealth, "applicantHasOtherSourcesOfWealth");
       this.applicantHasOtherSourcesOfWealth = applicantHasOtherSourcesOfWealth;
       return this;

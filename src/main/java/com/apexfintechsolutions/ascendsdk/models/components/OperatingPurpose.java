@@ -78,6 +78,8 @@ public class OperatingPurpose {
   public static final OperatingPurpose SETTLEMENT = new OperatingPurpose("SETTLEMENT");
   public static final OperatingPurpose TRANSFER_LOCATION =
       new OperatingPurpose("TRANSFER_LOCATION");
+  public static final OperatingPurpose CONTROL_DEPOSITORY =
+      new OperatingPurpose("CONTROL_DEPOSITORY");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -170,6 +172,7 @@ public class OperatingPurpose {
     map.put("WASH", WASH);
     map.put("SETTLEMENT", SETTLEMENT);
     map.put("TRANSFER_LOCATION", TRANSFER_LOCATION);
+    map.put("CONTROL_DEPOSITORY", CONTROL_DEPOSITORY);
     return map;
   }
 
@@ -201,6 +204,7 @@ public class OperatingPurpose {
     map.put("WASH", OperatingPurposeEnum.WASH);
     map.put("SETTLEMENT", OperatingPurposeEnum.SETTLEMENT);
     map.put("TRANSFER_LOCATION", OperatingPurposeEnum.TRANSFER_LOCATION);
+    map.put("CONTROL_DEPOSITORY", OperatingPurposeEnum.CONTROL_DEPOSITORY);
     return map;
   }
 
@@ -260,6 +264,7 @@ public class OperatingPurpose {
     WASH("WASH"),
     SETTLEMENT("SETTLEMENT"),
     TRANSFER_LOCATION("TRANSFER_LOCATION"),
+    CONTROL_DEPOSITORY("CONTROL_DEPOSITORY"),
     ;
 
     private final String value;

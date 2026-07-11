@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
@@ -25,7 +24,7 @@ public class EnrollmentLlcEnrollmentMetadataLowPricedSecurities {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("low_priced_securities")
-  private Optional<Boolean> lowPricedSecurities;
+  private JsonNullable<Boolean> lowPricedSecurities;
 
   /** The percentage, by volume, of the account's trades which will involve low priced securities */
   @JsonInclude(Include.NON_ABSENT)
@@ -35,7 +34,7 @@ public class EnrollmentLlcEnrollmentMetadataLowPricedSecurities {
 
   @JsonCreator
   public EnrollmentLlcEnrollmentMetadataLowPricedSecurities(
-      @JsonProperty("low_priced_securities") Optional<Boolean> lowPricedSecurities,
+      @JsonProperty("low_priced_securities") JsonNullable<Boolean> lowPricedSecurities,
       @JsonProperty("low_priced_securities_percentage")
           JsonNullable<? extends EnrollmentLlcEnrollmentMetadataLowPricedSecuritiesPercentage>
               lowPricedSecuritiesPercentage) {
@@ -46,7 +45,7 @@ public class EnrollmentLlcEnrollmentMetadataLowPricedSecurities {
   }
 
   public EnrollmentLlcEnrollmentMetadataLowPricedSecurities() {
-    this(Optional.empty(), JsonNullable.undefined());
+    this(JsonNullable.undefined(), JsonNullable.undefined());
   }
 
   /**
@@ -54,7 +53,7 @@ public class EnrollmentLlcEnrollmentMetadataLowPricedSecurities {
    * typically traded over-the-counter (OTC) or through pink sheets
    */
   @JsonIgnore
-  public Optional<Boolean> lowPricedSecurities() {
+  public JsonNullable<Boolean> lowPricedSecurities() {
     return lowPricedSecurities;
   }
 
@@ -78,7 +77,7 @@ public class EnrollmentLlcEnrollmentMetadataLowPricedSecurities {
   public EnrollmentLlcEnrollmentMetadataLowPricedSecurities withLowPricedSecurities(
       boolean lowPricedSecurities) {
     Utils.checkNotNull(lowPricedSecurities, "lowPricedSecurities");
-    this.lowPricedSecurities = Optional.ofNullable(lowPricedSecurities);
+    this.lowPricedSecurities = JsonNullable.of(lowPricedSecurities);
     return this;
   }
 
@@ -87,7 +86,7 @@ public class EnrollmentLlcEnrollmentMetadataLowPricedSecurities {
    * typically traded over-the-counter (OTC) or through pink sheets
    */
   public EnrollmentLlcEnrollmentMetadataLowPricedSecurities withLowPricedSecurities(
-      Optional<Boolean> lowPricedSecurities) {
+      JsonNullable<Boolean> lowPricedSecurities) {
     Utils.checkNotNull(lowPricedSecurities, "lowPricedSecurities");
     this.lowPricedSecurities = lowPricedSecurities;
     return this;
@@ -143,7 +142,7 @@ public class EnrollmentLlcEnrollmentMetadataLowPricedSecurities {
   @SuppressWarnings("UnusedReturnValue")
   public static final class Builder {
 
-    private Optional<Boolean> lowPricedSecurities = Optional.empty();
+    private JsonNullable<Boolean> lowPricedSecurities = JsonNullable.undefined();
 
     private JsonNullable<? extends EnrollmentLlcEnrollmentMetadataLowPricedSecuritiesPercentage>
         lowPricedSecuritiesPercentage = JsonNullable.undefined();
@@ -158,7 +157,7 @@ public class EnrollmentLlcEnrollmentMetadataLowPricedSecurities {
      */
     public Builder lowPricedSecurities(boolean lowPricedSecurities) {
       Utils.checkNotNull(lowPricedSecurities, "lowPricedSecurities");
-      this.lowPricedSecurities = Optional.ofNullable(lowPricedSecurities);
+      this.lowPricedSecurities = JsonNullable.of(lowPricedSecurities);
       return this;
     }
 
@@ -166,7 +165,7 @@ public class EnrollmentLlcEnrollmentMetadataLowPricedSecurities {
      * The account anticipates trading in securities trading for less than $5 per share and are
      * typically traded over-the-counter (OTC) or through pink sheets
      */
-    public Builder lowPricedSecurities(Optional<Boolean> lowPricedSecurities) {
+    public Builder lowPricedSecurities(JsonNullable<Boolean> lowPricedSecurities) {
       Utils.checkNotNull(lowPricedSecurities, "lowPricedSecurities");
       this.lowPricedSecurities = lowPricedSecurities;
       return this;

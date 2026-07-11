@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
@@ -21,7 +20,7 @@ public class EntityDueDiligence {
   /** Indicates whether the entity issues bearer shares */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("entity_issues_bearer_shares")
-  private Optional<Boolean> entityIssuesBearerShares;
+  private JsonNullable<Boolean> entityIssuesBearerShares;
 
   /** Information about any negative news against related parties and entities */
   @JsonInclude(Include.NON_ABSENT)
@@ -30,7 +29,7 @@ public class EntityDueDiligence {
 
   @JsonCreator
   public EntityDueDiligence(
-      @JsonProperty("entity_issues_bearer_shares") Optional<Boolean> entityIssuesBearerShares,
+      @JsonProperty("entity_issues_bearer_shares") JsonNullable<Boolean> entityIssuesBearerShares,
       @JsonProperty("negative_news") JsonNullable<? extends LegalEntityNegativeNews> negativeNews) {
     Utils.checkNotNull(entityIssuesBearerShares, "entityIssuesBearerShares");
     Utils.checkNotNull(negativeNews, "negativeNews");
@@ -39,12 +38,12 @@ public class EntityDueDiligence {
   }
 
   public EntityDueDiligence() {
-    this(Optional.empty(), JsonNullable.undefined());
+    this(JsonNullable.undefined(), JsonNullable.undefined());
   }
 
   /** Indicates whether the entity issues bearer shares */
   @JsonIgnore
-  public Optional<Boolean> entityIssuesBearerShares() {
+  public JsonNullable<Boolean> entityIssuesBearerShares() {
     return entityIssuesBearerShares;
   }
 
@@ -62,13 +61,13 @@ public class EntityDueDiligence {
   /** Indicates whether the entity issues bearer shares */
   public EntityDueDiligence withEntityIssuesBearerShares(boolean entityIssuesBearerShares) {
     Utils.checkNotNull(entityIssuesBearerShares, "entityIssuesBearerShares");
-    this.entityIssuesBearerShares = Optional.ofNullable(entityIssuesBearerShares);
+    this.entityIssuesBearerShares = JsonNullable.of(entityIssuesBearerShares);
     return this;
   }
 
   /** Indicates whether the entity issues bearer shares */
   public EntityDueDiligence withEntityIssuesBearerShares(
-      Optional<Boolean> entityIssuesBearerShares) {
+      JsonNullable<Boolean> entityIssuesBearerShares) {
     Utils.checkNotNull(entityIssuesBearerShares, "entityIssuesBearerShares");
     this.entityIssuesBearerShares = entityIssuesBearerShares;
     return this;
@@ -120,7 +119,7 @@ public class EntityDueDiligence {
   @SuppressWarnings("UnusedReturnValue")
   public static final class Builder {
 
-    private Optional<Boolean> entityIssuesBearerShares = Optional.empty();
+    private JsonNullable<Boolean> entityIssuesBearerShares = JsonNullable.undefined();
 
     private JsonNullable<? extends LegalEntityNegativeNews> negativeNews = JsonNullable.undefined();
 
@@ -131,12 +130,12 @@ public class EntityDueDiligence {
     /** Indicates whether the entity issues bearer shares */
     public Builder entityIssuesBearerShares(boolean entityIssuesBearerShares) {
       Utils.checkNotNull(entityIssuesBearerShares, "entityIssuesBearerShares");
-      this.entityIssuesBearerShares = Optional.ofNullable(entityIssuesBearerShares);
+      this.entityIssuesBearerShares = JsonNullable.of(entityIssuesBearerShares);
       return this;
     }
 
     /** Indicates whether the entity issues bearer shares */
-    public Builder entityIssuesBearerShares(Optional<Boolean> entityIssuesBearerShares) {
+    public Builder entityIssuesBearerShares(JsonNullable<Boolean> entityIssuesBearerShares) {
       Utils.checkNotNull(entityIssuesBearerShares, "entityIssuesBearerShares");
       this.entityIssuesBearerShares = entityIssuesBearerShares;
       return this;

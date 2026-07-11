@@ -66,6 +66,10 @@ public class AcceptTransferResponseTransferType {
       new AcceptTransferResponseTransferType("RECLAIM");
   public static final AcceptTransferResponseTransferType RESIDUAL_CREDIT =
       new AcceptTransferResponseTransferType("RESIDUAL_CREDIT");
+  public static final AcceptTransferResponseTransferType SPONSORED_TRANSFER =
+      new AcceptTransferResponseTransferType("SPONSORED_TRANSFER");
+  public static final AcceptTransferResponseTransferType FREE_RECEIVE =
+      new AcceptTransferResponseTransferType("FREE_RECEIVE");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -145,6 +149,8 @@ public class AcceptTransferResponseTransferType {
         POSITION_TRANSFER_FUND_FIRM_TO_MUTUAL_FUND_COMPANY_ONLY);
     map.put("RECLAIM", RECLAIM);
     map.put("RESIDUAL_CREDIT", RESIDUAL_CREDIT);
+    map.put("SPONSORED_TRANSFER", SPONSORED_TRANSFER);
+    map.put("FREE_RECEIVE", FREE_RECEIVE);
     return map;
   }
 
@@ -170,6 +176,8 @@ public class AcceptTransferResponseTransferType {
             .POSITION_TRANSFER_FUND_FIRM_TO_MUTUAL_FUND_COMPANY_ONLY);
     map.put("RECLAIM", AcceptTransferResponseTransferTypeEnum.RECLAIM);
     map.put("RESIDUAL_CREDIT", AcceptTransferResponseTransferTypeEnum.RESIDUAL_CREDIT);
+    map.put("SPONSORED_TRANSFER", AcceptTransferResponseTransferTypeEnum.SPONSORED_TRANSFER);
+    map.put("FREE_RECEIVE", AcceptTransferResponseTransferTypeEnum.FREE_RECEIVE);
     return map;
   }
 
@@ -216,6 +224,8 @@ public class AcceptTransferResponseTransferType {
         "POSITION_TRANSFER_FUND_FIRM_TO_MUTUAL_FUND_COMPANY_ONLY"),
     RECLAIM("RECLAIM"),
     RESIDUAL_CREDIT("RESIDUAL_CREDIT"),
+    SPONSORED_TRANSFER("SPONSORED_TRANSFER"),
+    FREE_RECEIVE("FREE_RECEIVE"),
     ;
 
     private final String value;

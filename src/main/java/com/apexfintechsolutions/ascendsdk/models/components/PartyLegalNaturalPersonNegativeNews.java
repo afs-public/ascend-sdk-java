@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * PartyLegalNaturalPersonNegativeNews
@@ -21,7 +22,7 @@ public class PartyLegalNaturalPersonNegativeNews {
   /** Indicates whether there is negative news against related parties */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("negative_news_against_related_parties")
-  private Optional<Boolean> negativeNewsAgainstRelatedParties;
+  private JsonNullable<Boolean> negativeNewsAgainstRelatedParties;
 
   /** Description of the negative news against related parties */
   @JsonInclude(Include.NON_ABSENT)
@@ -31,7 +32,7 @@ public class PartyLegalNaturalPersonNegativeNews {
   @JsonCreator
   public PartyLegalNaturalPersonNegativeNews(
       @JsonProperty("negative_news_against_related_parties")
-          Optional<Boolean> negativeNewsAgainstRelatedParties,
+          JsonNullable<Boolean> negativeNewsAgainstRelatedParties,
       @JsonProperty("negative_news_against_related_parties_description")
           Optional<String> negativeNewsAgainstRelatedPartiesDescription) {
     Utils.checkNotNull(negativeNewsAgainstRelatedParties, "negativeNewsAgainstRelatedParties");
@@ -44,12 +45,12 @@ public class PartyLegalNaturalPersonNegativeNews {
   }
 
   public PartyLegalNaturalPersonNegativeNews() {
-    this(Optional.empty(), Optional.empty());
+    this(JsonNullable.undefined(), Optional.empty());
   }
 
   /** Indicates whether there is negative news against related parties */
   @JsonIgnore
-  public Optional<Boolean> negativeNewsAgainstRelatedParties() {
+  public JsonNullable<Boolean> negativeNewsAgainstRelatedParties() {
     return negativeNewsAgainstRelatedParties;
   }
 
@@ -67,13 +68,13 @@ public class PartyLegalNaturalPersonNegativeNews {
   public PartyLegalNaturalPersonNegativeNews withNegativeNewsAgainstRelatedParties(
       boolean negativeNewsAgainstRelatedParties) {
     Utils.checkNotNull(negativeNewsAgainstRelatedParties, "negativeNewsAgainstRelatedParties");
-    this.negativeNewsAgainstRelatedParties = Optional.ofNullable(negativeNewsAgainstRelatedParties);
+    this.negativeNewsAgainstRelatedParties = JsonNullable.of(negativeNewsAgainstRelatedParties);
     return this;
   }
 
   /** Indicates whether there is negative news against related parties */
   public PartyLegalNaturalPersonNegativeNews withNegativeNewsAgainstRelatedParties(
-      Optional<Boolean> negativeNewsAgainstRelatedParties) {
+      JsonNullable<Boolean> negativeNewsAgainstRelatedParties) {
     Utils.checkNotNull(negativeNewsAgainstRelatedParties, "negativeNewsAgainstRelatedParties");
     this.negativeNewsAgainstRelatedParties = negativeNewsAgainstRelatedParties;
     return this;
@@ -136,7 +137,7 @@ public class PartyLegalNaturalPersonNegativeNews {
   @SuppressWarnings("UnusedReturnValue")
   public static final class Builder {
 
-    private Optional<Boolean> negativeNewsAgainstRelatedParties = Optional.empty();
+    private JsonNullable<Boolean> negativeNewsAgainstRelatedParties = JsonNullable.undefined();
 
     private Optional<String> negativeNewsAgainstRelatedPartiesDescription = Optional.empty();
 
@@ -147,14 +148,13 @@ public class PartyLegalNaturalPersonNegativeNews {
     /** Indicates whether there is negative news against related parties */
     public Builder negativeNewsAgainstRelatedParties(boolean negativeNewsAgainstRelatedParties) {
       Utils.checkNotNull(negativeNewsAgainstRelatedParties, "negativeNewsAgainstRelatedParties");
-      this.negativeNewsAgainstRelatedParties =
-          Optional.ofNullable(negativeNewsAgainstRelatedParties);
+      this.negativeNewsAgainstRelatedParties = JsonNullable.of(negativeNewsAgainstRelatedParties);
       return this;
     }
 
     /** Indicates whether there is negative news against related parties */
     public Builder negativeNewsAgainstRelatedParties(
-        Optional<Boolean> negativeNewsAgainstRelatedParties) {
+        JsonNullable<Boolean> negativeNewsAgainstRelatedParties) {
       Utils.checkNotNull(negativeNewsAgainstRelatedParties, "negativeNewsAgainstRelatedParties");
       this.negativeNewsAgainstRelatedParties = negativeNewsAgainstRelatedParties;
       return this;

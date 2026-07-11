@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
@@ -25,7 +24,7 @@ public class EnrollmentLowPricedSecurities {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("low_priced_securities")
-  private Optional<Boolean> lowPricedSecurities;
+  private JsonNullable<Boolean> lowPricedSecurities;
 
   /** The percentage, by volume, of the account's trades which will involve low priced securities */
   @JsonInclude(Include.NON_ABSENT)
@@ -35,7 +34,7 @@ public class EnrollmentLowPricedSecurities {
 
   @JsonCreator
   public EnrollmentLowPricedSecurities(
-      @JsonProperty("low_priced_securities") Optional<Boolean> lowPricedSecurities,
+      @JsonProperty("low_priced_securities") JsonNullable<Boolean> lowPricedSecurities,
       @JsonProperty("low_priced_securities_percentage")
           JsonNullable<? extends EnrollmentLowPricedSecuritiesPercentage>
               lowPricedSecuritiesPercentage) {
@@ -46,7 +45,7 @@ public class EnrollmentLowPricedSecurities {
   }
 
   public EnrollmentLowPricedSecurities() {
-    this(Optional.empty(), JsonNullable.undefined());
+    this(JsonNullable.undefined(), JsonNullable.undefined());
   }
 
   /**
@@ -54,7 +53,7 @@ public class EnrollmentLowPricedSecurities {
    * typically traded over-the-counter (OTC) or through pink sheets
    */
   @JsonIgnore
-  public Optional<Boolean> lowPricedSecurities() {
+  public JsonNullable<Boolean> lowPricedSecurities() {
     return lowPricedSecurities;
   }
 
@@ -75,7 +74,7 @@ public class EnrollmentLowPricedSecurities {
    */
   public EnrollmentLowPricedSecurities withLowPricedSecurities(boolean lowPricedSecurities) {
     Utils.checkNotNull(lowPricedSecurities, "lowPricedSecurities");
-    this.lowPricedSecurities = Optional.ofNullable(lowPricedSecurities);
+    this.lowPricedSecurities = JsonNullable.of(lowPricedSecurities);
     return this;
   }
 
@@ -84,7 +83,7 @@ public class EnrollmentLowPricedSecurities {
    * typically traded over-the-counter (OTC) or through pink sheets
    */
   public EnrollmentLowPricedSecurities withLowPricedSecurities(
-      Optional<Boolean> lowPricedSecurities) {
+      JsonNullable<Boolean> lowPricedSecurities) {
     Utils.checkNotNull(lowPricedSecurities, "lowPricedSecurities");
     this.lowPricedSecurities = lowPricedSecurities;
     return this;
@@ -139,7 +138,7 @@ public class EnrollmentLowPricedSecurities {
   @SuppressWarnings("UnusedReturnValue")
   public static final class Builder {
 
-    private Optional<Boolean> lowPricedSecurities = Optional.empty();
+    private JsonNullable<Boolean> lowPricedSecurities = JsonNullable.undefined();
 
     private JsonNullable<? extends EnrollmentLowPricedSecuritiesPercentage>
         lowPricedSecuritiesPercentage = JsonNullable.undefined();
@@ -154,7 +153,7 @@ public class EnrollmentLowPricedSecurities {
      */
     public Builder lowPricedSecurities(boolean lowPricedSecurities) {
       Utils.checkNotNull(lowPricedSecurities, "lowPricedSecurities");
-      this.lowPricedSecurities = Optional.ofNullable(lowPricedSecurities);
+      this.lowPricedSecurities = JsonNullable.of(lowPricedSecurities);
       return this;
     }
 
@@ -162,7 +161,7 @@ public class EnrollmentLowPricedSecurities {
      * The account anticipates trading in securities trading for less than $5 per share and are
      * typically traded over-the-counter (OTC) or through pink sheets
      */
-    public Builder lowPricedSecurities(Optional<Boolean> lowPricedSecurities) {
+    public Builder lowPricedSecurities(JsonNullable<Boolean> lowPricedSecurities) {
       Utils.checkNotNull(lowPricedSecurities, "lowPricedSecurities");
       this.lowPricedSecurities = lowPricedSecurities;
       return this;

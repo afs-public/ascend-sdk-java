@@ -147,6 +147,11 @@ public class EnrollmentCreate {
   private Optional<? extends OrdersOptionsTradingEnrollmentMetadataCreate>
       ordersOptionsTradingEnrollmentMetadata;
 
+  /** Enrollment metadata for the PARTNERSHIP enrollment type */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("partnership_enrollment_metadata")
+  private Optional<? extends PartnershipEnrollmentMetadataCreate> partnershipEnrollmentMetadata;
+
   /**
    * The ULID is associated with the approver of a given enrollment. The approver you create will
    * contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID
@@ -236,6 +241,8 @@ public class EnrollmentCreate {
       @JsonProperty("orders_options_trading_enrollment_metadata")
           Optional<? extends OrdersOptionsTradingEnrollmentMetadataCreate>
               ordersOptionsTradingEnrollmentMetadata,
+      @JsonProperty("partnership_enrollment_metadata")
+          Optional<? extends PartnershipEnrollmentMetadataCreate> partnershipEnrollmentMetadata,
       @JsonProperty("principal_approver_id") String principalApproverId,
       @JsonProperty("sole_proprietorship_enrollment_metadata")
           Optional<? extends SoleProprietorshipEnrollmentMetadataCreate>
@@ -278,6 +285,7 @@ public class EnrollmentCreate {
     Utils.checkNotNull(operatingEnrollmentMetadata, "operatingEnrollmentMetadata");
     Utils.checkNotNull(
         ordersOptionsTradingEnrollmentMetadata, "ordersOptionsTradingEnrollmentMetadata");
+    Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
     Utils.checkNotNull(principalApproverId, "principalApproverId");
     Utils.checkNotNull(
         soleProprietorshipEnrollmentMetadata, "soleProprietorshipEnrollmentMetadata");
@@ -310,6 +318,7 @@ public class EnrollmentCreate {
     this.llcEnrollmentMetadata = llcEnrollmentMetadata;
     this.operatingEnrollmentMetadata = operatingEnrollmentMetadata;
     this.ordersOptionsTradingEnrollmentMetadata = ordersOptionsTradingEnrollmentMetadata;
+    this.partnershipEnrollmentMetadata = partnershipEnrollmentMetadata;
     this.principalApproverId = principalApproverId;
     this.soleProprietorshipEnrollmentMetadata = soleProprietorshipEnrollmentMetadata;
     this.trustEnrollmentMetadata = trustEnrollmentMetadata;
@@ -319,6 +328,7 @@ public class EnrollmentCreate {
 
   public EnrollmentCreate(String principalApproverId, EnrollmentCreateType type) {
     this(
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
@@ -530,6 +540,13 @@ public class EnrollmentCreate {
       ordersOptionsTradingEnrollmentMetadata() {
     return (Optional<OrdersOptionsTradingEnrollmentMetadataCreate>)
         ordersOptionsTradingEnrollmentMetadata;
+  }
+
+  /** Enrollment metadata for the PARTNERSHIP enrollment type */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<PartnershipEnrollmentMetadataCreate> partnershipEnrollmentMetadata() {
+    return (Optional<PartnershipEnrollmentMetadataCreate>) partnershipEnrollmentMetadata;
   }
 
   /**
@@ -994,6 +1011,22 @@ public class EnrollmentCreate {
     return this;
   }
 
+  /** Enrollment metadata for the PARTNERSHIP enrollment type */
+  public EnrollmentCreate withPartnershipEnrollmentMetadata(
+      PartnershipEnrollmentMetadataCreate partnershipEnrollmentMetadata) {
+    Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
+    this.partnershipEnrollmentMetadata = Optional.ofNullable(partnershipEnrollmentMetadata);
+    return this;
+  }
+
+  /** Enrollment metadata for the PARTNERSHIP enrollment type */
+  public EnrollmentCreate withPartnershipEnrollmentMetadata(
+      Optional<? extends PartnershipEnrollmentMetadataCreate> partnershipEnrollmentMetadata) {
+    Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
+    this.partnershipEnrollmentMetadata = partnershipEnrollmentMetadata;
+    return this;
+  }
+
   /**
    * The ULID is associated with the approver of a given enrollment. The approver you create will
    * contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID
@@ -1124,6 +1157,8 @@ public class EnrollmentCreate {
         && Utils.enhancedDeepEquals(
             this.ordersOptionsTradingEnrollmentMetadata,
             other.ordersOptionsTradingEnrollmentMetadata)
+        && Utils.enhancedDeepEquals(
+            this.partnershipEnrollmentMetadata, other.partnershipEnrollmentMetadata)
         && Utils.enhancedDeepEquals(this.principalApproverId, other.principalApproverId)
         && Utils.enhancedDeepEquals(
             this.soleProprietorshipEnrollmentMetadata, other.soleProprietorshipEnrollmentMetadata)
@@ -1161,6 +1196,7 @@ public class EnrollmentCreate {
         llcEnrollmentMetadata,
         operatingEnrollmentMetadata,
         ordersOptionsTradingEnrollmentMetadata,
+        partnershipEnrollmentMetadata,
         principalApproverId,
         soleProprietorshipEnrollmentMetadata,
         trustEnrollmentMetadata,
@@ -1220,6 +1256,8 @@ public class EnrollmentCreate {
         operatingEnrollmentMetadata,
         "ordersOptionsTradingEnrollmentMetadata",
         ordersOptionsTradingEnrollmentMetadata,
+        "partnershipEnrollmentMetadata",
+        partnershipEnrollmentMetadata,
         "principalApproverId",
         principalApproverId,
         "soleProprietorshipEnrollmentMetadata",
@@ -1305,6 +1343,9 @@ public class EnrollmentCreate {
 
     private Optional<? extends OrdersOptionsTradingEnrollmentMetadataCreate>
         ordersOptionsTradingEnrollmentMetadata = Optional.empty();
+
+    private Optional<? extends PartnershipEnrollmentMetadataCreate> partnershipEnrollmentMetadata =
+        Optional.empty();
 
     private String principalApproverId;
 
@@ -1740,6 +1781,22 @@ public class EnrollmentCreate {
       return this;
     }
 
+    /** Enrollment metadata for the PARTNERSHIP enrollment type */
+    public Builder partnershipEnrollmentMetadata(
+        PartnershipEnrollmentMetadataCreate partnershipEnrollmentMetadata) {
+      Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
+      this.partnershipEnrollmentMetadata = Optional.ofNullable(partnershipEnrollmentMetadata);
+      return this;
+    }
+
+    /** Enrollment metadata for the PARTNERSHIP enrollment type */
+    public Builder partnershipEnrollmentMetadata(
+        Optional<? extends PartnershipEnrollmentMetadataCreate> partnershipEnrollmentMetadata) {
+      Utils.checkNotNull(partnershipEnrollmentMetadata, "partnershipEnrollmentMetadata");
+      this.partnershipEnrollmentMetadata = partnershipEnrollmentMetadata;
+      return this;
+    }
+
     /**
      * The ULID is associated with the approver of a given enrollment. The approver you create will
      * contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID
@@ -1840,6 +1897,7 @@ public class EnrollmentCreate {
           llcEnrollmentMetadata,
           operatingEnrollmentMetadata,
           ordersOptionsTradingEnrollmentMetadata,
+          partnershipEnrollmentMetadata,
           principalApproverId,
           soleProprietorshipEnrollmentMetadata,
           trustEnrollmentMetadata,
