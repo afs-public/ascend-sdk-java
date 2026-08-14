@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Optional;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * TransferScheduleSummaryRetirementContribution
@@ -24,7 +23,7 @@ public class TransferScheduleSummaryRetirementContribution {
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("tax_year")
-  private JsonNullable<Integer> taxYear;
+  private Optional<Integer> taxYear;
 
   /**
    * A temporal tax year value. This will always evaluate to a year based on the date the transfer
@@ -41,7 +40,7 @@ public class TransferScheduleSummaryRetirementContribution {
 
   @JsonCreator
   public TransferScheduleSummaryRetirementContribution(
-      @JsonProperty("tax_year") JsonNullable<Integer> taxYear,
+      @JsonProperty("tax_year") Optional<Integer> taxYear,
       @JsonProperty("temporal_tax_year")
           Optional<? extends TransferScheduleSummaryTemporalTaxYear> temporalTaxYear,
       @JsonProperty("type") Optional<? extends TransferScheduleSummaryType> type) {
@@ -54,7 +53,7 @@ public class TransferScheduleSummaryRetirementContribution {
   }
 
   public TransferScheduleSummaryRetirementContribution() {
-    this(JsonNullable.undefined(), Optional.empty(), Optional.empty());
+    this(Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -62,7 +61,7 @@ public class TransferScheduleSummaryRetirementContribution {
    * before the tax deadline. Must be in "YYYY" format.
    */
   @JsonIgnore
-  public JsonNullable<Integer> taxYear() {
+  public Optional<Integer> taxYear() {
     return taxYear;
   }
 
@@ -93,7 +92,7 @@ public class TransferScheduleSummaryRetirementContribution {
    */
   public TransferScheduleSummaryRetirementContribution withTaxYear(int taxYear) {
     Utils.checkNotNull(taxYear, "taxYear");
-    this.taxYear = JsonNullable.of(taxYear);
+    this.taxYear = Optional.ofNullable(taxYear);
     return this;
   }
 
@@ -101,7 +100,7 @@ public class TransferScheduleSummaryRetirementContribution {
    * An explicit tax year value. The current year is always valid; and the prior year is valid only
    * before the tax deadline. Must be in "YYYY" format.
    */
-  public TransferScheduleSummaryRetirementContribution withTaxYear(JsonNullable<Integer> taxYear) {
+  public TransferScheduleSummaryRetirementContribution withTaxYear(Optional<Integer> taxYear) {
     Utils.checkNotNull(taxYear, "taxYear");
     this.taxYear = taxYear;
     return this;
@@ -179,7 +178,7 @@ public class TransferScheduleSummaryRetirementContribution {
   @SuppressWarnings("UnusedReturnValue")
   public static final class Builder {
 
-    private JsonNullable<Integer> taxYear = JsonNullable.undefined();
+    private Optional<Integer> taxYear = Optional.empty();
 
     private Optional<? extends TransferScheduleSummaryTemporalTaxYear> temporalTaxYear =
         Optional.empty();
@@ -196,7 +195,7 @@ public class TransferScheduleSummaryRetirementContribution {
      */
     public Builder taxYear(int taxYear) {
       Utils.checkNotNull(taxYear, "taxYear");
-      this.taxYear = JsonNullable.of(taxYear);
+      this.taxYear = Optional.ofNullable(taxYear);
       return this;
     }
 
@@ -204,7 +203,7 @@ public class TransferScheduleSummaryRetirementContribution {
      * An explicit tax year value. The current year is always valid; and the prior year is valid
      * only before the tax deadline. Must be in "YYYY" format.
      */
-    public Builder taxYear(JsonNullable<Integer> taxYear) {
+    public Builder taxYear(Optional<Integer> taxYear) {
       Utils.checkNotNull(taxYear, "taxYear");
       this.taxYear = taxYear;
       return this;

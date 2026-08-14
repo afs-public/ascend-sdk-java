@@ -5,6 +5,7 @@ We currently support the following versions of the library with security updates
 
 | Version | Supported |
 |---------|-----------|
+| 1.6.12   | ✅         |
 | 1.6.11   | ✅         |
 | 1.6.10   | ✅         |
 | 1.6.9   | ✅         |

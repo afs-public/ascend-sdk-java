@@ -7,7 +7,7 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.models.components.CancelOrderRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.OrderCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.SetExtraReportingDataRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.TradingSetExtraReportingDataRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceCancelOrderRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceCancelOrderRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceCancelOrderResponse;
@@ -323,17 +323,17 @@ public class Orders {
    *
    * @param accountId The account id.
    * @param orderId The order id.
-   * @param setExtraReportingDataRequestCreate
+   * @param tradingSetExtraReportingDataRequestCreate
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public OrderServiceSetExtraReportingDataResponse setExtraReportingData(
       String accountId,
       String orderId,
-      SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate)
+      TradingSetExtraReportingDataRequestCreate tradingSetExtraReportingDataRequestCreate)
       throws Exception {
     return setExtraReportingData(
-        accountId, orderId, setExtraReportingDataRequestCreate, Optional.empty());
+        accountId, orderId, tradingSetExtraReportingDataRequestCreate, Optional.empty());
   }
 
   /**
@@ -344,7 +344,7 @@ public class Orders {
    *
    * @param accountId The account id.
    * @param orderId The order id.
-   * @param setExtraReportingDataRequestCreate
+   * @param tradingSetExtraReportingDataRequestCreate
    * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
@@ -352,14 +352,14 @@ public class Orders {
   public OrderServiceSetExtraReportingDataResponse setExtraReportingData(
       String accountId,
       String orderId,
-      SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate,
+      TradingSetExtraReportingDataRequestCreate tradingSetExtraReportingDataRequestCreate,
       Optional<Options> options)
       throws Exception {
     OrderServiceSetExtraReportingDataRequest request =
         OrderServiceSetExtraReportingDataRequest.builder()
             .accountId(accountId)
             .orderId(orderId)
-            .setExtraReportingDataRequestCreate(setExtraReportingDataRequestCreate)
+            .tradingSetExtraReportingDataRequestCreate(tradingSetExtraReportingDataRequestCreate)
             .build();
     RequestOperation<
             OrderServiceSetExtraReportingDataRequest, OrderServiceSetExtraReportingDataResponse>

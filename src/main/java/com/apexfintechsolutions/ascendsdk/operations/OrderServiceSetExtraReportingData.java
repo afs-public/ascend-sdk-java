@@ -111,7 +111,7 @@ public class OrderServiceSetExtraReportingData {
       Object convertedRequest = Utils.convertToShape(request, JsonShape.DEFAULT, typeReference);
       SerializedBody serializedRequestBody =
           Utils.serializeRequestBody(
-              convertedRequest, "setExtraReportingDataRequestCreate", "json", false);
+              convertedRequest, "tradingSetExtraReportingDataRequestCreate", "json", false);
       if (serializedRequestBody == null) {
         throw new Exception("Request body is required");
       }

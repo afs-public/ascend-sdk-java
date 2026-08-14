@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
 import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
-import com.apexfintechsolutions.ascendsdk.models.components.SetExtraReportingDataRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.TradingSetExtraReportingDataRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceListAccountOrdersResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceListCorrespondentOrdersResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.OrderServiceSetExtraReportingDataResponse;
@@ -47,8 +47,8 @@ public class OrderTests {
             .setExtraReportingData()
             .accountId("01K6P14WKCJT0G38KKHY52M4BQ")
             .orderId("a73f4471-832c-4ff2-9b14-f44420592a67")
-            .setExtraReportingDataRequestCreate(
-                SetExtraReportingDataRequestCreate.builder()
+            .tradingSetExtraReportingDataRequestCreate(
+                TradingSetExtraReportingDataRequestCreate.builder()
                     .cancelConfirmedTime(OffsetDateTime.parse("2025-12-13T15:28:17.262732Z"))
                     .name(
                         "accounts/01K6P14WKCJT0G38KKHY52M4BQ/orders/a73f4471-832c-4ff2-9b14-f44420592a67")

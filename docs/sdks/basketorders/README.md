@@ -516,7 +516,6 @@ import com.apexfintechsolutions.ascendsdk.models.components.*;
 import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.BasketOrdersServiceSetExtraReportingDataResponse;
 import java.lang.Exception;
-import java.time.OffsetDateTime;
 
 public class Application {
 
@@ -537,9 +536,9 @@ public class Application {
         BasketOrdersServiceSetExtraReportingDataResponse res = sdk.basketOrders().setExtraReportingData()
                 .correspondentId("01HPMZZM6RKMVZA1JQ63RQKJRP")
                 .basketId("fffd326-72fa-4d2b-bd1f-45384fe5d521")
-                .setExtraReportingDataRequestCreate(SetExtraReportingDataRequestCreate.builder()
-                    .cancelConfirmedTime(OffsetDateTime.parse("2025-12-13T15:28:17.262732Z"))
-                    .name("accounts/01HBRQ5BW6ZAY4BNWP4GWRD80X/orders/ebb0c9b5-2c74-45c9-a4ab-40596b778706")
+                .basketTradingSetExtraReportingDataRequestCreate(BasketTradingSetExtraReportingDataRequestCreate.builder()
+                    .clientOrderId("4cff908e-aaed-401d-8ec9-929e3eb18cbc")
+                    .name("correspondents/01HPMZZM6RKMVZA1JQ63RQKJRP/baskets/fffd326-72fa-4d2b-bd1f-45384fe5d521")
                     .build())
                 .call();
 
@@ -552,11 +551,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         | Example                                                                                             |
-| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `correspondentId`                                                                                   | *String*                                                                                            | :heavy_check_mark:                                                                                  | The correspondent id.                                                                               | 01HPMZZM6RKMVZA1JQ63RQKJRP                                                                          |
-| `basketId`                                                                                          | *String*                                                                                            | :heavy_check_mark:                                                                                  | The basket id.                                                                                      | fffd326-72fa-4d2b-bd1f-45384fe5d521                                                                 |
-| `setExtraReportingDataRequestCreate`                                                                | [SetExtraReportingDataRequestCreate](../../models/components/SetExtraReportingDataRequestCreate.md) | :heavy_check_mark:                                                                                  | N/A                                                                                                 |                                                                                                     |
+| Parameter                                                                                                                     | Type                                                                                                                          | Required                                                                                                                      | Description                                                                                                                   | Example                                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `correspondentId`                                                                                                             | *String*                                                                                                                      | :heavy_check_mark:                                                                                                            | The correspondent id.                                                                                                         | 01HPMZZM6RKMVZA1JQ63RQKJRP                                                                                                    |
+| `basketId`                                                                                                                    | *String*                                                                                                                      | :heavy_check_mark:                                                                                                            | The basket id.                                                                                                                | fffd326-72fa-4d2b-bd1f-45384fe5d521                                                                                           |
+| `basketTradingSetExtraReportingDataRequestCreate`                                                                             | [BasketTradingSetExtraReportingDataRequestCreate](../../models/components/BasketTradingSetExtraReportingDataRequestCreate.md) | :heavy_check_mark:                                                                                                            | N/A                                                                                                                           |                                                                                                                               |
 
 ### Response
 
