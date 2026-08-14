@@ -6,7 +6,7 @@ package com.apexfintechsolutions.ascendsdk.models.operations;
 import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOperation;
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
-import com.apexfintechsolutions.ascendsdk.models.components.SetExtraReportingDataRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.BasketTradingSetExtraReportingDataRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.BasketOrdersServiceSetExtraReportingData;
 import com.apexfintechsolutions.ascendsdk.utils.Options;
 import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
@@ -17,7 +17,8 @@ public class BasketOrdersServiceSetExtraReportingDataRequestBuilder {
 
   private String correspondentId;
   private String basketId;
-  private SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate;
+  private BasketTradingSetExtraReportingDataRequestCreate
+      basketTradingSetExtraReportingDataRequestCreate;
   private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
@@ -38,10 +39,15 @@ public class BasketOrdersServiceSetExtraReportingDataRequestBuilder {
     return this;
   }
 
-  public BasketOrdersServiceSetExtraReportingDataRequestBuilder setExtraReportingDataRequestCreate(
-      SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate) {
-    Utils.checkNotNull(setExtraReportingDataRequestCreate, "setExtraReportingDataRequestCreate");
-    this.setExtraReportingDataRequestCreate = setExtraReportingDataRequestCreate;
+  public BasketOrdersServiceSetExtraReportingDataRequestBuilder
+      basketTradingSetExtraReportingDataRequestCreate(
+          BasketTradingSetExtraReportingDataRequestCreate
+              basketTradingSetExtraReportingDataRequestCreate) {
+    Utils.checkNotNull(
+        basketTradingSetExtraReportingDataRequestCreate,
+        "basketTradingSetExtraReportingDataRequestCreate");
+    this.basketTradingSetExtraReportingDataRequestCreate =
+        basketTradingSetExtraReportingDataRequestCreate;
     return this;
   }
 
@@ -63,7 +69,7 @@ public class BasketOrdersServiceSetExtraReportingDataRequestBuilder {
 
     BasketOrdersServiceSetExtraReportingDataRequest request =
         new BasketOrdersServiceSetExtraReportingDataRequest(
-            correspondentId, basketId, setExtraReportingDataRequestCreate);
+            correspondentId, basketId, basketTradingSetExtraReportingDataRequestCreate);
 
     return request;
   }

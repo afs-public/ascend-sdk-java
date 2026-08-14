@@ -7,8 +7,8 @@ import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOp
 
 import com.apexfintechsolutions.ascendsdk.models.components.AddOrdersRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.BasketCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.BasketTradingSetExtraReportingDataRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.RemoveOrdersRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.components.SetExtraReportingDataRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.SubmitBasketRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.operations.BasketOrdersServiceAddOrdersRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.BasketOrdersServiceAddOrdersRequestBuilder;
@@ -525,17 +525,22 @@ public class BasketOrders {
    *
    * @param correspondentId The correspondent id.
    * @param basketId The basket id.
-   * @param setExtraReportingDataRequestCreate
+   * @param basketTradingSetExtraReportingDataRequestCreate The message to set extra reporting data
+   *     onto a basket order
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
   public BasketOrdersServiceSetExtraReportingDataResponse setExtraReportingData(
       String correspondentId,
       String basketId,
-      SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate)
+      BasketTradingSetExtraReportingDataRequestCreate
+          basketTradingSetExtraReportingDataRequestCreate)
       throws Exception {
     return setExtraReportingData(
-        correspondentId, basketId, setExtraReportingDataRequestCreate, Optional.empty());
+        correspondentId,
+        basketId,
+        basketTradingSetExtraReportingDataRequestCreate,
+        Optional.empty());
   }
 
   /**
@@ -546,7 +551,8 @@ public class BasketOrders {
    *
    * @param correspondentId The correspondent id.
    * @param basketId The basket id.
-   * @param setExtraReportingDataRequestCreate
+   * @param basketTradingSetExtraReportingDataRequestCreate The message to set extra reporting data
+   *     onto a basket order
    * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
@@ -554,14 +560,16 @@ public class BasketOrders {
   public BasketOrdersServiceSetExtraReportingDataResponse setExtraReportingData(
       String correspondentId,
       String basketId,
-      SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate,
+      BasketTradingSetExtraReportingDataRequestCreate
+          basketTradingSetExtraReportingDataRequestCreate,
       Optional<Options> options)
       throws Exception {
     BasketOrdersServiceSetExtraReportingDataRequest request =
         BasketOrdersServiceSetExtraReportingDataRequest.builder()
             .correspondentId(correspondentId)
             .basketId(basketId)
-            .setExtraReportingDataRequestCreate(setExtraReportingDataRequestCreate)
+            .basketTradingSetExtraReportingDataRequestCreate(
+                basketTradingSetExtraReportingDataRequestCreate)
             .build();
     RequestOperation<
             BasketOrdersServiceSetExtraReportingDataRequest,

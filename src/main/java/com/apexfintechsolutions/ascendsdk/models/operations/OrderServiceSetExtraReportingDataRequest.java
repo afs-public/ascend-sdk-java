@@ -3,7 +3,7 @@
  */
 package com.apexfintechsolutions.ascendsdk.models.operations;
 
-import com.apexfintechsolutions.ascendsdk.models.components.SetExtraReportingDataRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.TradingSetExtraReportingDataRequestCreate;
 import com.apexfintechsolutions.ascendsdk.utils.SpeakeasyMetadata;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -19,19 +19,20 @@ public class OrderServiceSetExtraReportingDataRequest {
   private String orderId;
 
   @SpeakeasyMetadata("request:mediaType=application/json")
-  private SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate;
+  private TradingSetExtraReportingDataRequestCreate tradingSetExtraReportingDataRequestCreate;
 
   @JsonCreator
   public OrderServiceSetExtraReportingDataRequest(
       String accountId,
       String orderId,
-      SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate) {
+      TradingSetExtraReportingDataRequestCreate tradingSetExtraReportingDataRequestCreate) {
     Utils.checkNotNull(accountId, "accountId");
     Utils.checkNotNull(orderId, "orderId");
-    Utils.checkNotNull(setExtraReportingDataRequestCreate, "setExtraReportingDataRequestCreate");
+    Utils.checkNotNull(
+        tradingSetExtraReportingDataRequestCreate, "tradingSetExtraReportingDataRequestCreate");
     this.accountId = accountId;
     this.orderId = orderId;
-    this.setExtraReportingDataRequestCreate = setExtraReportingDataRequestCreate;
+    this.tradingSetExtraReportingDataRequestCreate = tradingSetExtraReportingDataRequestCreate;
   }
 
   /** The account id. */
@@ -47,8 +48,8 @@ public class OrderServiceSetExtraReportingDataRequest {
   }
 
   @JsonIgnore
-  public SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate() {
-    return setExtraReportingDataRequestCreate;
+  public TradingSetExtraReportingDataRequestCreate tradingSetExtraReportingDataRequestCreate() {
+    return tradingSetExtraReportingDataRequestCreate;
   }
 
   public static Builder builder() {
@@ -69,10 +70,11 @@ public class OrderServiceSetExtraReportingDataRequest {
     return this;
   }
 
-  public OrderServiceSetExtraReportingDataRequest withSetExtraReportingDataRequestCreate(
-      SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate) {
-    Utils.checkNotNull(setExtraReportingDataRequestCreate, "setExtraReportingDataRequestCreate");
-    this.setExtraReportingDataRequestCreate = setExtraReportingDataRequestCreate;
+  public OrderServiceSetExtraReportingDataRequest withTradingSetExtraReportingDataRequestCreate(
+      TradingSetExtraReportingDataRequestCreate tradingSetExtraReportingDataRequestCreate) {
+    Utils.checkNotNull(
+        tradingSetExtraReportingDataRequestCreate, "tradingSetExtraReportingDataRequestCreate");
+    this.tradingSetExtraReportingDataRequestCreate = tradingSetExtraReportingDataRequestCreate;
     return this;
   }
 
@@ -88,12 +90,13 @@ public class OrderServiceSetExtraReportingDataRequest {
     return Utils.enhancedDeepEquals(this.accountId, other.accountId)
         && Utils.enhancedDeepEquals(this.orderId, other.orderId)
         && Utils.enhancedDeepEquals(
-            this.setExtraReportingDataRequestCreate, other.setExtraReportingDataRequestCreate);
+            this.tradingSetExtraReportingDataRequestCreate,
+            other.tradingSetExtraReportingDataRequestCreate);
   }
 
   @Override
   public int hashCode() {
-    return Utils.enhancedHash(accountId, orderId, setExtraReportingDataRequestCreate);
+    return Utils.enhancedHash(accountId, orderId, tradingSetExtraReportingDataRequestCreate);
   }
 
   @Override
@@ -104,8 +107,8 @@ public class OrderServiceSetExtraReportingDataRequest {
         accountId,
         "orderId",
         orderId,
-        "setExtraReportingDataRequestCreate",
-        setExtraReportingDataRequestCreate);
+        "tradingSetExtraReportingDataRequestCreate",
+        tradingSetExtraReportingDataRequestCreate);
   }
 
   @SuppressWarnings("UnusedReturnValue")
@@ -115,7 +118,7 @@ public class OrderServiceSetExtraReportingDataRequest {
 
     private String orderId;
 
-    private SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate;
+    private TradingSetExtraReportingDataRequestCreate tradingSetExtraReportingDataRequestCreate;
 
     private Builder() {
       // force use of static builder() method
@@ -135,17 +138,18 @@ public class OrderServiceSetExtraReportingDataRequest {
       return this;
     }
 
-    public Builder setExtraReportingDataRequestCreate(
-        SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate) {
-      Utils.checkNotNull(setExtraReportingDataRequestCreate, "setExtraReportingDataRequestCreate");
-      this.setExtraReportingDataRequestCreate = setExtraReportingDataRequestCreate;
+    public Builder tradingSetExtraReportingDataRequestCreate(
+        TradingSetExtraReportingDataRequestCreate tradingSetExtraReportingDataRequestCreate) {
+      Utils.checkNotNull(
+          tradingSetExtraReportingDataRequestCreate, "tradingSetExtraReportingDataRequestCreate");
+      this.tradingSetExtraReportingDataRequestCreate = tradingSetExtraReportingDataRequestCreate;
       return this;
     }
 
     public OrderServiceSetExtraReportingDataRequest build() {
 
       return new OrderServiceSetExtraReportingDataRequest(
-          accountId, orderId, setExtraReportingDataRequestCreate);
+          accountId, orderId, tradingSetExtraReportingDataRequestCreate);
     }
   }
 }

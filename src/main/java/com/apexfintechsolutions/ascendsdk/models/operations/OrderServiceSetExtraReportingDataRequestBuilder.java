@@ -6,7 +6,7 @@ package com.apexfintechsolutions.ascendsdk.models.operations;
 import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOperation;
 
 import com.apexfintechsolutions.ascendsdk.SDKConfiguration;
-import com.apexfintechsolutions.ascendsdk.models.components.SetExtraReportingDataRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.TradingSetExtraReportingDataRequestCreate;
 import com.apexfintechsolutions.ascendsdk.operations.OrderServiceSetExtraReportingData;
 import com.apexfintechsolutions.ascendsdk.utils.Options;
 import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
@@ -17,7 +17,7 @@ public class OrderServiceSetExtraReportingDataRequestBuilder {
 
   private String accountId;
   private String orderId;
-  private SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate;
+  private TradingSetExtraReportingDataRequestCreate tradingSetExtraReportingDataRequestCreate;
   private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
@@ -37,10 +37,11 @@ public class OrderServiceSetExtraReportingDataRequestBuilder {
     return this;
   }
 
-  public OrderServiceSetExtraReportingDataRequestBuilder setExtraReportingDataRequestCreate(
-      SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate) {
-    Utils.checkNotNull(setExtraReportingDataRequestCreate, "setExtraReportingDataRequestCreate");
-    this.setExtraReportingDataRequestCreate = setExtraReportingDataRequestCreate;
+  public OrderServiceSetExtraReportingDataRequestBuilder tradingSetExtraReportingDataRequestCreate(
+      TradingSetExtraReportingDataRequestCreate tradingSetExtraReportingDataRequestCreate) {
+    Utils.checkNotNull(
+        tradingSetExtraReportingDataRequestCreate, "tradingSetExtraReportingDataRequestCreate");
+    this.tradingSetExtraReportingDataRequestCreate = tradingSetExtraReportingDataRequestCreate;
     return this;
   }
 
@@ -61,7 +62,7 @@ public class OrderServiceSetExtraReportingDataRequestBuilder {
 
     OrderServiceSetExtraReportingDataRequest request =
         new OrderServiceSetExtraReportingDataRequest(
-            accountId, orderId, setExtraReportingDataRequestCreate);
+            accountId, orderId, tradingSetExtraReportingDataRequestCreate);
 
     return request;
   }

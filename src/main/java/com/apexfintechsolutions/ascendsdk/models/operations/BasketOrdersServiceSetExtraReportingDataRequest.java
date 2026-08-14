@@ -3,7 +3,7 @@
  */
 package com.apexfintechsolutions.ascendsdk.models.operations;
 
-import com.apexfintechsolutions.ascendsdk.models.components.SetExtraReportingDataRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.BasketTradingSetExtraReportingDataRequestCreate;
 import com.apexfintechsolutions.ascendsdk.utils.SpeakeasyMetadata;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -19,19 +19,24 @@ public class BasketOrdersServiceSetExtraReportingDataRequest {
   private String basketId;
 
   @SpeakeasyMetadata("request:mediaType=application/json")
-  private SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate;
+  private BasketTradingSetExtraReportingDataRequestCreate
+      basketTradingSetExtraReportingDataRequestCreate;
 
   @JsonCreator
   public BasketOrdersServiceSetExtraReportingDataRequest(
       String correspondentId,
       String basketId,
-      SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate) {
+      BasketTradingSetExtraReportingDataRequestCreate
+          basketTradingSetExtraReportingDataRequestCreate) {
     Utils.checkNotNull(correspondentId, "correspondentId");
     Utils.checkNotNull(basketId, "basketId");
-    Utils.checkNotNull(setExtraReportingDataRequestCreate, "setExtraReportingDataRequestCreate");
+    Utils.checkNotNull(
+        basketTradingSetExtraReportingDataRequestCreate,
+        "basketTradingSetExtraReportingDataRequestCreate");
     this.correspondentId = correspondentId;
     this.basketId = basketId;
-    this.setExtraReportingDataRequestCreate = setExtraReportingDataRequestCreate;
+    this.basketTradingSetExtraReportingDataRequestCreate =
+        basketTradingSetExtraReportingDataRequestCreate;
   }
 
   /** The correspondent id. */
@@ -47,8 +52,9 @@ public class BasketOrdersServiceSetExtraReportingDataRequest {
   }
 
   @JsonIgnore
-  public SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate() {
-    return setExtraReportingDataRequestCreate;
+  public BasketTradingSetExtraReportingDataRequestCreate
+      basketTradingSetExtraReportingDataRequestCreate() {
+    return basketTradingSetExtraReportingDataRequestCreate;
   }
 
   public static Builder builder() {
@@ -70,10 +76,15 @@ public class BasketOrdersServiceSetExtraReportingDataRequest {
     return this;
   }
 
-  public BasketOrdersServiceSetExtraReportingDataRequest withSetExtraReportingDataRequestCreate(
-      SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate) {
-    Utils.checkNotNull(setExtraReportingDataRequestCreate, "setExtraReportingDataRequestCreate");
-    this.setExtraReportingDataRequestCreate = setExtraReportingDataRequestCreate;
+  public BasketOrdersServiceSetExtraReportingDataRequest
+      withBasketTradingSetExtraReportingDataRequestCreate(
+          BasketTradingSetExtraReportingDataRequestCreate
+              basketTradingSetExtraReportingDataRequestCreate) {
+    Utils.checkNotNull(
+        basketTradingSetExtraReportingDataRequestCreate,
+        "basketTradingSetExtraReportingDataRequestCreate");
+    this.basketTradingSetExtraReportingDataRequestCreate =
+        basketTradingSetExtraReportingDataRequestCreate;
     return this;
   }
 
@@ -90,12 +101,14 @@ public class BasketOrdersServiceSetExtraReportingDataRequest {
     return Utils.enhancedDeepEquals(this.correspondentId, other.correspondentId)
         && Utils.enhancedDeepEquals(this.basketId, other.basketId)
         && Utils.enhancedDeepEquals(
-            this.setExtraReportingDataRequestCreate, other.setExtraReportingDataRequestCreate);
+            this.basketTradingSetExtraReportingDataRequestCreate,
+            other.basketTradingSetExtraReportingDataRequestCreate);
   }
 
   @Override
   public int hashCode() {
-    return Utils.enhancedHash(correspondentId, basketId, setExtraReportingDataRequestCreate);
+    return Utils.enhancedHash(
+        correspondentId, basketId, basketTradingSetExtraReportingDataRequestCreate);
   }
 
   @Override
@@ -106,8 +119,8 @@ public class BasketOrdersServiceSetExtraReportingDataRequest {
         correspondentId,
         "basketId",
         basketId,
-        "setExtraReportingDataRequestCreate",
-        setExtraReportingDataRequestCreate);
+        "basketTradingSetExtraReportingDataRequestCreate",
+        basketTradingSetExtraReportingDataRequestCreate);
   }
 
   @SuppressWarnings("UnusedReturnValue")
@@ -117,7 +130,8 @@ public class BasketOrdersServiceSetExtraReportingDataRequest {
 
     private String basketId;
 
-    private SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate;
+    private BasketTradingSetExtraReportingDataRequestCreate
+        basketTradingSetExtraReportingDataRequestCreate;
 
     private Builder() {
       // force use of static builder() method
@@ -137,17 +151,21 @@ public class BasketOrdersServiceSetExtraReportingDataRequest {
       return this;
     }
 
-    public Builder setExtraReportingDataRequestCreate(
-        SetExtraReportingDataRequestCreate setExtraReportingDataRequestCreate) {
-      Utils.checkNotNull(setExtraReportingDataRequestCreate, "setExtraReportingDataRequestCreate");
-      this.setExtraReportingDataRequestCreate = setExtraReportingDataRequestCreate;
+    public Builder basketTradingSetExtraReportingDataRequestCreate(
+        BasketTradingSetExtraReportingDataRequestCreate
+            basketTradingSetExtraReportingDataRequestCreate) {
+      Utils.checkNotNull(
+          basketTradingSetExtraReportingDataRequestCreate,
+          "basketTradingSetExtraReportingDataRequestCreate");
+      this.basketTradingSetExtraReportingDataRequestCreate =
+          basketTradingSetExtraReportingDataRequestCreate;
       return this;
     }
 
     public BasketOrdersServiceSetExtraReportingDataRequest build() {
 
       return new BasketOrdersServiceSetExtraReportingDataRequest(
-          correspondentId, basketId, setExtraReportingDataRequestCreate);
+          correspondentId, basketId, basketTradingSetExtraReportingDataRequestCreate);
     }
   }
 }

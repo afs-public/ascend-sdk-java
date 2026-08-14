@@ -76,8 +76,8 @@ public class TestNullableFields {
                     .build())
             .build();
 
-    // Current behavior: unlike the TS SDK, the Java SDK does NOT reject the null
-    // wrapper — the response deserializes successfully.
+    // The Java SDK deserializes the null wrapper successfully, modeling it as
+    // JsonNullable<Boolean> (matching the TS SDK, which now also accepts it).
     var response = sdk.personManagement().createLegalNaturalPerson(request);
     Assertions.assertEquals(200, response.statusCode());
 

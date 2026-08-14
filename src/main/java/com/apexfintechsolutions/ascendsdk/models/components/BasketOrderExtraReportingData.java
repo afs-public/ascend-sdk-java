@@ -18,7 +18,7 @@ import org.openapitools.jackson.nullable.JsonNullable;
  * <p>Any reporting data provided by the SetExtraReportingData endpoint.
  */
 public class BasketOrderExtraReportingData {
-
+  /** The time the client has confirmed a cancel confirmation in their own system */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("cancel_confirmed_time")
   private JsonNullable<OffsetDateTime> cancelConfirmedTime;
@@ -34,6 +34,7 @@ public class BasketOrderExtraReportingData {
     this(JsonNullable.undefined());
   }
 
+  /** The time the client has confirmed a cancel confirmation in their own system */
   @JsonIgnore
   public JsonNullable<OffsetDateTime> cancelConfirmedTime() {
     return cancelConfirmedTime;
@@ -43,12 +44,14 @@ public class BasketOrderExtraReportingData {
     return new Builder();
   }
 
+  /** The time the client has confirmed a cancel confirmation in their own system */
   public BasketOrderExtraReportingData withCancelConfirmedTime(OffsetDateTime cancelConfirmedTime) {
     Utils.checkNotNull(cancelConfirmedTime, "cancelConfirmedTime");
     this.cancelConfirmedTime = JsonNullable.of(cancelConfirmedTime);
     return this;
   }
 
+  /** The time the client has confirmed a cancel confirmation in their own system */
   public BasketOrderExtraReportingData withCancelConfirmedTime(
       JsonNullable<OffsetDateTime> cancelConfirmedTime) {
     Utils.checkNotNull(cancelConfirmedTime, "cancelConfirmedTime");
@@ -88,12 +91,14 @@ public class BasketOrderExtraReportingData {
       // force use of static builder() method
     }
 
+    /** The time the client has confirmed a cancel confirmation in their own system */
     public Builder cancelConfirmedTime(OffsetDateTime cancelConfirmedTime) {
       Utils.checkNotNull(cancelConfirmedTime, "cancelConfirmedTime");
       this.cancelConfirmedTime = JsonNullable.of(cancelConfirmedTime);
       return this;
     }
 
+    /** The time the client has confirmed a cancel confirmation in their own system */
     public Builder cancelConfirmedTime(JsonNullable<OffsetDateTime> cancelConfirmedTime) {
       Utils.checkNotNull(cancelConfirmedTime, "cancelConfirmedTime");
       this.cancelConfirmedTime = cancelConfirmedTime;
