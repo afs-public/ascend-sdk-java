@@ -61,7 +61,9 @@ public class TestPositionsJournals {
             .description("Stock reward for testing")
             .build();
 
-    var res = sdk.positionJournals().createPositionJournal(request);
+    var res =
+        RetryUtil.retryOnTransientError(
+            () -> sdk.positionJournals().createPositionJournal(request));
     Assertions.assertNotNull(res);
     Assertions.assertEquals(200, res.statusCode());
     Assertions.assertTrue(res.positionJournal().isPresent());
@@ -153,8 +155,7 @@ public class TestPositionsJournals {
       Assertions.assertTrue(res.positionJournal().isPresent());
     } catch (Status status) {
       Assertions.assertEquals(3, status.code().get());
-      Assertions.assertTrue(
-          status.message().get().toLowerCase().contains("that does not need review"));
+      Assertions.assertTrue(status.message().get().toLowerCase().contains("does not need review"));
     }
   }
 

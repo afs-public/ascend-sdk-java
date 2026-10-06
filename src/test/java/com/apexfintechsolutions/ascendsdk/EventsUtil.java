@@ -46,10 +46,25 @@ public class EventsUtil {
         && !res.listPushSubscriptionsResponse().get().pushSubscriptions().get().isEmpty()) {
 
       var subscriptions = res.listPushSubscriptionsResponse().get().pushSubscriptions().get();
-      var subscription = subscriptions.get(0);
 
-      // Unwrap the Optional and return the value
-      return subscription
+      // The first listed subscription can be a freshly created one with no
+      // delivery history (e.g. from a concurrently running suite's create
+      // test); prefer a subscription that already has deliveries.
+      for (var subscription : subscriptions) {
+        if (subscription.subscriptionId().isEmpty()) {
+          continue;
+        }
+        String subscriptionId = subscription.subscriptionId().get();
+        try {
+          if (!firstDeliveryId(sdk, subscriptionId).isEmpty()) {
+            return subscriptionId;
+          }
+        } catch (Exception ignored) {
+          // No deliveries (or transient error) -- try the next subscription.
+        }
+      }
+      return subscriptions
+          .get(0)
           .subscriptionId()
           .orElseThrow(() -> new Exception("Subscription ID not found"));
 
@@ -59,11 +74,12 @@ public class EventsUtil {
   }
 
   public static String getDeliveryID(SDK sdk) throws Exception {
+    return firstDeliveryId(sdk, getTestSubscriberId(sdk));
+  }
+
+  static String firstDeliveryId(SDK sdk, String subscriptionId) throws Exception {
     var res =
-        sdk.subscriber()
-            .listPushSubscriptionDeliveries()
-            .subscriptionId(getTestSubscriberId(sdk))
-            .call();
+        sdk.subscriber().listPushSubscriptionDeliveries().subscriptionId(subscriptionId).call();
 
     if (res.statusCode() == 200
         && !res.listPushSubscriptionDeliveriesResponse()

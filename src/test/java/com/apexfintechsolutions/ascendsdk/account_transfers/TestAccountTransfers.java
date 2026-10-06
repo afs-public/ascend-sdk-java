@@ -79,14 +79,19 @@ public class TestAccountTransfers {
   public void test_account_transfers_account_transfers_accept_transfer_accept_transfer1()
       throws Exception {
 
-    var accept_transfer_id = AccountTransfersUtil.createAccountTransferId(sdk, accountId);
+    // Use a dedicated account: rejecting the earlier transfer restricts its
+    // deliverer account (ACAT_PARTIAL_OUTBOUND entitlement) for an unbounded
+    // window, so a second transfer on the same account is rejected as
+    // "Account not entitled".
+    var acceptAccountId = AccountUtil.createEnrolledAccount(sdk).accountId().get();
+    var accept_transfer_id = AccountTransfersUtil.createAccountTransferId(sdk, acceptAccountId);
     var request =
         AcceptTransferRequestCreate.builder()
             .name(
                 "correspondents/"
                     + SdkUtil.getCorrespondentId()
                     + "/accounts/"
-                    + accountId
+                    + acceptAccountId
                     + "/transfers/"
                     + accept_transfer_id)
             .build();
@@ -95,7 +100,7 @@ public class TestAccountTransfers {
         sdk.accountTransfers()
             .acceptTransfer()
             .correspondentId(SdkUtil.getCorrespondentId())
-            .accountId(accountId)
+            .accountId(acceptAccountId)
             .transferId(accept_transfer_id)
             .acceptTransferRequestCreate(request)
             .call();

@@ -70,7 +70,7 @@ public class TestAccountManagement {
   public void test_account_management_accounts_update_account_group_update_account_group1()
       throws Exception {
     var update =
-        new UpdateAccountGroupRequestUpdate().withAccountGroupId(SdkUtil.getAccountGroupId());
+        new UpdateAccountGroupRequestUpdate().withAccountGroupId(SdkUtil.getSecondAccountGroupId());
     var res =
         sdk.accountManagement()
             .updateAccountGroup()

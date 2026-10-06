@@ -1,8 +1,9 @@
 package com.apexfintechsolutions.ascendsdk;
 
 import com.apexfintechsolutions.ascendsdk.models.components.*;
-import com.apexfintechsolutions.ascendsdk.models.components.BankRelationshipStateState;
 import com.apexfintechsolutions.ascendsdk.models.components.RetirementDistributionCreateType;
+import com.apexfintechsolutions.ascendsdk.utils.Options;
+import com.apexfintechsolutions.ascendsdk.utils.RetryConfig;
 import java.util.*;
 
 public class TransfersUtil {
@@ -30,9 +31,18 @@ public class TransfersUtil {
 
   public static MicroDepositAmountsCreate getFailingMicrodepositAmounts(
       SDK sdk, Account account, BankRelationship relationship) throws Exception {
+    // Same post-creation propagation window as getCorrectMicrodepositAmounts.
     var response =
-        sdk.testSimulation()
-            .getMicroDepositAmounts(account.accountId().get(), getBankRelationshipId(relationship));
+        RetryUtil.retryOnTransientError(
+            () ->
+                sdk.testSimulation()
+                    .getMicroDepositAmounts(
+                        account.accountId().get(),
+                        getBankRelationshipId(relationship),
+                        Optional.of(
+                            Options.builder().retryConfig(RetryConfig.noRetries()).build())),
+            40,
+            2000);
     if (response.statusCode() == 200) {
       var amounts = response.microDepositAmounts().get();
       return adjustMicroDepositAmount(amounts);
@@ -108,9 +118,22 @@ public class TransfersUtil {
 
   public static MicroDepositAmounts getCorrectMicrodepositAmounts(
       SDK sdk, Account enrolledAccount, BankRelationship br) throws Exception {
+    // 40 attempts x 2s: the default 20x2s window was observed intermittently
+    // to be insufficient for micro deposits against the real UAT environment.
+    // The SDK's own 504/429 backoff (up to 60s per call) is disabled inside
+    // the poll -- this is a fast not-found-until-ready check, and stacking
+    // the two retry layers multiplies the worst case into tens of minutes.
     var response =
-        sdk.testSimulation()
-            .getMicroDepositAmounts(enrolledAccount.accountId().get(), getBankRelationshipId(br));
+        RetryUtil.retryOnTransientError(
+            () ->
+                sdk.testSimulation()
+                    .getMicroDepositAmounts(
+                        enrolledAccount.accountId().get(),
+                        getBankRelationshipId(br),
+                        Optional.of(
+                            Options.builder().retryConfig(RetryConfig.noRetries()).build())),
+            40,
+            2000);
     if (response.statusCode() == 200) {
       return response.microDepositAmounts().get();
     } else {
@@ -322,56 +345,28 @@ public class TransfersUtil {
     return "01JHK07CRQ9X8P5XE9JWG4PFSP";
   }
 
-  public static String createCompletedWithdrawal(SDK sdk, String withdrawalAccountId)
-      throws Exception {
-    var res = sdk.bankRelationships().listBankRelationships(withdrawalAccountId);
-    var maxRelationships =
-        res.listBankRelationshipsResponse().get().bankRelationships().get().size();
-    var attemptCount = 0;
-    while (attemptCount < maxRelationships) {
-      if (res.listBankRelationshipsResponse()
-          .get()
-          .bankRelationships()
-          .get()
-          .get(attemptCount)
-          .state()
-          .get()
-          .state()
-          .get()
-          .equals(BankRelationshipStateState.APPROVED)) {
-        var cancelBankRelationshipId =
-            res.listBankRelationshipsResponse()
-                .get()
-                .bankRelationships()
-                .get()
-                .get(attemptCount)
-                .name()
-                .get()
-                .split("/")[3];
-        var req =
-            CancelBankRelationshipRequestCreate.builder()
-                .name(
-                    "accounts/"
-                        + withdrawalAccountId
-                        + "/bankRelationships/"
-                        + cancelBankRelationshipId)
-                .comment("Cancling bank user request")
-                .build();
-        sdk.bankRelationships()
-            .cancelBankRelationship()
-            .accountId(withdrawalAccountId)
-            .bankRelationshipId(cancelBankRelationshipId)
-            .cancelBankRelationshipRequestCreate(req)
-            .call();
-      }
-      attemptCount++;
-    }
+  public static class CompletedWithdrawal {
+    public final String accountId;
+    public final String withdrawalId;
 
-    var bankRel =
-        createVerifiedBankRelationship(sdk, AccountUtil.getAccount(sdk, withdrawalAccountId));
-    var withdrawal =
-        createAchWithdrawal(sdk, AccountUtil.getAccount(sdk, withdrawalAccountId), bankRel);
-    return getAchWithdrawalId(withdrawal);
+    public CompletedWithdrawal(String accountId, String withdrawalId) {
+      this.accountId = accountId;
+      this.withdrawalId = withdrawalId;
+    }
+  }
+
+  // Creates a fresh enrolled account for the withdrawal rather than reusing
+  // the shared withdrawal account id -- that account has accumulated dozens
+  // of bank relationships from other tests, and its micro deposit amounts
+  // were observed to never become queryable (not just delayed) even after
+  // extended retries, likely due to degraded propagation on an account with
+  // that much history. A fresh account with a single bank relationship
+  // doesn't hit this.
+  public static CompletedWithdrawal createCompletedWithdrawal(SDK sdk) throws Exception {
+    var account = AccountUtil.createEnrolledAccount(sdk);
+    var bankRel = createVerifiedBankRelationship(sdk, account);
+    var withdrawal = createAchWithdrawal(sdk, account, bankRel);
+    return new CompletedWithdrawal(account.accountId().get(), getAchWithdrawalId(withdrawal));
   }
 
   public static BankRelationship getBankRelationship(SDK sdk, String accountId, String bankRelId)

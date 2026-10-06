@@ -38,8 +38,16 @@ public class DataRetrievalTests {
             .client(testHttpClient)
             .build();
 
+    // An unfiltered list forces the service onto its slow GCS/BQ scan path,
+    // which exceeds the 55s gateway timeout (504) in UAT; a snapshot_type
+    // filter keeps it on the fast path (~3s).
     SnapshotsListSnapshotsResponse res =
-        sdk.dataRetrieval().listSnapshots().filter("").pageSize(25).pageToken("").call();
+        sdk.dataRetrieval()
+            .listSnapshots()
+            .filter("snapshot_type==\"daily_accounts\"")
+            .pageSize(25)
+            .pageToken("")
+            .call();
     assertEquals(200, res.statusCode());
   }
 }

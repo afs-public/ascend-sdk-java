@@ -56,4 +56,12 @@ public class SdkUtil {
     }
     return accountGroupId;
   }
+
+  public static String getSecondAccountGroupId() {
+    String accountGroupId = System.getenv("SECOND_ACCOUNT_GROUP_ID");
+    if (accountGroupId == null || accountGroupId.isEmpty()) {
+      throw new IllegalArgumentException("SECOND_ACCOUNT_GROUP_ID environment variable is not set");
+    }
+    return accountGroupId;
+  }
 }
