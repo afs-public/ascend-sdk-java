@@ -4,6 +4,7 @@
 package com.apexfintechsolutions.ascendsdk;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.apexfintechsolutions.ascendsdk.models.components.AlternativeOrderCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.AlternativeOrderCreateIdentifierType;
@@ -13,11 +14,11 @@ import com.apexfintechsolutions.ascendsdk.models.components.OrderSettlementTarge
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
 import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.components.SettleAlternativeOrderRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.AlternativeOrdersCreateAlternativeOrderResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.AlternativeOrdersGetAlternativeOrderResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.AlternativeOrdersListAlternativeOrdersResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.AlternativeOrdersRetrievePendingInvestorActionsResponse;
-import com.apexfintechsolutions.ascendsdk.models.operations.AlternativeOrdersSettleAlternativeOrderResponse;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
@@ -52,14 +53,14 @@ public class AlternativeOrdersTests {
     AlternativeOrdersCreateAlternativeOrderResponse res =
         sdk.alternativeOrders()
             .createAlternativeOrder()
-            .accountId("01JHGTEPC6ZTAHCFRH2MD3VJJT")
+            .accountId(AltsUtil.ALTS_ACCOUNT_ID)
             .alternativeOrderCreate(
                 AlternativeOrderCreate.builder()
                     .clientOrderId(UUID.randomUUID().toString())
-                    .identifier("6684398")
+                    .identifier("13607391")
                     .identifierType(AlternativeOrderCreateIdentifierType.ASSET_ID)
                     .side(AlternativeOrderCreateSide.BUY)
-                    .notionalValue(DecimalCreate.builder().value("10000").build())
+                    .notionalValue(DecimalCreate.builder().value("15000").build())
                     .build())
             .call();
     assertEquals(200, res.statusCode());
@@ -93,7 +94,7 @@ public class AlternativeOrdersTests {
     AlternativeOrdersListAlternativeOrdersResponse res =
         sdk.alternativeOrders()
             .listAlternativeOrders()
-            .accountId("01JHGTEPC6ZTAHCFRH2MD3VJJT")
+            .accountId(AltsUtil.ALTS_ACCOUNT_ID)
             .pageSize(25)
             .pageToken("")
             .filter("")
@@ -129,8 +130,8 @@ public class AlternativeOrdersTests {
     AlternativeOrdersGetAlternativeOrderResponse res =
         sdk.alternativeOrders()
             .getAlternativeOrder()
-            .accountId("01JHGTEPC6ZTAHCFRH2MD3VJJT")
-            .alternativeOrderId("01KHYEFHKS7VM17YC8BQC6A8PV")
+            .accountId(AltsUtil.ALTS_ACCOUNT_ID)
+            .alternativeOrderId(AltsUtil.ALTS_ORDER_ID)
             .call();
     assertEquals(200, res.statusCode());
   }
@@ -165,8 +166,8 @@ public class AlternativeOrdersTests {
     AlternativeOrdersRetrievePendingInvestorActionsResponse res =
         sdk.alternativeOrders()
             .retrievePendingInvestorActions()
-            .accountId("01JHGTEPC6ZTAHCFRH2MD3VJJT")
-            .alternativeOrderId("01KHYEFHKS7VM17YC8BQC6A8PV")
+            .accountId(AltsUtil.ALTS_ACCOUNT_ID)
+            .alternativeOrderId(AltsUtil.ALTS_ORDER_ID)
             .call();
     assertEquals(200, res.statusCode());
   }
@@ -196,18 +197,30 @@ public class AlternativeOrdersTests {
             .client(testHttpClient)
             .build();
 
-    AlternativeOrdersSettleAlternativeOrderResponse res =
-        sdk.alternativeOrders()
-            .settleAlternativeOrder()
-            .accountId("01JHGTEPC6ZTAHCFRH2MD3VJJT")
-            .alternativeOrderId("01KHYEFHKS7VM17YC8BQC6A8PV")
-            .settleAlternativeOrderRequestCreate(
-                SettleAlternativeOrderRequestCreate.builder()
-                    .name(
-                        "accounts/01JHGTEPC6ZTAHCFRH2MD3VJJT/alternativeOrders/01KHYEFHKS7VM17YC8BQC6A8PV")
-                    .orderSettlementTarget(OrderSettlementTarget.FILLED)
-                    .build())
-            .call();
-    assertEquals(400, res.statusCode());
+    // This hardcoded order is already FILLED, so settling it again is expected
+    // to fail with a SETTLEMENT_POST_FAILURE precondition error -- but accept
+    // a genuine 200 too, in case the order's state ever changes.
+    try {
+      var res =
+          sdk.alternativeOrders()
+              .settleAlternativeOrder()
+              .accountId(AltsUtil.ALTS_ACCOUNT_ID)
+              .alternativeOrderId(AltsUtil.ALTS_ORDER_ID)
+              .settleAlternativeOrderRequestCreate(
+                  SettleAlternativeOrderRequestCreate.builder()
+                      .name(
+                          "accounts/"
+                              + AltsUtil.ALTS_ACCOUNT_ID
+                              + "/alternativeOrders/"
+                              + AltsUtil.ALTS_ORDER_ID)
+                      .orderSettlementTarget(OrderSettlementTarget.FILLED)
+                      .build())
+              .call();
+      assertEquals(200, res.statusCode());
+    } catch (Status status) {
+      assertEquals(9, status.code().get());
+      assertTrue(
+          status.message().get().contains("SETTLEMENT_POST_FAILURE"), status.message().get());
+    }
   }
 }

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 04604b59-b953-4711-ac65-9ad5897162b4
 management:
-  docChecksum: 4c8f2212b727219781a18b2fcc74f8f0
-  docVersion: v1:20260814:uat:c54c9dbed75d
+  docChecksum: 4823f23e792e1f9b384b0a52cfe0385c
+  docVersion: v1:20261005:uat:400dff6391e1
   speakeasyVersion: 1.608.0
   generationVersion: 2.691.6
-  releaseVersion: 1.6.12
-  configChecksum: e267b0c769f7c5ae5c1d801b106b6215
+  releaseVersion: 1.6.13
+  configChecksum: faf89b03f856cbb9b775c637e5b9c741
 features:
   java:
     additionalDependencies: 0.1.0
@@ -139,6 +139,14 @@ generatedFiles:
   - docs/models/components/AchWithdrawalStateState.md
   - docs/models/components/AchWithdrawalType.md
   - docs/models/components/Acquisition.md
+  - docs/models/components/AcquisitionAdjustedNetAmount.md
+  - docs/models/components/AcquisitionAdjustedNetPerShareAmount.md
+  - docs/models/components/AcquisitionCommissionFeeAmount.md
+  - docs/models/components/AcquisitionExecutionPriceAmount.md
+  - docs/models/components/AcquisitionFxRateAmount.md
+  - docs/models/components/AcquisitionOriginalNetAmount.md
+  - docs/models/components/AcquisitionOriginalTradeDate.md
+  - docs/models/components/AcquisitionTrueZeroIndicator.md
   - docs/models/components/Action.md
   - docs/models/components/Activity.md
   - docs/models/components/ActivityAcatsPendingOut.md
@@ -433,6 +441,7 @@ generatedFiles:
   - docs/models/components/AvailableEnrollment.md
   - docs/models/components/AvailableLiquidityAmount.md
   - docs/models/components/AvailableRestriction.md
+  - docs/models/components/AverageBasisIndicator.md
   - docs/models/components/AveragePrice.md
   - docs/models/components/BankAccount.md
   - docs/models/components/BankAccountCreate.md
@@ -692,6 +701,8 @@ generatedFiles:
   - docs/models/components/CheckWithdrawalScheduleUpdate.md
   - docs/models/components/Classification.md
   - docs/models/components/CloseAccountRequestCreate.md
+  - docs/models/components/ClosedLot.md
+  - docs/models/components/ClosedLotQuantity.md
   - docs/models/components/Code.md
   - docs/models/components/Commission.md
   - docs/models/components/CommissionAmount.md
@@ -742,6 +753,7 @@ generatedFiles:
   - docs/models/components/CouponFrequency.md
   - docs/models/components/CouponRate.md
   - docs/models/components/CouponType.md
+  - docs/models/components/CoveredLotIndicator.md
   - docs/models/components/CreateUploadLinkRequestCreate.md
   - docs/models/components/CreatedDate.md
   - docs/models/components/Credit.md
@@ -798,6 +810,16 @@ generatedFiles:
   - docs/models/components/DeviceMetadataCreate.md
   - docs/models/components/DeviceType.md
   - docs/models/components/Direction.md
+  - docs/models/components/DisallowedLossAmount.md
+  - docs/models/components/DisposalAdjustedNetAmount.md
+  - docs/models/components/DisposalAdjustedNetPerShareAmount.md
+  - docs/models/components/DisposalCommissionFeeAmount.md
+  - docs/models/components/DisposalExecutionPriceAmount.md
+  - docs/models/components/DisposalFxRateAmount.md
+  - docs/models/components/DisposalMethod.md
+  - docs/models/components/DisposalOriginalNetAmount.md
+  - docs/models/components/DisposalSettleDate.md
+  - docs/models/components/DisposalTradeDate.md
   - docs/models/components/DistributionConstraints.md
   - docs/models/components/DistributionConstraintsDistributionTypeInfo.md
   - docs/models/components/DistributionConstraintsDistributionTypeInfoType.md
@@ -823,6 +845,7 @@ generatedFiles:
   - docs/models/components/DowJonesDetails.md
   - docs/models/components/DownloadAlternativeInvestmentDocumentResponse.md
   - docs/models/components/Drip.md
+  - docs/models/components/DripIndicator.md
   - docs/models/components/Duration.md
   - docs/models/components/EddAccountEnrollmentMetadata.md
   - docs/models/components/EddAccountEnrollmentMetadataCreate.md
@@ -1223,11 +1246,14 @@ generatedFiles:
   - docs/models/components/FuturesEnrollmentMetadata.md
   - docs/models/components/FuturesEnrollmentMetadataCreate.md
   - docs/models/components/FuturesInvestmentObjective.md
+  - docs/models/components/GainLossAmount.md
   - docs/models/components/GenerateServiceAccountTokenRequestCreate.md
   - docs/models/components/Geolocation.md
   - docs/models/components/GeolocationMechanism.md
+  - docs/models/components/GiftIndicator.md
   - docs/models/components/GrossAmount.md
   - docs/models/components/GrossCreditAmount.md
+  - docs/models/components/HoldingStartDate.md
   - docs/models/components/HttpCallback.md
   - docs/models/components/HttpPushCallbackCreate.md
   - docs/models/components/HttpPushCallbackUpdate.md
@@ -1341,6 +1367,7 @@ generatedFiles:
   - docs/models/components/IndividualRecipientParty.md
   - docs/models/components/InheritedFromOwnerBirthDate.md
   - docs/models/components/InheritedFromOwnerDeathDate.md
+  - docs/models/components/InheritedIndicator.md
   - docs/models/components/InitialDepositAmount.md
   - docs/models/components/InstitutionCreate.md
   - docs/models/components/Interest.md
@@ -1527,6 +1554,7 @@ generatedFiles:
   - docs/models/components/LocalMarketTradeDate.md
   - docs/models/components/LocateIctReportResponse.md
   - docs/models/components/LocateIctReportResponseProgram.md
+  - docs/models/components/LongShortIndicator.md
   - docs/models/components/LookupResult.md
   - docs/models/components/Lot.md
   - docs/models/components/LotCreate.md
@@ -1561,6 +1589,7 @@ generatedFiles:
   - docs/models/components/Money.md
   - docs/models/components/MoneyMarketFundSweep.md
   - docs/models/components/Moneyness.md
+  - docs/models/components/Multiplier.md
   - docs/models/components/MutualFund.md
   - docs/models/components/MutualFundType.md
   - docs/models/components/NachaNocCreate.md
@@ -1594,6 +1623,27 @@ generatedFiles:
   - docs/models/components/NsccStatus.md
   - docs/models/components/OpenBalanceAmount.md
   - docs/models/components/OpenLiquidityAmount.md
+  - docs/models/components/OpenLot.md
+  - docs/models/components/OpenLotAcquisitionAdjustedNetAmount.md
+  - docs/models/components/OpenLotAcquisitionAdjustedNetPerShareAmount.md
+  - docs/models/components/OpenLotAcquisitionCommissionFeeAmount.md
+  - docs/models/components/OpenLotAcquisitionExecutionPriceAmount.md
+  - docs/models/components/OpenLotAcquisitionFxRateAmount.md
+  - docs/models/components/OpenLotAcquisitionOriginalNetAmount.md
+  - docs/models/components/OpenLotAcquisitionOriginalTradeDate.md
+  - docs/models/components/OpenLotAcquisitionTrueZeroIndicator.md
+  - docs/models/components/OpenLotAverageBasisIndicator.md
+  - docs/models/components/OpenLotCoveredLotIndicator.md
+  - docs/models/components/OpenLotDripIndicator.md
+  - docs/models/components/OpenLotGiftIndicator.md
+  - docs/models/components/OpenLotHoldingStartDate.md
+  - docs/models/components/OpenLotInheritedIndicator.md
+  - docs/models/components/OpenLotLongShortIndicator.md
+  - docs/models/components/OpenLotMultiplier.md
+  - docs/models/components/OpenLotQuantity.md
+  - docs/models/components/OpenLotReplacementShareIndicator.md
+  - docs/models/components/OpenLotTerm.md
+  - docs/models/components/OpenLotWashSaleAdjustmentAmount.md
   - docs/models/components/OpenedOnBehalfOf.md
   - docs/models/components/OperatingEnrollmentMetadata.md
   - docs/models/components/OperatingEnrollmentMetadataCreate.md
@@ -1981,6 +2031,7 @@ generatedFiles:
   - docs/models/components/RemoveOrdersResponse.md
   - docs/models/components/RemovePartyRequestCreate.md
   - docs/models/components/ReplacePartyRequestCreate.md
+  - docs/models/components/ReplacementShareIndicator.md
   - docs/models/components/ReportingEligibility.md
   - docs/models/components/RequiredMinimumDistribution.md
   - docs/models/components/Requirements.md
@@ -2038,6 +2089,12 @@ generatedFiles:
   - docs/models/components/ScheduledRetirementContributionCreate.md
   - docs/models/components/ScheduledRetirementContributionCreateType.md
   - docs/models/components/SearchCashJournalSchedulesResponse.md
+  - docs/models/components/SearchClosedLotsRequestCreate.md
+  - docs/models/components/SearchClosedLotsRequestCreateIdentifierType.md
+  - docs/models/components/SearchClosedLotsResponse.md
+  - docs/models/components/SearchOpenLotsRequestCreate.md
+  - docs/models/components/SearchOpenLotsRequestCreateIdentifierType.md
+  - docs/models/components/SearchOpenLotsResponse.md
   - docs/models/components/Security.md
   - docs/models/components/SelfieVerified.md
   - docs/models/components/SeriesDate.md
@@ -2128,6 +2185,7 @@ generatedFiles:
   - docs/models/components/TemporalTaxYear.md
   - docs/models/components/TenderOffer.md
   - docs/models/components/TenderOfferType.md
+  - docs/models/components/Term.md
   - docs/models/components/TimeHorizon.md
   - docs/models/components/TimeInForce.md
   - docs/models/components/TimeInForceExpirationDate.md
@@ -2257,6 +2315,7 @@ generatedFiles:
   - docs/models/components/VirtualAccountNumberEnrollmentMetadata.md
   - docs/models/components/VirtualAccountNumberEnrollmentMetadataCreate.md
   - docs/models/components/WarrantExercise.md
+  - docs/models/components/WashSaleAdjustmentAmount.md
   - docs/models/components/WatchlistItem.md
   - docs/models/components/WatchlistMatch.md
   - docs/models/components/WatchlistMatchUpdate.md
@@ -2615,6 +2674,10 @@ generatedFiles:
   - docs/models/operations/CheckWithdrawalSchedulesListCheckWithdrawalSchedulesResponse.md
   - docs/models/operations/CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleRequest.md
   - docs/models/operations/CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleResponse.md
+  - docs/models/operations/CostBasisServiceSearchClosedLotsRequest.md
+  - docs/models/operations/CostBasisServiceSearchClosedLotsResponse.md
+  - docs/models/operations/CostBasisServiceSearchOpenLotsRequest.md
+  - docs/models/operations/CostBasisServiceSearchOpenLotsResponse.md
   - docs/models/operations/CreditsCancelCreditRequest.md
   - docs/models/operations/CreditsCancelCreditResponse.md
   - docs/models/operations/CreditsCreateCreditRequest.md
@@ -2817,6 +2880,7 @@ generatedFiles:
   - docs/sdks/buyingpower/README.md
   - docs/sdks/cashbalances/README.md
   - docs/sdks/checks/README.md
+  - docs/sdks/costbasisservice/README.md
   - docs/sdks/dataretrieval/README.md
   - docs/sdks/enrollmentsandagreements/README.md
   - docs/sdks/feesandcredits/README.md
@@ -2865,6 +2929,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/BuyingPower.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/CashBalances.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/Checks.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/CostBasisService.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/DataRetrieval.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/EnrollmentsAndAgreements.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/FeesAndCredits.java
@@ -3002,6 +3067,14 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AchWithdrawalStateState.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AchWithdrawalType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Acquisition.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcquisitionAdjustedNetAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcquisitionAdjustedNetPerShareAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcquisitionCommissionFeeAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcquisitionExecutionPriceAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcquisitionFxRateAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcquisitionOriginalNetAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcquisitionOriginalTradeDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AcquisitionTrueZeroIndicator.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Action.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Activity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ActivityAcatsPendingOut.java
@@ -3296,6 +3369,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AvailableEnrollment.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AvailableLiquidityAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AvailableRestriction.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AverageBasisIndicator.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/AveragePrice.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BankAccount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/BankAccountCreate.java
@@ -3555,6 +3629,8 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CheckWithdrawalScheduleUpdate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Classification.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CloseAccountRequestCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ClosedLot.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ClosedLotQuantity.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Code.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Commission.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CommissionAmount.java
@@ -3605,6 +3681,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CouponFrequency.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CouponRate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CouponType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CoveredLotIndicator.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CreateUploadLinkRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/CreatedDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Credit.java
@@ -3661,6 +3738,16 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DeviceMetadataCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DeviceType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Direction.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DisallowedLossAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DisposalAdjustedNetAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DisposalAdjustedNetPerShareAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DisposalCommissionFeeAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DisposalExecutionPriceAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DisposalFxRateAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DisposalMethod.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DisposalOriginalNetAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DisposalSettleDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DisposalTradeDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DistributionConstraints.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DistributionConstraintsDistributionTypeInfo.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DistributionConstraintsDistributionTypeInfoType.java
@@ -3686,6 +3773,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DowJonesDetails.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DownloadAlternativeInvestmentDocumentResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Drip.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/DripIndicator.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Duration.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EddAccountEnrollmentMetadata.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/EddAccountEnrollmentMetadataCreate.java
@@ -4086,11 +4174,14 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/FuturesEnrollmentMetadata.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/FuturesEnrollmentMetadataCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/FuturesInvestmentObjective.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/GainLossAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/GenerateServiceAccountTokenRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Geolocation.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/GeolocationMechanism.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/GiftIndicator.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/GrossAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/GrossCreditAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/HoldingStartDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/HttpCallback.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/HttpPushCallbackCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/HttpPushCallbackUpdate.java
@@ -4204,6 +4295,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/IndividualRecipientParty.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/InheritedFromOwnerBirthDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/InheritedFromOwnerDeathDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/InheritedIndicator.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/InitialDepositAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/InstitutionCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Interest.java
@@ -4390,6 +4482,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LocalMarketTradeDate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LocateIctReportResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LocateIctReportResponseProgram.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LongShortIndicator.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LookupResult.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Lot.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/LotCreate.java
@@ -4424,6 +4517,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Money.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MoneyMarketFundSweep.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Moneyness.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Multiplier.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MutualFund.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/MutualFundType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/NachaNocCreate.java
@@ -4457,6 +4551,27 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/NsccStatus.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenBalanceAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenLiquidityAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenLot.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenLotAcquisitionAdjustedNetAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenLotAcquisitionAdjustedNetPerShareAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenLotAcquisitionCommissionFeeAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenLotAcquisitionExecutionPriceAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenLotAcquisitionFxRateAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenLotAcquisitionOriginalNetAmount.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenLotAcquisitionOriginalTradeDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenLotAcquisitionTrueZeroIndicator.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenLotAverageBasisIndicator.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenLotCoveredLotIndicator.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenLotDripIndicator.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenLotGiftIndicator.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenLotHoldingStartDate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenLotInheritedIndicator.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenLotLongShortIndicator.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenLotMultiplier.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenLotQuantity.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenLotReplacementShareIndicator.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenLotTerm.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenLotWashSaleAdjustmentAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OpenedOnBehalfOf.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OperatingEnrollmentMetadata.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/OperatingEnrollmentMetadataCreate.java
@@ -4844,6 +4959,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RemoveOrdersResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RemovePartyRequestCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ReplacePartyRequestCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ReplacementShareIndicator.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ReportingEligibility.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/RequiredMinimumDistribution.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Requirements.java
@@ -4901,6 +5017,12 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ScheduledRetirementContributionCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/ScheduledRetirementContributionCreateType.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SearchCashJournalSchedulesResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SearchClosedLotsRequestCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SearchClosedLotsRequestCreateIdentifierType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SearchClosedLotsResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SearchOpenLotsRequestCreate.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SearchOpenLotsRequestCreateIdentifierType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SearchOpenLotsResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Security.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SelfieVerified.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/SeriesDate.java
@@ -4991,6 +5113,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TemporalTaxYear.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TenderOffer.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TenderOfferType.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/Term.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TimeHorizon.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TimeInForce.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/TimeInForceExpirationDate.java
@@ -5120,6 +5243,7 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/VirtualAccountNumberEnrollmentMetadata.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/VirtualAccountNumberEnrollmentMetadataCreate.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/WarrantExercise.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/WashSaleAdjustmentAmount.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/WatchlistItem.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/WatchlistMatch.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/components/WatchlistMatchUpdate.java
@@ -5621,6 +5745,12 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CostBasisServiceSearchClosedLotsRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CostBasisServiceSearchClosedLotsRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CostBasisServiceSearchClosedLotsResponse.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CostBasisServiceSearchOpenLotsRequest.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CostBasisServiceSearchOpenLotsRequestBuilder.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CostBasisServiceSearchOpenLotsResponse.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CreditsCancelCreditRequest.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CreditsCancelCreditRequestBuilder.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/models/operations/CreditsCancelCreditResponse.java
@@ -6040,6 +6170,8 @@ generatedFiles:
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CheckWithdrawalSchedulesGetCheckWithdrawalSchedule.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CheckWithdrawalSchedulesListCheckWithdrawalSchedules.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CheckWithdrawalSchedulesUpdateCheckWithdrawalSchedule.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CostBasisServiceSearchClosedLots.java
+  - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CostBasisServiceSearchOpenLots.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CreditsCancelCredit.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CreditsCreateCredit.java
   - src/main/java/com/apexfintechsolutions/ascendsdk/operations/CreditsGetCredit.java
@@ -6199,6 +6331,7 @@ generatedFiles:
   - src/test/java/com/apexfintechsolutions/ascendsdk/AssetTradingConfigTests.java
   - src/test/java/com/apexfintechsolutions/ascendsdk/AssetsTests.java
   - src/test/java/com/apexfintechsolutions/ascendsdk/ChecksTests.java
+  - src/test/java/com/apexfintechsolutions/ascendsdk/CostBasisServiceTests.java
   - src/test/java/com/apexfintechsolutions/ascendsdk/DataRetrievalTests.java
   - src/test/java/com/apexfintechsolutions/ascendsdk/InvestigationsTests.java
   - src/test/java/com/apexfintechsolutions/ascendsdk/MarginsTests.java
@@ -9556,6 +9689,38 @@ examples:
           application/json: {}
         default:
           application/json: {}
+  CostBasisService_SearchClosedLots:
+    speakeasy-default-cost-basis-service-search-closed-lots:
+      parameters:
+        path:
+          account_id: "01J71HKJ1K1GX5C0EWZ4BCPACB"
+      requestBody:
+        application/json: {"parent": "accounts/01J71HKJ1K1GX5C0EWZ4BCPACB"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  CostBasisService_SearchOpenLots:
+    speakeasy-default-cost-basis-service-search-open-lots:
+      parameters:
+        path:
+          account_id: "01J71HKJ1K1GX5C0EWZ4BCPACB"
+      requestBody:
+        application/json: {"parent": "accounts/01J71HKJ1K1GX5C0EWZ4BCPACB"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
 examplesVersion: 1.0.2
 generatedTests:
   Accounts_ListLegalNaturalPersons: "2025-08-22T19:32:39Z"
@@ -9596,3 +9761,5 @@ generatedTests:
   MarginsRealTime_GetAssetBuyingPower: "2026-03-23T15:14:32Z"
   CheckDeposits_ForceApproveCheckDeposit: "2026-03-23T15:14:32Z"
   OrderService_ListAccountOrders: "2026-03-23T15:14:32Z"
+  CostBasisService_SearchOpenLots: "2026-10-05T10:54:20Z"
+  CostBasisService_SearchClosedLots: "2026-10-05T10:54:20Z"

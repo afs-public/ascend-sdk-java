@@ -151,12 +151,17 @@ public class TestBankRelationships {
             .sourceBankRelationship(
                 "accounts/"
                     + enrolledAccount.accountId().get()
-                    + "/bank_relationships/"
+                    + "/bankRelationships/"
                     + TransfersUtil.getBankRelationshipId(bankRelationship))
             .build();
 
+    // The reuse target account was just created; retry through the fresh-
+    // account propagation window ("Permission denied on resource").
     var result =
-        sdk.bankRelationships().reuseBankRelationship(reUseAccount.accountId().get(), request);
+        RetryUtil.retryOnTransientError(
+            () ->
+                sdk.bankRelationships()
+                    .reuseBankRelationship(reUseAccount.accountId().get(), request));
     Assertions.assertEquals(200, result.statusCode());
   }
 

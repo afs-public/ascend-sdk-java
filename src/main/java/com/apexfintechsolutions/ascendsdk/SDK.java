@@ -143,6 +143,8 @@ public class SDK {
 
   private final OptionInstructions optionInstructions;
 
+  private final CostBasisService costBasisService;
+
   public Authentication authentication() {
     return authentication;
   }
@@ -309,6 +311,10 @@ public class SDK {
 
   public OptionInstructions optionInstructions() {
     return optionInstructions;
+  }
+
+  public CostBasisService costBasisService() {
+    return costBasisService;
   }
 
   private final SDKConfiguration sdkConfiguration;
@@ -502,6 +508,7 @@ public class SDK {
     this.investorDocs = new InvestorDocs(sdkConfiguration);
     this.dataRetrieval = new DataRetrieval(sdkConfiguration);
     this.optionInstructions = new OptionInstructions(sdkConfiguration);
+    this.costBasisService = new CostBasisService(sdkConfiguration);
     SdkInitData data =
         this.sdkConfiguration
             .hooks()

@@ -42,10 +42,23 @@ public class AlternativeAccountAccreditationTests {
             .client(testHttpClient)
             .build();
 
+    // UAT data churn periodically wipes the accreditation resource, so set
+    // it before reading rather than depending on state from earlier runs.
+    sdk.alternativeAccountAccreditation()
+        .setAccountAccreditationType()
+        .accountId(AltsUtil.ALTS_ACCOUNT_ID)
+        .setAccountAccreditationTypeRequestCreate(
+            SetAccountAccreditationTypeRequestCreate.builder()
+                .accreditationType(
+                    SetAccountAccreditationTypeRequestCreateAccreditationType.NET_WORTH_GT1_M)
+                .name("accounts/" + AltsUtil.ALTS_ACCOUNT_ID + "/accreditation")
+                .build())
+        .call();
+
     AccountAccreditationServiceGetAccountAccreditationResponse res =
         sdk.alternativeAccountAccreditation()
             .getAccountAccreditation()
-            .accountId("01JHGTEPC6ZTAHCFRH2MD3VJJT")
+            .accountId(AltsUtil.ALTS_ACCOUNT_ID)
             .call();
     assertEquals(200, res.statusCode());
   }
@@ -80,12 +93,12 @@ public class AlternativeAccountAccreditationTests {
     AccountAccreditationServiceSetAccountAccreditationTypeResponse res =
         sdk.alternativeAccountAccreditation()
             .setAccountAccreditationType()
-            .accountId("01JHGTEPC6ZTAHCFRH2MD3VJJT")
+            .accountId(AltsUtil.ALTS_ACCOUNT_ID)
             .setAccountAccreditationTypeRequestCreate(
                 SetAccountAccreditationTypeRequestCreate.builder()
                     .accreditationType(
                         SetAccountAccreditationTypeRequestCreateAccreditationType.NET_WORTH_GT1_M)
-                    .name("accounts/01JHGTEPC6ZTAHCFRH2MD3VJJT/accreditation")
+                    .name("accounts/" + AltsUtil.ALTS_ACCOUNT_ID + "/accreditation")
                     .build())
             .call();
     assertEquals(200, res.statusCode());

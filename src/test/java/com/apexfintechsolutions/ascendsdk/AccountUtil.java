@@ -163,29 +163,23 @@ public class AccountUtil {
     var agreements = enrollAccount(sdk, account);
     affirmAgreements(sdk, account, agreements);
 
-    int attempts = 5;
-    for (int i = 0; i < attempts; i++) {
-      Account acc = getAccount(sdk, account.accountId().get());
-      if (acc.state().get() == AccountState.OPEN) {
-        return acc;
-      }
-    }
-
-    throw new Exception("Account never reached OPEN state!");
+    return waitForAccountOpen(sdk, account);
   }
 
   public static Account createEnrolledAccount(SDK sdk) throws Exception {
-    var person = createLnp(sdk);
-    var account = createAccount(sdk, person);
-    var agreements = enrollAccount(sdk, account);
-    affirmAgreements(sdk, account, agreements);
+    return createEnrolledAccountWithLNP(sdk, createLnp(sdk));
+  }
 
-    int attempts = 5;
+  // A new account can take tens of seconds to reach OPEN against the real
+  // UAT environment; poll with a delay rather than hammering immediately.
+  private static Account waitForAccountOpen(SDK sdk, Account account) throws Exception {
+    int attempts = 20;
     for (int i = 0; i < attempts; i++) {
       Account acc = getAccount(sdk, account.accountId().get());
       if (acc.state().get() == AccountState.OPEN) {
         return acc;
       }
+      Thread.sleep(2000);
     }
 
     throw new Exception("Account never reached OPEN state!");

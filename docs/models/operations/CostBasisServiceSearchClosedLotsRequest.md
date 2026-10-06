@@ -1,0 +1,9 @@
+# CostBasisServiceSearchClosedLotsRequest
+
+
+## Fields
+
+| Field                                                                                     | Type                                                                                      | Required                                                                                  | Description                                                                               | Example                                                                                   |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `accountId`                                                                               | *String*                                                                                  | :heavy_check_mark:                                                                        | The account id.                                                                           | 01J71HKJ1K1GX5C0EWZ4BCPACB                                                                |
+| `searchClosedLotsRequestCreate`                                                           | [SearchClosedLotsRequestCreate](../../models/components/SearchClosedLotsRequestCreate.md) | :heavy_check_mark:                                                                        | N/A                                                                                       |                                                                                           |

@@ -66,12 +66,22 @@ public class TestSubscriber {
   public void
       test_subscriber_events_get_subscription_event_delivery_get_subscription_event_delivery1()
           throws Exception {
+    // Re-pick the subscription/delivery pair on each attempt: a concurrently
+    // running suite can delete the picked subscription between the pick and
+    // the read.
     var res =
-        sdk.subscriber()
-            .getPushSubscriptionDelivery()
-            .subscriptionId(subscriberId)
-            .deliveryId(deliveryID)
-            .call();
+        RetryUtil.retryOnTransientError(
+            () -> {
+              String subscriptionId = EventsUtil.getTestSubscriberId(sdk);
+              String deliveryId = EventsUtil.firstDeliveryId(sdk, subscriptionId);
+              return sdk.subscriber()
+                  .getPushSubscriptionDelivery()
+                  .subscriptionId(subscriptionId)
+                  .deliveryId(deliveryId)
+                  .call();
+            },
+            5,
+            2000);
     Assertions.assertNotNull(res);
     Assertions.assertEquals(res.statusCode(), 200);
   }

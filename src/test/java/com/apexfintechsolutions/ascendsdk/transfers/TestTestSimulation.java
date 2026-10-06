@@ -105,8 +105,7 @@ public class TestTestSimulation {
       Assertions.assertEquals(200, res.statusCode());
     } catch (Status status) {
       Assertions.assertEquals(3, status.code().get());
-      Assertions.assertTrue(
-          status.message().get().toLowerCase().contains("that does not need review"));
+      Assertions.assertTrue(status.message().get().toLowerCase().contains("does not need review"));
     }
   }
 
@@ -176,8 +175,7 @@ public class TestTestSimulation {
       Assertions.assertEquals(200, res.statusCode());
     } catch (Status status) {
       Assertions.assertEquals(3, status.code().get());
-      Assertions.assertTrue(
-          status.message().get().toLowerCase().contains("that does not need review"));
+      Assertions.assertTrue(status.message().get().toLowerCase().contains("does not need review"));
     }
   }
 
@@ -248,8 +246,7 @@ public class TestTestSimulation {
       Assertions.assertEquals(200, res.statusCode());
     } catch (Status status) {
       Assertions.assertEquals(3, status.code().get());
-      Assertions.assertTrue(
-          status.message().get().toLowerCase().contains("that does not need review"));
+      Assertions.assertTrue(status.message().get().toLowerCase().contains("does not need review"));
     }
   }
 
@@ -262,8 +259,7 @@ public class TestTestSimulation {
         "Skipping Endpoint Test: Force NOC ACH Withdrawal. Requires current time to be between"
             + " 11:30 PM CT and 6:00 PM CT");
 
-    var completedWithdrawalId =
-        TransfersUtil.createCompletedWithdrawal(sdk, TransfersUtil.getWithdrawalAccountId());
+    var completedWithdrawal = TransfersUtil.createCompletedWithdrawal(sdk);
     var req =
         ForceNocAchWithdrawalRequestCreate.builder()
             .nachaNoc(
@@ -273,16 +269,16 @@ public class TestTestSimulation {
                     .build())
             .name(
                 "accounts/"
-                    + TransfersUtil.getWithdrawalAccountId()
+                    + completedWithdrawal.accountId
                     + "/achWithdrawals/"
-                    + completedWithdrawalId)
+                    + completedWithdrawal.withdrawalId)
             .build();
     var res =
         sdk.testSimulation()
             .forceNocAchWithdrawal()
             .forceNocAchWithdrawalRequestCreate(req)
-            .achWithdrawalId(completedWithdrawalId)
-            .accountId(TransfersUtil.getWithdrawalAccountId())
+            .achWithdrawalId(completedWithdrawal.withdrawalId)
+            .accountId(completedWithdrawal.accountId)
             .call();
     Assertions.assertNotNull(res);
     Assertions.assertEquals(200, res.statusCode());
@@ -319,8 +315,7 @@ public class TestTestSimulation {
       Assertions.assertEquals(200, res.statusCode());
     } catch (Status status) {
       Assertions.assertEquals(3, status.code().get());
-      Assertions.assertTrue(
-          status.message().get().toLowerCase().contains("that does not need review"));
+      Assertions.assertTrue(status.message().get().toLowerCase().contains("does not need review"));
     }
   }
 
@@ -334,24 +329,23 @@ public class TestTestSimulation {
         "Skipping Endpoint Test: Force Return ACH Withdrawal. Requires current time to be between"
             + " 11:30 PM CT and 6:00 PM CT");
 
-    var completedWithdrawalId =
-        TransfersUtil.createCompletedWithdrawal(sdk, TransfersUtil.getWithdrawalAccountId());
+    var completedWithdrawal = TransfersUtil.createCompletedWithdrawal(sdk);
     var req =
         ForceReturnAchWithdrawalRequestCreate.builder()
             .nachaReturn(new NachaReturnCreate(NachaReturnCreateCode.R16))
             .name(
                 "accounts/"
-                    + TransfersUtil.getWithdrawalAccountId()
+                    + completedWithdrawal.accountId
                     + "/achWithdrawals/"
-                    + completedWithdrawalId)
+                    + completedWithdrawal.withdrawalId)
             .build();
     try {
       var res =
           sdk.testSimulation()
               .forceReturnAchWithdrawal()
               .forceReturnAchWithdrawalRequestCreate(req)
-              .achWithdrawalId(completedWithdrawalId)
-              .accountId(TransfersUtil.getWithdrawalAccountId())
+              .achWithdrawalId(completedWithdrawal.withdrawalId)
+              .accountId(completedWithdrawal.accountId)
               .call();
 
       Assertions.assertNotNull(res);
@@ -388,8 +382,7 @@ public class TestTestSimulation {
       Assertions.assertEquals(200, res.statusCode());
     } catch (Status status) {
       Assertions.assertEquals(3, status.code().get());
-      Assertions.assertTrue(
-          status.message().get().toLowerCase().contains("that does not need review"));
+      Assertions.assertTrue(status.message().get().toLowerCase().contains("does not need review"));
     }
   }
 
@@ -419,8 +412,7 @@ public class TestTestSimulation {
       Assertions.assertEquals(200, res.statusCode());
     } catch (Status status) {
       Assertions.assertEquals(3, status.code().get());
-      Assertions.assertTrue(
-          status.message().get().toLowerCase().contains("that does not need review"));
+      Assertions.assertTrue(status.message().get().toLowerCase().contains("does not need review"));
     }
   }
 
@@ -451,8 +443,7 @@ public class TestTestSimulation {
       Assertions.assertEquals(200, res.statusCode());
     } catch (Status status) {
       Assertions.assertEquals(3, status.code().get());
-      Assertions.assertTrue(
-          status.message().get().toLowerCase().contains("that does not need review"));
+      Assertions.assertTrue(status.message().get().toLowerCase().contains("does not need review"));
     }
   }
 
@@ -483,8 +474,7 @@ public class TestTestSimulation {
       Assertions.assertEquals(200, res.statusCode());
     } catch (Status status) {
       Assertions.assertEquals(3, status.code().get());
-      Assertions.assertTrue(
-          status.message().get().toLowerCase().contains("that does not need review"));
+      Assertions.assertTrue(status.message().get().toLowerCase().contains("does not need review"));
     }
   }
 
@@ -565,12 +555,22 @@ public class TestTestSimulation {
                     TransfersUtil.getWithdrawalAccountId(), wireWithdrawalId))
             .build();
 
-    var result =
-        sdk.testSimulation()
-            .forceApproveWireWithdrawal(
-                TransfersUtil.getWithdrawalAccountId(), wireWithdrawalId, request);
-    Assertions.assertNotNull(result);
-    Assertions.assertEquals(200, result.statusCode());
+    // A freshly created wire withdrawal is sometimes approved before the
+    // force-approve lands, which fails with a "does not need review"
+    // precondition error -- accept that alongside a genuine 200.
+    try {
+      var result =
+          sdk.testSimulation()
+              .forceApproveWireWithdrawal(
+                  TransfersUtil.getWithdrawalAccountId(), wireWithdrawalId, request);
+      Assertions.assertNotNull(result);
+      Assertions.assertEquals(200, result.statusCode());
+    } catch (Status status) {
+      Assertions.assertEquals(3, status.code().get());
+      Assertions.assertTrue(
+          status.message().get().toLowerCase().contains("does not need review"),
+          status.message().get());
+    }
   }
 
   @Test

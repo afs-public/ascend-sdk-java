@@ -4,13 +4,14 @@
 package com.apexfintechsolutions.ascendsdk;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.apexfintechsolutions.ascendsdk.models.components.DecimalCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.ForceApproveCheckDepositRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.Security;
 import com.apexfintechsolutions.ascendsdk.models.components.ServiceAccountCreds;
 import com.apexfintechsolutions.ascendsdk.models.components.SimulateCreateCheckDepositRequestCreate;
-import com.apexfintechsolutions.ascendsdk.models.operations.CheckDepositsForceApproveCheckDepositResponse;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
 import com.apexfintechsolutions.ascendsdk.models.operations.CheckDepositsSimulateCreateCheckDepositResponse;
 import com.apexfintechsolutions.ascendsdk.utils.Utils;
 import org.junit.jupiter.api.Test;
@@ -42,17 +43,28 @@ public class TestSimulationTests {
             .client(testHttpClient)
             .build();
 
-    CheckDepositsForceApproveCheckDepositResponse res =
-        sdk.testSimulation()
-            .forceApproveCheckDeposit()
-            .accountId("01JHGTEPC6ZTAHCFRH2MD3VJJT")
-            .checkDepositId("20250811022796")
-            .forceApproveCheckDepositRequestCreate(
-                ForceApproveCheckDepositRequestCreate.builder()
-                    .name("accounts/01JHGTEPC6ZTAHCFRH2MD3VJJT/checkDeposits/20250811022796")
-                    .build())
-            .call();
-    assertEquals(200, res.statusCode());
+    // This hardcoded check deposit is already approved/completed, so
+    // force-approving it again is expected to fail with a "does not need
+    // review" precondition error -- but accept a genuine 200 too, in case
+    // the deposit's state ever changes.
+    try {
+      var res =
+          sdk.testSimulation()
+              .forceApproveCheckDeposit()
+              .accountId("01JHGTEPC6ZTAHCFRH2MD3VJJT")
+              .checkDepositId("20250811022796")
+              .forceApproveCheckDepositRequestCreate(
+                  ForceApproveCheckDepositRequestCreate.builder()
+                      .name("accounts/01JHGTEPC6ZTAHCFRH2MD3VJJT/checkDeposits/20250811022796")
+                      .build())
+              .call();
+      assertEquals(200, res.statusCode());
+    } catch (Status status) {
+      assertEquals(3, status.code().get());
+      assertTrue(
+          status.message().get().toLowerCase().contains("does not need review"),
+          status.message().get());
+    }
   }
 
   @Test

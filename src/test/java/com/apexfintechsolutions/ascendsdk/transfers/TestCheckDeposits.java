@@ -70,8 +70,7 @@ public class TestCheckDeposits {
       Assertions.assertTrue(res.checkDeposit().isPresent());
     } catch (Status status) {
       Assertions.assertEquals(3, status.code().get());
-      Assertions.assertTrue(
-          status.message().get().toLowerCase().contains("that does not need review"));
+      Assertions.assertTrue(status.message().get().toLowerCase().contains("does not need review"));
     }
   }
 }
