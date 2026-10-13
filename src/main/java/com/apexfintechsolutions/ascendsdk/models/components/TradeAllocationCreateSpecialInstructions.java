@@ -135,6 +135,8 @@ public class TradeAllocationCreateSpecialInstructions {
       new TradeAllocationCreateSpecialInstructions("SUPPRESS_TAF_FEE");
   public static final TradeAllocationCreateSpecialInstructions DIVIDEND_REINVESTMENT =
       new TradeAllocationCreateSpecialInstructions("DIVIDEND_REINVESTMENT");
+  public static final TradeAllocationCreateSpecialInstructions REPORT_MSRB =
+      new TradeAllocationCreateSpecialInstructions("REPORT_MSRB");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -252,6 +254,7 @@ public class TradeAllocationCreateSpecialInstructions {
     map.put("SUPPRESS_SEC_FEE", SUPPRESS_SEC_FEE);
     map.put("SUPPRESS_TAF_FEE", SUPPRESS_TAF_FEE);
     map.put("DIVIDEND_REINVESTMENT", DIVIDEND_REINVESTMENT);
+    map.put("REPORT_MSRB", REPORT_MSRB);
     return map;
   }
 
@@ -339,6 +342,7 @@ public class TradeAllocationCreateSpecialInstructions {
     map.put(
         "DIVIDEND_REINVESTMENT",
         TradeAllocationCreateSpecialInstructionsEnum.DIVIDEND_REINVESTMENT);
+    map.put("REPORT_MSRB", TradeAllocationCreateSpecialInstructionsEnum.REPORT_MSRB);
     return map;
   }
 
@@ -425,6 +429,7 @@ public class TradeAllocationCreateSpecialInstructions {
     SUPPRESS_SEC_FEE("SUPPRESS_SEC_FEE"),
     SUPPRESS_TAF_FEE("SUPPRESS_TAF_FEE"),
     DIVIDEND_REINVESTMENT("DIVIDEND_REINVESTMENT"),
+    REPORT_MSRB("REPORT_MSRB"),
     ;
 
     private final String value;

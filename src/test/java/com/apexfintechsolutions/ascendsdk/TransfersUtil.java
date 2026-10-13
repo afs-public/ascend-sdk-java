@@ -480,7 +480,10 @@ public class TransfersUtil {
             .amount(DecimalCreate.builder().value("500001.00").build())
             .sourceAccount("accounts/" + getWithdrawalAccountId())
             .build();
-    var res = sdk.journals().createCashJournal(req);
+    // A just-opened destination account is rejected with PERMISSION_DENIED ("Permission denied
+    // on resource (or it might not exist)") for a window after it reaches OPEN, so retry like
+    // the Python fixture does rather than failing the whole suite's @BeforeAll.
+    var res = RetryUtil.retryOnTransientError(() -> sdk.journals().createCashJournal(req));
     if (res.statusCode() == 200) {
       return res.cashJournal().get().name().get().split("/")[1];
     }

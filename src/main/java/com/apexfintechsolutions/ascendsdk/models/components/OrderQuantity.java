@@ -19,8 +19,8 @@ import java.util.Optional;
  * Represents the number of shares, up to a maximum of 3 decimal places. For Fixed Income:
  * Represents the par (face-value) amount being ordered, and may not exceed two decimal places for
  * USD-based currencies. For Event Contracts: Represents the number of contracts being ordered, and
- * must be whole numbers for BUY orders or up to a maximum of 2 decimal places for SELL orders.
- * Either a quantity or notional_value MUST be specified (but not both).
+ * may be up to a maximum of 2 decimal places. Exactly one of quantity, notional_value, or
+ * full_position MUST be specified.
  */
 public class OrderQuantity {
   /**

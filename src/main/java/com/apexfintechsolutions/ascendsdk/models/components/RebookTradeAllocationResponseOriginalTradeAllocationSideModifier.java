@@ -63,6 +63,8 @@ public class RebookTradeAllocationResponseOriginalTradeAllocationSideModifier {
       new RebookTradeAllocationResponseOriginalTradeAllocationSideModifier("OPEN");
   public static final RebookTradeAllocationResponseOriginalTradeAllocationSideModifier CLOSE =
       new RebookTradeAllocationResponseOriginalTradeAllocationSideModifier("CLOSE");
+  public static final RebookTradeAllocationResponseOriginalTradeAllocationSideModifier COVER =
+      new RebookTradeAllocationResponseOriginalTradeAllocationSideModifier("COVER");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -147,6 +149,7 @@ public class RebookTradeAllocationResponseOriginalTradeAllocationSideModifier {
     map.put("SHORT_COVER", SHORT_COVER);
     map.put("OPEN", OPEN);
     map.put("CLOSE", CLOSE);
+    map.put("COVER", COVER);
     return map;
   }
 
@@ -168,6 +171,7 @@ public class RebookTradeAllocationResponseOriginalTradeAllocationSideModifier {
         RebookTradeAllocationResponseOriginalTradeAllocationSideModifierEnum.SHORT_COVER);
     map.put("OPEN", RebookTradeAllocationResponseOriginalTradeAllocationSideModifierEnum.OPEN);
     map.put("CLOSE", RebookTradeAllocationResponseOriginalTradeAllocationSideModifierEnum.CLOSE);
+    map.put("COVER", RebookTradeAllocationResponseOriginalTradeAllocationSideModifierEnum.COVER);
     return map;
   }
 
@@ -213,6 +217,7 @@ public class RebookTradeAllocationResponseOriginalTradeAllocationSideModifier {
     SHORT_COVER("SHORT_COVER"),
     OPEN("OPEN"),
     CLOSE("CLOSE"),
+    COVER("COVER"),
     ;
 
     private final String value;

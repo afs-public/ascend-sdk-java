@@ -55,6 +55,7 @@ public class BookingTradeSideModifier {
       new BookingTradeSideModifier("SHORT_COVER");
   public static final BookingTradeSideModifier OPEN = new BookingTradeSideModifier("OPEN");
   public static final BookingTradeSideModifier CLOSE = new BookingTradeSideModifier("CLOSE");
+  public static final BookingTradeSideModifier COVER = new BookingTradeSideModifier("COVER");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -129,6 +130,7 @@ public class BookingTradeSideModifier {
     map.put("SHORT_COVER", SHORT_COVER);
     map.put("OPEN", OPEN);
     map.put("CLOSE", CLOSE);
+    map.put("COVER", COVER);
     return map;
   }
 
@@ -140,6 +142,7 @@ public class BookingTradeSideModifier {
     map.put("SHORT_COVER", BookingTradeSideModifierEnum.SHORT_COVER);
     map.put("OPEN", BookingTradeSideModifierEnum.OPEN);
     map.put("CLOSE", BookingTradeSideModifierEnum.CLOSE);
+    map.put("COVER", BookingTradeSideModifierEnum.COVER);
     return map;
   }
 
@@ -181,6 +184,7 @@ public class BookingTradeSideModifier {
     SHORT_COVER("SHORT_COVER"),
     OPEN("OPEN"),
     CLOSE("CLOSE"),
+    COVER("COVER"),
     ;
 
     private final String value;

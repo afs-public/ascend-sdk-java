@@ -55,6 +55,7 @@ public class TradeAllocationSideModifier {
       new TradeAllocationSideModifier("SHORT_COVER");
   public static final TradeAllocationSideModifier OPEN = new TradeAllocationSideModifier("OPEN");
   public static final TradeAllocationSideModifier CLOSE = new TradeAllocationSideModifier("CLOSE");
+  public static final TradeAllocationSideModifier COVER = new TradeAllocationSideModifier("COVER");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -129,6 +130,7 @@ public class TradeAllocationSideModifier {
     map.put("SHORT_COVER", SHORT_COVER);
     map.put("OPEN", OPEN);
     map.put("CLOSE", CLOSE);
+    map.put("COVER", COVER);
     return map;
   }
 
@@ -140,6 +142,7 @@ public class TradeAllocationSideModifier {
     map.put("SHORT_COVER", TradeAllocationSideModifierEnum.SHORT_COVER);
     map.put("OPEN", TradeAllocationSideModifierEnum.OPEN);
     map.put("CLOSE", TradeAllocationSideModifierEnum.CLOSE);
+    map.put("COVER", TradeAllocationSideModifierEnum.COVER);
     return map;
   }
 
@@ -181,6 +184,7 @@ public class TradeAllocationSideModifier {
     SHORT_COVER("SHORT_COVER"),
     OPEN("OPEN"),
     CLOSE("CLOSE"),
+    COVER("COVER"),
     ;
 
     private final String value;

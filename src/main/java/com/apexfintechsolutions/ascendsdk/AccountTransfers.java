@@ -6,6 +6,7 @@ package com.apexfintechsolutions.ascendsdk;
 import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOperation;
 
 import com.apexfintechsolutions.ascendsdk.models.components.AcceptTransferRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.components.PreviewTransferRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.RejectTransferRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.TransferCreate;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersAcceptTransferRequest;
@@ -20,6 +21,8 @@ import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersGetT
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersListTransfersRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersListTransfersRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersListTransfersResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersPreviewTransferRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersPreviewTransferResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersRejectTransferRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersRejectTransferRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersRejectTransferResponse;
@@ -27,6 +30,7 @@ import com.apexfintechsolutions.ascendsdk.operations.AccountTransfersAcceptTrans
 import com.apexfintechsolutions.ascendsdk.operations.AccountTransfersCreateTransfer;
 import com.apexfintechsolutions.ascendsdk.operations.AccountTransfersGetTransfer;
 import com.apexfintechsolutions.ascendsdk.operations.AccountTransfersListTransfers;
+import com.apexfintechsolutions.ascendsdk.operations.AccountTransfersPreviewTransfer;
 import com.apexfintechsolutions.ascendsdk.operations.AccountTransfersRejectTransfer;
 import com.apexfintechsolutions.ascendsdk.utils.Options;
 import java.util.Optional;
@@ -336,6 +340,60 @@ public class AccountTransfers {
             .build();
     RequestOperation<AccountTransfersGetTransferRequest, AccountTransfersGetTransferResponse>
         operation = new AccountTransfersGetTransfer.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Preview Transfer
+   *
+   * <p>Previews what an ACATS transfer of a linked account's holdings would look like: the holdings
+   * sorted into eligible and ineligible (with reasons), plus any transfer- or account-level
+   * conditions. The linked account comes from a Data Aggregator Connect connection (see [Create
+   * Connection](https://developer.apexclearing.com/apex-beta/v1-dev/reference/dacservice_createconnection));
+   * ACATS resolves the holdings from it internally.
+   *
+   * @return The call builder
+   */
+  public AccountTransfersPreviewTransferRequestBuilder previewTransfer() {
+    return new AccountTransfersPreviewTransferRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * Preview Transfer
+   *
+   * <p>Previews what an ACATS transfer of a linked account's holdings would look like: the holdings
+   * sorted into eligible and ineligible (with reasons), plus any transfer- or account-level
+   * conditions. The linked account comes from a Data Aggregator Connect connection (see [Create
+   * Connection](https://developer.apexclearing.com/apex-beta/v1-dev/reference/dacservice_createconnection));
+   * ACATS resolves the holdings from it internally.
+   *
+   * @param request The request object containing all the parameters for the API call.
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountTransfersPreviewTransferResponse previewTransfer(
+      PreviewTransferRequestCreate request) throws Exception {
+    return previewTransfer(request, Optional.empty());
+  }
+
+  /**
+   * Preview Transfer
+   *
+   * <p>Previews what an ACATS transfer of a linked account's holdings would look like: the holdings
+   * sorted into eligible and ineligible (with reasons), plus any transfer- or account-level
+   * conditions. The linked account comes from a Data Aggregator Connect connection (see [Create
+   * Connection](https://developer.apexclearing.com/apex-beta/v1-dev/reference/dacservice_createconnection));
+   * ACATS resolves the holdings from it internally.
+   *
+   * @param request The request object containing all the parameters for the API call.
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public AccountTransfersPreviewTransferResponse previewTransfer(
+      PreviewTransferRequestCreate request, Optional<Options> options) throws Exception {
+    RequestOperation<PreviewTransferRequestCreate, AccountTransfersPreviewTransferResponse>
+        operation = new AccountTransfersPreviewTransfer.Sync(sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }
 }

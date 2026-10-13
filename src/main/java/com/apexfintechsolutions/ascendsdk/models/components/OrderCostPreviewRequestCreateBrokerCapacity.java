@@ -40,7 +40,8 @@ import java.util.Optional;
 /**
  * OrderCostPreviewRequestCreateBrokerCapacity
  *
- * <p>Capacity used in determining the order cost. Defaults to "AGENCY" if no value specified.
+ * <p>Capacity used in determining the order cost. If not specified, defaults to the capacity
+ * configured for the correspondent by Apex.
  */
 @JsonDeserialize(using = OrderCostPreviewRequestCreateBrokerCapacity._Deserializer.class)
 @JsonSerialize(using = OrderCostPreviewRequestCreateBrokerCapacity._Serializer.class)

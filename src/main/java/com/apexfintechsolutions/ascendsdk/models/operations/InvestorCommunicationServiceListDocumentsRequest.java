@@ -10,7 +10,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Optional;
 
 public class InvestorCommunicationServiceListDocumentsRequest {
-  /** The maximum number of items to return; The service may return fewer than this value */
+  /**
+   * The maximum number of items to return; The service may return fewer than this value; If
+   * unspecified, zero, or negative, at most 20 items will be returned; The maximum allowed value is
+   * 200; if a larger value is requested, the page size will be overridden to 200
+   */
   @SpeakeasyMetadata("queryParam:style=form,explode=true,name=page_size")
   private Optional<Integer> pageSize;
 
@@ -40,7 +44,11 @@ public class InvestorCommunicationServiceListDocumentsRequest {
     this(Optional.empty(), Optional.empty(), Optional.empty());
   }
 
-  /** The maximum number of items to return; The service may return fewer than this value */
+  /**
+   * The maximum number of items to return; The service may return fewer than this value; If
+   * unspecified, zero, or negative, at most 20 items will be returned; The maximum allowed value is
+   * 200; if a larger value is requested, the page size will be overridden to 200
+   */
   @JsonIgnore
   public Optional<Integer> pageSize() {
     return pageSize;
@@ -65,14 +73,22 @@ public class InvestorCommunicationServiceListDocumentsRequest {
     return new Builder();
   }
 
-  /** The maximum number of items to return; The service may return fewer than this value */
+  /**
+   * The maximum number of items to return; The service may return fewer than this value; If
+   * unspecified, zero, or negative, at most 20 items will be returned; The maximum allowed value is
+   * 200; if a larger value is requested, the page size will be overridden to 200
+   */
   public InvestorCommunicationServiceListDocumentsRequest withPageSize(int pageSize) {
     Utils.checkNotNull(pageSize, "pageSize");
     this.pageSize = Optional.ofNullable(pageSize);
     return this;
   }
 
-  /** The maximum number of items to return; The service may return fewer than this value */
+  /**
+   * The maximum number of items to return; The service may return fewer than this value; If
+   * unspecified, zero, or negative, at most 20 items will be returned; The maximum allowed value is
+   * 200; if a larger value is requested, the page size will be overridden to 200
+   */
   public InvestorCommunicationServiceListDocumentsRequest withPageSize(Optional<Integer> pageSize) {
     Utils.checkNotNull(pageSize, "pageSize");
     this.pageSize = pageSize;
@@ -159,14 +175,22 @@ public class InvestorCommunicationServiceListDocumentsRequest {
       // force use of static builder() method
     }
 
-    /** The maximum number of items to return; The service may return fewer than this value */
+    /**
+     * The maximum number of items to return; The service may return fewer than this value; If
+     * unspecified, zero, or negative, at most 20 items will be returned; The maximum allowed value
+     * is 200; if a larger value is requested, the page size will be overridden to 200
+     */
     public Builder pageSize(int pageSize) {
       Utils.checkNotNull(pageSize, "pageSize");
       this.pageSize = Optional.ofNullable(pageSize);
       return this;
     }
 
-    /** The maximum number of items to return; The service may return fewer than this value */
+    /**
+     * The maximum number of items to return; The service may return fewer than this value; If
+     * unspecified, zero, or negative, at most 20 items will be returned; The maximum allowed value
+     * is 200; if a larger value is requested, the page size will be overridden to 200
+     */
     public Builder pageSize(Optional<Integer> pageSize) {
       Utils.checkNotNull(pageSize, "pageSize");
       this.pageSize = pageSize;

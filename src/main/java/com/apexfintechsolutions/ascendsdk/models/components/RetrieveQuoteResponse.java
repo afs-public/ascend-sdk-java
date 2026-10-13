@@ -74,7 +74,8 @@ public class RetrieveQuoteResponse {
   private JsonNullable<? extends BidQuantity> bidQuantity;
 
   /**
-   * Capacity used in determining bid and ask prices. Defaults to "AGENCY" if no value specified.
+   * Capacity used in determining bid and ask prices. If not specified, defaults to the capacity
+   * configured for the correspondent by Apex.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("broker_capacity")
@@ -245,7 +246,8 @@ public class RetrieveQuoteResponse {
   }
 
   /**
-   * Capacity used in determining bid and ask prices. Defaults to "AGENCY" if no value specified.
+   * Capacity used in determining bid and ask prices. If not specified, defaults to the capacity
+   * configured for the correspondent by Apex.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -435,7 +437,8 @@ public class RetrieveQuoteResponse {
   }
 
   /**
-   * Capacity used in determining bid and ask prices. Defaults to "AGENCY" if no value specified.
+   * Capacity used in determining bid and ask prices. If not specified, defaults to the capacity
+   * configured for the correspondent by Apex.
    */
   public RetrieveQuoteResponse withBrokerCapacity(
       RetrieveQuoteResponseBrokerCapacity brokerCapacity) {
@@ -445,7 +448,8 @@ public class RetrieveQuoteResponse {
   }
 
   /**
-   * Capacity used in determining bid and ask prices. Defaults to "AGENCY" if no value specified.
+   * Capacity used in determining bid and ask prices. If not specified, defaults to the capacity
+   * configured for the correspondent by Apex.
    */
   public RetrieveQuoteResponse withBrokerCapacity(
       Optional<? extends RetrieveQuoteResponseBrokerCapacity> brokerCapacity) {
@@ -788,7 +792,8 @@ public class RetrieveQuoteResponse {
     }
 
     /**
-     * Capacity used in determining bid and ask prices. Defaults to "AGENCY" if no value specified.
+     * Capacity used in determining bid and ask prices. If not specified, defaults to the capacity
+     * configured for the correspondent by Apex.
      */
     public Builder brokerCapacity(RetrieveQuoteResponseBrokerCapacity brokerCapacity) {
       Utils.checkNotNull(brokerCapacity, "brokerCapacity");
@@ -797,7 +802,8 @@ public class RetrieveQuoteResponse {
     }
 
     /**
-     * Capacity used in determining bid and ask prices. Defaults to "AGENCY" if no value specified.
+     * Capacity used in determining bid and ask prices. If not specified, defaults to the capacity
+     * configured for the correspondent by Apex.
      */
     public Builder brokerCapacity(
         Optional<? extends RetrieveQuoteResponseBrokerCapacity> brokerCapacity) {

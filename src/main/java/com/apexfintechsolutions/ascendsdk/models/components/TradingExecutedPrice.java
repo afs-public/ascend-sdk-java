@@ -19,10 +19,7 @@ import org.openapitools.jackson.nullable.JsonNullable;
  */
 public class TradingExecutedPrice {
   /**
-   * The limit price which must be greater than zero if provided. For equity orders in the USD
-   * currency, up to 2 decimal places are allowed for prices above $1 and up to 4 decimal places for
-   * prices at or below $1. For fixed income orders this is expressed as a percentage of par, which
-   * allows up to 8 decimal places in the USD currency.
+   * The price value which must be greater than zero if provided. Supports up to 8 decimal places.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("price")
@@ -51,10 +48,7 @@ public class TradingExecutedPrice {
   }
 
   /**
-   * The limit price which must be greater than zero if provided. For equity orders in the USD
-   * currency, up to 2 decimal places are allowed for prices above $1 and up to 4 decimal places for
-   * prices at or below $1. For fixed income orders this is expressed as a percentage of par, which
-   * allows up to 8 decimal places in the USD currency.
+   * The price value which must be greater than zero if provided. Supports up to 8 decimal places.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -77,10 +71,7 @@ public class TradingExecutedPrice {
   }
 
   /**
-   * The limit price which must be greater than zero if provided. For equity orders in the USD
-   * currency, up to 2 decimal places are allowed for prices above $1 and up to 4 decimal places for
-   * prices at or below $1. For fixed income orders this is expressed as a percentage of par, which
-   * allows up to 8 decimal places in the USD currency.
+   * The price value which must be greater than zero if provided. Supports up to 8 decimal places.
    */
   public TradingExecutedPrice withPrice(Price price) {
     Utils.checkNotNull(price, "price");
@@ -89,10 +80,7 @@ public class TradingExecutedPrice {
   }
 
   /**
-   * The limit price which must be greater than zero if provided. For equity orders in the USD
-   * currency, up to 2 decimal places are allowed for prices above $1 and up to 4 decimal places for
-   * prices at or below $1. For fixed income orders this is expressed as a percentage of par, which
-   * allows up to 8 decimal places in the USD currency.
+   * The price value which must be greater than zero if provided. Supports up to 8 decimal places.
    */
   public TradingExecutedPrice withPrice(JsonNullable<? extends Price> price) {
     Utils.checkNotNull(price, "price");
@@ -155,10 +143,7 @@ public class TradingExecutedPrice {
     }
 
     /**
-     * The limit price which must be greater than zero if provided. For equity orders in the USD
-     * currency, up to 2 decimal places are allowed for prices above $1 and up to 4 decimal places
-     * for prices at or below $1. For fixed income orders this is expressed as a percentage of par,
-     * which allows up to 8 decimal places in the USD currency.
+     * The price value which must be greater than zero if provided. Supports up to 8 decimal places.
      */
     public Builder price(Price price) {
       Utils.checkNotNull(price, "price");
@@ -167,10 +152,7 @@ public class TradingExecutedPrice {
     }
 
     /**
-     * The limit price which must be greater than zero if provided. For equity orders in the USD
-     * currency, up to 2 decimal places are allowed for prices above $1 and up to 4 decimal places
-     * for prices at or below $1. For fixed income orders this is expressed as a percentage of par,
-     * which allows up to 8 decimal places in the USD currency.
+     * The price value which must be greater than zero if provided. Supports up to 8 decimal places.
      */
     public Builder price(JsonNullable<? extends Price> price) {
       Utils.checkNotNull(price, "price");

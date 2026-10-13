@@ -40,7 +40,8 @@ import java.util.Optional;
 /**
  * RetrieveQuoteRequestCreateBrokerCapacity
  *
- * <p>Capacity used in determining bid and ask prices. Defaults to "AGENCY" if no value specified.
+ * <p>Capacity used in determining bid and ask prices. If not specified, defaults to the capacity
+ * configured for the correspondent by Apex.
  */
 @JsonDeserialize(using = RetrieveQuoteRequestCreateBrokerCapacity._Deserializer.class)
 @JsonSerialize(using = RetrieveQuoteRequestCreateBrokerCapacity._Serializer.class)

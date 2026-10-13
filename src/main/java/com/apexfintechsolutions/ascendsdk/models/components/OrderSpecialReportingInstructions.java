@@ -95,6 +95,8 @@ public class OrderSpecialReportingInstructions {
       new OrderSpecialReportingInstructions("CAT_PARENT_ALGO");
   public static final OrderSpecialReportingInstructions CAT_PARENT_GTC =
       new OrderSpecialReportingInstructions("CAT_PARENT_GTC");
+  public static final OrderSpecialReportingInstructions MANUAL_ORDER =
+      new OrderSpecialReportingInstructions("MANUAL_ORDER");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -191,6 +193,7 @@ public class OrderSpecialReportingInstructions {
     map.put("ROUND_UP", ROUND_UP);
     map.put("CAT_PARENT_ALGO", CAT_PARENT_ALGO);
     map.put("CAT_PARENT_GTC", CAT_PARENT_GTC);
+    map.put("MANUAL_ORDER", MANUAL_ORDER);
     return map;
   }
 
@@ -228,6 +231,7 @@ public class OrderSpecialReportingInstructions {
     map.put("ROUND_UP", OrderSpecialReportingInstructionsEnum.ROUND_UP);
     map.put("CAT_PARENT_ALGO", OrderSpecialReportingInstructionsEnum.CAT_PARENT_ALGO);
     map.put("CAT_PARENT_GTC", OrderSpecialReportingInstructionsEnum.CAT_PARENT_GTC);
+    map.put("MANUAL_ORDER", OrderSpecialReportingInstructionsEnum.MANUAL_ORDER);
     return map;
   }
 
@@ -291,6 +295,7 @@ public class OrderSpecialReportingInstructions {
     ROUND_UP("ROUND_UP"),
     CAT_PARENT_ALGO("CAT_PARENT_ALGO"),
     CAT_PARENT_GTC("CAT_PARENT_GTC"),
+    MANUAL_ORDER("MANUAL_ORDER"),
     ;
 
     private final String value;

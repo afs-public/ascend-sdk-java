@@ -38,7 +38,10 @@ public class OptionOrder {
   @JsonProperty("cancel_initiator")
   private Optional<? extends OptionOrderCancelInitiator> cancelInitiator;
 
-  /** Used to explain why an option order is canceled */
+  /**
+   * Used to explain why an option order is canceled. Unused: reserved for future use. This field is
+   * not currently populated.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("cancel_reason")
   private Optional<String> cancelReason;
@@ -69,7 +72,11 @@ public class OptionOrder {
   @JsonProperty("client_order_id")
   private Optional<String> clientOrderId;
 
-  /** Required for any client who is having Apex do CAT reporting on their behalf. */
+  /**
+   * Required for any client who is having Apex do CAT reporting on their behalf. When
+   * special_reporting_instructions includes MANUAL_ORDER, this is also reported to CAT as the time
+   * the order was manually received from the customer.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("client_received_time")
   private JsonNullable<OffsetDateTime> clientReceivedTime;
@@ -138,12 +145,11 @@ public class OptionOrder {
   private Optional<? extends List<OptionOrderLeg>> legs;
 
   /**
-   * The limit price for this option order. For single-leg option orders, this is the price per
-   * contract which the filled order must match or beat. For multi-leg orders, this represents the
-   * amortized "price per unit" that must be matched or beat. (E.g. with a limit price of a $4
-   * DEBIT, and an order with 2 legs that includes one leg buy 100 shares of SBX and another leg to
-   * sell 1 contract of SBX, then the fills will be guaranteed to result in no more than a $400--4
-   * USD X 100 shares/contract--total debit against the ordering account.)
+   * **Field Dependencies:**
+   *
+   * <p>Required if `order_type` is `LIMIT`.
+   *
+   * <p>Otherwise, must be empty.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("limit_price")
@@ -204,8 +210,11 @@ public class OptionOrder {
   private JsonNullable<? extends OptionOrderQuantity> quantity;
 
   /**
-   * Special Reporting Instructions to be applied to this option order. Can include multiple
-   * Instructions.
+   * Special Reporting Instructions to be applied to this option order. Only CAT_PARENT_ALGO and
+   * MANUAL_ORDER are supported for option orders; any other value is rejected. CAT_PARENT_ALGO is
+   * only allowed on LIMIT orders. MANUAL_ORDER marks the order as manually received from the
+   * customer for CAT reporting; client_received_time should then be set to the time the order was
+   * received.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("special_reporting_instructions")
@@ -376,7 +385,10 @@ public class OptionOrder {
     return (Optional<OptionOrderCancelInitiator>) cancelInitiator;
   }
 
-  /** Used to explain why an option order is canceled */
+  /**
+   * Used to explain why an option order is canceled. Unused: reserved for future use. This field is
+   * not currently populated.
+   */
   @JsonIgnore
   public Optional<String> cancelReason() {
     return cancelReason;
@@ -413,7 +425,11 @@ public class OptionOrder {
     return clientOrderId;
   }
 
-  /** Required for any client who is having Apex do CAT reporting on their behalf. */
+  /**
+   * Required for any client who is having Apex do CAT reporting on their behalf. When
+   * special_reporting_instructions includes MANUAL_ORDER, this is also reported to CAT as the time
+   * the order was manually received from the customer.
+   */
   @JsonIgnore
   public JsonNullable<OffsetDateTime> clientReceivedTime() {
     return clientReceivedTime;
@@ -497,12 +513,11 @@ public class OptionOrder {
   }
 
   /**
-   * The limit price for this option order. For single-leg option orders, this is the price per
-   * contract which the filled order must match or beat. For multi-leg orders, this represents the
-   * amortized "price per unit" that must be matched or beat. (E.g. with a limit price of a $4
-   * DEBIT, and an order with 2 legs that includes one leg buy 100 shares of SBX and another leg to
-   * sell 1 contract of SBX, then the fills will be guaranteed to result in no more than a $400--4
-   * USD X 100 shares/contract--total debit against the ordering account.)
+   * **Field Dependencies:**
+   *
+   * <p>Required if `order_type` is `LIMIT`.
+   *
+   * <p>Otherwise, must be empty.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -579,8 +594,11 @@ public class OptionOrder {
   }
 
   /**
-   * Special Reporting Instructions to be applied to this option order. Can include multiple
-   * Instructions.
+   * Special Reporting Instructions to be applied to this option order. Only CAT_PARENT_ALGO and
+   * MANUAL_ORDER are supported for option orders; any other value is rejected. CAT_PARENT_ALGO is
+   * only allowed on LIMIT orders. MANUAL_ORDER marks the order as manually received from the
+   * customer for CAT reporting; client_received_time should then be set to the time the order was
+   * received.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -652,14 +670,20 @@ public class OptionOrder {
     return this;
   }
 
-  /** Used to explain why an option order is canceled */
+  /**
+   * Used to explain why an option order is canceled. Unused: reserved for future use. This field is
+   * not currently populated.
+   */
   public OptionOrder withCancelReason(String cancelReason) {
     Utils.checkNotNull(cancelReason, "cancelReason");
     this.cancelReason = Optional.ofNullable(cancelReason);
     return this;
   }
 
-  /** Used to explain why an option order is canceled */
+  /**
+   * Used to explain why an option order is canceled. Unused: reserved for future use. This field is
+   * not currently populated.
+   */
   public OptionOrder withCancelReason(Optional<String> cancelReason) {
     Utils.checkNotNull(cancelReason, "cancelReason");
     this.cancelReason = cancelReason;
@@ -737,14 +761,22 @@ public class OptionOrder {
     return this;
   }
 
-  /** Required for any client who is having Apex do CAT reporting on their behalf. */
+  /**
+   * Required for any client who is having Apex do CAT reporting on their behalf. When
+   * special_reporting_instructions includes MANUAL_ORDER, this is also reported to CAT as the time
+   * the order was manually received from the customer.
+   */
   public OptionOrder withClientReceivedTime(OffsetDateTime clientReceivedTime) {
     Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
     this.clientReceivedTime = JsonNullable.of(clientReceivedTime);
     return this;
   }
 
-  /** Required for any client who is having Apex do CAT reporting on their behalf. */
+  /**
+   * Required for any client who is having Apex do CAT reporting on their behalf. When
+   * special_reporting_instructions includes MANUAL_ORDER, this is also reported to CAT as the time
+   * the order was manually received from the customer.
+   */
   public OptionOrder withClientReceivedTime(JsonNullable<OffsetDateTime> clientReceivedTime) {
     Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
     this.clientReceivedTime = clientReceivedTime;
@@ -919,12 +951,11 @@ public class OptionOrder {
   }
 
   /**
-   * The limit price for this option order. For single-leg option orders, this is the price per
-   * contract which the filled order must match or beat. For multi-leg orders, this represents the
-   * amortized "price per unit" that must be matched or beat. (E.g. with a limit price of a $4
-   * DEBIT, and an order with 2 legs that includes one leg buy 100 shares of SBX and another leg to
-   * sell 1 contract of SBX, then the fills will be guaranteed to result in no more than a $400--4
-   * USD X 100 shares/contract--total debit against the ordering account.)
+   * **Field Dependencies:**
+   *
+   * <p>Required if `order_type` is `LIMIT`.
+   *
+   * <p>Otherwise, must be empty.
    */
   public OptionOrder withLimitPrice(OptionOrderLimitPrice limitPrice) {
     Utils.checkNotNull(limitPrice, "limitPrice");
@@ -933,12 +964,11 @@ public class OptionOrder {
   }
 
   /**
-   * The limit price for this option order. For single-leg option orders, this is the price per
-   * contract which the filled order must match or beat. For multi-leg orders, this represents the
-   * amortized "price per unit" that must be matched or beat. (E.g. with a limit price of a $4
-   * DEBIT, and an order with 2 legs that includes one leg buy 100 shares of SBX and another leg to
-   * sell 1 contract of SBX, then the fills will be guaranteed to result in no more than a $400--4
-   * USD X 100 shares/contract--total debit against the ordering account.)
+   * **Field Dependencies:**
+   *
+   * <p>Required if `order_type` is `LIMIT`.
+   *
+   * <p>Otherwise, must be empty.
    */
   public OptionOrder withLimitPrice(JsonNullable<? extends OptionOrderLimitPrice> limitPrice) {
     Utils.checkNotNull(limitPrice, "limitPrice");
@@ -1089,8 +1119,11 @@ public class OptionOrder {
   }
 
   /**
-   * Special Reporting Instructions to be applied to this option order. Can include multiple
-   * Instructions.
+   * Special Reporting Instructions to be applied to this option order. Only CAT_PARENT_ALGO and
+   * MANUAL_ORDER are supported for option orders; any other value is rejected. CAT_PARENT_ALGO is
+   * only allowed on LIMIT orders. MANUAL_ORDER marks the order as manually received from the
+   * customer for CAT reporting; client_received_time should then be set to the time the order was
+   * received.
    */
   public OptionOrder withSpecialReportingInstructions(
       List<OptionOrderSpecialReportingInstructions> specialReportingInstructions) {
@@ -1100,8 +1133,11 @@ public class OptionOrder {
   }
 
   /**
-   * Special Reporting Instructions to be applied to this option order. Can include multiple
-   * Instructions.
+   * Special Reporting Instructions to be applied to this option order. Only CAT_PARENT_ALGO and
+   * MANUAL_ORDER are supported for option orders; any other value is rejected. CAT_PARENT_ALGO is
+   * only allowed on LIMIT orders. MANUAL_ORDER marks the order as manually received from the
+   * customer for CAT reporting; client_received_time should then be set to the time the order was
+   * received.
    */
   public OptionOrder withSpecialReportingInstructions(
       Optional<? extends List<OptionOrderSpecialReportingInstructions>>
@@ -1390,14 +1426,20 @@ public class OptionOrder {
       return this;
     }
 
-    /** Used to explain why an option order is canceled */
+    /**
+     * Used to explain why an option order is canceled. Unused: reserved for future use. This field
+     * is not currently populated.
+     */
     public Builder cancelReason(String cancelReason) {
       Utils.checkNotNull(cancelReason, "cancelReason");
       this.cancelReason = Optional.ofNullable(cancelReason);
       return this;
     }
 
-    /** Used to explain why an option order is canceled */
+    /**
+     * Used to explain why an option order is canceled. Unused: reserved for future use. This field
+     * is not currently populated.
+     */
     public Builder cancelReason(Optional<String> cancelReason) {
       Utils.checkNotNull(cancelReason, "cancelReason");
       this.cancelReason = cancelReason;
@@ -1473,14 +1515,22 @@ public class OptionOrder {
       return this;
     }
 
-    /** Required for any client who is having Apex do CAT reporting on their behalf. */
+    /**
+     * Required for any client who is having Apex do CAT reporting on their behalf. When
+     * special_reporting_instructions includes MANUAL_ORDER, this is also reported to CAT as the
+     * time the order was manually received from the customer.
+     */
     public Builder clientReceivedTime(OffsetDateTime clientReceivedTime) {
       Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
       this.clientReceivedTime = JsonNullable.of(clientReceivedTime);
       return this;
     }
 
-    /** Required for any client who is having Apex do CAT reporting on their behalf. */
+    /**
+     * Required for any client who is having Apex do CAT reporting on their behalf. When
+     * special_reporting_instructions includes MANUAL_ORDER, this is also reported to CAT as the
+     * time the order was manually received from the customer.
+     */
     public Builder clientReceivedTime(JsonNullable<OffsetDateTime> clientReceivedTime) {
       Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
       this.clientReceivedTime = clientReceivedTime;
@@ -1655,12 +1705,11 @@ public class OptionOrder {
     }
 
     /**
-     * The limit price for this option order. For single-leg option orders, this is the price per
-     * contract which the filled order must match or beat. For multi-leg orders, this represents the
-     * amortized "price per unit" that must be matched or beat. (E.g. with a limit price of a $4
-     * DEBIT, and an order with 2 legs that includes one leg buy 100 shares of SBX and another leg
-     * to sell 1 contract of SBX, then the fills will be guaranteed to result in no more than a
-     * $400--4 USD X 100 shares/contract--total debit against the ordering account.)
+     * **Field Dependencies:**
+     *
+     * <p>Required if `order_type` is `LIMIT`.
+     *
+     * <p>Otherwise, must be empty.
      */
     public Builder limitPrice(OptionOrderLimitPrice limitPrice) {
       Utils.checkNotNull(limitPrice, "limitPrice");
@@ -1669,12 +1718,11 @@ public class OptionOrder {
     }
 
     /**
-     * The limit price for this option order. For single-leg option orders, this is the price per
-     * contract which the filled order must match or beat. For multi-leg orders, this represents the
-     * amortized "price per unit" that must be matched or beat. (E.g. with a limit price of a $4
-     * DEBIT, and an order with 2 legs that includes one leg buy 100 shares of SBX and another leg
-     * to sell 1 contract of SBX, then the fills will be guaranteed to result in no more than a
-     * $400--4 USD X 100 shares/contract--total debit against the ordering account.)
+     * **Field Dependencies:**
+     *
+     * <p>Required if `order_type` is `LIMIT`.
+     *
+     * <p>Otherwise, must be empty.
      */
     public Builder limitPrice(JsonNullable<? extends OptionOrderLimitPrice> limitPrice) {
       Utils.checkNotNull(limitPrice, "limitPrice");
@@ -1824,8 +1872,11 @@ public class OptionOrder {
     }
 
     /**
-     * Special Reporting Instructions to be applied to this option order. Can include multiple
-     * Instructions.
+     * Special Reporting Instructions to be applied to this option order. Only CAT_PARENT_ALGO and
+     * MANUAL_ORDER are supported for option orders; any other value is rejected. CAT_PARENT_ALGO is
+     * only allowed on LIMIT orders. MANUAL_ORDER marks the order as manually received from the
+     * customer for CAT reporting; client_received_time should then be set to the time the order was
+     * received.
      */
     public Builder specialReportingInstructions(
         List<OptionOrderSpecialReportingInstructions> specialReportingInstructions) {
@@ -1835,8 +1886,11 @@ public class OptionOrder {
     }
 
     /**
-     * Special Reporting Instructions to be applied to this option order. Can include multiple
-     * Instructions.
+     * Special Reporting Instructions to be applied to this option order. Only CAT_PARENT_ALGO and
+     * MANUAL_ORDER are supported for option orders; any other value is rejected. CAT_PARENT_ALGO is
+     * only allowed on LIMIT orders. MANUAL_ORDER marks the order as manually received from the
+     * customer for CAT reporting; client_received_time should then be set to the time the order was
+     * received.
      */
     public Builder specialReportingInstructions(
         Optional<? extends List<OptionOrderSpecialReportingInstructions>>

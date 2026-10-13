@@ -14,8 +14,8 @@ import java.util.Optional;
 /**
  * PrevailingMarketPrice
  *
- * <p>The prevailing market price of the asset, without fees or commissions. Will only be present
- * for orders of Fixed Income assets.
+ * <p>The prevailing market price of the asset, without fees or commissions, up to 8 decimal places.
+ * Will only be present for orders of Fixed Income assets.
  */
 public class PrevailingMarketPrice {
   /**

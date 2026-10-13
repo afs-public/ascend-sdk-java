@@ -122,6 +122,7 @@ public class SpecialInstructions {
       new SpecialInstructions("SUPPRESS_TAF_FEE");
   public static final SpecialInstructions DIVIDEND_REINVESTMENT =
       new SpecialInstructions("DIVIDEND_REINVESTMENT");
+  public static final SpecialInstructions REPORT_MSRB = new SpecialInstructions("REPORT_MSRB");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -236,6 +237,7 @@ public class SpecialInstructions {
     map.put("SUPPRESS_SEC_FEE", SUPPRESS_SEC_FEE);
     map.put("SUPPRESS_TAF_FEE", SUPPRESS_TAF_FEE);
     map.put("DIVIDEND_REINVESTMENT", DIVIDEND_REINVESTMENT);
+    map.put("REPORT_MSRB", REPORT_MSRB);
     return map;
   }
 
@@ -291,6 +293,7 @@ public class SpecialInstructions {
     map.put("SUPPRESS_SEC_FEE", SpecialInstructionsEnum.SUPPRESS_SEC_FEE);
     map.put("SUPPRESS_TAF_FEE", SpecialInstructionsEnum.SUPPRESS_TAF_FEE);
     map.put("DIVIDEND_REINVESTMENT", SpecialInstructionsEnum.DIVIDEND_REINVESTMENT);
+    map.put("REPORT_MSRB", SpecialInstructionsEnum.REPORT_MSRB);
     return map;
   }
 
@@ -372,6 +375,7 @@ public class SpecialInstructions {
     SUPPRESS_SEC_FEE("SUPPRESS_SEC_FEE"),
     SUPPRESS_TAF_FEE("SUPPRESS_TAF_FEE"),
     DIVIDEND_REINVESTMENT("DIVIDEND_REINVESTMENT"),
+    REPORT_MSRB("REPORT_MSRB"),
     ;
 
     private final String value;

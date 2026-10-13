@@ -72,7 +72,7 @@ public class PreIpoCompaniesTests {
     PreIpoCompaniesGetPreIpoCompanyResponse res =
         sdk.preIPOCompanies()
             .getPreIpoCompany()
-            .preIpoCompanyId("a6c63e95-fe8a-4703-a74a-f2a90c0a9c6d")
+            .preIpoCompanyId("74c41a5b-b5e0-4509-964f-ca2de584c052")
             .call();
     assertEquals(200, res.statusCode());
   }

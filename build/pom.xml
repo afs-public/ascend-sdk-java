@@ -9,7 +9,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.apexfintechsolutions</groupId>
   <artifactId>ascendsdk</artifactId>
-  <version>1.6.13</version>
+  <version>1.7.0</version>
   <name>Apex Fintech Solutions Java SDK</name>
   <description>SDK enabling Java developers to easily integrate with the Apex Fintech Solutions API.</description>
   <url>https://github.com/owner/repo</url>

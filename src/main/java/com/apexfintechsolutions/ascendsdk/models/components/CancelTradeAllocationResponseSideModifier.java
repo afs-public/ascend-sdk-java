@@ -58,6 +58,8 @@ public class CancelTradeAllocationResponseSideModifier {
       new CancelTradeAllocationResponseSideModifier("OPEN");
   public static final CancelTradeAllocationResponseSideModifier CLOSE =
       new CancelTradeAllocationResponseSideModifier("CLOSE");
+  public static final CancelTradeAllocationResponseSideModifier COVER =
+      new CancelTradeAllocationResponseSideModifier("COVER");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -135,6 +137,7 @@ public class CancelTradeAllocationResponseSideModifier {
     map.put("SHORT_COVER", SHORT_COVER);
     map.put("OPEN", OPEN);
     map.put("CLOSE", CLOSE);
+    map.put("COVER", COVER);
     return map;
   }
 
@@ -148,6 +151,7 @@ public class CancelTradeAllocationResponseSideModifier {
     map.put("SHORT_COVER", CancelTradeAllocationResponseSideModifierEnum.SHORT_COVER);
     map.put("OPEN", CancelTradeAllocationResponseSideModifierEnum.OPEN);
     map.put("CLOSE", CancelTradeAllocationResponseSideModifierEnum.CLOSE);
+    map.put("COVER", CancelTradeAllocationResponseSideModifierEnum.COVER);
     return map;
   }
 
@@ -193,6 +197,7 @@ public class CancelTradeAllocationResponseSideModifier {
     SHORT_COVER("SHORT_COVER"),
     OPEN("OPEN"),
     CLOSE("CLOSE"),
+    COVER("COVER"),
     ;
 
     private final String value;

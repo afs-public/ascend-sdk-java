@@ -28,12 +28,10 @@ public class OrderCreate {
   private AssetType assetType;
 
   /**
-   * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
-   * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
-   * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
-   * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
-   * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
-   * allowed.
+   * Defaults to "AGENCY" for all asset types except Fixed Income. For Equities: Only "AGENCY" is
+   * allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or
+   * "PRINCIPAL" are allowed. If not specified, defaults to the capacity configured for the
+   * correspondent by Apex. For Event Contracts: Only "AGENCY" is allowed.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("broker_capacity")
@@ -46,7 +44,9 @@ public class OrderCreate {
   /**
    * Required for Equity Orders for any client who is having Apex do CAT reporting on their behalf.
    * A value may be provided for non-Equity orders, and will be remembered, but valid timestamps
-   * will have no impact on how they are processed.
+   * will have no impact on how they are processed. When special_reporting_instructions includes
+   * MANUAL_ORDER, this is also reported to CAT as the time the order was manually received from the
+   * customer.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("client_received_time")
@@ -74,6 +74,14 @@ public class OrderCreate {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("currency_code")
   private Optional<String> currencyCode;
+
+  /**
+   * Request that the order be handled by a desk trader. Only available for Equity orders. When
+   * omitted, treated as false.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("desk_handling_requested")
+  private Optional<Boolean> deskHandlingRequested;
 
   /** Fees that will be applied to this order. Only the BROKER_FEE type is supported. */
   @JsonInclude(Include.NON_ABSENT)
@@ -118,6 +126,14 @@ public class OrderCreate {
   private Optional<? extends LimitPriceCreate> limitPrice;
 
   /**
+   * Tax lot matching instructions specifying which lots to sell. Maximum 100 instructions per
+   * order.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("lot_matching_instructions")
+  private Optional<? extends List<LotMatchingInstructionCreate>> lotMatchingInstructions;
+
+  /**
    * A representation of a decimal value, such as 2.5. Clients may convert values into
    * language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
    *
@@ -153,8 +169,9 @@ public class OrderCreate {
    * <p>Related types are [google.type.TimeOfDay][google.type.TimeOfDay] and
    * `google.protobuf.Timestamp`.
    */
+  @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("order_date")
-  private DateCreate orderDate;
+  private Optional<? extends DateCreate> orderDate;
 
   /**
    * The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are
@@ -190,8 +207,12 @@ public class OrderCreate {
   private Side side;
 
   /**
-   * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
-   * Only available for Equity, Mutual Fund, and Fixed Income orders.
+   * Special Reporting Instructions to be applied to this order. Can include up to 5 Instructions.
+   * Supported for Equity orders only; must be omitted for Mutual Fund, Fixed Income, and Event
+   * Contract orders. BROKER_DEALER_ORDER and FULLY_REGISTERED are not supported. CAT_PARENT_ALGO is
+   * only allowed on LIMIT orders; CAT_PARENT_GTC is only allowed on GOOD_TILL_DATE orders.
+   * MANUAL_ORDER marks the order as manually received from the customer for CAT reporting;
+   * client_received_time should then be set to the time the order was received.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("special_reporting_instructions")
@@ -240,15 +261,18 @@ public class OrderCreate {
       @JsonProperty("client_sent_time") JsonNullable<OffsetDateTime> clientSentTime,
       @JsonProperty("commission") Optional<? extends CommissionCreate> commission,
       @JsonProperty("currency_code") Optional<String> currencyCode,
+      @JsonProperty("desk_handling_requested") Optional<Boolean> deskHandlingRequested,
       @JsonProperty("fees") Optional<? extends List<FeeCreate>> fees,
       @JsonProperty("identifier") String identifier,
       @JsonProperty("identifier_issuing_region_code") Optional<String> identifierIssuingRegionCode,
       @JsonProperty("identifier_type") OrderCreateIdentifierType identifierType,
       @JsonProperty("letter_of_intent") Optional<? extends LetterOfIntentCreate> letterOfIntent,
       @JsonProperty("limit_price") Optional<? extends LimitPriceCreate> limitPrice,
+      @JsonProperty("lot_matching_instructions")
+          Optional<? extends List<LotMatchingInstructionCreate>> lotMatchingInstructions,
       @JsonProperty("max_sell_quantity") Optional<? extends DecimalCreate> maxSellQuantity,
       @JsonProperty("notional_value") Optional<? extends DecimalCreate> notionalValue,
-      @JsonProperty("order_date") DateCreate orderDate,
+      @JsonProperty("order_date") Optional<? extends DateCreate> orderDate,
       @JsonProperty("order_type") OrderType orderType,
       @JsonProperty("quantity") Optional<? extends DecimalCreate> quantity,
       @JsonProperty("rights_of_accumulation")
@@ -268,12 +292,14 @@ public class OrderCreate {
     Utils.checkNotNull(clientSentTime, "clientSentTime");
     Utils.checkNotNull(commission, "commission");
     Utils.checkNotNull(currencyCode, "currencyCode");
+    Utils.checkNotNull(deskHandlingRequested, "deskHandlingRequested");
     Utils.checkNotNull(fees, "fees");
     Utils.checkNotNull(identifier, "identifier");
     Utils.checkNotNull(identifierIssuingRegionCode, "identifierIssuingRegionCode");
     Utils.checkNotNull(identifierType, "identifierType");
     Utils.checkNotNull(letterOfIntent, "letterOfIntent");
     Utils.checkNotNull(limitPrice, "limitPrice");
+    Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
     Utils.checkNotNull(maxSellQuantity, "maxSellQuantity");
     Utils.checkNotNull(notionalValue, "notionalValue");
     Utils.checkNotNull(orderDate, "orderDate");
@@ -293,12 +319,14 @@ public class OrderCreate {
     this.clientSentTime = clientSentTime;
     this.commission = commission;
     this.currencyCode = currencyCode;
+    this.deskHandlingRequested = deskHandlingRequested;
     this.fees = fees;
     this.identifier = identifier;
     this.identifierIssuingRegionCode = identifierIssuingRegionCode;
     this.identifierType = identifierType;
     this.letterOfIntent = letterOfIntent;
     this.limitPrice = limitPrice;
+    this.lotMatchingInstructions = lotMatchingInstructions;
     this.maxSellQuantity = maxSellQuantity;
     this.notionalValue = notionalValue;
     this.orderDate = orderDate;
@@ -318,7 +346,6 @@ public class OrderCreate {
       String clientOrderId,
       String identifier,
       OrderCreateIdentifierType identifierType,
-      DateCreate orderDate,
       OrderType orderType,
       Side side,
       TimeInForce timeInForce) {
@@ -331,6 +358,7 @@ public class OrderCreate {
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
+        Optional.empty(),
         identifier,
         Optional.empty(),
         identifierType,
@@ -338,7 +366,8 @@ public class OrderCreate {
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
-        orderDate,
+        Optional.empty(),
+        Optional.empty(),
         orderType,
         Optional.empty(),
         Optional.empty(),
@@ -360,12 +389,10 @@ public class OrderCreate {
   }
 
   /**
-   * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
-   * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
-   * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
-   * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
-   * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
-   * allowed.
+   * Defaults to "AGENCY" for all asset types except Fixed Income. For Equities: Only "AGENCY" is
+   * allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or
+   * "PRINCIPAL" are allowed. If not specified, defaults to the capacity configured for the
+   * correspondent by Apex. For Event Contracts: Only "AGENCY" is allowed.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -382,7 +409,9 @@ public class OrderCreate {
   /**
    * Required for Equity Orders for any client who is having Apex do CAT reporting on their behalf.
    * A value may be provided for non-Equity orders, and will be remembered, but valid timestamps
-   * will have no impact on how they are processed.
+   * will have no impact on how they are processed. When special_reporting_instructions includes
+   * MANUAL_ORDER, this is also reported to CAT as the time the order was manually received from the
+   * customer.
    */
   @JsonIgnore
   public JsonNullable<OffsetDateTime> clientReceivedTime() {
@@ -414,6 +443,15 @@ public class OrderCreate {
   @JsonIgnore
   public Optional<String> currencyCode() {
     return currencyCode;
+  }
+
+  /**
+   * Request that the order be handled by a desk trader. Only available for Equity orders. When
+   * omitted, treated as false.
+   */
+  @JsonIgnore
+  public Optional<Boolean> deskHandlingRequested() {
+    return deskHandlingRequested;
   }
 
   /** Fees that will be applied to this order. Only the BROKER_FEE type is supported. */
@@ -470,6 +508,16 @@ public class OrderCreate {
   }
 
   /**
+   * Tax lot matching instructions specifying which lots to sell. Maximum 100 instructions per
+   * order.
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<List<LotMatchingInstructionCreate>> lotMatchingInstructions() {
+    return (Optional<List<LotMatchingInstructionCreate>>) lotMatchingInstructions;
+  }
+
+  /**
    * A representation of a decimal value, such as 2.5. Clients may convert values into
    * language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
    *
@@ -509,9 +557,10 @@ public class OrderCreate {
    * <p>Related types are [google.type.TimeOfDay][google.type.TimeOfDay] and
    * `google.protobuf.Timestamp`.
    */
+  @SuppressWarnings("unchecked")
   @JsonIgnore
-  public DateCreate orderDate() {
-    return orderDate;
+  public Optional<DateCreate> orderDate() {
+    return (Optional<DateCreate>) orderDate;
   }
 
   /**
@@ -556,8 +605,12 @@ public class OrderCreate {
   }
 
   /**
-   * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
-   * Only available for Equity, Mutual Fund, and Fixed Income orders.
+   * Special Reporting Instructions to be applied to this order. Can include up to 5 Instructions.
+   * Supported for Equity orders only; must be omitted for Mutual Fund, Fixed Income, and Event
+   * Contract orders. BROKER_DEALER_ORDER and FULLY_REGISTERED are not supported. CAT_PARENT_ALGO is
+   * only allowed on LIMIT orders; CAT_PARENT_GTC is only allowed on GOOD_TILL_DATE orders.
+   * MANUAL_ORDER marks the order as manually received from the customer for CAT reporting;
+   * client_received_time should then be set to the time the order was received.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -622,12 +675,10 @@ public class OrderCreate {
   }
 
   /**
-   * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
-   * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
-   * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
-   * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
-   * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
-   * allowed.
+   * Defaults to "AGENCY" for all asset types except Fixed Income. For Equities: Only "AGENCY" is
+   * allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or
+   * "PRINCIPAL" are allowed. If not specified, defaults to the capacity configured for the
+   * correspondent by Apex. For Event Contracts: Only "AGENCY" is allowed.
    */
   public OrderCreate withBrokerCapacity(BrokerCapacity brokerCapacity) {
     Utils.checkNotNull(brokerCapacity, "brokerCapacity");
@@ -636,12 +687,10 @@ public class OrderCreate {
   }
 
   /**
-   * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
-   * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
-   * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
-   * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
-   * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
-   * allowed.
+   * Defaults to "AGENCY" for all asset types except Fixed Income. For Equities: Only "AGENCY" is
+   * allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or
+   * "PRINCIPAL" are allowed. If not specified, defaults to the capacity configured for the
+   * correspondent by Apex. For Event Contracts: Only "AGENCY" is allowed.
    */
   public OrderCreate withBrokerCapacity(Optional<? extends BrokerCapacity> brokerCapacity) {
     Utils.checkNotNull(brokerCapacity, "brokerCapacity");
@@ -659,7 +708,9 @@ public class OrderCreate {
   /**
    * Required for Equity Orders for any client who is having Apex do CAT reporting on their behalf.
    * A value may be provided for non-Equity orders, and will be remembered, but valid timestamps
-   * will have no impact on how they are processed.
+   * will have no impact on how they are processed. When special_reporting_instructions includes
+   * MANUAL_ORDER, this is also reported to CAT as the time the order was manually received from the
+   * customer.
    */
   public OrderCreate withClientReceivedTime(OffsetDateTime clientReceivedTime) {
     Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
@@ -670,7 +721,9 @@ public class OrderCreate {
   /**
    * Required for Equity Orders for any client who is having Apex do CAT reporting on their behalf.
    * A value may be provided for non-Equity orders, and will be remembered, but valid timestamps
-   * will have no impact on how they are processed.
+   * will have no impact on how they are processed. When special_reporting_instructions includes
+   * MANUAL_ORDER, this is also reported to CAT as the time the order was manually received from the
+   * customer.
    */
   public OrderCreate withClientReceivedTime(JsonNullable<OffsetDateTime> clientReceivedTime) {
     Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
@@ -733,6 +786,26 @@ public class OrderCreate {
   public OrderCreate withCurrencyCode(Optional<String> currencyCode) {
     Utils.checkNotNull(currencyCode, "currencyCode");
     this.currencyCode = currencyCode;
+    return this;
+  }
+
+  /**
+   * Request that the order be handled by a desk trader. Only available for Equity orders. When
+   * omitted, treated as false.
+   */
+  public OrderCreate withDeskHandlingRequested(boolean deskHandlingRequested) {
+    Utils.checkNotNull(deskHandlingRequested, "deskHandlingRequested");
+    this.deskHandlingRequested = Optional.ofNullable(deskHandlingRequested);
+    return this;
+  }
+
+  /**
+   * Request that the order be handled by a desk trader. Only available for Equity orders. When
+   * omitted, treated as false.
+   */
+  public OrderCreate withDeskHandlingRequested(Optional<Boolean> deskHandlingRequested) {
+    Utils.checkNotNull(deskHandlingRequested, "deskHandlingRequested");
+    this.deskHandlingRequested = deskHandlingRequested;
     return this;
   }
 
@@ -831,6 +904,28 @@ public class OrderCreate {
   }
 
   /**
+   * Tax lot matching instructions specifying which lots to sell. Maximum 100 instructions per
+   * order.
+   */
+  public OrderCreate withLotMatchingInstructions(
+      List<LotMatchingInstructionCreate> lotMatchingInstructions) {
+    Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
+    this.lotMatchingInstructions = Optional.ofNullable(lotMatchingInstructions);
+    return this;
+  }
+
+  /**
+   * Tax lot matching instructions specifying which lots to sell. Maximum 100 instructions per
+   * order.
+   */
+  public OrderCreate withLotMatchingInstructions(
+      Optional<? extends List<LotMatchingInstructionCreate>> lotMatchingInstructions) {
+    Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
+    this.lotMatchingInstructions = lotMatchingInstructions;
+    return this;
+  }
+
+  /**
    * A representation of a decimal value, such as 2.5. Clients may convert values into
    * language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
    *
@@ -899,6 +994,24 @@ public class OrderCreate {
    * `google.protobuf.Timestamp`.
    */
   public OrderCreate withOrderDate(DateCreate orderDate) {
+    Utils.checkNotNull(orderDate, "orderDate");
+    this.orderDate = Optional.ofNullable(orderDate);
+    return this;
+  }
+
+  /**
+   * Represents a whole or partial calendar date, such as a birthday. The time of day and time zone
+   * are either specified elsewhere or are insignificant. The date is relative to the Gregorian
+   * Calendar. This can represent one of the following:
+   *
+   * <p>* A full date, with non-zero year, month, and day values * A month and day value, with a
+   * zero year, such as an anniversary * A year on its own, with zero month and day values * A year
+   * and month value, with a zero day, such as a credit card expiration date
+   *
+   * <p>Related types are [google.type.TimeOfDay][google.type.TimeOfDay] and
+   * `google.protobuf.Timestamp`.
+   */
+  public OrderCreate withOrderDate(Optional<? extends DateCreate> orderDate) {
     Utils.checkNotNull(orderDate, "orderDate");
     this.orderDate = orderDate;
     return this;
@@ -974,8 +1087,12 @@ public class OrderCreate {
   }
 
   /**
-   * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
-   * Only available for Equity, Mutual Fund, and Fixed Income orders.
+   * Special Reporting Instructions to be applied to this order. Can include up to 5 Instructions.
+   * Supported for Equity orders only; must be omitted for Mutual Fund, Fixed Income, and Event
+   * Contract orders. BROKER_DEALER_ORDER and FULLY_REGISTERED are not supported. CAT_PARENT_ALGO is
+   * only allowed on LIMIT orders; CAT_PARENT_GTC is only allowed on GOOD_TILL_DATE orders.
+   * MANUAL_ORDER marks the order as manually received from the customer for CAT reporting;
+   * client_received_time should then be set to the time the order was received.
    */
   public OrderCreate withSpecialReportingInstructions(
       List<SpecialReportingInstructions> specialReportingInstructions) {
@@ -985,8 +1102,12 @@ public class OrderCreate {
   }
 
   /**
-   * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
-   * Only available for Equity, Mutual Fund, and Fixed Income orders.
+   * Special Reporting Instructions to be applied to this order. Can include up to 5 Instructions.
+   * Supported for Equity orders only; must be omitted for Mutual Fund, Fixed Income, and Event
+   * Contract orders. BROKER_DEALER_ORDER and FULLY_REGISTERED are not supported. CAT_PARENT_ALGO is
+   * only allowed on LIMIT orders; CAT_PARENT_GTC is only allowed on GOOD_TILL_DATE orders.
+   * MANUAL_ORDER marks the order as manually received from the customer for CAT reporting;
+   * client_received_time should then be set to the time the order was received.
    */
   public OrderCreate withSpecialReportingInstructions(
       Optional<? extends List<SpecialReportingInstructions>> specialReportingInstructions) {
@@ -1087,6 +1208,7 @@ public class OrderCreate {
         && Utils.enhancedDeepEquals(this.clientSentTime, other.clientSentTime)
         && Utils.enhancedDeepEquals(this.commission, other.commission)
         && Utils.enhancedDeepEquals(this.currencyCode, other.currencyCode)
+        && Utils.enhancedDeepEquals(this.deskHandlingRequested, other.deskHandlingRequested)
         && Utils.enhancedDeepEquals(this.fees, other.fees)
         && Utils.enhancedDeepEquals(this.identifier, other.identifier)
         && Utils.enhancedDeepEquals(
@@ -1094,6 +1216,7 @@ public class OrderCreate {
         && Utils.enhancedDeepEquals(this.identifierType, other.identifierType)
         && Utils.enhancedDeepEquals(this.letterOfIntent, other.letterOfIntent)
         && Utils.enhancedDeepEquals(this.limitPrice, other.limitPrice)
+        && Utils.enhancedDeepEquals(this.lotMatchingInstructions, other.lotMatchingInstructions)
         && Utils.enhancedDeepEquals(this.maxSellQuantity, other.maxSellQuantity)
         && Utils.enhancedDeepEquals(this.notionalValue, other.notionalValue)
         && Utils.enhancedDeepEquals(this.orderDate, other.orderDate)
@@ -1119,12 +1242,14 @@ public class OrderCreate {
         clientSentTime,
         commission,
         currencyCode,
+        deskHandlingRequested,
         fees,
         identifier,
         identifierIssuingRegionCode,
         identifierType,
         letterOfIntent,
         limitPrice,
+        lotMatchingInstructions,
         maxSellQuantity,
         notionalValue,
         orderDate,
@@ -1157,6 +1282,8 @@ public class OrderCreate {
         commission,
         "currencyCode",
         currencyCode,
+        "deskHandlingRequested",
+        deskHandlingRequested,
         "fees",
         fees,
         "identifier",
@@ -1169,6 +1296,8 @@ public class OrderCreate {
         letterOfIntent,
         "limitPrice",
         limitPrice,
+        "lotMatchingInstructions",
+        lotMatchingInstructions,
         "maxSellQuantity",
         maxSellQuantity,
         "notionalValue",
@@ -1212,6 +1341,8 @@ public class OrderCreate {
 
     private Optional<String> currencyCode = Optional.empty();
 
+    private Optional<Boolean> deskHandlingRequested = Optional.empty();
+
     private Optional<? extends List<FeeCreate>> fees = Optional.empty();
 
     private String identifier;
@@ -1224,11 +1355,14 @@ public class OrderCreate {
 
     private Optional<? extends LimitPriceCreate> limitPrice = Optional.empty();
 
+    private Optional<? extends List<LotMatchingInstructionCreate>> lotMatchingInstructions =
+        Optional.empty();
+
     private Optional<? extends DecimalCreate> maxSellQuantity = Optional.empty();
 
     private Optional<? extends DecimalCreate> notionalValue = Optional.empty();
 
-    private DateCreate orderDate;
+    private Optional<? extends DateCreate> orderDate = Optional.empty();
 
     private OrderType orderType;
 
@@ -1264,12 +1398,10 @@ public class OrderCreate {
     }
 
     /**
-     * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
-     * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
-     * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
-     * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
-     * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
-     * allowed.
+     * Defaults to "AGENCY" for all asset types except Fixed Income. For Equities: Only "AGENCY" is
+     * allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or
+     * "PRINCIPAL" are allowed. If not specified, defaults to the capacity configured for the
+     * correspondent by Apex. For Event Contracts: Only "AGENCY" is allowed.
      */
     public Builder brokerCapacity(BrokerCapacity brokerCapacity) {
       Utils.checkNotNull(brokerCapacity, "brokerCapacity");
@@ -1278,12 +1410,10 @@ public class OrderCreate {
     }
 
     /**
-     * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
-     * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
-     * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
-     * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
-     * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
-     * allowed.
+     * Defaults to "AGENCY" for all asset types except Fixed Income. For Equities: Only "AGENCY" is
+     * allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or
+     * "PRINCIPAL" are allowed. If not specified, defaults to the capacity configured for the
+     * correspondent by Apex. For Event Contracts: Only "AGENCY" is allowed.
      */
     public Builder brokerCapacity(Optional<? extends BrokerCapacity> brokerCapacity) {
       Utils.checkNotNull(brokerCapacity, "brokerCapacity");
@@ -1301,7 +1431,9 @@ public class OrderCreate {
     /**
      * Required for Equity Orders for any client who is having Apex do CAT reporting on their
      * behalf. A value may be provided for non-Equity orders, and will be remembered, but valid
-     * timestamps will have no impact on how they are processed.
+     * timestamps will have no impact on how they are processed. When special_reporting_instructions
+     * includes MANUAL_ORDER, this is also reported to CAT as the time the order was manually
+     * received from the customer.
      */
     public Builder clientReceivedTime(OffsetDateTime clientReceivedTime) {
       Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
@@ -1312,7 +1444,9 @@ public class OrderCreate {
     /**
      * Required for Equity Orders for any client who is having Apex do CAT reporting on their
      * behalf. A value may be provided for non-Equity orders, and will be remembered, but valid
-     * timestamps will have no impact on how they are processed.
+     * timestamps will have no impact on how they are processed. When special_reporting_instructions
+     * includes MANUAL_ORDER, this is also reported to CAT as the time the order was manually
+     * received from the customer.
      */
     public Builder clientReceivedTime(JsonNullable<OffsetDateTime> clientReceivedTime) {
       Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
@@ -1375,6 +1509,26 @@ public class OrderCreate {
     public Builder currencyCode(Optional<String> currencyCode) {
       Utils.checkNotNull(currencyCode, "currencyCode");
       this.currencyCode = currencyCode;
+      return this;
+    }
+
+    /**
+     * Request that the order be handled by a desk trader. Only available for Equity orders. When
+     * omitted, treated as false.
+     */
+    public Builder deskHandlingRequested(boolean deskHandlingRequested) {
+      Utils.checkNotNull(deskHandlingRequested, "deskHandlingRequested");
+      this.deskHandlingRequested = Optional.ofNullable(deskHandlingRequested);
+      return this;
+    }
+
+    /**
+     * Request that the order be handled by a desk trader. Only available for Equity orders. When
+     * omitted, treated as false.
+     */
+    public Builder deskHandlingRequested(Optional<Boolean> deskHandlingRequested) {
+      Utils.checkNotNull(deskHandlingRequested, "deskHandlingRequested");
+      this.deskHandlingRequested = deskHandlingRequested;
       return this;
     }
 
@@ -1473,6 +1627,28 @@ public class OrderCreate {
     }
 
     /**
+     * Tax lot matching instructions specifying which lots to sell. Maximum 100 instructions per
+     * order.
+     */
+    public Builder lotMatchingInstructions(
+        List<LotMatchingInstructionCreate> lotMatchingInstructions) {
+      Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
+      this.lotMatchingInstructions = Optional.ofNullable(lotMatchingInstructions);
+      return this;
+    }
+
+    /**
+     * Tax lot matching instructions specifying which lots to sell. Maximum 100 instructions per
+     * order.
+     */
+    public Builder lotMatchingInstructions(
+        Optional<? extends List<LotMatchingInstructionCreate>> lotMatchingInstructions) {
+      Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
+      this.lotMatchingInstructions = lotMatchingInstructions;
+      return this;
+    }
+
+    /**
      * A representation of a decimal value, such as 2.5. Clients may convert values into
      * language-native decimal formats, such as Java's [BigDecimal][] or Python's
      * [decimal.Decimal][].
@@ -1545,6 +1721,24 @@ public class OrderCreate {
      * `google.protobuf.Timestamp`.
      */
     public Builder orderDate(DateCreate orderDate) {
+      Utils.checkNotNull(orderDate, "orderDate");
+      this.orderDate = Optional.ofNullable(orderDate);
+      return this;
+    }
+
+    /**
+     * Represents a whole or partial calendar date, such as a birthday. The time of day and time
+     * zone are either specified elsewhere or are insignificant. The date is relative to the
+     * Gregorian Calendar. This can represent one of the following:
+     *
+     * <p>* A full date, with non-zero year, month, and day values * A month and day value, with a
+     * zero year, such as an anniversary * A year on its own, with zero month and day values * A
+     * year and month value, with a zero day, such as a credit card expiration date
+     *
+     * <p>Related types are [google.type.TimeOfDay][google.type.TimeOfDay] and
+     * `google.protobuf.Timestamp`.
+     */
+    public Builder orderDate(Optional<? extends DateCreate> orderDate) {
       Utils.checkNotNull(orderDate, "orderDate");
       this.orderDate = orderDate;
       return this;
@@ -1622,8 +1816,12 @@ public class OrderCreate {
     }
 
     /**
-     * Special Reporting Instructions to be applied to this order. Can include multiple
-     * Instructions. Only available for Equity, Mutual Fund, and Fixed Income orders.
+     * Special Reporting Instructions to be applied to this order. Can include up to 5 Instructions.
+     * Supported for Equity orders only; must be omitted for Mutual Fund, Fixed Income, and Event
+     * Contract orders. BROKER_DEALER_ORDER and FULLY_REGISTERED are not supported. CAT_PARENT_ALGO
+     * is only allowed on LIMIT orders; CAT_PARENT_GTC is only allowed on GOOD_TILL_DATE orders.
+     * MANUAL_ORDER marks the order as manually received from the customer for CAT reporting;
+     * client_received_time should then be set to the time the order was received.
      */
     public Builder specialReportingInstructions(
         List<SpecialReportingInstructions> specialReportingInstructions) {
@@ -1633,8 +1831,12 @@ public class OrderCreate {
     }
 
     /**
-     * Special Reporting Instructions to be applied to this order. Can include multiple
-     * Instructions. Only available for Equity, Mutual Fund, and Fixed Income orders.
+     * Special Reporting Instructions to be applied to this order. Can include up to 5 Instructions.
+     * Supported for Equity orders only; must be omitted for Mutual Fund, Fixed Income, and Event
+     * Contract orders. BROKER_DEALER_ORDER and FULLY_REGISTERED are not supported. CAT_PARENT_ALGO
+     * is only allowed on LIMIT orders; CAT_PARENT_GTC is only allowed on GOOD_TILL_DATE orders.
+     * MANUAL_ORDER marks the order as manually received from the customer for CAT reporting;
+     * client_received_time should then be set to the time the order was received.
      */
     public Builder specialReportingInstructions(
         Optional<? extends List<SpecialReportingInstructions>> specialReportingInstructions) {
@@ -1729,12 +1931,14 @@ public class OrderCreate {
           clientSentTime,
           commission,
           currencyCode,
+          deskHandlingRequested,
           fees,
           identifier,
           identifierIssuingRegionCode,
           identifierType,
           letterOfIntent,
           limitPrice,
+          lotMatchingInstructions,
           maxSellQuantity,
           notionalValue,
           orderDate,

@@ -65,6 +65,16 @@ public class BasketOrderCreate {
   private BasketOrderCreateIdentifierType identifierType;
 
   /**
+   * Specifies instructions for how to match tax lots to the order. Only applicable for SELL orders.
+   * Maximum 100 instructions per order. Each instruction must include quantity. When id is
+   * specified, trade_date and price must not be specified. When id is not specified, trade_date is
+   * required and price is optional.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("lot_matching_instructions")
+  private Optional<? extends List<LotCreate>> lotMatchingInstructions;
+
+  /**
    * A representation of a decimal value, such as 2.5. Clients may convert values into
    * language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
    *
@@ -135,6 +145,8 @@ public class BasketOrderCreate {
           Optional<? extends ExtraReportingDataCreate> extraReportingData,
       @JsonProperty("identifier") String identifier,
       @JsonProperty("identifier_type") BasketOrderCreateIdentifierType identifierType,
+      @JsonProperty("lot_matching_instructions")
+          Optional<? extends List<LotCreate>> lotMatchingInstructions,
       @JsonProperty("max_sell_quantity") Optional<? extends DecimalCreate> maxSellQuantity,
       @JsonProperty("notional_value") Optional<? extends DecimalCreate> notionalValue,
       @JsonProperty("order_type") BasketOrderCreateOrderType orderType,
@@ -152,6 +164,7 @@ public class BasketOrderCreate {
     Utils.checkNotNull(extraReportingData, "extraReportingData");
     Utils.checkNotNull(identifier, "identifier");
     Utils.checkNotNull(identifierType, "identifierType");
+    Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
     Utils.checkNotNull(maxSellQuantity, "maxSellQuantity");
     Utils.checkNotNull(notionalValue, "notionalValue");
     Utils.checkNotNull(orderType, "orderType");
@@ -167,6 +180,7 @@ public class BasketOrderCreate {
     this.extraReportingData = extraReportingData;
     this.identifier = identifier;
     this.identifierType = identifierType;
+    this.lotMatchingInstructions = lotMatchingInstructions;
     this.maxSellQuantity = maxSellQuantity;
     this.notionalValue = notionalValue;
     this.orderType = orderType;
@@ -194,6 +208,7 @@ public class BasketOrderCreate {
         Optional.empty(),
         identifier,
         identifierType,
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         orderType,
@@ -259,6 +274,18 @@ public class BasketOrderCreate {
   @JsonIgnore
   public BasketOrderCreateIdentifierType identifierType() {
     return identifierType;
+  }
+
+  /**
+   * Specifies instructions for how to match tax lots to the order. Only applicable for SELL orders.
+   * Maximum 100 instructions per order. Each instruction must include quantity. When id is
+   * specified, trade_date and price must not be specified. When id is not specified, trade_date is
+   * required and price is optional.
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<List<LotCreate>> lotMatchingInstructions() {
+    return (Optional<List<LotCreate>>) lotMatchingInstructions;
   }
 
   /**
@@ -434,6 +461,31 @@ public class BasketOrderCreate {
   }
 
   /**
+   * Specifies instructions for how to match tax lots to the order. Only applicable for SELL orders.
+   * Maximum 100 instructions per order. Each instruction must include quantity. When id is
+   * specified, trade_date and price must not be specified. When id is not specified, trade_date is
+   * required and price is optional.
+   */
+  public BasketOrderCreate withLotMatchingInstructions(List<LotCreate> lotMatchingInstructions) {
+    Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
+    this.lotMatchingInstructions = Optional.ofNullable(lotMatchingInstructions);
+    return this;
+  }
+
+  /**
+   * Specifies instructions for how to match tax lots to the order. Only applicable for SELL orders.
+   * Maximum 100 instructions per order. Each instruction must include quantity. When id is
+   * specified, trade_date and price must not be specified. When id is not specified, trade_date is
+   * required and price is optional.
+   */
+  public BasketOrderCreate withLotMatchingInstructions(
+      Optional<? extends List<LotCreate>> lotMatchingInstructions) {
+    Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
+    this.lotMatchingInstructions = lotMatchingInstructions;
+    return this;
+  }
+
+  /**
    * A representation of a decimal value, such as 2.5. Clients may convert values into
    * language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
    *
@@ -579,6 +631,7 @@ public class BasketOrderCreate {
         && Utils.enhancedDeepEquals(this.extraReportingData, other.extraReportingData)
         && Utils.enhancedDeepEquals(this.identifier, other.identifier)
         && Utils.enhancedDeepEquals(this.identifierType, other.identifierType)
+        && Utils.enhancedDeepEquals(this.lotMatchingInstructions, other.lotMatchingInstructions)
         && Utils.enhancedDeepEquals(this.maxSellQuantity, other.maxSellQuantity)
         && Utils.enhancedDeepEquals(this.notionalValue, other.notionalValue)
         && Utils.enhancedDeepEquals(this.orderType, other.orderType)
@@ -600,6 +653,7 @@ public class BasketOrderCreate {
         extraReportingData,
         identifier,
         identifierType,
+        lotMatchingInstructions,
         maxSellQuantity,
         notionalValue,
         orderType,
@@ -629,6 +683,8 @@ public class BasketOrderCreate {
         identifier,
         "identifierType",
         identifierType,
+        "lotMatchingInstructions",
+        lotMatchingInstructions,
         "maxSellQuantity",
         maxSellQuantity,
         "notionalValue",
@@ -663,6 +719,8 @@ public class BasketOrderCreate {
     private String identifier;
 
     private BasketOrderCreateIdentifierType identifierType;
+
+    private Optional<? extends List<LotCreate>> lotMatchingInstructions = Optional.empty();
 
     private Optional<? extends DecimalCreate> maxSellQuantity = Optional.empty();
 
@@ -773,6 +831,31 @@ public class BasketOrderCreate {
     public Builder identifierType(BasketOrderCreateIdentifierType identifierType) {
       Utils.checkNotNull(identifierType, "identifierType");
       this.identifierType = identifierType;
+      return this;
+    }
+
+    /**
+     * Specifies instructions for how to match tax lots to the order. Only applicable for SELL
+     * orders. Maximum 100 instructions per order. Each instruction must include quantity. When id
+     * is specified, trade_date and price must not be specified. When id is not specified,
+     * trade_date is required and price is optional.
+     */
+    public Builder lotMatchingInstructions(List<LotCreate> lotMatchingInstructions) {
+      Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
+      this.lotMatchingInstructions = Optional.ofNullable(lotMatchingInstructions);
+      return this;
+    }
+
+    /**
+     * Specifies instructions for how to match tax lots to the order. Only applicable for SELL
+     * orders. Maximum 100 instructions per order. Each instruction must include quantity. When id
+     * is specified, trade_date and price must not be specified. When id is not specified,
+     * trade_date is required and price is optional.
+     */
+    public Builder lotMatchingInstructions(
+        Optional<? extends List<LotCreate>> lotMatchingInstructions) {
+      Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
+      this.lotMatchingInstructions = lotMatchingInstructions;
       return this;
     }
 
@@ -924,6 +1007,7 @@ public class BasketOrderCreate {
           extraReportingData,
           identifier,
           identifierType,
+          lotMatchingInstructions,
           maxSellQuantity,
           notionalValue,
           orderType,

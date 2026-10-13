@@ -68,6 +68,10 @@ public class AcatsTransferState {
       new AcatsTransferState("PENDING_REVIEW_MARGINS");
   public static final AcatsTransferState PENDING_SUBMISSION =
       new AcatsTransferState("PENDING_SUBMISSION");
+  public static final AcatsTransferState RESPONSE_OVERDUE =
+      new AcatsTransferState("RESPONSE_OVERDUE");
+  public static final AcatsTransferState PENDING_CORRECTION =
+      new AcatsTransferState("PENDING_CORRECTION");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -150,6 +154,8 @@ public class AcatsTransferState {
     map.put("PURGED", PURGED);
     map.put("PENDING_REVIEW_MARGINS", PENDING_REVIEW_MARGINS);
     map.put("PENDING_SUBMISSION", PENDING_SUBMISSION);
+    map.put("RESPONSE_OVERDUE", RESPONSE_OVERDUE);
+    map.put("PENDING_CORRECTION", PENDING_CORRECTION);
     return map;
   }
 
@@ -170,6 +176,8 @@ public class AcatsTransferState {
     map.put("PURGED", AcatsTransferStateEnum.PURGED);
     map.put("PENDING_REVIEW_MARGINS", AcatsTransferStateEnum.PENDING_REVIEW_MARGINS);
     map.put("PENDING_SUBMISSION", AcatsTransferStateEnum.PENDING_SUBMISSION);
+    map.put("RESPONSE_OVERDUE", AcatsTransferStateEnum.RESPONSE_OVERDUE);
+    map.put("PENDING_CORRECTION", AcatsTransferStateEnum.PENDING_CORRECTION);
     return map;
   }
 
@@ -219,6 +227,8 @@ public class AcatsTransferState {
     PURGED("PURGED"),
     PENDING_REVIEW_MARGINS("PENDING_REVIEW_MARGINS"),
     PENDING_SUBMISSION("PENDING_SUBMISSION"),
+    RESPONSE_OVERDUE("RESPONSE_OVERDUE"),
+    PENDING_CORRECTION("PENDING_CORRECTION"),
     ;
 
     private final String value;

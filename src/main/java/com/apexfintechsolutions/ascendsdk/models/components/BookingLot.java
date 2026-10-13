@@ -24,7 +24,7 @@ public class BookingLot {
   private Optional<String> id;
 
   /**
-   * Deprecated; use the price field instead
+   * Deprecated: use the price field instead
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as
    *     soon as possible.
@@ -84,7 +84,7 @@ public class BookingLot {
   }
 
   /**
-   * Deprecated; use the price field instead
+   * Deprecated: use the price field instead
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as
    *     soon as possible.
@@ -136,7 +136,7 @@ public class BookingLot {
   }
 
   /**
-   * Deprecated; use the price field instead
+   * Deprecated: use the price field instead
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as
    *     soon as possible.
@@ -149,7 +149,7 @@ public class BookingLot {
   }
 
   /**
-   * Deprecated; use the price field instead
+   * Deprecated: use the price field instead
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as
    *     soon as possible.
@@ -272,7 +272,7 @@ public class BookingLot {
     }
 
     /**
-     * Deprecated; use the price field instead
+     * Deprecated: use the price field instead
      *
      * @deprecated field: This will be removed in a future release, please migrate away from it as
      *     soon as possible.
@@ -285,7 +285,7 @@ public class BookingLot {
     }
 
     /**
-     * Deprecated; use the price field instead
+     * Deprecated: use the price field instead
      *
      * @deprecated field: This will be removed in a future release, please migrate away from it as
      *     soon as possible.

@@ -136,6 +136,10 @@ public class OrderRejectedReason {
       new OrderRejectedReason("UNSUPPORTED_ORDER_TYPE_FOR_ASSET");
   public static final OrderRejectedReason UNSUPPORTED_TIME_IN_FORCE_FOR_ASSET =
       new OrderRejectedReason("UNSUPPORTED_TIME_IN_FORCE_FOR_ASSET");
+  public static final OrderRejectedReason UNSUPPORTED_BROKER_CAPACITY =
+      new OrderRejectedReason("UNSUPPORTED_BROKER_CAPACITY");
+  public static final OrderRejectedReason ABOVE_BROKER_FEE_MAXIMUM =
+      new OrderRejectedReason("ABOVE_BROKER_FEE_MAXIMUM");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -257,6 +261,8 @@ public class OrderRejectedReason {
     map.put("UNSUPPORTED_TRADING_SESSION_FOR_ASSET", UNSUPPORTED_TRADING_SESSION_FOR_ASSET);
     map.put("UNSUPPORTED_ORDER_TYPE_FOR_ASSET", UNSUPPORTED_ORDER_TYPE_FOR_ASSET);
     map.put("UNSUPPORTED_TIME_IN_FORCE_FOR_ASSET", UNSUPPORTED_TIME_IN_FORCE_FOR_ASSET);
+    map.put("UNSUPPORTED_BROKER_CAPACITY", UNSUPPORTED_BROKER_CAPACITY);
+    map.put("ABOVE_BROKER_FEE_MAXIMUM", ABOVE_BROKER_FEE_MAXIMUM);
     return map;
   }
 
@@ -329,6 +335,8 @@ public class OrderRejectedReason {
     map.put(
         "UNSUPPORTED_TIME_IN_FORCE_FOR_ASSET",
         OrderRejectedReasonEnum.UNSUPPORTED_TIME_IN_FORCE_FOR_ASSET);
+    map.put("UNSUPPORTED_BROKER_CAPACITY", OrderRejectedReasonEnum.UNSUPPORTED_BROKER_CAPACITY);
+    map.put("ABOVE_BROKER_FEE_MAXIMUM", OrderRejectedReasonEnum.ABOVE_BROKER_FEE_MAXIMUM);
     return map;
   }
 
@@ -410,6 +418,8 @@ public class OrderRejectedReason {
     UNSUPPORTED_TRADING_SESSION_FOR_ASSET("UNSUPPORTED_TRADING_SESSION_FOR_ASSET"),
     UNSUPPORTED_ORDER_TYPE_FOR_ASSET("UNSUPPORTED_ORDER_TYPE_FOR_ASSET"),
     UNSUPPORTED_TIME_IN_FORCE_FOR_ASSET("UNSUPPORTED_TIME_IN_FORCE_FOR_ASSET"),
+    UNSUPPORTED_BROKER_CAPACITY("UNSUPPORTED_BROKER_CAPACITY"),
+    ABOVE_BROKER_FEE_MAXIMUM("ABOVE_BROKER_FEE_MAXIMUM"),
     ;
 
     private final String value;

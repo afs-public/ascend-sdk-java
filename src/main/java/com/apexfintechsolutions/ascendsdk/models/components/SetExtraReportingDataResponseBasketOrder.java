@@ -156,6 +156,16 @@ public class SetExtraReportingDataResponseBasketOrder {
   private JsonNullable<OffsetDateTime> lastUpdateTime;
 
   /**
+   * Specifies instructions for how to match tax lots to the order. Only applicable for SELL orders.
+   * Maximum 100 instructions per order. Each instruction must include quantity. When id is
+   * specified, trade_date and price must not be specified. When id is not specified, trade_date is
+   * required and price is optional.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("lot_matching_instructions")
+  private Optional<? extends List<TradeLot>> lotMatchingInstructions;
+
+  /**
    * The maximum number of shares to be sold if this is a notional SELL order of an Equity asset
    * type. (Prohibited for other side or asset_type inputs.)
    *
@@ -262,6 +272,8 @@ public class SetExtraReportingDataResponseBasketOrder {
       @JsonProperty("identifier_type")
           Optional<? extends SetExtraReportingDataResponseIdentifierType> identifierType,
       @JsonProperty("last_update_time") JsonNullable<OffsetDateTime> lastUpdateTime,
+      @JsonProperty("lot_matching_instructions")
+          Optional<? extends List<TradeLot>> lotMatchingInstructions,
       @JsonProperty("max_sell_quantity")
           JsonNullable<? extends SetExtraReportingDataResponseMaxSellQuantity> maxSellQuantity,
       @JsonProperty("name") Optional<String> name,
@@ -300,6 +312,7 @@ public class SetExtraReportingDataResponseBasketOrder {
     Utils.checkNotNull(identifier, "identifier");
     Utils.checkNotNull(identifierType, "identifierType");
     Utils.checkNotNull(lastUpdateTime, "lastUpdateTime");
+    Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
     Utils.checkNotNull(maxSellQuantity, "maxSellQuantity");
     Utils.checkNotNull(name, "name");
     Utils.checkNotNull(notionalValue, "notionalValue");
@@ -329,6 +342,7 @@ public class SetExtraReportingDataResponseBasketOrder {
     this.identifier = identifier;
     this.identifierType = identifierType;
     this.lastUpdateTime = lastUpdateTime;
+    this.lotMatchingInstructions = lotMatchingInstructions;
     this.maxSellQuantity = maxSellQuantity;
     this.name = name;
     this.notionalValue = notionalValue;
@@ -362,6 +376,7 @@ public class SetExtraReportingDataResponseBasketOrder {
         Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined(),
+        Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty(),
         JsonNullable.undefined(),
@@ -534,6 +549,18 @@ public class SetExtraReportingDataResponseBasketOrder {
   @JsonIgnore
   public JsonNullable<OffsetDateTime> lastUpdateTime() {
     return lastUpdateTime;
+  }
+
+  /**
+   * Specifies instructions for how to match tax lots to the order. Only applicable for SELL orders.
+   * Maximum 100 instructions per order. Each instruction must include quantity. When id is
+   * specified, trade_date and price must not be specified. When id is not specified, trade_date is
+   * required and price is optional.
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<List<TradeLot>> lotMatchingInstructions() {
+    return (Optional<List<TradeLot>>) lotMatchingInstructions;
   }
 
   /**
@@ -1006,6 +1033,32 @@ public class SetExtraReportingDataResponseBasketOrder {
   }
 
   /**
+   * Specifies instructions for how to match tax lots to the order. Only applicable for SELL orders.
+   * Maximum 100 instructions per order. Each instruction must include quantity. When id is
+   * specified, trade_date and price must not be specified. When id is not specified, trade_date is
+   * required and price is optional.
+   */
+  public SetExtraReportingDataResponseBasketOrder withLotMatchingInstructions(
+      List<TradeLot> lotMatchingInstructions) {
+    Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
+    this.lotMatchingInstructions = Optional.ofNullable(lotMatchingInstructions);
+    return this;
+  }
+
+  /**
+   * Specifies instructions for how to match tax lots to the order. Only applicable for SELL orders.
+   * Maximum 100 instructions per order. Each instruction must include quantity. When id is
+   * specified, trade_date and price must not be specified. When id is not specified, trade_date is
+   * required and price is optional.
+   */
+  public SetExtraReportingDataResponseBasketOrder withLotMatchingInstructions(
+      Optional<? extends List<TradeLot>> lotMatchingInstructions) {
+    Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
+    this.lotMatchingInstructions = lotMatchingInstructions;
+    return this;
+  }
+
+  /**
    * The maximum number of shares to be sold if this is a notional SELL order of an Equity asset
    * type. (Prohibited for other side or asset_type inputs.)
    *
@@ -1240,6 +1293,7 @@ public class SetExtraReportingDataResponseBasketOrder {
         && Utils.enhancedDeepEquals(this.identifier, other.identifier)
         && Utils.enhancedDeepEquals(this.identifierType, other.identifierType)
         && Utils.enhancedDeepEquals(this.lastUpdateTime, other.lastUpdateTime)
+        && Utils.enhancedDeepEquals(this.lotMatchingInstructions, other.lotMatchingInstructions)
         && Utils.enhancedDeepEquals(this.maxSellQuantity, other.maxSellQuantity)
         && Utils.enhancedDeepEquals(this.name, other.name)
         && Utils.enhancedDeepEquals(this.notionalValue, other.notionalValue)
@@ -1275,6 +1329,7 @@ public class SetExtraReportingDataResponseBasketOrder {
         identifier,
         identifierType,
         lastUpdateTime,
+        lotMatchingInstructions,
         maxSellQuantity,
         name,
         notionalValue,
@@ -1329,6 +1384,8 @@ public class SetExtraReportingDataResponseBasketOrder {
         identifierType,
         "lastUpdateTime",
         lastUpdateTime,
+        "lotMatchingInstructions",
+        lotMatchingInstructions,
         "maxSellQuantity",
         maxSellQuantity,
         "name",
@@ -1396,6 +1453,8 @@ public class SetExtraReportingDataResponseBasketOrder {
         Optional.empty();
 
     private JsonNullable<OffsetDateTime> lastUpdateTime = JsonNullable.undefined();
+
+    private Optional<? extends List<TradeLot>> lotMatchingInstructions = Optional.empty();
 
     private JsonNullable<? extends SetExtraReportingDataResponseMaxSellQuantity> maxSellQuantity =
         JsonNullable.undefined();
@@ -1781,6 +1840,31 @@ public class SetExtraReportingDataResponseBasketOrder {
     }
 
     /**
+     * Specifies instructions for how to match tax lots to the order. Only applicable for SELL
+     * orders. Maximum 100 instructions per order. Each instruction must include quantity. When id
+     * is specified, trade_date and price must not be specified. When id is not specified,
+     * trade_date is required and price is optional.
+     */
+    public Builder lotMatchingInstructions(List<TradeLot> lotMatchingInstructions) {
+      Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
+      this.lotMatchingInstructions = Optional.ofNullable(lotMatchingInstructions);
+      return this;
+    }
+
+    /**
+     * Specifies instructions for how to match tax lots to the order. Only applicable for SELL
+     * orders. Maximum 100 instructions per order. Each instruction must include quantity. When id
+     * is specified, trade_date and price must not be specified. When id is not specified,
+     * trade_date is required and price is optional.
+     */
+    public Builder lotMatchingInstructions(
+        Optional<? extends List<TradeLot>> lotMatchingInstructions) {
+      Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
+      this.lotMatchingInstructions = lotMatchingInstructions;
+      return this;
+    }
+
+    /**
      * The maximum number of shares to be sold if this is a notional SELL order of an Equity asset
      * type. (Prohibited for other side or asset_type inputs.)
      *
@@ -2003,6 +2087,7 @@ public class SetExtraReportingDataResponseBasketOrder {
           identifier,
           identifierType,
           lastUpdateTime,
+          lotMatchingInstructions,
           maxSellQuantity,
           name,
           notionalValue,

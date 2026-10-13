@@ -58,6 +58,8 @@ public class CompleteTradeResponseSideModifier {
       new CompleteTradeResponseSideModifier("OPEN");
   public static final CompleteTradeResponseSideModifier CLOSE =
       new CompleteTradeResponseSideModifier("CLOSE");
+  public static final CompleteTradeResponseSideModifier COVER =
+      new CompleteTradeResponseSideModifier("COVER");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -132,6 +134,7 @@ public class CompleteTradeResponseSideModifier {
     map.put("SHORT_COVER", SHORT_COVER);
     map.put("OPEN", OPEN);
     map.put("CLOSE", CLOSE);
+    map.put("COVER", COVER);
     return map;
   }
 
@@ -145,6 +148,7 @@ public class CompleteTradeResponseSideModifier {
     map.put("SHORT_COVER", CompleteTradeResponseSideModifierEnum.SHORT_COVER);
     map.put("OPEN", CompleteTradeResponseSideModifierEnum.OPEN);
     map.put("CLOSE", CompleteTradeResponseSideModifierEnum.CLOSE);
+    map.put("COVER", CompleteTradeResponseSideModifierEnum.COVER);
     return map;
   }
 
@@ -187,6 +191,7 @@ public class CompleteTradeResponseSideModifier {
     SHORT_COVER("SHORT_COVER"),
     OPEN("OPEN"),
     CLOSE("CLOSE"),
+    COVER("COVER"),
     ;
 
     private final String value;

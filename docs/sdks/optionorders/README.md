@@ -54,8 +54,6 @@ public class Application {
                     .clientOrderId("a6d5258b-6b23-478a-8145-98e79d60427a")
                     .currencyCode("USD")
                     .legs(List.of())
-                    .limitPrice(DecimalCreate.builder()
-                        .build())
                     .orderDate(DateCreate.builder()
                         .build())
                     .orderType(OptionOrderCreateOrderType.LIMIT)

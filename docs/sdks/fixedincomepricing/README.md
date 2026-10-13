@@ -42,7 +42,7 @@ public class Application {
             .build();
 
         OrderPriceServicePreviewOrderCostResponse res = sdk.fixedIncomePricing().previewOrderCost()
-                .accountId("<id>")
+                .accountId("01HBRQ5BW6ZAY4BNWP4GWRD80X")
                 .orderCostPreviewRequestCreate(OrderCostPreviewRequestCreate.builder()
                     .assetType(OrderCostPreviewRequestCreateAssetType.FIXED_INCOME)
                     .identifier("037833100")
@@ -52,7 +52,7 @@ public class Application {
                             .build())
                         .type(LimitPriceCreateType.PRICE_PER_UNIT)
                         .build())
-                    .parent("<value>")
+                    .parent("accounts/01HBRQ5BW6ZAY4BNWP4GWRD80X")
                     .quantity(DecimalCreate.builder()
                         .build())
                     .build())
@@ -67,10 +67,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
-| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `accountId`                                                                               | *String*                                                                                  | :heavy_check_mark:                                                                        | The account id.                                                                           |
-| `orderCostPreviewRequestCreate`                                                           | [OrderCostPreviewRequestCreate](../../models/components/OrderCostPreviewRequestCreate.md) | :heavy_check_mark:                                                                        | N/A                                                                                       |
+| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               | Example                                                                                   |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `accountId`                                                                               | *String*                                                                                  | :heavy_check_mark:                                                                        | The account id.                                                                           | 01HBRQ5BW6ZAY4BNWP4GWRD80X                                                                |
+| `orderCostPreviewRequestCreate`                                                           | [OrderCostPreviewRequestCreate](../../models/components/OrderCostPreviewRequestCreate.md) | :heavy_check_mark:                                                                        | N/A                                                                                       |                                                                                           |
 
 ### Response
 
@@ -117,12 +117,12 @@ public class Application {
             .build();
 
         OrderPriceServiceRetrieveQuoteResponse res = sdk.fixedIncomePricing().retrieveQuote()
-                .accountId("<id>")
+                .accountId("01HBRQ5BW6ZAY4BNWP4GWRD80X")
                 .retrieveQuoteRequestCreate(RetrieveQuoteRequestCreate.builder()
                     .assetType(RetrieveQuoteRequestCreateAssetType.FIXED_INCOME)
                     .identifier("037833100")
                     .identifierType(RetrieveQuoteRequestCreateIdentifierType.CUSIP)
-                    .parent("<value>")
+                    .parent("accounts/01HBRQ5BW6ZAY4BNWP4GWRD80X")
                     .build())
                 .call();
 
@@ -135,10 +135,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         |
-| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `accountId`                                                                         | *String*                                                                            | :heavy_check_mark:                                                                  | The account id.                                                                     |
-| `retrieveQuoteRequestCreate`                                                        | [RetrieveQuoteRequestCreate](../../models/components/RetrieveQuoteRequestCreate.md) | :heavy_check_mark:                                                                  | N/A                                                                                 |
+| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         | Example                                                                             |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `accountId`                                                                         | *String*                                                                            | :heavy_check_mark:                                                                  | The account id.                                                                     | 01HBRQ5BW6ZAY4BNWP4GWRD80X                                                          |
+| `retrieveQuoteRequestCreate`                                                        | [RetrieveQuoteRequestCreate](../../models/components/RetrieveQuoteRequestCreate.md) | :heavy_check_mark:                                                                  | N/A                                                                                 |                                                                                     |
 
 ### Response
 
@@ -186,9 +186,9 @@ public class Application {
             .build();
 
         OrderPriceServiceRetrieveFixedIncomeMarksResponse res = sdk.fixedIncomePricing().retrieveFixedIncomeMarks()
-                .correspondentId("<id>")
+                .correspondentId("01HBRQ5BW6ZAY4BNWP4GWRD80X")
                 .retrieveFixedIncomeMarksRequestCreate(RetrieveFixedIncomeMarksRequestCreate.builder()
-                    .parent("<value>")
+                    .parent("correspondents/01HBRQ5BW6ZAY4BNWP4GWRD80X")
                     .securityIdentifiers(List.of(
                         RetrieveFixedIncomeMarksRequestSecurityIdentifiersCreate.builder()
                             .identifier("US0378331005")
@@ -210,10 +210,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
-| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `correspondentId`                                                                                         | *String*                                                                                                  | :heavy_check_mark:                                                                                        | The correspondent id.                                                                                     |
-| `retrieveFixedIncomeMarksRequestCreate`                                                                   | [RetrieveFixedIncomeMarksRequestCreate](../../models/components/RetrieveFixedIncomeMarksRequestCreate.md) | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
+| Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               | Example                                                                                                   |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `correspondentId`                                                                                         | *String*                                                                                                  | :heavy_check_mark:                                                                                        | The correspondent id.                                                                                     | 01HBRQ5BW6ZAY4BNWP4GWRD80X                                                                                |
+| `retrieveFixedIncomeMarksRequestCreate`                                                                   | [RetrieveFixedIncomeMarksRequestCreate](../../models/components/RetrieveFixedIncomeMarksRequestCreate.md) | :heavy_check_mark:                                                                                        | N/A                                                                                                       |                                                                                                           |
 
 ### Response
 

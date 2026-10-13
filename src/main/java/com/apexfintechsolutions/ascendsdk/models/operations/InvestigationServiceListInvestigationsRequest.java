@@ -40,24 +40,40 @@ public class InvestigationServiceListInvestigationsRequest {
   @SpeakeasyMetadata("queryParam:style=form,explode=true,name=order_by")
   private Optional<String> orderBy;
 
+  /**
+   * Include the total size of the collection specified by this query in the response (this may
+   * incur a performance penalty)
+   *
+   * <p>**Field Dependencies:**
+   *
+   * <p>When include_total_size is explicitly set to false, total_size in the response will be 0.
+   *
+   * <p>Must be empty if `total_size` is `false`.
+   */
+  @SpeakeasyMetadata("queryParam:style=form,explode=true,name=include_total_size")
+  private Optional<Boolean> includeTotalSize;
+
   @JsonCreator
   public InvestigationServiceListInvestigationsRequest(
       Optional<Integer> pageSize,
       Optional<String> pageToken,
       Optional<String> filter,
-      Optional<String> orderBy) {
+      Optional<String> orderBy,
+      Optional<Boolean> includeTotalSize) {
     Utils.checkNotNull(pageSize, "pageSize");
     Utils.checkNotNull(pageToken, "pageToken");
     Utils.checkNotNull(filter, "filter");
     Utils.checkNotNull(orderBy, "orderBy");
+    Utils.checkNotNull(includeTotalSize, "includeTotalSize");
     this.pageSize = pageSize;
     this.pageToken = pageToken;
     this.filter = filter;
     this.orderBy = orderBy;
+    this.includeTotalSize = includeTotalSize;
   }
 
   public InvestigationServiceListInvestigationsRequest() {
-    this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
   }
 
   /**
@@ -96,6 +112,21 @@ public class InvestigationServiceListInvestigationsRequest {
   @JsonIgnore
   public Optional<String> orderBy() {
     return orderBy;
+  }
+
+  /**
+   * Include the total size of the collection specified by this query in the response (this may
+   * incur a performance penalty)
+   *
+   * <p>**Field Dependencies:**
+   *
+   * <p>When include_total_size is explicitly set to false, total_size in the response will be 0.
+   *
+   * <p>Must be empty if `total_size` is `false`.
+   */
+  @JsonIgnore
+  public Optional<Boolean> includeTotalSize() {
+    return includeTotalSize;
   }
 
   public static Builder builder() {
@@ -186,6 +217,40 @@ public class InvestigationServiceListInvestigationsRequest {
     return this;
   }
 
+  /**
+   * Include the total size of the collection specified by this query in the response (this may
+   * incur a performance penalty)
+   *
+   * <p>**Field Dependencies:**
+   *
+   * <p>When include_total_size is explicitly set to false, total_size in the response will be 0.
+   *
+   * <p>Must be empty if `total_size` is `false`.
+   */
+  public InvestigationServiceListInvestigationsRequest withIncludeTotalSize(
+      boolean includeTotalSize) {
+    Utils.checkNotNull(includeTotalSize, "includeTotalSize");
+    this.includeTotalSize = Optional.ofNullable(includeTotalSize);
+    return this;
+  }
+
+  /**
+   * Include the total size of the collection specified by this query in the response (this may
+   * incur a performance penalty)
+   *
+   * <p>**Field Dependencies:**
+   *
+   * <p>When include_total_size is explicitly set to false, total_size in the response will be 0.
+   *
+   * <p>Must be empty if `total_size` is `false`.
+   */
+  public InvestigationServiceListInvestigationsRequest withIncludeTotalSize(
+      Optional<Boolean> includeTotalSize) {
+    Utils.checkNotNull(includeTotalSize, "includeTotalSize");
+    this.includeTotalSize = includeTotalSize;
+    return this;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -199,12 +264,13 @@ public class InvestigationServiceListInvestigationsRequest {
     return Utils.enhancedDeepEquals(this.pageSize, other.pageSize)
         && Utils.enhancedDeepEquals(this.pageToken, other.pageToken)
         && Utils.enhancedDeepEquals(this.filter, other.filter)
-        && Utils.enhancedDeepEquals(this.orderBy, other.orderBy);
+        && Utils.enhancedDeepEquals(this.orderBy, other.orderBy)
+        && Utils.enhancedDeepEquals(this.includeTotalSize, other.includeTotalSize);
   }
 
   @Override
   public int hashCode() {
-    return Utils.enhancedHash(pageSize, pageToken, filter, orderBy);
+    return Utils.enhancedHash(pageSize, pageToken, filter, orderBy, includeTotalSize);
   }
 
   @Override
@@ -218,7 +284,9 @@ public class InvestigationServiceListInvestigationsRequest {
         "filter",
         filter,
         "orderBy",
-        orderBy);
+        orderBy,
+        "includeTotalSize",
+        includeTotalSize);
   }
 
   @SuppressWarnings("UnusedReturnValue")
@@ -231,6 +299,8 @@ public class InvestigationServiceListInvestigationsRequest {
     private Optional<String> filter = Optional.empty();
 
     private Optional<String> orderBy = Optional.empty();
+
+    private Optional<Boolean> includeTotalSize = Optional.empty();
 
     private Builder() {
       // force use of static builder() method
@@ -320,10 +390,42 @@ public class InvestigationServiceListInvestigationsRequest {
       return this;
     }
 
+    /**
+     * Include the total size of the collection specified by this query in the response (this may
+     * incur a performance penalty)
+     *
+     * <p>**Field Dependencies:**
+     *
+     * <p>When include_total_size is explicitly set to false, total_size in the response will be 0.
+     *
+     * <p>Must be empty if `total_size` is `false`.
+     */
+    public Builder includeTotalSize(boolean includeTotalSize) {
+      Utils.checkNotNull(includeTotalSize, "includeTotalSize");
+      this.includeTotalSize = Optional.ofNullable(includeTotalSize);
+      return this;
+    }
+
+    /**
+     * Include the total size of the collection specified by this query in the response (this may
+     * incur a performance penalty)
+     *
+     * <p>**Field Dependencies:**
+     *
+     * <p>When include_total_size is explicitly set to false, total_size in the response will be 0.
+     *
+     * <p>Must be empty if `total_size` is `false`.
+     */
+    public Builder includeTotalSize(Optional<Boolean> includeTotalSize) {
+      Utils.checkNotNull(includeTotalSize, "includeTotalSize");
+      this.includeTotalSize = includeTotalSize;
+      return this;
+    }
+
     public InvestigationServiceListInvestigationsRequest build() {
 
       return new InvestigationServiceListInvestigationsRequest(
-          pageSize, pageToken, filter, orderBy);
+          pageSize, pageToken, filter, orderBy, includeTotalSize);
     }
   }
 }
