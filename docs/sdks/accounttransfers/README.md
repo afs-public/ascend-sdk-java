@@ -10,6 +10,7 @@
 * [acceptTransfer](#accepttransfer) - Accept Transfer
 * [rejectTransfer](#rejecttransfer) - Reject Transfer
 * [getTransfer](#gettransfer) - Get Transfer
+* [previewTransfer](#previewtransfer) - Preview Transfer
 
 ## createTransfer
 
@@ -352,4 +353,68 @@ public class Application {
 | Error Type             | Status Code            | Content Type           |
 | ---------------------- | ---------------------- | ---------------------- |
 | models/errors/Status   | 400, 403, 404          | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## previewTransfer
+
+Previews what an ACATS transfer of a linked account's holdings would look like: the holdings sorted into eligible and ineligible (with reasons), plus any transfer- or account-level conditions. The linked account comes from a Data Aggregator Connect connection (see [Create Connection](https://developer.apexclearing.com/apex-beta/v1-dev/reference/dacservice_createconnection)); ACATS resolves the holdings from it internally.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="AccountTransfers_PreviewTransfer" method="post" path="/acats/v1/transfers:preview" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.AccountTransfersPreviewTransferResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        PreviewTransferRequestCreate req = PreviewTransferRequestCreate.builder()
+                .build();
+
+        AccountTransfersPreviewTransferResponse res = sdk.accountTransfers().previewTransfer()
+                .request(req)
+                .call();
+
+        if (res.previewTransferResponse().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `request`                                                                           | [PreviewTransferRequestCreate](../../models/shared/PreviewTransferRequestCreate.md) | :heavy_check_mark:                                                                  | The request object to use for the request.                                          |
+
+### Response
+
+**[AccountTransfersPreviewTransferResponse](../../models/operations/AccountTransfersPreviewTransferResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403, 404          | application/json       |
+| models/errors/Status   | 500                    | application/json       |
 | models/errors/SDKError | 4XX, 5XX               | \*/\*                  |

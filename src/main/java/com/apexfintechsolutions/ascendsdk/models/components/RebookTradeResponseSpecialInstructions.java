@@ -135,6 +135,8 @@ public class RebookTradeResponseSpecialInstructions {
       new RebookTradeResponseSpecialInstructions("SUPPRESS_TAF_FEE");
   public static final RebookTradeResponseSpecialInstructions DIVIDEND_REINVESTMENT =
       new RebookTradeResponseSpecialInstructions("DIVIDEND_REINVESTMENT");
+  public static final RebookTradeResponseSpecialInstructions REPORT_MSRB =
+      new RebookTradeResponseSpecialInstructions("REPORT_MSRB");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -252,6 +254,7 @@ public class RebookTradeResponseSpecialInstructions {
     map.put("SUPPRESS_SEC_FEE", SUPPRESS_SEC_FEE);
     map.put("SUPPRESS_TAF_FEE", SUPPRESS_TAF_FEE);
     map.put("DIVIDEND_REINVESTMENT", DIVIDEND_REINVESTMENT);
+    map.put("REPORT_MSRB", REPORT_MSRB);
     return map;
   }
 
@@ -332,6 +335,7 @@ public class RebookTradeResponseSpecialInstructions {
     map.put("SUPPRESS_TAF_FEE", RebookTradeResponseSpecialInstructionsEnum.SUPPRESS_TAF_FEE);
     map.put(
         "DIVIDEND_REINVESTMENT", RebookTradeResponseSpecialInstructionsEnum.DIVIDEND_REINVESTMENT);
+    map.put("REPORT_MSRB", RebookTradeResponseSpecialInstructionsEnum.REPORT_MSRB);
     return map;
   }
 
@@ -416,6 +420,7 @@ public class RebookTradeResponseSpecialInstructions {
     SUPPRESS_SEC_FEE("SUPPRESS_SEC_FEE"),
     SUPPRESS_TAF_FEE("SUPPRESS_TAF_FEE"),
     DIVIDEND_REINVESTMENT("DIVIDEND_REINVESTMENT"),
+    REPORT_MSRB("REPORT_MSRB"),
     ;
 
     private final String value;

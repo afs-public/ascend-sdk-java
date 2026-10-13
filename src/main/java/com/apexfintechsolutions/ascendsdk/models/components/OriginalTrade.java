@@ -138,6 +138,21 @@ public class OriginalTrade {
   @JsonProperty("order_id")
   private Optional<String> orderId;
 
+  /**
+   * The resource name of the API resource that originated this trade, for example the order that
+   * produced it. Set by the system; any value supplied by the caller is ignored. Lets a client walk
+   * a Ledger activity to its trade and on to the originating order using only
+   * originating_resource_name fields.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("originating_resource_name")
+  private Optional<String> originatingResourceName;
+
+  /** RIA Trade Away indicator. */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("prime")
+  private Optional<Boolean> prime;
+
   /** Route type for the trade. */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("route_type")
@@ -218,6 +233,8 @@ public class OriginalTrade {
       @JsonProperty("name") Optional<String> name,
       @JsonProperty("open") Optional<Boolean> open,
       @JsonProperty("order_id") Optional<String> orderId,
+      @JsonProperty("originating_resource_name") Optional<String> originatingResourceName,
+      @JsonProperty("prime") Optional<Boolean> prime,
       @JsonProperty("route_type")
           Optional<? extends RebookTradeResponseOriginalTradeRouteType> routeType,
       @JsonProperty("settlement_date")
@@ -252,6 +269,8 @@ public class OriginalTrade {
     Utils.checkNotNull(name, "name");
     Utils.checkNotNull(open, "open");
     Utils.checkNotNull(orderId, "orderId");
+    Utils.checkNotNull(originatingResourceName, "originatingResourceName");
+    Utils.checkNotNull(prime, "prime");
     Utils.checkNotNull(routeType, "routeType");
     Utils.checkNotNull(settlementDate, "settlementDate");
     Utils.checkNotNull(side, "side");
@@ -280,6 +299,8 @@ public class OriginalTrade {
     this.name = name;
     this.open = open;
     this.orderId = orderId;
+    this.originatingResourceName = originatingResourceName;
+    this.prime = prime;
     this.routeType = routeType;
     this.settlementDate = settlementDate;
     this.side = side;
@@ -307,6 +328,8 @@ public class OriginalTrade {
         Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined(),
+        Optional.empty(),
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
@@ -466,6 +489,23 @@ public class OriginalTrade {
   @JsonIgnore
   public Optional<String> orderId() {
     return orderId;
+  }
+
+  /**
+   * The resource name of the API resource that originated this trade, for example the order that
+   * produced it. Set by the system; any value supplied by the caller is ignored. Lets a client walk
+   * a Ledger activity to its trade and on to the originating order using only
+   * originating_resource_name fields.
+   */
+  @JsonIgnore
+  public Optional<String> originatingResourceName() {
+    return originatingResourceName;
+  }
+
+  /** RIA Trade Away indicator. */
+  @JsonIgnore
+  public Optional<Boolean> prime() {
+    return prime;
   }
 
   /** Route type for the trade. */
@@ -862,6 +902,44 @@ public class OriginalTrade {
     return this;
   }
 
+  /**
+   * The resource name of the API resource that originated this trade, for example the order that
+   * produced it. Set by the system; any value supplied by the caller is ignored. Lets a client walk
+   * a Ledger activity to its trade and on to the originating order using only
+   * originating_resource_name fields.
+   */
+  public OriginalTrade withOriginatingResourceName(String originatingResourceName) {
+    Utils.checkNotNull(originatingResourceName, "originatingResourceName");
+    this.originatingResourceName = Optional.ofNullable(originatingResourceName);
+    return this;
+  }
+
+  /**
+   * The resource name of the API resource that originated this trade, for example the order that
+   * produced it. Set by the system; any value supplied by the caller is ignored. Lets a client walk
+   * a Ledger activity to its trade and on to the originating order using only
+   * originating_resource_name fields.
+   */
+  public OriginalTrade withOriginatingResourceName(Optional<String> originatingResourceName) {
+    Utils.checkNotNull(originatingResourceName, "originatingResourceName");
+    this.originatingResourceName = originatingResourceName;
+    return this;
+  }
+
+  /** RIA Trade Away indicator. */
+  public OriginalTrade withPrime(boolean prime) {
+    Utils.checkNotNull(prime, "prime");
+    this.prime = Optional.ofNullable(prime);
+    return this;
+  }
+
+  /** RIA Trade Away indicator. */
+  public OriginalTrade withPrime(Optional<Boolean> prime) {
+    Utils.checkNotNull(prime, "prime");
+    this.prime = prime;
+    return this;
+  }
+
   /** Route type for the trade. */
   public OriginalTrade withRouteType(RebookTradeResponseOriginalTradeRouteType routeType) {
     Utils.checkNotNull(routeType, "routeType");
@@ -1038,6 +1116,8 @@ public class OriginalTrade {
         && Utils.enhancedDeepEquals(this.name, other.name)
         && Utils.enhancedDeepEquals(this.open, other.open)
         && Utils.enhancedDeepEquals(this.orderId, other.orderId)
+        && Utils.enhancedDeepEquals(this.originatingResourceName, other.originatingResourceName)
+        && Utils.enhancedDeepEquals(this.prime, other.prime)
         && Utils.enhancedDeepEquals(this.routeType, other.routeType)
         && Utils.enhancedDeepEquals(this.settlementDate, other.settlementDate)
         && Utils.enhancedDeepEquals(this.side, other.side)
@@ -1071,6 +1151,8 @@ public class OriginalTrade {
         name,
         open,
         orderId,
+        originatingResourceName,
+        prime,
         routeType,
         settlementDate,
         side,
@@ -1124,6 +1206,10 @@ public class OriginalTrade {
         open,
         "orderId",
         orderId,
+        "originatingResourceName",
+        originatingResourceName,
+        "prime",
+        prime,
         "routeType",
         routeType,
         "settlementDate",
@@ -1188,6 +1274,10 @@ public class OriginalTrade {
     private Optional<Boolean> open = Optional.empty();
 
     private Optional<String> orderId = Optional.empty();
+
+    private Optional<String> originatingResourceName = Optional.empty();
+
+    private Optional<Boolean> prime = Optional.empty();
 
     private Optional<? extends RebookTradeResponseOriginalTradeRouteType> routeType =
         Optional.empty();
@@ -1535,6 +1625,44 @@ public class OriginalTrade {
       return this;
     }
 
+    /**
+     * The resource name of the API resource that originated this trade, for example the order that
+     * produced it. Set by the system; any value supplied by the caller is ignored. Lets a client
+     * walk a Ledger activity to its trade and on to the originating order using only
+     * originating_resource_name fields.
+     */
+    public Builder originatingResourceName(String originatingResourceName) {
+      Utils.checkNotNull(originatingResourceName, "originatingResourceName");
+      this.originatingResourceName = Optional.ofNullable(originatingResourceName);
+      return this;
+    }
+
+    /**
+     * The resource name of the API resource that originated this trade, for example the order that
+     * produced it. Set by the system; any value supplied by the caller is ignored. Lets a client
+     * walk a Ledger activity to its trade and on to the originating order using only
+     * originating_resource_name fields.
+     */
+    public Builder originatingResourceName(Optional<String> originatingResourceName) {
+      Utils.checkNotNull(originatingResourceName, "originatingResourceName");
+      this.originatingResourceName = originatingResourceName;
+      return this;
+    }
+
+    /** RIA Trade Away indicator. */
+    public Builder prime(boolean prime) {
+      Utils.checkNotNull(prime, "prime");
+      this.prime = Optional.ofNullable(prime);
+      return this;
+    }
+
+    /** RIA Trade Away indicator. */
+    public Builder prime(Optional<Boolean> prime) {
+      Utils.checkNotNull(prime, "prime");
+      this.prime = prime;
+      return this;
+    }
+
     /** Route type for the trade. */
     public Builder routeType(RebookTradeResponseOriginalTradeRouteType routeType) {
       Utils.checkNotNull(routeType, "routeType");
@@ -1704,6 +1832,8 @@ public class OriginalTrade {
           name,
           open,
           orderId,
+          originatingResourceName,
+          prime,
           routeType,
           settlementDate,
           side,

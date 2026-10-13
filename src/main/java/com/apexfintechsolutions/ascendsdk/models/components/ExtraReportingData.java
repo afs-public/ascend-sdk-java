@@ -18,7 +18,10 @@ import org.openapitools.jackson.nullable.JsonNullable;
  * <p>Any reporting data provided by the SetExtraReportingData endpoint.
  */
 public class ExtraReportingData {
-
+  /**
+   * Correspondent-side timestamp when the cancellation was confirmed. Maps to CAT
+   * CANCEL_CONFIRM_TIME.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("cancel_confirmed_time")
   private JsonNullable<OffsetDateTime> cancelConfirmedTime;
@@ -34,6 +37,10 @@ public class ExtraReportingData {
     this(JsonNullable.undefined());
   }
 
+  /**
+   * Correspondent-side timestamp when the cancellation was confirmed. Maps to CAT
+   * CANCEL_CONFIRM_TIME.
+   */
   @JsonIgnore
   public JsonNullable<OffsetDateTime> cancelConfirmedTime() {
     return cancelConfirmedTime;
@@ -43,12 +50,20 @@ public class ExtraReportingData {
     return new Builder();
   }
 
+  /**
+   * Correspondent-side timestamp when the cancellation was confirmed. Maps to CAT
+   * CANCEL_CONFIRM_TIME.
+   */
   public ExtraReportingData withCancelConfirmedTime(OffsetDateTime cancelConfirmedTime) {
     Utils.checkNotNull(cancelConfirmedTime, "cancelConfirmedTime");
     this.cancelConfirmedTime = JsonNullable.of(cancelConfirmedTime);
     return this;
   }
 
+  /**
+   * Correspondent-side timestamp when the cancellation was confirmed. Maps to CAT
+   * CANCEL_CONFIRM_TIME.
+   */
   public ExtraReportingData withCancelConfirmedTime(
       JsonNullable<OffsetDateTime> cancelConfirmedTime) {
     Utils.checkNotNull(cancelConfirmedTime, "cancelConfirmedTime");
@@ -87,12 +102,20 @@ public class ExtraReportingData {
       // force use of static builder() method
     }
 
+    /**
+     * Correspondent-side timestamp when the cancellation was confirmed. Maps to CAT
+     * CANCEL_CONFIRM_TIME.
+     */
     public Builder cancelConfirmedTime(OffsetDateTime cancelConfirmedTime) {
       Utils.checkNotNull(cancelConfirmedTime, "cancelConfirmedTime");
       this.cancelConfirmedTime = JsonNullable.of(cancelConfirmedTime);
       return this;
     }
 
+    /**
+     * Correspondent-side timestamp when the cancellation was confirmed. Maps to CAT
+     * CANCEL_CONFIRM_TIME.
+     */
     public Builder cancelConfirmedTime(JsonNullable<OffsetDateTime> cancelConfirmedTime) {
       Utils.checkNotNull(cancelConfirmedTime, "cancelConfirmedTime");
       this.cancelConfirmedTime = cancelConfirmedTime;

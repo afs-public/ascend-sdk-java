@@ -28,7 +28,11 @@ public class OptionOrderCreate {
   @JsonProperty("client_order_id")
   private String clientOrderId;
 
-  /** Required for any client who is having Apex do CAT reporting on their behalf. */
+  /**
+   * Required for any client who is having Apex do CAT reporting on their behalf. When
+   * special_reporting_instructions includes MANUAL_ORDER, this is also reported to CAT as the time
+   * the order was manually received from the customer.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("client_received_time")
   private JsonNullable<OffsetDateTime> clientReceivedTime;
@@ -68,8 +72,9 @@ public class OptionOrderCreate {
    * https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html
    * [decimal.Decimal]: https://docs.python.org/3/library/decimal.html
    */
+  @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("limit_price")
-  private DecimalCreate limitPrice;
+  private Optional<? extends DecimalCreate> limitPrice;
 
   /**
    * Represents a whole or partial calendar date, such as a birthday. The time of day and time zone
@@ -109,8 +114,11 @@ public class OptionOrderCreate {
   private DecimalCreate quantity;
 
   /**
-   * Special Reporting Instructions to be applied to this option order. Can include multiple
-   * Instructions.
+   * Special Reporting Instructions to be applied to this option order. Only CAT_PARENT_ALGO and
+   * MANUAL_ORDER are supported for option orders; any other value is rejected. CAT_PARENT_ALGO is
+   * only allowed on LIMIT orders. MANUAL_ORDER marks the order as manually received from the
+   * customer for CAT reporting; client_received_time should then be set to the time the order was
+   * received.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("special_reporting_instructions")
@@ -133,7 +141,7 @@ public class OptionOrderCreate {
       @JsonProperty("currency_code") String currencyCode,
       @JsonProperty("fees") Optional<? extends List<FeeCreate>> fees,
       @JsonProperty("legs") List<OptionOrderLegCreate> legs,
-      @JsonProperty("limit_price") DecimalCreate limitPrice,
+      @JsonProperty("limit_price") Optional<? extends DecimalCreate> limitPrice,
       @JsonProperty("order_date") DateCreate orderDate,
       @JsonProperty("order_type") OptionOrderCreateOrderType orderType,
       @JsonProperty("price_direction") PriceDirection priceDirection,
@@ -177,7 +185,6 @@ public class OptionOrderCreate {
       String clientOrderId,
       String currencyCode,
       List<OptionOrderLegCreate> legs,
-      DecimalCreate limitPrice,
       DateCreate orderDate,
       OptionOrderCreateOrderType orderType,
       PriceDirection priceDirection,
@@ -191,7 +198,7 @@ public class OptionOrderCreate {
         currencyCode,
         Optional.empty(),
         legs,
-        limitPrice,
+        Optional.empty(),
         orderDate,
         orderType,
         priceDirection,
@@ -212,7 +219,11 @@ public class OptionOrderCreate {
     return clientOrderId;
   }
 
-  /** Required for any client who is having Apex do CAT reporting on their behalf. */
+  /**
+   * Required for any client who is having Apex do CAT reporting on their behalf. When
+   * special_reporting_instructions includes MANUAL_ORDER, this is also reported to CAT as the time
+   * the order was manually received from the customer.
+   */
   @JsonIgnore
   public JsonNullable<OffsetDateTime> clientReceivedTime() {
     return clientReceivedTime;
@@ -260,9 +271,10 @@ public class OptionOrderCreate {
    * https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html
    * [decimal.Decimal]: https://docs.python.org/3/library/decimal.html
    */
+  @SuppressWarnings("unchecked")
   @JsonIgnore
-  public DecimalCreate limitPrice() {
-    return limitPrice;
+  public Optional<DecimalCreate> limitPrice() {
+    return (Optional<DecimalCreate>) limitPrice;
   }
 
   /**
@@ -311,8 +323,11 @@ public class OptionOrderCreate {
   }
 
   /**
-   * Special Reporting Instructions to be applied to this option order. Can include multiple
-   * Instructions.
+   * Special Reporting Instructions to be applied to this option order. Only CAT_PARENT_ALGO and
+   * MANUAL_ORDER are supported for option orders; any other value is rejected. CAT_PARENT_ALGO is
+   * only allowed on LIMIT orders. MANUAL_ORDER marks the order as manually received from the
+   * customer for CAT reporting; client_received_time should then be set to the time the order was
+   * received.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -349,14 +364,22 @@ public class OptionOrderCreate {
     return this;
   }
 
-  /** Required for any client who is having Apex do CAT reporting on their behalf. */
+  /**
+   * Required for any client who is having Apex do CAT reporting on their behalf. When
+   * special_reporting_instructions includes MANUAL_ORDER, this is also reported to CAT as the time
+   * the order was manually received from the customer.
+   */
   public OptionOrderCreate withClientReceivedTime(OffsetDateTime clientReceivedTime) {
     Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
     this.clientReceivedTime = JsonNullable.of(clientReceivedTime);
     return this;
   }
 
-  /** Required for any client who is having Apex do CAT reporting on their behalf. */
+  /**
+   * Required for any client who is having Apex do CAT reporting on their behalf. When
+   * special_reporting_instructions includes MANUAL_ORDER, this is also reported to CAT as the time
+   * the order was manually received from the customer.
+   */
   public OptionOrderCreate withClientReceivedTime(JsonNullable<OffsetDateTime> clientReceivedTime) {
     Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
     this.clientReceivedTime = clientReceivedTime;
@@ -427,6 +450,20 @@ public class OptionOrderCreate {
    */
   public OptionOrderCreate withLimitPrice(DecimalCreate limitPrice) {
     Utils.checkNotNull(limitPrice, "limitPrice");
+    this.limitPrice = Optional.ofNullable(limitPrice);
+    return this;
+  }
+
+  /**
+   * A representation of a decimal value, such as 2.5. Clients may convert values into
+   * language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
+   *
+   * <p>[BigDecimal]:
+   * https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html
+   * [decimal.Decimal]: https://docs.python.org/3/library/decimal.html
+   */
+  public OptionOrderCreate withLimitPrice(Optional<? extends DecimalCreate> limitPrice) {
+    Utils.checkNotNull(limitPrice, "limitPrice");
     this.limitPrice = limitPrice;
     return this;
   }
@@ -481,8 +518,11 @@ public class OptionOrderCreate {
   }
 
   /**
-   * Special Reporting Instructions to be applied to this option order. Can include multiple
-   * Instructions.
+   * Special Reporting Instructions to be applied to this option order. Only CAT_PARENT_ALGO and
+   * MANUAL_ORDER are supported for option orders; any other value is rejected. CAT_PARENT_ALGO is
+   * only allowed on LIMIT orders. MANUAL_ORDER marks the order as manually received from the
+   * customer for CAT reporting; client_received_time should then be set to the time the order was
+   * received.
    */
   public OptionOrderCreate withSpecialReportingInstructions(
       List<OptionOrderCreateSpecialReportingInstructions> specialReportingInstructions) {
@@ -492,8 +532,11 @@ public class OptionOrderCreate {
   }
 
   /**
-   * Special Reporting Instructions to be applied to this option order. Can include multiple
-   * Instructions.
+   * Special Reporting Instructions to be applied to this option order. Only CAT_PARENT_ALGO and
+   * MANUAL_ORDER are supported for option orders; any other value is rejected. CAT_PARENT_ALGO is
+   * only allowed on LIMIT orders. MANUAL_ORDER marks the order as manually received from the
+   * customer for CAT reporting; client_received_time should then be set to the time the order was
+   * received.
    */
   public OptionOrderCreate withSpecialReportingInstructions(
       Optional<? extends List<OptionOrderCreateSpecialReportingInstructions>>
@@ -609,7 +652,7 @@ public class OptionOrderCreate {
 
     private List<OptionOrderLegCreate> legs;
 
-    private DecimalCreate limitPrice;
+    private Optional<? extends DecimalCreate> limitPrice = Optional.empty();
 
     private DateCreate orderDate;
 
@@ -642,14 +685,22 @@ public class OptionOrderCreate {
       return this;
     }
 
-    /** Required for any client who is having Apex do CAT reporting on their behalf. */
+    /**
+     * Required for any client who is having Apex do CAT reporting on their behalf. When
+     * special_reporting_instructions includes MANUAL_ORDER, this is also reported to CAT as the
+     * time the order was manually received from the customer.
+     */
     public Builder clientReceivedTime(OffsetDateTime clientReceivedTime) {
       Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
       this.clientReceivedTime = JsonNullable.of(clientReceivedTime);
       return this;
     }
 
-    /** Required for any client who is having Apex do CAT reporting on their behalf. */
+    /**
+     * Required for any client who is having Apex do CAT reporting on their behalf. When
+     * special_reporting_instructions includes MANUAL_ORDER, this is also reported to CAT as the
+     * time the order was manually received from the customer.
+     */
     public Builder clientReceivedTime(JsonNullable<OffsetDateTime> clientReceivedTime) {
       Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
       this.clientReceivedTime = clientReceivedTime;
@@ -721,6 +772,21 @@ public class OptionOrderCreate {
      */
     public Builder limitPrice(DecimalCreate limitPrice) {
       Utils.checkNotNull(limitPrice, "limitPrice");
+      this.limitPrice = Optional.ofNullable(limitPrice);
+      return this;
+    }
+
+    /**
+     * A representation of a decimal value, such as 2.5. Clients may convert values into
+     * language-native decimal formats, such as Java's [BigDecimal][] or Python's
+     * [decimal.Decimal][].
+     *
+     * <p>[BigDecimal]:
+     * https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html
+     * [decimal.Decimal]: https://docs.python.org/3/library/decimal.html
+     */
+    public Builder limitPrice(Optional<? extends DecimalCreate> limitPrice) {
+      Utils.checkNotNull(limitPrice, "limitPrice");
       this.limitPrice = limitPrice;
       return this;
     }
@@ -776,8 +842,11 @@ public class OptionOrderCreate {
     }
 
     /**
-     * Special Reporting Instructions to be applied to this option order. Can include multiple
-     * Instructions.
+     * Special Reporting Instructions to be applied to this option order. Only CAT_PARENT_ALGO and
+     * MANUAL_ORDER are supported for option orders; any other value is rejected. CAT_PARENT_ALGO is
+     * only allowed on LIMIT orders. MANUAL_ORDER marks the order as manually received from the
+     * customer for CAT reporting; client_received_time should then be set to the time the order was
+     * received.
      */
     public Builder specialReportingInstructions(
         List<OptionOrderCreateSpecialReportingInstructions> specialReportingInstructions) {
@@ -787,8 +856,11 @@ public class OptionOrderCreate {
     }
 
     /**
-     * Special Reporting Instructions to be applied to this option order. Can include multiple
-     * Instructions.
+     * Special Reporting Instructions to be applied to this option order. Only CAT_PARENT_ALGO and
+     * MANUAL_ORDER are supported for option orders; any other value is rejected. CAT_PARENT_ALGO is
+     * only allowed on LIMIT orders. MANUAL_ORDER marks the order as manually received from the
+     * customer for CAT reporting; client_received_time should then be set to the time the order was
+     * received.
      */
     public Builder specialReportingInstructions(
         Optional<? extends List<OptionOrderCreateSpecialReportingInstructions>>

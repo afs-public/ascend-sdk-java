@@ -131,6 +131,11 @@ public class TradeCreate {
   @JsonProperty("order_id")
   private Optional<String> orderId;
 
+  /** RIA Trade Away indicator. */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("prime")
+  private Optional<Boolean> prime;
+
   /** Route type for the trade. */
   @JsonProperty("route_type")
   private RouteType routeType;
@@ -203,6 +208,7 @@ public class TradeCreate {
       @JsonProperty("mic_code") Optional<String> micCode,
       @JsonProperty("open") Optional<Boolean> open,
       @JsonProperty("order_id") Optional<String> orderId,
+      @JsonProperty("prime") Optional<Boolean> prime,
       @JsonProperty("route_type") RouteType routeType,
       @JsonProperty("settlement_date") Optional<? extends DateCreate> settlementDate,
       @JsonProperty("side") TradeCreateSide side,
@@ -229,6 +235,7 @@ public class TradeCreate {
     Utils.checkNotNull(micCode, "micCode");
     Utils.checkNotNull(open, "open");
     Utils.checkNotNull(orderId, "orderId");
+    Utils.checkNotNull(prime, "prime");
     Utils.checkNotNull(routeType, "routeType");
     Utils.checkNotNull(settlementDate, "settlementDate");
     Utils.checkNotNull(side, "side");
@@ -254,6 +261,7 @@ public class TradeCreate {
     this.micCode = micCode;
     this.open = open;
     this.orderId = orderId;
+    this.prime = prime;
     this.routeType = routeType;
     this.settlementDate = settlementDate;
     this.side = side;
@@ -287,6 +295,7 @@ public class TradeCreate {
         Optional.empty(),
         identifier,
         identifierType,
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
@@ -440,6 +449,12 @@ public class TradeCreate {
   @JsonIgnore
   public Optional<String> orderId() {
     return orderId;
+  }
+
+  /** RIA Trade Away indicator. */
+  @JsonIgnore
+  public Optional<Boolean> prime() {
+    return prime;
   }
 
   /** Route type for the trade. */
@@ -766,6 +781,20 @@ public class TradeCreate {
     return this;
   }
 
+  /** RIA Trade Away indicator. */
+  public TradeCreate withPrime(boolean prime) {
+    Utils.checkNotNull(prime, "prime");
+    this.prime = Optional.ofNullable(prime);
+    return this;
+  }
+
+  /** RIA Trade Away indicator. */
+  public TradeCreate withPrime(Optional<Boolean> prime) {
+    Utils.checkNotNull(prime, "prime");
+    this.prime = prime;
+    return this;
+  }
+
   /** Route type for the trade. */
   public TradeCreate withRouteType(RouteType routeType) {
     Utils.checkNotNull(routeType, "routeType");
@@ -914,6 +943,7 @@ public class TradeCreate {
         && Utils.enhancedDeepEquals(this.micCode, other.micCode)
         && Utils.enhancedDeepEquals(this.open, other.open)
         && Utils.enhancedDeepEquals(this.orderId, other.orderId)
+        && Utils.enhancedDeepEquals(this.prime, other.prime)
         && Utils.enhancedDeepEquals(this.routeType, other.routeType)
         && Utils.enhancedDeepEquals(this.settlementDate, other.settlementDate)
         && Utils.enhancedDeepEquals(this.side, other.side)
@@ -944,6 +974,7 @@ public class TradeCreate {
         micCode,
         open,
         orderId,
+        prime,
         routeType,
         settlementDate,
         side,
@@ -992,6 +1023,8 @@ public class TradeCreate {
         open,
         "orderId",
         orderId,
+        "prime",
+        prime,
         "routeType",
         routeType,
         "settlementDate",
@@ -1046,6 +1079,8 @@ public class TradeCreate {
     private Optional<Boolean> open = Optional.empty();
 
     private Optional<String> orderId = Optional.empty();
+
+    private Optional<Boolean> prime = Optional.empty();
 
     private RouteType routeType;
 
@@ -1319,6 +1354,20 @@ public class TradeCreate {
       return this;
     }
 
+    /** RIA Trade Away indicator. */
+    public Builder prime(boolean prime) {
+      Utils.checkNotNull(prime, "prime");
+      this.prime = Optional.ofNullable(prime);
+      return this;
+    }
+
+    /** RIA Trade Away indicator. */
+    public Builder prime(Optional<Boolean> prime) {
+      Utils.checkNotNull(prime, "prime");
+      this.prime = prime;
+      return this;
+    }
+
     /** Route type for the trade. */
     public Builder routeType(RouteType routeType) {
       Utils.checkNotNull(routeType, "routeType");
@@ -1461,6 +1510,7 @@ public class TradeCreate {
           micCode,
           open,
           orderId,
+          prime,
           routeType,
           settlementDate,
           side,

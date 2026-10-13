@@ -44,7 +44,7 @@ public class PreIpoFundingRoundsTests {
     PreIpoCompanyFundingRoundsListPreIpoCompanyFundingRoundsResponse res =
         sdk.preIPOFundingRounds()
             .listPreIpoCompanyFundingRounds()
-            .preIpoCompanyId("a6c63e95-fe8a-4703-a74a-f2a90c0a9c6d")
+            .preIpoCompanyId("74c41a5b-b5e0-4509-964f-ca2de584c052")
             .pageSize(25)
             .pageToken("")
             .call();
@@ -81,7 +81,7 @@ public class PreIpoFundingRoundsTests {
     PreIpoCompanyFundingRoundsGetPreIpoCompanyFundingRoundResponse res =
         sdk.preIPOFundingRounds()
             .getPreIpoCompanyFundingRound()
-            .preIpoCompanyId("a6c63e95-fe8a-4703-a74a-f2a90c0a9c6d")
+            .preIpoCompanyId("74c41a5b-b5e0-4509-964f-ca2de584c052")
             .fundingRoundId("019c6a2b-6801-7759-9e1d-3d5aaa64bc2a")
             .call();
     assertEquals(200, res.statusCode());

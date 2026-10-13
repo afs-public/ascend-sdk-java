@@ -323,7 +323,8 @@ public class Orders {
    *
    * @param accountId The account id.
    * @param orderId The order id.
-   * @param tradingSetExtraReportingDataRequestCreate
+   * @param tradingSetExtraReportingDataRequestCreate The message to request setting extra reporting
+   *     data on an existing order.
    * @return The response from the API call
    * @throws Exception if the API call fails
    */
@@ -344,7 +345,8 @@ public class Orders {
    *
    * @param accountId The account id.
    * @param orderId The order id.
-   * @param tradingSetExtraReportingDataRequestCreate
+   * @param tradingSetExtraReportingDataRequestCreate The message to request setting extra reporting
+   *     data on an existing order.
    * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails

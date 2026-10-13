@@ -27,6 +27,7 @@ public class InvestigationServiceListInvestigationsRequestBuilder {
   private Optional<String> pageToken = Optional.empty();
   private Optional<String> filter = Optional.empty();
   private Optional<String> orderBy = Optional.empty();
+  private Optional<Boolean> includeTotalSize = Optional.empty();
   private Optional<RetryConfig> retryConfig = Optional.empty();
   private final SDKConfiguration sdkConfiguration;
 
@@ -83,6 +84,20 @@ public class InvestigationServiceListInvestigationsRequestBuilder {
     return this;
   }
 
+  public InvestigationServiceListInvestigationsRequestBuilder includeTotalSize(
+      boolean includeTotalSize) {
+    Utils.checkNotNull(includeTotalSize, "includeTotalSize");
+    this.includeTotalSize = Optional.of(includeTotalSize);
+    return this;
+  }
+
+  public InvestigationServiceListInvestigationsRequestBuilder includeTotalSize(
+      Optional<Boolean> includeTotalSize) {
+    Utils.checkNotNull(includeTotalSize, "includeTotalSize");
+    this.includeTotalSize = includeTotalSize;
+    return this;
+  }
+
   public InvestigationServiceListInvestigationsRequestBuilder retryConfig(RetryConfig retryConfig) {
     Utils.checkNotNull(retryConfig, "retryConfig");
     this.retryConfig = Optional.of(retryConfig);
@@ -99,7 +114,8 @@ public class InvestigationServiceListInvestigationsRequestBuilder {
   private InvestigationServiceListInvestigationsRequest buildRequest() {
 
     InvestigationServiceListInvestigationsRequest request =
-        new InvestigationServiceListInvestigationsRequest(pageSize, pageToken, filter, orderBy);
+        new InvestigationServiceListInvestigationsRequest(
+            pageSize, pageToken, filter, orderBy, includeTotalSize);
 
     return request;
   }

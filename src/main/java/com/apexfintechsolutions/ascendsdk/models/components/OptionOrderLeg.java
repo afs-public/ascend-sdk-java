@@ -38,7 +38,7 @@ public class OptionOrderLeg {
 
   /**
    * The computed average price for this leg, which is a weighted average (by quantity) of the
-   * executed prices.
+   * executed prices. Supports up to 8 decimal places.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("average_price")
@@ -171,7 +171,7 @@ public class OptionOrderLeg {
 
   /**
    * The computed average price for this leg, which is a weighted average (by quantity) of the
-   * executed prices.
+   * executed prices. Supports up to 8 decimal places.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -295,7 +295,7 @@ public class OptionOrderLeg {
 
   /**
    * The computed average price for this leg, which is a weighted average (by quantity) of the
-   * executed prices.
+   * executed prices. Supports up to 8 decimal places.
    */
   public OptionOrderLeg withAveragePrice(AveragePrice averagePrice) {
     Utils.checkNotNull(averagePrice, "averagePrice");
@@ -305,7 +305,7 @@ public class OptionOrderLeg {
 
   /**
    * The computed average price for this leg, which is a weighted average (by quantity) of the
-   * executed prices.
+   * executed prices. Supports up to 8 decimal places.
    */
   public OptionOrderLeg withAveragePrice(JsonNullable<? extends AveragePrice> averagePrice) {
     Utils.checkNotNull(averagePrice, "averagePrice");
@@ -589,7 +589,7 @@ public class OptionOrderLeg {
 
     /**
      * The computed average price for this leg, which is a weighted average (by quantity) of the
-     * executed prices.
+     * executed prices. Supports up to 8 decimal places.
      */
     public Builder averagePrice(AveragePrice averagePrice) {
       Utils.checkNotNull(averagePrice, "averagePrice");
@@ -599,7 +599,7 @@ public class OptionOrderLeg {
 
     /**
      * The computed average price for this leg, which is a weighted average (by quantity) of the
-     * executed prices.
+     * executed prices. Supports up to 8 decimal places.
      */
     public Builder averagePrice(JsonNullable<? extends AveragePrice> averagePrice) {
       Utils.checkNotNull(averagePrice, "averagePrice");

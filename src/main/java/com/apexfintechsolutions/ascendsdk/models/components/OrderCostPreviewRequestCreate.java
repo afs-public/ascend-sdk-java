@@ -21,7 +21,10 @@ public class OrderCostPreviewRequestCreate {
   @JsonProperty("asset_type")
   private OrderCostPreviewRequestCreateAssetType assetType;
 
-  /** Capacity used in determining the order cost. Defaults to "AGENCY" if no value specified. */
+  /**
+   * Capacity used in determining the order cost. If not specified, defaults to the capacity
+   * configured for the correspondent by Apex.
+   */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("broker_capacity")
   private Optional<? extends OrderCostPreviewRequestCreateBrokerCapacity> brokerCapacity;
@@ -95,7 +98,10 @@ public class OrderCostPreviewRequestCreate {
     return assetType;
   }
 
-  /** Capacity used in determining the order cost. Defaults to "AGENCY" if no value specified. */
+  /**
+   * Capacity used in determining the order cost. If not specified, defaults to the capacity
+   * configured for the correspondent by Apex.
+   */
   @SuppressWarnings("unchecked")
   @JsonIgnore
   public Optional<OrderCostPreviewRequestCreateBrokerCapacity> brokerCapacity() {
@@ -151,7 +157,10 @@ public class OrderCostPreviewRequestCreate {
     return this;
   }
 
-  /** Capacity used in determining the order cost. Defaults to "AGENCY" if no value specified. */
+  /**
+   * Capacity used in determining the order cost. If not specified, defaults to the capacity
+   * configured for the correspondent by Apex.
+   */
   public OrderCostPreviewRequestCreate withBrokerCapacity(
       OrderCostPreviewRequestCreateBrokerCapacity brokerCapacity) {
     Utils.checkNotNull(brokerCapacity, "brokerCapacity");
@@ -159,7 +168,10 @@ public class OrderCostPreviewRequestCreate {
     return this;
   }
 
-  /** Capacity used in determining the order cost. Defaults to "AGENCY" if no value specified. */
+  /**
+   * Capacity used in determining the order cost. If not specified, defaults to the capacity
+   * configured for the correspondent by Apex.
+   */
   public OrderCostPreviewRequestCreate withBrokerCapacity(
       Optional<? extends OrderCostPreviewRequestCreateBrokerCapacity> brokerCapacity) {
     Utils.checkNotNull(brokerCapacity, "brokerCapacity");
@@ -283,14 +295,20 @@ public class OrderCostPreviewRequestCreate {
       return this;
     }
 
-    /** Capacity used in determining the order cost. Defaults to "AGENCY" if no value specified. */
+    /**
+     * Capacity used in determining the order cost. If not specified, defaults to the capacity
+     * configured for the correspondent by Apex.
+     */
     public Builder brokerCapacity(OrderCostPreviewRequestCreateBrokerCapacity brokerCapacity) {
       Utils.checkNotNull(brokerCapacity, "brokerCapacity");
       this.brokerCapacity = Optional.ofNullable(brokerCapacity);
       return this;
     }
 
-    /** Capacity used in determining the order cost. Defaults to "AGENCY" if no value specified. */
+    /**
+     * Capacity used in determining the order cost. If not specified, defaults to the capacity
+     * configured for the correspondent by Apex.
+     */
     public Builder brokerCapacity(
         Optional<? extends OrderCostPreviewRequestCreateBrokerCapacity> brokerCapacity) {
       Utils.checkNotNull(brokerCapacity, "brokerCapacity");

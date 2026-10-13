@@ -3,7 +3,7 @@
   "component": {
     "group": "com.apexfintechsolutions",
     "module": "ascendsdk",
-    "version": "1.6.13",
+    "version": "1.7.0",
     "attributes": {
       "org.gradle.status": "release"
     }
@@ -47,13 +47,13 @@
       ],
       "files": [
         {
-          "name": "ascendsdk-1.6.13.jar",
-          "url": "ascendsdk-1.6.13.jar",
-          "size": 15380306,
-          "sha512": "ddccfd51a14099baadfae4fa37bdee625a2efe9dc49b3fe8680215a103d9304c6405acbc036c8ac13704c6b5d3f3e6db26dc445c2c052e3de04142046bf52ba9",
-          "sha256": "ca271a3985efbb8abb4f5f52b4cc44564fabaec98535a14264eb32601c589894",
-          "sha1": "18857fc831360b7187773af40ba4d8051e7bef9a",
-          "md5": "f0583f3a1783c50d48a1b730f2ad2bc8"
+          "name": "ascendsdk-1.7.0.jar",
+          "url": "ascendsdk-1.7.0.jar",
+          "size": 15557963,
+          "sha512": "0b56c5088a75bc804ab9cea355d3eae2810a3dcb0a8e2d76ddee59a646a69b73e91917ae33c6dffa29ed962c3e9c1b413c8187206fccadbec0de9c693fd90319",
+          "sha256": "e2a5e9da472453de5be7e28160a81741dd73be204b53af116bf6310b29a7fc3a",
+          "sha1": "9096714ab3609942c0e676f204f6f64dd9f01159",
+          "md5": "54d19dfb6cbf449f2a2a3099c46257dd"
         }
       ]
     },
@@ -139,13 +139,13 @@
       ],
       "files": [
         {
-          "name": "ascendsdk-1.6.13.jar",
-          "url": "ascendsdk-1.6.13.jar",
-          "size": 15380306,
-          "sha512": "ddccfd51a14099baadfae4fa37bdee625a2efe9dc49b3fe8680215a103d9304c6405acbc036c8ac13704c6b5d3f3e6db26dc445c2c052e3de04142046bf52ba9",
-          "sha256": "ca271a3985efbb8abb4f5f52b4cc44564fabaec98535a14264eb32601c589894",
-          "sha1": "18857fc831360b7187773af40ba4d8051e7bef9a",
-          "md5": "f0583f3a1783c50d48a1b730f2ad2bc8"
+          "name": "ascendsdk-1.7.0.jar",
+          "url": "ascendsdk-1.7.0.jar",
+          "size": 15557963,
+          "sha512": "0b56c5088a75bc804ab9cea355d3eae2810a3dcb0a8e2d76ddee59a646a69b73e91917ae33c6dffa29ed962c3e9c1b413c8187206fccadbec0de9c693fd90319",
+          "sha256": "e2a5e9da472453de5be7e28160a81741dd73be204b53af116bf6310b29a7fc3a",
+          "sha1": "9096714ab3609942c0e676f204f6f64dd9f01159",
+          "md5": "54d19dfb6cbf449f2a2a3099c46257dd"
         }
       ]
     },
@@ -159,13 +159,13 @@
       },
       "files": [
         {
-          "name": "ascendsdk-1.6.13-sources.jar",
-          "url": "ascendsdk-1.6.13-sources.jar",
-          "size": 6510162,
-          "sha512": "e47e7b32e1974024ef4c29c98981aebd0212306a721c028e211796a639cf1c0df98e25ec7063891d336aa96b75e5cd1af8cc3f3c609099f65f153523d7b7e43f",
-          "sha256": "61a7c1933d6a0750c8aca49b89d1353dc4bb2e5cd46b820407ce680b8e2f38c2",
-          "sha1": "12a78a665d66073eb36142e163ec5f86b42bc24f",
-          "md5": "f84a49c29c2bec67778196c2c78b1b40"
+          "name": "ascendsdk-1.7.0-sources.jar",
+          "url": "ascendsdk-1.7.0-sources.jar",
+          "size": 6594824,
+          "sha512": "50fcbe909ae8361f1c4ffd8238e237181fd1c3ba5533986bee6c38c783707b11b515704676cc52ca2172e217a70b3b9caf8c25fc29e4fdb7230654c589856092",
+          "sha256": "d4e94e7200ffa02f024a76c6bb84f17bdc41a5087b7322acc363df22130034da",
+          "sha1": "0ad13f75d56f062568bc606e4aa65544f449e68c",
+          "md5": "cbf6135961d5a4d183fdc08985e2e7ff"
         }
       ]
     },
@@ -179,13 +179,13 @@
       },
       "files": [
         {
-          "name": "ascendsdk-1.6.13-javadoc.jar",
-          "url": "ascendsdk-1.6.13-javadoc.jar",
-          "size": 31343286,
-          "sha512": "53f7fd28eb35cc0227966c44e65730d5a29a1e71272c824a023092157322d03b49457a9faf12bb8549d0ffe3ead33f19d6d1d7e39191c8dd471c33dcb31fde53",
-          "sha256": "9f43da6667c31ec3c9dfd00a7ce17a39c1b509103f51170c5c62373a31952382",
-          "sha1": "9f8fbbba607eab8bd3e8a8d660f3ba3df60fa637",
-          "md5": "59b3ef09783dffddc2eb14960a932194"
+          "name": "ascendsdk-1.7.0-javadoc.jar",
+          "url": "ascendsdk-1.7.0-javadoc.jar",
+          "size": 31684923,
+          "sha512": "2b98462799dbdd924cc6bce44dcb807dbab79b28fb4abb5542682aa09661c432443c71216d9a2a03c1a86383da94c4c6e3c5c4a9b7add5ae14ef8fb8d10e8675",
+          "sha256": "4f0b0380a2e0065034072f92108cc14b4f8f91fb5941e7c265163dacc922652d",
+          "sha1": "52e93058b78e9f53f39c3474656659d42b8dab08",
+          "md5": "ab18005cc034898a9e4a17c776ff4032"
         }
       ]
     }

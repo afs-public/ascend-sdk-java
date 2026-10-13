@@ -135,6 +135,8 @@ public class CancelTradeResponseSpecialInstructions {
       new CancelTradeResponseSpecialInstructions("SUPPRESS_TAF_FEE");
   public static final CancelTradeResponseSpecialInstructions DIVIDEND_REINVESTMENT =
       new CancelTradeResponseSpecialInstructions("DIVIDEND_REINVESTMENT");
+  public static final CancelTradeResponseSpecialInstructions REPORT_MSRB =
+      new CancelTradeResponseSpecialInstructions("REPORT_MSRB");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -252,6 +254,7 @@ public class CancelTradeResponseSpecialInstructions {
     map.put("SUPPRESS_SEC_FEE", SUPPRESS_SEC_FEE);
     map.put("SUPPRESS_TAF_FEE", SUPPRESS_TAF_FEE);
     map.put("DIVIDEND_REINVESTMENT", DIVIDEND_REINVESTMENT);
+    map.put("REPORT_MSRB", REPORT_MSRB);
     return map;
   }
 
@@ -332,6 +335,7 @@ public class CancelTradeResponseSpecialInstructions {
     map.put("SUPPRESS_TAF_FEE", CancelTradeResponseSpecialInstructionsEnum.SUPPRESS_TAF_FEE);
     map.put(
         "DIVIDEND_REINVESTMENT", CancelTradeResponseSpecialInstructionsEnum.DIVIDEND_REINVESTMENT);
+    map.put("REPORT_MSRB", CancelTradeResponseSpecialInstructionsEnum.REPORT_MSRB);
     return map;
   }
 
@@ -416,6 +420,7 @@ public class CancelTradeResponseSpecialInstructions {
     SUPPRESS_SEC_FEE("SUPPRESS_SEC_FEE"),
     SUPPRESS_TAF_FEE("SUPPRESS_TAF_FEE"),
     DIVIDEND_REINVESTMENT("DIVIDEND_REINVESTMENT"),
+    REPORT_MSRB("REPORT_MSRB"),
     ;
 
     private final String value;

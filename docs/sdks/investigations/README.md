@@ -10,7 +10,9 @@
 * [listInvestigations](#listinvestigations) - List Investigations
 * [linkDocuments](#linkdocuments) - Link Documents
 * [getWatchlistItem](#getwatchlistitem) - Get Watchlist Item
+* [linkCustomerIdentification](#linkcustomeridentification) - Link Customer Identification to an Investigation
 * [getCustomerIdentification](#getcustomeridentification) - Get Identity Verification
+* [createCustomerIdentification](#createcustomeridentification) - Create Identity Verification
 * [createIdentityLookup](#createidentitylookup) - Create Identity Lookup
 * [verifyIdentityLookup](#verifyidentitylookup) - Verify Identity Lookup
 
@@ -198,6 +200,7 @@ public class Application {
 | `pageToken`                                                                                                                                                                                                                                                                                                                                                                                 | *Optional\<String>*                                                                                                                                                                                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                          | The page token used to request a specific page of the search results                                                                                                                                                                                                                                                                                                                        |                                                                                                                                                                                                                                                                                                                                                                                             |
 | `filter`                                                                                                                                                                                                                                                                                                                                                                                    | *Optional\<String>*                                                                                                                                                                                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                          | A CEL string to filter results; See the [CEL Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in Guides for more information; Filter options include:<br/> ListInvestigationStatesResponse.investigation_states                                                                                                                                      | person.given_name == 'Jane' && person.family_name == 'Dough'                                                                                                                                                                                                                                                                                                                                |
 | `orderBy`                                                                                                                                                                                                                                                                                                                                                                                   | *Optional\<String>*                                                                                                                                                                                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                          | The order in which investigations are listed. Only one field and direction can be specified. Supported fields (followed by 'asc' or 'desc'; 'asc' is default if left blank):<br/>  - investigation_request_state<br/>  - correspondent_id<br/>  - scope<br/>  - identity_verification<br/>  - watchlist_screen<br/>  - person.given_name<br/>  - person.family_name<br/>  - entity.legal_name<br/>  - created_at<br/>  - updated_at | person.given_name desc                                                                                                                                                                                                                                                                                                                                                                      |
+| `includeTotalSize`                                                                                                                                                                                                                                                                                                                                                                          | *Optional\<Boolean>*                                                                                                                                                                                                                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                          | Include the total size of the collection specified by this query in the response (this may incur a performance penalty)<br/><br/>**Field Dependencies:**<br/><br/>When include_total_size is explicitly set to false, total_size in the response will be 0.<br/><br/>Must be empty if `total_size` is `false`.                                                                              |                                                                                                                                                                                                                                                                                                                                                                                             |
 
 ### Response
 
@@ -342,6 +345,71 @@ public class Application {
 | models/errors/Status   | 500, 503               | application/json       |
 | models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
 
+## linkCustomerIdentification
+
+Use this endpoint to link a customer identification to an investigation Upon linking a CustomerIdentification, the Investigation.IdentityVerificationState will be re-evaluated based on the CustomerIdentification.Result The CustomerIdentification must exist, and CustomerIdentification.Result.completed must be true The CustomerIdentification.Identity.given_name must match the Investigation.Person.given_name The CustomerIdentification.Identity.family_name must match the Investigation.Person.family_name The CustomerIdentification.Identity.birth_date must match the Investigation.Person.birth_date If the above validations are not met, the service will return a FAILED_PRECONDITION error status with the incorrect fields
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="InvestigationService_LinkCustomerIdentification" method="post" path="/investigations/v1/investigations/{investigation_id}:linkCustomerIdentification" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.InvestigationServiceLinkCustomerIdentificationResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        InvestigationServiceLinkCustomerIdentificationResponse res = sdk.investigations().linkCustomerIdentification()
+                .investigationId("01HEWVF4ZSNKYRP293J53ASJCJ")
+                .linkCustomerIdentificationRequestCreate(LinkCustomerIdentificationRequestCreate.builder()
+                    .customerIdentificationId("01HEWVF4ZSNKYRP293J53ASJCJ")
+                    .build())
+                .call();
+
+        if (res.investigation().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   | Example                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `investigationId`                                                                                             | *String*                                                                                                      | :heavy_check_mark:                                                                                            | The investigation id.                                                                                         | 01HEWVF4ZSNKYRP293J53ASJCJ                                                                                    |
+| `linkCustomerIdentificationRequestCreate`                                                                     | [LinkCustomerIdentificationRequestCreate](../../models/components/LinkCustomerIdentificationRequestCreate.md) | :heavy_check_mark:                                                                                            | N/A                                                                                                           |                                                                                                               |
+
+### Response
+
+**[InvestigationServiceLinkCustomerIdentificationResponse](../../models/operations/InvestigationServiceLinkCustomerIdentificationResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403, 404          | application/json       |
+| models/errors/Status   | 500, 503               | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
 ## getCustomerIdentification
 
 Gets a CustomerIdentification by CustomerIdentification ID.
@@ -406,6 +474,73 @@ public class Application {
 | Error Type             | Status Code            | Content Type           |
 | ---------------------- | ---------------------- | ---------------------- |
 | models/errors/Status   | 400, 403, 404          | application/json       |
+| models/errors/Status   | 500, 503               | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## createCustomerIdentification
+
+Request a new CustomerIdentificationCheck
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="CustomerIdentificationResultService_CreateCustomerIdentification" method="post" path="/cip/v1/correspondents/{correspondent_id}/customerIdentifications" -->
+```java
+package hello.world;
+
+import com.apexfintechsolutions.ascendsdk.SDK;
+import com.apexfintechsolutions.ascendsdk.models.components.*;
+import com.apexfintechsolutions.ascendsdk.models.errors.Status;
+import com.apexfintechsolutions.ascendsdk.models.operations.CustomerIdentificationResultServiceCreateCustomerIdentificationResponse;
+import java.lang.Exception;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) throws Status, Status, Exception {
+
+        SDK sdk = SDK.builder()
+                .security(Security.builder()
+                    .apiKey("ABCDEFGHIJ0123456789abcdefghij0123456789")
+                    .serviceAccountCreds(ServiceAccountCreds.builder()
+                        .privateKey("-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}")
+                        .name("FinFirm")
+                        .organization("correspondents/00000000-0000-0000-0000-000000000000")
+                        .type("serviceAccount")
+                        .build())
+                    .build())
+            .build();
+
+        CustomerIdentificationResultServiceCreateCustomerIdentificationResponse res = sdk.investigations().createCustomerIdentification()
+                .correspondentId("01HPMZZM6RKMVZA1JQ63RQKJRP")
+                .customerIdentificationCreate(CustomerIdentificationCreate.builder()
+                    .checkTypes(List.of(
+                        CustomerIdentificationCreateCheckTypes.DATABASE))
+                    .build())
+                .call();
+
+        if (res.customerIdentification().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             | Example                                                                                 |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `correspondentId`                                                                       | *String*                                                                                | :heavy_check_mark:                                                                      | The correspondent id.                                                                   | 01HPMZZM6RKMVZA1JQ63RQKJRP                                                              |
+| `customerIdentificationCreate`                                                          | [CustomerIdentificationCreate](../../models/components/CustomerIdentificationCreate.md) | :heavy_check_mark:                                                                      | N/A                                                                                     |                                                                                         |
+
+### Response
+
+**[CustomerIdentificationResultServiceCreateCustomerIdentificationResponse](../../models/operations/CustomerIdentificationResultServiceCreateCustomerIdentificationResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Status   | 400, 403               | application/json       |
 | models/errors/Status   | 500, 503               | application/json       |
 | models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
 

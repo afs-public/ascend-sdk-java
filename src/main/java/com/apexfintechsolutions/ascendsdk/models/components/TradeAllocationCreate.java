@@ -75,6 +75,11 @@ public class TradeAllocationCreate {
   @JsonProperty("commission_amount")
   private Optional<? extends DecimalCreate> commissionAmount;
 
+  /** Executing broker of the trade allocation. */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("executing_broker")
+  private Optional<String> executingBroker;
+
   /**
    * Timestamp of when the trade allocation took place. If settlement_date is not provided, this
    * field will be converted into Eastern Time and used to calculate settlement_date.
@@ -167,6 +172,11 @@ public class TradeAllocationCreate {
   @JsonProperty("price_adjustment")
   private Optional<? extends PriceAdjustmentCreate> priceAdjustment;
 
+  /** RIA Trade Away indicator. */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("prime")
+  private Optional<Boolean> prime;
+
   /**
    * A representation of a decimal value, such as 2.5. Clients may convert values into
    * language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
@@ -237,6 +247,7 @@ public class TradeAllocationCreate {
       @JsonProperty("broker_capacity") TradeAllocationCreateBrokerCapacity brokerCapacity,
       @JsonProperty("client_order_id") Optional<String> clientOrderId,
       @JsonProperty("commission_amount") Optional<? extends DecimalCreate> commissionAmount,
+      @JsonProperty("executing_broker") Optional<String> executingBroker,
       @JsonProperty("execution_time") Optional<OffsetDateTime> executionTime,
       @JsonProperty("fees") Optional<? extends List<BookingFeeCreate>> fees,
       @JsonProperty("from_account_id") String fromAccountId,
@@ -251,6 +262,7 @@ public class TradeAllocationCreate {
           Optional<? extends DecimalCreate> prevailingMarketPrice,
       @JsonProperty("price") DecimalCreate price,
       @JsonProperty("price_adjustment") Optional<? extends PriceAdjustmentCreate> priceAdjustment,
+      @JsonProperty("prime") Optional<Boolean> prime,
       @JsonProperty("quantity") DecimalCreate quantity,
       @JsonProperty("settlement_date") Optional<? extends DateCreate> settlementDate,
       @JsonProperty("side_modifier")
@@ -268,6 +280,7 @@ public class TradeAllocationCreate {
     Utils.checkNotNull(brokerCapacity, "brokerCapacity");
     Utils.checkNotNull(clientOrderId, "clientOrderId");
     Utils.checkNotNull(commissionAmount, "commissionAmount");
+    Utils.checkNotNull(executingBroker, "executingBroker");
     Utils.checkNotNull(executionTime, "executionTime");
     Utils.checkNotNull(fees, "fees");
     Utils.checkNotNull(fromAccountId, "fromAccountId");
@@ -280,6 +293,7 @@ public class TradeAllocationCreate {
     Utils.checkNotNull(prevailingMarketPrice, "prevailingMarketPrice");
     Utils.checkNotNull(price, "price");
     Utils.checkNotNull(priceAdjustment, "priceAdjustment");
+    Utils.checkNotNull(prime, "prime");
     Utils.checkNotNull(quantity, "quantity");
     Utils.checkNotNull(settlementDate, "settlementDate");
     Utils.checkNotNull(sideModifier, "sideModifier");
@@ -295,6 +309,7 @@ public class TradeAllocationCreate {
     this.brokerCapacity = brokerCapacity;
     this.clientOrderId = clientOrderId;
     this.commissionAmount = commissionAmount;
+    this.executingBroker = executingBroker;
     this.executionTime = executionTime;
     this.fees = fees;
     this.fromAccountId = fromAccountId;
@@ -307,6 +322,7 @@ public class TradeAllocationCreate {
     this.prevailingMarketPrice = prevailingMarketPrice;
     this.price = price;
     this.priceAdjustment = priceAdjustment;
+    this.prime = prime;
     this.quantity = quantity;
     this.settlementDate = settlementDate;
     this.sideModifier = sideModifier;
@@ -338,6 +354,7 @@ public class TradeAllocationCreate {
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
+        Optional.empty(),
         fromAccountId,
         Optional.empty(),
         identifier,
@@ -347,6 +364,7 @@ public class TradeAllocationCreate {
         Optional.empty(),
         Optional.empty(),
         price,
+        Optional.empty(),
         Optional.empty(),
         quantity,
         Optional.empty(),
@@ -424,6 +442,12 @@ public class TradeAllocationCreate {
   @JsonIgnore
   public Optional<DecimalCreate> commissionAmount() {
     return (Optional<DecimalCreate>) commissionAmount;
+  }
+
+  /** Executing broker of the trade allocation. */
+  @JsonIgnore
+  public Optional<String> executingBroker() {
+    return executingBroker;
   }
 
   /**
@@ -537,6 +561,12 @@ public class TradeAllocationCreate {
   @JsonIgnore
   public Optional<PriceAdjustmentCreate> priceAdjustment() {
     return (Optional<PriceAdjustmentCreate>) priceAdjustment;
+  }
+
+  /** RIA Trade Away indicator. */
+  @JsonIgnore
+  public Optional<Boolean> prime() {
+    return prime;
   }
 
   /**
@@ -752,6 +782,20 @@ public class TradeAllocationCreate {
     return this;
   }
 
+  /** Executing broker of the trade allocation. */
+  public TradeAllocationCreate withExecutingBroker(String executingBroker) {
+    Utils.checkNotNull(executingBroker, "executingBroker");
+    this.executingBroker = Optional.ofNullable(executingBroker);
+    return this;
+  }
+
+  /** Executing broker of the trade allocation. */
+  public TradeAllocationCreate withExecutingBroker(Optional<String> executingBroker) {
+    Utils.checkNotNull(executingBroker, "executingBroker");
+    this.executingBroker = executingBroker;
+    return this;
+  }
+
   /**
    * Timestamp of when the trade allocation took place. If settlement_date is not provided, this
    * field will be converted into Eastern Time and used to calculate settlement_date.
@@ -959,6 +1003,20 @@ public class TradeAllocationCreate {
     return this;
   }
 
+  /** RIA Trade Away indicator. */
+  public TradeAllocationCreate withPrime(boolean prime) {
+    Utils.checkNotNull(prime, "prime");
+    this.prime = Optional.ofNullable(prime);
+    return this;
+  }
+
+  /** RIA Trade Away indicator. */
+  public TradeAllocationCreate withPrime(Optional<Boolean> prime) {
+    Utils.checkNotNull(prime, "prime");
+    this.prime = prime;
+    return this;
+  }
+
   /**
    * A representation of a decimal value, such as 2.5. Clients may convert values into
    * language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
@@ -1101,6 +1159,7 @@ public class TradeAllocationCreate {
         && Utils.enhancedDeepEquals(this.brokerCapacity, other.brokerCapacity)
         && Utils.enhancedDeepEquals(this.clientOrderId, other.clientOrderId)
         && Utils.enhancedDeepEquals(this.commissionAmount, other.commissionAmount)
+        && Utils.enhancedDeepEquals(this.executingBroker, other.executingBroker)
         && Utils.enhancedDeepEquals(this.executionTime, other.executionTime)
         && Utils.enhancedDeepEquals(this.fees, other.fees)
         && Utils.enhancedDeepEquals(this.fromAccountId, other.fromAccountId)
@@ -1113,6 +1172,7 @@ public class TradeAllocationCreate {
         && Utils.enhancedDeepEquals(this.prevailingMarketPrice, other.prevailingMarketPrice)
         && Utils.enhancedDeepEquals(this.price, other.price)
         && Utils.enhancedDeepEquals(this.priceAdjustment, other.priceAdjustment)
+        && Utils.enhancedDeepEquals(this.prime, other.prime)
         && Utils.enhancedDeepEquals(this.quantity, other.quantity)
         && Utils.enhancedDeepEquals(this.settlementDate, other.settlementDate)
         && Utils.enhancedDeepEquals(this.sideModifier, other.sideModifier)
@@ -1133,6 +1193,7 @@ public class TradeAllocationCreate {
         brokerCapacity,
         clientOrderId,
         commissionAmount,
+        executingBroker,
         executionTime,
         fees,
         fromAccountId,
@@ -1145,6 +1206,7 @@ public class TradeAllocationCreate {
         prevailingMarketPrice,
         price,
         priceAdjustment,
+        prime,
         quantity,
         settlementDate,
         sideModifier,
@@ -1173,6 +1235,8 @@ public class TradeAllocationCreate {
         clientOrderId,
         "commissionAmount",
         commissionAmount,
+        "executingBroker",
+        executingBroker,
         "executionTime",
         executionTime,
         "fees",
@@ -1197,6 +1261,8 @@ public class TradeAllocationCreate {
         price,
         "priceAdjustment",
         priceAdjustment,
+        "prime",
+        prime,
         "quantity",
         quantity,
         "settlementDate",
@@ -1232,6 +1298,8 @@ public class TradeAllocationCreate {
 
     private Optional<? extends DecimalCreate> commissionAmount = Optional.empty();
 
+    private Optional<String> executingBroker = Optional.empty();
+
     private Optional<OffsetDateTime> executionTime = Optional.empty();
 
     private Optional<? extends List<BookingFeeCreate>> fees = Optional.empty();
@@ -1255,6 +1323,8 @@ public class TradeAllocationCreate {
     private DecimalCreate price;
 
     private Optional<? extends PriceAdjustmentCreate> priceAdjustment = Optional.empty();
+
+    private Optional<Boolean> prime = Optional.empty();
 
     private DecimalCreate quantity;
 
@@ -1410,6 +1480,20 @@ public class TradeAllocationCreate {
     public Builder commissionAmount(Optional<? extends DecimalCreate> commissionAmount) {
       Utils.checkNotNull(commissionAmount, "commissionAmount");
       this.commissionAmount = commissionAmount;
+      return this;
+    }
+
+    /** Executing broker of the trade allocation. */
+    public Builder executingBroker(String executingBroker) {
+      Utils.checkNotNull(executingBroker, "executingBroker");
+      this.executingBroker = Optional.ofNullable(executingBroker);
+      return this;
+    }
+
+    /** Executing broker of the trade allocation. */
+    public Builder executingBroker(Optional<String> executingBroker) {
+      Utils.checkNotNull(executingBroker, "executingBroker");
+      this.executingBroker = executingBroker;
       return this;
     }
 
@@ -1621,6 +1705,20 @@ public class TradeAllocationCreate {
       return this;
     }
 
+    /** RIA Trade Away indicator. */
+    public Builder prime(boolean prime) {
+      Utils.checkNotNull(prime, "prime");
+      this.prime = Optional.ofNullable(prime);
+      return this;
+    }
+
+    /** RIA Trade Away indicator. */
+    public Builder prime(Optional<Boolean> prime) {
+      Utils.checkNotNull(prime, "prime");
+      this.prime = prime;
+      return this;
+    }
+
     /**
      * A representation of a decimal value, such as 2.5. Clients may convert values into
      * language-native decimal formats, such as Java's [BigDecimal][] or Python's
@@ -1760,6 +1858,7 @@ public class TradeAllocationCreate {
           brokerCapacity,
           clientOrderId,
           commissionAmount,
+          executingBroker,
           executionTime,
           fees,
           fromAccountId,
@@ -1772,6 +1871,7 @@ public class TradeAllocationCreate {
           prevailingMarketPrice,
           price,
           priceAdjustment,
+          prime,
           quantity,
           settlementDate,
           sideModifier,

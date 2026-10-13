@@ -29,10 +29,16 @@ public class TradingExecutions {
   private JsonNullable<? extends AccruedInterestAmount> accruedInterestAmount;
 
   /**
-   * The prices at which the order was executed. For Equities: there will be one price measured in
-   * PRICE_PER_UNIT (using the order currency). For Fixed Income assets: there will always be an
-   * entry measured in the PERCENTAGE_OF_PAR (100 X cost / total par value), and there may be
-   * additional entries measured in yield.
+   * The prices at which the order was executed.
+   *
+   * <p>Returned values depend on asset_type: - EQUITY: exactly one ExecutedPrice element of type
+   * PRICE_PER_UNIT in the order currency (up to 8 decimal places). - MUTUAL_FUND: exactly one
+   * ExecutedPrice element of type PRICE_PER_UNIT in the order currency (up to 5 decimal places). -
+   * FIXED_INCOME: may contain multiple elements with different types other than PRICE_PER_UNIT;
+   * there will always be an entry measured in PERCENTAGE_OF_PAR (100 X cost / total par value), and
+   * there may be additional entries measured in yield. Yield types (YIELD_TO_*) support up to 7
+   * decimal places, other price types support up to 8 decimal places. - Other asset types: supports
+   * up to 5 decimal places.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("executed_prices")
@@ -57,8 +63,8 @@ public class TradingExecutions {
   private JsonNullable<? extends GrossCreditAmount> grossCreditAmount;
 
   /**
-   * The prevailing market price of the asset, without fees or commissions. Will only be present for
-   * orders of Fixed Income assets.
+   * The prevailing market price of the asset, without fees or commissions, up to 8 decimal places.
+   * Will only be present for orders of Fixed Income assets.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("prevailing_market_price")
@@ -123,10 +129,16 @@ public class TradingExecutions {
   }
 
   /**
-   * The prices at which the order was executed. For Equities: there will be one price measured in
-   * PRICE_PER_UNIT (using the order currency). For Fixed Income assets: there will always be an
-   * entry measured in the PERCENTAGE_OF_PAR (100 X cost / total par value), and there may be
-   * additional entries measured in yield.
+   * The prices at which the order was executed.
+   *
+   * <p>Returned values depend on asset_type: - EQUITY: exactly one ExecutedPrice element of type
+   * PRICE_PER_UNIT in the order currency (up to 8 decimal places). - MUTUAL_FUND: exactly one
+   * ExecutedPrice element of type PRICE_PER_UNIT in the order currency (up to 5 decimal places). -
+   * FIXED_INCOME: may contain multiple elements with different types other than PRICE_PER_UNIT;
+   * there will always be an entry measured in PERCENTAGE_OF_PAR (100 X cost / total par value), and
+   * there may be additional entries measured in yield. Yield types (YIELD_TO_*) support up to 7
+   * decimal places, other price types support up to 8 decimal places. - Other asset types: supports
+   * up to 5 decimal places.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -157,8 +169,8 @@ public class TradingExecutions {
   }
 
   /**
-   * The prevailing market price of the asset, without fees or commissions. Will only be present for
-   * orders of Fixed Income assets.
+   * The prevailing market price of the asset, without fees or commissions, up to 8 decimal places.
+   * Will only be present for orders of Fixed Income assets.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -202,10 +214,16 @@ public class TradingExecutions {
   }
 
   /**
-   * The prices at which the order was executed. For Equities: there will be one price measured in
-   * PRICE_PER_UNIT (using the order currency). For Fixed Income assets: there will always be an
-   * entry measured in the PERCENTAGE_OF_PAR (100 X cost / total par value), and there may be
-   * additional entries measured in yield.
+   * The prices at which the order was executed.
+   *
+   * <p>Returned values depend on asset_type: - EQUITY: exactly one ExecutedPrice element of type
+   * PRICE_PER_UNIT in the order currency (up to 8 decimal places). - MUTUAL_FUND: exactly one
+   * ExecutedPrice element of type PRICE_PER_UNIT in the order currency (up to 5 decimal places). -
+   * FIXED_INCOME: may contain multiple elements with different types other than PRICE_PER_UNIT;
+   * there will always be an entry measured in PERCENTAGE_OF_PAR (100 X cost / total par value), and
+   * there may be additional entries measured in yield. Yield types (YIELD_TO_*) support up to 7
+   * decimal places, other price types support up to 8 decimal places. - Other asset types: supports
+   * up to 5 decimal places.
    */
   public TradingExecutions withExecutedPrices(List<TradingExecutedPrice> executedPrices) {
     Utils.checkNotNull(executedPrices, "executedPrices");
@@ -214,10 +232,16 @@ public class TradingExecutions {
   }
 
   /**
-   * The prices at which the order was executed. For Equities: there will be one price measured in
-   * PRICE_PER_UNIT (using the order currency). For Fixed Income assets: there will always be an
-   * entry measured in the PERCENTAGE_OF_PAR (100 X cost / total par value), and there may be
-   * additional entries measured in yield.
+   * The prices at which the order was executed.
+   *
+   * <p>Returned values depend on asset_type: - EQUITY: exactly one ExecutedPrice element of type
+   * PRICE_PER_UNIT in the order currency (up to 8 decimal places). - MUTUAL_FUND: exactly one
+   * ExecutedPrice element of type PRICE_PER_UNIT in the order currency (up to 5 decimal places). -
+   * FIXED_INCOME: may contain multiple elements with different types other than PRICE_PER_UNIT;
+   * there will always be an entry measured in PERCENTAGE_OF_PAR (100 X cost / total par value), and
+   * there may be additional entries measured in yield. Yield types (YIELD_TO_*) support up to 7
+   * decimal places, other price types support up to 8 decimal places. - Other asset types: supports
+   * up to 5 decimal places.
    */
   public TradingExecutions withExecutedPrices(
       Optional<? extends List<TradingExecutedPrice>> executedPrices) {
@@ -276,8 +300,8 @@ public class TradingExecutions {
   }
 
   /**
-   * The prevailing market price of the asset, without fees or commissions. Will only be present for
-   * orders of Fixed Income assets.
+   * The prevailing market price of the asset, without fees or commissions, up to 8 decimal places.
+   * Will only be present for orders of Fixed Income assets.
    */
   public TradingExecutions withPrevailingMarketPrice(PrevailingMarketPrice prevailingMarketPrice) {
     Utils.checkNotNull(prevailingMarketPrice, "prevailingMarketPrice");
@@ -286,8 +310,8 @@ public class TradingExecutions {
   }
 
   /**
-   * The prevailing market price of the asset, without fees or commissions. Will only be present for
-   * orders of Fixed Income assets.
+   * The prevailing market price of the asset, without fees or commissions, up to 8 decimal places.
+   * Will only be present for orders of Fixed Income assets.
    */
   public TradingExecutions withPrevailingMarketPrice(
       JsonNullable<? extends PrevailingMarketPrice> prevailingMarketPrice) {
@@ -412,10 +436,16 @@ public class TradingExecutions {
     }
 
     /**
-     * The prices at which the order was executed. For Equities: there will be one price measured in
-     * PRICE_PER_UNIT (using the order currency). For Fixed Income assets: there will always be an
-     * entry measured in the PERCENTAGE_OF_PAR (100 X cost / total par value), and there may be
-     * additional entries measured in yield.
+     * The prices at which the order was executed.
+     *
+     * <p>Returned values depend on asset_type: - EQUITY: exactly one ExecutedPrice element of type
+     * PRICE_PER_UNIT in the order currency (up to 8 decimal places). - MUTUAL_FUND: exactly one
+     * ExecutedPrice element of type PRICE_PER_UNIT in the order currency (up to 5 decimal places).
+     * - FIXED_INCOME: may contain multiple elements with different types other than PRICE_PER_UNIT;
+     * there will always be an entry measured in PERCENTAGE_OF_PAR (100 X cost / total par value),
+     * and there may be additional entries measured in yield. Yield types (YIELD_TO_*) support up to
+     * 7 decimal places, other price types support up to 8 decimal places. - Other asset types:
+     * supports up to 5 decimal places.
      */
     public Builder executedPrices(List<TradingExecutedPrice> executedPrices) {
       Utils.checkNotNull(executedPrices, "executedPrices");
@@ -424,10 +454,16 @@ public class TradingExecutions {
     }
 
     /**
-     * The prices at which the order was executed. For Equities: there will be one price measured in
-     * PRICE_PER_UNIT (using the order currency). For Fixed Income assets: there will always be an
-     * entry measured in the PERCENTAGE_OF_PAR (100 X cost / total par value), and there may be
-     * additional entries measured in yield.
+     * The prices at which the order was executed.
+     *
+     * <p>Returned values depend on asset_type: - EQUITY: exactly one ExecutedPrice element of type
+     * PRICE_PER_UNIT in the order currency (up to 8 decimal places). - MUTUAL_FUND: exactly one
+     * ExecutedPrice element of type PRICE_PER_UNIT in the order currency (up to 5 decimal places).
+     * - FIXED_INCOME: may contain multiple elements with different types other than PRICE_PER_UNIT;
+     * there will always be an entry measured in PERCENTAGE_OF_PAR (100 X cost / total par value),
+     * and there may be additional entries measured in yield. Yield types (YIELD_TO_*) support up to
+     * 7 decimal places, other price types support up to 8 decimal places. - Other asset types:
+     * supports up to 5 decimal places.
      */
     public Builder executedPrices(Optional<? extends List<TradingExecutedPrice>> executedPrices) {
       Utils.checkNotNull(executedPrices, "executedPrices");
@@ -484,8 +520,8 @@ public class TradingExecutions {
     }
 
     /**
-     * The prevailing market price of the asset, without fees or commissions. Will only be present
-     * for orders of Fixed Income assets.
+     * The prevailing market price of the asset, without fees or commissions, up to 8 decimal
+     * places. Will only be present for orders of Fixed Income assets.
      */
     public Builder prevailingMarketPrice(PrevailingMarketPrice prevailingMarketPrice) {
       Utils.checkNotNull(prevailingMarketPrice, "prevailingMarketPrice");
@@ -494,8 +530,8 @@ public class TradingExecutions {
     }
 
     /**
-     * The prevailing market price of the asset, without fees or commissions. Will only be present
-     * for orders of Fixed Income assets.
+     * The prevailing market price of the asset, without fees or commissions, up to 8 decimal
+     * places. Will only be present for orders of Fixed Income assets.
      */
     public Builder prevailingMarketPrice(
         JsonNullable<? extends PrevailingMarketPrice> prevailingMarketPrice) {

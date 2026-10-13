@@ -15,7 +15,7 @@ import java.util.Optional;
  * AveragePrice
  *
  * <p>The computed average price for this leg, which is a weighted average (by quantity) of the
- * executed prices.
+ * executed prices. Supports up to 8 decimal places.
  */
 public class AveragePrice {
   /**

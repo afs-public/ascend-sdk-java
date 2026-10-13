@@ -5,10 +5,15 @@ package com.apexfintechsolutions.ascendsdk;
 
 import static com.apexfintechsolutions.ascendsdk.operations.Operations.RequestOperation;
 
+import com.apexfintechsolutions.ascendsdk.models.components.CustomerIdentificationCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.IdentityLookupCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.InvestigationUpdate;
+import com.apexfintechsolutions.ascendsdk.models.components.LinkCustomerIdentificationRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.LinkDocumentsRequestCreate;
 import com.apexfintechsolutions.ascendsdk.models.components.VerifyIdentityLookupRequestCreate;
+import com.apexfintechsolutions.ascendsdk.models.operations.CustomerIdentificationResultServiceCreateCustomerIdentificationRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.CustomerIdentificationResultServiceCreateCustomerIdentificationRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.CustomerIdentificationResultServiceCreateCustomerIdentificationResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.CustomerIdentificationResultServiceGetCustomerIdentificationQueryParamView;
 import com.apexfintechsolutions.ascendsdk.models.operations.CustomerIdentificationResultServiceGetCustomerIdentificationRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.CustomerIdentificationResultServiceGetCustomerIdentificationRequestBuilder;
@@ -22,6 +27,9 @@ import com.apexfintechsolutions.ascendsdk.models.operations.IdentityLookupServic
 import com.apexfintechsolutions.ascendsdk.models.operations.InvestigationServiceGetInvestigationRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.InvestigationServiceGetInvestigationRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.InvestigationServiceGetInvestigationResponse;
+import com.apexfintechsolutions.ascendsdk.models.operations.InvestigationServiceLinkCustomerIdentificationRequest;
+import com.apexfintechsolutions.ascendsdk.models.operations.InvestigationServiceLinkCustomerIdentificationRequestBuilder;
+import com.apexfintechsolutions.ascendsdk.models.operations.InvestigationServiceLinkCustomerIdentificationResponse;
 import com.apexfintechsolutions.ascendsdk.models.operations.InvestigationServiceLinkDocumentsRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.InvestigationServiceLinkDocumentsRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.InvestigationServiceLinkDocumentsResponse;
@@ -34,10 +42,12 @@ import com.apexfintechsolutions.ascendsdk.models.operations.InvestigationService
 import com.apexfintechsolutions.ascendsdk.models.operations.WatchlistServiceGetWatchlistItemRequest;
 import com.apexfintechsolutions.ascendsdk.models.operations.WatchlistServiceGetWatchlistItemRequestBuilder;
 import com.apexfintechsolutions.ascendsdk.models.operations.WatchlistServiceGetWatchlistItemResponse;
+import com.apexfintechsolutions.ascendsdk.operations.CustomerIdentificationResultServiceCreateCustomerIdentification;
 import com.apexfintechsolutions.ascendsdk.operations.CustomerIdentificationResultServiceGetCustomerIdentification;
 import com.apexfintechsolutions.ascendsdk.operations.IdentityLookupServiceCreateIdentityLookup;
 import com.apexfintechsolutions.ascendsdk.operations.IdentityLookupServiceVerifyIdentityLookup;
 import com.apexfintechsolutions.ascendsdk.operations.InvestigationServiceGetInvestigation;
+import com.apexfintechsolutions.ascendsdk.operations.InvestigationServiceLinkCustomerIdentification;
 import com.apexfintechsolutions.ascendsdk.operations.InvestigationServiceLinkDocuments;
 import com.apexfintechsolutions.ascendsdk.operations.InvestigationServiceListInvestigations;
 import com.apexfintechsolutions.ascendsdk.operations.InvestigationServiceUpdateInvestigation;
@@ -184,7 +194,12 @@ public class Investigations {
   public InvestigationServiceListInvestigationsResponse listInvestigationsDirect()
       throws Exception {
     return listInvestigations(
-        Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        Optional.empty(),
+        Optional.empty(),
+        Optional.empty(),
+        Optional.empty(),
+        Optional.empty(),
+        Optional.empty());
   }
 
   /**
@@ -205,6 +220,12 @@ public class Investigations {
    *     blank): - investigation_request_state - correspondent_id - scope - identity_verification -
    *     watchlist_screen - person.given_name - person.family_name - entity.legal_name - created_at
    *     - updated_at
+   * @param includeTotalSize Include the total size of the collection specified by this query in the
+   *     response (this may incur a performance penalty)
+   *     <p>**Field Dependencies:**
+   *     <p>When include_total_size is explicitly set to false, total_size in the response will be
+   *     0.
+   *     <p>Must be empty if `total_size` is `false`.
    * @param options additional options
    * @return The response from the API call
    * @throws Exception if the API call fails
@@ -214,6 +235,7 @@ public class Investigations {
       Optional<String> pageToken,
       Optional<String> filter,
       Optional<String> orderBy,
+      Optional<Boolean> includeTotalSize,
       Optional<Options> options)
       throws Exception {
     InvestigationServiceListInvestigationsRequest request =
@@ -222,6 +244,7 @@ public class Investigations {
             .pageToken(pageToken)
             .filter(filter)
             .orderBy(orderBy)
+            .includeTotalSize(includeTotalSize)
             .build();
     RequestOperation<
             InvestigationServiceListInvestigationsRequest,
@@ -349,6 +372,90 @@ public class Investigations {
   }
 
   /**
+   * Link Customer Identification to an Investigation
+   *
+   * <p>Use this endpoint to link a customer identification to an investigation Upon linking a
+   * CustomerIdentification, the Investigation.IdentityVerificationState will be re-evaluated based
+   * on the CustomerIdentification.Result The CustomerIdentification must exist, and
+   * CustomerIdentification.Result.completed must be true The
+   * CustomerIdentification.Identity.given_name must match the Investigation.Person.given_name The
+   * CustomerIdentification.Identity.family_name must match the Investigation.Person.family_name The
+   * CustomerIdentification.Identity.birth_date must match the Investigation.Person.birth_date If
+   * the above validations are not met, the service will return a FAILED_PRECONDITION error status
+   * with the incorrect fields
+   *
+   * @return The call builder
+   */
+  public InvestigationServiceLinkCustomerIdentificationRequestBuilder linkCustomerIdentification() {
+    return new InvestigationServiceLinkCustomerIdentificationRequestBuilder(sdkConfiguration);
+  }
+
+  /**
+   * Link Customer Identification to an Investigation
+   *
+   * <p>Use this endpoint to link a customer identification to an investigation Upon linking a
+   * CustomerIdentification, the Investigation.IdentityVerificationState will be re-evaluated based
+   * on the CustomerIdentification.Result The CustomerIdentification must exist, and
+   * CustomerIdentification.Result.completed must be true The
+   * CustomerIdentification.Identity.given_name must match the Investigation.Person.given_name The
+   * CustomerIdentification.Identity.family_name must match the Investigation.Person.family_name The
+   * CustomerIdentification.Identity.birth_date must match the Investigation.Person.birth_date If
+   * the above validations are not met, the service will return a FAILED_PRECONDITION error status
+   * with the incorrect fields
+   *
+   * @param investigationId The investigation id.
+   * @param linkCustomerIdentificationRequestCreate Request to link a CustomerIdentification to an
+   *     Investigation
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public InvestigationServiceLinkCustomerIdentificationResponse linkCustomerIdentification(
+      String investigationId,
+      LinkCustomerIdentificationRequestCreate linkCustomerIdentificationRequestCreate)
+      throws Exception {
+    return linkCustomerIdentification(
+        investigationId, linkCustomerIdentificationRequestCreate, Optional.empty());
+  }
+
+  /**
+   * Link Customer Identification to an Investigation
+   *
+   * <p>Use this endpoint to link a customer identification to an investigation Upon linking a
+   * CustomerIdentification, the Investigation.IdentityVerificationState will be re-evaluated based
+   * on the CustomerIdentification.Result The CustomerIdentification must exist, and
+   * CustomerIdentification.Result.completed must be true The
+   * CustomerIdentification.Identity.given_name must match the Investigation.Person.given_name The
+   * CustomerIdentification.Identity.family_name must match the Investigation.Person.family_name The
+   * CustomerIdentification.Identity.birth_date must match the Investigation.Person.birth_date If
+   * the above validations are not met, the service will return a FAILED_PRECONDITION error status
+   * with the incorrect fields
+   *
+   * @param investigationId The investigation id.
+   * @param linkCustomerIdentificationRequestCreate Request to link a CustomerIdentification to an
+   *     Investigation
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public InvestigationServiceLinkCustomerIdentificationResponse linkCustomerIdentification(
+      String investigationId,
+      LinkCustomerIdentificationRequestCreate linkCustomerIdentificationRequestCreate,
+      Optional<Options> options)
+      throws Exception {
+    InvestigationServiceLinkCustomerIdentificationRequest request =
+        InvestigationServiceLinkCustomerIdentificationRequest.builder()
+            .investigationId(investigationId)
+            .linkCustomerIdentificationRequestCreate(linkCustomerIdentificationRequestCreate)
+            .build();
+    RequestOperation<
+            InvestigationServiceLinkCustomerIdentificationRequest,
+            InvestigationServiceLinkCustomerIdentificationResponse>
+        operation =
+            new InvestigationServiceLinkCustomerIdentification.Sync(sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
    * Get Identity Verification
    *
    * <p>Gets a CustomerIdentification by CustomerIdentification ID.
@@ -411,6 +518,70 @@ public class Investigations {
             CustomerIdentificationResultServiceGetCustomerIdentificationResponse>
         operation =
             new CustomerIdentificationResultServiceGetCustomerIdentification.Sync(
+                sdkConfiguration, options);
+    return operation.handleResponse(operation.doRequest(request));
+  }
+
+  /**
+   * Create Identity Verification
+   *
+   * <p>Request a new CustomerIdentificationCheck
+   *
+   * @return The call builder
+   */
+  public CustomerIdentificationResultServiceCreateCustomerIdentificationRequestBuilder
+      createCustomerIdentification() {
+    return new CustomerIdentificationResultServiceCreateCustomerIdentificationRequestBuilder(
+        sdkConfiguration);
+  }
+
+  /**
+   * Create Identity Verification
+   *
+   * <p>Request a new CustomerIdentificationCheck
+   *
+   * @param correspondentId The correspondent id.
+   * @param customerIdentificationCreate CustomerIdentification includes the details of a customer
+   *     identification check
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CustomerIdentificationResultServiceCreateCustomerIdentificationResponse
+      createCustomerIdentification(
+          String correspondentId, CustomerIdentificationCreate customerIdentificationCreate)
+          throws Exception {
+    return createCustomerIdentification(
+        correspondentId, customerIdentificationCreate, Optional.empty());
+  }
+
+  /**
+   * Create Identity Verification
+   *
+   * <p>Request a new CustomerIdentificationCheck
+   *
+   * @param correspondentId The correspondent id.
+   * @param customerIdentificationCreate CustomerIdentification includes the details of a customer
+   *     identification check
+   * @param options additional options
+   * @return The response from the API call
+   * @throws Exception if the API call fails
+   */
+  public CustomerIdentificationResultServiceCreateCustomerIdentificationResponse
+      createCustomerIdentification(
+          String correspondentId,
+          CustomerIdentificationCreate customerIdentificationCreate,
+          Optional<Options> options)
+          throws Exception {
+    CustomerIdentificationResultServiceCreateCustomerIdentificationRequest request =
+        CustomerIdentificationResultServiceCreateCustomerIdentificationRequest.builder()
+            .correspondentId(correspondentId)
+            .customerIdentificationCreate(customerIdentificationCreate)
+            .build();
+    RequestOperation<
+            CustomerIdentificationResultServiceCreateCustomerIdentificationRequest,
+            CustomerIdentificationResultServiceCreateCustomerIdentificationResponse>
+        operation =
+            new CustomerIdentificationResultServiceCreateCustomerIdentification.Sync(
                 sdkConfiguration, options);
     return operation.handleResponse(operation.doRequest(request));
   }

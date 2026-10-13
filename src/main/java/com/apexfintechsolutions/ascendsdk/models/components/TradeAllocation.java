@@ -66,6 +66,11 @@ public class TradeAllocation {
   @JsonProperty("commission_amount")
   private JsonNullable<? extends TradeAllocationCommissionAmount> commissionAmount;
 
+  /** Executing broker of the trade allocation. */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("executing_broker")
+  private Optional<String> executingBroker;
+
   /**
    * Timestamp of when the trade allocation took place. If settlement_date is not provided, this
    * field will be converted into Eastern Time and used to calculate settlement_date.
@@ -96,9 +101,11 @@ public class TradeAllocation {
   private Optional<String> fromActivityId;
 
   /**
-   * Gross amount is calculated by the Booking service by multiplying price and quantity and fixing
-   * it to 2 fractional precision. Optionally specifiable. If present, will override the
-   * gross_amount calculated above.
+   * Gross amount is calculated by the Booking service by multiplying price, quantity, and
+   * security_type specific multiplier and round half up to 2 decimal point. Requirement of 11 or
+   * less integral number and 2 or less fractional precision. Optionally specifiable for
+   * FIXED_INCOME trades. Not allowed for trades of other instrument types. If present, will
+   * override the gross_amount calculated above.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("gross_amount")
@@ -160,6 +167,11 @@ public class TradeAllocation {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("price_adjustment")
   private JsonNullable<? extends TradeAllocationPriceAdjustment> priceAdjustment;
+
+  /** RIA Trade Away indicator. */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("prime")
+  private Optional<Boolean> prime;
 
   /** Quantity with requirement of 12 or less integral number and 5 or less fractional precision. */
   @JsonInclude(Include.NON_ABSENT)
@@ -239,6 +251,7 @@ public class TradeAllocation {
       @JsonProperty("client_order_id") Optional<String> clientOrderId,
       @JsonProperty("commission_amount")
           JsonNullable<? extends TradeAllocationCommissionAmount> commissionAmount,
+      @JsonProperty("executing_broker") Optional<String> executingBroker,
       @JsonProperty("execution_time") JsonNullable<OffsetDateTime> executionTime,
       @JsonProperty("fees") Optional<? extends List<BookingFee>> fees,
       @JsonProperty("from_account_id") Optional<String> fromAccountId,
@@ -257,6 +270,7 @@ public class TradeAllocation {
       @JsonProperty("price") JsonNullable<? extends TradeAllocationPrice> price,
       @JsonProperty("price_adjustment")
           JsonNullable<? extends TradeAllocationPriceAdjustment> priceAdjustment,
+      @JsonProperty("prime") Optional<Boolean> prime,
       @JsonProperty("quantity") JsonNullable<? extends TradeAllocationQuantity> quantity,
       @JsonProperty("settlement_date")
           JsonNullable<? extends TradeAllocationSettlementDate> settlementDate,
@@ -277,6 +291,7 @@ public class TradeAllocation {
     Utils.checkNotNull(brokerCapacity, "brokerCapacity");
     Utils.checkNotNull(clientOrderId, "clientOrderId");
     Utils.checkNotNull(commissionAmount, "commissionAmount");
+    Utils.checkNotNull(executingBroker, "executingBroker");
     Utils.checkNotNull(executionTime, "executionTime");
     Utils.checkNotNull(fees, "fees");
     Utils.checkNotNull(fromAccountId, "fromAccountId");
@@ -291,6 +306,7 @@ public class TradeAllocation {
     Utils.checkNotNull(prevailingMarketPrice, "prevailingMarketPrice");
     Utils.checkNotNull(price, "price");
     Utils.checkNotNull(priceAdjustment, "priceAdjustment");
+    Utils.checkNotNull(prime, "prime");
     Utils.checkNotNull(quantity, "quantity");
     Utils.checkNotNull(settlementDate, "settlementDate");
     Utils.checkNotNull(sideModifier, "sideModifier");
@@ -309,6 +325,7 @@ public class TradeAllocation {
     this.brokerCapacity = brokerCapacity;
     this.clientOrderId = clientOrderId;
     this.commissionAmount = commissionAmount;
+    this.executingBroker = executingBroker;
     this.executionTime = executionTime;
     this.fees = fees;
     this.fromAccountId = fromAccountId;
@@ -323,6 +340,7 @@ public class TradeAllocation {
     this.prevailingMarketPrice = prevailingMarketPrice;
     this.price = price;
     this.priceAdjustment = priceAdjustment;
+    this.prime = prime;
     this.quantity = quantity;
     this.settlementDate = settlementDate;
     this.sideModifier = sideModifier;
@@ -345,20 +363,22 @@ public class TradeAllocation {
         Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined(),
-        JsonNullable.undefined(),
-        Optional.empty(),
-        Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
+        JsonNullable.undefined(),
+        Optional.empty(),
+        Optional.empty(),
+        Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
+        Optional.empty(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         Optional.empty(),
@@ -430,6 +450,12 @@ public class TradeAllocation {
     return (JsonNullable<TradeAllocationCommissionAmount>) commissionAmount;
   }
 
+  /** Executing broker of the trade allocation. */
+  @JsonIgnore
+  public Optional<String> executingBroker() {
+    return executingBroker;
+  }
+
   /**
    * Timestamp of when the trade allocation took place. If settlement_date is not provided, this
    * field will be converted into Eastern Time and used to calculate settlement_date.
@@ -465,9 +491,11 @@ public class TradeAllocation {
   }
 
   /**
-   * Gross amount is calculated by the Booking service by multiplying price and quantity and fixing
-   * it to 2 fractional precision. Optionally specifiable. If present, will override the
-   * gross_amount calculated above.
+   * Gross amount is calculated by the Booking service by multiplying price, quantity, and
+   * security_type specific multiplier and round half up to 2 decimal point. Requirement of 11 or
+   * less integral number and 2 or less fractional precision. Optionally specifiable for
+   * FIXED_INCOME trades. Not allowed for trades of other instrument types. If present, will
+   * override the gross_amount calculated above.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -544,6 +572,12 @@ public class TradeAllocation {
   @JsonIgnore
   public JsonNullable<TradeAllocationPriceAdjustment> priceAdjustment() {
     return (JsonNullable<TradeAllocationPriceAdjustment>) priceAdjustment;
+  }
+
+  /** RIA Trade Away indicator. */
+  @JsonIgnore
+  public Optional<Boolean> prime() {
+    return prime;
   }
 
   /** Quantity with requirement of 12 or less integral number and 5 or less fractional precision. */
@@ -758,6 +792,20 @@ public class TradeAllocation {
     return this;
   }
 
+  /** Executing broker of the trade allocation. */
+  public TradeAllocation withExecutingBroker(String executingBroker) {
+    Utils.checkNotNull(executingBroker, "executingBroker");
+    this.executingBroker = Optional.ofNullable(executingBroker);
+    return this;
+  }
+
+  /** Executing broker of the trade allocation. */
+  public TradeAllocation withExecutingBroker(Optional<String> executingBroker) {
+    Utils.checkNotNull(executingBroker, "executingBroker");
+    this.executingBroker = executingBroker;
+    return this;
+  }
+
   /**
    * Timestamp of when the trade allocation took place. If settlement_date is not provided, this
    * field will be converted into Eastern Time and used to calculate settlement_date.
@@ -833,9 +881,11 @@ public class TradeAllocation {
   }
 
   /**
-   * Gross amount is calculated by the Booking service by multiplying price and quantity and fixing
-   * it to 2 fractional precision. Optionally specifiable. If present, will override the
-   * gross_amount calculated above.
+   * Gross amount is calculated by the Booking service by multiplying price, quantity, and
+   * security_type specific multiplier and round half up to 2 decimal point. Requirement of 11 or
+   * less integral number and 2 or less fractional precision. Optionally specifiable for
+   * FIXED_INCOME trades. Not allowed for trades of other instrument types. If present, will
+   * override the gross_amount calculated above.
    */
   public TradeAllocation withGrossAmount(TradeAllocationGrossAmount grossAmount) {
     Utils.checkNotNull(grossAmount, "grossAmount");
@@ -844,9 +894,11 @@ public class TradeAllocation {
   }
 
   /**
-   * Gross amount is calculated by the Booking service by multiplying price and quantity and fixing
-   * it to 2 fractional precision. Optionally specifiable. If present, will override the
-   * gross_amount calculated above.
+   * Gross amount is calculated by the Booking service by multiplying price, quantity, and
+   * security_type specific multiplier and round half up to 2 decimal point. Requirement of 11 or
+   * less integral number and 2 or less fractional precision. Optionally specifiable for
+   * FIXED_INCOME trades. Not allowed for trades of other instrument types. If present, will
+   * override the gross_amount calculated above.
    */
   public TradeAllocation withGrossAmount(
       JsonNullable<? extends TradeAllocationGrossAmount> grossAmount) {
@@ -1007,6 +1059,20 @@ public class TradeAllocation {
       JsonNullable<? extends TradeAllocationPriceAdjustment> priceAdjustment) {
     Utils.checkNotNull(priceAdjustment, "priceAdjustment");
     this.priceAdjustment = priceAdjustment;
+    return this;
+  }
+
+  /** RIA Trade Away indicator. */
+  public TradeAllocation withPrime(boolean prime) {
+    Utils.checkNotNull(prime, "prime");
+    this.prime = Optional.ofNullable(prime);
+    return this;
+  }
+
+  /** RIA Trade Away indicator. */
+  public TradeAllocation withPrime(Optional<Boolean> prime) {
+    Utils.checkNotNull(prime, "prime");
+    this.prime = prime;
     return this;
   }
 
@@ -1206,6 +1272,7 @@ public class TradeAllocation {
         && Utils.enhancedDeepEquals(this.brokerCapacity, other.brokerCapacity)
         && Utils.enhancedDeepEquals(this.clientOrderId, other.clientOrderId)
         && Utils.enhancedDeepEquals(this.commissionAmount, other.commissionAmount)
+        && Utils.enhancedDeepEquals(this.executingBroker, other.executingBroker)
         && Utils.enhancedDeepEquals(this.executionTime, other.executionTime)
         && Utils.enhancedDeepEquals(this.fees, other.fees)
         && Utils.enhancedDeepEquals(this.fromAccountId, other.fromAccountId)
@@ -1220,6 +1287,7 @@ public class TradeAllocation {
         && Utils.enhancedDeepEquals(this.prevailingMarketPrice, other.prevailingMarketPrice)
         && Utils.enhancedDeepEquals(this.price, other.price)
         && Utils.enhancedDeepEquals(this.priceAdjustment, other.priceAdjustment)
+        && Utils.enhancedDeepEquals(this.prime, other.prime)
         && Utils.enhancedDeepEquals(this.quantity, other.quantity)
         && Utils.enhancedDeepEquals(this.settlementDate, other.settlementDate)
         && Utils.enhancedDeepEquals(this.sideModifier, other.sideModifier)
@@ -1243,6 +1311,7 @@ public class TradeAllocation {
         brokerCapacity,
         clientOrderId,
         commissionAmount,
+        executingBroker,
         executionTime,
         fees,
         fromAccountId,
@@ -1257,6 +1326,7 @@ public class TradeAllocation {
         prevailingMarketPrice,
         price,
         priceAdjustment,
+        prime,
         quantity,
         settlementDate,
         sideModifier,
@@ -1288,6 +1358,8 @@ public class TradeAllocation {
         clientOrderId,
         "commissionAmount",
         commissionAmount,
+        "executingBroker",
+        executingBroker,
         "executionTime",
         executionTime,
         "fees",
@@ -1316,6 +1388,8 @@ public class TradeAllocation {
         price,
         "priceAdjustment",
         priceAdjustment,
+        "prime",
+        prime,
         "quantity",
         quantity,
         "settlementDate",
@@ -1359,6 +1433,8 @@ public class TradeAllocation {
     private JsonNullable<? extends TradeAllocationCommissionAmount> commissionAmount =
         JsonNullable.undefined();
 
+    private Optional<String> executingBroker = Optional.empty();
+
     private JsonNullable<OffsetDateTime> executionTime = JsonNullable.undefined();
 
     private Optional<? extends List<BookingFee>> fees = Optional.empty();
@@ -1389,6 +1465,8 @@ public class TradeAllocation {
 
     private JsonNullable<? extends TradeAllocationPriceAdjustment> priceAdjustment =
         JsonNullable.undefined();
+
+    private Optional<Boolean> prime = Optional.empty();
 
     private JsonNullable<? extends TradeAllocationQuantity> quantity = JsonNullable.undefined();
 
@@ -1544,6 +1622,20 @@ public class TradeAllocation {
       return this;
     }
 
+    /** Executing broker of the trade allocation. */
+    public Builder executingBroker(String executingBroker) {
+      Utils.checkNotNull(executingBroker, "executingBroker");
+      this.executingBroker = Optional.ofNullable(executingBroker);
+      return this;
+    }
+
+    /** Executing broker of the trade allocation. */
+    public Builder executingBroker(Optional<String> executingBroker) {
+      Utils.checkNotNull(executingBroker, "executingBroker");
+      this.executingBroker = executingBroker;
+      return this;
+    }
+
     /**
      * Timestamp of when the trade allocation took place. If settlement_date is not provided, this
      * field will be converted into Eastern Time and used to calculate settlement_date.
@@ -1619,9 +1711,11 @@ public class TradeAllocation {
     }
 
     /**
-     * Gross amount is calculated by the Booking service by multiplying price and quantity and
-     * fixing it to 2 fractional precision. Optionally specifiable. If present, will override the
-     * gross_amount calculated above.
+     * Gross amount is calculated by the Booking service by multiplying price, quantity, and
+     * security_type specific multiplier and round half up to 2 decimal point. Requirement of 11 or
+     * less integral number and 2 or less fractional precision. Optionally specifiable for
+     * FIXED_INCOME trades. Not allowed for trades of other instrument types. If present, will
+     * override the gross_amount calculated above.
      */
     public Builder grossAmount(TradeAllocationGrossAmount grossAmount) {
       Utils.checkNotNull(grossAmount, "grossAmount");
@@ -1630,9 +1724,11 @@ public class TradeAllocation {
     }
 
     /**
-     * Gross amount is calculated by the Booking service by multiplying price and quantity and
-     * fixing it to 2 fractional precision. Optionally specifiable. If present, will override the
-     * gross_amount calculated above.
+     * Gross amount is calculated by the Booking service by multiplying price, quantity, and
+     * security_type specific multiplier and round half up to 2 decimal point. Requirement of 11 or
+     * less integral number and 2 or less fractional precision. Optionally specifiable for
+     * FIXED_INCOME trades. Not allowed for trades of other instrument types. If present, will
+     * override the gross_amount calculated above.
      */
     public Builder grossAmount(JsonNullable<? extends TradeAllocationGrossAmount> grossAmount) {
       Utils.checkNotNull(grossAmount, "grossAmount");
@@ -1792,6 +1888,20 @@ public class TradeAllocation {
         JsonNullable<? extends TradeAllocationPriceAdjustment> priceAdjustment) {
       Utils.checkNotNull(priceAdjustment, "priceAdjustment");
       this.priceAdjustment = priceAdjustment;
+      return this;
+    }
+
+    /** RIA Trade Away indicator. */
+    public Builder prime(boolean prime) {
+      Utils.checkNotNull(prime, "prime");
+      this.prime = Optional.ofNullable(prime);
+      return this;
+    }
+
+    /** RIA Trade Away indicator. */
+    public Builder prime(Optional<Boolean> prime) {
+      Utils.checkNotNull(prime, "prime");
+      this.prime = prime;
       return this;
     }
 
@@ -1994,6 +2104,7 @@ public class TradeAllocation {
           brokerCapacity,
           clientOrderId,
           commissionAmount,
+          executingBroker,
           executionTime,
           fees,
           fromAccountId,
@@ -2008,6 +2119,7 @@ public class TradeAllocation {
           prevailingMarketPrice,
           price,
           priceAdjustment,
+          prime,
           quantity,
           settlementDate,
           sideModifier,

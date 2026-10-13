@@ -47,25 +47,22 @@ public class Order {
    * The average prices, as weighted averages, across all executions in this order. Will be absent
    * if an order has no executions.
    *
-   * <p>When asset_type = EQUITY or MUTUAL_FUND, there will be at most one value present, with a
-   * type of PRICE_PER_UNIT. This will have up to 4 decimal places for USD amounts less than $1, and
-   * a maximum of two for larger USD amounts.
-   *
-   * <p>When asset_type = FIXED_INCOME, there may be more than one value present which would have a
-   * type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 8 decimal
-   * places of precision, and price values measured in yields will support up to 7 decimal places.
+   * <p>Returned values depend on asset_type: - EQUITY: exactly one ExecutedPrice element of type
+   * PRICE_PER_UNIT in USD (up to 8 decimal places). - MUTUAL_FUND: exactly one ExecutedPrice
+   * element of type PRICE_PER_UNIT in USD (up to 5 decimal places). - FIXED_INCOME: may contain
+   * multiple elements with different types other than PRICE_PER_UNIT; yield types (YIELD_TO_*)
+   * support up to 7 decimal places, other types support up to 8 decimal places. - Other asset
+   * types: supports up to 5 decimal places.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("average_prices")
   private Optional<? extends List<TradingExecutedPrice>> averagePrices;
 
   /**
-   * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
-   * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
-   * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
-   * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
-   * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
-   * allowed.
+   * Defaults to "AGENCY" for all asset types except Fixed Income. For Equities: Only "AGENCY" is
+   * allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or
+   * "PRINCIPAL" are allowed. If not specified, defaults to the capacity configured for the
+   * correspondent by Apex. For Event Contracts: Only "AGENCY" is allowed.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("broker_capacity")
@@ -114,7 +111,9 @@ public class Order {
   /**
    * Required for Equity Orders for any client who is having Apex do CAT reporting on their behalf.
    * A value may be provided for non-Equity orders, and will be remembered, but valid timestamps
-   * will have no impact on how they are processed.
+   * will have no impact on how they are processed. When special_reporting_instructions includes
+   * MANUAL_ORDER, this is also reported to CAT as the time the order was manually received from the
+   * customer.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("client_received_time")
@@ -160,6 +159,14 @@ public class Order {
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("currency_code")
   private Optional<String> currencyCode;
+
+  /**
+   * Request that the order be handled by a desk trader. Only available for Equity orders. When
+   * omitted, treated as false.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("desk_handling_requested")
+  private Optional<Boolean> deskHandlingRequested;
 
   /** The execution-level details that compose this order */
   @JsonInclude(Include.NON_ABSENT)
@@ -229,6 +236,14 @@ public class Order {
   private JsonNullable<? extends LimitPrice> limitPrice;
 
   /**
+   * Tax lot matching instructions specifying which lots to sell. Maximum 100 instructions per
+   * order.
+   */
+  @JsonInclude(Include.NON_ABSENT)
+  @JsonProperty("lot_matching_instructions")
+  private Optional<? extends List<LotMatchingInstruction>> lotMatchingInstructions;
+
+  /**
    * The maximum number of shares to be sold for a notional SELL order of an Equity asset type. This
    * field restricts the quantity to sell, even if the notional amount requires more shares to
    * fulfill. REQUIRED if your account is not subject to Apex position checks, and PROHIBITED if
@@ -266,11 +281,15 @@ public class Order {
   private Optional<Boolean> open;
 
   /**
-   * The date on which the order will go to the market: must either be "today" or the next valid
-   * trading day. If the current day is not a valid trading day, then the next valid market day must
-   * be specified. If the current time is after market close, and before midnight Eastern, then the
-   * next valid market day must be specified. In all other cases, the current day, Eastern must be
-   * specified.
+   * The date on which the order will go to the market.
+   *
+   * <p>When provided, the date must be either today or the next valid trading day (Eastern time): -
+   * If today is not a valid trading day, specify the next valid market day. - If the current time
+   * is after market close but before midnight Eastern, specify the next valid market day. -
+   * Otherwise, specify the current Eastern trading day.
+   *
+   * <p>Required for all orders except event contract orders with a non-DAY time_in_force (GTC, GTD,
+   * IOC, FOK). When omitted for those orders, defaults to the current Eastern trading day.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("order_date")
@@ -305,8 +324,8 @@ public class Order {
 
   /**
    * The prevailing market price, calculated as a weighted average of the fills in this order, up to
-   * a maximum of 5 decimal places. Can be up to 8 decimal places when asset_type = FIXED_INCOME.
-   * Will be absent if an order has no executions.
+   * 8 decimal places. Will only be present for orders of Fixed Income assets. Will be absent if an
+   * order has no executions.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("prevailing_market_price")
@@ -318,8 +337,8 @@ public class Order {
    * orders. Represents the number of shares, up to a maximum of 3 decimal places. For Fixed Income:
    * Represents the par (face-value) amount being ordered, and may not exceed two decimal places for
    * USD-based currencies. For Event Contracts: Represents the number of contracts being ordered,
-   * and must be whole numbers for BUY orders or up to a maximum of 2 decimal places for SELL
-   * orders. Either a quantity or notional_value MUST be specified (but not both).
+   * and may be up to a maximum of 2 decimal places. Exactly one of quantity, notional_value, or
+   * full_position MUST be specified.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("quantity")
@@ -340,8 +359,12 @@ public class Order {
   private Optional<? extends OrderSide> side;
 
   /**
-   * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
-   * Only available for Equity, Mutual Fund, and Fixed Income orders.
+   * Special Reporting Instructions to be applied to this order. Can include up to 5 Instructions.
+   * Supported for Equity orders only; must be omitted for Mutual Fund, Fixed Income, and Event
+   * Contract orders. BROKER_DEALER_ORDER and FULLY_REGISTERED are not supported. CAT_PARENT_ALGO is
+   * only allowed on LIMIT orders; CAT_PARENT_GTC is only allowed on GOOD_TILL_DATE orders.
+   * MANUAL_ORDER marks the order as manually received from the customer for CAT reporting;
+   * client_received_time should then be set to the time the order was received.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("special_reporting_instructions")
@@ -396,6 +419,7 @@ public class Order {
       @JsonProperty("cumulative_notional_value")
           JsonNullable<? extends CumulativeNotionalValue> cumulativeNotionalValue,
       @JsonProperty("currency_code") Optional<String> currencyCode,
+      @JsonProperty("desk_handling_requested") Optional<Boolean> deskHandlingRequested,
       @JsonProperty("executions") Optional<? extends List<TradingExecutions>> executions,
       @JsonProperty("extra_reporting_data")
           JsonNullable<? extends ExtraReportingData> extraReportingData,
@@ -407,6 +431,8 @@ public class Order {
       @JsonProperty("last_update_time") JsonNullable<OffsetDateTime> lastUpdateTime,
       @JsonProperty("letter_of_intent") JsonNullable<? extends LetterOfIntent> letterOfIntent,
       @JsonProperty("limit_price") JsonNullable<? extends LimitPrice> limitPrice,
+      @JsonProperty("lot_matching_instructions")
+          Optional<? extends List<LotMatchingInstruction>> lotMatchingInstructions,
       @JsonProperty("max_sell_quantity") JsonNullable<? extends MaxSellQuantity> maxSellQuantity,
       @JsonProperty("name") Optional<String> name,
       @JsonProperty("notional_value") JsonNullable<? extends NotionalValue> notionalValue,
@@ -447,6 +473,7 @@ public class Order {
     Utils.checkNotNull(createTime, "createTime");
     Utils.checkNotNull(cumulativeNotionalValue, "cumulativeNotionalValue");
     Utils.checkNotNull(currencyCode, "currencyCode");
+    Utils.checkNotNull(deskHandlingRequested, "deskHandlingRequested");
     Utils.checkNotNull(executions, "executions");
     Utils.checkNotNull(extraReportingData, "extraReportingData");
     Utils.checkNotNull(fees, "fees");
@@ -457,6 +484,7 @@ public class Order {
     Utils.checkNotNull(lastUpdateTime, "lastUpdateTime");
     Utils.checkNotNull(letterOfIntent, "letterOfIntent");
     Utils.checkNotNull(limitPrice, "limitPrice");
+    Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
     Utils.checkNotNull(maxSellQuantity, "maxSellQuantity");
     Utils.checkNotNull(name, "name");
     Utils.checkNotNull(notionalValue, "notionalValue");
@@ -492,6 +520,7 @@ public class Order {
     this.createTime = createTime;
     this.cumulativeNotionalValue = cumulativeNotionalValue;
     this.currencyCode = currencyCode;
+    this.deskHandlingRequested = deskHandlingRequested;
     this.executions = executions;
     this.extraReportingData = extraReportingData;
     this.fees = fees;
@@ -502,6 +531,7 @@ public class Order {
     this.lastUpdateTime = lastUpdateTime;
     this.letterOfIntent = letterOfIntent;
     this.limitPrice = limitPrice;
+    this.lotMatchingInstructions = lotMatchingInstructions;
     this.maxSellQuantity = maxSellQuantity;
     this.name = name;
     this.notionalValue = notionalValue;
@@ -542,15 +572,17 @@ public class Order {
         JsonNullable.undefined(),
         Optional.empty(),
         Optional.empty(),
-        JsonNullable.undefined(),
         Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty(),
+        JsonNullable.undefined(),
         Optional.empty(),
         Optional.empty(),
+        Optional.empty(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
         JsonNullable.undefined(),
+        Optional.empty(),
         JsonNullable.undefined(),
         Optional.empty(),
         JsonNullable.undefined(),
@@ -602,13 +634,12 @@ public class Order {
    * The average prices, as weighted averages, across all executions in this order. Will be absent
    * if an order has no executions.
    *
-   * <p>When asset_type = EQUITY or MUTUAL_FUND, there will be at most one value present, with a
-   * type of PRICE_PER_UNIT. This will have up to 4 decimal places for USD amounts less than $1, and
-   * a maximum of two for larger USD amounts.
-   *
-   * <p>When asset_type = FIXED_INCOME, there may be more than one value present which would have a
-   * type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 8 decimal
-   * places of precision, and price values measured in yields will support up to 7 decimal places.
+   * <p>Returned values depend on asset_type: - EQUITY: exactly one ExecutedPrice element of type
+   * PRICE_PER_UNIT in USD (up to 8 decimal places). - MUTUAL_FUND: exactly one ExecutedPrice
+   * element of type PRICE_PER_UNIT in USD (up to 5 decimal places). - FIXED_INCOME: may contain
+   * multiple elements with different types other than PRICE_PER_UNIT; yield types (YIELD_TO_*)
+   * support up to 7 decimal places, other types support up to 8 decimal places. - Other asset
+   * types: supports up to 5 decimal places.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -617,12 +648,10 @@ public class Order {
   }
 
   /**
-   * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
-   * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
-   * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
-   * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
-   * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
-   * allowed.
+   * Defaults to "AGENCY" for all asset types except Fixed Income. For Equities: Only "AGENCY" is
+   * allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or
+   * "PRINCIPAL" are allowed. If not specified, defaults to the capacity configured for the
+   * correspondent by Apex. For Event Contracts: Only "AGENCY" is allowed.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -681,7 +710,9 @@ public class Order {
   /**
    * Required for Equity Orders for any client who is having Apex do CAT reporting on their behalf.
    * A value may be provided for non-Equity orders, and will be remembered, but valid timestamps
-   * will have no impact on how they are processed.
+   * will have no impact on how they are processed. When special_reporting_instructions includes
+   * MANUAL_ORDER, this is also reported to CAT as the time the order was manually received from the
+   * customer.
    */
   @JsonIgnore
   public JsonNullable<OffsetDateTime> clientReceivedTime() {
@@ -734,6 +765,15 @@ public class Order {
   @JsonIgnore
   public Optional<String> currencyCode() {
     return currencyCode;
+  }
+
+  /**
+   * Request that the order be handled by a desk trader. Only available for Equity orders. When
+   * omitted, treated as false.
+   */
+  @JsonIgnore
+  public Optional<Boolean> deskHandlingRequested() {
+    return deskHandlingRequested;
   }
 
   /** The execution-level details that compose this order */
@@ -821,6 +861,16 @@ public class Order {
   }
 
   /**
+   * Tax lot matching instructions specifying which lots to sell. Maximum 100 instructions per
+   * order.
+   */
+  @SuppressWarnings("unchecked")
+  @JsonIgnore
+  public Optional<List<LotMatchingInstruction>> lotMatchingInstructions() {
+    return (Optional<List<LotMatchingInstruction>>) lotMatchingInstructions;
+  }
+
+  /**
    * The maximum number of shares to be sold for a notional SELL order of an Equity asset type. This
    * field restricts the quantity to sell, even if the notional amount requires more shares to
    * fulfill. REQUIRED if your account is not subject to Apex position checks, and PROHIBITED if
@@ -864,11 +914,15 @@ public class Order {
   }
 
   /**
-   * The date on which the order will go to the market: must either be "today" or the next valid
-   * trading day. If the current day is not a valid trading day, then the next valid market day must
-   * be specified. If the current time is after market close, and before midnight Eastern, then the
-   * next valid market day must be specified. In all other cases, the current day, Eastern must be
-   * specified.
+   * The date on which the order will go to the market.
+   *
+   * <p>When provided, the date must be either today or the next valid trading day (Eastern time): -
+   * If today is not a valid trading day, specify the next valid market day. - If the current time
+   * is after market close but before midnight Eastern, specify the next valid market day. -
+   * Otherwise, specify the current Eastern trading day.
+   *
+   * <p>Required for all orders except event contract orders with a non-DAY time_in_force (GTC, GTD,
+   * IOC, FOK). When omitted for those orders, defaults to the current Eastern trading day.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -912,8 +966,8 @@ public class Order {
 
   /**
    * The prevailing market price, calculated as a weighted average of the fills in this order, up to
-   * a maximum of 5 decimal places. Can be up to 8 decimal places when asset_type = FIXED_INCOME.
-   * Will be absent if an order has no executions.
+   * 8 decimal places. Will only be present for orders of Fixed Income assets. Will be absent if an
+   * order has no executions.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -927,8 +981,8 @@ public class Order {
    * orders. Represents the number of shares, up to a maximum of 3 decimal places. For Fixed Income:
    * Represents the par (face-value) amount being ordered, and may not exceed two decimal places for
    * USD-based currencies. For Event Contracts: Represents the number of contracts being ordered,
-   * and must be whole numbers for BUY orders or up to a maximum of 2 decimal places for SELL
-   * orders. Either a quantity or notional_value MUST be specified (but not both).
+   * and may be up to a maximum of 2 decimal places. Exactly one of quantity, notional_value, or
+   * full_position MUST be specified.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -955,8 +1009,12 @@ public class Order {
   }
 
   /**
-   * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
-   * Only available for Equity, Mutual Fund, and Fixed Income orders.
+   * Special Reporting Instructions to be applied to this order. Can include up to 5 Instructions.
+   * Supported for Equity orders only; must be omitted for Mutual Fund, Fixed Income, and Event
+   * Contract orders. BROKER_DEALER_ORDER and FULLY_REGISTERED are not supported. CAT_PARENT_ALGO is
+   * only allowed on LIMIT orders; CAT_PARENT_GTC is only allowed on GOOD_TILL_DATE orders.
+   * MANUAL_ORDER marks the order as manually received from the customer for CAT reporting;
+   * client_received_time should then be set to the time the order was received.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -1065,13 +1123,12 @@ public class Order {
    * The average prices, as weighted averages, across all executions in this order. Will be absent
    * if an order has no executions.
    *
-   * <p>When asset_type = EQUITY or MUTUAL_FUND, there will be at most one value present, with a
-   * type of PRICE_PER_UNIT. This will have up to 4 decimal places for USD amounts less than $1, and
-   * a maximum of two for larger USD amounts.
-   *
-   * <p>When asset_type = FIXED_INCOME, there may be more than one value present which would have a
-   * type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 8 decimal
-   * places of precision, and price values measured in yields will support up to 7 decimal places.
+   * <p>Returned values depend on asset_type: - EQUITY: exactly one ExecutedPrice element of type
+   * PRICE_PER_UNIT in USD (up to 8 decimal places). - MUTUAL_FUND: exactly one ExecutedPrice
+   * element of type PRICE_PER_UNIT in USD (up to 5 decimal places). - FIXED_INCOME: may contain
+   * multiple elements with different types other than PRICE_PER_UNIT; yield types (YIELD_TO_*)
+   * support up to 7 decimal places, other types support up to 8 decimal places. - Other asset
+   * types: supports up to 5 decimal places.
    */
   public Order withAveragePrices(List<TradingExecutedPrice> averagePrices) {
     Utils.checkNotNull(averagePrices, "averagePrices");
@@ -1083,13 +1140,12 @@ public class Order {
    * The average prices, as weighted averages, across all executions in this order. Will be absent
    * if an order has no executions.
    *
-   * <p>When asset_type = EQUITY or MUTUAL_FUND, there will be at most one value present, with a
-   * type of PRICE_PER_UNIT. This will have up to 4 decimal places for USD amounts less than $1, and
-   * a maximum of two for larger USD amounts.
-   *
-   * <p>When asset_type = FIXED_INCOME, there may be more than one value present which would have a
-   * type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 8 decimal
-   * places of precision, and price values measured in yields will support up to 7 decimal places.
+   * <p>Returned values depend on asset_type: - EQUITY: exactly one ExecutedPrice element of type
+   * PRICE_PER_UNIT in USD (up to 8 decimal places). - MUTUAL_FUND: exactly one ExecutedPrice
+   * element of type PRICE_PER_UNIT in USD (up to 5 decimal places). - FIXED_INCOME: may contain
+   * multiple elements with different types other than PRICE_PER_UNIT; yield types (YIELD_TO_*)
+   * support up to 7 decimal places, other types support up to 8 decimal places. - Other asset
+   * types: supports up to 5 decimal places.
    */
   public Order withAveragePrices(Optional<? extends List<TradingExecutedPrice>> averagePrices) {
     Utils.checkNotNull(averagePrices, "averagePrices");
@@ -1098,12 +1154,10 @@ public class Order {
   }
 
   /**
-   * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
-   * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
-   * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
-   * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
-   * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
-   * allowed.
+   * Defaults to "AGENCY" for all asset types except Fixed Income. For Equities: Only "AGENCY" is
+   * allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or
+   * "PRINCIPAL" are allowed. If not specified, defaults to the capacity configured for the
+   * correspondent by Apex. For Event Contracts: Only "AGENCY" is allowed.
    */
   public Order withBrokerCapacity(OrderBrokerCapacity brokerCapacity) {
     Utils.checkNotNull(brokerCapacity, "brokerCapacity");
@@ -1112,12 +1166,10 @@ public class Order {
   }
 
   /**
-   * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
-   * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
-   * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
-   * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
-   * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
-   * allowed.
+   * Defaults to "AGENCY" for all asset types except Fixed Income. For Equities: Only "AGENCY" is
+   * allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or
+   * "PRINCIPAL" are allowed. If not specified, defaults to the capacity configured for the
+   * correspondent by Apex. For Event Contracts: Only "AGENCY" is allowed.
    */
   public Order withBrokerCapacity(Optional<? extends OrderBrokerCapacity> brokerCapacity) {
     Utils.checkNotNull(brokerCapacity, "brokerCapacity");
@@ -1233,7 +1285,9 @@ public class Order {
   /**
    * Required for Equity Orders for any client who is having Apex do CAT reporting on their behalf.
    * A value may be provided for non-Equity orders, and will be remembered, but valid timestamps
-   * will have no impact on how they are processed.
+   * will have no impact on how they are processed. When special_reporting_instructions includes
+   * MANUAL_ORDER, this is also reported to CAT as the time the order was manually received from the
+   * customer.
    */
   public Order withClientReceivedTime(OffsetDateTime clientReceivedTime) {
     Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
@@ -1244,7 +1298,9 @@ public class Order {
   /**
    * Required for Equity Orders for any client who is having Apex do CAT reporting on their behalf.
    * A value may be provided for non-Equity orders, and will be remembered, but valid timestamps
-   * will have no impact on how they are processed.
+   * will have no impact on how they are processed. When special_reporting_instructions includes
+   * MANUAL_ORDER, this is also reported to CAT as the time the order was manually received from the
+   * customer.
    */
   public Order withClientReceivedTime(JsonNullable<OffsetDateTime> clientReceivedTime) {
     Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
@@ -1352,6 +1408,26 @@ public class Order {
   public Order withCurrencyCode(Optional<String> currencyCode) {
     Utils.checkNotNull(currencyCode, "currencyCode");
     this.currencyCode = currencyCode;
+    return this;
+  }
+
+  /**
+   * Request that the order be handled by a desk trader. Only available for Equity orders. When
+   * omitted, treated as false.
+   */
+  public Order withDeskHandlingRequested(boolean deskHandlingRequested) {
+    Utils.checkNotNull(deskHandlingRequested, "deskHandlingRequested");
+    this.deskHandlingRequested = Optional.ofNullable(deskHandlingRequested);
+    return this;
+  }
+
+  /**
+   * Request that the order be handled by a desk trader. Only available for Equity orders. When
+   * omitted, treated as false.
+   */
+  public Order withDeskHandlingRequested(Optional<Boolean> deskHandlingRequested) {
+    Utils.checkNotNull(deskHandlingRequested, "deskHandlingRequested");
+    this.deskHandlingRequested = deskHandlingRequested;
     return this;
   }
 
@@ -1531,6 +1607,27 @@ public class Order {
   }
 
   /**
+   * Tax lot matching instructions specifying which lots to sell. Maximum 100 instructions per
+   * order.
+   */
+  public Order withLotMatchingInstructions(List<LotMatchingInstruction> lotMatchingInstructions) {
+    Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
+    this.lotMatchingInstructions = Optional.ofNullable(lotMatchingInstructions);
+    return this;
+  }
+
+  /**
+   * Tax lot matching instructions specifying which lots to sell. Maximum 100 instructions per
+   * order.
+   */
+  public Order withLotMatchingInstructions(
+      Optional<? extends List<LotMatchingInstruction>> lotMatchingInstructions) {
+    Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
+    this.lotMatchingInstructions = lotMatchingInstructions;
+    return this;
+  }
+
+  /**
    * The maximum number of shares to be sold for a notional SELL order of an Equity asset type. This
    * field restricts the quantity to sell, even if the notional amount requires more shares to
    * fulfill. REQUIRED if your account is not subject to Apex position checks, and PROHIBITED if
@@ -1621,11 +1718,15 @@ public class Order {
   }
 
   /**
-   * The date on which the order will go to the market: must either be "today" or the next valid
-   * trading day. If the current day is not a valid trading day, then the next valid market day must
-   * be specified. If the current time is after market close, and before midnight Eastern, then the
-   * next valid market day must be specified. In all other cases, the current day, Eastern must be
-   * specified.
+   * The date on which the order will go to the market.
+   *
+   * <p>When provided, the date must be either today or the next valid trading day (Eastern time): -
+   * If today is not a valid trading day, specify the next valid market day. - If the current time
+   * is after market close but before midnight Eastern, specify the next valid market day. -
+   * Otherwise, specify the current Eastern trading day.
+   *
+   * <p>Required for all orders except event contract orders with a non-DAY time_in_force (GTC, GTD,
+   * IOC, FOK). When omitted for those orders, defaults to the current Eastern trading day.
    */
   public Order withOrderDate(OrderDate orderDate) {
     Utils.checkNotNull(orderDate, "orderDate");
@@ -1634,11 +1735,15 @@ public class Order {
   }
 
   /**
-   * The date on which the order will go to the market: must either be "today" or the next valid
-   * trading day. If the current day is not a valid trading day, then the next valid market day must
-   * be specified. If the current time is after market close, and before midnight Eastern, then the
-   * next valid market day must be specified. In all other cases, the current day, Eastern must be
-   * specified.
+   * The date on which the order will go to the market.
+   *
+   * <p>When provided, the date must be either today or the next valid trading day (Eastern time): -
+   * If today is not a valid trading day, specify the next valid market day. - If the current time
+   * is after market close but before midnight Eastern, specify the next valid market day. -
+   * Otherwise, specify the current Eastern trading day.
+   *
+   * <p>Required for all orders except event contract orders with a non-DAY time_in_force (GTC, GTD,
+   * IOC, FOK). When omitted for those orders, defaults to the current Eastern trading day.
    */
   public Order withOrderDate(JsonNullable<? extends OrderDate> orderDate) {
     Utils.checkNotNull(orderDate, "orderDate");
@@ -1719,8 +1824,8 @@ public class Order {
 
   /**
    * The prevailing market price, calculated as a weighted average of the fills in this order, up to
-   * a maximum of 5 decimal places. Can be up to 8 decimal places when asset_type = FIXED_INCOME.
-   * Will be absent if an order has no executions.
+   * 8 decimal places. Will only be present for orders of Fixed Income assets. Will be absent if an
+   * order has no executions.
    */
   public Order withPrevailingMarketPrice(OrderPrevailingMarketPrice prevailingMarketPrice) {
     Utils.checkNotNull(prevailingMarketPrice, "prevailingMarketPrice");
@@ -1730,8 +1835,8 @@ public class Order {
 
   /**
    * The prevailing market price, calculated as a weighted average of the fills in this order, up to
-   * a maximum of 5 decimal places. Can be up to 8 decimal places when asset_type = FIXED_INCOME.
-   * Will be absent if an order has no executions.
+   * 8 decimal places. Will only be present for orders of Fixed Income assets. Will be absent if an
+   * order has no executions.
    */
   public Order withPrevailingMarketPrice(
       JsonNullable<? extends OrderPrevailingMarketPrice> prevailingMarketPrice) {
@@ -1746,8 +1851,8 @@ public class Order {
    * orders. Represents the number of shares, up to a maximum of 3 decimal places. For Fixed Income:
    * Represents the par (face-value) amount being ordered, and may not exceed two decimal places for
    * USD-based currencies. For Event Contracts: Represents the number of contracts being ordered,
-   * and must be whole numbers for BUY orders or up to a maximum of 2 decimal places for SELL
-   * orders. Either a quantity or notional_value MUST be specified (but not both).
+   * and may be up to a maximum of 2 decimal places. Exactly one of quantity, notional_value, or
+   * full_position MUST be specified.
    */
   public Order withQuantity(OrderQuantity quantity) {
     Utils.checkNotNull(quantity, "quantity");
@@ -1761,8 +1866,8 @@ public class Order {
    * orders. Represents the number of shares, up to a maximum of 3 decimal places. For Fixed Income:
    * Represents the par (face-value) amount being ordered, and may not exceed two decimal places for
    * USD-based currencies. For Event Contracts: Represents the number of contracts being ordered,
-   * and must be whole numbers for BUY orders or up to a maximum of 2 decimal places for SELL
-   * orders. Either a quantity or notional_value MUST be specified (but not both).
+   * and may be up to a maximum of 2 decimal places. Exactly one of quantity, notional_value, or
+   * full_position MUST be specified.
    */
   public Order withQuantity(JsonNullable<? extends OrderQuantity> quantity) {
     Utils.checkNotNull(quantity, "quantity");
@@ -1808,8 +1913,12 @@ public class Order {
   }
 
   /**
-   * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
-   * Only available for Equity, Mutual Fund, and Fixed Income orders.
+   * Special Reporting Instructions to be applied to this order. Can include up to 5 Instructions.
+   * Supported for Equity orders only; must be omitted for Mutual Fund, Fixed Income, and Event
+   * Contract orders. BROKER_DEALER_ORDER and FULLY_REGISTERED are not supported. CAT_PARENT_ALGO is
+   * only allowed on LIMIT orders; CAT_PARENT_GTC is only allowed on GOOD_TILL_DATE orders.
+   * MANUAL_ORDER marks the order as manually received from the customer for CAT reporting;
+   * client_received_time should then be set to the time the order was received.
    */
   public Order withSpecialReportingInstructions(
       List<OrderSpecialReportingInstructions> specialReportingInstructions) {
@@ -1819,8 +1928,12 @@ public class Order {
   }
 
   /**
-   * Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
-   * Only available for Equity, Mutual Fund, and Fixed Income orders.
+   * Special Reporting Instructions to be applied to this order. Can include up to 5 Instructions.
+   * Supported for Equity orders only; must be omitted for Mutual Fund, Fixed Income, and Event
+   * Contract orders. BROKER_DEALER_ORDER and FULLY_REGISTERED are not supported. CAT_PARENT_ALGO is
+   * only allowed on LIMIT orders; CAT_PARENT_GTC is only allowed on GOOD_TILL_DATE orders.
+   * MANUAL_ORDER marks the order as manually received from the customer for CAT reporting;
+   * client_received_time should then be set to the time the order was received.
    */
   public Order withSpecialReportingInstructions(
       Optional<? extends List<OrderSpecialReportingInstructions>> specialReportingInstructions) {
@@ -1926,6 +2039,7 @@ public class Order {
         && Utils.enhancedDeepEquals(this.createTime, other.createTime)
         && Utils.enhancedDeepEquals(this.cumulativeNotionalValue, other.cumulativeNotionalValue)
         && Utils.enhancedDeepEquals(this.currencyCode, other.currencyCode)
+        && Utils.enhancedDeepEquals(this.deskHandlingRequested, other.deskHandlingRequested)
         && Utils.enhancedDeepEquals(this.executions, other.executions)
         && Utils.enhancedDeepEquals(this.extraReportingData, other.extraReportingData)
         && Utils.enhancedDeepEquals(this.fees, other.fees)
@@ -1937,6 +2051,7 @@ public class Order {
         && Utils.enhancedDeepEquals(this.lastUpdateTime, other.lastUpdateTime)
         && Utils.enhancedDeepEquals(this.letterOfIntent, other.letterOfIntent)
         && Utils.enhancedDeepEquals(this.limitPrice, other.limitPrice)
+        && Utils.enhancedDeepEquals(this.lotMatchingInstructions, other.lotMatchingInstructions)
         && Utils.enhancedDeepEquals(this.maxSellQuantity, other.maxSellQuantity)
         && Utils.enhancedDeepEquals(this.name, other.name)
         && Utils.enhancedDeepEquals(this.notionalValue, other.notionalValue)
@@ -1978,6 +2093,7 @@ public class Order {
         createTime,
         cumulativeNotionalValue,
         currencyCode,
+        deskHandlingRequested,
         executions,
         extraReportingData,
         fees,
@@ -1988,6 +2104,7 @@ public class Order {
         lastUpdateTime,
         letterOfIntent,
         limitPrice,
+        lotMatchingInstructions,
         maxSellQuantity,
         name,
         notionalValue,
@@ -2046,6 +2163,8 @@ public class Order {
         cumulativeNotionalValue,
         "currencyCode",
         currencyCode,
+        "deskHandlingRequested",
+        deskHandlingRequested,
         "executions",
         executions,
         "extraReportingData",
@@ -2066,6 +2185,8 @@ public class Order {
         letterOfIntent,
         "limitPrice",
         limitPrice,
+        "lotMatchingInstructions",
+        lotMatchingInstructions,
         "maxSellQuantity",
         maxSellQuantity,
         "name",
@@ -2142,6 +2263,8 @@ public class Order {
 
     private Optional<String> currencyCode = Optional.empty();
 
+    private Optional<Boolean> deskHandlingRequested = Optional.empty();
+
     private Optional<? extends List<TradingExecutions>> executions = Optional.empty();
 
     private JsonNullable<? extends ExtraReportingData> extraReportingData =
@@ -2162,6 +2285,9 @@ public class Order {
     private JsonNullable<? extends LetterOfIntent> letterOfIntent = JsonNullable.undefined();
 
     private JsonNullable<? extends LimitPrice> limitPrice = JsonNullable.undefined();
+
+    private Optional<? extends List<LotMatchingInstruction>> lotMatchingInstructions =
+        Optional.empty();
 
     private JsonNullable<? extends MaxSellQuantity> maxSellQuantity = JsonNullable.undefined();
 
@@ -2271,13 +2397,12 @@ public class Order {
      * The average prices, as weighted averages, across all executions in this order. Will be absent
      * if an order has no executions.
      *
-     * <p>When asset_type = EQUITY or MUTUAL_FUND, there will be at most one value present, with a
-     * type of PRICE_PER_UNIT. This will have up to 4 decimal places for USD amounts less than $1,
-     * and a maximum of two for larger USD amounts.
-     *
-     * <p>When asset_type = FIXED_INCOME, there may be more than one value present which would have
-     * a type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 8 decimal
-     * places of precision, and price values measured in yields will support up to 7 decimal places.
+     * <p>Returned values depend on asset_type: - EQUITY: exactly one ExecutedPrice element of type
+     * PRICE_PER_UNIT in USD (up to 8 decimal places). - MUTUAL_FUND: exactly one ExecutedPrice
+     * element of type PRICE_PER_UNIT in USD (up to 5 decimal places). - FIXED_INCOME: may contain
+     * multiple elements with different types other than PRICE_PER_UNIT; yield types (YIELD_TO_*)
+     * support up to 7 decimal places, other types support up to 8 decimal places. - Other asset
+     * types: supports up to 5 decimal places.
      */
     public Builder averagePrices(List<TradingExecutedPrice> averagePrices) {
       Utils.checkNotNull(averagePrices, "averagePrices");
@@ -2289,13 +2414,12 @@ public class Order {
      * The average prices, as weighted averages, across all executions in this order. Will be absent
      * if an order has no executions.
      *
-     * <p>When asset_type = EQUITY or MUTUAL_FUND, there will be at most one value present, with a
-     * type of PRICE_PER_UNIT. This will have up to 4 decimal places for USD amounts less than $1,
-     * and a maximum of two for larger USD amounts.
-     *
-     * <p>When asset_type = FIXED_INCOME, there may be more than one value present which would have
-     * a type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 8 decimal
-     * places of precision, and price values measured in yields will support up to 7 decimal places.
+     * <p>Returned values depend on asset_type: - EQUITY: exactly one ExecutedPrice element of type
+     * PRICE_PER_UNIT in USD (up to 8 decimal places). - MUTUAL_FUND: exactly one ExecutedPrice
+     * element of type PRICE_PER_UNIT in USD (up to 5 decimal places). - FIXED_INCOME: may contain
+     * multiple elements with different types other than PRICE_PER_UNIT; yield types (YIELD_TO_*)
+     * support up to 7 decimal places, other types support up to 8 decimal places. - Other asset
+     * types: supports up to 5 decimal places.
      */
     public Builder averagePrices(Optional<? extends List<TradingExecutedPrice>> averagePrices) {
       Utils.checkNotNull(averagePrices, "averagePrices");
@@ -2304,12 +2428,10 @@ public class Order {
     }
 
     /**
-     * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
-     * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
-     * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
-     * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
-     * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
-     * allowed.
+     * Defaults to "AGENCY" for all asset types except Fixed Income. For Equities: Only "AGENCY" is
+     * allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or
+     * "PRINCIPAL" are allowed. If not specified, defaults to the capacity configured for the
+     * correspondent by Apex. For Event Contracts: Only "AGENCY" is allowed.
      */
     public Builder brokerCapacity(OrderBrokerCapacity brokerCapacity) {
       Utils.checkNotNull(brokerCapacity, "brokerCapacity");
@@ -2318,12 +2440,10 @@ public class Order {
     }
 
     /**
-     * Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents
-     * which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For
-     * Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are
-     * allowed. - RIA correspondents: Defaults to "PRINCIPAL" if not specified. - Other
-     * correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is
-     * allowed.
+     * Defaults to "AGENCY" for all asset types except Fixed Income. For Equities: Only "AGENCY" is
+     * allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or
+     * "PRINCIPAL" are allowed. If not specified, defaults to the capacity configured for the
+     * correspondent by Apex. For Event Contracts: Only "AGENCY" is allowed.
      */
     public Builder brokerCapacity(Optional<? extends OrderBrokerCapacity> brokerCapacity) {
       Utils.checkNotNull(brokerCapacity, "brokerCapacity");
@@ -2439,7 +2559,9 @@ public class Order {
     /**
      * Required for Equity Orders for any client who is having Apex do CAT reporting on their
      * behalf. A value may be provided for non-Equity orders, and will be remembered, but valid
-     * timestamps will have no impact on how they are processed.
+     * timestamps will have no impact on how they are processed. When special_reporting_instructions
+     * includes MANUAL_ORDER, this is also reported to CAT as the time the order was manually
+     * received from the customer.
      */
     public Builder clientReceivedTime(OffsetDateTime clientReceivedTime) {
       Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
@@ -2450,7 +2572,9 @@ public class Order {
     /**
      * Required for Equity Orders for any client who is having Apex do CAT reporting on their
      * behalf. A value may be provided for non-Equity orders, and will be remembered, but valid
-     * timestamps will have no impact on how they are processed.
+     * timestamps will have no impact on how they are processed. When special_reporting_instructions
+     * includes MANUAL_ORDER, this is also reported to CAT as the time the order was manually
+     * received from the customer.
      */
     public Builder clientReceivedTime(JsonNullable<OffsetDateTime> clientReceivedTime) {
       Utils.checkNotNull(clientReceivedTime, "clientReceivedTime");
@@ -2558,6 +2682,26 @@ public class Order {
     public Builder currencyCode(Optional<String> currencyCode) {
       Utils.checkNotNull(currencyCode, "currencyCode");
       this.currencyCode = currencyCode;
+      return this;
+    }
+
+    /**
+     * Request that the order be handled by a desk trader. Only available for Equity orders. When
+     * omitted, treated as false.
+     */
+    public Builder deskHandlingRequested(boolean deskHandlingRequested) {
+      Utils.checkNotNull(deskHandlingRequested, "deskHandlingRequested");
+      this.deskHandlingRequested = Optional.ofNullable(deskHandlingRequested);
+      return this;
+    }
+
+    /**
+     * Request that the order be handled by a desk trader. Only available for Equity orders. When
+     * omitted, treated as false.
+     */
+    public Builder deskHandlingRequested(Optional<Boolean> deskHandlingRequested) {
+      Utils.checkNotNull(deskHandlingRequested, "deskHandlingRequested");
+      this.deskHandlingRequested = deskHandlingRequested;
       return this;
     }
 
@@ -2737,6 +2881,27 @@ public class Order {
     }
 
     /**
+     * Tax lot matching instructions specifying which lots to sell. Maximum 100 instructions per
+     * order.
+     */
+    public Builder lotMatchingInstructions(List<LotMatchingInstruction> lotMatchingInstructions) {
+      Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
+      this.lotMatchingInstructions = Optional.ofNullable(lotMatchingInstructions);
+      return this;
+    }
+
+    /**
+     * Tax lot matching instructions specifying which lots to sell. Maximum 100 instructions per
+     * order.
+     */
+    public Builder lotMatchingInstructions(
+        Optional<? extends List<LotMatchingInstruction>> lotMatchingInstructions) {
+      Utils.checkNotNull(lotMatchingInstructions, "lotMatchingInstructions");
+      this.lotMatchingInstructions = lotMatchingInstructions;
+      return this;
+    }
+
+    /**
      * The maximum number of shares to be sold for a notional SELL order of an Equity asset type.
      * This field restricts the quantity to sell, even if the notional amount requires more shares
      * to fulfill. REQUIRED if your account is not subject to Apex position checks, and PROHIBITED
@@ -2827,11 +2992,15 @@ public class Order {
     }
 
     /**
-     * The date on which the order will go to the market: must either be "today" or the next valid
-     * trading day. If the current day is not a valid trading day, then the next valid market day
-     * must be specified. If the current time is after market close, and before midnight Eastern,
-     * then the next valid market day must be specified. In all other cases, the current day,
-     * Eastern must be specified.
+     * The date on which the order will go to the market.
+     *
+     * <p>When provided, the date must be either today or the next valid trading day (Eastern time):
+     * - If today is not a valid trading day, specify the next valid market day. - If the current
+     * time is after market close but before midnight Eastern, specify the next valid market day. -
+     * Otherwise, specify the current Eastern trading day.
+     *
+     * <p>Required for all orders except event contract orders with a non-DAY time_in_force (GTC,
+     * GTD, IOC, FOK). When omitted for those orders, defaults to the current Eastern trading day.
      */
     public Builder orderDate(OrderDate orderDate) {
       Utils.checkNotNull(orderDate, "orderDate");
@@ -2840,11 +3009,15 @@ public class Order {
     }
 
     /**
-     * The date on which the order will go to the market: must either be "today" or the next valid
-     * trading day. If the current day is not a valid trading day, then the next valid market day
-     * must be specified. If the current time is after market close, and before midnight Eastern,
-     * then the next valid market day must be specified. In all other cases, the current day,
-     * Eastern must be specified.
+     * The date on which the order will go to the market.
+     *
+     * <p>When provided, the date must be either today or the next valid trading day (Eastern time):
+     * - If today is not a valid trading day, specify the next valid market day. - If the current
+     * time is after market close but before midnight Eastern, specify the next valid market day. -
+     * Otherwise, specify the current Eastern trading day.
+     *
+     * <p>Required for all orders except event contract orders with a non-DAY time_in_force (GTC,
+     * GTD, IOC, FOK). When omitted for those orders, defaults to the current Eastern trading day.
      */
     public Builder orderDate(JsonNullable<? extends OrderDate> orderDate) {
       Utils.checkNotNull(orderDate, "orderDate");
@@ -2925,8 +3098,8 @@ public class Order {
 
     /**
      * The prevailing market price, calculated as a weighted average of the fills in this order, up
-     * to a maximum of 5 decimal places. Can be up to 8 decimal places when asset_type =
-     * FIXED_INCOME. Will be absent if an order has no executions.
+     * to 8 decimal places. Will only be present for orders of Fixed Income assets. Will be absent
+     * if an order has no executions.
      */
     public Builder prevailingMarketPrice(OrderPrevailingMarketPrice prevailingMarketPrice) {
       Utils.checkNotNull(prevailingMarketPrice, "prevailingMarketPrice");
@@ -2936,8 +3109,8 @@ public class Order {
 
     /**
      * The prevailing market price, calculated as a weighted average of the fills in this order, up
-     * to a maximum of 5 decimal places. Can be up to 8 decimal places when asset_type =
-     * FIXED_INCOME. Will be absent if an order has no executions.
+     * to 8 decimal places. Will only be present for orders of Fixed Income assets. Will be absent
+     * if an order has no executions.
      */
     public Builder prevailingMarketPrice(
         JsonNullable<? extends OrderPrevailingMarketPrice> prevailingMarketPrice) {
@@ -2952,8 +3125,8 @@ public class Order {
      * orders. Represents the number of shares, up to a maximum of 3 decimal places. For Fixed
      * Income: Represents the par (face-value) amount being ordered, and may not exceed two decimal
      * places for USD-based currencies. For Event Contracts: Represents the number of contracts
-     * being ordered, and must be whole numbers for BUY orders or up to a maximum of 2 decimal
-     * places for SELL orders. Either a quantity or notional_value MUST be specified (but not both).
+     * being ordered, and may be up to a maximum of 2 decimal places. Exactly one of quantity,
+     * notional_value, or full_position MUST be specified.
      */
     public Builder quantity(OrderQuantity quantity) {
       Utils.checkNotNull(quantity, "quantity");
@@ -2967,8 +3140,8 @@ public class Order {
      * orders. Represents the number of shares, up to a maximum of 3 decimal places. For Fixed
      * Income: Represents the par (face-value) amount being ordered, and may not exceed two decimal
      * places for USD-based currencies. For Event Contracts: Represents the number of contracts
-     * being ordered, and must be whole numbers for BUY orders or up to a maximum of 2 decimal
-     * places for SELL orders. Either a quantity or notional_value MUST be specified (but not both).
+     * being ordered, and may be up to a maximum of 2 decimal places. Exactly one of quantity,
+     * notional_value, or full_position MUST be specified.
      */
     public Builder quantity(JsonNullable<? extends OrderQuantity> quantity) {
       Utils.checkNotNull(quantity, "quantity");
@@ -3014,8 +3187,12 @@ public class Order {
     }
 
     /**
-     * Special Reporting Instructions to be applied to this order. Can include multiple
-     * Instructions. Only available for Equity, Mutual Fund, and Fixed Income orders.
+     * Special Reporting Instructions to be applied to this order. Can include up to 5 Instructions.
+     * Supported for Equity orders only; must be omitted for Mutual Fund, Fixed Income, and Event
+     * Contract orders. BROKER_DEALER_ORDER and FULLY_REGISTERED are not supported. CAT_PARENT_ALGO
+     * is only allowed on LIMIT orders; CAT_PARENT_GTC is only allowed on GOOD_TILL_DATE orders.
+     * MANUAL_ORDER marks the order as manually received from the customer for CAT reporting;
+     * client_received_time should then be set to the time the order was received.
      */
     public Builder specialReportingInstructions(
         List<OrderSpecialReportingInstructions> specialReportingInstructions) {
@@ -3025,8 +3202,12 @@ public class Order {
     }
 
     /**
-     * Special Reporting Instructions to be applied to this order. Can include multiple
-     * Instructions. Only available for Equity, Mutual Fund, and Fixed Income orders.
+     * Special Reporting Instructions to be applied to this order. Can include up to 5 Instructions.
+     * Supported for Equity orders only; must be omitted for Mutual Fund, Fixed Income, and Event
+     * Contract orders. BROKER_DEALER_ORDER and FULLY_REGISTERED are not supported. CAT_PARENT_ALGO
+     * is only allowed on LIMIT orders; CAT_PARENT_GTC is only allowed on GOOD_TILL_DATE orders.
+     * MANUAL_ORDER marks the order as manually received from the customer for CAT reporting;
+     * client_received_time should then be set to the time the order was received.
      */
     public Builder specialReportingInstructions(
         Optional<? extends List<OrderSpecialReportingInstructions>> specialReportingInstructions) {
@@ -3126,6 +3307,7 @@ public class Order {
           createTime,
           cumulativeNotionalValue,
           currencyCode,
+          deskHandlingRequested,
           executions,
           extraReportingData,
           fees,
@@ -3136,6 +3318,7 @@ public class Order {
           lastUpdateTime,
           letterOfIntent,
           limitPrice,
+          lotMatchingInstructions,
           maxSellQuantity,
           name,
           notionalValue,

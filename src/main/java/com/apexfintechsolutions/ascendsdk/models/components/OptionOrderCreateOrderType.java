@@ -49,6 +49,7 @@ public class OptionOrderCreateOrderType {
   public static final OptionOrderCreateOrderType ORDER_TYPE_UNSPECIFIED =
       new OptionOrderCreateOrderType("ORDER_TYPE_UNSPECIFIED");
   public static final OptionOrderCreateOrderType LIMIT = new OptionOrderCreateOrderType("LIMIT");
+  public static final OptionOrderCreateOrderType MARKET = new OptionOrderCreateOrderType("MARKET");
 
   // This map will grow whenever a Color gets created with a new
   // unrecognized value (a potential memory leak if the user is not
@@ -119,6 +120,7 @@ public class OptionOrderCreateOrderType {
     Map<String, OptionOrderCreateOrderType> map = new LinkedHashMap<>();
     map.put("ORDER_TYPE_UNSPECIFIED", ORDER_TYPE_UNSPECIFIED);
     map.put("LIMIT", LIMIT);
+    map.put("MARKET", MARKET);
     return map;
   }
 
@@ -126,6 +128,7 @@ public class OptionOrderCreateOrderType {
     Map<String, OptionOrderCreateOrderTypeEnum> map = new HashMap<>();
     map.put("ORDER_TYPE_UNSPECIFIED", OptionOrderCreateOrderTypeEnum.ORDER_TYPE_UNSPECIFIED);
     map.put("LIMIT", OptionOrderCreateOrderTypeEnum.LIMIT);
+    map.put("MARKET", OptionOrderCreateOrderTypeEnum.MARKET);
     return map;
   }
 
@@ -163,6 +166,7 @@ public class OptionOrderCreateOrderType {
   public enum OptionOrderCreateOrderTypeEnum {
     ORDER_TYPE_UNSPECIFIED("ORDER_TYPE_UNSPECIFIED"),
     LIMIT("LIMIT"),
+    MARKET("MARKET"),
     ;
 
     private final String value;

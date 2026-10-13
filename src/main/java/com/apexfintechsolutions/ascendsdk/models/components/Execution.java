@@ -72,10 +72,11 @@ public class Execution {
   private Optional<String> externalId;
 
   /**
-   * Gross amount is calculated by the Booking service by multiplying price and quantity and fixing
-   * it to 2 fractional precision. Requirement of 11 or less integral number and 2 or less
-   * fractional precision. Optionally specifiable. If present, will override the gross_amount
-   * calculated above.
+   * Gross amount is calculated by the Booking service by multiplying price, quantity, and
+   * security_type specific multiplier and round half up to 2 decimal point. Requirement of 11 or
+   * less integral number and 2 or less fractional precision. Optionally specifiable for
+   * FIXED_INCOME trades. Not allowed for trades of other instrument types. If present, will
+   * override the gross_amount calculated above.
    */
   @JsonInclude(Include.NON_ABSENT)
   @JsonProperty("gross_amount")
@@ -272,10 +273,11 @@ public class Execution {
   }
 
   /**
-   * Gross amount is calculated by the Booking service by multiplying price and quantity and fixing
-   * it to 2 fractional precision. Requirement of 11 or less integral number and 2 or less
-   * fractional precision. Optionally specifiable. If present, will override the gross_amount
-   * calculated above.
+   * Gross amount is calculated by the Booking service by multiplying price, quantity, and
+   * security_type specific multiplier and round half up to 2 decimal point. Requirement of 11 or
+   * less integral number and 2 or less fractional precision. Optionally specifiable for
+   * FIXED_INCOME trades. Not allowed for trades of other instrument types. If present, will
+   * override the gross_amount calculated above.
    */
   @SuppressWarnings("unchecked")
   @JsonIgnore
@@ -483,10 +485,11 @@ public class Execution {
   }
 
   /**
-   * Gross amount is calculated by the Booking service by multiplying price and quantity and fixing
-   * it to 2 fractional precision. Requirement of 11 or less integral number and 2 or less
-   * fractional precision. Optionally specifiable. If present, will override the gross_amount
-   * calculated above.
+   * Gross amount is calculated by the Booking service by multiplying price, quantity, and
+   * security_type specific multiplier and round half up to 2 decimal point. Requirement of 11 or
+   * less integral number and 2 or less fractional precision. Optionally specifiable for
+   * FIXED_INCOME trades. Not allowed for trades of other instrument types. If present, will
+   * override the gross_amount calculated above.
    */
   public Execution withGrossAmount(GrossAmount grossAmount) {
     Utils.checkNotNull(grossAmount, "grossAmount");
@@ -495,10 +498,11 @@ public class Execution {
   }
 
   /**
-   * Gross amount is calculated by the Booking service by multiplying price and quantity and fixing
-   * it to 2 fractional precision. Requirement of 11 or less integral number and 2 or less
-   * fractional precision. Optionally specifiable. If present, will override the gross_amount
-   * calculated above.
+   * Gross amount is calculated by the Booking service by multiplying price, quantity, and
+   * security_type specific multiplier and round half up to 2 decimal point. Requirement of 11 or
+   * less integral number and 2 or less fractional precision. Optionally specifiable for
+   * FIXED_INCOME trades. Not allowed for trades of other instrument types. If present, will
+   * override the gross_amount calculated above.
    */
   public Execution withGrossAmount(JsonNullable<? extends GrossAmount> grossAmount) {
     Utils.checkNotNull(grossAmount, "grossAmount");
@@ -912,10 +916,11 @@ public class Execution {
     }
 
     /**
-     * Gross amount is calculated by the Booking service by multiplying price and quantity and
-     * fixing it to 2 fractional precision. Requirement of 11 or less integral number and 2 or less
-     * fractional precision. Optionally specifiable. If present, will override the gross_amount
-     * calculated above.
+     * Gross amount is calculated by the Booking service by multiplying price, quantity, and
+     * security_type specific multiplier and round half up to 2 decimal point. Requirement of 11 or
+     * less integral number and 2 or less fractional precision. Optionally specifiable for
+     * FIXED_INCOME trades. Not allowed for trades of other instrument types. If present, will
+     * override the gross_amount calculated above.
      */
     public Builder grossAmount(GrossAmount grossAmount) {
       Utils.checkNotNull(grossAmount, "grossAmount");
@@ -924,10 +929,11 @@ public class Execution {
     }
 
     /**
-     * Gross amount is calculated by the Booking service by multiplying price and quantity and
-     * fixing it to 2 fractional precision. Requirement of 11 or less integral number and 2 or less
-     * fractional precision. Optionally specifiable. If present, will override the gross_amount
-     * calculated above.
+     * Gross amount is calculated by the Booking service by multiplying price, quantity, and
+     * security_type specific multiplier and round half up to 2 decimal point. Requirement of 11 or
+     * less integral number and 2 or less fractional precision. Optionally specifiable for
+     * FIXED_INCOME trades. Not allowed for trades of other instrument types. If present, will
+     * override the gross_amount calculated above.
      */
     public Builder grossAmount(JsonNullable<? extends GrossAmount> grossAmount) {
       Utils.checkNotNull(grossAmount, "grossAmount");

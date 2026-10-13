@@ -16,7 +16,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'com.apexfintechsolutions:ascendsdk:1.6.13'
+implementation 'com.apexfintechsolutions:ascendsdk:1.7.0'
 ```
 
 Maven:
@@ -24,7 +24,7 @@ Maven:
 <dependency>
     <groupId>com.apexfintechsolutions</groupId>
     <artifactId>ascendsdk</artifactId>
-    <version>1.6.13</version>
+    <version>1.7.0</version>
 </dependency>
 ```
 
@@ -437,6 +437,7 @@ public class Application {
 * [acceptTransfer](docs/sdks/accounttransfers/README.md#accepttransfer) - Accept Transfer
 * [rejectTransfer](docs/sdks/accounttransfers/README.md#rejecttransfer) - Reject Transfer
 * [getTransfer](docs/sdks/accounttransfers/README.md#gettransfer) - Get Transfer
+* [previewTransfer](docs/sdks/accounttransfers/README.md#previewtransfer) - Preview Transfer
 
 ### [achTransfers()](docs/sdks/achtransfers/README.md)
 
@@ -575,7 +576,9 @@ public class Application {
 * [listInvestigations](docs/sdks/investigations/README.md#listinvestigations) - List Investigations
 * [linkDocuments](docs/sdks/investigations/README.md#linkdocuments) - Link Documents
 * [getWatchlistItem](docs/sdks/investigations/README.md#getwatchlistitem) - Get Watchlist Item
+* [linkCustomerIdentification](docs/sdks/investigations/README.md#linkcustomeridentification) - Link Customer Identification to an Investigation
 * [getCustomerIdentification](docs/sdks/investigations/README.md#getcustomeridentification) - Get Identity Verification
+* [createCustomerIdentification](docs/sdks/investigations/README.md#createcustomeridentification) - Create Identity Verification
 * [createIdentityLookup](docs/sdks/investigations/README.md#createidentitylookup) - Create Identity Lookup
 * [verifyIdentityLookup](docs/sdks/investigations/README.md#verifyidentitylookup) - Verify Identity Lookup
 
